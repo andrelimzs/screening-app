@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { withTracker } from 'meteor/react-meteor-data';
+
 import Station from './Station.jsx';
 import Queue from './Queue.jsx';
 import Form from './Form.jsx';
@@ -6,7 +8,7 @@ import Form from './Form.jsx';
 import Patientinfo from '/imports/api/patientinfo';
 import Stationforms from '/imports/api/stationforms';
 
-export default class App extends Component {
+class App extends Component {
   state = {
     station: "",
     currentPatient: "",
@@ -39,8 +41,8 @@ export default class App extends Component {
         <div>
           <a href="#" onClick={this.selectStation.bind(this, "")}>Back</a>
           <Station station={this.state.station} />
-          <Queue station={this.state.station} numOfPatients={Patientinfo.find().count()} />
-          <Form station={this.state.station} formData={Stationforms.find({name: this.state.station}).fetch()} />
+          <Queue station={this.state.station} numOfPatients={this.props.numOfPatients} />
+          <Form station={this.state.station} />
         </div>
       );
     } else {
@@ -58,3 +60,9 @@ export default class App extends Component {
     
   }
 }
+
+export default withTracker(() => {
+  return {
+    numOfPatients: Patientinfo.find().count()
+  };
+})(App);

@@ -5,12 +5,22 @@ import Stationforms from '/imports/api/stationforms';
 
 export default class Form extends Component {
   renderForm() {
-    return this.props.formData.map((form) => (
-      <input
-        type={form[1]}
-        ref={form[0]}
-      />
-    ));
+    const formData = {"Registration": ["Name", "ID"],
+                      "Height & weight": ["Height", "Weight", "Waist"],
+                      "CBG & Hb": ["CBG", "Hb"],
+                      "Phlebotomy": ["Blood"],
+                      "Blood pressure": ["BP"]};
+    
+    return (
+      <React.Fragment>
+        {formData[this.props.station].map(field => (
+          <React.Fragment>
+            {field}:<br />
+            <input type="text" ref={field} /><br /><br />
+          </React.Fragment>
+        ))}
+      </React.Fragment>
+    );
   }
 
   handleSubmit(event) {
@@ -32,17 +42,7 @@ export default class Form extends Component {
     return (
       <div>
         <form className="patient-form" onSubmit={this.handleSubmit.bind(this)} >
-          {/* { this.renderForm() } */}
-          Name:<br />
-          <input
-            type="text"
-            ref="name"
-          /><br />
-          ID:<br />
-          <input
-            type="text"
-            ref="id"
-          />
+          { this.renderForm() }  
         </form>
       </div>
     );
