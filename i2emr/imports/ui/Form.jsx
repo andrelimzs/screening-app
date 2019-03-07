@@ -15,8 +15,8 @@ export default class Form extends Component {
       <React.Fragment>
         {formData[this.props.station].map(field => (
           <React.Fragment>
-            {field}:<br />
-            <input type="text" ref={field} /><br /><br />
+            <label for={field}>{field}:</label>
+            <input type="text" ref={field} /><br />
           </React.Fragment>
         ))}
       </React.Fragment>
@@ -42,7 +42,8 @@ export default class Form extends Component {
     return (
       <div>
         <form className="patient-form" onSubmit={this.handleSubmit.bind(this)} >
-          { this.renderForm() }  
+          { this.renderForm() }
+          <input type="submit" value="Submit" />
         </form>
       </div>
     );
