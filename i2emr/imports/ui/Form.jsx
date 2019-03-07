@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { withTracker } from 'meteor/react-meteor-data';
-
-import Patientinfo from '/imports/api/patientinfo';
+import { Meteor } from 'meteor/meteor';
 
 import Button from '@material-ui/core/Button';
 
@@ -32,21 +31,24 @@ export default class Form extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
-    // Find the text field via the React ref
-    // const newTask = ReactDOM.findDOMNode(this.refs.taskInput).value.trim();
     
     const newForm = {};
 
+    // Loop through form fields
     for (var i=0, len = this.formData[this.props.station].length; i < len; i++ ){
       const field = this.formData[this.props.station][i];
-      newForm[field] = ReactDOM.findDOMNode(this.refs[field]).value;
+      // Extract data
+      newForm[field] = ReactDOM.findDOMNode(this.refs[field]).value.trim();
+      // And clear form
+      ReactDOM.findDOMNode(this.refs[field]).value = '';
     }
 
-    Patientinfo.insert(newForm);
-
-    // // Clear form
-    // ReactDOM.findDOMNode(this.refs.taskInput).value = '';
+    // Insert/update patientinfo database
+    if (this.props.station == "Registration") {
+      Meteor.call('patientinfo.insert', newForm);
+    } else {
+      Meteor.call('patientinfo.upsert', newForm);
+    }
   }
 
   render() {
