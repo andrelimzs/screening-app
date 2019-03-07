@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 
 import Station from './Station.jsx';
-import Queue from './Queue.jsx';
-import Form from './Form.jsx';
+import QueueContainer from './Queue.jsx';
+import FormContainer from './Form.jsx';
 
 import Patientinfo from '/imports/api/patientinfo';
-import Stationforms from '/imports/api/stationforms';
 
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -63,12 +62,12 @@ class App extends Component {
           <Grid container justify="center" spacing={16}>
             <Grid item xs={12}>
               <Paper square={false}>
-                <Queue station={this.state.station} numOfPatients={this.props.numOfPatients} />
+                <QueueContainer station={this.state.station} />
               </Paper>
             </Grid>
             <Grid item xs={12}>
               <Paper square={false}>
-                <Form station={this.state.station} />
+                <FormContainer station={this.state.station} />
               </Paper>
             </Grid>
           </Grid>
