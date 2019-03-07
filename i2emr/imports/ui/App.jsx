@@ -8,6 +8,22 @@ import Form from './Form.jsx';
 import Patientinfo from '/imports/api/patientinfo';
 import Stationforms from '/imports/api/stationforms';
 
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+});
+
 class App extends Component {
   state = {
     station: "",
@@ -28,9 +44,9 @@ class App extends Component {
   makeStation(station) {
     return (
       <p>
-        <button onClick={this.selectStation.bind(this, station)}>
+        <Button variant="outlined" onClick={this.selectStation.bind(this, station)}>
           {station}
-        </button>
+        </Button>
       </p>
     )
   }
@@ -39,10 +55,23 @@ class App extends Component {
     if ( this.state.station ) {
       return (
         <div>
-          <a href="#" onClick={this.selectStation.bind(this, "")}>Back</a>
-          <Station station={this.state.station} />
-          <Queue station={this.state.station} numOfPatients={this.props.numOfPatients} />
-          <Form station={this.state.station} />
+          <Grid container justify="center">
+            <Button variant="outlined" onClick={this.selectStation.bind(this, "")}>Back</Button>
+            <br />
+            <Station station={this.state.station} />
+          </Grid>
+          <Grid container justify="center" spacing={16}>
+            <Grid item xs={12}>
+              <Paper square={false}>
+                <Queue station={this.state.station} numOfPatients={this.props.numOfPatients} />
+              </Paper>
+            </Grid>
+            <Grid item xs={12}>
+              <Paper square={false}>
+                <Form station={this.state.station} />
+              </Paper>
+            </Grid>
+          </Grid>
         </div>
       );
     } else {
@@ -66,3 +95,5 @@ export default withTracker(() => {
     numOfPatients: Patientinfo.find().count()
   };
 })(App);
+
+// export default withStyles(styles)(App);
