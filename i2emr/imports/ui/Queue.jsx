@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
+import { withTracker } from 'meteor/react-meteor-data';
 
-export default class Queue extends Component {
+class Queue extends Component {
+  renderPatient() {
+    
+  }
+
   render() {
     return (
       <div>
-        <p>Number of patients: {this.props.numOfPatients}</p>
+        <p>Number of patients: {this.props.patients.length}</p>
       </div>
     );
   }
 }
+
+export default withTracker(() => {
+  return {
+    patients: Patientinfo.find({}).fetch()
+  };
+})(Queue);
