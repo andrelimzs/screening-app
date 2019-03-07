@@ -61,13 +61,12 @@ class App extends Component {
             <Station station={this.state.station} />
           </Grid>
           <Grid container justify="center" spacing={16}>
-            <Grid item>
+            <Grid item xs={12}>
               <Paper square={false}>
-                
                 <Queue station={this.state.station} numOfPatients={this.props.numOfPatients} />
               </Paper>
             </Grid>
-            <Grid item>
+            <Grid item xs={12}>
               <Paper square={false}>
                 <Form station={this.state.station} />
               </Paper>
