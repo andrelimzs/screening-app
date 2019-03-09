@@ -12,16 +12,16 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
-// const styles = theme => ({
-//   root: {
-//     flexGrow: 1,
-//   },
-//   paper: {
-//     padding: theme.spacing.unit * 2,
-//     textAlign: 'center',
-//     color: theme.palette.text.secondary,
-//   },
-// });
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+});
 
 class App extends Component {
   state = {
@@ -65,7 +65,7 @@ class App extends Component {
               </Grid>
             }
             <Grid item xs={12}>
-              <Paper square={false}>
+              <Paper square={false} m={120}>
                 <Form station={station} id={this.props.id} />
               </Paper>
             </Grid>
@@ -89,8 +89,7 @@ class App extends Component {
     
   }
 }
-
-export default withTracker(() => {
+const AppContainer = withTracker(() => {
   const station = Session.get('station');
   const patientList = Patientinfo.find({nextStation:station}).fetch();
 
@@ -101,3 +100,5 @@ export default withTracker(() => {
     id: newID,
   };
 })(App);
+
+export default withStyles(styles)(AppContainer);

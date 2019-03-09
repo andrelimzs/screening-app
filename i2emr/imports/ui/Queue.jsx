@@ -9,7 +9,19 @@ import Typography from '@material-ui/core/Typography';
 
 class Queue extends Component {
   renderPatient() {
-    const newPatient = (this.props.patientList.length>0) ? this.props.patientList[0].name : "Empty";
+    if (this.props.patientList.length == 0) {
+      return (
+        <React.Fragment>
+          <Card>
+            <CardContent>
+              <Typography>
+                Empty
+              </Typography>
+            </CardContent>
+          </Card>
+        </React.Fragment>
+      )
+    }
 
     return (
       <React.Fragment>
@@ -38,7 +50,7 @@ class Queue extends Component {
           direction="row"
           justify="flex-start"
           alignItems="center"
-          spacing={16}
+          spacing={8}
         >
           {this.renderPatient()}
         </Grid>

@@ -22,6 +22,11 @@ Meteor.startup(() => {
       'S1234567A',
       "Height & weight"
     );
+    addPatient(
+      'Gary',
+      'S7654321Z',
+      "Height & weight"
+    );
   }
 
   if (Stationforms.find().count() === 0) {
