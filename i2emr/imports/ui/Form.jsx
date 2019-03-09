@@ -9,7 +9,7 @@ class Form extends Component {
   constructor() {
     super();
 
-    this.formData = {"Registration": ["Name", "ID"],
+    this.formData = {"Registration": ["Name", "id"],
                     "Height & weight": ["Height", "Weight", "Waist"],
                     "CBG & Hb": ["CBG", "Hb"],
                     "Phlebotomy": ["Blood"],
@@ -47,6 +47,7 @@ class Form extends Component {
 
     // Insert/update patientinfo database
     if (this.props.station == "Registration") {
+      console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
       Meteor.call('patientinfo.insert', newForm);
     } else {
       newForm.id = this.props.id;

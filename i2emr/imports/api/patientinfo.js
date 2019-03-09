@@ -5,7 +5,6 @@ import { check } from 'meteor/check';
 export default Patientinfo = new Mongo.Collection('patientinfo');
 
 
-
 Meteor.methods({
   'patientinfo.insert'(data) {
     for (var elem in data) {
@@ -22,6 +21,6 @@ Meteor.methods({
     const id = data.id;
     delete data.nextStation;
     delete data.id;
-    Patientinfo.update({id:id},{$set:{nextStation,nextStation}, $push:data});
+    Patientinfo.update({id:id},{$set:{nextStation:nextStation}, $push:data});
   },
 });

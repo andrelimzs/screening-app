@@ -7,18 +7,19 @@ class Queue extends Component {
   }
 
   render() {
+    console.log("Queue|patientList ", this.props.patientList);
     return (
       <div>
-        <p>Number of patients: {this.props.patients.length}</p>
+        <p>Number of patients: {this.props.patientList.length}</p>
       </div>
     );
   }
 }
 
-const QueueContainer = withTracker(({ station }) => {
-  return {
-    patients: Patientinfo.find({nextStation:station}).fetch()
-  };
-})(Queue);
+// const QueueContainer = withTracker(({ station }) => {
+//   return {
+//     patients: Patientinfo.find({nextStation:station}).fetch()
+//   };
+// })(Queue);
 
-export default QueueContainer;
+export default Queue;

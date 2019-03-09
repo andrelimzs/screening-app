@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 
 import Station from './Station.jsx';
-import QueueContainer from './Queue.jsx';
-import FormContainer from './Form.jsx';
+import Queue from './Queue.jsx';
+import Form from './Form.jsx';
 
 import Patientinfo from '/imports/api/patientinfo';
 
@@ -25,7 +25,6 @@ const styles = theme => ({
 
 class App extends Component {
   state = {
-    station: "",
     currentPatient: "",
     links: ["Registration","Height & weight","CBG & Hb","Phlebotomy","Blood pressure"],
   }
@@ -33,9 +32,7 @@ class App extends Component {
   selectStation(newStation, e) {
     e.preventDefault();
 
-    this.setState({
-      station: newStation
-    });
+    Session.set("station",newStation);
 
     this.forceUpdate()
   }
@@ -51,36 +48,40 @@ class App extends Component {
   }
 
   render() {
-    if ( this.state.station ) {
+    const station = Session.get('station');
+
+    if ( station ) {
       return (
         <div>
           <Grid container justify="center">
             <Button variant="outlined" onClick={this.selectStation.bind(this, "")}>Back</Button>
             <br />
-            <Station station={this.state.station} />
+            <Station station={station} />
           </Grid>
           <Grid container justify="center" spacing={16}>
             <Grid item xs={12}>
               <Paper square={false}>
-                <QueueContainer station={this.state.station} />
+                <Queue patientList={this.props.patientList} />
               </Paper>
             </Grid>
             <Grid item xs={12}>
               <Paper square={false}>
-                <FormContainer station={this.state.station} />
+                <Form station={station} id={this.props.id} />
               </Paper>
             </Grid>
           </Grid>
         </div>
       );
+
     } else {
+
       const links = this.state.links.map(
         link => this.makeStation(link)
       );
 
       return (
         <div>
-          <h1>Select Station {this.state.station} </h1>
+          <h1>Select Station </h1>
           {links}
         </div>
       );
@@ -90,8 +91,14 @@ class App extends Component {
 }
 
 export default withTracker(() => {
+  const station = Session.get('station');
+  const patientList = Patientinfo.find({nextStation:station}).fetch();
+
+  newID = (patientList.length > 0) ? patientList[0].id : null;
+
   return {
-    numOfPatients: Patientinfo.find().count()
+    patientList: patientList,
+    id: newID,
   };
 })(App);
 
