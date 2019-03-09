@@ -18,7 +18,7 @@ Meteor.startup(() => {
 
   if (Patientinfo.find().count() === 0) {
     addPatient(
-      'Tom Lim',
+      'Tom',
       'S1234567A',
       "Height & weight"
     );

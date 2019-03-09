@@ -12,16 +12,16 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing.unit * 2,
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-});
+// const styles = theme => ({
+//   root: {
+//     flexGrow: 1,
+//   },
+//   paper: {
+//     padding: theme.spacing.unit * 2,
+//     textAlign: 'center',
+//     color: theme.palette.text.secondary,
+//   },
+// });
 
 class App extends Component {
   state = {
@@ -59,11 +59,11 @@ class App extends Component {
             <Station station={station} />
           </Grid>
           <Grid container justify="center" spacing={16}>
-            <Grid item xs={12}>
-              <Paper square={false}>
+            {station != "Registration" &&
+              <Grid item xs={12}>
                 <Queue patientList={this.props.patientList} />
-              </Paper>
-            </Grid>
+              </Grid>
+            }
             <Grid item xs={12}>
               <Paper square={false}>
                 <Form station={station} id={this.props.id} />
@@ -101,5 +101,3 @@ export default withTracker(() => {
     id: newID,
   };
 })(App);
-
-// export default withStyles(styles)(App);

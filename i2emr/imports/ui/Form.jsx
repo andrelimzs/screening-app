@@ -9,7 +9,7 @@ class Form extends Component {
   constructor() {
     super();
 
-    this.formData = {"Registration": ["Name", "id"],
+    this.formData = {"Registration": ["Name", "ID"],
                     "Height & weight": ["Height", "Weight", "Waist"],
                     "CBG & Hb": ["CBG", "Hb"],
                     "Phlebotomy": ["Blood"],
@@ -40,7 +40,7 @@ class Form extends Component {
     for (var i=0, len = this.formData[this.props.station].length; i < len; i++ ){
       const field = this.formData[this.props.station][i];
       // Extract data
-      newForm[field] = ReactDOM.findDOMNode(this.refs[field]).value.trim();
+      newForm[field.toLowerCase()] = ReactDOM.findDOMNode(this.refs[field]).value.trim();
       // And clear form
       ReactDOM.findDOMNode(this.refs[field]).value = '';
     }
@@ -68,11 +68,5 @@ class Form extends Component {
     );
   }
 }
-
-const FormContainer = withTracker(({ station }) => {
-  return {
-    id: Patientinfo.find({nextStation:station}).fetch().id,
-  };
-})(Form);
 
 export default Form;
