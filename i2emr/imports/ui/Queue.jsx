@@ -3,20 +3,23 @@ import { withTracker } from 'meteor/react-meteor-data';
 
 class Queue extends Component {
   renderPatient() {
-    
+
   }
 
   render() {
+    console.log("Queue|patientList ", this.props.patientList);
     return (
       <div>
-        <p>Number of patients: {this.props.patients.length}</p>
+        <p>Number of patients: {this.props.patientList.length}</p>
       </div>
     );
   }
 }
 
-export default withTracker(() => {
-  return {
-    patients: Patientinfo.find({}).fetch()
-  };
-})(Queue);
+// const QueueContainer = withTracker(({ station }) => {
+//   return {
+//     patients: Patientinfo.find({nextStation:station}).fetch()
+//   };
+// })(Queue);
+
+export default Queue;

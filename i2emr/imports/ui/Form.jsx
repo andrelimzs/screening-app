@@ -5,15 +5,17 @@ import { Meteor } from 'meteor/meteor';
 
 import Button from '@material-ui/core/Button';
 
-export default class Form extends Component {
+class Form extends Component {
   constructor() {
     super();
 
-    this.formData = {"Registration": ["Name", "ID"],
+    this.formData = {"Registration": ["Name", "id"],
                     "Height & weight": ["Height", "Weight", "Waist"],
                     "CBG & Hb": ["CBG", "Hb"],
                     "Phlebotomy": ["Blood"],
                     "Blood pressure": ["BP"]};
+
+    this.stations = ["Registration","Height & weight","CBG & Hb","Phlebotomy","Blood pressure","Done"];
   }
 
   renderForm() {
@@ -45,9 +47,13 @@ export default class Form extends Component {
 
     // Insert/update patientinfo database
     if (this.props.station == "Registration") {
+      console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
       Meteor.call('patientinfo.insert', newForm);
     } else {
-      Meteor.call('patientinfo.upsert', newForm);
+      newForm.id = this.props.id;
+      console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
+      newForm.nextStation = this.stations[this.stations.indexOf(this.props.station)+1];
+      Meteor.call('patientinfo.update', newForm);
     }
   }
 
@@ -62,3 +68,11 @@ export default class Form extends Component {
     );
   }
 }
+
+const FormContainer = withTracker(({ station }) => {
+  return {
+    id: Patientinfo.find({nextStation:station}).fetch().id,
+  };
+})(Form);
+
+export default Form;
