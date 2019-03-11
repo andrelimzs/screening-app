@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
+import { SimpleSchema} from 'meteor/aldeed:simple-schema';
 
 import Button from '@material-ui/core/Button';
 
