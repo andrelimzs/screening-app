@@ -82,14 +82,7 @@ function simpleSchema(Name,ID) {
   this.ID = ID;
 }
 
-var ss = new simpleSchema({
-  requiredString: {
-      type: String
-  }
-});
-var ssContext1 = ss.namedContext("userForm");
-
-var mySchema = new simpleSchema({name: {type: String}});
+var mySchema = new simpleSchema({name: {type: String}, ID: {type: String}});
 
 Match.test({name: "Tom"}, mySchema); // Return true
 Match.test({admin: true}, mySchema); // Return false
