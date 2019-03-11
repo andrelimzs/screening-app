@@ -59,13 +59,13 @@ class App extends Component {
             <Station station={station} />
           </Grid>
           <Grid container justify="center" spacing={16}>
-            <Grid item xs={12}>
-              <Paper square={false}>
+            {station != "Registration" &&
+              <Grid item xs={12}>
                 <Queue patientList={this.props.patientList} />
-              </Paper>
-            </Grid>
+              </Grid>
+            }
             <Grid item xs={12}>
-              <Paper square={false}>
+              <Paper square={false} m={120}>
                 <Form station={station} id={this.props.id} />
               </Paper>
             </Grid>
@@ -89,8 +89,7 @@ class App extends Component {
     
   }
 }
-
-export default withTracker(() => {
+const AppContainer = withTracker(() => {
   const station = Session.get('station');
   const patientList = Patientinfo.find({nextStation:station}).fetch();
 
