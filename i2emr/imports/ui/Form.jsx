@@ -82,7 +82,7 @@ function simpleSchema(Name,ID) {
   this.ID = ID;
 }
 
-var mySchema = new simpleSchema({name: {type: String}, ID: {type: String}});
+var mySchema = new simpleSchema({Name: {type: String}, ID: {type: String}});
 
 // Define the schema
 PatientSchema = new simpleSchema({
@@ -108,7 +108,7 @@ PatientSchema = new simpleSchema({
 });
 
 // Validate an object against the schema
-obj = {Name: "Tom", ID: "123"};
+obj = {Name: {type: String}, ID: {type: String}};
 
 isValid = PatientSchema.namedContext("myContext").validate(obj);
 // OR
