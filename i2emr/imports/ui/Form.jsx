@@ -77,7 +77,7 @@ const FormContainer = withTracker(({ station }) => {
 })(Form);
 
 
-function simpleSchema(Name, ID) {
+function simpleSchema(Name,ID) {
   this.Name = Name;
   this.ID = ID;
 }
