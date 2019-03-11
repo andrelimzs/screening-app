@@ -91,7 +91,11 @@ class App extends Component {
 }
 const AppContainer = withTracker(() => {
   const station = Session.get('station');
-  const patientList = Patientinfo.find({nextStation:station}).fetch();
+  const currentPatient = Session.get('currentPatient');
+  const patientList = Patientinfo.find(
+    {$and:[{nextStation:station},
+      {$or:[{busy:false},{id:currentPatient}]}
+    ]}).fetch();
 
   newID = (patientList.length > 0) ? patientList[0].id : null;
 

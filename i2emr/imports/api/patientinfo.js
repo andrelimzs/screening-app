@@ -12,6 +12,7 @@ Meteor.methods({
     }
     data.nextStation = "Height & weight";
     data.id = data.id.toUpperCase();
+    data.busy = false;
     Patientinfo.insert(data);
   },
   'patientinfo.update'(data) {
@@ -22,6 +23,9 @@ Meteor.methods({
     const id = data.id.toUpperCase();
     delete data.nextStation;
     delete data.id;
-    Patientinfo.update({id:id},{$set:{nextStation:nextStation}, $push:data});
+    Patientinfo.update({id:id},{$set:{nextStation:nextStation,busy:false}, $push:data});
+  },
+  'patientinfo.setBusy'(id) {
+    Patientinfo.update({id:id},{$set:{busy:true}});
   },
 });

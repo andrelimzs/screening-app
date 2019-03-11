@@ -6,8 +6,17 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 class Queue extends Component {
+  takePatient(id, e) {
+    e.preventDefault();
+    
+    Meteor.call('patientinfo.setBusy', id);
+
+    Session.set('currentPatient',id);
+  }
+
   renderPatient() {
     if (this.props.patientList.length == 0) {
       return (
@@ -31,6 +40,7 @@ class Queue extends Component {
               <CardContent>
                 <Typography>
                   {patient.name}
+                  <Button variant="outlined" onClick={this.takePatient.bind(this, patient.id)}>Take</Button>
                 </Typography>
               </CardContent>
             </Card>

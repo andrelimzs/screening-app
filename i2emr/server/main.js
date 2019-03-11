@@ -5,7 +5,7 @@ import Stationforms from '/imports/api/stationforms';
 
 
 function addPatient(name, id, nextStation) {
-  Patientinfo.insert({name:name, id:id, nextStation:nextStation, createdAt: new Date() });
+  Patientinfo.insert({name:name, id:id, nextStation:nextStation, busy:false, createdAt: new Date() });
 }
 
 function addForm(station, formData) {
