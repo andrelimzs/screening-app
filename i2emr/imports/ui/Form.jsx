@@ -55,11 +55,14 @@ class Form extends Component {
       newForm.nextStation = this.stations[this.stations.indexOf(this.props.station)+1];
       Meteor.call('patientinfo.update', newForm);
     }
+
+    Session.set('currentPatient',null);
   }
 
   render() {
     return (
       <div>
+        {this.props.id}
         <form className="patient-form" onSubmit={this.handleSubmit.bind(this)} >
           { this.renderForm() }
           <input type="submit" value="Submit" />

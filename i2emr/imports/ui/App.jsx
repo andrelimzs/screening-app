@@ -34,6 +34,12 @@ class App extends Component {
 
     Session.set("station",newStation);
 
+    const currentPatient = Session.get('currentPatient');
+    if (currentPatient !==  null) {
+      Meteor.call('patientinfo.setBusy', currentPatient, false);
+      Session.set('currentPatient',null); 
+    }
+
     this.forceUpdate()
   }
 
@@ -66,7 +72,7 @@ class App extends Component {
             }
             <Grid item xs={12}>
               <Paper square={false} m={120}>
-                <Form station={station} id={this.props.id} />
+                <Form station={station} id={Session.get('currentPatient')} />
               </Paper>
             </Grid>
           </Grid>

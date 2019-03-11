@@ -25,7 +25,7 @@ Meteor.methods({
     delete data.id;
     Patientinfo.update({id:id},{$set:{nextStation:nextStation,busy:false}, $push:data});
   },
-  'patientinfo.setBusy'(id) {
-    Patientinfo.update({id:id},{$set:{busy:true}});
+  'patientinfo.setBusy'(id, value) {
+    Patientinfo.update({id:id},{$set:{busy:value}});
   },
 });

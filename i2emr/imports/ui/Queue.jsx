@@ -12,7 +12,7 @@ class Queue extends Component {
   takePatient(id, e) {
     e.preventDefault();
     
-    Meteor.call('patientinfo.setBusy', id);
+    Meteor.call('patientinfo.setBusy', id, true);
 
     Session.set('currentPatient',id);
   }
@@ -40,7 +40,11 @@ class Queue extends Component {
               <CardContent>
                 <Typography>
                   {patient.name}
-                  <Button variant="outlined" onClick={this.takePatient.bind(this, patient.id)}>Take</Button>
+                  <Button
+                    variant="outlined"
+                    onClick={this.takePatient.bind(this, patient.id)}>
+                      Take
+                  </Button>
                 </Typography>
               </CardContent>
             </Card>
