@@ -27,5 +27,12 @@ Meteor.methods({
   },
   'patientinfo.setBusy'(id, value) {
     Patientinfo.update({id:id},{$set:{busy:value}});
+
+    if (value === true) {
+      this.connection.onClose( () => {
+        Patientinfo.update({id:id},{$set:{busy:false}});
+      })
+    }
+    
   },
 });
