@@ -76,6 +76,9 @@ const FormContainer = withTracker(({ station }) => {
 })(Form);
 
 
+
+
+
 // Define the schema
 PatientSchema = new PatientSchema({
   Name: {
@@ -122,7 +125,18 @@ if (Meteor.isClient) {
   });
 }
 
+var ss = new SimpleSchema({
+  requiredString: {
+      type: String
+  }
+});
+var ssContext1 = ss.namedContext("userForm");
 
+var mySchema = new SimpleSchema({name: {type: String}});
+
+Match.test({name: "Steve"}, mySchema); // Return true
+Match.test({admin: true}, mySchema); // Return false
+check({admin: true}, mySchema); // throw a Match.Error
 
 
 export default Form;
