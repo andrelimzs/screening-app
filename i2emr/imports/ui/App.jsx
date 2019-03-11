@@ -101,4 +101,54 @@ const AppContainer = withTracker(() => {
   };
 })(App);
 
+// Define the schema
+PatientSchema = new PatientSchema({
+  Name: {
+    type: String,
+    label: "Name",
+    max: 200
+  },
+  ID: {
+    type: String,
+    label: "ID"
+  },
+  Height: {
+    type: Number,
+    label: "Height",
+    min: 0
+  },
+  Weight: {
+    type: Number,
+    label: "Weight",
+    min: 0
+  }
+});
+
+// Validate an object against the schema
+obj = {Name: "Tom", ID: "123"};
+
+isValid = PatientSchema.namedContext("myContext").validate(obj);
+// OR
+isValid = PatientSchema.namedContext("myContext").validateOne(obj, "keyToValidate");
+// OR
+isValid = Match.test(obj, PatientSchema);
+// OR
+check(obj, PatientSchema);
+
+// Validation errors are available through reactive methods
+if (Meteor.isClient) {
+  Meteor.startup(function() {
+    Tracker.autorun(function() {
+      var context = PatientSchema.namedContext("myContext");
+      if (!context.isValid()) {
+        console.log(context.invalidKeys());
+      }
+    });
+  });
+}
+
+
+
+
+
 // export default withStyles(styles)(App);
