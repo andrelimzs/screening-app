@@ -4,6 +4,8 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 
 class Form extends Component {
   constructor() {
@@ -62,7 +64,10 @@ class Form extends Component {
   render() {
     return (
       <div>
-        {this.props.id}
+        <Typography>
+          {this.props.id}
+        </Typography>
+        
         <form className="patient-form" onSubmit={this.handleSubmit.bind(this)} >
           { this.renderForm() }
           <input type="submit" value="Submit" />

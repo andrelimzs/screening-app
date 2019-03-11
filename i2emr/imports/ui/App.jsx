@@ -59,11 +59,11 @@ class App extends Component {
     if ( station ) {
       return (
         <div>
-          <Grid container justify="center">
+          
             <Button variant="outlined" onClick={this.selectStation.bind(this, "")}>Back</Button>
             <br />
             <Station station={station} />
-          </Grid>
+          
           <Grid container justify="center" spacing={16}>
             {station != "Registration" &&
               <Grid item xs={12}>

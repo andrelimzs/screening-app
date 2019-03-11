@@ -12,9 +12,22 @@ class Queue extends Component {
   takePatient(id, e) {
     e.preventDefault();
     
-    Meteor.call('patientinfo.setBusy', id, true);
+    // If switching from another patient
+    // reset previous patient before proceeding
+    const previousPatient = Session.get('currentPatient');
+    if (previousPatient) {
+      Meteor.call('patientinfo.setBusy', previousPatient, false);
+    }
 
-    Session.set('currentPatient',id);
+    // If previous == current (toggling off)
+    // Don't change anything
+    if (previousPatient != id) {
+      Meteor.call('patientinfo.setBusy', id, true);
+      Session.set('currentPatient',id);
+    } else {
+      Session.set('currentPatient',null); 
+    }
+    
   }
 
   renderPatient() {
@@ -40,12 +53,13 @@ class Queue extends Component {
               <CardContent>
                 <Typography>
                   {patient.name}
-                  <Button
-                    variant="outlined"
-                    onClick={this.takePatient.bind(this, patient.id)}>
-                      Take
-                  </Button>
                 </Typography>
+                <Button
+                  variant={(patient.busy) ? "contained": "outlined"}
+                  color={(patient.busy) ? "secondary": ""}
+                  onClick={this.takePatient.bind(this, patient.id)}>
+                    Take
+                </Button>
               </CardContent>
             </Card>
           </React.Fragment>
