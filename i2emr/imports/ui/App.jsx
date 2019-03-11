@@ -34,6 +34,12 @@ class App extends Component {
 
     Session.set("station",newStation);
 
+    const currentPatient = Session.get('currentPatient');
+    if (currentPatient !==  null) {
+      Meteor.call('patientinfo.setBusy', currentPatient, false);
+      Session.set('currentPatient',null); 
+    }
+
     this.forceUpdate()
   }
 
@@ -53,20 +59,20 @@ class App extends Component {
     if ( station ) {
       return (
         <div>
-          <Grid container justify="center">
+          
             <Button variant="outlined" onClick={this.selectStation.bind(this, "")}>Back</Button>
             <br />
             <Station station={station} />
-          </Grid>
+          
           <Grid container justify="center" spacing={16}>
-            <Grid item xs={12}>
-              <Paper square={false}>
+            {station != "Registration" &&
+              <Grid item xs={12}>
                 <Queue patientList={this.props.patientList} />
-              </Paper>
-            </Grid>
+              </Grid>
+            }
             <Grid item xs={12}>
-              <Paper square={false}>
-                <Form station={station} id={this.props.id} />
+              <Paper square={false} m={120}>
+                <Form station={station} id={Session.get('currentPatient')} />
               </Paper>
             </Grid>
           </Grid>
@@ -89,10 +95,13 @@ class App extends Component {
     
   }
 }
-
-export default withTracker(() => {
+const AppContainer = withTracker(() => {
   const station = Session.get('station');
-  const patientList = Patientinfo.find({nextStation:station}).fetch();
+  const currentPatient = Session.get('currentPatient');
+  const patientList = Patientinfo.find(
+    {$and:[{nextStation:station},
+      {$or:[{busy:false},{id:currentPatient}]}
+    ]}).fetch();
 
   newID = (patientList.length > 0) ? patientList[0].id : null;
 
@@ -102,4 +111,4 @@ export default withTracker(() => {
   };
 })(App);
 
-// export default withStyles(styles)(App);
+export default withStyles(styles)(AppContainer);

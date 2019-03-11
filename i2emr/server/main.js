@@ -5,7 +5,7 @@ import Stationforms from '/imports/api/stationforms';
 
 
 function addPatient(name, id, nextStation) {
-  Patientinfo.insert({name:name, id:id, nextStation:nextStation, createdAt: new Date() });
+  Patientinfo.insert({name:name, id:id, nextStation:nextStation, busy:false, createdAt: new Date() });
 }
 
 function addForm(station, formData) {
@@ -18,8 +18,13 @@ Meteor.startup(() => {
 
   if (Patientinfo.find().count() === 0) {
     addPatient(
-      'Tom Lim',
+      'Tom',
       'S1234567A',
+      "Height & weight"
+    );
+    addPatient(
+      'Gary',
+      'S7654321Z',
       "Height & weight"
     );
   }
