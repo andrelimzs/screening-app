@@ -76,11 +76,8 @@ const FormContainer = withTracker(({ station }) => {
 })(Form);
 
 
-
-
-
 // Define the schema
-PatientSchema = new PatientSchema({
+PatientSchema = new simpleSchema({
   Name: {
     type: String,
     label: "Name",
