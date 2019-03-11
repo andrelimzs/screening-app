@@ -84,10 +84,6 @@ function simpleSchema(Name,ID) {
 
 var mySchema = new simpleSchema({name: {type: String}, ID: {type: String}});
 
-Match.test({name: "Tom"}, mySchema); // Return true
-Match.test({admin: true}, mySchema); // Return false
-check({admin: true}, mySchema); // throw a Match.Error
-
 // Define the schema
 PatientSchema = new simpleSchema({
   Name: {
