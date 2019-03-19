@@ -77,15 +77,15 @@ const FormContainer = withTracker(({ station }) => {
 })(Form);
 
 
-function simpleSchema(Name: {type: String}, ID: {type: String}) {
-  this.Name = Name;
-  this.ID = ID;
-}
+// function simpleSchema(Name: {type: String}, ID: {type: String}) {
+//   this.Name = Name;
+//   this.ID = ID;
+// }
 
 // var mySchema = new simpleSchema({Name: "Tom", ID: "123"});
 
 // Define the schema
-PatientSchema = new simpleSchema({
+PatientSchema = new SimpleSchema({
   Name: {
     type: String,
     label: "Name",
