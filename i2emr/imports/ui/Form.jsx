@@ -95,11 +95,11 @@ PatientSchema = new SimpleSchema({
     type: String,
     label: "id"
   },
-  //Height: {
-  //  type: Number,
-  //  label: "Height",
-  //  min: 0
- // },
+  Height: {
+    type: Number,
+    label: "Height",
+    min: 0
+  },
   Weight: {
     type: Number,
     label: "Weight",
@@ -112,9 +112,9 @@ obj = {Name: "Tom", ID: "123"};
 
 isValid = PatientSchema.namedContext("myContext").validate(obj);
 // OR
-isValid = PatientSchema.namedContext("myContext").validateOne(obj, "keyToValidate");
+// isValid = PatientSchema.namedContext("myContext").validateOne(obj, "keyToValidate");
 // OR
-isValid = Check.test(obj, PatientSchema);
+// isValid = Check.test(obj, PatientSchema);
 // OR
 check(obj, PatientSchema);
 
