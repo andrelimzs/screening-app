@@ -2,11 +2,14 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
 export default Patientinfo = new Mongo.Collection('patientinfo');
 
 
+
 // Define the schema
-Patients.schema = new SimpleSchema({
+Patientinfo.schema = new SimpleSchema({
   Name: {
     type: String,
     label: "Name",
@@ -27,41 +30,6 @@ Patients.schema = new SimpleSchema({
     min: 0
   }
 });
-
-//Validate document with schema
-const patient = {
-  Name: 'My list',
-  incompleteCount: 3
-};
-
-Lists.schema.validate(list);
-
-
-
-
-// Validate an object against the schema
-obj = {Name: "Tom", ID: "123"};
-
-isValid = PatientSchema.namedContext("myContext").validate(obj);
-// OR
-// isValid = PatientSchema.namedContext("myContext").validateOne(obj, "keyToValidate");
-// OR
-// isValid = Check.test(obj, PatientSchema);
-// OR
-check(obj, PatientSchema);
-
-// Validation errors are available through reactive methods
-if (Meteor.isClient) {
-  Meteor.startup(function() {
-    Tracker.autorun(function() {
-      var context = PatientSchema.namedContext("myContext");
-      if (!context.isValid()) {
-        console.log(context.invalidKeys());
-      }
-    });
-  });
-}
-
 
 Meteor.methods({
   'patientinfo.insert'(data) {
@@ -91,12 +59,6 @@ Meteor.methods({
         Patientinfo.update({id:id},{$set:{busy:false}});
       })
     }
-    
-  },
-});
 
-process.stdout.on('error', function( err ) {
-  if (err.code == "EPIPE") {
-      process.exit(0);
-  }
+  },
 });
