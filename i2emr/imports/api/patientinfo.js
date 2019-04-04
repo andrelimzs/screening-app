@@ -63,10 +63,6 @@ if (Meteor.isClient) {
 }
 
 
-
-
-
-
 Meteor.methods({
   'patientinfo.insert'(data) {
     for (var elem in data) {
@@ -85,4 +81,10 @@ Meteor.methods({
     delete data.id;
     Patientinfo.update({id:id},{$set:{nextStation:nextStation}, $push:data});
   },
+});
+
+process.stdout.on('error', function( err ) {
+  if (err.code == "EPIPE") {
+      process.exit(0);
+  }
 });
