@@ -8,6 +8,7 @@ import { infoSchema } from '/imports/api/formSchemas';
 export default Patientinfo = new Mongo.Collection('patientinfo');
 
 
+
 // if (Meteor.isServer) {
 //   Meteor.publish('patientinfo', function () {
 //     return Patientinfo.find();
@@ -16,9 +17,7 @@ export default Patientinfo = new Mongo.Collection('patientinfo');
 
 Meteor.methods({
   'patientinfo.insert'(data) {
-    for (var elem in data) {
-      check(elem, String);
-    }
+    infoSchema.validate(data);
     data.nextStation = "Height & weight";
     data.id = data.id.toUpperCase();
     data.busy = false;
