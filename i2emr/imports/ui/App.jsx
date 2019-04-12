@@ -64,16 +64,31 @@ class App extends Component {
             <br />
             <Station station={station} />
           
-          <Grid container justify="center" spacing={16}>
+          <Grid container justify="flex-start" spacing={16}>
             {station != "Registration" &&
               <Grid item xs={12}>
                 <Queue patientList={this.props.patientList} />
               </Grid>
             }
-            <Grid item xs={12}>
-              <Paper square={false} m={120}>
-                <Form station={station} id={Session.get('currentPatient')} />
-              </Paper>
+            <Grid
+              container
+              direction="row"
+              justify="flex-start"
+              alignItems="flex-start"
+              spacing={16}
+            >
+              <Grid item xs={4}>
+                <Paper square={false} m={120}>
+                  <Form station={station} id={Session.get('currentPatient')} />
+                </Paper>
+              </Grid>
+
+              <Grid item xs={4}>
+                <Paper square={false} m={120}>
+                  <Form station={station} id={Session.get('currentPatient')} />
+                </Paper>
+              </Grid>
+
             </Grid>
           </Grid>
         </div>
