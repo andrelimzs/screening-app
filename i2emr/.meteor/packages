@@ -21,3 +21,5 @@ static-html             # Define static page content in .html files
 react-meteor-data       # React higher-order component for reactively tracking Meteor data
 session
 aldeed:simple-schema
+aldeed:autoform
+aldeed:collection2
