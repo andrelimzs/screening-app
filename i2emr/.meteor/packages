@@ -23,3 +23,4 @@ session
 aldeed:simple-schema
 aldeed:autoform
 aldeed:collection2
+aldeed:schema-index

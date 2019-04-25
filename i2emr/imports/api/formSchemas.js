@@ -1,4 +1,15 @@
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
+
+import Patientinfo from '/imports/api/patientinfo';
+
+// Customise validation error messages
+SimpleSchema.setDefaultMessages({
+  messages: {
+    en: {
+      "IDnotUnique": "ID is already registered",
+    },
+  },
+});
 
 // Define the schema
 export const formSchemas = {
@@ -13,6 +24,16 @@ export const formSchemas = {
       type: String,
       regEx: /^[A-z][0-9]{7}[A-z]$/,
       label: "ID",
+      custom: function () {
+        if (Meteor.isClient && this.isSet) {
+          // Do a blocking, direct database query
+          // This is important, AutoFrom validation will not work otherwise
+          if (Patientinfo.find({id:this.value}).count() !== 0) {
+            // console.log("ID not unique");
+            return "IDnotUnique";
+          }
+        }
+      }
     },
   }),
 
