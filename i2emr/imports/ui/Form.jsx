@@ -14,6 +14,9 @@ class Form extends Component {
   constructor() {
     super();
 
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.formRef = null;
+
     this.formData = {"Registration": ["Name", "ID"],
                     "Height & weight": ["Height", "Weight", "Waist"],
                     "CBG & Hb": ["CBG", "Hb"],
@@ -36,20 +39,7 @@ class Form extends Component {
     );
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    
-    const newForm = {};
-
-    // Loop through form fields
-    for (var i=0, len = this.formData[this.props.station].length; i < len; i++ ){
-      const field = this.formData[this.props.station][i];
-      // Extract data
-      newForm[field.toLowerCase()] = ReactDOM.findDOMNode(this.refs[field]).value.trim();
-      // And clear form
-      ReactDOM.findDOMNode(this.refs[field]).value = '';
-    }
-
+  handleSubmit(newForm) {
     // Insert/update patientinfo database
     if (this.props.station == "Registration") {
       console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
@@ -62,6 +52,8 @@ class Form extends Component {
     }
 
     Session.set('currentPatient',null);
+
+    this.formRef.reset();
   }
 
   render() {
@@ -76,8 +68,9 @@ class Form extends Component {
           <input type="submit" value="Submit" />
         </form> */}
         <AutoForm
+          ref={(ref) => this.formRef = ref}
           schema={infoSchema}
-          onSubmit={doc => db.save(doc)}
+          onSubmit={this.handleSubmit}
         />
       </div>
     );
