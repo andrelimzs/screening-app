@@ -8,19 +8,13 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 
 import AutoForm from 'uniforms-unstyled/AutoForm';
-import { infoSchema } from '/imports/api/formSchemas';
+import { formSchemas } from '/imports/api/formSchemas';
 
 class Form extends Component {
   constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
     this.formRef = null;
-
-    this.formData = {"Registration": ["Name", "ID"],
-                    "Height & weight": ["Height", "Weight", "Waist"],
-                    "CBG & Hb": ["CBG", "Hb"],
-                    "Phlebotomy": ["Blood"],
-                    "Blood pressure": ["BP"]};
 
     this.stations = ["Registration","Height & weight","CBG & Hb","Phlebotomy","Blood pressure","Done"];
   }
@@ -50,7 +44,7 @@ class Form extends Component {
         </Typography>
           <AutoForm
             ref={(ref) => this.formRef = ref}
-            schema={infoSchema}
+            schema={formSchemas[this.props.station]}
             onSubmit={this.handleSubmit}
           />
       </div>

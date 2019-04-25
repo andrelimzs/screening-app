@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { infoSchema } from '/imports/api/formSchemas';
+import { formSchemas } from '/imports/api/formSchemas';
 
 export default Patientinfo = new Mongo.Collection('patientinfo');
 
@@ -17,7 +17,7 @@ export default Patientinfo = new Mongo.Collection('patientinfo');
 
 Meteor.methods({
   'patientinfo.insert'(data) {
-    infoSchema.validate(data);
+    formSchemas["Registration"].validate(data);
     data.nextStation = "Height & weight";
     data.id = data.id.toUpperCase();
     data.busy = false;
