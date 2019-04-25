@@ -7,6 +7,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 
+import AutoForm from 'uniforms-unstyled/AutoForm';
+import { infoSchema } from '/imports/api/formSchemas';
+
 class Form extends Component {
   constructor() {
     super();
@@ -68,10 +71,14 @@ class Form extends Component {
           {this.props.id}
         </Typography>
         
-        <form className="patient-form" onSubmit={this.handleSubmit.bind(this)} >
+        {/* <form className="patient-form" onSubmit={this.handleSubmit.bind(this)} >
           { this.renderForm() }
           <input type="submit" value="Submit" />
-        </form>
+        </form> */}
+        <AutoForm
+          schema={infoSchema}
+          onSubmit={doc => db.save(doc)}
+        />
       </div>
     );
   }

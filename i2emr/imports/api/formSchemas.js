@@ -10,6 +10,6 @@ export const infoSchema = new SimpleSchema({
     id: {
         type: String,
         regEx: /^[A-z][0-9]{7}[A-z]$/,
-       label: "ID",
+        label: "ID",
     }
 });
