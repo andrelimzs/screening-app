@@ -13,7 +13,6 @@ import { infoSchema } from '/imports/api/formSchemas';
 class Form extends Component {
   constructor() {
     super();
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.formRef = null;
 
@@ -24,19 +23,6 @@ class Form extends Component {
                     "Blood pressure": ["BP"]};
 
     this.stations = ["Registration","Height & weight","CBG & Hb","Phlebotomy","Blood pressure","Done"];
-  }
-
-  renderForm() {
-    return (
-      <React.Fragment>
-        {this.formData[this.props.station].map(field => (
-          <React.Fragment>
-            <label for={field}>{field}:</label>
-            <input type="text" ref={field} /><br />
-          </React.Fragment>
-        ))}
-      </React.Fragment>
-    );
   }
 
   handleSubmit(newForm) {
@@ -62,16 +48,11 @@ class Form extends Component {
         <Typography>
           {this.props.id}
         </Typography>
-        
-        {/* <form className="patient-form" onSubmit={this.handleSubmit.bind(this)} >
-          { this.renderForm() }
-          <input type="submit" value="Submit" />
-        </form> */}
-        <AutoForm
-          ref={(ref) => this.formRef = ref}
-          schema={infoSchema}
-          onSubmit={this.handleSubmit}
-        />
+          <AutoForm
+            ref={(ref) => this.formRef = ref}
+            schema={infoSchema}
+            onSubmit={this.handleSubmit}
+          />
       </div>
     );
   }
