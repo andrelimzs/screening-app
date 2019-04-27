@@ -28,7 +28,7 @@ Meteor.methods({
       check(elem, String);
     }
     const nextStation = data.nextStation;
-    // const id = data.id.toUpperCase();
+    const id = data.id;
 
     // TODO - patient routing
     delete data.nextStation;
@@ -36,7 +36,7 @@ Meteor.methods({
     delete data.id;
     Patientinfo.update({id:id},{$set:{nextStation:nextStation,busy:false}, $push:data});
 
-    console.log(Patientinfo.findOne({id:id}));
+    // console.log(Patientinfo.findOne({id:id}));
   },
   'patientinfo.setBusy'(id, value) {
     Patientinfo.update({id:id},{$set:{busy:value}});

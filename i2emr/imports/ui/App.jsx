@@ -4,6 +4,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import Station from './Station.jsx';
 import Queue from './Queue.jsx';
 import Form from './Form.jsx';
+import Info from './Info.jsx';
 
 import Patientinfo from '/imports/api/patientinfo';
 
@@ -82,10 +83,10 @@ class App extends Component {
                   <Form station={station} id={Session.get('currentPatient')} />
                 </Paper>
               </Grid>
-
+              
               <Grid item xs={4}>
                 <Paper square={false} m={120}>
-                  <Form station={station} id={Session.get('currentPatient')} />
+                  <Info station={station} id={Session.get('currentPatient')} patientInfo={this.props.patientInfo} />
                 </Paper>
               </Grid>
 
@@ -112,17 +113,28 @@ class App extends Component {
 }
 const AppContainer = withTracker(() => {
   const station = Session.get('station');
-  const currentPatient = Session.get('currentPatient');
+  const currentPatientID = Session.get('currentPatient');
   const patientList = Patientinfo.find(
     {$and:[{nextStation:station},
-      {$or:[{busy:false},{id:currentPatient}]}
+      {$or:[{busy:false},{id:currentPatientID}]}
     ]}).fetch();
 
   newID = (patientList.length > 0) ? patientList[0].id : null;
 
+  // TODO - Find better way to sent patient info in
+  // Retrieve current patient info for Info component
+  // If no current patient, set to null
+  const patientInfo = (currentPatientID !== undefined && currentPatientID !== null) ? 
+                      Patientinfo.findOne({id:currentPatientID}) : {name: ""};
+  if (currentPatientID !== undefined && currentPatientID !== null) {
+    console.log(currentPatientID);
+  }
+  
+
   return {
     patientList: patientList,
     id: newID,
+    patientInfo: patientInfo,
   };
 })(App);
 

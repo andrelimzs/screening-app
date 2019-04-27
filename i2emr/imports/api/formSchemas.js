@@ -64,7 +64,8 @@ export const formSchemas = {
       type: String,
     },
     anyDrugAllergies: {
-      type: Boolean,
+      type: String,
+      allowedValues: ['Yes', 'No'],
     },
     drugAllergies: {
       type: String,

@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 
-import AutoForm from 'uniforms-unstyled/AutoForm';
+import AutoForm from 'uniforms-material/AutoForm';
 import { formSchemas } from '/imports/api/formSchemas';
 
 class Form extends Component {
@@ -39,9 +39,9 @@ class Form extends Component {
   render() {
     return (
       <div>
-        <Typography>
+        {/* <Typography>
           {this.props.id}
-        </Typography>
+        </Typography> */}
           <AutoForm
             ref={(ref) => this.formRef = ref}
             schema={formSchemas[this.props.station]}
