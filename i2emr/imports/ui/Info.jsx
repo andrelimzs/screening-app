@@ -1,32 +1,29 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { withTracker } from 'meteor/react-meteor-data';
-import Links from '../api/links';
+import { Meteor } from 'meteor/meteor';
+
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 
 class Info extends Component {
-  render() {
-    const links = this.props.links.map(
-      link => this.makeLink(link)
-    );
-
-    return (
-      <div>
-        <h2>Learn Meteor!</h2>
-        <ul>{ links }</ul>
-      </div>
-    );
+  constructor() {
+    super();
   }
 
-  makeLink(link) {
+  render() {
     return (
-      <li key={link._id}>
-        <a href={link.url} target="_blank">{link.title}</a>
-      </li>
+      <div>
+        <Typography>
+          {this.props.patientInfo.name}
+        </Typography>
+        <Typography>
+          {this.props.patientInfo.id}
+        </Typography>
+      </div>
     );
   }
 }
 
-export default InfoContainer = withTracker(() => {
-  return {
-    links: Links.find().fetch(),
-  };
-})(Info);
+export default Info;

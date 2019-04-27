@@ -33,36 +33,28 @@ class Queue extends Component {
   renderPatient() {
     if (this.props.patientList.length == 0) {
       return (
-        <React.Fragment>
-          <Card>
-            <CardContent>
-              <Typography>
-                Empty
-              </Typography>
-            </CardContent>
-          </Card>
-        </React.Fragment>
+        <React.Fragment><Card><CardContent>
+          <Typography>
+            Empty
+          </Typography>
+        </CardContent></Card></React.Fragment>
       )
     }
 
     return (
       <React.Fragment>
         {this.props.patientList.map(patient => (
-          <React.Fragment>
-            <Card>
-              <CardContent>
-                <Typography>
-                  {patient.name}
-                </Typography>
-                <Button
-                  variant={(patient.busy) ? "contained": "outlined"}
-                  color={(patient.busy) ? "secondary": ""}
-                  onClick={this.takePatient.bind(this, patient.id)}>
-                    Take
-                </Button>
-              </CardContent>
-            </Card>
-          </React.Fragment>
+          <React.Fragment><Card><CardContent>
+            <Typography>
+              {patient.name}
+            </Typography>
+            <Button
+              variant={(patient.busy) ? "contained": "outlined"}
+              color={(patient.busy) ? "secondary": "default"}
+              onClick={this.takePatient.bind(this, patient.id)}>
+                Take
+            </Button>
+          </CardContent></Card></React.Fragment>
         ))}
       </React.Fragment>
     );

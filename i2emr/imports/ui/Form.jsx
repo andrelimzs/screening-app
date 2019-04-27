@@ -7,46 +7,19 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 
+import AutoForm from 'uniforms-material/AutoForm';
+import { formSchemas } from '/imports/api/formSchemas';
+
 class Form extends Component {
   constructor() {
     super();
-
-    this.formData = {"Registration": ["Name", "ID"],
-                    "Height & weight": ["Height", "Weight", "Waist"],
-                    "CBG & Hb": ["CBG", "Hb"],
-                    "Phlebotomy": ["Blood"],
-                    "Blood pressure": ["BP"]};
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.formRef = null;
 
     this.stations = ["Registration","Height & weight","CBG & Hb","Phlebotomy","Blood pressure","Done"];
   }
 
-  renderForm() {
-    return (
-      <React.Fragment>
-        {this.formData[this.props.station].map(field => (
-          <React.Fragment>
-            <label for={field}>{field}:</label>
-            <input type="text" ref={field} /><br />
-          </React.Fragment>
-        ))}
-      </React.Fragment>
-    );
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    
-    const newForm = {};
-
-    // Loop through form fields
-    for (var i=0, len = this.formData[this.props.station].length; i < len; i++ ){
-      const field = this.formData[this.props.station][i];
-      // Extract data
-      newForm[field.toLowerCase()] = ReactDOM.findDOMNode(this.refs[field]).value.trim();
-      // And clear form
-      ReactDOM.findDOMNode(this.refs[field]).value = '';
-    }
-
+  handleSubmit(newForm) {
     // Insert/update patientinfo database
     if (this.props.station == "Registration") {
       console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
@@ -59,19 +32,21 @@ class Form extends Component {
     }
 
     Session.set('currentPatient',null);
+
+    this.formRef.reset();
   }
 
   render() {
     return (
       <div>
-        <Typography>
+        {/* <Typography>
           {this.props.id}
-        </Typography>
-        
-        <form className="patient-form" onSubmit={this.handleSubmit.bind(this)} >
-          { this.renderForm() }
-          <input type="submit" value="Submit" />
-        </form>
+        </Typography> */}
+          <AutoForm
+            ref={(ref) => this.formRef = ref}
+            schema={formSchemas[this.props.station]}
+            onSubmit={this.handleSubmit}
+          />
       </div>
     );
   }
