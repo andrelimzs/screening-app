@@ -50,7 +50,7 @@ class Queue extends Component {
             </Typography>
             <Button
               variant={(patient.busy) ? "contained": "outlined"}
-              color={(patient.busy) ? "secondary": ""}
+              color={(patient.busy) ? "secondary": "default"}
               onClick={this.takePatient.bind(this, patient.id)}>
                 Take
             </Button>
