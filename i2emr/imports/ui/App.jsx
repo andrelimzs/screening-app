@@ -17,8 +17,9 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
   },
+  spacing : 8,
   paper: {
-    padding: theme.spacing.unit * 2,
+    // padding: theme.spacing.unit * 2,
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
@@ -79,9 +80,7 @@ class App extends Component {
               spacing={16}
             >
               <Grid item xs={4}>
-                <Paper square={false} m={120}>
-                  <Form station={station} id={Session.get('currentPatient')} />
-                </Paper>
+                <Form station={station} id={Session.get('currentPatient')} />
               </Grid>
               
               <Grid item xs={4}>
