@@ -21,9 +21,11 @@ class Queue extends Component {
 
     // If previous == current (toggling off)
     // Don't change anything
+    var patientConflict;
     if (previousPatient != id) {
-      Meteor.call('patientinfo.setBusy', id, true);
-      Session.set('currentPatient',id);
+      Meteor.call('patientinfo.setBusy', id, true, (error, result) => {
+        if (result) Session.set('currentPatient',id);
+      });
     } else {
       Session.set('currentPatient',null); 
     }

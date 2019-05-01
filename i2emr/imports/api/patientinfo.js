@@ -39,12 +39,24 @@ Meteor.methods({
     // console.log(Patientinfo.findOne({id:id}));
   },
   'patientinfo.setBusy'(id, value) {
-    Patientinfo.update({id:id},{$set:{busy:value}});
+    const patientStatus = Patientinfo.findOne({id:id}).busy;
+    
+    if (patientStatus === value) {
 
-    if (Meteor.isServer && value === true) {
-      this.connection.onClose( () => {
-        Patientinfo.update({id:id},{$set:{busy:false}});
-      })
+      console.log("Patient conflict");
+      return false;
+      
+    } else {
+
+      Patientinfo.update({id:id},{$set:{busy:value}});
+
+      if (Meteor.isServer && value === true) {
+        this.connection.onClose( () => {
+          Patientinfo.update({id:id},{$set:{busy:false}});
+        })
+      }
+      
+      return true;
     }
 
   },
