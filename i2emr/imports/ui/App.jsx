@@ -10,7 +10,6 @@ import Patientinfo from '/imports/api/patientinfo';
 
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
@@ -62,18 +61,19 @@ class App extends Component {
       return (
         <div>
           
-            <Button variant="outlined" onClick={this.selectStation.bind(this, "")}>Back</Button>
-            <br />
-            <Station station={station} />
+          <Button variant="outlined" onClick={this.selectStation.bind(this, "")}>Back</Button>
+          <br />
+          <Station station={station} />
           
-          <Grid container justify="flex-start" spacing={16}>
+          <Grid container
+            justify="flex-start"
+            spacing={16}>
             {station != "Registration" &&
               <Grid item xs={12}>
                 <Queue patientList={this.props.patientList} />
               </Grid>
             }
-            <Grid
-              container
+            <Grid container
               direction="row"
               justify="flex-start"
               alignItems="flex-start"
@@ -84,9 +84,9 @@ class App extends Component {
               </Grid>
               
               <Grid item xs={4}>
-                <Paper square={false} m={120}>
+                {station !== "Registration" && 
                   <Info station={station} id={Session.get('currentPatient')} patientInfo={this.props.patientInfo} />
-                </Paper>
+                }
               </Grid>
 
             </Grid>

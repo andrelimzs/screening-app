@@ -39,7 +39,7 @@ class Form extends Component {
 
   render() {
     return (
-      <Paper p={0} m={0}>
+      <Paper elevation={1} p={0} m={0}>
         {/* <Typography>
           {this.props.id}
         </Typography> */}

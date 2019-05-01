@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 
-import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 
@@ -14,14 +14,24 @@ class Info extends Component {
 
   render() {
     return (
-      <div>
+      <Paper elevation={1}>
         <Typography>
-          {this.props.patientInfo.name}
+          Name: {this.props.patientInfo.name}
         </Typography>
+        <Divider />
         <Typography>
-          {this.props.patientInfo.id}
+          Age: {this.props.patientInfo.age}
         </Typography>
-      </div>
+        <Divider />
+        <Typography>
+          Spoken Languages: {typeof this.props.patientInfo.spokenLanguages !== 'undefined' && 
+            this.props.patientInfo.spokenLanguages.join(", ")}
+        </Typography>
+        <Divider />
+        <Typography>
+          Drug Allergies: {this.props.patientInfo.drugAllergies}
+        </Typography>
+      </Paper>
     );
   }
 }
