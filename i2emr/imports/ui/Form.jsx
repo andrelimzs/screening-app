@@ -6,6 +6,7 @@ import { Meteor } from 'meteor/meteor';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import Paper from '@material-ui/core/Paper';
 
 import AutoForm from 'uniforms-material/AutoForm';
 import { formSchemas } from '/imports/api/formSchemas';
@@ -38,7 +39,7 @@ class Form extends Component {
 
   render() {
     return (
-      <div>
+      <Paper elevation={1} p={0} m={0}>
         {/* <Typography>
           {this.props.id}
         </Typography> */}
@@ -47,7 +48,7 @@ class Form extends Component {
             schema={formSchemas[this.props.station]}
             onSubmit={this.handleSubmit}
           />
-      </div>
+        </Paper>
     );
   }
 }

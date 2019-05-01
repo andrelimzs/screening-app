@@ -10,15 +10,15 @@ import Patientinfo from '/imports/api/patientinfo';
 
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
   },
+  spacing : 8,
   paper: {
-    padding: theme.spacing.unit * 2,
+    // padding: theme.spacing.unit * 2,
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
@@ -61,33 +61,32 @@ class App extends Component {
       return (
         <div>
           
-            <Button variant="outlined" onClick={this.selectStation.bind(this, "")}>Back</Button>
-            <br />
-            <Station station={station} />
+          <Button variant="outlined" onClick={this.selectStation.bind(this, "")}>Back</Button>
+          <br />
+          <Station station={station} />
           
-          <Grid container justify="flex-start" spacing={16}>
+          <Grid container
+            justify="flex-start"
+            spacing={16}>
             {station != "Registration" &&
               <Grid item xs={12}>
                 <Queue patientList={this.props.patientList} />
               </Grid>
             }
-            <Grid
-              container
+            <Grid container
               direction="row"
               justify="flex-start"
               alignItems="flex-start"
               spacing={16}
             >
               <Grid item xs={4}>
-                <Paper square={false} m={120}>
-                  <Form station={station} id={Session.get('currentPatient')} />
-                </Paper>
+                <Form station={station} id={Session.get('currentPatient')} />
               </Grid>
               
               <Grid item xs={4}>
-                <Paper square={false} m={120}>
+                {station !== "Registration" && 
                   <Info station={station} id={Session.get('currentPatient')} patientInfo={this.props.patientInfo} />
-                </Paper>
+                }
               </Grid>
 
             </Grid>

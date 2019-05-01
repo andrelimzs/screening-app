@@ -21,9 +21,11 @@ class Queue extends Component {
 
     // If previous == current (toggling off)
     // Don't change anything
+    var patientConflict;
     if (previousPatient != id) {
-      Meteor.call('patientinfo.setBusy', id, true);
-      Session.set('currentPatient',id);
+      Meteor.call('patientinfo.setBusy', id, true, (error, result) => {
+        if (result) Session.set('currentPatient',id);
+      });
     } else {
       Session.set('currentPatient',null); 
     }
@@ -44,17 +46,24 @@ class Queue extends Component {
     return (
       <React.Fragment>
         {this.props.patientList.map(patient => (
-          <React.Fragment><Card><CardContent>
-            <Typography>
-              {patient.name}
-            </Typography>
-            <Button
-              variant={(patient.busy) ? "contained": "outlined"}
-              color={(patient.busy) ? "secondary": "default"}
-              onClick={this.takePatient.bind(this, patient.id)}>
-                Take
-            </Button>
-          </CardContent></Card></React.Fragment>
+          <Card>
+            <CardContent>
+              <Typography variant="h5">
+                {patient.name}
+              </Typography>
+              <Typography variant="body1">
+                {patient.gender}, {patient.age}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button
+                variant={(patient.busy) ? "contained": "outlined"}
+                color={(patient.busy) ? "secondary": "default"}
+                onClick={this.takePatient.bind(this, patient.id)}>
+                  Take
+              </Button>
+            </CardActions>
+          </Card>
         ))}
       </React.Fragment>
     );
