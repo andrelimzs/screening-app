@@ -13,6 +13,7 @@ import ListField from 'uniforms-material/ListField';
 import DateField from 'uniforms-material/DateField';
 import BoolField from 'uniforms-material/BoolField';
 import LongTextField from 'uniforms-material/LongTextField';
+import Divider from '@material-ui/core/Divider';
 
 // Define the layouts
 export const formLayouts = {
@@ -76,6 +77,20 @@ export const formLayouts = {
       <LongTextField name="abDescribe" />
       <BoolField name="fnacCompleted" />
       <BoolField name="eduCompleted" />
+      <div>
+        <SubmitField />
+      </div>
+    </AutoForm>
+  ),
+
+  "Blood Pressure":(
+    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Blood Pressure"]} onSubmit={this.handleSubmit}>
+      <div><NumField name="bp1Sys" /></div>
+      <div><NumField name="bp1Dia" /></div>
+      <div><NumField name="bp2Sys" /></div>
+      <div><NumField name="bp2Dia" /></div>
+      <div><NumField name="bp3Sys" /></div>
+      <div><NumField name="bp3Dia" /></div>
       <div>
         <SubmitField />
       </div>
