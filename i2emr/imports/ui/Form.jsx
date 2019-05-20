@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 
 import AutoForm from 'uniforms-material/AutoForm';
 import { formSchemas } from '/imports/api/formSchemas';
+import { formLayouts } from '/imports/api/formLayouts';
 
 class Form extends Component {
   constructor() {
@@ -18,6 +19,7 @@ class Form extends Component {
     this.formRef = null;
 
     this.stations = ["Registration","Height & weight","CBG & Hb","Phlebotomy","Blood pressure","Done"];
+
   }
 
   handleSubmit(newForm) {
@@ -40,16 +42,8 @@ class Form extends Component {
   render() {
     return (
       <Paper elevation={1} p={0} m={0}>
-        {/* <Typography>
-          {this.props.id}
-        </Typography> */}
-          <AutoForm
-            ref={(ref) => this.formRef = ref}
-            schema={formSchemas[this.props.station]}
-            onSubmit={this.handleSubmit}
-            grid={12}
-          />
-        </Paper>
+        {formLayouts[this.props.station]}
+      </Paper>
     );
   }
 }
