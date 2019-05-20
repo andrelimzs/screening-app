@@ -47,6 +47,7 @@ class Form extends Component {
             ref={(ref) => this.formRef = ref}
             schema={formSchemas[this.props.station]}
             onSubmit={this.handleSubmit}
+            grid={12}
           />
         </Paper>
     );

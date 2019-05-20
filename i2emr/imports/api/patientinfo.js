@@ -17,16 +17,12 @@ export default Patientinfo = new Mongo.Collection('patientinfo');
 
 Meteor.methods({
   'patientinfo.insert'(data) {
-    formSchemas["Registration"].validate(data);
     data.nextStation = "Height & weight";
     // data.id = data.id.toUpperCase();
     data.busy = false;
     Patientinfo.insert(data);
   },
   'patientinfo.update'(data) {
-    for (var elem in data) {
-      check(elem, String);
-    }
     const nextStation = data.nextStation;
     const id = data.id;
 
