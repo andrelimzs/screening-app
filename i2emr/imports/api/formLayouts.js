@@ -96,4 +96,45 @@ export const formLayouts = {
       </div>
     </AutoForm>
   ),
+
+  "Doctors' Consult":(
+    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Doctors' Consult"]} onSubmit={this.handleSubmit}>
+      <BoolField name="consCompleted" />
+      <BoolField name="refLetter" />
+      <div>
+        <SubmitField />
+      </div>
+    </AutoForm>
+  ),
+
+  "Eye Screening":(
+    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Eye Screening"]} onSubmit={this.handleSubmit}>
+      <BoolField name="specs" />
+      <TextField name="rightWoGlass" />
+      <TextField name="leftWoGlass" />
+      <TextField name="rightWiGlass" />
+      <TextField name="leftWiGlass" />
+      <TextField name="rightNearVis" />
+      <TextField name="leftNearVis" />
+      <LongTextField name="lids" />
+      <LongTextField name="conjunctiva" />
+      <LongTextField name="cornea" />
+      <LongTextField name="antSeg" />
+      <LongTextField name="iris" />
+      <LongTextField name="pupil" />
+      <LongTextField name="lens" />
+      <LongTextField name="ocuMvmt" />
+      <LongTextField name="iop" />
+      <LongTextField name="duct" />
+      <LongTextField name="cdr" />
+      <LongTextField name="macula" />
+      <LongTextField name="retina" />
+      <LongTextField name="diagnosis" />
+      <LongTextField name="advice" />
+      <LongTextField name="nameDoc" />
+      <div>
+        <SubmitField />
+      </div>
+    </AutoForm>
+  ),
 };
