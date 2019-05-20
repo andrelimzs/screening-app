@@ -118,7 +118,7 @@ export const formSchemas = {
     papCompleted: {
       type: Boolean,
       label: "Completed?"
-    }.label,
+    },
   }),
 
   "Breast Exam":
