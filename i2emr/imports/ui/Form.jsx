@@ -18,7 +18,7 @@ class Form extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.formRef = null;
 
-    this.stations = ["Registration","Height & weight","CBG & Hb","Phlebotomy","Blood pressure","Done"];
+    this.stations = ["Registration","Height & weight","CBG & Hb","Phlebotomy","Pap Smear","Blood pressure","Done"];
 
   }
 
