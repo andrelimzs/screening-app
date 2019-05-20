@@ -11,6 +11,7 @@ import HiddenField from 'uniforms-material/HiddenField';
 import NumField from 'uniforms-material/NumField';
 import ListField from 'uniforms-material/ListField';
 import DateField from 'uniforms-material/DateField';
+import RadioField from 'uniforms-material/RadioField';
 import BoolField from 'uniforms-material/BoolField';
 import LongTextField from 'uniforms-material/LongTextField';
 
