@@ -11,6 +11,7 @@ import HiddenField from 'uniforms-material/HiddenField';
 import NumField from 'uniforms-material/NumField';
 import ListField from 'uniforms-material/ListField';
 import DateField from 'uniforms-material/DateField';
+import RadioField from 'uniforms-material/RadioField';
 
 // Define the layouts
 export const formLayouts = {
@@ -21,9 +22,20 @@ export const formLayouts = {
       <SelectField name="gender" />
       <DateField name="birthday" labelProps={{shrink: true, disableAnimation: false}}/>
       <NumField name="age" decimal={false} />
-      <TextField name="contactNumber" />
-      <ListField name="spokenLanguages" />
-    </AutoForm>),
+      <TextField name="district" />
+      <TextField name="address" />
+      <NumField name="zipcode" decimal={false} /><br />
+      <NumField name="contactNumber" decimal={false} />
+      <AutoField name="spokenLanguages" />
+      <AutoField name="writtenLanguages" />
+      <RadioField name="anyDrugAllergies" />
+      <TextField name="drugAllergies" />
+      <RadioField name="pregnant" />
+      <div>
+        <SubmitField />
+      </div>
+    </AutoForm>
+    ),
 
   "Height & weight": (
     <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Height & weight"]} onSubmit={this.handleSubmit}>
@@ -35,6 +47,6 @@ export const formLayouts = {
         <SubmitField />
       </div>
     </AutoForm>
-  )
+    ),
     
 };

@@ -35,6 +35,15 @@ export const formSchemas = {
       type: SimpleSchema.Integer,
       min: 0,
     },
+    district: {
+      type: String,
+    },
+    address: {
+      type: String,
+    },
+    zipcode: {
+      type: SimpleSchema.Integer,
+    },
     contactNumber: {
       type: SimpleSchema.Integer,
     },
@@ -52,9 +61,6 @@ export const formSchemas = {
       type: String,
       allowedValues: ['Sambalpuri', 'Odia', 'English', 'Others'],
     },
-    address: {
-      type: String,
-    },
     anyDrugAllergies: {
       type: String,
       allowedValues: ['Yes', 'No'],
@@ -63,6 +69,10 @@ export const formSchemas = {
       type: String,
       optional: true,
     },
+    pregnant: {
+      type: String,
+      allowedValues: ['Yes', 'No'],
+    }
   }),
 
   "Height & weight":
