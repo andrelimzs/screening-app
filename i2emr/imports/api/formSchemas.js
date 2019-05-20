@@ -21,23 +21,15 @@ export const formSchemas = {
       label: "Name",
     },
     id: {
-      type: String,
-      regEx: /^[A-z][0-9]{7}[A-z]$/,
-      label: "ID",
-      custom: function () {
-        if (Meteor.isClient && this.isSet) {
-          // Do a blocking, direct database query
-          // This is important, AutoFrom validation will not work otherwise
-          if (Patientinfo.find({id:this.value}).count() !== 0) {
-            // console.log("ID not unique");
-            return "IDnotUnique";
-          }
-        }
-      }
+      type: SimpleSchema.Integer,
+      index: 1,
     },
     gender: {
       type: String,
       allowedValues: ['male', 'female'],
+    },
+    birthday: {
+      type: String,
     },
     age: {
       type: SimpleSchema.Integer,
