@@ -87,7 +87,7 @@ Meteor.methods({
   },
   'patientinfo.getSkipList'(id) {
     const stationQueue = Patientinfo.find({id:id}).fetch()[0].stationQueue;
-
+    
     return stationQueue;
   },
 });

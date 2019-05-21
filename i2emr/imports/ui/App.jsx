@@ -87,7 +87,7 @@ class App extends Component {
               spacing={16}
             >
               <Grid item xs={4}>
-                <Form station={station} id={Session.get('currentPatient')} />
+                <Form station={station} id={Session.get('currentPatient')} stationQueue={this.props.patientInfo.stationQueue} />
               </Grid>
               
               <Grid item xs={4}>

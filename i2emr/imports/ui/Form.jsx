@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
@@ -43,7 +43,10 @@ class Form extends Component {
     this.oldID = null;
     this.multiData = {};
 
-    this.state = {pageIndex: 0};
+    this.state = {
+      pageIndex: 0,
+      stationQueue: null,
+    };
   }
 
   handleSubmit(newForm) {
@@ -105,9 +108,10 @@ class Form extends Component {
   };
 
   makeStationEntry(station) {
+    // onClick={this.editField.bind(this,field)}
     return (
       <Fragment>
-        <Button variant="text" fullWidth={true} onClick={this.editField.bind(this,field)}>
+        <Button variant="text" fullWidth={true}>
           {station}
         </Button>
       </Fragment>
@@ -115,19 +119,14 @@ class Form extends Component {
   }
 
   getSkipList() {
-    // Meteor call to get station queue
-    var stationQueue;
-    Meteor.call('patientinfo.getSkipList', this.props.id, (error, result) => {
-      stationQueue = result;
-    });
-
-    const StationList = stationQueue.map(
+    console.log(this.props.stationQueue);
+    const newStationQueue = this.props.stationQueue.map(
       station => this.makeStationEntry(station)
     );
-
+    
     return (
       <div>
-        {StationList}
+        {newStationQueue}
       </div>
     );
   }
