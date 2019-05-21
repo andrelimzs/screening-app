@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+
+import Divider from '@material-ui/core/Divider';
 
 import { formSchemas } from '/imports/api/formSchemas';
 
@@ -11,104 +13,113 @@ import HiddenField from 'uniforms-material/HiddenField';
 import NumField from 'uniforms-material/NumField';
 import ListField from 'uniforms-material/ListField';
 import DateField from 'uniforms-material/DateField';
+import RadioField from 'uniforms-material/RadioField';
 import BoolField from 'uniforms-material/BoolField';
 import LongTextField from 'uniforms-material/LongTextField';
-import Divider from '@material-ui/core/Divider';
+
+import BaseField from 'uniforms/BaseField';
+import nothing from 'uniforms/nothing';
+import {Children} from 'react';
+
+// Define DisplayIf
+// Used to display fields depending on another field's response
+const DisplayIf = ({children, condition}, {uniforms}) => (condition(uniforms) ? Children.only(children) : nothing);
+DisplayIf.contextTypes = BaseField.contextTypes;
 
 // Define the layouts
 export const formLayouts = {
   "Registration":
-    (<AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Registration"]} onSubmit={this.handleSubmit}>
-      <TextField name="name" />
-      <HiddenField name="id" />
-      <SelectField name="gender" />
-      <DateField name="birthday" labelProps={{shrink: true, disableAnimation: false}}/>
-      <NumField name="age" decimal={false} />
-      <TextField name="contactNumber" />
-      <ListField name="spokenLanguages" />
-    </AutoForm>),
+    (
+      <Fragment>
+        <TextField name="name" />
+        <HiddenField name="id" />
+        <SelectField name="gender" />
+        <DateField name="birthday" labelProps={{shrink: true, disableAnimation: false}}/>
+        <NumField name="age" decimal={false} />
+        <Divider variant="middle"/>
+
+        <TextField name="district" />
+        <TextField name="address" />
+        <TextField name="zipcode" decimal={false} /><br />
+        <TextField name="contactNumber" decimal={false} />
+        <AutoField name="spokenLanguages" />
+        <AutoField name="writtenLanguages" />
+        <Divider variant="middle"/>
+
+        <RadioField name="anyDrugAllergies" />
+        <DisplayIf condition={context => context.model.anyDrugAllergies === "Yes"}>
+          <TextField name="drugAllergies" />
+        </DisplayIf>
+        <Divider variant="middle"/>
+
+        <RadioField name="pregnant" />
+
+      </Fragment>
+    ),
 
   "Height & weight": (
-    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Height & weight"]} onSubmit={this.handleSubmit}>
+    <Fragment>
       <TextField name="height" />
+      <br />
       <TextField name="weight" />
+      <br />
       <TextField name="waist" />
+      <br />
       <TextField name="hip" />
-      <div>
-        <SubmitField />
-      </div>
-    </AutoForm>
+    </Fragment>
   ),
 
   "CBG & Hb":(
-    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["CBG & Hb"]} onSubmit={this.handleSubmit}>
-      <NumField name="cbg" />
+    <Fragment>
+      <TextField name="cbg" />
       <br />
-      <NumField name="hb" />
+      <TextField name="hb" />
       <br />
-      <div>
-        <SubmitField />
-      </div>
-    </AutoForm>
+    </Fragment>
   ),
 
   "Phlebotomy":(
-    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Phlebotomy"]} onSubmit={this.handleSubmit}>
+    <Fragment>
       <BoolField name="phleboCompleted" />
-      <div>
-        <SubmitField />
-      </div>
-    </AutoForm>
+    </Fragment>
   ),
 
   "Pap Smear":(
-    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Pap Smear"]} onSubmit={this.handleSubmit}>
+    <Fragment>
       <BoolField name="papCompleted" />
-      <div>
-        <SubmitField />
-      </div>
-    </AutoForm>
+    </Fragment>
   ),
     
   "Breast Exam":(
-    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Breast Exam"]} onSubmit={this.handleSubmit}>
+    <Fragment>
       <BoolField name="breastCompleted" />
       <BoolField name="abnormalities" />
       <LongTextField name="abDescribe" />
       <BoolField name="fnacCompleted" />
       <BoolField name="eduCompleted" />
-      <div>
-        <SubmitField />
-      </div>
-    </AutoForm>
+    </Fragment>
   ),
 
   "Blood Pressure":(
-    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Blood Pressure"]} onSubmit={this.handleSubmit}>
-      <div><NumField name="bp1Sys" /></div>
-      <div><NumField name="bp1Dia" /></div>
-      <div><NumField name="bp2Sys" /></div>
-      <div><NumField name="bp2Dia" /></div>
-      <div><NumField name="bp3Sys" /></div>
-      <div><NumField name="bp3Dia" /></div>
-      <div>
-        <SubmitField />
-      </div>
-    </AutoForm>
+    <Fragment>
+      <div><TextField name="bp1Sys" /></div>
+      <div><TextField name="bp1Dia" /></div>
+      <div><TextField name="bp2Sys" /></div>
+      <div><TextField name="bp2Dia" /></div>
+      <div><TextField name="bp3Sys" /></div>
+      <div><TextField name="bp3Dia" /></div>
+    </Fragment>
   ),
 
   "Doctors' Consult":(
-    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Doctors' Consult"]} onSubmit={this.handleSubmit}>
+    <Fragment>
       <BoolField name="consCompleted" />
       <BoolField name="refLetter" />
-      <div>
-        <SubmitField />
-      </div>
-    </AutoForm>
+    </Fragment>
   ),
 
   "Eye Screening":(
-    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Eye Screening"]} onSubmit={this.handleSubmit}>
+    <Fragment>
       <BoolField name="specs" />
       <TextField name="rightWoGlass" />
       <TextField name="leftWoGlass" />
@@ -132,14 +143,11 @@ export const formLayouts = {
       <LongTextField name="diagnosis" />
       <LongTextField name="advice" />
       <LongTextField name="nameDoc" />
-      <div>
-        <SubmitField />
-      </div>
-    </AutoForm>
+    </Fragment>
   ),
 
   "Pre-Women's Education Quiz":(
-    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Pre-Women's Education Quiz"]} onSubmit={this.handleSubmit}>
+    <Fragment>
       From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
       <SelectField name="S1" />
       Which of the following is/are normal symptom(s) of menstrual periods?
@@ -154,14 +162,11 @@ export const formLayouts = {
       <SelectField name="Q5" />
       You should go to the doctor if you notice:
       <SelectField name="Q6" />
-      <div>
-        <SubmitField />
-      </div>
-    </AutoForm>
+    </Fragment>
   ),
 
   "Post-Women's Education Quiz":(
-    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Post-Women's Education Quiz"]} onSubmit={this.handleSubmit}>
+    <Fragment>
       From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
       <SelectField name="S1" />
       Which of the following is/are normal symptom(s) of menstrual periods?
@@ -176,14 +181,11 @@ export const formLayouts = {
       <SelectField name="Q5" />
       You should go to the doctor if you notice:
       <SelectField name="Q6" />
-      <div>
-        <SubmitField />
-      </div>
-    </AutoForm>
+    </Fragment>
   ),
 
   "Pre-Education Survey":(
-    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Pre-Education Survey"]} onSubmit={this.handleSubmit}>
+    <Fragment>
       From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
 1 being not at all, and 5 being a lot
       <SelectField name="S1" />
@@ -196,14 +198,11 @@ export const formLayouts = {
       From a scale of 1-5, how much do you know about good eyecare habits?
 1 being not at all, and 5 being a lot
       <SelectField name="S4" />
-      <div>
-        <SubmitField />
-      </div>
-    </AutoForm>
+    </Fragment>
   ),
 
   "Pre-Education Quiz":(
-    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Pre-Education Quiz"]} onSubmit={this.handleSubmit}>
+    <Fragment>
       You are at higher risk of developing high cholesterol if you
       <SelectField name="Q1" />
       All of the following are complications of diabetes except
@@ -218,14 +217,11 @@ export const formLayouts = {
       <SelectField name="Q6" />
       Which of the following is not considered good eyecare habits?
       <SelectField name="Q7" />
-      <div>
-        <SubmitField />
-      </div>
-    </AutoForm>
+    </Fragment>
   ),
 
   "Post-Education Survey":(
-    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Post-Education Survey"]} onSubmit={this.handleSubmit}>
+    <Fragment>
       From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
 1 being not at all, and 5 being a lot
       <SelectField name="S1" />
@@ -238,14 +234,11 @@ export const formLayouts = {
       From a scale of 1-5, how much do you know about good eyecare habits?
 1 being not at all, and 5 being a lot
       <SelectField name="S4" />
-      <div>
-        <SubmitField />
-      </div>
-    </AutoForm>
+    </Fragment>
   ),
 
   "Post-Education Quiz":(
-    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Post-Education Quiz"]} onSubmit={this.handleSubmit}>
+    <Fragment>
       You are at higher risk of developing high cholesterol if you
       <SelectField name="Q1" />
       All of the following are complications of diabetes except
@@ -260,10 +253,7 @@ export const formLayouts = {
       <SelectField name="Q6" />
       Which of the following is not considered good eyecare habits?
       <SelectField name="Q7" />
-      <div>
-        <SubmitField />
-      </div>
-    </AutoForm>
+    </Fragment>
   ),
 
 };
