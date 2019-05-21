@@ -11,6 +11,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Button from '@material-ui/core/Button';
 import Popover from '@material-ui/core/Popover';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
 
 class Info extends Component {
   constructor() {
@@ -119,7 +121,29 @@ class Info extends Component {
             horizontal: 'center',
           }}
         >
-          <Typography>The content of the Popover.</Typography>
+          <Grid container
+            direction="column"
+            justify="center"
+            alignItems="flex-end"
+          >
+            <Grid item>
+              <TextField
+                id="outlined-name"
+                label="Name"
+                value="Sample"
+                margin="normal"
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item>
+              <Button
+                size="large"
+                variant="outlined"
+              >
+                EDIT
+              </Button>
+            </Grid>
+          </Grid>
         </Popover>
       </Paper>
     );
