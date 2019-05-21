@@ -371,7 +371,51 @@ export const formSchemas = {
                       'Cancer',
                       'No, they do not have any of the above'],
     },
-
+    FLRSQ1: {
+      type: String,
+    },
+    FLRSQ2: {
+      type: String,
+      allowedValues: ['Yes','No'],
+    },
+    FLRSQ3: {
+      type: String,
+    },
+    FLRSQ4: {
+      type: String,
+      allowedValues: ['Yes','No','Unsure'],
+    },
+    FLRSQ5: {
+      type: String,
+      allowedValues: ['Yes','No'],      
+    },
+    FLRSQ6: {
+      type: Array,
+    },
+    'FLRSQ6.$': {
+      type: String,
+      allowedValues: ['Cigarette', 
+                      'Beedi', 
+                      'Tobacco', 
+                      'Opium'],
+    },
+    FLRSQ7: {
+      type: String,
+      allowedValues: ['Less than 1 cigarette (or equivalent) per day on average',
+                      'Between 1 to 10 cigarettes (or equivalent) per day on average',
+                      'More than 10 cigarettes (or equivalent) per day on average'],      
+    },    
+    FLRSQ8: {
+      type: String,
+    },
+    FLRSQ9: {
+      type: String,
+      allowedValues: ['I have stopped smoking completely','I have never smoked before'],      
+    },
+    FLRSQ10: {
+      type: String,
+      allowedValues: ['Yes','No'],      
+    },
   }),
 
   "Height & weight":

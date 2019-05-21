@@ -239,6 +239,33 @@ export const formLayouts = {
           Do your parents, siblings or children have any of the following conditions? Note: CAD = coronary artery disease (narrowed blood vessels supplying heart muscle)
           <AutoField name="familyHistory" />
 
+          <h2>Framingham Lipids Risk Stratification</h2>
+          Has a doctor told you that you have any heart problems? If yes, please elaborate
+          <TextField name="FLRSQ1" />
+          Have you ever been diagnosed by your doctor to have a stroke?
+          <SelectField name="FLRSQ2" />
+          Has your doctor ever told you that you have any problems with your blood vessels/blood flow? If yes, please elaborate
+          <TextField name="FLRSQ3" />
+          Have you ever been diagnosed by your doctor to have chronic kidney disease?
+          <SelectField name="FLRSQ4" />
+          Do you currently smoke?
+          <SelectField name="FLRSQ5" />
+          <DisplayIf condition={context => context.model.FLRSQ5 === "Yes"}><Fragment>
+            If yes to Q5, what do you smoke? (select all that apply)
+            <AutoField name="FLRSQ6" />
+            If yes to Q5, how much do you smoke?
+            <SelectField name="FLRSQ7" />
+            If yes to Q5, how many years have you been smoking for?
+            <TextField name="FLRSQ8" />
+          </Fragment></DisplayIf>
+          <DisplayIf condition={context => context.model.FLRSQ5 === "No"}><Fragment>
+            If no to Q5, have you ever smoked before?
+            <SelectField name="FLRSQ9" />
+          </Fragment></DisplayIf>
+          Do you chew paan or tobacco?
+          <SelectField name="FLRSQ10" />
+          
+
 
 
     </Fragment>
