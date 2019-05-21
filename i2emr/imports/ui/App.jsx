@@ -7,6 +7,7 @@ import Form from './Form.jsx';
 import Info from './Info.jsx';
 
 import Patientinfo from '/imports/api/patientinfo';
+import { formLayouts } from '/imports/api/formLayouts';
 
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -33,7 +34,7 @@ const styles = theme => ({
 class App extends Component {
   state = {
     currentPatient: "",
-    links: ["Registration","Height & weight","CBG & Hb","Phlebotomy", "Pap Smear","Breast Exam","Blood Pressure", "Doctors' Consult", "Eye Screening", "Pre-Women's Education Quiz", "Post-Women's Education Quiz","Pre-Education Survey","Pre-Education Quiz","Post-Education Survey","Post-Education Quiz"],
+    links: Object.keys(formLayouts),
   }
 
   selectStation(newStation, e) {

@@ -33,7 +33,7 @@ class Form extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.formRef = null;
 
-    this.stations = formLayouts.keys();
+    this.stations = Object.keys(formLayouts);
 
   }
 
