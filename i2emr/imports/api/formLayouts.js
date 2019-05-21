@@ -32,7 +32,7 @@ export const formLayouts = {
     (
       <Fragment>
         <TextField name="name" />
-        <HiddenField name="id" />
+        {/* <HiddenField name="id" /> */}
         <SelectField name="gender" />
         <DateField name="birthday" labelProps={{shrink: true, disableAnimation: false}}/>
         <NumField name="age" decimal={false} />
@@ -191,35 +191,35 @@ export const formLayouts = {
       <Fragment>
         From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
         1 being not at all, and 5 being a lot
-        <RadioField name="S1" />
+        <SelectField name="S1" />
         From a scale of 1-5, how much do you know about healthy lifestyle and diet?
         1 being not at all, and 5 being a lot
-        <RadioField name="S2" />
+        <SelectField name="S2" />
         From a scale of 1-5, how much do you know about cancer risk factors?
         1 being not at all, and 5 being a lot
-        <RadioField name="S3" />
+        <SelectField name="S3" />
         From a scale of 1-5, how much do you know about good eyecare habits?
         1 being not at all, and 5 being a lot
-        <RadioField name="S4" />
+        <SelectField name="S4" />
       </Fragment>
     ),
 
     "Pre-Education Quiz":(
       <Fragment>
         You are at higher risk of developing high cholesterol if you
-        <RadioField name="Q1" />
+        <SelectField name="Q1" />
         All of the following are complications of diabetes except
-        <RadioField name="Q2" />
+        <SelectField name="Q2" />
         How much exercise should we get a week?
-        <RadioField name="Q3" />
+        <SelectField name="Q3" />
         What makes up a healthy plate?
-        <RadioField name="Q4" />
+        <SelectField name="Q4" />
         Which of the following is the healthier choice to make?
-        <RadioField name="Q5" />
+        <SelectField name="Q5" />
         Which of the following is a cancer risk factor(s)?
-        <RadioField name="Q6" />
+        <SelectField name="Q6" />
         Which of the following is not considered good eyecare habits?
-        <RadioField name="Q7" />
+        <SelectField name="Q7" />
       </Fragment>
     ),
 
@@ -227,35 +227,35 @@ export const formLayouts = {
       <Fragment>
         From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
         1 being not at all, and 5 being a lot
-        <RadioField name="S1" />
+        <SelectField name="S1" />
         From a scale of 1-5, how much do you know about healthy lifestyle and diet?
         1 being not at all, and 5 being a lot
-        <RadioField name="S2" />
+        <SelectField name="S2" />
         From a scale of 1-5, how much do you know about cancer risk factors?
         1 being not at all, and 5 being a lot
-        <RadioField name="S3" />
+        <SelectField name="S3" />
         From a scale of 1-5, how much do you know about good eyecare habits?
         1 being not at all, and 5 being a lot
-        <RadioField name="S4" />
+        <SelectField name="S4" />
       </Fragment>
     ),
 
     "Post-Education Quiz":(
       <Fragment>
         You are at higher risk of developing high cholesterol if you
-        <RadioField name="Q1" />
+        <SelectField name="Q1" />
         All of the following are complications of diabetes except
-        <RadioField name="Q2" />
+        <SelectField name="Q2" />
         How much exercise should we get a week?
-        <RadioField name="Q3" />
+        <SelectField name="Q3" />
         What makes up a healthy plate?
-        <RadioField name="Q4" />
+        <SelectField name="Q4" />
         Which of the following is the healthier choice to make?
-        <RadioField name="Q5" />
+        <SelectField name="Q5" />
         Which of the following is a cancer risk factor(s)?
-        <RadioField name="Q6" />
+        <SelectField name="Q6" />
         Which of the following is not considered good eyecare habits?
-        <RadioField name="Q7" />
+        <SelectField name="Q7" />
       </Fragment>
     ),
   }

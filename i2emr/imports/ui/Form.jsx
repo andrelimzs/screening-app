@@ -36,8 +36,11 @@ class Form extends Component {
     this.stations = Object.keys(formLayouts);
 
     this.isMultipage = (formSchemas[this.props.station].__proto__.constructor.name !== "SimpleSchema");
-    this.pageIndex = 0;
+    // this.pageIndex = 0;
     this.oldID = null;
+    this.multiData = {};
+
+    this.state = {pageIndex: 0};
   }
 
   handleSubmit(newForm) {
@@ -46,39 +49,70 @@ class Form extends Component {
       console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
 
       Meteor.call('patientinfo.insert', newForm);
+
+    } else if (this.isMultipage) {
+      if (this.state.pageIndex < Object.keys(formSchemas[this.props.station]).length - 1) {
+        // If not at last subpage
+        // Concat and store multipage form data
+        const subSchemaName = Object.keys(formSchemas[this.props.station])[this.state.pageIndex];
+        this.multiData[subSchemaName] = newForm;
+
+        // this.pageIndex++;
+        this.setState((state, props) => ({
+          pageIndex: state.pageIndex + 1
+        }));
+
+        console.log("Next subpage");
+      } else {
+        this.multiData.id = this.props.id;
+
+        console.log(this.multiData);
+
+        // On last subpage
+        Meteor.call('patientinfo.update', this.multiData);
+        // Empty data for multipage form
+        this.multiData = {};
+        // Reset page index
+        // this.pageIndex = 0;
+        this.setState({
+          pageIndex: 0
+        });
+
+        Session.set('currentPatient',null);
+
+        console.log("Finished multipage");
+      }
+
     } else {
       newForm.id = this.props.id;      
 
-      if (!this.isMultipage || this.pageIndex >= Object.keys(formSchemas[this.props.station]).length - 1) {
-        console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
-        newForm.nextStation = this.stations[this.stations.indexOf(this.props.station)+1];
-      }
-      Meteor.call('patientinfo.update', newForm);
-    }
+      // if (!this.isMultipage || this.pageIndex >= Object.keys(formSchemas[this.props.station]).length - 1) {
+      console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
+      newForm.nextStation = this.stations[this.stations.indexOf(this.props.station)+1];
 
-    // If multipage AND not done, go to next form
-    if (this.isMultipage && this.pageIndex < Object.keys(formSchemas[this.props.station]).length - 1) {
-      this.pageIndex++;
-    } else {
-      // Otherwise (patient is done with station)
+      Meteor.call('patientinfo.update', newForm);
+
       Session.set('currentPatient',null);
-      this.pageIndex = 0;
     }
   }
 
   render() {
-    // On ID change => Reset page index
-    if (this.isMultipage && this.oldID != this.props.id) {
-      this.oldID = this.props.id;
-      this.pageIndex = 0;
-    }
+    // // On ID change => Reset page index
+    // if (this.isMultipage && this.oldID != this.props.id) {
+    //   this.oldID = this.props.id;
+    //   // this.pageIndex = 0;
+    //   this.setState({
+    //     pageIndex: 0
+    //   });
+    //   console.log("New patient");
+    // }
 
     // Index into appropriate form for multipage forms
     var currentFormSchema = formSchemas[this.props.station];
     var currentFormLayout = formLayouts[this.props.station];
     if (this.isMultipage) {
-      currentFormSchema = currentFormSchema[Object.keys(currentFormSchema)[this.pageIndex]];
-      currentFormLayout = currentFormLayout[Object.keys(currentFormLayout)[this.pageIndex]];
+      currentFormSchema = currentFormSchema[Object.keys(currentFormSchema)[this.state.pageIndex]];
+      currentFormLayout = currentFormLayout[Object.keys(currentFormLayout)[this.state.pageIndex]];
     }
     
     const newForm = () => (
