@@ -10,6 +10,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Button from '@material-ui/core/Button';
+import Popover from '@material-ui/core/Popover';
 
 class Info extends Component {
   constructor() {
@@ -17,6 +18,7 @@ class Info extends Component {
 
     this.state = {
       value: 0,
+      anchorEl: null,
     };
   }
 
@@ -24,12 +26,23 @@ class Info extends Component {
     this.setState({ value });
   };
 
+  editField = event => {
+    this.setState({
+      anchorEl: event.currentTarget,
+    });
+  };
+  handleClose = () => {
+    this.setState({
+      anchorEl: null,
+    });
+  };
+
   makeInfoEntry(field) {
-    // onClick={this.selectStation.bind(this, station)}
+    // 
     // console.log(field);
     return (
       <Fragment>
-        <Button variant="text" fullWidth={true} >
+        <Button variant="text" fullWidth={true} onClick={this.editField}>
           {field[0] + ": " + field[1]}
         </Button>
       </Fragment>
@@ -79,6 +92,8 @@ class Info extends Component {
   }
 
   render() {
+    const { anchorEl } = this.state;
+    const open = Boolean(anchorEl);
 
     return (
       <Paper elevation={1}>
@@ -90,6 +105,22 @@ class Info extends Component {
         </AppBar>
         {this.state.value === 0 && this.generalInfo()}
         {this.state.value === 1 && this.allInfo()}
+        <Popover
+          id="simple-popper"
+          open={open}
+          anchorEl={anchorEl}
+          onClose={this.handleClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+        >
+          <Typography>The content of the Popover.</Typography>
+        </Popover>
       </Paper>
     );
   }
