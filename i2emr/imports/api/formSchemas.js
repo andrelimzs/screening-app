@@ -238,6 +238,88 @@ export const formSchemas = {
     S4: {
       type: String,
     },
+    O1a: {
+      type: String,
+      allowedValues: ['Yes','No'],
+    },
+    O1b: {
+      type: String,
+    },
+    O2a: {
+      type: String,
+      allowedValues: ['Yes','No'],
+    },
+    O2b: {
+      type: String,
+    },
+    O3a: {
+      type: String,
+      allowedValues: ['Yes','No'],
+    },
+    O3b: {
+      type: String,
+    },
+    O3c: {
+      type: String,
+    },
+    cataract: {
+      type: Boolean,
+      label: "Cataract",
+    },
+    glaucoma: {
+      type: Boolean,
+      label: "Glaucoma",
+    },
+    diabeticRetinopathy: {
+      type: Boolean,
+      label: "Diabetic Retinopathy",
+    },
+    amd: {
+      type: Boolean,
+      label: "Age-related macular degeneration",
+    },
+    anyOtherOcularCond: {
+      type: Boolean,
+      label: "Others (please specify)",
+    },
+    otherOcularCond:{
+      type: String,
+    },
+    O4: {
+      type: String,
+      allowedValues: ['Yes','No'],
+    },
+    O5a: {
+      type: String,
+      allowedValues: ['Normal','Good enough for my daily activities','Poor'],
+    },
+    O5b: {
+      type: String,
+      allowedValues: ['Yes','No'],
+    },
+    concerns: {
+      type: Boolean,
+      label: "Concerns about finances",
+    },
+    tooFar: {
+      type: Boolean,
+      label: "Too far away/difficult to get to the clinic/hospital",
+    },
+    previousAdvice: {
+      type: Boolean,
+      label: "Previously told by eye specialist that nothing can be done"
+    },
+    nothing: {
+      type: Boolean,
+      label: "Nothing can be done as it is part of ageing",
+    },
+    anyOtherReasons: {
+      type: Boolean,
+      label: "Others (please specify)",
+    },
+    otherReasons: {
+      type: String,
+    },
   }),
 
   "Height & weight":

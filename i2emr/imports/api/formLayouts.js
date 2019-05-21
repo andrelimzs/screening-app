@@ -168,6 +168,58 @@ export const formLayouts = {
             <TextField name="S4" />
           </Fragment></DisplayIf>
 
+          <h2>Ocular History</h2>
+          Have you had any eye surgeries?
+          <SelectField name="O1a" />
+          <DisplayIf condition={context => context.model.O1a === "Yes"}><Fragment>
+            If yes to 1a, please specify
+            <TextField name="O1b" />
+          </Fragment></DisplayIf>
+          Any previous trauma to the eye?
+          <SelectField name="O2a" />
+          <DisplayIf condition={context => context.model.O2a === "Yes"}><Fragment>
+            If yes to 2a, please specify
+            <TextField name="O2b" />
+          </Fragment></DisplayIf>
+          Are you under the care of any eye specialist or receiving treatment for the eye from any hospital/clinic?
+          <SelectField name="O3a" />
+          <DisplayIf condition={context => context.model.O3a === "Yes"}><Fragment>
+            If yes to 3a, please specify where
+            <TextField name="O3b" />
+            If yes to 3a, when was your last review?
+            <TextField name="O3c" />
+            If yes to 3a, what was the condition?
+            <BoolField name="cataract" />
+            <BoolField name="glaucoma" />
+            <BoolField name="diabeticRetinopathy" />
+            <BoolField name="amd" />
+            <BoolField name="anyOtherOcularCond" />
+          </Fragment></DisplayIf>
+          <DisplayIf condition={context => context.model.anyOtherOcularCond === true}><Fragment>  
+            <TextField name="otherOcularCond" />
+          </Fragment></DisplayIf>          
+          Have you had any falls in the last 1 year?
+          <SelectField name="O4" />
+          How do you perceive your vision?
+          <SelectField name="O5a" />
+          <DisplayIf condition={context => context.model.O5a === "Poor"}><Fragment>
+            If answer to 5a was 'Poor', do you intend to seek medical help?
+            <SelectField name="O5b" />
+          </Fragment></DisplayIf>
+          <DisplayIf condition={context => context.model.O5b === "No"}><Fragment>
+            If no to 5b, why?
+            <BoolField name="concerns" />
+            <BoolField name="tooFar" />
+            <BoolField name="previousAdvice" />
+            <BoolField name="nothing" />
+            <BoolField name="anyOtherReasons" />
+          </Fragment></DisplayIf>
+          <DisplayIf condition={context => context.model.anyOtherReasons === true}><Fragment>
+            <TextField name="otherReasons" />
+          </Fragment></DisplayIf>
+
+
+
 
     </Fragment>
     
