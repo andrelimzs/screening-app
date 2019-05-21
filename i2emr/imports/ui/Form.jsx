@@ -28,36 +28,62 @@ class ClearableAutoForm extends AutoForm {
 }
 
 class Form extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.formRef = null;
 
     this.stations = Object.keys(formLayouts);
 
+    this.isMultipage = (formSchemas[this.props.station].__proto__.constructor.name !== "SimpleSchema");
+    this.pageIndex = 0;
+    this.oldID = null;
   }
 
   handleSubmit(newForm) {
     // Insert/update patientinfo database
     if (this.props.station == "Registration") {
       console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
+
       Meteor.call('patientinfo.insert', newForm);
     } else {
-      newForm.id = this.props.id;
-      console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
-      newForm.nextStation = this.stations[this.stations.indexOf(this.props.station)+1];
+      newForm.id = this.props.id;      
+
+      if (!this.isMultipage || this.pageIndex >= Object.keys(formSchemas[this.props.station]).length - 1) {
+        console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
+        newForm.nextStation = this.stations[this.stations.indexOf(this.props.station)+1];
+      }
       Meteor.call('patientinfo.update', newForm);
     }
 
-    Session.set('currentPatient',null);
-    // console.log(this.formRef);
-    // this.formRef.reset();
+    // If multipage AND not done, go to next form
+    if (this.isMultipage && this.pageIndex < Object.keys(formSchemas[this.props.station]).length - 1) {
+      this.pageIndex++;
+    } else {
+      // Otherwise (patient is done with station)
+      Session.set('currentPatient',null);
+      this.pageIndex = 0;
+    }
   }
 
   render() {
+    // On ID change => Reset page index
+    if (this.isMultipage && this.oldID != this.props.id) {
+      this.oldID = this.props.id;
+      this.pageIndex = 0;
+    }
+
+    // Index into appropriate form for multipage forms
+    var currentFormSchema = formSchemas[this.props.station];
+    var currentFormLayout = formLayouts[this.props.station];
+    if (this.isMultipage) {
+      currentFormSchema = currentFormSchema[Object.keys(currentFormSchema)[this.pageIndex]];
+      currentFormLayout = currentFormLayout[Object.keys(currentFormLayout)[this.pageIndex]];
+    }
+    
     const newForm = () => (
-      <ClearableAutoForm schema={formSchemas[this.props.station]} onSubmit={this.handleSubmit} >
-        {formLayouts[this.props.station]}
+      <ClearableAutoForm schema={currentFormSchema} onSubmit={this.handleSubmit} >
+        {currentFormLayout}
         <ErrorsField />
         <div>
           <SubmitField inputRef={(ref) => this.formRef = ref} />

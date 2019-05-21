@@ -125,8 +125,6 @@ const AppContainer = withTracker(() => {
       {$or:[{busy:false},{id:currentPatientID}]}
     ]}).fetch();
 
-  newID = (patientList.length > 0) ? patientList[0].id : null;
-
   // TODO - Find better way to sent patient info in
   // Retrieve current patient info for Info component
   // If no current patient, set to null
@@ -135,11 +133,9 @@ const AppContainer = withTracker(() => {
   if (currentPatientID !== undefined && currentPatientID !== null) {
     console.log(currentPatientID);
   }
-  
 
   return {
     patientList: patientList,
-    id: newID,
     patientInfo: patientInfo,
   };
 })(App);

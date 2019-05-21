@@ -19,7 +19,7 @@ Meteor.startup(() => {
   if (Patientinfo.find().count() === 0) {
     Patientinfo.insert({
       name: 'Tom',
-      id: 'S1234567A',
+      id: '1',
       gender: 'male',
       age: '24',
       contactNumber: '12344321',
@@ -34,7 +34,7 @@ Meteor.startup(() => {
     });
     Patientinfo.insert({
       name: 'Gary',
-      id: 'S7654321Z',
+      id: '2',
       gender: 'male',
       age: '24',
       contactNumber: '12344321',
@@ -46,16 +46,20 @@ Meteor.startup(() => {
       busy:false,
       createdAt: new Date()
     });
-  }
-
-  if (Stationforms.find().count() === 0) {
-    addForm(
-      'Registration',
-      [
-        ["name","text"],
-        ["id","alphanumeric"],
-        ["age", "number"]
-      ]
-    )
+    Patientinfo.insert({
+      name: 'Reyansh Aditya Vihaan',
+      id: '3',
+      gender: 'male',
+      age: '24',
+      contactNumber: '12344321',
+      spokenLanguages: ['English', 'Others'],
+      writtenLanguages: ['English'],
+      address: 'Baker Street',
+      anyDrugAllergies: 'Yes',
+      drugAllergies: 'Panadol',
+      nextStation: 'Education',
+      busy:false,
+      createdAt: new Date()
+    });
   }
 });

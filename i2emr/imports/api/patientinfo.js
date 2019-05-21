@@ -4,10 +4,9 @@ import { check } from 'meteor/check';
 
 import SimpleSchema from 'simpl-schema';
 import { formSchemas } from '/imports/api/formSchemas';
+import { formLayouts } from '/imports/api/formLayouts';
 
 export default Patientinfo = new Mongo.Collection('patientinfo');
-
-
 
 // if (Meteor.isServer) {
 //   Meteor.publish('patientinfo', function () {
@@ -17,20 +16,33 @@ export default Patientinfo = new Mongo.Collection('patientinfo');
 
 Meteor.methods({
   'patientinfo.insert'(data) {
-    data.nextStation = "Height & weight";
-    // data.id = data.id.toUpperCase();
+    // Determine stations to visit based on:
+    // Based on gender & age
+    const isMale = (data.gender === "male");
+    const isChild = (data.age <= 18);
+
+    const stationsToRemove = [];
+    if (isMale) {
+      stationsToRemove.push("Pap Smear", "Breast Exam", "Women's Edu");
+    }
+    if (isChild) {
+      stationsToRemove.push("Blood Pressure", "Phlebotomy", "Pap Smear", "Breast Exam");
+    }
+
+    // Construct station queue by filtering out stations to exclude
+    // https://stackoverflow.com/questions/5767325/how-do-i-remove-a-particular-element-from-an-array-in-javascript
+    data.stationQueue = Object.keys(formLayouts).filter(s => !stationsToRemove.includes(s));
+    
+    data.nextStation = data.stationQueue[0];
+    
     data.busy = false;
     Patientinfo.insert(data);
   },
   'patientinfo.update'(data) {
-    const nextStation = data.nextStation;
-    const id = data.id;
+    data.stationQueue.shift();
+    const nextStation = data.nextStation[0];
 
-    // TODO - patient routing
-    delete data.nextStation;
-    
-    delete data.id;
-    Patientinfo.update({id:id},{$set:{nextStation:nextStation,busy:false}, $push:data});
+    Patientinfo.update({id:data.id},{$set:{nextStation:nextStation,busy:false}, $push:data});
 
     // console.log(Patientinfo.findOne({id:id}));
   },
