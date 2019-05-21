@@ -26,13 +26,13 @@ class Info extends Component {
 
   makeInfoEntry(field) {
     // onClick={this.selectStation.bind(this, station)}
-    console.log(field);
+    // console.log(field);
     return (
-        // <Typography>
-        <Button variant="outlined" >
+      <Fragment>
+        <Button variant="text" fullWidth={true} >
           {field[0] + ": " + field[1]}
         </Button>
-        // </Typography>
+      </Fragment>
     );
   }
 
@@ -62,7 +62,10 @@ class Info extends Component {
   allInfo() {
     // Convert object to nested array
     // [ [field_name, value], ... ]
-    const previousInfo = Object.entries(this.props.patientInfo);
+    var previousInfo = Object.entries(this.props.patientInfo);
+    // Filter out unwanted fields
+    const fieldsToRemove = ["_id", "stationQueue", "nextStation", "createdAt", "busy"];
+    previousInfo = previousInfo.filter(field => !fieldsToRemove.includes(field[0]));
 
     const listInfo = previousInfo.map(
       field => this.makeInfoEntry(field)
@@ -79,10 +82,10 @@ class Info extends Component {
 
     return (
       <Paper elevation={1}>
-        <AppBar position="static">
+        <AppBar position="static" color="default">
           <Tabs value={this.state.value} onChange={this.handleChange}>
-            <Tab label="Item One" />
-            <Tab label="Item Two" />
+            <Tab label="Summary" />
+            <Tab label="All Info" />
           </Tabs>
         </AppBar>
         {this.state.value === 0 && this.generalInfo()}
