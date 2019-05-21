@@ -57,6 +57,13 @@ export const formLayouts = {
       </Fragment>
     ),
 
+  "Patient Profiling": (
+    <Fragment>
+      <h2>Diabetes Mellitus</h2>
+      <SelectField name="DM1" />
+    </Fragment>
+  ),
+
   "Height & weight": (
     <Fragment>
       <TextField name="height" />
