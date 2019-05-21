@@ -11,6 +11,20 @@ import Paper from '@material-ui/core/Paper';
 import AutoForm from 'uniforms-material/AutoForm';
 import { formSchemas } from '/imports/api/formSchemas';
 import { formLayouts } from '/imports/api/formLayouts';
+import SubmitField from 'uniforms-material/SubmitField';
+
+class ClearableAutoForm extends AutoForm {
+  onSubmit () {
+      // If you don't care about this Promise
+      return super.onSubmit(...arguments).then(() => this.reset());
+
+      // If you do care about this Promise
+      return super.onSubmit(...arguments).then(result => {
+          this.reset();
+          return result;
+      });
+  }
+}
 
 class Form extends Component {
   constructor() {
@@ -35,14 +49,23 @@ class Form extends Component {
     }
 
     Session.set('currentPatient',null);
-
-    this.formRef.reset();
+    // console.log(this.formRef);
+    // this.formRef.reset();
   }
 
   render() {
-    return (
-      <Paper elevation={1} p={0} m={0}>
+    const newForm = () => (
+      <ClearableAutoForm schema={formSchemas[this.props.station]} onSubmit={this.handleSubmit} >
         {formLayouts[this.props.station]}
+        <div>
+          <SubmitField inputRef={(ref) => this.formRef = ref} />
+        </div>
+      </ClearableAutoForm>
+    );
+    
+    return (
+      <Paper elevation={2} p={0} m={0}>
+        {newForm()}
       </Paper>
     );
   }

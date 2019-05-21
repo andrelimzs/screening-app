@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+
+import Divider from '@material-ui/core/Divider';
 
 import { formSchemas } from '/imports/api/formSchemas';
 
@@ -15,40 +17,56 @@ import RadioField from 'uniforms-material/RadioField';
 import BoolField from 'uniforms-material/BoolField';
 import LongTextField from 'uniforms-material/LongTextField';
 
+import BaseField from 'uniforms/BaseField';
+import nothing from 'uniforms/nothing';
+import {Children} from 'react';
+
+// Define DisplayIf
+// Used to display fields depending on another field's response
+const DisplayIf = ({children, condition}, {uniforms}) => (condition(uniforms) ? Children.only(children) : nothing);
+DisplayIf.contextTypes = BaseField.contextTypes;
+
 // Define the layouts
 export const formLayouts = {
   "Registration":
-    (<AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Registration"]} onSubmit={this.handleSubmit}>
-      <TextField name="name" />
-      <HiddenField name="id" />
-      <SelectField name="gender" />
-      <DateField name="birthday" labelProps={{shrink: true, disableAnimation: false}}/>
-      <NumField name="age" decimal={false} />
-      <TextField name="district" />
-      <TextField name="address" />
-      <NumField name="zipcode" decimal={false} /><br />
-      <NumField name="contactNumber" decimal={false} />
-      <AutoField name="spokenLanguages" />
-      <AutoField name="writtenLanguages" />
-      <RadioField name="anyDrugAllergies" />
-      <TextField name="drugAllergies" />
-      <RadioField name="pregnant" />
-      <div>
-        <SubmitField />
-      </div>
-    </AutoForm>
+    (
+      <Fragment>
+        <TextField name="name" />
+        <HiddenField name="id" />
+        <SelectField name="gender" />
+        <DateField name="birthday" labelProps={{shrink: true, disableAnimation: false}}/>
+        <NumField name="age" decimal={false} />
+        <Divider variant="middle"/>
+
+        <TextField name="district" />
+        <TextField name="address" />
+        <TextField name="zipcode" decimal={false} /><br />
+        <TextField name="contactNumber" decimal={false} />
+        <AutoField name="spokenLanguages" />
+        <AutoField name="writtenLanguages" />
+        <Divider variant="middle"/>
+
+        <RadioField name="anyDrugAllergies" />
+        <DisplayIf condition={context => context.model.anyDrugAllergies === "Yes"}>
+          <TextField name="drugAllergies" />
+        </DisplayIf>
+        <Divider variant="middle"/>
+
+        <RadioField name="pregnant" />
+
+      </Fragment>
     ),
 
   "Height & weight": (
-    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Height & weight"]} onSubmit={this.handleSubmit}>
-      <TextField name="height" />
-      <TextField name="weight" />
-      <TextField name="waist" />
-      <TextField name="hip" />
-      <div>
-        <SubmitField />
-      </div>
-    </AutoForm>
+    <Fragment>
+      <NumField name="height" />
+      <br />
+      <NumField name="weight" />
+      <br />
+      <NumField name="waist" />
+      <br />
+      <NumField name="hip" />
+    </Fragment>
   ),
 
   "CBG & Hb":(

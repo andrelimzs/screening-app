@@ -29,7 +29,7 @@ export const formSchemas = {
       allowedValues: ['male', 'female'],
     },
     birthday: {
-      type: String,
+      type: Date,
     },
     age: {
       type: SimpleSchema.Integer,
@@ -42,10 +42,12 @@ export const formSchemas = {
       type: String,
     },
     zipcode: {
-      type: SimpleSchema.Integer,
+      type: String,
+      regEx: /^[0-9]+$/,
     },
     contactNumber: {
-      type: SimpleSchema.Integer,
+      type: String,
+      regEx: /^[0-9]+$/,
     },
     spokenLanguages: {
       type: Array,
