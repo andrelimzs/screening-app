@@ -142,11 +142,17 @@ export const formLayouts = {
     <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Pre-Women's Education Quiz"]} onSubmit={this.handleSubmit}>
       From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
       <SelectField name="S1" />
+      Which of the following is/are normal symptom(s) of menstrual periods?
       <SelectField name="Q1" />
+      All of the following are reasons for missed periods except
       <SelectField name="Q2" />
+      Which of the following is true about menstruation
       <SelectField name="Q3" />
+      When is the best time to do a breast self examination?
       <SelectField name="Q4" />
+      How often should you do a breast self examination?
       <SelectField name="Q5" />
+      You should go to the doctor if you notice:
       <SelectField name="Q6" />
       <div>
         <SubmitField />
@@ -158,15 +164,106 @@ export const formLayouts = {
     <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Post-Women's Education Quiz"]} onSubmit={this.handleSubmit}>
       From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
       <SelectField name="S1" />
+      Which of the following is/are normal symptom(s) of menstrual periods?
       <SelectField name="Q1" />
+      All of the following are reasons for missed periods except
       <SelectField name="Q2" />
+      Which of the following is true about menstruation
       <SelectField name="Q3" />
+      When is the best time to do a breast self examination?
       <SelectField name="Q4" />
+      How often should you do a breast self examination?
       <SelectField name="Q5" />
+      You should go to the doctor if you notice:
       <SelectField name="Q6" />
       <div>
         <SubmitField />
       </div>
     </AutoForm>
   ),
+
+  "Pre-Education Survey":(
+    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Pre-Education Survey"]} onSubmit={this.handleSubmit}>
+      From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
+1 being not at all, and 5 being a lot
+      <SelectField name="S1" />
+      From a scale of 1-5, how much do you know about healthy lifestyle and diet?
+1 being not at all, and 5 being a lot
+      <SelectField name="S2" />
+      From a scale of 1-5, how much do you know about cancer risk factors?
+1 being not at all, and 5 being a lot
+      <SelectField name="S3" />
+      From a scale of 1-5, how much do you know about good eyecare habits?
+1 being not at all, and 5 being a lot
+      <SelectField name="S4" />
+      <div>
+        <SubmitField />
+      </div>
+    </AutoForm>
+  ),
+
+  "Pre-Education Quiz":(
+    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Pre-Education Quiz"]} onSubmit={this.handleSubmit}>
+      You are at higher risk of developing high cholesterol if you
+      <SelectField name="Q1" />
+      All of the following are complications of diabetes except
+      <SelectField name="Q2" />
+      How much exercise should we get a week?
+      <SelectField name="Q3" />
+      What makes up a healthy plate?
+      <SelectField name="Q4" />
+      Which of the following is the healthier choice to make?
+      <SelectField name="Q5" />
+      Which of the following is a cancer risk factor(s)?
+      <SelectField name="Q6" />
+      Which of the following is not considered good eyecare habits?
+      <SelectField name="Q7" />
+      <div>
+        <SubmitField />
+      </div>
+    </AutoForm>
+  ),
+
+  "Post-Education Survey":(
+    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Post-Education Survey"]} onSubmit={this.handleSubmit}>
+      From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
+1 being not at all, and 5 being a lot
+      <SelectField name="S1" />
+      From a scale of 1-5, how much do you know about healthy lifestyle and diet?
+1 being not at all, and 5 being a lot
+      <SelectField name="S2" />
+      From a scale of 1-5, how much do you know about cancer risk factors?
+1 being not at all, and 5 being a lot
+      <SelectField name="S3" />
+      From a scale of 1-5, how much do you know about good eyecare habits?
+1 being not at all, and 5 being a lot
+      <SelectField name="S4" />
+      <div>
+        <SubmitField />
+      </div>
+    </AutoForm>
+  ),
+
+  "Post-Education Quiz":(
+    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Post-Education Quiz"]} onSubmit={this.handleSubmit}>
+      You are at higher risk of developing high cholesterol if you
+      <SelectField name="Q1" />
+      All of the following are complications of diabetes except
+      <SelectField name="Q2" />
+      How much exercise should we get a week?
+      <SelectField name="Q3" />
+      What makes up a healthy plate?
+      <SelectField name="Q4" />
+      Which of the following is the healthier choice to make?
+      <SelectField name="Q5" />
+      Which of the following is a cancer risk factor(s)?
+      <SelectField name="Q6" />
+      Which of the following is not considered good eyecare habits?
+      <SelectField name="Q7" />
+      <div>
+        <SubmitField />
+      </div>
+    </AutoForm>
+  ),
+
 };

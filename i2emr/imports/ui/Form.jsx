@@ -18,7 +18,20 @@ class Form extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.formRef = null;
 
-    this.stations = ["Registration","Height & weight","CBG & Hb","Phlebotomy", "Pap Smear","Breast Exam","Blood Pressure", "Doctors' Consult", "Eye Screening","Pre-Women's Education Quiz","Post-Women's Education Quiz","Done"];
+    this.stations = ["Registration",
+                      "Height & weight",
+                      "CBG & Hb","Phlebotomy",
+                      "Pap Smear","Breast Exam",
+                      "Blood Pressure",
+                      "Doctors' Consult", 
+                      "Eye Screening",
+                      "Pre-Women's Education Quiz",
+                      "Post-Women's Education Quiz",
+                      "Pre-Education Survey",
+                      "Pre-Education Quiz",
+                      "Post-Education Survey",
+                      "Post-Education Quiz",
+                      "Done"];
 
   }
 
