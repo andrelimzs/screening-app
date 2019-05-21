@@ -49,7 +49,7 @@ class Queue extends Component {
           <Card>
             <CardContent>
               <Typography variant="h5">
-                {patient.name}
+                {patient.id} {patient.name}
               </Typography>
               <Typography variant="body1">
                 {patient.gender}, {patient.age}

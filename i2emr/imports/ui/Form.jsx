@@ -46,7 +46,7 @@ class Form extends Component {
   handleSubmit(newForm) {
     // Insert/update patientinfo database
     if (this.props.station == "Registration") {
-      console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
+      // console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
 
       Meteor.call('patientinfo.insert', newForm);
 

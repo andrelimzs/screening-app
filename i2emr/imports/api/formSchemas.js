@@ -20,10 +20,10 @@ export const formSchemas = {
       regEx: /^\D+$/,
       label: "Name",
     },
-    id: {
-      type: String,
-      regEx: /^[0-9]+$/,
-    },
+    // id: {
+    //   type: String,
+    //   regEx: /^[0-9]+$/,
+    // },
     gender: {
       type: String,
       allowedValues: ['male', 'female'],

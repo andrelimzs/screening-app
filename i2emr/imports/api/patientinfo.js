@@ -21,7 +21,8 @@ Meteor.methods({
     const isMale = (data.gender === "male");
     const isChild = (data.age <= 18);
 
-    const stationsToRemove = [];
+    // Stations to remove
+    const stationsToRemove = ["Registration"];
     if (isMale) {
       stationsToRemove.push("Pap Smear", "Breast Exam", "Women's Edu");
     }
@@ -36,6 +37,13 @@ Meteor.methods({
     data.nextStation = data.stationQueue[0];
     
     data.busy = false;
+
+    // Assign unique id
+    data.id = Patientinfo.find({}).count() + 1;
+    
+    console.log("Station queue");
+    console.log(data.stationQueue);
+
     Patientinfo.insert(data);
   },
   'patientinfo.update'(data) {
