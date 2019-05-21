@@ -33,7 +33,7 @@ const styles = theme => ({
 class App extends Component {
   state = {
     currentPatient: "",
-    links: ["Registration","Height & weight","CBG & Hb","Phlebotomy", "Pap Smear","Breast Exam","Blood Pressure", "Doctors' Consult", "Eye Screening"],
+    links: ["Registration","Height & weight","CBG & Hb","Phlebotomy", "Pap Smear","Breast Exam","Blood Pressure", "Doctors' Consult", "Eye Screening", "Pre-Women's Education Quiz"],
   }
 
   selectStation(newStation, e) {
