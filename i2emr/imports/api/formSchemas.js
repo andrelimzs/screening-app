@@ -416,6 +416,105 @@ export const formSchemas = {
       type: String,
       allowedValues: ['Yes','No'],      
     },
+    socialHisQ1: {
+      type: String,
+      allowedValues: ['Yes','No'],
+    },
+    socialHisQ2: {
+      type: Number,
+    },
+    student: {
+      type: Boolean,
+      label: "Student",
+    },
+    housewife: {
+      type: Boolean,
+      label: "Homemaker/Housewife",
+    },
+    relig:{
+      type: Boolean,
+      label: "Religious Work",
+    },
+    prof: {
+      type: Boolean,
+      label: "Professional (teacher, engineer, architect, doctor, nurse, lawyer, management, finance, etc)",
+    },
+    service: {
+      type: Boolean,
+      label: "Service industry (e.g. restaurant server, call centre, receptionist, hotel staff)",
+    },
+    manual: {
+      type: Boolean,
+      label: "Manual labourer (e.g. construction, cleaning, clothes washing)",
+    },
+    skilledLab:{
+      type: Boolean,
+      label: "Skilled labourer (e.g. plumbing, electrician, cook, tailor)",
+    },
+    farming: {
+      type: Boolean,
+      label: "Farming/Agriculture",
+    },
+    mining: {
+      type: Boolean,
+      label: "Mining",
+    },
+    manu: {
+      type: Boolean,
+      label: "Manufacturing",
+    },
+    unemployed: {
+      type: Boolean,
+      label: "Unemployed",
+    },
+    anyOtherOcc: {
+      type: Boolean,
+      label: "Others (please specify) - free text",
+    },
+    otherOcc: {
+      type: String,
+    },
+    socialHisQ4: {
+      type: String,
+      allowedValues: ['Labour', 'Sedentary'],
+    },
+    socialHisQ5:{
+      type: String,
+      allowedValues: ['Yes', 'No'],
+    },
+    socialHisQ6: {
+      type: String,
+      optional: true,
+    },
+    socialHisQ7: {
+      type: String,
+      allowedValues: ['Unmarried', 'Married','Widowed','Divorced'],
+    },
+    socialHisQ8: {
+      type: Number,
+    },
+    socialHisQ9: {
+      type: Number,
+    },
+    socialHisQ10: {
+      type: Number,
+    },
+    socialHisQ11: {
+      type: Number,
+    },
+    socialHisQ13: {
+      type: String,
+      allowedValues: ['No Formal Qualifications', 
+                      '6th standard or less',
+                      '7th-9th standard',
+                      '10th standard',
+                      '11th standard',
+                      '12th standard',
+                      'Vocational training (e.g. plumbing, construction, cooking)',
+                      'Bachelors or equivalent',
+                      'Post-graduate (Masters/Doctorate or equivalent)',
+                      'Refuse to answer'],
+    },
   }),
 
   "Height & weight":
