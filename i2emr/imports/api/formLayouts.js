@@ -59,21 +59,21 @@ export const formLayouts = {
 
   "Height & weight": (
     <Fragment>
-      <NumField name="height" />
+      <TextField name="height" />
       <br />
-      <NumField name="weight" />
+      <TextField name="weight" />
       <br />
-      <NumField name="waist" />
+      <TextField name="waist" />
       <br />
-      <NumField name="hip" />
+      <TextField name="hip" />
     </Fragment>
   ),
 
   "CBG & Hb":(
     <Fragment>
-      <NumField name="cbg" />
+      <TextField name="cbg" />
       <br />
-      <NumField name="hb" />
+      <TextField name="hb" />
       <br />
     </Fragment>
   ),
