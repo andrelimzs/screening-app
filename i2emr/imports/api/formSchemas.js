@@ -107,10 +107,43 @@ export const formSchemas = {
       type: String,
       allowedValues: ['Regular (Interval of 6 months or less)', 'Occasionally (Interval of more than 6 months)','Seldom (last appointment was >1 year ago)','Not at all'],   
     },
-    Q5: {
+    anyWesternMedicine: {
+      type: Boolean,
+      label: "Yes, Western medicine",
+    },
+    westernMedicine: {
+      type: String,
+    },
+    anyTraditionalMedicine: {
+      type: Boolean,
+      label: "Yes, Traditional medicine",
+    },
+    traditionalMedicine: {
+      type: String,
+    },
+    noMedicine: {
+      type: Boolean,
+    },
+    Q6: {
+      type: String,
+      allowedValues: ['0', '1-3','4-6','> or equal to 7'],   
+    },
+    hypQ1: {
+      type: String,
+      allowedValues: ['Yes', 'No'],   
+      },
+    hypQ2: {
+      type: String,
+      allowedValues: ['Within past 3 years', 'More than 3 years ago'],   
+      },
+    hypQ3: {
+      type: String,
+      allowedValues: ['Regular (Interval of 6 months or less)', 'Occasionally (Interval of more than 6 months)','Seldom (last appointment was >1 year ago)','Not at all'],   
+    },
+    hypQ4: {
       type: Array,
     },
-    'Q5.$': {
+    'hypQ4.$': {
       type: String,
       allowedValues: ['Yes, Western medicine', 
                       'Yes, Traditional medicine', 
@@ -123,11 +156,11 @@ export const formSchemas = {
     traditionalMedicine: {
       type: String,
     },
-    Q6: {
+    hypQ5: {
       type: String,
       allowedValues: ['0 ', '1-3','4-6','> or equal to 7'],   
       },
-
+    
   }),
 
   "Height & weight":
