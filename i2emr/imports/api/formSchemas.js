@@ -121,9 +121,6 @@ export const formSchemas = {
     traditionalMedicine: {
       type: String,
     },
-    noMedicine: {
-      type: Boolean,
-    },
     Q6: {
       type: String,
       allowedValues: ['0', '1-3','4-6','> or equal to 7'],   
@@ -140,27 +137,24 @@ export const formSchemas = {
       type: String,
       allowedValues: ['Regular (Interval of 6 months or less)', 'Occasionally (Interval of more than 6 months)','Seldom (last appointment was >1 year ago)','Not at all'],   
     },
-    hypQ4: {
-      type: Array,
+    hypAnyWesternMedicine: {
+      type: Boolean,
+      label: "Yes, Western medicine",
     },
-    'hypQ4.$': {
-      type: String,
-      allowedValues: ['Yes, Western medicine', 
-                      'Yes, Traditional medicine', 
-                      'No'
-                    ],
-    },
-    westernMedicine: {
+    hypWesternMedicine: {
       type: String,
     },
-    traditionalMedicine: {
+    hypAnyTraditionalMedicine: {
+      type: Boolean,
+      label: "Yes, Traditional medicine",
+    },
+    hypTraditionalMedicine: {
       type: String,
     },
     hypQ5: {
       type: String,
-      allowedValues: ['0 ', '1-3','4-6','> or equal to 7'],   
-      },
-    
+      allowedValues: ['0', '1-3','4-6','> or equal to 7'],   
+    },
   }),
 
   "Height & weight":

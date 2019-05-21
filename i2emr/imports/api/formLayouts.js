@@ -74,14 +74,18 @@ export const formLayouts = {
           <SelectField name="Q4" />
           If yes to Q1, are you taking any medication for your diabetes? If so, can you name them?
           <BoolField name="anyWesternMedicine" />
+        </Fragment></DisplayIf>
+        <DisplayIf condition={context => context.model.anyWesternMedicine === true}><Fragment>
+          <TextField name="westernMedicine" />
+          If yes to Western medicine, how many times do you forget to take your diabetes medication in a week?
+          <SelectField name="Q6" />
+        </Fragment></DisplayIf>
+        <DisplayIf condition={context => context.model.Q1 === "Yes"}><Fragment>
           <BoolField name="anyTraditionalMedicine" />
-          </Fragment></DisplayIf>
-          <DisplayIf condition={context => context.model.anyWesternMedicine === true}><Fragment>
-            <TextField name="westernMedicine" />
-          </Fragment></DisplayIf>
-          <DisplayIf condition= {context => context.model.anyTraditionalMedicine === true}><Fragment>
-            <TextField name="traditionalMedicine" />
-          </Fragment></DisplayIf>
+        </Fragment></DisplayIf>
+        <DisplayIf condition= {context => context.model.anyTraditionalMedicine === true}><Fragment>
+          <TextField name="traditionalMedicine" />
+        </Fragment></DisplayIf>
 
       <Divider variant="middle"/>
       
@@ -95,18 +99,21 @@ export const formLayouts = {
         If yes to Q1, how often are you seeing your doctor for your diabetes?
         <SelectField name="hypQ3" />
         If yes to Q1, are you taking any medication for your diabetes? If so, can you name them?
-        <AutoField name="hypQ4" />
-      </Fragment></DisplayIf>
-      <DisplayIf condition={context => context.model.hypQ4 === "Yes, Western medicine"}><Fragment>
-        <TextField name="westernMedicine" />
-      </Fragment></DisplayIf>
-      <DisplayIf condition= {context => context.model.hypQ4 === "Yes, Traditional medicine"}><Fragment>
-        <TextField name="traditionalMedicine" />
-      </Fragment></DisplayIf>
-      <DisplayIf condition={context => (context.model.hypQ4 === "Yes, Western medicine" || context.model.hypQ4 === "Yes, Traditional medicine")}><Fragment>
-        If yes to Q1, are you taking any medication for your diabetes? If so, can you name them?
-        <SelectField name="hypQ5" />
-      </Fragment></DisplayIf>
+        <BoolField name="hypAnyWesternMedicine" />
+        </Fragment></DisplayIf>
+        <DisplayIf condition={context => context.model.hypAnyWesternMedicine === true}><Fragment>
+          <TextField name="hypWesternMedicine" />
+          If yes to taking Western medicine, how many times do you forget to take your diabetes medication in a week?
+          <SelectField name="hypQ5" />
+        </Fragment></DisplayIf>
+        <DisplayIf condition={context => context.model.hypQ1 === "Yes"}><Fragment> 
+          <BoolField name="hypAnyTraditionalMedicine" />
+          <DisplayIf condition= {context => context.model.hypAnyTraditionalMedicine === true}><Fragment>
+            <TextField name="hypTraditionalMedicine" />
+          </Fragment></DisplayIf>
+        </Fragment></DisplayIf>
+
+
     </Fragment>
     
   ),
