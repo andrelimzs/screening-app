@@ -70,45 +70,33 @@ export const formLayouts = {
   ),
 
   "CBG & Hb":(
-    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["CBG & Hb"]} onSubmit={this.handleSubmit}>
+    <Fragment>
       <NumField name="cbg" />
       <br />
       <NumField name="hb" />
       <br />
-      <div>
-        <SubmitField />
-      </div>
-    </AutoForm>
+    </Fragment>
   ),
 
   "Phlebotomy":(
-    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Phlebotomy"]} onSubmit={this.handleSubmit}>
+    <Fragment>
       <BoolField name="phleboCompleted" />
-      <div>
-        <SubmitField />
-      </div>
-    </AutoForm>
+    </Fragment>
   ),
 
   "Pap Smear":(
-    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Pap Smear"]} onSubmit={this.handleSubmit}>
+    <Fragment>
       <BoolField name="papCompleted" />
-      <div>
-        <SubmitField />
-      </div>
-    </AutoForm>
+    </Fragment>
   ),
     
   "Breast Exam":(
-    <AutoForm ref={(ref) => this.formRef = ref} schema={formSchemas["Breast Exam"]} onSubmit={this.handleSubmit}>
+    <Fragment>
       <BoolField name="breastCompleted" />
       <BoolField name="abnormalities" />
       <LongTextField name="abDescribe" />
       <BoolField name="fnacCompleted" />
       <BoolField name="eduCompleted" />
-      <div>
-        <SubmitField />
-      </div>
-    </AutoForm>
+    </Fragment>
   ),
 };

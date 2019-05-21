@@ -12,6 +12,7 @@ import AutoForm from 'uniforms-material/AutoForm';
 import { formSchemas } from '/imports/api/formSchemas';
 import { formLayouts } from '/imports/api/formLayouts';
 import SubmitField from 'uniforms-material/SubmitField';
+import ErrorsField from 'uniforms-material/ErrorsField';
 
 class ClearableAutoForm extends AutoForm {
   onSubmit () {
@@ -57,6 +58,7 @@ class Form extends Component {
     const newForm = () => (
       <ClearableAutoForm schema={formSchemas[this.props.station]} onSubmit={this.handleSubmit} >
         {formLayouts[this.props.station]}
+        <ErrorsField />
         <div>
           <SubmitField inputRef={(ref) => this.formRef = ref} />
         </div>
