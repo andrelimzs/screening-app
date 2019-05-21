@@ -88,106 +88,106 @@ export const formLayouts = {
       
       <h2>Hyperlipidemia</h2>
       Has a western-trained doctor ever told you that you have high cholesterol?
-      <RadioField name="hypQ1" />
-      <DisplayIf condition={context => context.model.hypQ1 === "No"}><Fragment>
+      <RadioField name="hyperlipidemiaQ1" />
+      <DisplayIf condition={context => context.model.hyperlipidemiaQ1 === "No"}><Fragment>
         If no to Q1, when was the last time you checked your blood cholesterol?
-        <SelectField name="hypQ2" />
+        <SelectField name="hyperlipidemiaQ2" />
       </Fragment></DisplayIf>
-      <DisplayIf condition={context => context.model.hypQ1 === "Yes"}><Fragment>
+      <DisplayIf condition={context => context.model.hyperlipidemiaQ1 === "Yes"}><Fragment>
         If yes to Q1, how often are you seeing your doctor for your high cholesterol?
-        <SelectField name="hypQ3" />
+        <SelectField name="hyperlipidemiaQ3" />
         If yes to Q1, are you taking any medication for your high cholesterol? If so, can you name them?
-        <BoolField name="hypAnyWesternMedicine" />
+        <BoolField name="hyperlipidemiaAnyWesternMedicine" />
         </Fragment></DisplayIf>
-        <DisplayIf condition={context => context.model.hypAnyWesternMedicine === true}><Fragment>
-          <TextField name="hypWesternMedicine" />
+        <DisplayIf condition={context => context.model.hyperlipidemiaAnyWesternMedicine === true}><Fragment>
+          <TextField name="hyperlipidemiaWesternMedicine" />
           If yes to taking Western medicine, how many times do you forget to take your high cholesterol medication in a week?
-          <SelectField name="hypQ5" />
+          <SelectField name="hyperlipidemiaQ5" />
         </Fragment></DisplayIf>
-        <DisplayIf condition={context => context.model.hypQ1 === "Yes"}><Fragment> 
-          <BoolField name="hypAnyTraditionalMedicine" />
-          <DisplayIf condition= {context => context.model.hypAnyTraditionalMedicine === true}><Fragment>
-            <TextField name="hypTraditionalMedicine" />
+        <DisplayIf condition={context => context.model.hyperlipidemiaQ1 === "Yes"}><Fragment> 
+          <BoolField name="hyperlipidemiaAnyTraditionalMedicine" />
+          <DisplayIf condition= {context => context.model.hyperlipidemiaAnyTraditionalMedicine === true}><Fragment>
+            <TextField name="hyperlipidemiaTraditionalMedicine" />
           </Fragment></DisplayIf>
         </Fragment></DisplayIf>
 
         <h2>Hypertension</h2>
         Has a western-trained doctor ever told you that you have high blood pressure (BP)?
-        <RadioField name="htQ1" />
+        <RadioField name="hypertensionQ1" />
         When was the last time you checked your blood pressure?
-        <SelectField name="htQ2" />
-        <DisplayIf condition={context => context.model.htQ1 === "Yes"}><Fragment>
+        <SelectField name="hypertensionQ2" />
+        <DisplayIf condition={context => context.model.hypertensionQ1 === "Yes"}><Fragment>
           If yes to Q1, how often are you seeing your doctor for your high blood pressure?
-          <SelectField name="htQ3" />
+          <SelectField name="hypertensionQ3" />
           If yes to Q1, are you taking any medication for your high blood pressure? If so, can you name them?
-          <BoolField name="htAnyWesternMedicine" />
+          <BoolField name="hypertensionAnyWesternMedicine" />
           </Fragment></DisplayIf>
-          <DisplayIf condition={context => context.model.htAnyWesternMedicine === true}><Fragment>
-            <TextField name="htWesternMedicine" />
+          <DisplayIf condition={context => context.model.hypertensionAnyWesternMedicine === true}><Fragment>
+            <TextField name="hypertensionWesternMedicine" />
             If yes to taking Western medicine, how many times do you forget to take your high blood pressure medication in a week?
-            <SelectField name="htQ5" />
+            <SelectField name="hypertensionQ5" />
           </Fragment></DisplayIf>
-          <DisplayIf condition={context => context.model.htQ1 === "Yes"}><Fragment> 
-            <BoolField name="htAnyTraditionalMedicine" />
-            <DisplayIf condition= {context => context.model.htAnyTraditionalMedicine === true}><Fragment>
-              <TextField name="htTraditionalMedicine" />
+          <DisplayIf condition={context => context.model.hypertensionQ1 === "Yes"}><Fragment> 
+            <BoolField name="hypertensionAnyTraditionalMedicine" />
+            <DisplayIf condition= {context => context.model.hypertensionAnyTraditionalMedicine === true}><Fragment>
+              <TextField name="hypertensionTraditionalMedicine" />
             </Fragment></DisplayIf>
           </Fragment></DisplayIf>
 
           <h2>TB Screening</h2>
           Have you ever been diagnosed with tuberculosis?
-          <SelectField name="TB1" />
+          <SelectField name="TBQ1" />
           Have you ever lived with someone with tuberculosis?
-          <SelectField name="TB2" />
+          <SelectField name="TBQ2" />
           Do you have any of the following symptoms? Select all that apply
-          <AutoField name="TB3" />
+          <AutoField name="TBQ3" />
           
           <h2>Medical history: others</h2>
           Do you have any medical conditions we should take note of? (if none, indicate NIL)
-          <TextField name="MH1" />
+          <TextField name="medicalHistory1" />
           How are you managing these conditions? (check-ups, medicines, diet/exercise, others)
-          <TextField name="MH2" />
+          <TextField name="medicalHistory2" />
           Where do you go to for routine healthcare?
-          <TextField name="MH3" />
+          <TextField name="medicalHistory3" />
           Where do you go to for emergency medical services (eg. fall, injury, fainting)?
-          <TextField name="MH4" />
+          <TextField name="medicalHistory4" />
           Are you taking any other medications? (If yes, indicate what medication and why. If none, indicate NIL)
-          <TextField name="MH5" />
+          <TextField name="medicalHistory5" />
 
           <h2>Surgery and hospitalisations</h2>
           Have you had any surgery previously?
-          <SelectField name="S1" />
-          <DisplayIf condition={context => context.model.S1 === "Yes"}><Fragment>
+          <SelectField name="surgAndHospQ1" />
+          <DisplayIf condition={context => context.model.surgAndHospQ1 === "Yes"}><Fragment>
             If yes to Q1, what surgery?
-            <TextField name="S2" />
+            <TextField name="surgAndHospQ2" />
           </Fragment></DisplayIf>
           Have you been hospitalised in the past 5 years? 
-          <SelectField name="S3" />
-          <DisplayIf condition={context => context.model.S3 === "Yes"}><Fragment>
+          <SelectField name="surgAndHospQ3" />
+          <DisplayIf condition={context => context.model.surgAndHospQ3 === "Yes"}><Fragment>
             If yes to Q3, why were you hospitalised?
-            <TextField name="S4" />
+            <TextField name="surgAndHospQ4" />
           </Fragment></DisplayIf>
 
           <h2>Ocular History</h2>
           Have you had any eye surgeries?
-          <SelectField name="O1a" />
-          <DisplayIf condition={context => context.model.O1a === "Yes"}><Fragment>
+          <SelectField name="ocularHisQ1a" />
+          <DisplayIf condition={context => context.model.ocularHisQ1a === "Yes"}><Fragment>
             If yes to 1a, please specify
-            <TextField name="O1b" />
+            <TextField name="ocularHisQ1b" />
           </Fragment></DisplayIf>
           Any previous trauma to the eye?
-          <SelectField name="O2a" />
-          <DisplayIf condition={context => context.model.O2a === "Yes"}><Fragment>
+          <SelectField name="ocularHisQ2a" />
+          <DisplayIf condition={context => context.model.ocularHisQ2a === "Yes"}><Fragment>
             If yes to 2a, please specify
-            <TextField name="O2b" />
+            <TextField name="ocularHisQ2b" />
           </Fragment></DisplayIf>
           Are you under the care of any eye specialist or receiving treatment for the eye from any hospital/clinic?
-          <SelectField name="O3a" />
-          <DisplayIf condition={context => context.model.O3a === "Yes"}><Fragment>
+          <SelectField name="ocularHisQ3a" />
+          <DisplayIf condition={context => context.model.ocularHisQ3a === "Yes"}><Fragment>
             If yes to 3a, please specify where
-            <TextField name="O3b" />
+            <TextField name="ocularHisQ3b" />
             If yes to 3a, when was your last review?
-            <TextField name="O3c" />
+            <TextField name="ocularHisQ3c" />
             If yes to 3a, what was the condition?
             <BoolField name="cataract" />
             <BoolField name="glaucoma" />
@@ -199,14 +199,14 @@ export const formLayouts = {
             <TextField name="otherOcularCond" />
           </Fragment></DisplayIf>          
           Have you had any falls in the last 1 year?
-          <SelectField name="O4" />
+          <SelectField name="ocularHisQ4" />
           How do you perceive your vision?
-          <SelectField name="O5a" />
-          <DisplayIf condition={context => context.model.O5a === "Poor"}><Fragment>
+          <SelectField name="ocularHisQ5a" />
+          <DisplayIf condition={context => context.model.ocularHisQ5a === "Poor"}><Fragment>
             If answer to 5a was 'Poor', do you intend to seek medical help?
-            <SelectField name="O5b" />
+            <SelectField name="ocularHisQ5b" />
           </Fragment></DisplayIf>
-          <DisplayIf condition={context => context.model.O5b === "No"}><Fragment>
+          <DisplayIf condition={context => context.model.ocularHisQ5b === "No"}><Fragment>
             If no to 5b, why?
             <BoolField name="concerns" />
             <BoolField name="tooFar" />
@@ -218,6 +218,22 @@ export const formLayouts = {
             <TextField name="otherReasons" />
           </Fragment></DisplayIf>
 
+          <h2>Barriers to Healthcare</h2>
+          What type of doctor do you see for your existing conditions?
+          <SelectField name="barrierQ1" />
+          <DisplayIf condition={context => context.model.barrierQ1 === "Seldom/Never visits the doctor"}><Fragment>
+            If answer to Q1 was 'Seldom/Never visits the doctor', why do you not follow-up with your doctor for your existing conditions?
+            <BoolField name="noNeed" />
+            <BoolField name="time" />
+            <BoolField name="mobility" />
+            <BoolField name="financial" />
+            <BoolField name="scared" />
+            <BoolField name="preferTradMed" />
+            <BoolField name="anyOtherBarriers" />
+          </Fragment></DisplayIf>
+          <DisplayIf condition={context => context.model.anyOtherBarriers === true}><Fragment>
+            <TextField name="otherBarriers" />
+          </Fragment></DisplayIf>
 
 
 

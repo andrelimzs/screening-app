@@ -125,80 +125,80 @@ export const formSchemas = {
       type: String,
       allowedValues: ['0', '1-3','4-6','> or equal to 7'],   
     },
-    hypQ1: {
+    hyperlipidemiaQ1: {
       type: String,
       allowedValues: ['Yes', 'No'],   
       },
-    hypQ2: {
+    hyperlipidemiaQ2: {
       type: String,
       allowedValues: ['Within past 3 years', 'More than 3 years ago'],   
       },
-    hypQ3: {
+    hyperlipidemiaQ3: {
       type: String,
       allowedValues: ['Regular (Interval of 6 months or less)', 'Occasionally (Interval of more than 6 months)','Seldom (last appointment was >1 year ago)','Not at all'],   
     },
-    hypAnyWesternMedicine: {
+    hyperlipidemiaAnyWesternMedicine: {
       type: Boolean,
       label: "Yes, Western medicine",
     },
-    hypWesternMedicine: {
+    hyperlipidemiaWesternMedicine: {
       type: String,
     },
-    hypAnyTraditionalMedicine: {
+    hyperlipidemiaAnyTraditionalMedicine: {
       type: Boolean,
       label: "Yes, Traditional medicine",
     },
-    hypTraditionalMedicine: {
+    hyperlipidemiaTraditionalMedicine: {
       type: String,
     },
-    hypQ5: {
+    hyperlipidemiaQ5: {
       type: String,
       allowedValues: ['0', '1-3','4-6','> or equal to 7'],   
     },
-    htQ1: {
+    hypertensionQ1: {
       type: String,
       allowedValues: ['Yes', 'No'],   
       },
-    htQ2: {
+    hypertensionQ2: {
       type: String,
       allowedValues: ['Within past 3 years', 'More than 3 years ago'],   
       },
-    htQ3: {
+    hypertensionQ3: {
       type: String,
       allowedValues: ['Regular (Interval of 6 months or less)', 'Occasionally (Interval of more than 6 months)','Seldom (last appointment was >1 year ago)','Not at all'],   
     },
-    htAnyWesternMedicine: {
+    hypertensionAnyWesternMedicine: {
       type: Boolean,
       label: "Yes, Western medicine",
     },
-    htWesternMedicine: {
+    hypertensionWesternMedicine: {
       type: String,
     },
-    htAnyTraditionalMedicine: {
+    hypertensionAnyTraditionalMedicine: {
       type: Boolean,
       label: "Yes, Traditional medicine",
     },
-    htTraditionalMedicine: {
+    hypertensionTraditionalMedicine: {
       type: String,
     },
-    htQ5: {
+    hypertensionQ5: {
       type: String,
       allowedValues: ['0', '1-3','4-6','> or equal to 7'],   
     },
-    TB1: {
+    TBQ1: {
       type: String,
       allowedValues: ['Yes','No'],
     },
-    TB2: {
+    TBQ2: {
       type: String,
       allowedValues: ['Yes, the person was diagnosed with TB within the past 4 months', 
                       'Yes, the person was diagnosed with TB more than 4 months ago',
                       'No'],
     },
-    TB3: {
+    TBQ3: {
       type: Array,
     },
-    'TB3.$': {
+    'TBQ3.$': {
       type: String,
       allowedValues: ['Cough that has lasted more than 2 weeks', 
                       'Coughing up blood', 
@@ -209,57 +209,57 @@ export const formSchemas = {
                       'Loss of appetite',
                       'None of the above'],
     },
-    MH1: {
+    medicalHistory1: {
       type: String,
     },
-    MH2: {
+    medicalHistory2: {
       type: String,
     },
-    MH3: {
+    medicalHistory3: {
       type: String,
     },
-    MH4: {
+    medicalHistory4: {
       type: String,
     },
-    MH5: {
+    medicalHistory5: {
       type: String,
     },
-    S1: {
-      type: String,
-      allowedValues: ['Yes','No'],
-    },
-    S2: {
-      type: String,
-    },
-    S3: {
+    surgAndHospQ1: {
       type: String,
       allowedValues: ['Yes','No'],
     },
-    S4: {
+    surgAndHospQ2: {
       type: String,
     },
-    O1a: {
-      type: String,
-      allowedValues: ['Yes','No'],
-    },
-    O1b: {
-      type: String,
-    },
-    O2a: {
+    surgAndHospQ3: {
       type: String,
       allowedValues: ['Yes','No'],
     },
-    O2b: {
+    surgAndHospQ4: {
       type: String,
     },
-    O3a: {
+    ocularHisQ1a: {
       type: String,
       allowedValues: ['Yes','No'],
     },
-    O3b: {
+    ocularHisQ1b: {
       type: String,
     },
-    O3c: {
+    ocularHisQ2a: {
+      type: String,
+      allowedValues: ['Yes','No'],
+    },
+    ocularHisQ2b: {
+      type: String,
+    },
+    ocularHisQ3a: {
+      type: String,
+      allowedValues: ['Yes','No'],
+    },
+    ocularHisQ3b: {
+      type: String,
+    },
+    ocularHisQ3c: {
       type: String,
     },
     cataract: {
@@ -285,15 +285,15 @@ export const formSchemas = {
     otherOcularCond:{
       type: String,
     },
-    O4: {
+    ocularHisQ4: {
       type: String,
       allowedValues: ['Yes','No'],
     },
-    O5a: {
+    ocularHisQ5a: {
       type: String,
       allowedValues: ['Normal','Good enough for my daily activities','Poor'],
     },
-    O5b: {
+    ocularHisQ5b: {
       type: String,
       allowedValues: ['Yes','No'],
     },
@@ -320,6 +320,45 @@ export const formSchemas = {
     otherReasons: {
       type: String,
     },
+    barrierQ1:{
+      type: String,
+      allowedValues: ['Hospital',
+                      'Clinics',
+                      'Traditional Medicine',
+                      'Seldom/Never visits the doctor'],
+    },
+    noNeed: {
+      type: Boolean,
+      label: "Do not see the need for the tests",
+    },
+    time: {
+      type: Boolean,
+      label: "Challenging to make time to go for appointments",
+    },
+    mobility: {
+      type: Boolean,
+      label: "Difficulty getting to clinic (mobility)",
+    },
+    financial: {
+      type: Boolean,
+      label: "Financial issues",
+    },
+    scared: {
+      type: Boolean,
+      label: "Scared of doctor",
+    },
+    preferTradMed: {
+      type: Boolean,
+      label: "Prefer traditional medicine",
+    },
+    anyOtherBarriers: {
+      type: Boolean,
+      label: "Others: (free text)",
+    },
+    otherBarriers: {
+      type: String,
+    },
+
   }),
 
   "Height & weight":
