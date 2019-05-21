@@ -79,10 +79,55 @@ export const formSchemas = {
 
   "Patient Profiling":
   new SimpleSchema({
-    DM1: {
+    Q1: {
       type: String,
-      allowedValues: ['Yes', 'No', 'Headache', 'All of the above'],   
+      allowedValues: ['Yes', 'No'],   
       },
+    Q2: {
+      type: String,
+      allowedValues: ['Within past 3 years', 'More than 3 years ago'],   
+      },
+    Q3: {
+      type: Array,
+    },
+    'Q3.$': {
+      type: String,
+      allowedValues: ['Increased urination', 
+                      'Increased thirst', 
+                      'Weight loss', 
+                      'Increased hunger',
+                      'Increased tiredness',
+                      'Blurred vision',
+                      'Slow-healing wounds',
+                      'Numbness/tingling in hands and/or feet',
+                      'None of the above'
+                    ],
+    },
+    Q4: {
+      type: String,
+      allowedValues: ['Regular (Interval of 6 months or less)', 'Occasionally (Interval of more than 6 months)','Seldom (last appointment was >1 year ago)','Not at all'],   
+    },
+    Q5: {
+      type: Array,
+    },
+    'Q5.$': {
+      type: String,
+      allowedValues: ['Yes, Western medicine', 
+                      'Yes, Traditional medicine', 
+                      'No'
+                    ],
+    },
+    westernMedicine: {
+      type: String,
+    },
+    traditionalMedicine: {
+      type: String,
+    },
+    Q6: {
+      type: String,
+      allowedValues: ['0 ', '1-3','4-6','> or equal to 7'],   
+      },
+
   }),
 
   "Height & weight":

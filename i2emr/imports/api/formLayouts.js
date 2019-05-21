@@ -60,7 +60,35 @@ export const formLayouts = {
   "Patient Profiling": (
     <Fragment>
       <h2>Diabetes Mellitus</h2>
-      <SelectField name="DM1" />
+      Has a western-trained doctor ever told you that you have diabetes?
+      <Divider variant="middle"/>
+      <RadioField name="Q1" />
+        <DisplayIf condition={context => context.model.Q1 === "No"}><Fragment>
+          If no to Q1, when was the last time you checked your blood sugar?
+          <SelectField name="Q2" />
+          If no to Q1, do you have any of the following symptoms? (select all that apply)
+          <AutoField name="Q3" />
+        </Fragment></DisplayIf>
+        <DisplayIf condition={context => context.model.Q1 === "Yes"}><Fragment>
+        If yes to Q1, how often are you seeing your doctor for your diabetes? )
+          <SelectField name="Q4" />
+          If yes to Q1, are you taking any medication for your diabetes? If so, can you name them?
+          <RadioField name="Q5" />
+          </Fragment></DisplayIf>
+        <DisplayIf condition={context => context.model.Q5 === "Yes, Western medicine"}><Fragment>
+        <TextField name="westernMedicine" />
+        </Fragment></DisplayIf>
+        <DisplayIf condition= {context => context.model.Q5 === "Yes, Traditional medicine"}><Fragment>
+        <TextField name="traditionalMedicine" />
+        </Fragment></DisplayIf>
+        <DisplayIf condition={context => (context.model.Q5 === "Yes, Western medicine" || context.model.Q5 === "Yes, Traditional medicine")}><Fragment>
+          If yes to Q1, are you taking any medication for your diabetes? If so, can you name them?
+          <SelectField name="Q6" />
+        </Fragment></DisplayIf>
+      <Divider variant="middle"/>
+
+    <h2>Hyperlipidemia</h2>
+
     </Fragment>
   ),
 
