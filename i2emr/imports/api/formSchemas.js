@@ -344,10 +344,59 @@ export const formSchemas = {
       type: String,
       allowedValues: ['A lump that can be seen/felt in the breast or underarm', 'Nipple that is pushed inwards', 'Dimpling of skin over the breast', 'Ulceration of skin over the breast','All of the above'],   
       },
-  
-      
+  }),
 
+  "Post-Women's Education Quiz":
+  new SimpleSchema ({
+    S1: {
+    type: Array,
+    },
+    'S1.$': {
+    type: String,
+    allowedValues: ['1', '2', '3', '4', '5'],   
+    },
+    Q1: {
+      type: Array,
+      },
+    'Q1.$': {
+      type: String,
+      allowedValues: ['Abdominal cramps', 'Acne', 'Headache', 'All of the above'],   
+      },
+    Q2: {
+      type: Array,
+      },
+    'Q2.$': {
+      type: String,
+      allowedValues: ['Stress', 'Pregnancy', 'Weight loss', 'Abrasions'],   
+      },
+    Q3: {
+      type: Array,
+      },
+    'Q3.$': {
+      type: String,
+      allowedValues: ['Menstruation is dirty', 'Menstruation happens every 28 days, on average', 'We should change our sanitary pads once every few days', 'We should clean the area from back to front'],   
+      },
+    Q4: {
+      type: Array,
+      },
+    'Q4.$': {
+      type: String,
+      allowedValues: ['1st day of menses', '7-10 days after start of menses', '21 days after start of menses', '2 days before start of menses'],   
+      },
+    Q5: {
+      type: Array,
+      },
+    'Q5.$': {
+      type: String,
+      allowedValues: ['Once a week', 'Once a month', 'Once a year', 'Once in 2 years'],   
+      },
+    Q6: {
+      type: Array,
+      },
+    'Q6.$': {
+      type: String,
+      allowedValues: ['A lump that can be seen/felt in the breast or underarm', 'Nipple that is pushed inwards', 'Dimpling of skin over the breast', 'Ulceration of skin over the breast','All of the above'],   
+      },
   })
-
   
 }
