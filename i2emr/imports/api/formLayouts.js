@@ -235,6 +235,10 @@ export const formLayouts = {
             <TextField name="otherBarriers" />
           </Fragment></DisplayIf>
 
+          <h2>Family History</h2>
+          Do your parents, siblings or children have any of the following conditions? Note: CAD = coronary artery disease (narrowed blood vessels supplying heart muscle)
+          <AutoField name="familyHistory" />
+
 
 
     </Fragment>

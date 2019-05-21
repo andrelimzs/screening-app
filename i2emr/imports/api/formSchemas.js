@@ -358,6 +358,19 @@ export const formSchemas = {
     otherBarriers: {
       type: String,
     },
+    familyHistory: {
+      type: Array,
+    },
+    'familyHistory.$': {
+      type: String,
+      allowedValues: ['High blood pressure', 
+                      'High blood cholesterol', 
+                      'Heart attack or coronary arterial disease (narrowed blood vessel supplying the heart)*', 
+                      'Stroke',
+                      'Diabetes',
+                      'Cancer',
+                      'No, they do not have any of the above'],
+    },
 
   }),
 
