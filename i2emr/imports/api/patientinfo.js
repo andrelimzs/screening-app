@@ -39,10 +39,19 @@ Meteor.methods({
     Patientinfo.insert(data);
   },
   'patientinfo.update'(data) {
-    data.stationQueue.shift();
-    const nextStation = data.nextStation[0];
+    const id = data.id;
+    delete data.id;
+    delete data.nextStation;
 
-    Patientinfo.update({id:data.id},{$set:{nextStation:nextStation,busy:false}, $push:data});
+    // Retrieve station queue
+    const stationQueue = Patientinfo.find({id:id}).fetch()[0].stationQueue;
+    
+    // Proceed to next station
+    stationQueue.shift();
+
+    const nextStation = stationQueue[0];
+
+    Patientinfo.update({id:id},{$set:{nextStation:nextStation,busy:false,stationQueue:stationQueue}, $push:data});
 
     // console.log(Patientinfo.findOne({id:id}));
   },

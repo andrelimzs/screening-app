@@ -3,6 +3,8 @@ import Links from '/imports/api/links';
 import Patientinfo from '/imports/api/patientinfo';
 import Stationforms from '/imports/api/stationforms';
 
+import { formLayouts } from '/imports/api/formLayouts';
+
 
 function addPatient(name, id, nextStation) {
   Patientinfo.insert({name:name, id:id, nextStation:nextStation, busy:false, createdAt: new Date() });
@@ -28,6 +30,7 @@ Meteor.startup(() => {
       address: 'Baker Street',
       anyDrugAllergies: 'Yes',
       drugAllergies: 'Panadol',
+      stationQueue:["Height & weight", "CBG & Hb", "Phlebotomy", "Pap Smear", "Breast Exam", "Blood Pressure", "Doctors' Consult", "Eye Screening", "Women's Edu", "Education"],
       nextStation: 'Height & weight',
       busy:false,
       createdAt: new Date()
@@ -42,6 +45,7 @@ Meteor.startup(() => {
       writtenLanguages: ['English'],
       address: 'Baker Street',
       anyDrugAllergies: 'No',
+      stationQueue: ["Height & weight", "CBG & Hb", "Phlebotomy", "Pap Smear", "Breast Exam", "Blood Pressure", "Doctors' Consult", "Eye Screening", "Women's Edu", "Education"],
       nextStation: 'Height & weight',
       busy:false,
       createdAt: new Date()
@@ -57,6 +61,7 @@ Meteor.startup(() => {
       address: 'Baker Street',
       anyDrugAllergies: 'Yes',
       drugAllergies: 'Panadol',
+      stationQueue: ['Done'],
       nextStation: 'Education',
       busy:false,
       createdAt: new Date()

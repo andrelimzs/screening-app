@@ -21,8 +21,8 @@ export const formSchemas = {
       label: "Name",
     },
     id: {
-      type: SimpleSchema.Integer,
-      index: 1,
+      type: String,
+      regEx: /^[0-9]+$/,
     },
     gender: {
       type: String,
