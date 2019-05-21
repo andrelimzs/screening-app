@@ -209,6 +209,35 @@ export const formSchemas = {
                       'Loss of appetite',
                       'None of the above'],
     },
+    MH1: {
+      type: String,
+    },
+    MH2: {
+      type: String,
+    },
+    MH3: {
+      type: String,
+    },
+    MH4: {
+      type: String,
+    },
+    MH5: {
+      type: String,
+    },
+    S1: {
+      type: String,
+      allowedValues: ['Yes','No'],
+    },
+    S2: {
+      type: String,
+    },
+    S3: {
+      type: String,
+      allowedValues: ['Yes','No'],
+    },
+    S4: {
+      type: String,
+    },
   }),
 
   "Height & weight":

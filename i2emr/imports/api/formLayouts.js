@@ -141,6 +141,34 @@ export const formLayouts = {
           <SelectField name="TB2" />
           Do you have any of the following symptoms? Select all that apply
           <AutoField name="TB3" />
+          
+          <h2>Medical history: others</h2>
+          Do you have any medical conditions we should take note of? (if none, indicate NIL)
+          <TextField name="MH1" />
+          How are you managing these conditions? (check-ups, medicines, diet/exercise, others)
+          <TextField name="MH2" />
+          Where do you go to for routine healthcare?
+          <TextField name="MH3" />
+          Where do you go to for emergency medical services (eg. fall, injury, fainting)?
+          <TextField name="MH4" />
+          Are you taking any other medications? (If yes, indicate what medication and why. If none, indicate NIL)
+          <TextField name="MH5" />
+
+          <h2>Surgery and hospitalisations</h2>
+          Have you had any surgery previously?
+          <SelectField name="S1" />
+          <DisplayIf condition={context => context.model.S1 === "Yes"}><Fragment>
+            If yes to Q1, what surgery?
+            <TextField name="S2" />
+          </Fragment></DisplayIf>
+          Have you been hospitalised in the past 5 years? 
+          <SelectField name="S3" />
+          <DisplayIf condition={context => context.model.S3 === "Yes"}><Fragment>
+            If yes to Q3, why were you hospitalised?
+            <TextField name="S4" />
+          </Fragment></DisplayIf>
+
+
     </Fragment>
     
   ),
