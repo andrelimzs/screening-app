@@ -21,6 +21,8 @@ class Info extends Component {
     this.state = {
       value: 0,
       anchorEl: null,
+      textFieldLabel: "",
+      textFieldValue: "",
     };
   }
 
@@ -28,11 +30,14 @@ class Info extends Component {
     this.setState({ value });
   };
 
-  editField = event => {
+  editField(field, event) {
     this.setState({
       anchorEl: event.currentTarget,
+      textFieldLabel: field[0],
+      textFieldValue: field[1],
     });
   };
+
   handleClose = () => {
     this.setState({
       anchorEl: null,
@@ -44,11 +49,24 @@ class Info extends Component {
     // console.log(field);
     return (
       <Fragment>
-        <Button variant="text" fullWidth={true} onClick={this.editField}>
+        <Button variant="text" fullWidth={true} onClick={this.editField.bind(this,field)}>
           {field[0] + ": " + field[1]}
         </Button>
       </Fragment>
     );
+  }
+
+  handleEditChange = event => {
+    // console.log(event.target.value);
+    this.setState({
+      textFieldValue: event.target.value,
+    });
+  };
+  //   this.setState({textFieldValue: event.target.value});
+  // }
+
+  submitEdit(event) {
+    alert('An edit was submitted: ' + this.state.textFieldValue);
   }
 
   generalInfo() {
@@ -80,7 +98,8 @@ class Info extends Component {
     var previousInfo = Object.entries(this.props.patientInfo);
     // Filter out unwanted fields
     const fieldsToRemove = ["_id", "stationQueue", "nextStation", "createdAt", "busy"];
-    previousInfo = previousInfo.filter(field => !fieldsToRemove.includes(field[0]));
+    // Also filter out fields that are multiple select
+    previousInfo = previousInfo.filter(field => !fieldsToRemove.includes(field[0]) && !Array.isArray(field[1]));
 
     const listInfo = previousInfo.map(
       field => this.makeInfoEntry(field)
@@ -96,6 +115,8 @@ class Info extends Component {
   render() {
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
+    const textFieldLabel = this.state.textFieldLabel;
+    const textFieldValue = this.state.textFieldValue;
 
     return (
       <Paper elevation={1}>
@@ -128,9 +149,10 @@ class Info extends Component {
           >
             <Grid item>
               <TextField
-                id="outlined-name"
-                label="Name"
-                value="Sample"
+                id="edit-field"
+                label={textFieldLabel}
+                value={this.state.textFieldValue}
+                onChange={this.handleEditChange}
                 margin="normal"
                 variant="outlined"
               />
@@ -139,8 +161,9 @@ class Info extends Component {
               <Button
                 size="large"
                 variant="outlined"
+                onClick={this.submitEdit.bind(this)}
               >
-                EDIT
+                Edit
               </Button>
             </Grid>
           </Grid>
