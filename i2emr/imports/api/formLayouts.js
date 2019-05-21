@@ -61,7 +61,6 @@ export const formLayouts = {
     <Fragment>
       <h2>Diabetes Mellitus</h2>
       Has a western-trained doctor ever told you that you have diabetes?
-      <Divider variant="middle"/>
       <RadioField name="Q1" />
         <DisplayIf condition={context => context.model.Q1 === "No"}><Fragment>
           If no to Q1, when was the last time you checked your blood sugar?
@@ -86,24 +85,23 @@ export const formLayouts = {
         <DisplayIf condition= {context => context.model.anyTraditionalMedicine === true}><Fragment>
           <TextField name="traditionalMedicine" />
         </Fragment></DisplayIf>
-
-      <Divider variant="middle"/>
       
       <h2>Hyperlipidemia</h2>
+      Has a western-trained doctor ever told you that you have high cholesterol?
       <RadioField name="hypQ1" />
       <DisplayIf condition={context => context.model.hypQ1 === "No"}><Fragment>
-        If no to Q1, when was the last time you checked your blood sugar?
+        If no to Q1, when was the last time you checked your blood cholesterol?
         <SelectField name="hypQ2" />
       </Fragment></DisplayIf>
       <DisplayIf condition={context => context.model.hypQ1 === "Yes"}><Fragment>
-        If yes to Q1, how often are you seeing your doctor for your diabetes?
+        If yes to Q1, how often are you seeing your doctor for your high cholesterol?
         <SelectField name="hypQ3" />
-        If yes to Q1, are you taking any medication for your diabetes? If so, can you name them?
+        If yes to Q1, are you taking any medication for your high cholesterol? If so, can you name them?
         <BoolField name="hypAnyWesternMedicine" />
         </Fragment></DisplayIf>
         <DisplayIf condition={context => context.model.hypAnyWesternMedicine === true}><Fragment>
           <TextField name="hypWesternMedicine" />
-          If yes to taking Western medicine, how many times do you forget to take your diabetes medication in a week?
+          If yes to taking Western medicine, how many times do you forget to take your high cholesterol medication in a week?
           <SelectField name="hypQ5" />
         </Fragment></DisplayIf>
         <DisplayIf condition={context => context.model.hypQ1 === "Yes"}><Fragment> 
@@ -113,7 +111,36 @@ export const formLayouts = {
           </Fragment></DisplayIf>
         </Fragment></DisplayIf>
 
+        <h2>Hypertension</h2>
+        Has a western-trained doctor ever told you that you have high blood pressure (BP)?
+        <RadioField name="htQ1" />
+        When was the last time you checked your blood pressure?
+        <SelectField name="htQ2" />
+        <DisplayIf condition={context => context.model.htQ1 === "Yes"}><Fragment>
+          If yes to Q1, how often are you seeing your doctor for your high blood pressure?
+          <SelectField name="htQ3" />
+          If yes to Q1, are you taking any medication for your high blood pressure? If so, can you name them?
+          <BoolField name="htAnyWesternMedicine" />
+          </Fragment></DisplayIf>
+          <DisplayIf condition={context => context.model.htAnyWesternMedicine === true}><Fragment>
+            <TextField name="htWesternMedicine" />
+            If yes to taking Western medicine, how many times do you forget to take your high blood pressure medication in a week?
+            <SelectField name="htQ5" />
+          </Fragment></DisplayIf>
+          <DisplayIf condition={context => context.model.htQ1 === "Yes"}><Fragment> 
+            <BoolField name="htAnyTraditionalMedicine" />
+            <DisplayIf condition= {context => context.model.htAnyTraditionalMedicine === true}><Fragment>
+              <TextField name="htTraditionalMedicine" />
+            </Fragment></DisplayIf>
+          </Fragment></DisplayIf>
 
+          <h2>TB Screening</h2>
+          Have you ever been diagnosed with tuberculosis?
+          <SelectField name="TB1" />
+          Have you ever lived with someone with tuberculosis?
+          <SelectField name="TB2" />
+          Do you have any of the following symptoms? Select all that apply
+          <AutoField name="TB3" />
     </Fragment>
     
   ),

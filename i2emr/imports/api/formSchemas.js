@@ -155,6 +155,60 @@ export const formSchemas = {
       type: String,
       allowedValues: ['0', '1-3','4-6','> or equal to 7'],   
     },
+    htQ1: {
+      type: String,
+      allowedValues: ['Yes', 'No'],   
+      },
+    htQ2: {
+      type: String,
+      allowedValues: ['Within past 3 years', 'More than 3 years ago'],   
+      },
+    htQ3: {
+      type: String,
+      allowedValues: ['Regular (Interval of 6 months or less)', 'Occasionally (Interval of more than 6 months)','Seldom (last appointment was >1 year ago)','Not at all'],   
+    },
+    htAnyWesternMedicine: {
+      type: Boolean,
+      label: "Yes, Western medicine",
+    },
+    htWesternMedicine: {
+      type: String,
+    },
+    htAnyTraditionalMedicine: {
+      type: Boolean,
+      label: "Yes, Traditional medicine",
+    },
+    htTraditionalMedicine: {
+      type: String,
+    },
+    htQ5: {
+      type: String,
+      allowedValues: ['0', '1-3','4-6','> or equal to 7'],   
+    },
+    TB1: {
+      type: String,
+      allowedValues: ['Yes','No'],
+    },
+    TB2: {
+      type: String,
+      allowedValues: ['Yes, the person was diagnosed with TB within the past 4 months', 
+                      'Yes, the person was diagnosed with TB more than 4 months ago',
+                      'No'],
+    },
+    TB3: {
+      type: Array,
+    },
+    'TB3.$': {
+      type: String,
+      allowedValues: ['Cough that has lasted more than 2 weeks', 
+                      'Coughing up blood', 
+                      'Breathlessness', 
+                      'Weight loss',
+                      'Night sweats',
+                      'Fever',
+                      'Loss of appetite',
+                      'None of the above'],
+    },
   }),
 
   "Height & weight":
