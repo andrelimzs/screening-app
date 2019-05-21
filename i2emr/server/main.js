@@ -3,6 +3,8 @@ import Links from '/imports/api/links';
 import Patientinfo from '/imports/api/patientinfo';
 import Stationforms from '/imports/api/stationforms';
 
+import { formLayouts } from '/imports/api/formLayouts';
+
 
 function addPatient(name, id, nextStation) {
   Patientinfo.insert({name:name, id:id, nextStation:nextStation, busy:false, createdAt: new Date() });
@@ -19,7 +21,7 @@ Meteor.startup(() => {
   if (Patientinfo.find().count() === 0) {
     Patientinfo.insert({
       name: 'Tom',
-      id: 'S1234567A',
+      id: '1',
       gender: 'male',
       age: '24',
       contactNumber: '12344321',
@@ -28,13 +30,14 @@ Meteor.startup(() => {
       address: 'Baker Street',
       anyDrugAllergies: 'Yes',
       drugAllergies: 'Panadol',
+      stationQueue:["Height & weight", "CBG & Hb", "Phlebotomy", "Pap Smear", "Breast Exam", "Blood Pressure", "Doctors' Consult", "Eye Screening", "Women's Edu", "Education"],
       nextStation: 'Height & weight',
       busy:false,
       createdAt: new Date()
     });
     Patientinfo.insert({
       name: 'Gary',
-      id: 'S7654321Z',
+      id: '2',
       gender: 'male',
       age: '24',
       contactNumber: '12344321',
@@ -42,20 +45,26 @@ Meteor.startup(() => {
       writtenLanguages: ['English'],
       address: 'Baker Street',
       anyDrugAllergies: 'No',
+      stationQueue: ["Height & weight", "CBG & Hb", "Phlebotomy", "Pap Smear", "Breast Exam", "Blood Pressure", "Doctors' Consult", "Eye Screening", "Women's Edu", "Education"],
       nextStation: 'Height & weight',
       busy:false,
       createdAt: new Date()
     });
-  }
-
-  if (Stationforms.find().count() === 0) {
-    addForm(
-      'Registration',
-      [
-        ["name","text"],
-        ["id","alphanumeric"],
-        ["age", "number"]
-      ]
-    )
+    Patientinfo.insert({
+      name: 'Reyansh Aditya Vihaan',
+      id: '3',
+      gender: 'male',
+      age: '24',
+      contactNumber: '12344321',
+      spokenLanguages: ['English', 'Others'],
+      writtenLanguages: ['English'],
+      address: 'Baker Street',
+      anyDrugAllergies: 'Yes',
+      drugAllergies: 'Panadol',
+      stationQueue: ['Done'],
+      nextStation: 'Education',
+      busy:false,
+      createdAt: new Date()
+    });
   }
 });

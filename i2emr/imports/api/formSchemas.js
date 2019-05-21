@@ -20,10 +20,10 @@ export const formSchemas = {
       regEx: /^\D+$/,
       label: "Name",
     },
-    id: {
-      type: SimpleSchema.Integer,
-      index: 1,
-    },
+    // id: {
+    //   type: String,
+    //   regEx: /^[0-9]+$/,
+    // },
     gender: {
       type: String,
       allowedValues: ['male', 'female'],
@@ -305,279 +305,283 @@ export const formSchemas = {
     },
   }),
 
-  "Pre-Women's Education Quiz":
-  new SimpleSchema ({
-    S1: {
-    type: Array,
-    },
-    'S1.$': {
-    type: String,
-    allowedValues: ['1', '2', '3', '4', '5'],   
-    },
-    Q1: {
+  "Women's Edu":{
+    "Pre-Women's Education Quiz":
+    new SimpleSchema ({
+      S1: {
       type: Array,
       },
-    'Q1.$': {
+      'S1.$': {
       type: String,
-      allowedValues: ['Abdominal cramps', 'Acne', 'Headache', 'All of the above'],   
+      allowedValues: ['1', '2', '3', '4', '5'],   
       },
-    Q2: {
-      type: Array,
-      },
-    'Q2.$': {
-      type: String,
-      allowedValues: ['Stress', 'Pregnancy', 'Weight loss', 'Abrasions'],   
-      },
-    Q3: {
-      type: Array,
-      },
-    'Q3.$': {
-      type: String,
-      allowedValues: ['Menstruation is dirty', 'Menstruation happens every 28 days, on average', 'We should change our sanitary pads once every few days', 'We should clean the area from back to front'],   
-      },
-    Q4: {
-      type: Array,
-      },
-    'Q4.$': {
-      type: String,
-      allowedValues: ['1st day of menses', '7-10 days after start of menses', '21 days after start of menses', '2 days before start of menses'],   
-      },
-    Q5: {
-      type: Array,
-      },
-    'Q5.$': {
-      type: String,
-      allowedValues: ['Once a week', 'Once a month', 'Once a year', 'Once in 2 years'],   
-      },
-    Q6: {
-      type: Array,
-      },
-    'Q6.$': {
-      type: String,
-      allowedValues: ['A lump that can be seen/felt in the breast or underarm', 'Nipple that is pushed inwards', 'Dimpling of skin over the breast', 'Ulceration of skin over the breast','All of the above'],   
-      },
-  }),
+      Q1: {
+        type: Array,
+        },
+      'Q1.$': {
+        type: String,
+        allowedValues: ['Abdominal cramps', 'Acne', 'Headache', 'All of the above'],   
+        },
+      Q2: {
+        type: Array,
+        },
+      'Q2.$': {
+        type: String,
+        allowedValues: ['Stress', 'Pregnancy', 'Weight loss', 'Abrasions'],   
+        },
+      Q3: {
+        type: Array,
+        },
+      'Q3.$': {
+        type: String,
+        allowedValues: ['Menstruation is dirty', 'Menstruation happens every 28 days, on average', 'We should change our sanitary pads once every few days', 'We should clean the area from back to front'],   
+        },
+      Q4: {
+        type: Array,
+        },
+      'Q4.$': {
+        type: String,
+        allowedValues: ['1st day of menses', '7-10 days after start of menses', '21 days after start of menses', '2 days before start of menses'],   
+        },
+      Q5: {
+        type: Array,
+        },
+      'Q5.$': {
+        type: String,
+        allowedValues: ['Once a week', 'Once a month', 'Once a year', 'Once in 2 years'],   
+        },
+      Q6: {
+        type: Array,
+        },
+      'Q6.$': {
+        type: String,
+        allowedValues: ['A lump that can be seen/felt in the breast or underarm', 'Nipple that is pushed inwards', 'Dimpling of skin over the breast', 'Ulceration of skin over the breast','All of the above'],   
+        },
+    }),
 
-  "Post-Women's Education Quiz":
-  new SimpleSchema ({
-    S1: {
-    type: Array,
-    },
-    'S1.$': {
-    type: String,
-    allowedValues: ['1', '2', '3', '4', '5'],   
-    },
-    Q1: {
+    "Post-Women's Education Quiz":
+    new SimpleSchema ({
+      S1: {
       type: Array,
       },
-    'Q1.$': {
+      'S1.$': {
       type: String,
-      allowedValues: ['Abdominal cramps', 'Acne', 'Headache', 'All of the above'],   
+      allowedValues: ['1', '2', '3', '4', '5'],   
       },
-    Q2: {
-      type: Array,
-      },
-    'Q2.$': {
-      type: String,
-      allowedValues: ['Stress', 'Pregnancy', 'Weight loss', 'Abrasions'],   
-      },
-    Q3: {
-      type: Array,
-      },
-    'Q3.$': {
-      type: String,
-      allowedValues: ['Menstruation is dirty', 'Menstruation happens every 28 days, on average', 'We should change our sanitary pads once every few days', 'We should clean the area from back to front'],   
-      },
-    Q4: {
-      type: Array,
-      },
-    'Q4.$': {
-      type: String,
-      allowedValues: ['1st day of menses', '7-10 days after start of menses', '21 days after start of menses', '2 days before start of menses'],   
-      },
-    Q5: {
-      type: Array,
-      },
-    'Q5.$': {
-      type: String,
-      allowedValues: ['Once a week', 'Once a month', 'Once a year', 'Once in 2 years'],   
-      },
-    Q6: {
-      type: Array,
-      },
-    'Q6.$': {
-      type: String,
-      allowedValues: ['A lump that can be seen/felt in the breast or underarm', 'Nipple that is pushed inwards', 'Dimpling of skin over the breast', 'Ulceration of skin over the breast','All of the above'],   
-      },
-  }),
+      Q1: {
+        type: Array,
+        },
+      'Q1.$': {
+        type: String,
+        allowedValues: ['Abdominal cramps', 'Acne', 'Headache', 'All of the above'],   
+        },
+      Q2: {
+        type: Array,
+        },
+      'Q2.$': {
+        type: String,
+        allowedValues: ['Stress', 'Pregnancy', 'Weight loss', 'Abrasions'],   
+        },
+      Q3: {
+        type: Array,
+        },
+      'Q3.$': {
+        type: String,
+        allowedValues: ['Menstruation is dirty', 'Menstruation happens every 28 days, on average', 'We should change our sanitary pads once every few days', 'We should clean the area from back to front'],   
+        },
+      Q4: {
+        type: Array,
+        },
+      'Q4.$': {
+        type: String,
+        allowedValues: ['1st day of menses', '7-10 days after start of menses', '21 days after start of menses', '2 days before start of menses'],   
+        },
+      Q5: {
+        type: Array,
+        },
+      'Q5.$': {
+        type: String,
+        allowedValues: ['Once a week', 'Once a month', 'Once a year', 'Once in 2 years'],   
+        },
+      Q6: {
+        type: Array,
+        },
+      'Q6.$': {
+        type: String,
+        allowedValues: ['A lump that can be seen/felt in the breast or underarm', 'Nipple that is pushed inwards', 'Dimpling of skin over the breast', 'Ulceration of skin over the breast','All of the above'],   
+        },
+    }),
+  }, 
   
-  "Pre-Education Survey":
-  new SimpleSchema ({
-    S1: {
-    type: Array,
-    },
-    'S1.$': {
-    type: String,
-    allowedValues: ['1', '2', '3', '4', '5'],   
-    },
-    S2: {
+  "Education":{
+    "Pre-Education Survey":
+    new SimpleSchema ({
+      S1: {
       type: Array,
       },
-    'S2.$': {
+      'S1.$': {
       type: String,
       allowedValues: ['1', '2', '3', '4', '5'],   
       },
-    S3: {
-      type: Array,
-      },
-    'S3.$': {
-      type: String,
-      allowedValues: ['1', '2', '3', '4', '5'],    
-      },
-    S4: {
-      type: Array,
-      },
-    'S4.$': {
-      type: String,
-      allowedValues: ['1', '2', '3', '4', '5'],   
-      },
-  }),
+      S2: {
+        type: Array,
+        },
+      'S2.$': {
+        type: String,
+        allowedValues: ['1', '2', '3', '4', '5'],   
+        },
+      S3: {
+        type: Array,
+        },
+      'S3.$': {
+        type: String,
+        allowedValues: ['1', '2', '3', '4', '5'],    
+        },
+      S4: {
+        type: Array,
+        },
+      'S4.$': {
+        type: String,
+        allowedValues: ['1', '2', '3', '4', '5'],   
+        },
+    }),
 
-  "Pre-Education Quiz":
-  new SimpleSchema ({
-    Q1: {
-    type: Array,
-    },
-    'Q1.$': {
-    type: String,
-    allowedValues: ['Do not exercise', 'Have diabetes', 'Smoke', 'All of the above'],   
-    },
-    Q2: {
+    "Pre-Education Quiz":
+    new SimpleSchema ({
+      Q1: {
       type: Array,
       },
-    'Q2.$': {
+      'Q1.$': {
       type: String,
-      allowedValues: ['Blindness', 'Amputation', 'Craving sweet food', 'Kidney failure'],   
+      allowedValues: ['Do not exercise', 'Have diabetes', 'Smoke', 'All of the above'],   
       },
-    Q3: {
-      type: Array,
-      },
-    'Q3.$': {
-      type: String,
-      allowedValues: ['60 mins', '90 mins', '120 mins', '150 mins'],    
-      },
-    Q4: {
-      type: Array,
-      },
-    'Q4.$': {
-      type: String,
-      allowedValues: ['1/2 rice, 1/4 fruits and vegetables, 1/4 protein', '2/5 rice, 1/5 vegetables, 1/5 fruits, 1/5 protein', '1/3 rice, 1/3 vegetables, 1/3 protein', '1/2 fruits and vegetables, 1/4 rice, 1/4 protein'],   
-      },
-    Q5: {
-      type: Array,
-      },
-    'Q5.$': {
-      type: String,
-      allowedValues: ['Daal', 'Mattar Paneer', 'Chole Bhattura', 'Butter Paneer'],   
-      },
-    Q6: {
-      type: Array,
-      },
-    'Q6.$': {
-      type: String,
-      allowedValues: ['Tobacco', 'Alcohol', 'Pesticides', 'All of the above'],   
-      },
-    Q7: {
-      type: Array,
-      },
-    'Q7.$': {
-      type: String,
-      allowedValues: ['Get comprehensive eye exams regularly', 'Use a computer for 2h to finish my work', 'Read under sufficiently bright light', 'Wear sunglasses and caps when outdoors to protect eyes from UV rays'],   
-      },
-  }),
+      Q2: {
+        type: Array,
+        },
+      'Q2.$': {
+        type: String,
+        allowedValues: ['Blindness', 'Amputation', 'Craving sweet food', 'Kidney failure'],   
+        },
+      Q3: {
+        type: Array,
+        },
+      'Q3.$': {
+        type: String,
+        allowedValues: ['60 mins', '90 mins', '120 mins', '150 mins'],    
+        },
+      Q4: {
+        type: Array,
+        },
+      'Q4.$': {
+        type: String,
+        allowedValues: ['1/2 rice, 1/4 fruits and vegetables, 1/4 protein', '2/5 rice, 1/5 vegetables, 1/5 fruits, 1/5 protein', '1/3 rice, 1/3 vegetables, 1/3 protein', '1/2 fruits and vegetables, 1/4 rice, 1/4 protein'],   
+        },
+      Q5: {
+        type: Array,
+        },
+      'Q5.$': {
+        type: String,
+        allowedValues: ['Daal', 'Mattar Paneer', 'Chole Bhattura', 'Butter Paneer'],   
+        },
+      Q6: {
+        type: Array,
+        },
+      'Q6.$': {
+        type: String,
+        allowedValues: ['Tobacco', 'Alcohol', 'Pesticides', 'All of the above'],   
+        },
+      Q7: {
+        type: Array,
+        },
+      'Q7.$': {
+        type: String,
+        allowedValues: ['Get comprehensive eye exams regularly', 'Use a computer for 2h to finish my work', 'Read under sufficiently bright light', 'Wear sunglasses and caps when outdoors to protect eyes from UV rays'],   
+        },
+    }),
 
-  "Post-Education Survey":
-  new SimpleSchema ({
-    S1: {
-    type: Array,
-    },
-    'S1.$': {
-    type: String,
-    allowedValues: ['1', '2', '3', '4', '5'],   
-    },
-    S2: {
+    "Post-Education Survey":
+    new SimpleSchema ({
+      S1: {
       type: Array,
       },
-    'S2.$': {
+      'S1.$': {
       type: String,
       allowedValues: ['1', '2', '3', '4', '5'],   
       },
-    S3: {
-      type: Array,
-      },
-    'S3.$': {
-      type: String,
-      allowedValues: ['1', '2', '3', '4', '5'],    
-      },
-    S4: {
-      type: Array,
-      },
-    'S4.$': {
-      type: String,
-      allowedValues: ['1', '2', '3', '4', '5'],   
-      },
-  }),
+      S2: {
+        type: Array,
+        },
+      'S2.$': {
+        type: String,
+        allowedValues: ['1', '2', '3', '4', '5'],   
+        },
+      S3: {
+        type: Array,
+        },
+      'S3.$': {
+        type: String,
+        allowedValues: ['1', '2', '3', '4', '5'],    
+        },
+      S4: {
+        type: Array,
+        },
+      'S4.$': {
+        type: String,
+        allowedValues: ['1', '2', '3', '4', '5'],   
+        },
+    }),
 
-  "Post-Education Quiz":
-  new SimpleSchema ({
-    Q1: {
-    type: Array,
-    },
-    'Q1.$': {
-    type: String,
-    allowedValues: ['Do not exercise', 'Have diabetes', 'Smoke', 'All of the above'],   
-    },
-    Q2: {
+    "Post-Education Quiz":
+    new SimpleSchema ({
+      Q1: {
       type: Array,
       },
-    'Q2.$': {
+      'Q1.$': {
       type: String,
-      allowedValues: ['Blindness', 'Amputation', 'Craving sweet food', 'Kidney failure'],   
+      allowedValues: ['Do not exercise', 'Have diabetes', 'Smoke', 'All of the above'],   
       },
-    Q3: {
-      type: Array,
-      },
-    'Q3.$': {
-      type: String,
-      allowedValues: ['60 mins', '90 mins', '120 mins', '150 mins'],    
-      },
-    Q4: {
-      type: Array,
-      },
-    'Q4.$': {
-      type: String,
-      allowedValues: ['1/2 rice, 1/4 fruits and vegetables, 1/4 protein', '2/5 rice, 1/5 vegetables, 1/5 fruits, 1/5 protein', '1/3 rice, 1/3 vegetables, 1/3 protein', '1/2 fruits and vegetables, 1/4 rice, 1/4 protein'],   
-      },
-    Q5: {
-      type: Array,
-      },
-    'Q5.$': {
-      type: String,
-      allowedValues: ['Daal', 'Mattar Paneer', 'Chole Bhattura', 'Butter Paneer'],   
-      },
-    Q6: {
-      type: Array,
-      },
-    'Q6.$': {
-      type: String,
-      allowedValues: ['Tobacco', 'Alcohol', 'Pesticides', 'All of the above'],   
-      },
-    Q7: {
-      type: Array,
-      },
-    'Q7.$': {
-      type: String,
-      allowedValues: ['Get comprehensive eye exams regularly', 'Use a computer for 2h to finish my work', 'Read under sufficiently bright light', 'Wear sunglasses and caps when outdoors to protect eyes from UV rays'],   
-      },
-  }),
+      Q2: {
+        type: Array,
+        },
+      'Q2.$': {
+        type: String,
+        allowedValues: ['Blindness', 'Amputation', 'Craving sweet food', 'Kidney failure'],   
+        },
+      Q3: {
+        type: Array,
+        },
+      'Q3.$': {
+        type: String,
+        allowedValues: ['60 mins', '90 mins', '120 mins', '150 mins'],    
+        },
+      Q4: {
+        type: Array,
+        },
+      'Q4.$': {
+        type: String,
+        allowedValues: ['1/2 rice, 1/4 fruits and vegetables, 1/4 protein', '2/5 rice, 1/5 vegetables, 1/5 fruits, 1/5 protein', '1/3 rice, 1/3 vegetables, 1/3 protein', '1/2 fruits and vegetables, 1/4 rice, 1/4 protein'],   
+        },
+      Q5: {
+        type: Array,
+        },
+      'Q5.$': {
+        type: String,
+        allowedValues: ['Daal', 'Mattar Paneer', 'Chole Bhattura', 'Butter Paneer'],   
+        },
+      Q6: {
+        type: Array,
+        },
+      'Q6.$': {
+        type: String,
+        allowedValues: ['Tobacco', 'Alcohol', 'Pesticides', 'All of the above'],   
+        },
+      Q7: {
+        type: Array,
+        },
+      'Q7.$': {
+        type: String,
+        allowedValues: ['Get comprehensive eye exams regularly', 'Use a computer for 2h to finish my work', 'Read under sufficiently bright light', 'Wear sunglasses and caps when outdoors to protect eyes from UV rays'],   
+        },
+    }),
+  },
 }

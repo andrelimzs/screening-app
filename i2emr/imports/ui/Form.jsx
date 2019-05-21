@@ -28,49 +28,96 @@ class ClearableAutoForm extends AutoForm {
 }
 
 class Form extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.formRef = null;
 
-    this.stations = ["Registration",
-                      "Height & weight",
-                      "CBG & Hb","Phlebotomy",
-                      "Pap Smear","Breast Exam",
-                      "Blood Pressure",
-                      "Doctors' Consult", 
-                      "Eye Screening",
-                      "Pre-Women's Education Quiz",
-                      "Post-Women's Education Quiz",
-                      "Pre-Education Survey",
-                      "Pre-Education Quiz",
-                      "Post-Education Survey",
-                      "Post-Education Quiz",
-                      "Done"];
+    this.stations = Object.keys(formLayouts);
 
+    this.isMultipage = (formSchemas[this.props.station].__proto__.constructor.name !== "SimpleSchema");
+    // this.pageIndex = 0;
+    this.oldID = null;
+    this.multiData = {};
+
+    this.state = {pageIndex: 0};
   }
 
   handleSubmit(newForm) {
     // Insert/update patientinfo database
     if (this.props.station == "Registration") {
-      console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
+      // console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
+
       Meteor.call('patientinfo.insert', newForm);
+
+    } else if (this.isMultipage) {
+      if (this.state.pageIndex < Object.keys(formSchemas[this.props.station]).length - 1) {
+        // If not at last subpage
+        // Concat and store multipage form data
+        const subSchemaName = Object.keys(formSchemas[this.props.station])[this.state.pageIndex];
+        this.multiData[subSchemaName] = newForm;
+
+        // this.pageIndex++;
+        this.setState((state, props) => ({
+          pageIndex: state.pageIndex + 1
+        }));
+
+        console.log("Next subpage");
+      } else {
+        this.multiData.id = this.props.id;
+
+        console.log(this.multiData);
+
+        // On last subpage
+        Meteor.call('patientinfo.update', this.multiData);
+        // Empty data for multipage form
+        this.multiData = {};
+        // Reset page index
+        // this.pageIndex = 0;
+        this.setState({
+          pageIndex: 0
+        });
+
+        Session.set('currentPatient',null);
+
+        console.log("Finished multipage");
+      }
+
     } else {
-      newForm.id = this.props.id;
+      newForm.id = this.props.id;      
+
+      // if (!this.isMultipage || this.pageIndex >= Object.keys(formSchemas[this.props.station]).length - 1) {
       console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
       newForm.nextStation = this.stations[this.stations.indexOf(this.props.station)+1];
-      Meteor.call('patientinfo.update', newForm);
-    }
 
-    Session.set('currentPatient',null);
-    // console.log(this.formRef);
-    // this.formRef.reset();
+      Meteor.call('patientinfo.update', newForm);
+
+      Session.set('currentPatient',null);
+    }
   }
 
   render() {
+    // // On ID change => Reset page index
+    // if (this.isMultipage && this.oldID != this.props.id) {
+    //   this.oldID = this.props.id;
+    //   // this.pageIndex = 0;
+    //   this.setState({
+    //     pageIndex: 0
+    //   });
+    //   console.log("New patient");
+    // }
+
+    // Index into appropriate form for multipage forms
+    var currentFormSchema = formSchemas[this.props.station];
+    var currentFormLayout = formLayouts[this.props.station];
+    if (this.isMultipage) {
+      currentFormSchema = currentFormSchema[Object.keys(currentFormSchema)[this.state.pageIndex]];
+      currentFormLayout = currentFormLayout[Object.keys(currentFormLayout)[this.state.pageIndex]];
+    }
+    
     const newForm = () => (
-      <ClearableAutoForm schema={formSchemas[this.props.station]} onSubmit={this.handleSubmit} >
-        {formLayouts[this.props.station]}
+      <ClearableAutoForm schema={currentFormSchema} onSubmit={this.handleSubmit} >
+        {currentFormLayout}
         <ErrorsField />
         <div>
           <SubmitField inputRef={(ref) => this.formRef = ref} />
