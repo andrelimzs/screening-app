@@ -21,30 +21,33 @@ export const formSchemas = {
       label: "Name",
     },
     id: {
-      type: String,
-      regEx: /^[A-z][0-9]{7}[A-z]$/,
-      label: "ID",
-      custom: function () {
-        if (Meteor.isClient && this.isSet) {
-          // Do a blocking, direct database query
-          // This is important, AutoFrom validation will not work otherwise
-          if (Patientinfo.find({id:this.value}).count() !== 0) {
-            // console.log("ID not unique");
-            return "IDnotUnique";
-          }
-        }
-      }
+      type: SimpleSchema.Integer,
+      index: 1,
     },
     gender: {
       type: String,
       allowedValues: ['male', 'female'],
     },
+    birthday: {
+      type: Date,
+    },
     age: {
       type: SimpleSchema.Integer,
       min: 0,
     },
+    district: {
+      type: String,
+    },
+    address: {
+      type: String,
+    },
+    zipcode: {
+      type: String,
+      regEx: /^[0-9]+$/,
+    },
     contactNumber: {
-      type: SimpleSchema.Integer,
+      type: String,
+      regEx: /^[0-9]+$/,
     },
     spokenLanguages: {
       type: Array,
@@ -60,9 +63,6 @@ export const formSchemas = {
       type: String,
       allowedValues: ['Sambalpuri', 'Odia', 'English', 'Others'],
     },
-    address: {
-      type: String,
-    },
     anyDrugAllergies: {
       type: String,
       allowedValues: ['Yes', 'No'],
@@ -71,6 +71,10 @@ export const formSchemas = {
       type: String,
       optional: true,
     },
+    pregnant: {
+      type: String,
+      allowedValues: ['Yes', 'No'],
+    }
   }),
 
   "Height & weight":
@@ -117,10 +121,43 @@ export const formSchemas = {
   new SimpleSchema({
     phleboCompleted: {
       type: Boolean,
+      label: "Completed?"
     },
   }),
 
-  "Blood pressure":
+  "Pap Smear":
+  new SimpleSchema({
+    papCompleted: {
+      type: Boolean,
+      label: "Completed?"
+    }.label,
+  }),
+
+  "Breast Exam":
+  new SimpleSchema({
+    breastCompleted: {
+      type: Boolean, 
+      label: "Breast Screening Completed?"
+    },
+    abnormalities: {
+      type: Boolean,
+      label: "Any abnormalities noted (e.g. lumps, skin changes)?"
+    },
+    abDescribe: {
+      type: String,
+      label: "If yes to the previous question, please describe the abnormalities"
+    },
+    fnacCompleted: {
+      type: Boolean, 
+      label: "FNAC Completed?"
+    },
+    eduCompleted: {
+      type: Boolean,
+      label: "Breast Screening Education Completed?"
+    }
+  }),
+
+  "Blood Pressure":
   new SimpleSchema({
     bp1Sys: {
       type: SimpleSchema.Integer,
@@ -157,6 +194,114 @@ export const formSchemas = {
       min: 20,
       max: 200,
       label: "3rd Diastolic blood pressure"
+    },
+  }),
+
+  "Doctors' Consult":
+  new SimpleSchema({
+    consCompleted: {
+      type: Boolean,
+      label: "Completed?"
+    },
+    refLetter: {
+      type: Boolean,
+      label: "Provided with referral letter?"
+    },
+  }),
+
+  "Eye Screening":
+  new SimpleSchema ({
+    specs: {
+      type: Boolean,
+      label: "Does the participant use spectacles?"
+    },
+    rightWoGlass: {
+      type: String,
+      label: "Right eye without glasses"
+    },
+    leftWoGlass: {
+      type: String,
+      label: "Left eye without glasses"
+    },
+    rightWiGlass: {
+      type: String,
+      label: "Right eye with glasses"
+    },
+    leftWiGlass: {
+      type: String,
+      label: "Left eye with glasses"
+    },
+    rightNearVis: {
+      type: String,
+      label: "Right eye near vision"
+    },
+    leftNearVis: {
+      type: String,
+      label: "Left eye near vision"
+    },
+    lids: {
+      type: String,
+      label: "Lids"
+    },
+    conjunctiva: {
+      type: String,
+      label: "Conjunctiva"
+    },
+    cornea: {
+      type: String,
+      label: "Cornea"
+    },
+    antSeg: {
+      type: String,
+      label: "Anterior Segment"
+    },
+    iris: {
+      type: String,
+      label: "Iris"
+    },
+    pupil: {
+      type: String,
+      label: "Pupil"
+    },
+    lens: {
+      type: String,
+      label: "Lens"
+    },
+    ocuMvmt: {
+      type: String,
+      label: "Ocular Movements"
+    },
+    iop: {
+      type: String,
+      label: "IOP"
+    },
+    duct: {
+      type: String,
+      label: "Duct"
+    },
+    cdr: {
+      type: String,
+      label: "CDR"
+    },
+    macula: {
+      type: String,
+      label: "Macula"
+    },
+    retina: {
+      type: String,
+      label: "Retina"
+    },
+    diagnosis: {
+      type: String,
+      label: "Diagnosis"
+    },
+    advice: {
+      type: String,
+      label: "Advice"
+    },
+    nameDoc: {
+      type: String,
+      label: "Name of Doctor"
     },
   }),
 }
