@@ -109,7 +109,7 @@ class Info extends Component {
       <div>
         {listInfo}
       </div>
-    )
+    );
   }
 
   render() {

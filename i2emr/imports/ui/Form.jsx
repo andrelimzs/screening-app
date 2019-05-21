@@ -7,6 +7,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 import AutoForm from 'uniforms-material/AutoForm';
 import { formSchemas } from '/imports/api/formSchemas';
@@ -75,7 +78,8 @@ class Form extends Component {
         // Reset page index
         // this.pageIndex = 0;
         this.setState({
-          pageIndex: 0
+          pageIndex: 0,
+          tabValue: 0,
         });
 
         Session.set('currentPatient',null);
@@ -96,17 +100,39 @@ class Form extends Component {
     }
   }
 
-  render() {
-    // // On ID change => Reset page index
-    // if (this.isMultipage && this.oldID != this.props.id) {
-    //   this.oldID = this.props.id;
-    //   // this.pageIndex = 0;
-    //   this.setState({
-    //     pageIndex: 0
-    //   });
-    //   console.log("New patient");
-    // }
+  handleTabChange = (event, value) => {
+    this.setState({ tabValue:value });
+  };
 
+  makeStationEntry(station) {
+    return (
+      <Fragment>
+        <Button variant="text" fullWidth={true} onClick={this.editField.bind(this,field)}>
+          {station}
+        </Button>
+      </Fragment>
+    );
+  }
+
+  getSkipList() {
+    // Meteor call to get station queue
+    var stationQueue;
+    Meteor.call('patientinfo.getSkipList', this.props.id, (error, result) => {
+      stationQueue = result;
+    });
+
+    const StationList = stationQueue.map(
+      station => this.makeStationEntry(station)
+    );
+
+    return (
+      <div>
+        {StationList}
+      </div>
+    );
+  }
+
+  render() {
     // Index into appropriate form for multipage forms
     var currentFormSchema = formSchemas[this.props.station];
     var currentFormLayout = formLayouts[this.props.station];
@@ -125,9 +151,19 @@ class Form extends Component {
       </ClearableAutoForm>
     );
     
+    // Replace undefined with default value of 0
+    const tabValue = (this.state.tabValue === undefined) ? 0 : this.state.tabValue;
+
     return (
       <Paper elevation={2} p={0} m={0}>
-        {newForm()}
+        <AppBar position="static" color="default">
+          <Tabs value={tabValue} onChange={this.handleTabChange}>
+            <Tab label="Form" />
+            <Tab label="Skip Station" />
+          </Tabs>
+        </AppBar>
+        {tabValue === 0 && newForm()}
+        {tabValue === 1 && this.getSkipList()}
       </Paper>
     );
   }
