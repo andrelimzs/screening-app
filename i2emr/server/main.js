@@ -15,8 +15,8 @@ function addForm(station, formData) {
 }
 
 Meteor.startup(() => {
-  // Patientinfo.remove({});
-  // Stationforms.remove({});
+  Patientinfo.remove({});
+  Stationforms.remove({});
 
   if (Patientinfo.find().count() === 0) {
     Patientinfo.insert({
@@ -30,7 +30,9 @@ Meteor.startup(() => {
       address: 'Baker Street',
       anyDrugAllergies: 'Yes',
       drugAllergies: 'Panadol',
-      stationQueue:["Height & weight", "CBG & Hb", "Phlebotomy", "Pap Smear", "Breast Exam", "Blood Pressure", "Doctors' Consult", "Eye Screening", "Women's Edu", "Education"],
+      stationQueue:["CBG & Hb", "Phlebotomy", "Pap Smear", "Breast Exam",
+                    "Blood Pressure", "Doctors' Consult", "Eye Screening",
+                    "Women's Edu", "Education"],
       nextStation: 'Height & weight',
       busy:false,
       createdAt: new Date()
@@ -45,7 +47,9 @@ Meteor.startup(() => {
       writtenLanguages: ['English'],
       address: 'Baker Street',
       anyDrugAllergies: 'No',
-      stationQueue: ["Height & weight", "CBG & Hb", "Phlebotomy", "Pap Smear", "Breast Exam", "Blood Pressure", "Doctors' Consult", "Eye Screening", "Women's Edu", "Education"],
+      stationQueue:["CBG & Hb", "Phlebotomy", "Pap Smear", "Breast Exam",
+                    "Blood Pressure", "Doctors' Consult","Eye Screening",
+                    "Women's Edu", "Education"],
       nextStation: 'Height & weight',
       busy:false,
       createdAt: new Date()
@@ -61,7 +65,7 @@ Meteor.startup(() => {
       address: 'Baker Street',
       anyDrugAllergies: 'Yes',
       drugAllergies: 'Panadol',
-      stationQueue: ['Done'],
+      stationQueue: [],
       nextStation: 'Education',
       busy:false,
       createdAt: new Date()
