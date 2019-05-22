@@ -715,6 +715,11 @@ export const formSchemas = {
       type: Number,
       label: "Hip circumference (cm)",
     },
+    docConsultForHW: {
+      type: String,
+      allowedValues: ['Yes','No'],
+      label: "Doctors' consult required?",
+    },
   }),
 
   "CBG & Hb":
@@ -1040,31 +1045,31 @@ export const formSchemas = {
 
     "Pre-Education Quiz":
     new SimpleSchema ({
-      Q1: {
+      preEduQuiz1: {
       type: String,
       allowedValues: ['Do not exercise', 'Have diabetes', 'Smoke', 'All of the above'],   
       },
-      Q2: {
+      preEduQuiz2: {
         type: String,
         allowedValues: ['Do not exercise', 'Have diabetes', 'Smoke', 'All of the above'],   
         },
-      Q3: {
+        preEduQuiz3: {
         type: String,
         allowedValues: ['60 mins', '90 mins', '120 mins', '150 mins'],    
         },
-      Q4: {
+      preEduQuiz4: {
         type: String,
         allowedValues: ['1/2 rice, 1/4 fruits and vegetables, 1/4 protein', '2/5 rice, 1/5 vegetables, 1/5 fruits, 1/5 protein', '1/3 rice, 1/3 vegetables, 1/3 protein', '1/2 fruits and vegetables, 1/4 rice, 1/4 protein'],   
         },
-      Q5: {
+      preEduQuiz5: {
         type: String,
         allowedValues: ['Daal', 'Mattar Paneer', 'Chole Bhattura', 'Butter Paneer'],   
         },
-      Q6: {
+      preEduQuiz6: {
         type: String,
         allowedValues: ['Tobacco', 'Alcohol', 'Pesticides', 'All of the above'],   
         },
-      Q7: {
+      preEduQuiz7: {
         type: String,
         allowedValues: ['Get comprehensive eye exams regularly', 'Use a computer for 2h to finish my work', 'Read under sufficiently bright light', 'Wear sunglasses and caps when outdoors to protect eyes from UV rays'],   
         },
@@ -1072,19 +1077,19 @@ export const formSchemas = {
 
     "Post-Education Survey":
     new SimpleSchema ({
-      S1: {
+      postEduSurvey1: {
       type: String,
       allowedValues: ['1', '2', '3', '4', '5'],   
       },
-      S2: {
+      postEduSurvey2: {
         type: String,
         allowedValues: ['1', '2', '3', '4', '5'],   
         },
-      S3: {
+      postEduSurvey3: {
         type: String,
         allowedValues: ['1', '2', '3', '4', '5'],    
         },
-      S4: {
+      postEduSurvey4: {
         type: String,
         allowedValues: ['1', '2', '3', '4', '5'],   
         },
@@ -1092,31 +1097,31 @@ export const formSchemas = {
 
     "Post-Education Quiz":
     new SimpleSchema ({
-      Q1: {
+      postEduQuiz1: {
       type: String,
       allowedValues: ['Do not exercise', 'Have diabetes', 'Smoke', 'All of the above'],   
       },
-      Q2: {
+      postEduQuiz2: {
         type: String,
         allowedValues: ['Do not exercise', 'Have diabetes', 'Smoke', 'All of the above'],   
         },
-      Q3: {
+      postEduQuiz3: {
         type: String,
         allowedValues: ['60 mins', '90 mins', '120 mins', '150 mins'],    
         },
-      Q4: {
+      postEduQuiz4: {
         type: String,
         allowedValues: ['1/2 rice, 1/4 fruits and vegetables, 1/4 protein', '2/5 rice, 1/5 vegetables, 1/5 fruits, 1/5 protein', '1/3 rice, 1/3 vegetables, 1/3 protein', '1/2 fruits and vegetables, 1/4 rice, 1/4 protein'],   
         },
-      Q5: {
+      postEduQuiz5: {
         type: String,
         allowedValues: ['Daal', 'Mattar Paneer', 'Chole Bhattura', 'Butter Paneer'],   
         },
-      Q6: {
+      postEduQuiz6: {
         type: String,
         allowedValues: ['Tobacco', 'Alcohol', 'Pesticides', 'All of the above'],   
         },
-      Q7: {
+      postEduQuiz7: {
         type: String,
         allowedValues: ['Get comprehensive eye exams regularly', 'Use a computer for 2h to finish my work', 'Read under sufficiently bright light', 'Wear sunglasses and caps when outdoors to protect eyes from UV rays'],   
         },
@@ -1125,14 +1130,14 @@ export const formSchemas = {
 
     "Post-Screening Feedback":
     new SimpleSchema ({
-      Q1: {
+      postScreeningFeedback1: {
       type: String,
       allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
       },
-      Q2: {
+      postScreeningFeedback2: {
         type: Array,
       },
-      'Q2.$': {
+      'postScreeningFeedback2.$': {
         type: String,
         allowedValues: ['I am concerned about my health', 
                         'I have never been screened before', 
@@ -1143,50 +1148,50 @@ export const formSchemas = {
                         'It was conveniently located',
                         'It is at a convenient time'],
       },
-      Q3: {
+      postScreeningFeedback3: {
         type: String,
         allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
         },
-      Q4: {
+      postScreeningFeedback4: {
         type: String,
         allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
       },
-      Q5: {
+      postScreeningFeedback5: {
         type: String,
         allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
         },
-      Q6: {
+      postScreeningFeedback6: {
         type: String,
         allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
       }, 
-      Q7: {
+      postScreeningFeedback7: {
         type: String,
         allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
         },
-      Q8: {
+      postScreeningFeedback8: {
         type: String,
         allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
       }, 
-      Q9: {
+      postScreeningFeedback9: {
         type: String,
         allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
         },
-      Q10: {
+      postScreeningFeedback10: {
         type: String,
         allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
       }, 
-      Q11: {
+      postScreeningFeedback11: {
         type: String,
         allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
         },
-      Q12: {
+      postScreeningFeedback12: {
         type: String,
         allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
       },   
-      Q13: {
+      postScreeningFeedback13: {
         type: Array,
       },
-      'Q13.$': {
+      'postScreeningFeedback13.$': {
         type: String,
         allowedValues: ['Happened to pass by', 
                         'Posters', 
@@ -1194,7 +1199,7 @@ export const formSchemas = {
                         'Door-to-door publicity',
                         'Heard from neighbours/relatives/friends'],
       },
-      Q14: {
+      postScreeningFeedback14: {
         type: String,
         allowedValues: ['Never', 
                         'More than 3 years ago', 

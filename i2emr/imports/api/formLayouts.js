@@ -381,6 +381,9 @@ export const formLayouts = {
       <TextField name="waist" />
       <br />
       <TextField name="hip" />
+      <br />
+      <h2>Overview</h2>
+      <SelectField name="docConsultForHW" />
     </Fragment>
   ),
 
@@ -534,19 +537,19 @@ export const formLayouts = {
     "Pre-Education Quiz":(
       <Fragment>
         You are at higher risk of developing high cholesterol if you
-        <SelectField name="Q1" />
+        <SelectField name="preEduQuiz1" />
         All of the following are complications of diabetes except
-        <SelectField name="Q2" />
+        <SelectField name="preEduQuiz2" />
         How much exercise should we get a week?
-        <SelectField name="Q3" />
+        <SelectField name="preEduQuiz3" />
         What makes up a healthy plate?
-        <SelectField name="Q4" />
+        <SelectField name="preEduQuiz4" />
         Which of the following is the healthier choice to make?
-        <SelectField name="Q5" />
+        <SelectField name="preEduQuiz5" />
         Which of the following is a cancer risk factor(s)?
-        <SelectField name="Q6" />
+        <SelectField name="preEduQuiz6" />
         Which of the following is not considered good eyecare habits?
-        <SelectField name="Q7" />
+        <SelectField name="preEduQuiz7" />
       </Fragment>
     ),
 
@@ -554,68 +557,68 @@ export const formLayouts = {
       <Fragment>
         From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
         1 being not at all, and 5 being a lot
-        <SelectField name="S1" />
+        <SelectField name="postEduSurvey1" />
         From a scale of 1-5, how much do you know about healthy lifestyle and diet?
         1 being not at all, and 5 being a lot
-        <SelectField name="S2" />
+        <SelectField name="postEduSurvey2" />
         From a scale of 1-5, how much do you know about cancer risk factors?
         1 being not at all, and 5 being a lot
-        <SelectField name="S3" />
+        <SelectField name="postEduSurvey3" />
         From a scale of 1-5, how much do you know about good eyecare habits?
         1 being not at all, and 5 being a lot
-        <SelectField name="S4" />
+        <SelectField name="postEduSurvey4" />
       </Fragment>
     ),
 
     "Post-Education Quiz":(
       <Fragment>
         You are at higher risk of developing high cholesterol if you
-        <SelectField name="Q1" />
+        <SelectField name="postEduQuiz1" />
         All of the following are complications of diabetes except
-        <SelectField name="Q2" />
+        <SelectField name="postEduQuiz2" />
         How much exercise should we get a week?
-        <SelectField name="Q3" />
+        <SelectField name="postEduQuiz3" />
         What makes up a healthy plate?
-        <SelectField name="Q4" />
+        <SelectField name="postEduQuiz4" />
         Which of the following is the healthier choice to make?
-        <SelectField name="Q5" />
+        <SelectField name="postEduQuiz5" />
         Which of the following is a cancer risk factor(s)?
-        <SelectField name="Q6" />
+        <SelectField name="postEduQuiz6" />
         Which of the following is not considered good eyecare habits?
-        <SelectField name="Q7" />
+        <SelectField name="postEduQuiz7" />
       </Fragment>
     ),
 
     "Post-Screening Feedback":(
       <Fragment>
         I have had a good experience at the screening
-        <SelectField name="Q1" />
+        <SelectField name="postScreeningFeedback1" />
         I came for the screening because: (Select all that apply)
-        <AutoField name="Q2" />
+        <AutoField name="postScreeningFeedback2" />
         I know that regular health screening is important
-        <SelectField name="Q3" />
+        <SelectField name="postScreeningFeedback3" />
         I know that it is important to detect chronic diseases and cancers early
-        <SelectField name="Q4" />
+        <SelectField name="postScreeningFeedback4" />
         I am willing to take the trouble to attend health screenings
-        <SelectField name="Q5" />
+        <SelectField name="postScreeningFeedback5" />
         I am willing to attend my follow-up sessions
-        <SelectField name="Q6" />
+        <SelectField name="postScreeningFeedback6" />
         The student volunteers attended to my needs
-        <SelectField name="Q7" />
+        <SelectField name="postScreeningFeedback7" />
         The student volunteers were well-trained
-        <SelectField name="Q8" />
+        <SelectField name="postScreeningFeedback8" />
         The waiting time to enter the screening was reasonable
-        <SelectField name="Q9" />
+        <SelectField name="postScreeningFeedback9" />
         The waiting time for each station was reasonable
-        <SelectField name="Q10" />
+        <SelectField name="postScreeningFeedback10" />
         The flow of the screening was easy to follow
-        <SelectField name="Q11" />
+        <SelectField name="postScreeningFeedback11" />
         I would recommend my family/friends to attend this screening
-        <SelectField name="Q12" />
+        <SelectField name="postScreeningFeedback12" />
         What encouraged you to come for our event? Select all that apply
-        <AutoField name="Q13" />
+        <AutoField name="postScreeningFeedback13" />
         How often do you attend a health screening?
-        <SelectField name="Q14" />
+        <SelectField name="postScreeningFeedback14" />
       </Fragment>
     ),
   },
