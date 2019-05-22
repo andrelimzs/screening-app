@@ -13,597 +13,599 @@ SimpleSchema.setDefaultMessages({
 
 // Define the schema
 export const formSchemas = {
-  "Registration":
-  new SimpleSchema({
-    name: {
-      type: String,
-      regEx: /^\D+$/,
-      label: "Name",
-    },
-    // id: {
-    //   type: String,
-    //   regEx: /^[0-9]+$/,
-    // },
-    gender: {
-      type: String,
-      allowedValues: ['male', 'female'],
-    },
-    birthday: {
-      type: Date,
-    },
-    age: {
-      type: SimpleSchema.Integer,
-      min: 0,
-    },
-    district: {
-      type: String,
-    },
-    address: {
-      type: String,
-    },
-    zipcode: {
-      type: String,
-      regEx: /^[0-9]+$/,
-    },
-    contactNumber: {
-      type: String,
-      regEx: /^[0-9]+$/,
-    },
-    spokenLanguages: {
-      type: Array,
-    },
-    'spokenLanguages.$': {
-      type: String,
-      allowedValues: ['Sambalpuri', 'Odia', 'English', 'Others'],
-    },
-    writtenLanguages: {
-      type: Array,
-    },
-    'writtenLanguages.$': {
-      type: String,
-      allowedValues: ['Sambalpuri', 'Odia', 'English', 'Others'],
-    },
-    anyDrugAllergies: {
-      type: String,
-      allowedValues: ['Yes', 'No'],
-    },
-    drugAllergies: {
-      type: String,
-      optional: true,
-    },
-    pregnant: {
-      type: String,
-      allowedValues: ['Yes', 'No'],
-    }
-  }),
+  "Registration":{
+    "Patient Info":
+    new SimpleSchema({
+      name: {
+        type: String,
+        regEx: /^\D+$/,
+        label: "Name",
+      },
+      // id: {
+      //   type: String,
+      //   regEx: /^[0-9]+$/,
+      // },
+      gender: {
+        type: String,
+        allowedValues: ['male', 'female'],
+      },
+      birthday: {
+        type: Date,
+      },
+      age: {
+        type: SimpleSchema.Integer,
+        min: 0,
+      },
+      district: {
+        type: String,
+      },
+      address: {
+        type: String,
+      },
+      zipcode: {
+        type: String,
+        regEx: /^[0-9]+$/,
+      },
+      contactNumber: {
+        type: String,
+        regEx: /^[0-9]+$/,
+      },
+      spokenLanguages: {
+        type: Array,
+      },
+      'spokenLanguages.$': {
+        type: String,
+        allowedValues: ['Sambalpuri', 'Odia', 'English', 'Others'],
+      },
+      writtenLanguages: {
+        type: Array,
+      },
+      'writtenLanguages.$': {
+        type: String,
+        allowedValues: ['Sambalpuri', 'Odia', 'English', 'Others'],
+      },
+      anyDrugAllergies: {
+        type: String,
+        allowedValues: ['Yes', 'No'],
+      },
+      drugAllergies: {
+        type: String,
+        optional: true,
+      },
+      pregnant: {
+        type: String,
+        allowedValues: ['Yes', 'No'],
+      }
+    }),
 
-  "Patient Profiling":
-  new SimpleSchema({
-    Q1: {
-      type: String,
-      allowedValues: ['Yes', 'No'],   
+    "Patient Profiling":
+    new SimpleSchema({
+      Q1: {
+        type: String,
+        allowedValues: ['Yes', 'No'],   
+        },
+      Q2: {
+        type: String,
+        allowedValues: ['Within past 3 years', 'More than 3 years ago'],   
+        },
+      Q3: {
+        type: Array,
       },
-    Q2: {
-      type: String,
-      allowedValues: ['Within past 3 years', 'More than 3 years ago'],   
+      'Q3.$': {
+        type: String,
+        allowedValues: ['Increased urination', 
+                        'Increased thirst', 
+                        'Weight loss', 
+                        'Increased hunger',
+                        'Increased tiredness',
+                        'Blurred vision',
+                        'Slow-healing wounds',
+                        'Numbness/tingling in hands and/or feet',
+                        'None of the above'
+                      ],
       },
-    Q3: {
-      type: Array,
-    },
-    'Q3.$': {
-      type: String,
-      allowedValues: ['Increased urination', 
-                      'Increased thirst', 
-                      'Weight loss', 
-                      'Increased hunger',
-                      'Increased tiredness',
-                      'Blurred vision',
-                      'Slow-healing wounds',
-                      'Numbness/tingling in hands and/or feet',
-                      'None of the above'
-                    ],
-    },
-    Q4: {
-      type: String,
-      allowedValues: ['Regular (Interval of 6 months or less)', 'Occasionally (Interval of more than 6 months)','Seldom (last appointment was >1 year ago)','Not at all'],   
-    },
-    anyWesternMedicine: {
-      type: Boolean,
-      label: "Yes, Western medicine",
-    },
-    westernMedicine: {
-      type: String,
-    },
-    anyTraditionalMedicine: {
-      type: Boolean,
-      label: "Yes, Traditional medicine",
-    },
-    traditionalMedicine: {
-      type: String,
-    },
-    Q6: {
-      type: String,
-      allowedValues: ['0', '1-3','4-6','> or equal to 7'],   
-    },
-    hyperlipidemiaQ1: {
-      type: String,
-      allowedValues: ['Yes', 'No'],   
+      Q4: {
+        type: String,
+        allowedValues: ['Regular (Interval of 6 months or less)', 'Occasionally (Interval of more than 6 months)','Seldom (last appointment was >1 year ago)','Not at all'],   
       },
-    hyperlipidemiaQ2: {
-      type: String,
-      allowedValues: ['Within past 3 years', 'More than 3 years ago'],   
+      anyWesternMedicine: {
+        type: Boolean,
+        label: "Yes, Western medicine",
       },
-    hyperlipidemiaQ3: {
-      type: String,
-      allowedValues: ['Regular (Interval of 6 months or less)', 'Occasionally (Interval of more than 6 months)','Seldom (last appointment was >1 year ago)','Not at all'],   
-    },
-    hyperlipidemiaAnyWesternMedicine: {
-      type: Boolean,
-      label: "Yes, Western medicine",
-    },
-    hyperlipidemiaWesternMedicine: {
-      type: String,
-    },
-    hyperlipidemiaAnyTraditionalMedicine: {
-      type: Boolean,
-      label: "Yes, Traditional medicine",
-    },
-    hyperlipidemiaTraditionalMedicine: {
-      type: String,
-    },
-    hyperlipidemiaQ5: {
-      type: String,
-      allowedValues: ['0', '1-3','4-6','> or equal to 7'],   
-    },
-    hypertensionQ1: {
-      type: String,
-      allowedValues: ['Yes', 'No'],   
+      westernMedicine: {
+        type: String,
       },
-    hypertensionQ2: {
-      type: String,
-      allowedValues: ['Within past 3 years', 'More than 3 years ago'],   
+      anyTraditionalMedicine: {
+        type: Boolean,
+        label: "Yes, Traditional medicine",
       },
-    hypertensionQ3: {
-      type: String,
-      allowedValues: ['Regular (Interval of 6 months or less)', 'Occasionally (Interval of more than 6 months)','Seldom (last appointment was >1 year ago)','Not at all'],   
-    },
-    hypertensionAnyWesternMedicine: {
-      type: Boolean,
-      label: "Yes, Western medicine",
-    },
-    hypertensionWesternMedicine: {
-      type: String,
-    },
-    hypertensionAnyTraditionalMedicine: {
-      type: Boolean,
-      label: "Yes, Traditional medicine",
-    },
-    hypertensionTraditionalMedicine: {
-      type: String,
-    },
-    hypertensionQ5: {
-      type: String,
-      allowedValues: ['0', '1-3','4-6','> or equal to 7'],   
-    },
-    TBQ1: {
-      type: String,
-      allowedValues: ['Yes','No'],
-    },
-    TBQ2: {
-      type: String,
-      allowedValues: ['Yes, the person was diagnosed with TB within the past 4 months', 
-                      'Yes, the person was diagnosed with TB more than 4 months ago',
-                      'No'],
-    },
-    TBQ3: {
-      type: Array,
-    },
-    'TBQ3.$': {
-      type: String,
-      allowedValues: ['Cough that has lasted more than 2 weeks', 
-                      'Coughing up blood', 
-                      'Breathlessness', 
-                      'Weight loss',
-                      'Night sweats',
-                      'Fever',
-                      'Loss of appetite',
-                      'None of the above'],
-    },
-    medicalHistory1: {
-      type: String,
-    },
-    medicalHistory2: {
-      type: String,
-    },
-    medicalHistory3: {
-      type: String,
-    },
-    medicalHistory4: {
-      type: String,
-    },
-    medicalHistory5: {
-      type: String,
-    },
-    surgAndHospQ1: {
-      type: String,
-      allowedValues: ['Yes','No'],
-    },
-    surgAndHospQ2: {
-      type: String,
-    },
-    surgAndHospQ3: {
-      type: String,
-      allowedValues: ['Yes','No'],
-    },
-    surgAndHospQ4: {
-      type: String,
-    },
-    ocularHisQ1a: {
-      type: String,
-      allowedValues: ['Yes','No'],
-    },
-    ocularHisQ1b: {
-      type: String,
-    },
-    ocularHisQ2a: {
-      type: String,
-      allowedValues: ['Yes','No'],
-    },
-    ocularHisQ2b: {
-      type: String,
-    },
-    ocularHisQ3a: {
-      type: String,
-      allowedValues: ['Yes','No'],
-    },
-    ocularHisQ3b: {
-      type: String,
-    },
-    ocularHisQ3c: {
-      type: String,
-    },
-    cataract: {
-      type: Boolean,
-      label: "Cataract",
-    },
-    glaucoma: {
-      type: Boolean,
-      label: "Glaucoma",
-    },
-    diabeticRetinopathy: {
-      type: Boolean,
-      label: "Diabetic Retinopathy",
-    },
-    amd: {
-      type: Boolean,
-      label: "Age-related macular degeneration",
-    },
-    anyOtherOcularCond: {
-      type: Boolean,
-      label: "Others (please specify)",
-    },
-    otherOcularCond:{
-      type: String,
-    },
-    ocularHisQ4: {
-      type: String,
-      allowedValues: ['Yes','No'],
-    },
-    ocularHisQ5a: {
-      type: String,
-      allowedValues: ['Normal','Good enough for my daily activities','Poor'],
-    },
-    ocularHisQ5b: {
-      type: String,
-      allowedValues: ['Yes','No'],
-    },
-    concerns: {
-      type: Boolean,
-      label: "Concerns about finances",
-    },
-    tooFar: {
-      type: Boolean,
-      label: "Too far away/difficult to get to the clinic/hospital",
-    },
-    previousAdvice: {
-      type: Boolean,
-      label: "Previously told by eye specialist that nothing can be done"
-    },
-    nothing: {
-      type: Boolean,
-      label: "Nothing can be done as it is part of ageing",
-    },
-    anyOtherReasons: {
-      type: Boolean,
-      label: "Others (please specify)",
-    },
-    otherReasons: {
-      type: String,
-    },
-    barrierQ1:{
-      type: String,
-      allowedValues: ['Hospital',
-                      'Clinics',
-                      'Traditional Medicine',
-                      'Seldom/Never visits the doctor'],
-    },
-    noNeed: {
-      type: Boolean,
-      label: "Do not see the need for the tests",
-    },
-    time: {
-      type: Boolean,
-      label: "Challenging to make time to go for appointments",
-    },
-    mobility: {
-      type: Boolean,
-      label: "Difficulty getting to clinic (mobility)",
-    },
-    financial: {
-      type: Boolean,
-      label: "Financial issues",
-    },
-    scared: {
-      type: Boolean,
-      label: "Scared of doctor",
-    },
-    preferTradMed: {
-      type: Boolean,
-      label: "Prefer traditional medicine",
-    },
-    anyOtherBarriers: {
-      type: Boolean,
-      label: "Others: (free text)",
-    },
-    otherBarriers: {
-      type: String,
-    },
-    familyHistory: {
-      type: Array,
-    },
-    'familyHistory.$': {
-      type: String,
-      allowedValues: ['High blood pressure', 
-                      'High blood cholesterol', 
-                      'Heart attack or coronary arterial disease (narrowed blood vessel supplying the heart)*', 
-                      'Stroke',
-                      'Diabetes',
-                      'Cancer',
-                      'No, they do not have any of the above'],
-    },
-    FLRSQ1: {
-      type: String,
-    },
-    FLRSQ2: {
-      type: String,
-      allowedValues: ['Yes','No'],
-    },
-    FLRSQ3: {
-      type: String,
-    },
-    FLRSQ4: {
-      type: String,
-      allowedValues: ['Yes','No','Unsure'],
-    },
-    FLRSQ5: {
-      type: String,
-      allowedValues: ['Yes','No'],      
-    },
-    FLRSQ6: {
-      type: Array,
-    },
-    'FLRSQ6.$': {
-      type: String,
-      allowedValues: ['Cigarette', 
-                      'Beedi', 
-                      'Tobacco', 
-                      'Opium'],
-    },
-    FLRSQ7: {
-      type: String,
-      allowedValues: ['Less than 1 cigarette (or equivalent) per day on average',
-                      'Between 1 to 10 cigarettes (or equivalent) per day on average',
-                      'More than 10 cigarettes (or equivalent) per day on average'],      
-    },    
-    FLRSQ8: {
-      type: String,
-    },
-    FLRSQ9: {
-      type: String,
-      allowedValues: ['I have stopped smoking completely','I have never smoked before'],      
-    },
-    FLRSQ10: {
-      type: String,
-      allowedValues: ['Yes','No'],      
-    },
-    socialHisQ1: {
-      type: String,
-      allowedValues: ['Yes','No'],
-    },
-    socialHisQ2: {
-      type: Number,
-    },
-    student: {
-      type: Boolean,
-      label: "Student",
-    },
-    housewife: {
-      type: Boolean,
-      label: "Homemaker/Housewife",
-    },
-    relig:{
-      type: Boolean,
-      label: "Religious Work",
-    },
-    prof: {
-      type: Boolean,
-      label: "Professional (teacher, engineer, architect, doctor, nurse, lawyer, management, finance, etc)",
-    },
-    service: {
-      type: Boolean,
-      label: "Service industry (e.g. restaurant server, call centre, receptionist, hotel staff)",
-    },
-    manual: {
-      type: Boolean,
-      label: "Manual labourer (e.g. construction, cleaning, clothes washing)",
-    },
-    skilledLab:{
-      type: Boolean,
-      label: "Skilled labourer (e.g. plumbing, electrician, cook, tailor)",
-    },
-    farming: {
-      type: Boolean,
-      label: "Farming/Agriculture",
-    },
-    mining: {
-      type: Boolean,
-      label: "Mining",
-    },
-    manu: {
-      type: Boolean,
-      label: "Manufacturing",
-    },
-    unemployed: {
-      type: Boolean,
-      label: "Unemployed",
-    },
-    anyOtherOcc: {
-      type: Boolean,
-      label: "Others (please specify) - free text",
-    },
-    otherOcc: {
-      type: String,
-    },
-    socialHisQ4: {
-      type: String,
-      allowedValues: ['Labour', 'Sedentary'],
-    },
-    socialHisQ5:{
-      type: String,
-      allowedValues: ['Yes', 'No'],
-    },
-    socialHisQ6: {
-      type: String,
-      optional: true,
-    },
-    socialHisQ7: {
-      type: String,
-      allowedValues: ['Unmarried', 'Married','Widowed','Divorced'],
-    },
-    socialHisQ8: {
-      type: Number,
-    },
-    socialHisQ9: {
-      type: Number,
-    },
-    socialHisQ10: {
-      type: Number,
-    },
-    socialHisQ11: {
-      type: Number,
-    },
-    socialHisQ13: {
-      type: String,
-      allowedValues: ['No Formal Qualifications', 
-                      '6th standard or less',
-                      '7th-9th standard',
-                      '10th standard',
-                      '11th standard',
-                      '12th standard',
-                      'Vocational training (e.g. plumbing, construction, cooking)',
-                      'Bachelors or equivalent',
-                      'Post-graduate (Masters/Doctorate or equivalent)',
-                      'Refuse to answer'],
-    },
-  }),
+      traditionalMedicine: {
+        type: String,
+      },
+      Q6: {
+        type: String,
+        allowedValues: ['0', '1-3','4-6','> or equal to 7'],   
+      },
+      hyperlipidemiaQ1: {
+        type: String,
+        allowedValues: ['Yes', 'No'],   
+        },
+      hyperlipidemiaQ2: {
+        type: String,
+        allowedValues: ['Within past 3 years', 'More than 3 years ago'],   
+        },
+      hyperlipidemiaQ3: {
+        type: String,
+        allowedValues: ['Regular (Interval of 6 months or less)', 'Occasionally (Interval of more than 6 months)','Seldom (last appointment was >1 year ago)','Not at all'],   
+      },
+      hyperlipidemiaAnyWesternMedicine: {
+        type: Boolean,
+        label: "Yes, Western medicine",
+      },
+      hyperlipidemiaWesternMedicine: {
+        type: String,
+      },
+      hyperlipidemiaAnyTraditionalMedicine: {
+        type: Boolean,
+        label: "Yes, Traditional medicine",
+      },
+      hyperlipidemiaTraditionalMedicine: {
+        type: String,
+      },
+      hyperlipidemiaQ5: {
+        type: String,
+        allowedValues: ['0', '1-3','4-6','> or equal to 7'],   
+      },
+      hypertensionQ1: {
+        type: String,
+        allowedValues: ['Yes', 'No'],   
+        },
+      hypertensionQ2: {
+        type: String,
+        allowedValues: ['Within past 3 years', 'More than 3 years ago'],   
+        },
+      hypertensionQ3: {
+        type: String,
+        allowedValues: ['Regular (Interval of 6 months or less)', 'Occasionally (Interval of more than 6 months)','Seldom (last appointment was >1 year ago)','Not at all'],   
+      },
+      hypertensionAnyWesternMedicine: {
+        type: Boolean,
+        label: "Yes, Western medicine",
+      },
+      hypertensionWesternMedicine: {
+        type: String,
+      },
+      hypertensionAnyTraditionalMedicine: {
+        type: Boolean,
+        label: "Yes, Traditional medicine",
+      },
+      hypertensionTraditionalMedicine: {
+        type: String,
+      },
+      hypertensionQ5: {
+        type: String,
+        allowedValues: ['0', '1-3','4-6','> or equal to 7'],   
+      },
+      TBQ1: {
+        type: String,
+        allowedValues: ['Yes','No'],
+      },
+      TBQ2: {
+        type: String,
+        allowedValues: ['Yes, the person was diagnosed with TB within the past 4 months', 
+                        'Yes, the person was diagnosed with TB more than 4 months ago',
+                        'No'],
+      },
+      TBQ3: {
+        type: Array,
+      },
+      'TBQ3.$': {
+        type: String,
+        allowedValues: ['Cough that has lasted more than 2 weeks', 
+                        'Coughing up blood', 
+                        'Breathlessness', 
+                        'Weight loss',
+                        'Night sweats',
+                        'Fever',
+                        'Loss of appetite',
+                        'None of the above'],
+      },
+      medicalHistory1: {
+        type: String,
+      },
+      medicalHistory2: {
+        type: String,
+      },
+      medicalHistory3: {
+        type: String,
+      },
+      medicalHistory4: {
+        type: String,
+      },
+      medicalHistory5: {
+        type: String,
+      },
+      surgAndHospQ1: {
+        type: String,
+        allowedValues: ['Yes','No'],
+      },
+      surgAndHospQ2: {
+        type: String,
+      },
+      surgAndHospQ3: {
+        type: String,
+        allowedValues: ['Yes','No'],
+      },
+      surgAndHospQ4: {
+        type: String,
+      },
+      ocularHisQ1a: {
+        type: String,
+        allowedValues: ['Yes','No'],
+      },
+      ocularHisQ1b: {
+        type: String,
+      },
+      ocularHisQ2a: {
+        type: String,
+        allowedValues: ['Yes','No'],
+      },
+      ocularHisQ2b: {
+        type: String,
+      },
+      ocularHisQ3a: {
+        type: String,
+        allowedValues: ['Yes','No'],
+      },
+      ocularHisQ3b: {
+        type: String,
+      },
+      ocularHisQ3c: {
+        type: String,
+      },
+      cataract: {
+        type: Boolean,
+        label: "Cataract",
+      },
+      glaucoma: {
+        type: Boolean,
+        label: "Glaucoma",
+      },
+      diabeticRetinopathy: {
+        type: Boolean,
+        label: "Diabetic Retinopathy",
+      },
+      amd: {
+        type: Boolean,
+        label: "Age-related macular degeneration",
+      },
+      anyOtherOcularCond: {
+        type: Boolean,
+        label: "Others (please specify)",
+      },
+      otherOcularCond:{
+        type: String,
+      },
+      ocularHisQ4: {
+        type: String,
+        allowedValues: ['Yes','No'],
+      },
+      ocularHisQ5a: {
+        type: String,
+        allowedValues: ['Normal','Good enough for my daily activities','Poor'],
+      },
+      ocularHisQ5b: {
+        type: String,
+        allowedValues: ['Yes','No'],
+      },
+      concerns: {
+        type: Boolean,
+        label: "Concerns about finances",
+      },
+      tooFar: {
+        type: Boolean,
+        label: "Too far away/difficult to get to the clinic/hospital",
+      },
+      previousAdvice: {
+        type: Boolean,
+        label: "Previously told by eye specialist that nothing can be done"
+      },
+      nothing: {
+        type: Boolean,
+        label: "Nothing can be done as it is part of ageing",
+      },
+      anyOtherReasons: {
+        type: Boolean,
+        label: "Others (please specify)",
+      },
+      otherReasons: {
+        type: String,
+      },
+      barrierQ1:{
+        type: String,
+        allowedValues: ['Hospital',
+                        'Clinics',
+                        'Traditional Medicine',
+                        'Seldom/Never visits the doctor'],
+      },
+      noNeed: {
+        type: Boolean,
+        label: "Do not see the need for the tests",
+      },
+      time: {
+        type: Boolean,
+        label: "Challenging to make time to go for appointments",
+      },
+      mobility: {
+        type: Boolean,
+        label: "Difficulty getting to clinic (mobility)",
+      },
+      financial: {
+        type: Boolean,
+        label: "Financial issues",
+      },
+      scared: {
+        type: Boolean,
+        label: "Scared of doctor",
+      },
+      preferTradMed: {
+        type: Boolean,
+        label: "Prefer traditional medicine",
+      },
+      anyOtherBarriers: {
+        type: Boolean,
+        label: "Others: (free text)",
+      },
+      otherBarriers: {
+        type: String,
+      },
+      familyHistory: {
+        type: Array,
+      },
+      'familyHistory.$': {
+        type: String,
+        allowedValues: ['High blood pressure', 
+                        'High blood cholesterol', 
+                        'Heart attack or coronary arterial disease (narrowed blood vessel supplying the heart)*', 
+                        'Stroke',
+                        'Diabetes',
+                        'Cancer',
+                        'No, they do not have any of the above'],
+      },
+      FLRSQ1: {
+        type: String,
+      },
+      FLRSQ2: {
+        type: String,
+        allowedValues: ['Yes','No'],
+      },
+      FLRSQ3: {
+        type: String,
+      },
+      FLRSQ4: {
+        type: String,
+        allowedValues: ['Yes','No','Unsure'],
+      },
+      FLRSQ5: {
+        type: String,
+        allowedValues: ['Yes','No'],      
+      },
+      FLRSQ6: {
+        type: Array,
+      },
+      'FLRSQ6.$': {
+        type: String,
+        allowedValues: ['Cigarette', 
+                        'Beedi', 
+                        'Tobacco', 
+                        'Opium'],
+      },
+      FLRSQ7: {
+        type: String,
+        allowedValues: ['Less than 1 cigarette (or equivalent) per day on average',
+                        'Between 1 to 10 cigarettes (or equivalent) per day on average',
+                        'More than 10 cigarettes (or equivalent) per day on average'],      
+      },    
+      FLRSQ8: {
+        type: String,
+      },
+      FLRSQ9: {
+        type: String,
+        allowedValues: ['I have stopped smoking completely','I have never smoked before'],      
+      },
+      FLRSQ10: {
+        type: String,
+        allowedValues: ['Yes','No'],      
+      },
+      socialHisQ1: {
+        type: String,
+        allowedValues: ['Yes','No'],
+      },
+      socialHisQ2: {
+        type: Number,
+      },
+      student: {
+        type: Boolean,
+        label: "Student",
+      },
+      housewife: {
+        type: Boolean,
+        label: "Homemaker/Housewife",
+      },
+      relig:{
+        type: Boolean,
+        label: "Religious Work",
+      },
+      prof: {
+        type: Boolean,
+        label: "Professional (teacher, engineer, architect, doctor, nurse, lawyer, management, finance, etc)",
+      },
+      service: {
+        type: Boolean,
+        label: "Service industry (e.g. restaurant server, call centre, receptionist, hotel staff)",
+      },
+      manual: {
+        type: Boolean,
+        label: "Manual labourer (e.g. construction, cleaning, clothes washing)",
+      },
+      skilledLab:{
+        type: Boolean,
+        label: "Skilled labourer (e.g. plumbing, electrician, cook, tailor)",
+      },
+      farming: {
+        type: Boolean,
+        label: "Farming/Agriculture",
+      },
+      mining: {
+        type: Boolean,
+        label: "Mining",
+      },
+      manu: {
+        type: Boolean,
+        label: "Manufacturing",
+      },
+      unemployed: {
+        type: Boolean,
+        label: "Unemployed",
+      },
+      anyOtherOcc: {
+        type: Boolean,
+        label: "Others (please specify) - free text",
+      },
+      otherOcc: {
+        type: String,
+      },
+      socialHisQ4: {
+        type: String,
+        allowedValues: ['Labour', 'Sedentary'],
+      },
+      socialHisQ5:{
+        type: String,
+        allowedValues: ['Yes', 'No'],
+      },
+      socialHisQ6: {
+        type: String,
+        optional: true,
+      },
+      socialHisQ7: {
+        type: String,
+        allowedValues: ['Unmarried', 'Married','Widowed','Divorced'],
+      },
+      socialHisQ8: {
+        type: Number,
+      },
+      socialHisQ9: {
+        type: Number,
+      },
+      socialHisQ10: {
+        type: Number,
+      },
+      socialHisQ11: {
+        type: Number,
+      },
+      socialHisQ13: {
+        type: String,
+        allowedValues: ['No Formal Qualifications', 
+                        '6th standard or less',
+                        '7th-9th standard',
+                        '10th standard',
+                        '11th standard',
+                        '12th standard',
+                        'Vocational training (e.g. plumbing, construction, cooking)',
+                        'Bachelors or equivalent',
+                        'Post-graduate (Masters/Doctorate or equivalent)',
+                        'Refuse to answer'],
+      },
+    }),
 
-  "Station Selection":
-  new SimpleSchema({
-    Q1: {
-      type: String,
-      allowedValues: ['Yes', 
-                      'No'],
-    },
-    Q2:{
-      type: String,
-      allowedValues: ['Yes', 
-                      'No',
-                      'Not applicable (child)'],
-    },
-    Q3: {
-      type: String,
-      allowedValues: ['Yes', 
-                      'No'],
-    },
-    Q4: {
-      type: String,
-      allowedValues: ['Yes', 
-                      'No',
-                      'Not applicable (child)'],
-    },
-    Q5: {
-      type: Array,
-    },
-    'Q5.$': {
-      type: String,
-      allowedValues: ['High blood pressure', 
-                      'Diabetes', 
-                      'Cigarette smoking', 
-                      'Family member with coronary artery disease',
-                      'Family member with high cholesterol',
-                      'Chronic kidney disease',
-                      'None of the above/not applicable (Age < 40)'],
-    },
-    Q6: {
-      type: String,
-      allowedValues: ['Yes', 
-                      'No',
-                      'Not applicable (child)'],
-    },
-    Q7: {
-      type: String,
-      allowedValues: ['Yes', 
-                      'No'],
-    },
-    Q8: {
-      type: String,
-      allowedValues: ['Yes', 
-                      'No'],
-    },
-    Q9: {
-      type: String,
-      allowedValues: ['Yes', 
-                      'No'],
-    },
-    Q10: {
-      type: String,
-      allowedValues: ['Yes', 
-                      'No',
-                      'Not applicable (child)'],
-    },
-    Q11: {
-      type: String,
-      allowedValues: ['Yes', 
-                      'No',
-                      'Not applicable (child < 10 years old)'],
-    },
-    Q12: {
-      type: String,
-      allowedValues: ['Yes', 
-                      'No'],
-    },
-    Q13: {
-      type: String,
-      allowedValues: ['Yes', 
-                      'No'],
-    },
-    Q14: {
-      type: String,
-      allowedValues: ['Yes', 
-                      'No',
-                      'Not applicable (child)'],
-    },
-  }),
+    "Station Selection":
+    new SimpleSchema({
+      Q1: {
+        type: String,
+        allowedValues: ['Yes', 
+                        'No'],
+      },
+      Q2:{
+        type: String,
+        allowedValues: ['Yes', 
+                        'No',
+                        'Not applicable (child)'],
+      },
+      Q3: {
+        type: String,
+        allowedValues: ['Yes', 
+                        'No'],
+      },
+      Q4: {
+        type: String,
+        allowedValues: ['Yes', 
+                        'No',
+                        'Not applicable (child)'],
+      },
+      Q5: {
+        type: Array,
+      },
+      'Q5.$': {
+        type: String,
+        allowedValues: ['High blood pressure', 
+                        'Diabetes', 
+                        'Cigarette smoking', 
+                        'Family member with coronary artery disease',
+                        'Family member with high cholesterol',
+                        'Chronic kidney disease',
+                        'None of the above/not applicable (Age < 40)'],
+      },
+      Q6: {
+        type: String,
+        allowedValues: ['Yes', 
+                        'No',
+                        'Not applicable (child)'],
+      },
+      Q7: {
+        type: String,
+        allowedValues: ['Yes', 
+                        'No'],
+      },
+      Q8: {
+        type: String,
+        allowedValues: ['Yes', 
+                        'No'],
+      },
+      Q9: {
+        type: String,
+        allowedValues: ['Yes', 
+                        'No'],
+      },
+      Q10: {
+        type: String,
+        allowedValues: ['Yes', 
+                        'No',
+                        'Not applicable (child)'],
+      },
+      Q11: {
+        type: String,
+        allowedValues: ['Yes', 
+                        'No',
+                        'Not applicable (child < 10 years old)'],
+      },
+      Q12: {
+        type: String,
+        allowedValues: ['Yes', 
+                        'No'],
+      },
+      Q13: {
+        type: String,
+        allowedValues: ['Yes', 
+                        'No'],
+      },
+      Q14: {
+        type: String,
+        allowedValues: ['Yes', 
+                        'No',
+                        'Not applicable (child)'],
+      },
+    }),
+  },
 
   "Height & weight":
   new SimpleSchema({
