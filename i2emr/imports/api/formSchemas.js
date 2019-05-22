@@ -1005,31 +1005,82 @@ export const formSchemas = {
   new SimpleSchema ({
     Q1: {
     type: String,
-    allowedValues: ['Strongly agree', 'Agree', 'Smoke', 'All of the above'],   
+    allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
     },
     Q2: {
+      type: Array,
+    },
+    'Q2.$': {
       type: String,
-      allowedValues: ['Blindness', 'Amputation', 'Craving sweet food', 'Kidney failure'],   
-      },
+      allowedValues: ['I am concerned about my health', 
+                      'I have never been screened before', 
+                      'Friends/family told me to come', 
+                      'There is a free health screening',
+                      'There is a free goodie bag',
+                      'I was drawn to the crowd',
+                      'It was conveniently located',
+                      'It is at a convenient time'],
+    },
     Q3: {
       type: String,
-      allowedValues: ['60 mins', '90 mins', '120 mins', '150 mins'],    
+      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
       },
     Q4: {
       type: String,
-      allowedValues: ['1/2 rice, 1/4 fruits and vegetables, 1/4 protein', '2/5 rice, 1/5 vegetables, 1/5 fruits, 1/5 protein', '1/3 rice, 1/3 vegetables, 1/3 protein', '1/2 fruits and vegetables, 1/4 rice, 1/4 protein'],   
-      },
+      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
+    },
     Q5: {
       type: String,
-      allowedValues: ['Daal', 'Mattar Paneer', 'Chole Bhattura', 'Butter Paneer'],   
+      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
       },
     Q6: {
       type: String,
-      allowedValues: ['Tobacco', 'Alcohol', 'Pesticides', 'All of the above'],   
-      },
+      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
+    }, 
     Q7: {
       type: String,
-      allowedValues: ['Get comprehensive eye exams regularly', 'Use a computer for 2h to finish my work', 'Read under sufficiently bright light', 'Wear sunglasses and caps when outdoors to protect eyes from UV rays'],   
+      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
       },
+    Q8: {
+      type: String,
+      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
+    }, 
+    Q9: {
+      type: String,
+      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
+      },
+    Q10: {
+      type: String,
+      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
+    }, 
+    Q11: {
+      type: String,
+      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
+      },
+    Q12: {
+      type: String,
+      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
+    },   
+    Q13: {
+      type: Array,
+    },
+    'Q13.$': {
+      type: String,
+      allowedValues: ['Happened to pass by', 
+                      'Posters', 
+                      'Newspaper', 
+                      'Door-to-door publicity',
+                      'Heard from neighbours/relatives/friends'],
+    },
+    Q14: {
+      type: String,
+      allowedValues: ['Never', 
+                      'More than 3 years ago', 
+                      'Once in 3 years', 
+                      'Once in 2 years',
+                      'Once a year',
+                      'More than once a year'],   
+    },   
+
   }),
 }
