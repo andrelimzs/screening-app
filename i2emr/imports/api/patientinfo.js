@@ -18,11 +18,11 @@ Meteor.methods({
   'patientinfo.insert'(data) {
     // Determine stations to visit based on:
     // Based on gender & age
-    const isMale = (data.gender === "male");
-    const isChild = (data.age <= 18);
+    const isMale = (data["Patient Info"].gender === "male");
+    const isChild = (data["Patient Info"].age <= 18);
 
     // Stations to remove
-    const stationsToRemove = ["Registration"];
+    const stationsToRemove = ["Registration", "Height & weight"];
     if (isMale) {
       stationsToRemove.push("Pap Smear", "Breast Exam", "Women's Edu");
     }
@@ -60,7 +60,7 @@ Meteor.methods({
     // console.log(Patientinfo.findOne({id:id}));
   },
   'patientinfo.setBusy'(id, value) {
-    const patientStatus = Patientinfo.findOne({id:id}).busy;
+    const patientStatus = (Patientinfo.findOne({id:id}) !== "undefined") ? Patientinfo.findOne({id:id}).busy : false;
     
     if (patientStatus === value) {
 
