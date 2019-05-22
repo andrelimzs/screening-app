@@ -67,6 +67,7 @@ export const formSchemas = {
       anyDrugAllergies: {
         type: String,
         allowedValues: ['Yes', 'No'],
+        optional: true,
       },
       drugAllergies: {
         type: String,
@@ -80,19 +81,22 @@ export const formSchemas = {
 
     "Patient Profiling":
     new SimpleSchema({
-      Q1: {
+      patientProfile1: {
         type: String,
         allowedValues: ['Yes', 'No'],   
         },
-      Q2: {
+      patientProfile2: {
         type: String,
         allowedValues: ['Within past 3 years', 'More than 3 years ago'],   
+        optional: true,
         },
-      Q3: {
+      patientProfile3: {
         type: Array,
+        optional: true,
       },
-      'Q3.$': {
+      'patientProfile3.$': {
         type: String,
+        optional: true,
         allowedValues: ['Increased urination', 
                         'Increased thirst', 
                         'Weight loss', 
@@ -103,27 +107,34 @@ export const formSchemas = {
                         'Numbness/tingling in hands and/or feet',
                         'None of the above'
                       ],
+                      
       },
-      Q4: {
+      patientProfile4: {
         type: String,
+        optional: true,
         allowedValues: ['Regular (Interval of 6 months or less)', 'Occasionally (Interval of more than 6 months)','Seldom (last appointment was >1 year ago)','Not at all'],   
       },
       anyWesternMedicine: {
         type: Boolean,
+        optional: true,
         label: "Yes, Western medicine",
       },
       westernMedicine: {
         type: String,
+        optional: true,
       },
       anyTraditionalMedicine: {
         type: Boolean,
+        optional: true,
         label: "Yes, Traditional medicine",
       },
       traditionalMedicine: {
         type: String,
+        optional: true,
       },
-      Q6: {
+      patientProfile6: {
         type: String,
+        optional: true,
         allowedValues: ['0', '1-3','4-6','> or equal to 7'],   
       },
       hyperlipidemiaQ1: {
@@ -132,28 +143,35 @@ export const formSchemas = {
         },
       hyperlipidemiaQ2: {
         type: String,
+        optional: true,
         allowedValues: ['Within past 3 years', 'More than 3 years ago'],   
         },
       hyperlipidemiaQ3: {
         type: String,
+        optional: true,
         allowedValues: ['Regular (Interval of 6 months or less)', 'Occasionally (Interval of more than 6 months)','Seldom (last appointment was >1 year ago)','Not at all'],   
       },
       hyperlipidemiaAnyWesternMedicine: {
         type: Boolean,
+        optional: true,
         label: "Yes, Western medicine",
       },
       hyperlipidemiaWesternMedicine: {
         type: String,
+        optional: true,
       },
       hyperlipidemiaAnyTraditionalMedicine: {
         type: Boolean,
+        optional: true,
         label: "Yes, Traditional medicine",
       },
       hyperlipidemiaTraditionalMedicine: {
         type: String,
+        optional: true,
       },
       hyperlipidemiaQ5: {
         type: String,
+        optional: true,
         allowedValues: ['0', '1-3','4-6','> or equal to 7'],   
       },
       hypertensionQ1: {
@@ -166,24 +184,30 @@ export const formSchemas = {
         },
       hypertensionQ3: {
         type: String,
+        optional: true,
         allowedValues: ['Regular (Interval of 6 months or less)', 'Occasionally (Interval of more than 6 months)','Seldom (last appointment was >1 year ago)','Not at all'],   
       },
       hypertensionAnyWesternMedicine: {
         type: Boolean,
+        optional: true,
         label: "Yes, Western medicine",
       },
       hypertensionWesternMedicine: {
         type: String,
+        optional: true,
       },
       hypertensionAnyTraditionalMedicine: {
         type: Boolean,
+        optional: true,
         label: "Yes, Traditional medicine",
       },
       hypertensionTraditionalMedicine: {
         type: String,
+        optional: true,
       },
       hypertensionQ5: {
         type: String,
+        optional: true,
         allowedValues: ['0', '1-3','4-6','> or equal to 7'],   
       },
       TBQ1: {
@@ -231,6 +255,7 @@ export const formSchemas = {
       },
       surgAndHospQ2: {
         type: String,
+        optional: true,
       },
       surgAndHospQ3: {
         type: String,
@@ -238,6 +263,7 @@ export const formSchemas = {
       },
       surgAndHospQ4: {
         type: String,
+        optional: true,
       },
       ocularHisQ1a: {
         type: String,
@@ -245,6 +271,7 @@ export const formSchemas = {
       },
       ocularHisQ1b: {
         type: String,
+        optional: true,
       },
       ocularHisQ2a: {
         type: String,
@@ -252,6 +279,7 @@ export const formSchemas = {
       },
       ocularHisQ2b: {
         type: String,
+        optional: true,
       },
       ocularHisQ3a: {
         type: String,
@@ -259,32 +287,40 @@ export const formSchemas = {
       },
       ocularHisQ3b: {
         type: String,
+        optional: true,
       },
       ocularHisQ3c: {
         type: String,
+        optional: true,
       },
       cataract: {
         type: Boolean,
+        optional: true,
         label: "Cataract",
       },
       glaucoma: {
         type: Boolean,
+        optional: true,
         label: "Glaucoma",
       },
       diabeticRetinopathy: {
         type: Boolean,
+        optional: true,
         label: "Diabetic Retinopathy",
       },
       amd: {
         type: Boolean,
+        optional: true,
         label: "Age-related macular degeneration",
       },
       anyOtherOcularCond: {
         type: Boolean,
+        optional: true,
         label: "Others (please specify)",
       },
       otherOcularCond:{
         type: String,
+        optional: true,
       },
       ocularHisQ4: {
         type: String,
@@ -296,30 +332,37 @@ export const formSchemas = {
       },
       ocularHisQ5b: {
         type: String,
+        optional: true,
         allowedValues: ['Yes','No'],
       },
       concerns: {
         type: Boolean,
+        optional: true,
         label: "Concerns about finances",
       },
       tooFar: {
         type: Boolean,
+        optional: true,
         label: "Too far away/difficult to get to the clinic/hospital",
       },
       previousAdvice: {
         type: Boolean,
+        optional: true,
         label: "Previously told by eye specialist that nothing can be done"
       },
       nothing: {
         type: Boolean,
+        optional: true,
         label: "Nothing can be done as it is part of ageing",
       },
       anyOtherReasons: {
         type: Boolean,
+        optional: true,
         label: "Others (please specify)",
       },
       otherReasons: {
         type: String,
+        optional: true,
       },
       barrierQ1:{
         type: String,
@@ -330,34 +373,42 @@ export const formSchemas = {
       },
       noNeed: {
         type: Boolean,
+        optional: true,
         label: "Do not see the need for the tests",
       },
       time: {
         type: Boolean,
+        optional: true,
         label: "Challenging to make time to go for appointments",
       },
       mobility: {
         type: Boolean,
+        optional: true,
         label: "Difficulty getting to clinic (mobility)",
       },
       financial: {
         type: Boolean,
+        optional: true,
         label: "Financial issues",
       },
       scared: {
         type: Boolean,
+        optional: true,
         label: "Scared of doctor",
       },
       preferTradMed: {
         type: Boolean,
+        optional: true,
         label: "Prefer traditional medicine",
       },
       anyOtherBarriers: {
         type: Boolean,
+        optional: true,
         label: "Others: (free text)",
       },
       otherBarriers: {
         type: String,
+        optional: true,
       },
       familyHistory: {
         type: Array,
@@ -392,9 +443,11 @@ export const formSchemas = {
       },
       FLRSQ6: {
         type: Array,
+        optional: true,
       },
       'FLRSQ6.$': {
         type: String,
+        optional: true,
         allowedValues: ['Cigarette', 
                         'Beedi', 
                         'Tobacco', 
@@ -402,15 +455,18 @@ export const formSchemas = {
       },
       FLRSQ7: {
         type: String,
+        optional: true,
         allowedValues: ['Less than 1 cigarette (or equivalent) per day on average',
                         'Between 1 to 10 cigarettes (or equivalent) per day on average',
                         'More than 10 cigarettes (or equivalent) per day on average'],      
       },    
       FLRSQ8: {
         type: String,
+        optional: true,
       },
       FLRSQ9: {
         type: String,
+        optional: true,
         allowedValues: ['I have stopped smoking completely','I have never smoked before'],      
       },
       FLRSQ10: {
@@ -420,9 +476,11 @@ export const formSchemas = {
       socialHisQ1: {
         type: String,
         allowedValues: ['Yes','No'],
+        optional: true,
       },
       socialHisQ2: {
         type: Number,
+        optional: true,
       },
       student: {
         type: Boolean,
@@ -430,50 +488,62 @@ export const formSchemas = {
       },
       housewife: {
         type: Boolean,
+        optional: true,
         label: "Homemaker/Housewife",
       },
       relig:{
         type: Boolean,
+        optional: true,
         label: "Religious Work",
       },
       prof: {
         type: Boolean,
+        optional: true,
         label: "Professional (teacher, engineer, architect, doctor, nurse, lawyer, management, finance, etc)",
       },
       service: {
         type: Boolean,
+        optional: true,
         label: "Service industry (e.g. restaurant server, call centre, receptionist, hotel staff)",
       },
       manual: {
         type: Boolean,
+        optional: true,
         label: "Manual labourer (e.g. construction, cleaning, clothes washing)",
       },
       skilledLab:{
         type: Boolean,
+        optional: true,
         label: "Skilled labourer (e.g. plumbing, electrician, cook, tailor)",
       },
       farming: {
         type: Boolean,
+        optional: true,
         label: "Farming/Agriculture",
       },
       mining: {
         type: Boolean,
+        optional: true,
         label: "Mining",
       },
       manu: {
         type: Boolean,
+        optional: true,
         label: "Manufacturing",
       },
       unemployed: {
         type: Boolean,
+        optional: true,
         label: "Unemployed",
       },
       anyOtherOcc: {
         type: Boolean,
+        optional: true,
         label: "Others (please specify) - free text",
       },
       otherOcc: {
         type: String,
+        optional: true,
       },
       socialHisQ4: {
         type: String,
@@ -482,6 +552,7 @@ export const formSchemas = {
       socialHisQ5:{
         type: String,
         allowedValues: ['Yes', 'No'],
+        optional: true,
       },
       socialHisQ6: {
         type: String,
@@ -520,32 +591,32 @@ export const formSchemas = {
 
     "Station Selection":
     new SimpleSchema({
-      Q1: {
+      stationSelect1: {
         type: String,
         allowedValues: ['Yes', 
                         'No'],
       },
-      Q2:{
+      stationSelect2:{
         type: String,
         allowedValues: ['Yes', 
                         'No',
                         'Not applicable (child)'],
       },
-      Q3: {
+      stationSelect3: {
         type: String,
         allowedValues: ['Yes', 
                         'No'],
       },
-      Q4: {
+      stationSelect4: {
         type: String,
         allowedValues: ['Yes', 
                         'No',
                         'Not applicable (child)'],
       },
-      Q5: {
+      stationSelect5: {
         type: Array,
       },
-      'Q5.$': {
+      'stationSelect5.$': {
         type: String,
         allowedValues: ['High blood pressure', 
                         'Diabetes', 
@@ -555,50 +626,53 @@ export const formSchemas = {
                         'Chronic kidney disease',
                         'None of the above/not applicable (Age < 40)'],
       },
-      Q6: {
+      stationSelect6: {
+        type: String,
+        optional: true,
+        allowedValues: ['Yes', 
+                        'No',
+                        'Not applicable (child)'],
+      },
+      stationSelect7: {
+        type: String,
+        allowedValues: ['Yes', 
+                        'No'],
+      },
+      stationSelect8: {
+        type: String,
+        optional: true,
+        allowedValues: ['Yes', 
+                        'No'],
+      },
+      stationSelect9: {
+        type: String,
+        optional: true,
+        allowedValues: ['Yes', 
+                        'No'],
+      },
+      stationSelect10: {
         type: String,
         allowedValues: ['Yes', 
                         'No',
                         'Not applicable (child)'],
       },
-      Q7: {
-        type: String,
-        allowedValues: ['Yes', 
-                        'No'],
-      },
-      Q8: {
-        type: String,
-        allowedValues: ['Yes', 
-                        'No'],
-      },
-      Q9: {
-        type: String,
-        allowedValues: ['Yes', 
-                        'No'],
-      },
-      Q10: {
-        type: String,
-        allowedValues: ['Yes', 
-                        'No',
-                        'Not applicable (child)'],
-      },
-      Q11: {
+      stationSelect11: {
         type: String,
         allowedValues: ['Yes', 
                         'No',
                         'Not applicable (child < 10 years old)'],
       },
-      Q12: {
+      stationSelect12: {
         type: String,
         allowedValues: ['Yes', 
                         'No'],
       },
-      Q13: {
+      stationSelect13: {
         type: String,
         allowedValues: ['Yes', 
                         'No'],
       },
-      Q14: {
+      stationSelect14: {
         type: String,
         allowedValues: ['Yes', 
                         'No',
@@ -737,10 +811,10 @@ export const formSchemas = {
 
   "Doctors' Consult":
   new SimpleSchema({
-    Q1: {
+    docConsult1: {
       type: Array,
     },
-    'Q1.$': {
+    'docConsult1.$': {
       type: String,
       allowedValues: ['Overweight/obesity', 
                       'Heart burn', 
@@ -760,18 +834,19 @@ export const formSchemas = {
     },
     otherComplaints: {
       type: String,
+      optional: true,
     },
-    Q2: {
+    docConsult2: {
       type: String,
     },
-    Q3: {
+    docConsult3: {
       type: Boolean,
       label: "Provided with referral letter?"
     },
-    Q4: {
+    docConsult4: {
       type: String,
     },
-    Q5: {
+    docConsult5: {
       type: String,
     },
   }),
@@ -879,35 +954,31 @@ export const formSchemas = {
         type: Boolean, 
         label: "Breast Screening Completed?"
       },
-      S1: {
+      preWomenEduSurvey1: {
       type: String,
       allowedValues: ['1', '2', '3', '4', '5'],   
       },
-      Q1: {
-        type: String,
-        allowedValues: ['1', '2', '3', '4', '5'],   
-        },
-        Q1: {
+        preWomenEduQ1: {
           type: String,
           allowedValues: ['1', '2', '3', '4', '5'],   
           },
-        Q2: {
+        preWomenEduQ2: {
           type: String,
           allowedValues: ['Stress', 'Pregnancy', 'Weight loss', 'Abrasions'],   
           },
-        Q3: {
+          preWomenEduQ3: {
           type: String,
           allowedValues: ['Menstruation is dirty', 'Menstruation happens every 28 days, on average', 'We should change our sanitary pads once every few days', 'We should clean the area from back to front'],   
           },
-        Q4: {
+        preWomenEduQ4: {
           type: String,
           allowedValues: ['1st day of menses', '7-10 days after start of menses', '21 days after start of menses', '2 days before start of menses'],   
           },
-        Q5: {
+        preWomenEduQ5: {
           type: String,
           allowedValues: ['Once a week', 'Once a month', 'Once a year', 'Once in 2 years'],   
           },
-        Q6: {
+        preWomenEduQ6: {
           type: String,
           allowedValues: ['A lump that can be seen/felt in the breast or underarm', 'Nipple that is pushed inwards', 'Dimpling of skin over the breast', 'Ulceration of skin over the breast','All of the above'],   
           },
@@ -915,31 +986,31 @@ export const formSchemas = {
 
     "Post-Women's Education Quiz":
     new SimpleSchema ({
-      S1: {
+      postWomenEduSurvey1: {
       type: String,
       allowedValues: ['1', '2', '3', '4', '5'],   
       },
-      Q1: {
+      postWomenEduQ1: {
         type: String,
         allowedValues: ['1', '2', '3', '4', '5'],   
         },
-      Q2: {
+      postWomenEduQ2: {
         type: String,
         allowedValues: ['Stress', 'Pregnancy', 'Weight loss', 'Abrasions'],   
         },
-      Q3: {
+      postWomenEduQ3: {
         type: String,
         allowedValues: ['Menstruation is dirty', 'Menstruation happens every 28 days, on average', 'We should change our sanitary pads once every few days', 'We should clean the area from back to front'],   
         },
-      Q4: {
+      postWomenEduQ4: {
         type: String,
         allowedValues: ['1st day of menses', '7-10 days after start of menses', '21 days after start of menses', '2 days before start of menses'],   
         },
-      Q5: {
+      postWomenEduQ5: {
         type: String,
         allowedValues: ['Once a week', 'Once a month', 'Once a year', 'Once in 2 years'],   
         },
-      Q6: {
+      postWomenEduQ6: {
         type: String,
         allowedValues: ['A lump that can be seen/felt in the breast or underarm', 'Nipple that is pushed inwards', 'Dimpling of skin over the breast', 'Ulceration of skin over the breast','All of the above'],   
         },
@@ -949,19 +1020,19 @@ export const formSchemas = {
   "Education":{
     "Pre-Education Survey":
     new SimpleSchema ({
-      S1: {
+      preEduSurvey1: {
       type: String,
       allowedValues: ['1', '2', '3', '4', '5'],   
       },
-      S2: {
+      preEduSurvey2: {
         type: String,
         allowedValues: ['1', '2', '3', '4', '5'],   
         },
-      S3: {
+      preEduSurvey3: {
         type: String,
         allowedValues: ['1', '2', '3', '4', '5'],    
         },
-      S4: {
+      preEduSurvey4: {
         type: String,
         allowedValues: ['1', '2', '3', '4', '5'],   
         },
