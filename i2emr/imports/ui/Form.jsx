@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
@@ -7,6 +7,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 import AutoForm from 'uniforms-material/AutoForm';
 import { formSchemas } from '/imports/api/formSchemas';
@@ -40,7 +43,10 @@ class Form extends Component {
     this.oldID = null;
     this.multiData = {};
 
-    this.state = {pageIndex: 0};
+    this.state = {
+      pageIndex: 0,
+      stationQueue: null,
+    };
   }
 
   handleSubmit(newForm) {
@@ -75,7 +81,8 @@ class Form extends Component {
         // Reset page index
         // this.pageIndex = 0;
         this.setState({
-          pageIndex: 0
+          pageIndex: 0,
+          tabValue: 0,
         });
 
         Session.set('currentPatient',null);
@@ -96,17 +103,35 @@ class Form extends Component {
     }
   }
 
-  render() {
-    // // On ID change => Reset page index
-    // if (this.isMultipage && this.oldID != this.props.id) {
-    //   this.oldID = this.props.id;
-    //   // this.pageIndex = 0;
-    //   this.setState({
-    //     pageIndex: 0
-    //   });
-    //   console.log("New patient");
-    // }
+  handleTabChange = (event, value) => {
+    this.setState({ tabValue:value });
+  };
 
+  makeStationEntry(station) {
+    // onClick={this.editField.bind(this,field)}
+    return (
+      <Fragment>
+        <Button variant="text" fullWidth={true}>
+          {station}
+        </Button>
+      </Fragment>
+    );
+  }
+
+  getSkipList() {
+    console.log(this.props.stationQueue);
+    const newStationQueue = this.props.stationQueue.map(
+      station => this.makeStationEntry(station)
+    );
+    
+    return (
+      <div>
+        {newStationQueue}
+      </div>
+    );
+  }
+
+  render() {
     // Index into appropriate form for multipage forms
     var currentFormSchema = formSchemas[this.props.station];
     var currentFormLayout = formLayouts[this.props.station];
@@ -125,9 +150,19 @@ class Form extends Component {
       </ClearableAutoForm>
     );
     
+    // Replace undefined with default value of 0
+    const tabValue = (this.state.tabValue === undefined) ? 0 : this.state.tabValue;
+    
     return (
       <Paper elevation={2} p={0} m={0}>
-        {newForm()}
+        <AppBar position="static" color="default">
+          <Tabs value={tabValue} onChange={this.handleTabChange}>
+            <Tab label="Form" />
+            {typeof(this.props.stationQueue) !== "undefined" && <Tab label="Skip Station" />}
+          </Tabs>
+        </AppBar>
+        {tabValue === 0 && newForm()}
+        {tabValue === 1 && typeof(this.props.stationQueue) !== "undefined" && this.getSkipList()}
       </Paper>
     );
   }
