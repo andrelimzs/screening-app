@@ -517,6 +517,94 @@ export const formSchemas = {
     },
   }),
 
+  "Station Selection":
+  new SimpleSchema({
+    Q1: {
+      type: String,
+      allowedValues: ['Yes', 
+                      'No'],
+    },
+    Q2:{
+      type: String,
+      allowedValues: ['Yes', 
+                      'No',
+                      'Not applicable (child)'],
+    },
+    Q3: {
+      type: String,
+      allowedValues: ['Yes', 
+                      'No'],
+    },
+    Q4: {
+      type: String,
+      allowedValues: ['Yes', 
+                      'No',
+                      'Not applicable (child)'],
+    },
+    Q5: {
+      type: Array,
+    },
+    'Q5.$': {
+      type: String,
+      allowedValues: ['High blood pressure', 
+                      'Diabetes', 
+                      'Cigarette smoking', 
+                      'Family member with coronary artery disease',
+                      'Family member with high cholesterol',
+                      'Chronic kidney disease',
+                      'None of the above/not applicable (Age < 40)'],
+    },
+    Q6: {
+      type: String,
+      allowedValues: ['Yes', 
+                      'No',
+                      'Not applicable (child)'],
+    },
+    Q7: {
+      type: String,
+      allowedValues: ['Yes', 
+                      'No'],
+    },
+    Q8: {
+      type: String,
+      allowedValues: ['Yes', 
+                      'No'],
+    },
+    Q9: {
+      type: String,
+      allowedValues: ['Yes', 
+                      'No'],
+    },
+    Q10: {
+      type: String,
+      allowedValues: ['Yes', 
+                      'No',
+                      'Not applicable (child)'],
+    },
+    Q11: {
+      type: String,
+      allowedValues: ['Yes', 
+                      'No',
+                      'Not applicable (child < 10 years old)'],
+    },
+    Q12: {
+      type: String,
+      allowedValues: ['Yes', 
+                      'No'],
+    },
+    Q13: {
+      type: String,
+      allowedValues: ['Yes', 
+                      'No'],
+    },
+    Q14: {
+      type: String,
+      allowedValues: ['Yes', 
+                      'No',
+                      'Not applicable (child)'],
+    },
+  }),
+
   "Height & weight":
   new SimpleSchema({
     height: {

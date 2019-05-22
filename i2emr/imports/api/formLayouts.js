@@ -319,6 +319,59 @@ export const formLayouts = {
     
   ),
 
+  "Station Selection": (
+    <Fragment>
+    <h2>Height and Weight + Waist:Hip measurement</h2>
+    Can we measure your height, weight, waist size and hip size?
+    <SelectField name="Q1" />
+    <h2>Blood glucose and Hb</h2>
+    Can we check your blood sugar? This will be done by pricking your finger to get a small drop of blood
+    <SelectField name="Q2" />
+    Can we check if you have anemia? This will be done by pricking your finger to get a small drop of blood
+    <SelectField name="Q3" />
+    <h2>BP</h2>
+    Can we check your blood pressure?
+    <SelectField name="Q4" />
+    <h2>Phlebotomy (for patients aged 40 years old and above)</h2>
+    For patients aged 40 years old and above, Do you have the following conditions?
+    <AutoField name="Q5" />
+    <DisplayIf condition={context => Array.isArray(context.model.Q5) && context.model.Q5.length >= 2}><Fragment>
+      Can we do a blood test to see if you have high cholesterol? A blood sample will be taken by a trained staff. This will then be sent to the lab, and a report will be mailed to you after some time
+      <SelectField name="Q6" />
+    </Fragment></DisplayIf>
+    <h2>Pap Smear</h2>
+    Are you married (or have you ever been married)?
+    <SelectField name="Q7" />
+    <DisplayIf condition={context => context.model.Q7 === "Yes"}><Fragment>
+      If yes to Q7, have you done a Pap smear in the past 3 years?
+      <SelectField name="Q8" />
+    </Fragment></DisplayIf>
+    <DisplayIf condition={context => context.model.Q8 === "No"}><Fragment>
+      If no to Q8, would you want to undergo a free Pap smear today to check for cervical cancer?
+      <SelectField name="Q9" />
+    </Fragment></DisplayIf>
+    <h2>Breast</h2>
+    Would you want to undergo a breast examination for breast cancer today? 
+    <SelectField name="Q10" />
+    <h2>Women's Edu</h2>
+    Can we teach you about women's health? For adults, we will be sharing about menstrual health and breast self examinations. For girls aged 10-18 years old, we will be sharing about menstrual health only.
+    <SelectField name="Q11" />
+    <h2>Doctors' consult</h2>
+    Would you like to see a doctor today? (You will be asked to see the doctor if your test results are abnormal, but would you otherwise want to see the doctor?)
+    <SelectField name="Q12" />
+    <h2>Eye screening</h2>
+    Can we check your eyes/vision?
+    <SelectField name="Q13" />
+    <h2>Education</h2>
+    Can we teach you about healthy lifestyles and how to prevent common diseases like diabetes and high blood pressure?
+    <SelectField name="Q14" />
+
+
+
+    </Fragment>
+  ),
+
+
   "Height & weight": (
     <Fragment>
       <TextField name="height" />
