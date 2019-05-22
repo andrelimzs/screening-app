@@ -152,17 +152,17 @@ class Form extends Component {
     
     // Replace undefined with default value of 0
     const tabValue = (this.state.tabValue === undefined) ? 0 : this.state.tabValue;
-
+    
     return (
       <Paper elevation={2} p={0} m={0}>
         <AppBar position="static" color="default">
           <Tabs value={tabValue} onChange={this.handleTabChange}>
             <Tab label="Form" />
-            <Tab label="Skip Station" />
+            {typeof(this.props.stationQueue) !== "undefined" && <Tab label="Skip Station" />}
           </Tabs>
         </AppBar>
         {tabValue === 0 && newForm()}
-        {tabValue === 1 && this.getSkipList()}
+        {tabValue === 1 && typeof(this.props.stationQueue) !== "undefined" && this.getSkipList()}
       </Paper>
     );
   }
