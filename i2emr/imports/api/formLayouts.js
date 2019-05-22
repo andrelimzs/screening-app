@@ -189,13 +189,9 @@ export const formLayouts = {
               If yes to 3a, when was your last review?
               <TextField name="ocularHisQ3c" />
               If yes to 3a, what was the condition?
-              <BoolField name="cataract" />
-              <BoolField name="glaucoma" />
-              <BoolField name="diabeticRetinopathy" />
-              <BoolField name="amd" />
-              <BoolField name="anyOtherOcularCond" />
+              <AutoField name="ocularHisQ3d" />
             </Fragment></DisplayIf>
-            <DisplayIf condition={context => context.model.anyOtherOcularCond === true}><Fragment>  
+            <DisplayIf condition={context => Array.isArray(context.model.ocularHisQ3d) && context.model.ocularHisQ3d.includes('Others (please specify)')}><Fragment> 
               <TextField name="otherOcularCond" />
             </Fragment></DisplayIf>          
             Have you had any falls in the last 1 year?
@@ -363,7 +359,7 @@ export const formLayouts = {
       Can we check your eyes/vision?
       <SelectField name="stationSelect13" />
       <h2>Education</h2>
-      Can we teach you about healthy lifestyles and how to prevent common diseases like diabetes and high blood prestationSelecture?
+      Can we teach you about healthy lifestyles and how to prevent common diseases like diabetes and high blood pressure?
       <SelectField name="stationSelect14" />
       </Fragment>
     ),
@@ -383,16 +379,17 @@ export const formLayouts = {
       <TextField name="hip" />
       <br />
       <h2>Overview</h2>
-      <SelectField name="docConsultForHW" />
+      <BoolField name="docConsultForHW" />
     </Fragment>
   ),
 
-  "CBG & Hb":(
+  "Blood Glucose & Hb":(
     <Fragment>
       <TextField name="cbg" />
       <br />
       <TextField name="hb" />
       <br />
+      <BoolField name="docConsultForBloodGlucAndHb" />
     </Fragment>
   ),
 
@@ -425,6 +422,7 @@ export const formLayouts = {
       <div><TextField name="bp2Dia" /></div>
       <div><TextField name="bp3Sys" /></div>
       <div><TextField name="bp3Dia" /></div>
+      
     </Fragment>
   ),
 
@@ -499,7 +497,7 @@ export const formLayouts = {
     "Post-Women's Education Quiz":(
       <Fragment>
         From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
-        <SelectField name="postWomenEduSurvey11" />
+        <SelectField name="postWomenEduSurvey1" />
         Which of the following is/are normal symptom(s) of menstrual periods?
         <SelectField name="postWomenEduQ1" />
         All of the following are reasons for missed periods except
