@@ -371,10 +371,12 @@ export const formLayouts = {
 
   "Height & weight": (
     <Fragment>
+      <h2>Height and Weight</h2>
       <TextField name="height" />
       <br />
       <TextField name="weight" />
       <br />
+      <h2>Waist:Hip</h2>
       <TextField name="waist" />
       <br />
       <TextField name="hip" />
@@ -404,7 +406,6 @@ export const formLayouts = {
     
   "Breast Exam":(
     <Fragment>
-      <BoolField name="breastCompleted" />
       <BoolField name="abnormalities" />
       <LongTextField name="abDescribe" />
       <BoolField name="fnacCompleted" />
@@ -425,8 +426,19 @@ export const formLayouts = {
 
   "Doctors' Consult":(
     <Fragment>
-      <BoolField name="consCompleted" />
-      <BoolField name="refLetter" />
+      Chief complaint
+      <SelectField name="Q1" />
+      <DisplayIf condition={context => Array.isArray(context.model.Q1) && context.model.Q1.includes('Others (free text)')}><Fragment>
+        Other complaints
+        <TextField name="otherComplaints" />
+      </Fragment></DisplayIf>
+      Doctors' notes/advice
+      <LongTextField name="Q2" />
+      <BoolField name="Q3" />
+      Referral details
+      <LongTextField name="Q4" />
+      Name of doctor
+      <TextField name="Q5" />
     </Fragment>
   ),
 
@@ -460,6 +472,8 @@ export const formLayouts = {
 
   "Pre-Women's Education Quiz":(
     <Fragment>
+      Completed breast examination?
+      <BoolField name="breastCompleted" />
       From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
       <SelectField name="S1" />
       Which of the following is/are normal symptom(s) of menstrual periods?

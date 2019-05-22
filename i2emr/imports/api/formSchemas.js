@@ -613,12 +613,24 @@ export const formSchemas = {
       max: 2.8,
       label: "Height (m)",
     },
+    // childHeight: {
+    //   type: String,
+    //   allowedValues: ['Below 3rd percentile curve', 
+    //                   'Between 3rd and 97th percentile curves',
+    //                   'Above 97th percentile curve'],
+    // },
     weight: {
       type: Number,
       min: 5,
       max: 500,
       label: "Weight (kg)",
     },
+    // childWeight:{
+    //   type: String,
+    //   allowedValues: ['Below 3rd percentile curve', 
+    //                   'Between 3rd and 97th percentile curves',
+    //                   'Above 97th percentile curve'],
+    // },
     waist: {
       type: Number,
       label: "Waist circumference (cm)",
@@ -663,10 +675,6 @@ export const formSchemas = {
 
   "Breast Exam":
   new SimpleSchema({
-    breastCompleted: {
-      type: Boolean, 
-      label: "Breast Screening Completed?"
-    },
     abnormalities: {
       type: Boolean,
       label: "Any abnormalities noted (e.g. lumps, skin changes)?"
@@ -727,13 +735,42 @@ export const formSchemas = {
 
   "Doctors' Consult":
   new SimpleSchema({
-    consCompleted: {
-      type: Boolean,
-      label: "Completed?"
+    Q1: {
+      type: Array,
     },
-    refLetter: {
+    'Q1.$': {
+      type: String,
+      allowedValues: ['Overweight/obesity', 
+                      'Heart burn', 
+                      'Diabetes', 
+                      'High blood pressure',
+                      'Heart disease',
+                      'Unexplained weight loss',
+                      'Respiratory problems',
+                      'Joint pain/back pain',
+                      'Stroke',
+                      'Visual impairment',
+                      'Mental health issues',
+                      'Alcohol overuse',
+                      'Drug addiction',
+                      'Infectious diseases e.g. malaria, tuberculosis',
+                      'Others (free text)'],
+    },
+    otherComplaints: {
+      type: String,
+    },
+    Q2: {
+      type: String,
+    },
+    Q3: {
       type: Boolean,
       label: "Provided with referral letter?"
+    },
+    Q4: {
+      type: String,
+    },
+    Q5: {
+      type: String,
     },
   }),
 
@@ -835,6 +872,10 @@ export const formSchemas = {
 
   "Pre-Women's Education Quiz":
   new SimpleSchema ({
+    breastCompleted: {
+      type: Boolean, 
+      label: "Breast Screening Completed?"
+    },
     S1: {
     type: String,
     allowedValues: ['1', '2', '3', '4', '5'],   
