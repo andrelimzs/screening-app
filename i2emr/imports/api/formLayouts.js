@@ -469,27 +469,28 @@ export const formLayouts = {
       <LongTextField name="nameDoc" />
     </Fragment>
   ),
-
-  "Pre-Women's Education Quiz":(
-    <Fragment>
-      Completed breast examination?
-      <BoolField name="breastCompleted" />
-      From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
-      <SelectField name="S1" />
-      Which of the following is/are normal symptom(s) of menstrual periods?
-      <SelectField name="Q1" />
-      All of the following are reasons for missed periods except
-      <SelectField name="Q2" />
-      Which of the following is true about menstruation
-      <SelectField name="Q3" />
-      When is the best time to do a breast self examination?
-      <SelectField name="Q4" />
-      How often should you do a breast self examination?
-      <SelectField name="Q5" />
-      You should go to the doctor if you notice:
-      <SelectField name="Q6" />
-    </Fragment>
-  ),
+  
+  "Women's Edu":{
+    "Pre-Women's Education Quiz":(
+      <Fragment>
+        Completed breast examination?
+        <BoolField name="breastCompleted" />
+        From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
+        <SelectField name="S1" />
+        Which of the following is/are normal symptom(s) of menstrual periods?
+        <SelectField name="Q1" />
+        All of the following are reasons for missed periods except
+        <SelectField name="Q2" />
+        Which of the following is true about menstruation
+        <SelectField name="Q3" />
+        When is the best time to do a breast self examination?
+        <SelectField name="Q4" />
+        How often should you do a breast self examination?
+        <SelectField name="Q5" />
+        You should go to the doctor if you notice:
+        <SelectField name="Q6" />
+      </Fragment>
+    ),
 
     "Post-Women's Education Quiz":(
       <Fragment>
@@ -583,7 +584,7 @@ export const formLayouts = {
         <SelectField name="Q7" />
       </Fragment>
     ),
-  }
+  },
 
   "Post-Screening Feedback":(
     <Fragment>
