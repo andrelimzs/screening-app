@@ -73,20 +73,23 @@ class Info extends Component {
     return (
       <Fragment>
         <Typography>
-          Name: {this.props.patientInfo.name}
+          Name: {typeof(this.props.patientInfo["Patient Info"]) !== "undefined"
+                  && this.props.patientInfo["Patient Info"].name}
         </Typography>
         <Divider />
         <Typography>
-          Age: {this.props.patientInfo.age}
+          Age: {typeof(this.props.patientInfo["Patient Info"]) !== "undefined"
+                && this.props.patientInfo["Patient Info"].age}
         </Typography>
         <Divider />
         <Typography>
-          Spoken Languages: {typeof this.props.patientInfo.spokenLanguages !== 'undefined' && 
-            this.props.patientInfo.spokenLanguages.join(", ")}
+          Spoken Languages: {typeof(this.props.patientInfo["Patient Info"]) !== "undefined"
+                            && typeof this.props.patientInfo["Patient Info"].spokenLanguages !== 'undefined' && 
+            this.props.patientInfo["Patient Info"].spokenLanguages.join(", ")}
         </Typography>
         <Divider />
         <Typography>
-          Drug Allergies: {this.props.patientInfo.drugAllergies}
+          Drug Allergies: {typeof(this.props.patientInfo["Patient Info"]) !== "undefined" && this.props.patientInfo["Patient Info"].drugAllergies}
         </Typography>
       </Fragment>
     );

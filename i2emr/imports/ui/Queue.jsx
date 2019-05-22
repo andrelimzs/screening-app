@@ -11,8 +11,6 @@ import Button from '@material-ui/core/Button';
 class Queue extends Component {
   takePatient(id, e) {
     e.preventDefault();
-
-    console.log(id);
     
     // If switching from another patient
     // reset previous patient before proceeding
