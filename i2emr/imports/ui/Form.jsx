@@ -89,10 +89,11 @@ class Form extends Component {
 
     } else {
       // Store data in array, so that it can be $push[ed] into mongo
-      const subSchemaName = Object.keys(formSchemas[this.props.station]);
       var formData = {};
-      formData[subSchemaName] = newForm;
+      formData[this.props.station] = newForm;
       formData.id = this.props.id;
+
+      console.log(formData);
 
       // if (!this.isMultipage || this.pageIndex >= Object.keys(formSchemas[this.props.station]).length - 1) {
       console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
