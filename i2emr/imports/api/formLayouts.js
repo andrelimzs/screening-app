@@ -61,25 +61,25 @@ export const formLayouts = {
       <Fragment>
         <h2>Diabetes Mellitus</h2>
         Has a western-trained doctor ever told you that you have diabetes?
-        <RadioField name="Q1" />
-          <DisplayIf condition={context => context.model.Q1 === "No"}><Fragment>
+        <RadioField name="patientProfile1" />
+          <DisplayIf condition={context => context.model.patientProfile1 === "No"}><Fragment>
             If no to Q1, when was the last time you checked your blood sugar?
-            <SelectField name="Q2" />
+            <SelectField name="patientProfile2" />
             If no to Q1, do you have any of the following symptoms? (select all that apply)
-            <AutoField name="Q3" />
+            <AutoField name="patientProfile3" />
           </Fragment></DisplayIf>
-          <DisplayIf condition={context => context.model.Q1 === "Yes"}><Fragment>
+          <DisplayIf condition={context => context.model.patientProfile1 === "Yes"}><Fragment>
             If yes to Q1, how often are you seeing your doctor for your diabetes?
-            <SelectField name="Q4" />
+            <SelectField name="patientProfile4" />
             If yes to Q1, are you taking any medication for your diabetes? If so, can you name them?
             <BoolField name="anyWesternMedicine" />
           </Fragment></DisplayIf>
           <DisplayIf condition={context => context.model.anyWesternMedicine === true}><Fragment>
             <TextField name="westernMedicine" />
             If yes to Western medicine, how many times do you forget to take your diabetes medication in a week?
-            <SelectField name="Q6" />
+            <SelectField name="patientProfile6" />
           </Fragment></DisplayIf>
-          <DisplayIf condition={context => context.model.Q1 === "Yes"}><Fragment>
+          <DisplayIf condition={context => context.model.patientProfile1 === "Yes"}><Fragment>
             <BoolField name="anyTraditionalMedicine" />
           </Fragment></DisplayIf>
           <DisplayIf condition= {context => context.model.anyTraditionalMedicine === true}><Fragment>
@@ -189,13 +189,9 @@ export const formLayouts = {
               If yes to 3a, when was your last review?
               <TextField name="ocularHisQ3c" />
               If yes to 3a, what was the condition?
-              <BoolField name="cataract" />
-              <BoolField name="glaucoma" />
-              <BoolField name="diabeticRetinopathy" />
-              <BoolField name="amd" />
-              <BoolField name="anyOtherOcularCond" />
+              <AutoField name="ocularHisQ3d" />
             </Fragment></DisplayIf>
-            <DisplayIf condition={context => context.model.anyOtherOcularCond === true}><Fragment>  
+            <DisplayIf condition={context => Array.isArray(context.model.ocularHisQ3d) && context.model.ocularHisQ3d.includes('Others (please specify)')}><Fragment> 
               <TextField name="otherOcularCond" />
             </Fragment></DisplayIf>          
             Have you had any falls in the last 1 year?
@@ -208,13 +204,9 @@ export const formLayouts = {
             </Fragment></DisplayIf>
             <DisplayIf condition={context => context.model.ocularHisQ5b === "No"}><Fragment>
               If no to 5b, why?
-              <BoolField name="concerns" />
-              <BoolField name="tooFar" />
-              <BoolField name="previousAdvice" />
-              <BoolField name="nothing" />
-              <BoolField name="anyOtherReasons" />
+              <AutoField name="ocularHisQ5c" />
             </Fragment></DisplayIf>
-            <DisplayIf condition={context => context.model.anyOtherReasons === true}><Fragment>
+            <DisplayIf condition={context => Array.isArray(context.model.ocularHisQ5c) && context.model.ocularHisQ5c.includes('Others (please specify)')}><Fragment>
               <TextField name="otherReasons" />
             </Fragment></DisplayIf>
 
@@ -323,48 +315,48 @@ export const formLayouts = {
       <Fragment>
       <h2>Height and Weight + Waist:Hip measurement</h2>
       Can we measure your height, weight, waist size and hip size?
-      <SelectField name="Q1" />
+      <SelectField name="stationSelect1" />
       <h2>Blood glucose and Hb</h2>
       Can we check your blood sugar? This will be done by pricking your finger to get a small drop of blood
-      <SelectField name="Q2" />
+      <SelectField name="stationSelect2" />
       Can we check if you have anemia? This will be done by pricking your finger to get a small drop of blood
-      <SelectField name="Q3" />
+      <SelectField name="stationSelect3" />
       <h2>BP</h2>
       Can we check your blood pressure?
-      <SelectField name="Q4" />
+      <SelectField name="stationSelect4" />
       <h2>Phlebotomy (for patients aged 40 years old and above)</h2>
       For patients aged 40 years old and above, Do you have the following conditions?
-      <AutoField name="Q5" />
-      <DisplayIf condition={context => Array.isArray(context.model.Q5) && context.model.Q5.length >= 2}><Fragment>
+      <AutoField name="stationSelect5" />
+      <DisplayIf condition={context => Array.isArray(context.model.stationSelect5) && context.model.stationSelect5.length >= 2}><Fragment>
         Can we do a blood test to see if you have high cholesterol? A blood sample will be taken by a trained staff. This will then be sent to the lab, and a report will be mailed to you after some time
-        <SelectField name="Q6" />
+        <SelectField name="stationSelect6" />
       </Fragment></DisplayIf>
       <h2>Pap Smear</h2>
       Are you married (or have you ever been married)?
-      <SelectField name="Q7" />
-      <DisplayIf condition={context => context.model.Q7 === "Yes"}><Fragment>
+      <SelectField name="stationSelect7" />
+      <DisplayIf condition={context => context.model.stationSelect7 === "Yes"}><Fragment>
         If yes to Q7, have you done a Pap smear in the past 3 years?
-        <SelectField name="Q8" />
+        <SelectField name="stationSelect8" />
       </Fragment></DisplayIf>
-      <DisplayIf condition={context => context.model.Q8 === "No"}><Fragment>
+      <DisplayIf condition={context => context.model.stationSelect8 === "No"}><Fragment>
         If no to Q8, would you want to undergo a free Pap smear today to check for cervical cancer?
-        <SelectField name="Q9" />
+        <SelectField name="stationSelect9" />
       </Fragment></DisplayIf>
       <h2>Breast</h2>
       Would you want to undergo a breast examination for breast cancer today? 
-      <SelectField name="Q10" />
+      <SelectField name="stationSelect10" />
       <h2>Women's Edu</h2>
       Can we teach you about women's health? For adults, we will be sharing about menstrual health and breast self examinations. For girls aged 10-18 years old, we will be sharing about menstrual health only.
-      <SelectField name="Q11" />
+      <SelectField name="stationSelect11" />
       <h2>Doctors' consult</h2>
       Would you like to see a doctor today? (You will be asked to see the doctor if your test results are abnormal, but would you otherwise want to see the doctor?)
-      <SelectField name="Q12" />
+      <SelectField name="stationSelect12" />
       <h2>Eye screening</h2>
       Can we check your eyes/vision?
-      <SelectField name="Q13" />
+      <SelectField name="stationSelect13" />
       <h2>Education</h2>
       Can we teach you about healthy lifestyles and how to prevent common diseases like diabetes and high blood pressure?
-      <SelectField name="Q14" />
+      <SelectField name="stationSelect14" />
       </Fragment>
     ),
   },
@@ -381,15 +373,19 @@ export const formLayouts = {
       <TextField name="waist" />
       <br />
       <TextField name="hip" />
+      <br />
+      <h2>Overview</h2>
+      <BoolField name="docConsultForHW" />
     </Fragment>
   ),
 
-  "CBG & Hb":(
+  "Blood Glucose & Hb":(
     <Fragment>
       <TextField name="cbg" />
       <br />
       <TextField name="hb" />
       <br />
+      <BoolField name="docConsultForBloodGlucAndHb" />
     </Fragment>
   ),
 
@@ -402,6 +398,8 @@ export const formLayouts = {
   "Pap Smear":(
     <Fragment>
       <BoolField name="papCompleted" />
+      <LongTextField name="papNotes" />
+      <BoolField name="docConsultForPap" />
     </Fragment>
   ),
     
@@ -422,24 +420,25 @@ export const formLayouts = {
       <div><TextField name="bp2Dia" /></div>
       <div><TextField name="bp3Sys" /></div>
       <div><TextField name="bp3Dia" /></div>
+      <div><BoolField name="docConsultForBP" /></div>
     </Fragment>
   ),
 
   "Doctors' Consult":(
     <Fragment>
       Chief complaint
-      <SelectField name="Q1" />
-      <DisplayIf condition={context => Array.isArray(context.model.Q1) && context.model.Q1.includes('Others (free text)')}><Fragment>
+      <SelectField name="docConsult1" />
+      <DisplayIf condition={context => Array.isArray(context.model.docConsult1) && context.model.docConsult1.includes('Others (free text)')}><Fragment>
         Other complaints
         <TextField name="otherComplaints" />
       </Fragment></DisplayIf>
       Doctors' notes/advice
-      <LongTextField name="Q2" />
-      <BoolField name="Q3" />
+      <LongTextField name="docConsult2" />
+      <BoolField name="docConsult3" />
       Referral details
-      <LongTextField name="Q4" />
+      <LongTextField name="docConsult4" />
       Name of doctor
-      <TextField name="Q5" />
+      <TextField name="docConsult5" />
     </Fragment>
   ),
 
@@ -477,38 +476,38 @@ export const formLayouts = {
         Completed breast examination?
         <BoolField name="breastCompleted" />
         From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
-        <SelectField name="S1" />
+        <SelectField name="preWomenEduSurvey1" />
         Which of the following is/are normal symptom(s) of menstrual periods?
-        <SelectField name="Q1" />
+        <SelectField name="preWomenEduQ1" />
         All of the following are reasons for missed periods except
-        <SelectField name="Q2" />
+        <SelectField name="preWomenEduQ2" />
         Which of the following is true about menstruation
-        <SelectField name="Q3" />
+        <SelectField name="preWomenEduQ3" />
         When is the best time to do a breast self examination?
-        <SelectField name="Q4" />
+        <SelectField name="preWomenEduQ4" />
         How often should you do a breast self examination?
-        <SelectField name="Q5" />
+        <SelectField name="preWomenEduQ5" />
         You should go to the doctor if you notice:
-        <SelectField name="Q6" />
+        <SelectField name="preWomenEduQ6" />
       </Fragment>
     ),
 
     "Post-Women's Education Quiz":(
       <Fragment>
         From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
-        <SelectField name="S1" />
+        <SelectField name="postWomenEduSurvey1" />
         Which of the following is/are normal symptom(s) of menstrual periods?
-        <SelectField name="Q1" />
+        <SelectField name="postWomenEduQ1" />
         All of the following are reasons for missed periods except
-        <SelectField name="Q2" />
+        <SelectField name="postWomenEduQ2" />
         Which of the following is true about menstruation
-        <SelectField name="Q3" />
+        <SelectField name="postWomenEduQ3" />
         When is the best time to do a breast self examination?
-        <SelectField name="Q4" />
+        <SelectField name="postWomenEduQ4" />
         How often should you do a breast self examination?
-        <SelectField name="Q5" />
+        <SelectField name="postWomenEduQ5" />
         You should go to the doctor if you notice:
-        <SelectField name="Q6" />
+        <SelectField name="postWomenEduQ6" />
       </Fragment>
     ),
   },
@@ -518,35 +517,35 @@ export const formLayouts = {
       <Fragment>
         From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
         1 being not at all, and 5 being a lot
-        <SelectField name="S1" />
+        <SelectField name="preEduSurvey1" />
         From a scale of 1-5, how much do you know about healthy lifestyle and diet?
         1 being not at all, and 5 being a lot
-        <SelectField name="S2" />
+        <SelectField name="preEduSurvey2" />
         From a scale of 1-5, how much do you know about cancer risk factors?
         1 being not at all, and 5 being a lot
-        <SelectField name="S3" />
+        <SelectField name="preEduSurvey3" />
         From a scale of 1-5, how much do you know about good eyecare habits?
         1 being not at all, and 5 being a lot
-        <SelectField name="S4" />
+        <SelectField name="preEduSurvey4" />
       </Fragment>
     ),
 
     "Pre-Education Quiz":(
       <Fragment>
         You are at higher risk of developing high cholesterol if you
-        <SelectField name="Q1" />
+        <SelectField name="preEduQuiz1" />
         All of the following are complications of diabetes except
-        <SelectField name="Q2" />
+        <SelectField name="preEduQuiz2" />
         How much exercise should we get a week?
-        <SelectField name="Q3" />
+        <SelectField name="preEduQuiz3" />
         What makes up a healthy plate?
-        <SelectField name="Q4" />
+        <SelectField name="preEduQuiz4" />
         Which of the following is the healthier choice to make?
-        <SelectField name="Q5" />
+        <SelectField name="preEduQuiz5" />
         Which of the following is a cancer risk factor(s)?
-        <SelectField name="Q6" />
+        <SelectField name="preEduQuiz6" />
         Which of the following is not considered good eyecare habits?
-        <SelectField name="Q7" />
+        <SelectField name="preEduQuiz7" />
       </Fragment>
     ),
 
@@ -554,68 +553,68 @@ export const formLayouts = {
       <Fragment>
         From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
         1 being not at all, and 5 being a lot
-        <SelectField name="S1" />
+        <SelectField name="postEduSurvey1" />
         From a scale of 1-5, how much do you know about healthy lifestyle and diet?
         1 being not at all, and 5 being a lot
-        <SelectField name="S2" />
+        <SelectField name="postEduSurvey2" />
         From a scale of 1-5, how much do you know about cancer risk factors?
         1 being not at all, and 5 being a lot
-        <SelectField name="S3" />
+        <SelectField name="postEduSurvey3" />
         From a scale of 1-5, how much do you know about good eyecare habits?
         1 being not at all, and 5 being a lot
-        <SelectField name="S4" />
+        <SelectField name="postEduSurvey4" />
       </Fragment>
     ),
 
     "Post-Education Quiz":(
       <Fragment>
         You are at higher risk of developing high cholesterol if you
-        <SelectField name="Q1" />
+        <SelectField name="postEduQuiz1" />
         All of the following are complications of diabetes except
-        <SelectField name="Q2" />
+        <SelectField name="postEduQuiz2" />
         How much exercise should we get a week?
-        <SelectField name="Q3" />
+        <SelectField name="postEduQuiz3" />
         What makes up a healthy plate?
-        <SelectField name="Q4" />
+        <SelectField name="postEduQuiz4" />
         Which of the following is the healthier choice to make?
-        <SelectField name="Q5" />
+        <SelectField name="postEduQuiz5" />
         Which of the following is a cancer risk factor(s)?
-        <SelectField name="Q6" />
+        <SelectField name="postEduQuiz6" />
         Which of the following is not considered good eyecare habits?
-        <SelectField name="Q7" />
+        <SelectField name="postEduQuiz7" />
       </Fragment>
     ),
 
     "Post-Screening Feedback":(
       <Fragment>
         I have had a good experience at the screening
-        <SelectField name="Q1" />
+        <SelectField name="postScreeningFeedback1" />
         I came for the screening because: (Select all that apply)
-        <AutoField name="Q2" />
+        <AutoField name="postScreeningFeedback2" />
         I know that regular health screening is important
-        <SelectField name="Q3" />
+        <SelectField name="postScreeningFeedback3" />
         I know that it is important to detect chronic diseases and cancers early
-        <SelectField name="Q4" />
+        <SelectField name="postScreeningFeedback4" />
         I am willing to take the trouble to attend health screenings
-        <SelectField name="Q5" />
+        <SelectField name="postScreeningFeedback5" />
         I am willing to attend my follow-up sessions
-        <SelectField name="Q6" />
+        <SelectField name="postScreeningFeedback6" />
         The student volunteers attended to my needs
-        <SelectField name="Q7" />
+        <SelectField name="postScreeningFeedback7" />
         The student volunteers were well-trained
-        <SelectField name="Q8" />
+        <SelectField name="postScreeningFeedback8" />
         The waiting time to enter the screening was reasonable
-        <SelectField name="Q9" />
+        <SelectField name="postScreeningFeedback9" />
         The waiting time for each station was reasonable
-        <SelectField name="Q10" />
+        <SelectField name="postScreeningFeedback10" />
         The flow of the screening was easy to follow
-        <SelectField name="Q11" />
+        <SelectField name="postScreeningFeedback11" />
         I would recommend my family/friends to attend this screening
-        <SelectField name="Q12" />
+        <SelectField name="postScreeningFeedback12" />
         What encouraged you to come for our event? Select all that apply
-        <AutoField name="Q13" />
+        <AutoField name="postScreeningFeedback13" />
         How often do you attend a health screening?
-        <SelectField name="Q14" />
+        <SelectField name="postScreeningFeedback14" />
       </Fragment>
     ),
   },
