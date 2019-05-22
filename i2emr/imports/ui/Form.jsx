@@ -51,12 +51,7 @@ class Form extends Component {
 
   handleSubmit(newForm) {
     // Insert/update patientinfo database
-    if (this.props.station == "Registration") {
-      // console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
-
-      Meteor.call('patientinfo.insert', newForm);
-
-    } else if (this.isMultipage) {
+    if (this.isMultipage) {
       if (this.state.pageIndex < Object.keys(formSchemas[this.props.station]).length - 1) {
         // If not at last subpage
         // Concat and store multipage form data
@@ -72,10 +67,13 @@ class Form extends Component {
       } else {
         this.multiData.id = this.props.id;
 
-        console.log(this.multiData);
-
         // On last subpage
-        Meteor.call('patientinfo.update', this.multiData);
+        if (this.props.station == "Registration") {
+          Meteor.call('patientinfo.insert', this.multiData);
+        } else {
+          Meteor.call('patientinfo.update', this.multiData);
+          Session.set('currentPatient',null);
+        }
         // Empty data for multipage form
         this.multiData = {};
         // Reset page index
@@ -84,10 +82,6 @@ class Form extends Component {
           pageIndex: 0,
           tabValue: 0,
         });
-
-        Session.set('currentPatient',null);
-
-        console.log("Finished multipage");
       }
 
     } else {
