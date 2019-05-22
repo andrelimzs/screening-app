@@ -45,8 +45,6 @@ class Info extends Component {
   };
 
   makeInfoEntry(field) {
-    // 
-    // console.log(field);
     return (
       <Fragment>
         <Button variant="text" fullWidth={true} onClick={this.editField.bind(this,field)}>
@@ -104,9 +102,30 @@ class Info extends Component {
     // Also filter out fields that are multiple select
     previousInfo = previousInfo.filter(field => !fieldsToRemove.includes(field[0]) && !Array.isArray(field[1]));
 
-    const listInfo = previousInfo.map(
-      field => this.makeInfoEntry(field)
-    );
+    var listInfo = [];
+    var i;
+    for (i = 0; i < previousInfo.length; i++) {
+      const field = previousInfo[i];
+
+      // All forms are objects
+      if (field[1].__proto__.constructor.name === "Object") {
+        // Convert object to array
+        const individualForm = Object.entries(field[1]);
+
+        // Map each field in the form to display
+        const subFieldInfo = individualForm.map(
+          field => this.makeInfoEntry(field)
+        );
+        listInfo.push(subFieldInfo);
+      } else {
+        // Display individual field directly
+        listInfo.push(this.makeInfoEntry(field));
+      }
+    }
+
+    // const listInfo = previousInfo.map(
+    //   field => this.makeInfoEntry(field)
+    // );
 
     return (
       <div>
