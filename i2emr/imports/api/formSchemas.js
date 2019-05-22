@@ -293,30 +293,16 @@ export const formSchemas = {
         type: String,
         optional: true,
       },
-      cataract: {
-        type: Boolean,
-        optional: true,
-        label: "Cataract",
+      ocularHisQ3d: {
+        type: Array,
       },
-      glaucoma: {
-        type: Boolean,
-        optional: true,
-        label: "Glaucoma",
-      },
-      diabeticRetinopathy: {
-        type: Boolean,
-        optional: true,
-        label: "Diabetic Retinopathy",
-      },
-      amd: {
-        type: Boolean,
-        optional: true,
-        label: "Age-related macular degeneration",
-      },
-      anyOtherOcularCond: {
-        type: Boolean,
-        optional: true,
-        label: "Others (please specify)",
+      'ocularHisQ3d.$': {
+        type: String,
+        allowedValues: ['Cataract', 
+                        'Glaucoma', 
+                        'Diabetic Retinopathy', 
+                        'Age-related Macular Degeneration',
+                        'Others (please specify)'],
       },
       otherOcularCond:{
         type: String,
@@ -335,30 +321,18 @@ export const formSchemas = {
         optional: true,
         allowedValues: ['Yes','No'],
       },
-      concerns: {
-        type: Boolean,
+      ocularHisQ5c: {
+        type: Array,
         optional: true,
-        label: "Concerns about finances",
       },
-      tooFar: {
-        type: Boolean,
+      'ocularHisQ5c.$': {
+        type: String,
         optional: true,
-        label: "Too far away/difficult to get to the clinic/hospital",
-      },
-      previousAdvice: {
-        type: Boolean,
-        optional: true,
-        label: "Previously told by eye specialist that nothing can be done"
-      },
-      nothing: {
-        type: Boolean,
-        optional: true,
-        label: "Nothing can be done as it is part of ageing",
-      },
-      anyOtherReasons: {
-        type: Boolean,
-        optional: true,
-        label: "Others (please specify)",
+        allowedValues: ['Concerns about finances',
+                        'Too far away/difficult to get to the clinic/hospital',
+                        'Previously told by eye specialist that nothing can be done',
+                        'Nothing can be done as it is part of ageing',
+                        'Others (please specify)'],
       },
       otherReasons: {
         type: String,
@@ -484,6 +458,7 @@ export const formSchemas = {
       },
       student: {
         type: Boolean,
+        optional: true,
         label: "Student",
       },
       housewife: {
@@ -716,13 +691,12 @@ export const formSchemas = {
       label: "Hip circumference (cm)",
     },
     docConsultForHW: {
-      type: String,
-      allowedValues: ['Yes','No'],
-      label: "Doctors' consult required?",
+      type: Boolean,
+      label: "Doctors consult required?",
     },
   }),
 
-  "CBG & Hb":
+  "Blood Glucose & Hb":
   new SimpleSchema({
     cbg: {
       type: SimpleSchema.Integer,
@@ -734,7 +708,11 @@ export const formSchemas = {
       type: Number,
       min: 4,
       max: 40,
-      label: "Hemoglobin (g/dL)"
+      label: "Hemoglobin (g/dL)",
+    },
+    docConsultForBloodGlucAndHb:{
+      type: Boolean,
+      label: "Doctors consult required?",
     },
   }),
 
@@ -742,7 +720,7 @@ export const formSchemas = {
   new SimpleSchema({
     phleboCompleted: {
       type: Boolean,
-      label: "Completed?"
+      label: "Phlebotomy completed?"
     },
   }),
 
@@ -750,7 +728,16 @@ export const formSchemas = {
   new SimpleSchema({
     papCompleted: {
       type: Boolean,
-      label: "Completed?"
+      label: "Pap smear completed?"
+    },
+    papNotes:{
+      type: String,
+      optional: true,
+      label: "Notes (if any)",
+    },
+    docConsultForPap: {
+      type: Boolean,
+      label: "Doctors consult required?",
     },
   }),
 
@@ -802,15 +789,21 @@ export const formSchemas = {
     },
     bp3Sys: {
       type: SimpleSchema.Integer,
+      optional: true,
       min: 50,
       max: 300,
       label: "3rd Systolic blood pressure"
     },
     bp3Dia: {
       type: SimpleSchema.Integer,
+      optional: true,
       min: 20,
       max: 200,
       label: "3rd Diastolic blood pressure"
+    },
+    docConsultForBP: {
+      type: Boolean,
+      label: "Doctors consult required?",
     },
   }),
 
@@ -965,7 +958,7 @@ export const formSchemas = {
       },
         preWomenEduQ1: {
           type: String,
-          allowedValues: ['1', '2', '3', '4', '5'],   
+          allowedValues: ['Abdominal cramps','Acne','Headache','All of the above'], 
           },
         preWomenEduQ2: {
           type: String,
