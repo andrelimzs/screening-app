@@ -40,9 +40,6 @@ Meteor.methods({
 
     // Assign unique id
     data.id = Patientinfo.find({}).count() + 1;
-    
-    console.log("Station queue");
-    console.log(data.stationQueue);
 
     Patientinfo.insert(data);
   },
@@ -55,10 +52,9 @@ Meteor.methods({
     const stationQueue = Patientinfo.find({id:id}).fetch()[0].stationQueue;
     
     // Proceed to next station
+    const nextStation = (typeof(stationQueue[0]) !== "undefined") ? stationQueue[0] : "Done";
     stationQueue.shift();
-
-    const nextStation = stationQueue[0];
-
+    
     Patientinfo.update({id:id},{$set:{nextStation:nextStation,busy:false,stationQueue:stationQueue}, $push:data});
 
     // console.log(Patientinfo.findOne({id:id}));

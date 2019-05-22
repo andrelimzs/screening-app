@@ -65,6 +65,9 @@ class Form extends Component {
 
         console.log("Next subpage");
       } else {
+        const subSchemaName = Object.keys(formSchemas[this.props.station])[this.state.pageIndex];
+        this.multiData[subSchemaName] = newForm;
+
         this.multiData.id = this.props.id;
 
         // On last subpage
@@ -85,13 +88,18 @@ class Form extends Component {
       }
 
     } else {
-      newForm.id = this.props.id;      
+      // Store data in array, so that it can be $push[ed] into mongo
+      var formData = {};
+      formData[this.props.station] = newForm;
+      formData.id = this.props.id;
+
+      console.log(formData);
 
       // if (!this.isMultipage || this.pageIndex >= Object.keys(formSchemas[this.props.station]).length - 1) {
       console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
       newForm.nextStation = this.stations[this.stations.indexOf(this.props.station)+1];
 
-      Meteor.call('patientinfo.update', newForm);
+      Meteor.call('patientinfo.update', formData);
 
       Session.set('currentPatient',null);
     }

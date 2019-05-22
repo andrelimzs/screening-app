@@ -15,53 +15,63 @@ function addForm(station, formData) {
 }
 
 Meteor.startup(() => {
-  // Patientinfo.remove({});
-  // Stationforms.remove({});
+  Patientinfo.remove({});
+  Stationforms.remove({});
 
   if (Patientinfo.find().count() === 0) {
     Patientinfo.insert({
-      name: 'Tom',
       id: '1',
-      gender: 'male',
-      age: '24',
-      contactNumber: '12344321',
-      spokenLanguages: ['English', 'Others'],
-      writtenLanguages: ['English'],
-      address: 'Baker Street',
-      anyDrugAllergies: 'Yes',
-      drugAllergies: 'Panadol',
-      stationQueue:["Height & weight", "CBG & Hb", "Phlebotomy", "Pap Smear", "Breast Exam", "Blood Pressure", "Doctors' Consult", "Eye Screening", "Women's Edu", "Education"],
+      "Patient Info":{
+        name: 'Tom',
+        gender: 'male',
+        age: '24',
+        contactNumber: '12344321',
+        spokenLanguages: ['English', 'Others'],
+        writtenLanguages: ['English'],
+        address: 'Baker Street',
+        anyDrugAllergies: 'Yes',
+        drugAllergies: 'Panadol',
+      },
+      stationQueue:["CBG & Hb", "Phlebotomy", "Pap Smear", "Breast Exam",
+                    "Blood Pressure", "Doctors' Consult", "Eye Screening",
+                    "Women's Edu", "Education"],
       nextStation: 'Height & weight',
       busy:false,
       createdAt: new Date()
     });
     Patientinfo.insert({
-      name: 'Gary',
       id: '2',
-      gender: 'male',
-      age: '24',
-      contactNumber: '12344321',
-      spokenLanguages: ['English', 'Others'],
-      writtenLanguages: ['English'],
-      address: 'Baker Street',
-      anyDrugAllergies: 'No',
-      stationQueue: ["Height & weight", "CBG & Hb", "Phlebotomy", "Pap Smear", "Breast Exam", "Blood Pressure", "Doctors' Consult", "Eye Screening", "Women's Edu", "Education"],
+      "Patient Info":{
+        name: 'Gary',
+        gender: 'male',
+        age: '24',
+        contactNumber: '12344321',
+        spokenLanguages: ['English', 'Others'],
+        writtenLanguages: ['English'],
+        address: 'Baker Street',
+        anyDrugAllergies: 'No',
+      },
+      stationQueue:["CBG & Hb", "Phlebotomy", "Pap Smear", "Breast Exam",
+                    "Blood Pressure", "Doctors' Consult","Eye Screening",
+                    "Women's Edu", "Education"],
       nextStation: 'Height & weight',
       busy:false,
       createdAt: new Date()
     });
     Patientinfo.insert({
-      name: 'Reyansh Aditya Vihaan',
       id: '3',
-      gender: 'male',
-      age: '24',
-      contactNumber: '12344321',
-      spokenLanguages: ['English', 'Others'],
-      writtenLanguages: ['English'],
-      address: 'Baker Street',
-      anyDrugAllergies: 'Yes',
-      drugAllergies: 'Panadol',
-      stationQueue: ['Done'],
+      "Patient Info":{
+        name: 'Reyansh Aditya Vihaan',
+        gender: 'male',
+        age: '24',
+        contactNumber: '12344321',
+        spokenLanguages: ['English', 'Others'],
+        writtenLanguages: ['English'],
+        address: 'Baker Street',
+        anyDrugAllergies: 'Yes',
+        drugAllergies: 'Panadol',
+      },
+      stationQueue: [],
       nextStation: 'Education',
       busy:false,
       createdAt: new Date()
