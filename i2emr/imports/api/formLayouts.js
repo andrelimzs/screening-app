@@ -204,13 +204,9 @@ export const formLayouts = {
             </Fragment></DisplayIf>
             <DisplayIf condition={context => context.model.ocularHisQ5b === "No"}><Fragment>
               If no to 5b, why?
-              <BoolField name="concerns" />
-              <BoolField name="tooFar" />
-              <BoolField name="previousAdvice" />
-              <BoolField name="nothing" />
-              <BoolField name="anyOtherReasons" />
+              <AutoField name="ocularHisQ5c" />
             </Fragment></DisplayIf>
-            <DisplayIf condition={context => context.model.anyOtherReasons === true}><Fragment>
+            <DisplayIf condition={context => Array.isArray(context.model.ocularHisQ5c) && context.model.ocularHisQ5c.includes('Others (please specify)')}><Fragment>
               <TextField name="otherReasons" />
             </Fragment></DisplayIf>
 
@@ -402,6 +398,8 @@ export const formLayouts = {
   "Pap Smear":(
     <Fragment>
       <BoolField name="papCompleted" />
+      <LongTextField name="papNotes" />
+      <BoolField name="docConsultForPap" />
     </Fragment>
   ),
     
@@ -422,7 +420,7 @@ export const formLayouts = {
       <div><TextField name="bp2Dia" /></div>
       <div><TextField name="bp3Sys" /></div>
       <div><TextField name="bp3Dia" /></div>
-      
+      <div><BoolField name="docConsultForBP" /></div>
     </Fragment>
   ),
 

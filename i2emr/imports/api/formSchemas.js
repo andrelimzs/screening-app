@@ -321,30 +321,18 @@ export const formSchemas = {
         optional: true,
         allowedValues: ['Yes','No'],
       },
-      concerns: {
-        type: Boolean,
+      ocularHisQ5c: {
+        type: Array,
         optional: true,
-        label: "Concerns about finances",
       },
-      tooFar: {
-        type: Boolean,
+      'ocularHisQ5c.$': {
+        type: String,
         optional: true,
-        label: "Too far away/difficult to get to the clinic/hospital",
-      },
-      previousAdvice: {
-        type: Boolean,
-        optional: true,
-        label: "Previously told by eye specialist that nothing can be done"
-      },
-      nothing: {
-        type: Boolean,
-        optional: true,
-        label: "Nothing can be done as it is part of ageing",
-      },
-      anyOtherReasons: {
-        type: Boolean,
-        optional: true,
-        label: "Others (please specify)",
+        allowedValues: ['Concerns about finances',
+                        'Too far away/difficult to get to the clinic/hospital',
+                        'Previously told by eye specialist that nothing can be done',
+                        'Nothing can be done as it is part of ageing',
+                        'Others (please specify)'],
       },
       otherReasons: {
         type: String,
@@ -732,7 +720,7 @@ export const formSchemas = {
   new SimpleSchema({
     phleboCompleted: {
       type: Boolean,
-      label: "Completed?"
+      label: "Phlebotomy completed?"
     },
   }),
 
@@ -740,7 +728,16 @@ export const formSchemas = {
   new SimpleSchema({
     papCompleted: {
       type: Boolean,
-      label: "Completed?"
+      label: "Pap smear completed?"
+    },
+    papNotes:{
+      type: String,
+      optional: true,
+      label: "Notes (if any)",
+    },
+    docConsultForPap: {
+      type: Boolean,
+      label: "Doctors consult required?",
     },
   }),
 
@@ -803,6 +800,10 @@ export const formSchemas = {
       min: 20,
       max: 200,
       label: "3rd Diastolic blood pressure"
+    },
+    docConsultForBP: {
+      type: Boolean,
+      label: "Doctors consult required?",
     },
   }),
 
