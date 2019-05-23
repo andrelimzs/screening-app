@@ -34,7 +34,7 @@ const styles = theme => ({
 class App extends Component {
   state = {
     currentPatient: "",
-    links: Object.keys(formLayouts),
+    links: Object.keys(formLayouts).concat(["Finished Patients"]),
   }
 
   selectStation(newStation, e) {
@@ -87,7 +87,13 @@ class App extends Component {
               spacing={16}
             >
               <Grid item xs={4}>
-                <Form station={station} id={Session.get('currentPatient')} />
+                {station !== "Finished Patients" && 
+                  <Form station={station} id={Session.get('currentPatient')}
+                        stationQueue={this.props.patientInfo.stationQueue} patientInfo={this.props.patientInfo}/>
+                }
+                {station === "Finished Patients" && typeof(this.props.patientList) !== "undefined" &&
+                  console.log(Patientinfo.find({}).fetch())
+                }
               </Grid>
               
               <Grid item xs={4}>

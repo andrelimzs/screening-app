@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
@@ -7,6 +7,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 import AutoForm from 'uniforms-material/AutoForm';
 import { formSchemas } from '/imports/api/formSchemas';
@@ -40,17 +43,15 @@ class Form extends Component {
     this.oldID = null;
     this.multiData = {};
 
-    this.state = {pageIndex: 0};
+    this.state = {
+      pageIndex: 0,
+      stationQueue: null,
+    };
   }
 
   handleSubmit(newForm) {
     // Insert/update patientinfo database
-    if (this.props.station == "Registration") {
-      // console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
-
-      Meteor.call('patientinfo.insert', newForm);
-
-    } else if (this.isMultipage) {
+    if (this.isMultipage) {
       if (this.state.pageIndex < Object.keys(formSchemas[this.props.station]).length - 1) {
         // If not at last subpage
         // Concat and store multipage form data
@@ -64,49 +65,79 @@ class Form extends Component {
 
         console.log("Next subpage");
       } else {
+        const subSchemaName = Object.keys(formSchemas[this.props.station])[this.state.pageIndex];
+        this.multiData[subSchemaName] = newForm;
+
         this.multiData.id = this.props.id;
 
-        console.log(this.multiData);
-
         // On last subpage
-        Meteor.call('patientinfo.update', this.multiData);
+        if (this.props.station == "Registration") {
+          Meteor.call('patientinfo.insert', this.multiData);
+        } else {
+          Meteor.call('patientinfo.update', this.multiData);
+          Session.set('currentPatient',null);
+        }
         // Empty data for multipage form
         this.multiData = {};
         // Reset page index
         // this.pageIndex = 0;
         this.setState({
-          pageIndex: 0
+          pageIndex: 0,
+          tabValue: 0,
         });
-
-        Session.set('currentPatient',null);
-
-        console.log("Finished multipage");
       }
 
     } else {
-      newForm.id = this.props.id;      
+      // Store data in array, so that it can be $push[ed] into mongo
+      var formData = {};
+      formData[this.props.station] = newForm;
+      formData.id = this.props.id;
 
       // if (!this.isMultipage || this.pageIndex >= Object.keys(formSchemas[this.props.station]).length - 1) {
       console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
       newForm.nextStation = this.stations[this.stations.indexOf(this.props.station)+1];
 
-      Meteor.call('patientinfo.update', newForm);
+      Meteor.call('patientinfo.update', formData);
 
       Session.set('currentPatient',null);
     }
   }
 
-  render() {
-    // // On ID change => Reset page index
-    // if (this.isMultipage && this.oldID != this.props.id) {
-    //   this.oldID = this.props.id;
-    //   // this.pageIndex = 0;
-    //   this.setState({
-    //     pageIndex: 0
-    //   });
-    //   console.log("New patient");
-    // }
+  handleTabChange = (event, value) => {
+    this.setState({ tabValue:value });
+  };
 
+  handleSkipStation(stationToSkip, event) {
+    if (confirm("Confirm skip " + stationToSkip + "?")) {
+      Meteor.call('patientinfo.skipStation', this.props.id, this.props.id.station, stationToSkip);
+    }
+  }
+
+  makeStationEntry(station) {
+    // onClick={this.editField.bind(this,field)}
+    return (
+      <Fragment>
+        <Button variant="text" fullWidth={true} onClick={this.handleSkipStation.bind(this,station)}>
+          {station}
+        </Button>
+      </Fragment>
+    );
+  }
+
+  getStationList() {
+    // console.log(this.props.stationQueue);
+    const newStationQueue = this.props.stationQueue.map(
+      station => this.makeStationEntry(station)
+    );
+    
+    return (
+      <div>
+        {newStationQueue}
+      </div>
+    );
+  }
+
+  render() {
     // Index into appropriate form for multipage forms
     var currentFormSchema = formSchemas[this.props.station];
     var currentFormLayout = formLayouts[this.props.station];
@@ -117,7 +148,7 @@ class Form extends Component {
     
     const newForm = () => (
       <ClearableAutoForm schema={currentFormSchema} onSubmit={this.handleSubmit} >
-        {currentFormLayout}
+        {currentFormLayout(this.props.patientInfo)}
         <ErrorsField />
         <div>
           <SubmitField inputRef={(ref) => this.formRef = ref} />
@@ -125,9 +156,19 @@ class Form extends Component {
       </ClearableAutoForm>
     );
     
+    // Replace undefined with default value of 0
+    const tabValue = (this.state.tabValue === undefined) ? 0 : this.state.tabValue;
+    
     return (
       <Paper elevation={2} p={0} m={0}>
-        {newForm()}
+        <AppBar position="static" color="default">
+          <Tabs value={tabValue} onChange={this.handleTabChange}>
+            <Tab label="Form" />
+            <Tab label="Stations" />
+          </Tabs>
+        </AppBar>
+        {tabValue === 0 && newForm()}
+        {tabValue === 1 && typeof(this.props.stationQueue) !== "undefined" && this.getStationList()}
       </Paper>
     );
   }

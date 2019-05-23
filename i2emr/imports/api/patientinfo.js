@@ -18,16 +18,23 @@ Meteor.methods({
   'patientinfo.insert'(data) {
     // Determine stations to visit based on:
     // Based on gender & age
-    const isMale = (data.gender === "male");
-    const isChild = (data.age <= 18);
+    const isMale = (data["Patient Info"].gender === "male");
+    const isChild = (data["Patient Info"].age <= 18);
 
     // Stations to remove
-    const stationsToRemove = ["Registration"];
+    var stationsToRemove = ["Registration"];
     if (isMale) {
       stationsToRemove.push("Pap Smear", "Breast Exam", "Women's Edu");
     }
     if (isChild) {
       stationsToRemove.push("Blood Pressure", "Phlebotomy", "Pap Smear", "Breast Exam");
+    }
+    // Remove opt-out stations
+    console.log(data["Station Selection"]);
+    for (var station in data["Station Selection"]) {
+      if (data["Station Selection"][station] === "No") {
+        stationsToRemove.push(station);
+      }
     }
 
     // Construct station queue by filtering out stations to exclude
@@ -40,9 +47,6 @@ Meteor.methods({
 
     // Assign unique id
     data.id = Patientinfo.find({}).count() + 1;
-    
-    console.log("Station queue");
-    console.log(data.stationQueue);
 
     Patientinfo.insert(data);
   },
@@ -52,19 +56,18 @@ Meteor.methods({
     delete data.nextStation;
 
     // Retrieve station queue
-    const stationQueue = Patientinfo.find({id:id}).fetch()[0].stationQueue;
+    var stationQueue = Patientinfo.find({id:id}).fetch()[0].stationQueue;
     
     // Proceed to next station
     stationQueue.shift();
-
-    const nextStation = stationQueue[0];
-
+    const nextStation = (typeof(stationQueue[0]) !== "undefined") ? stationQueue[0] : "Done";
+    
     Patientinfo.update({id:id},{$set:{nextStation:nextStation,busy:false,stationQueue:stationQueue}, $push:data});
 
     // console.log(Patientinfo.findOne({id:id}));
   },
   'patientinfo.setBusy'(id, value) {
-    const patientStatus = Patientinfo.findOne({id:id}).busy;
+    const patientStatus = (Patientinfo.findOne({id:id}) !== "undefined") ? Patientinfo.findOne({id:id}).busy : false;
     
     if (patientStatus === value) {
 
@@ -84,5 +87,20 @@ Meteor.methods({
       return true;
     }
 
+  },
+  'patientinfo.skipStation'(id, currentStation, stationToSkip) {
+    // Retrieve station queue
+    const stationQueue = Patientinfo.find({id:id}).fetch()[0].stationQueue;
+    
+    // Filter out station
+    const newQueue = stationQueue.filter(field => field !== stationToSkip);
+    const nextStation = (typeof(newQueue[0]) !== "undefined") ? newQueue[0] : "Done";
+    const isChangingCurrent = (currentStation === stationToSkip);
+    Patientinfo.update({id:id},{$set:{nextStation:nextStation,busy:isChangingCurrent,stationQueue:newQueue}});
+  },
+  'patientinfo.getSkipList'(id) {
+    const stationQueue = Patientinfo.find({id:id}).fetch()[0].stationQueue;
+    
+    return stationQueue;
   },
 });
