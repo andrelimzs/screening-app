@@ -98,9 +98,16 @@ Meteor.methods({
     const isChangingCurrent = (currentStation === stationToSkip);
     Patientinfo.update({id:id},{$set:{nextStation:nextStation,busy:isChangingCurrent,stationQueue:newQueue}});
   },
-  'patientinfo.getSkipList'(id) {
-    const stationQueue = Patientinfo.find({id:id}).fetch()[0].stationQueue;
-    
-    return stationQueue;
-  },
+  'patientinfo.editPatientInfo'(id, parent, label, value) {
+    console.log(value);
+    const constructOperator = parent + "." + label;
+    Patientinfo.update({
+      id: id
+    },
+    {
+      $set:{
+        [constructOperator]: value
+      }
+    });
+  }
 });

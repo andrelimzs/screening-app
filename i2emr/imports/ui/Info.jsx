@@ -23,6 +23,7 @@ class Info extends Component {
       anchorEl: null,
       textFieldLabel: "",
       textFieldValue: "",
+      formParent: "",
     };
   }
 
@@ -30,11 +31,12 @@ class Info extends Component {
     this.setState({ value });
   };
 
-  editField(field, event) {
+  editField(field, parent, event) {
     this.setState({
       anchorEl: event.currentTarget,
       textFieldLabel: field[0],
       textFieldValue: field[1],
+      formParent: parent,
     });
   };
 
@@ -44,10 +46,10 @@ class Info extends Component {
     });
   };
 
-  makeInfoEntry(field) {
+  makeInfoEntry(field, parent=null) {
     return (
       <Fragment>
-        <Button variant="text" fullWidth={true} onClick={this.editField.bind(this,field)}>
+        <Button variant="text" fullWidth={true} onClick={this.editField.bind(this,field,parent)}>
           {field[0] + ": " + field[1]}
         </Button>
       </Fragment>
@@ -64,7 +66,9 @@ class Info extends Component {
   // }
 
   submitEdit(event) {
+    const value = this.state.textFieldValue;
     alert('An edit was submitted: ' + this.state.textFieldValue);
+    Meteor.call('patientinfo.editPatientInfo', this.props.id, this.state.formParent, this.state.textFieldLabel, value);
   }
 
   generalInfo() {
@@ -109,12 +113,13 @@ class Info extends Component {
 
       // All forms are objects
       if (field[1].__proto__.constructor.name === "Object") {
+        // {Station: {.. fields ..} }
         // Convert object to array
         const individualForm = Object.entries(field[1]);
 
         // Map each field in the form to display
         const subFieldInfo = individualForm.map(
-          field => this.makeInfoEntry(field)
+          subField => this.makeInfoEntry(subField, field[0])
         );
         listInfo.push(subFieldInfo);
       } else {
