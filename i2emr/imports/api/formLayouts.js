@@ -34,7 +34,8 @@ export const formLayouts = {
         <TextField name="name" />
         {/* <HiddenField name="id" /> */}
         <SelectField name="gender" />
-        <DateField name="birthday" labelProps={{shrink: true, disableAnimation: false}}/>
+        Enter birthdate in dd/mm/yyyy format
+        <TextField name="birthday" />
         <NumField name="age" decimal={false} />
         <Divider variant="middle"/>
 

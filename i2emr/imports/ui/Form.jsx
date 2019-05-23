@@ -93,8 +93,6 @@ class Form extends Component {
       formData[this.props.station] = newForm;
       formData.id = this.props.id;
 
-      console.log(formData);
-
       // if (!this.isMultipage || this.pageIndex >= Object.keys(formSchemas[this.props.station]).length - 1) {
       console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
       newForm.nextStation = this.stations[this.stations.indexOf(this.props.station)+1];
@@ -109,18 +107,24 @@ class Form extends Component {
     this.setState({ tabValue:value });
   };
 
+  handleSkipStation(station, event) {
+    if (confirm("Confirm skip " + station + "?")) {
+      Meteor.call('patientinfo.skipStation', this.props.id, station);
+    }
+  }
+
   makeStationEntry(station) {
     // onClick={this.editField.bind(this,field)}
     return (
       <Fragment>
-        <Button variant="text" fullWidth={true}>
+        <Button variant="text" fullWidth={true} onClick={this.handleSkipStation.bind(this,station)}>
           {station}
         </Button>
       </Fragment>
     );
   }
 
-  getSkipList() {
+  getStationList() {
     console.log(this.props.stationQueue);
     const newStationQueue = this.props.stationQueue.map(
       station => this.makeStationEntry(station)
@@ -160,11 +164,11 @@ class Form extends Component {
         <AppBar position="static" color="default">
           <Tabs value={tabValue} onChange={this.handleTabChange}>
             <Tab label="Form" />
-            {typeof(this.props.stationQueue) !== "undefined" && <Tab label="Skip Station" />}
+            <Tab label="Stations" />
           </Tabs>
         </AppBar>
         {tabValue === 0 && newForm()}
-        {tabValue === 1 && typeof(this.props.stationQueue) !== "undefined" && this.getSkipList()}
+        {tabValue === 1 && typeof(this.props.stationQueue) !== "undefined" && this.getStationList()}
       </Paper>
     );
   }

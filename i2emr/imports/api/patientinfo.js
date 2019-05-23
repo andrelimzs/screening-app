@@ -18,17 +18,20 @@ Meteor.methods({
   'patientinfo.insert'(data) {
     // Determine stations to visit based on:
     // Based on gender & age
-    const isMale = (data.gender === "male");
-    const isChild = (data.age <= 18);
+    const isMale = (data["Patient Info"].gender === "male");
+    const isChild = (data["Patient Info"].age <= 18);
 
     // Stations to remove
-    const stationsToRemove = ["Registration"];
+    var stationsToRemove = ["Registration", "Height & weight"];
     if (isMale) {
       stationsToRemove.push("Pap Smear", "Breast Exam", "Women's Edu");
     }
     if (isChild) {
       stationsToRemove.push("Blood Pressure", "Phlebotomy", "Pap Smear", "Breast Exam");
     }
+    // Remove opt-out stations
+    console.log(data["Station Selection"]);
+    // stationsToRemove.concat()
 
     // Construct station queue by filtering out stations to exclude
     // https://stackoverflow.com/questions/5767325/how-do-i-remove-a-particular-element-from-an-array-in-javascript
@@ -49,7 +52,7 @@ Meteor.methods({
     delete data.nextStation;
 
     // Retrieve station queue
-    const stationQueue = Patientinfo.find({id:id}).fetch()[0].stationQueue;
+    var stationQueue = Patientinfo.find({id:id}).fetch()[0].stationQueue;
     
     // Proceed to next station
     const nextStation = (typeof(stationQueue[0]) !== "undefined") ? stationQueue[0] : "Done";
@@ -60,7 +63,7 @@ Meteor.methods({
     // console.log(Patientinfo.findOne({id:id}));
   },
   'patientinfo.setBusy'(id, value) {
-    const patientStatus = Patientinfo.findOne({id:id}).busy;
+    const patientStatus = (Patientinfo.findOne({id:id}) !== "undefined") ? Patientinfo.findOne({id:id}).busy : false;
     
     if (patientStatus === value) {
 
@@ -80,6 +83,15 @@ Meteor.methods({
       return true;
     }
 
+  },
+  'patientinfo.skipStation'(id, stationToSkip) {
+    // Retrieve station queue
+    const stationQueue = Patientinfo.find({id:id}).fetch()[0].stationQueue;
+    
+    // Filter out station
+    const newQueue = stationQueue.filter(field => field !== stationToSkip);
+    
+    Patientinfo.update({id:id},{$set:{stationQueue:newQueue}});
   },
   'patientinfo.getSkipList'(id) {
     const stationQueue = Patientinfo.find({id:id}).fetch()[0].stationQueue;

@@ -32,9 +32,7 @@ Meteor.startup(() => {
         anyDrugAllergies: 'Yes',
         drugAllergies: 'Panadol',
       },
-      stationQueue:["CBG & Hb", "Phlebotomy", "Pap Smear", "Breast Exam",
-                    "Blood Pressure", "Doctors' Consult", "Eye Screening",
-                    "Women's Edu", "Education"],
+      stationQueue:["CBG & Hb", "Phlebotomy", "Blood Pressure", "Doctors' Consult", "Eye Screening", "Education"],
       nextStation: 'Height & weight',
       busy:false,
       createdAt: new Date()
@@ -51,9 +49,7 @@ Meteor.startup(() => {
         address: 'Baker Street',
         anyDrugAllergies: 'No',
       },
-      stationQueue:["CBG & Hb", "Phlebotomy", "Pap Smear", "Breast Exam",
-                    "Blood Pressure", "Doctors' Consult","Eye Screening",
-                    "Women's Edu", "Education"],
+      stationQueue:["CBG & Hb", "Phlebotomy", "Blood Pressure", "Doctors' Consult","Eye Screening", "Education"],
       nextStation: 'Height & weight',
       busy:false,
       createdAt: new Date()
