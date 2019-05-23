@@ -107,9 +107,9 @@ class Form extends Component {
     this.setState({ tabValue:value });
   };
 
-  handleSkipStation(station, event) {
-    if (confirm("Confirm skip " + station + "?")) {
-      Meteor.call('patientinfo.skipStation', this.props.id, station);
+  handleSkipStation(stationToSkip, event) {
+    if (confirm("Confirm skip " + stationToSkip + "?")) {
+      Meteor.call('patientinfo.skipStation', this.props.id, this.props.id.station, stationToSkip);
     }
   }
 
@@ -125,7 +125,7 @@ class Form extends Component {
   }
 
   getStationList() {
-    console.log(this.props.stationQueue);
+    // console.log(this.props.stationQueue);
     const newStationQueue = this.props.stationQueue.map(
       station => this.makeStationEntry(station)
     );
