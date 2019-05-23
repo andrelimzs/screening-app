@@ -148,7 +148,7 @@ class Form extends Component {
     
     const newForm = () => (
       <ClearableAutoForm schema={currentFormSchema} onSubmit={this.handleSubmit} >
-        {currentFormLayout}
+        {currentFormLayout(this.props.patientInfo)}
         <ErrorsField />
         <div>
           <SubmitField inputRef={(ref) => this.formRef = ref} />
