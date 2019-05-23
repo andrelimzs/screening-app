@@ -1128,89 +1128,89 @@ export const formSchemas = {
         allowedValues: ['Get comprehensive eye exams regularly', 'Use a computer for 2h to finish my work', 'Read under sufficiently bright light', 'Wear sunglasses and caps when outdoors to protect eyes from UV rays'],   
         },
     }),
-  
+  },
 
-    "Post-Screening Feedback":
-    new SimpleSchema ({
-      postScreeningFeedback1: {
+  "Post-Screening Feedback":
+  new SimpleSchema ({
+    postScreeningFeedback1: {
+    type: String,
+    allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
+    },
+    postScreeningFeedback2: {
+      type: Array,
+    },
+    'postScreeningFeedback2.$': {
+      type: String,
+      allowedValues: ['I am concerned about my health', 
+                      'I have never been screened before', 
+                      'Friends/family told me to come', 
+                      'There is a free health screening',
+                      'There is a free goodie bag',
+                      'I was drawn to the crowd',
+                      'It was conveniently located',
+                      'It is at a convenient time'],
+    },
+    postScreeningFeedback3: {
       type: String,
       allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
       },
-      postScreeningFeedback2: {
-        type: Array,
+    postScreeningFeedback4: {
+      type: String,
+      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
+    },
+    postScreeningFeedback5: {
+      type: String,
+      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
       },
-      'postScreeningFeedback2.$': {
-        type: String,
-        allowedValues: ['I am concerned about my health', 
-                        'I have never been screened before', 
-                        'Friends/family told me to come', 
-                        'There is a free health screening',
-                        'There is a free goodie bag',
-                        'I was drawn to the crowd',
-                        'It was conveniently located',
-                        'It is at a convenient time'],
+    postScreeningFeedback6: {
+      type: String,
+      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
+    }, 
+    postScreeningFeedback7: {
+      type: String,
+      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
       },
-      postScreeningFeedback3: {
-        type: String,
-        allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
-        },
-      postScreeningFeedback4: {
-        type: String,
-        allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
+    postScreeningFeedback8: {
+      type: String,
+      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
+    }, 
+    postScreeningFeedback9: {
+      type: String,
+      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
       },
-      postScreeningFeedback5: {
-        type: String,
-        allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
-        },
-      postScreeningFeedback6: {
-        type: String,
-        allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
-      }, 
-      postScreeningFeedback7: {
-        type: String,
-        allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
-        },
-      postScreeningFeedback8: {
-        type: String,
-        allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
-      }, 
-      postScreeningFeedback9: {
-        type: String,
-        allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
-        },
-      postScreeningFeedback10: {
-        type: String,
-        allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
-      }, 
-      postScreeningFeedback11: {
-        type: String,
-        allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
-        },
-      postScreeningFeedback12: {
-        type: String,
-        allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
-      },   
-      postScreeningFeedback13: {
-        type: Array,
+    postScreeningFeedback10: {
+      type: String,
+      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
+    }, 
+    postScreeningFeedback11: {
+      type: String,
+      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
       },
-      'postScreeningFeedback13.$': {
-        type: String,
-        allowedValues: ['Happened to pass by', 
-                        'Posters', 
-                        'Newspaper', 
-                        'Door-to-door publicity',
-                        'Heard from neighbours/relatives/friends'],
-      },
-      postScreeningFeedback14: {
-        type: String,
-        allowedValues: ['Never', 
-                        'More than 3 years ago', 
-                        'Once in 3 years', 
-                        'Once in 2 years',
-                        'Once a year',
-                        'More than once a year'],   
-      },   
+    postScreeningFeedback12: {
+      type: String,
+      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
+    },   
+    postScreeningFeedback13: {
+      type: Array,
+    },
+    'postScreeningFeedback13.$': {
+      type: String,
+      allowedValues: ['Happened to pass by', 
+                      'Posters', 
+                      'Newspaper', 
+                      'Door-to-door publicity',
+                      'Heard from neighbours/relatives/friends'],
+    },
+    postScreeningFeedback14: {
+      type: String,
+      allowedValues: ['Never', 
+                      'More than 3 years ago', 
+                      'Once in 3 years', 
+                      'Once in 2 years',
+                      'Once a year',
+                      'More than once a year'],   
+    },   
 
-    }),
-  },
+  }),
+  
 }
