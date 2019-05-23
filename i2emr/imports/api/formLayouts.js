@@ -390,6 +390,18 @@ export const formLayouts = {
     </Fragment>
   ),
 
+  "Blood Pressure":(
+    <Fragment>
+      <div><TextField name="bp1Sys" /></div>
+      <div><TextField name="bp1Dia" /></div>
+      <div><TextField name="bp2Sys" /></div>
+      <div><TextField name="bp2Dia" /></div>
+      <div><TextField name="bp3Sys" /></div>
+      <div><TextField name="bp3Dia" /></div>
+      <div><BoolField name="docConsultForBP" /></div>
+    </Fragment>
+  ),
+
   "Phlebotomy":(
     <Fragment>
       <BoolField name="phleboCompleted" />
@@ -413,17 +425,47 @@ export const formLayouts = {
     </Fragment>
   ),
 
-  "Blood Pressure":(
-    <Fragment>
-      <div><TextField name="bp1Sys" /></div>
-      <div><TextField name="bp1Dia" /></div>
-      <div><TextField name="bp2Sys" /></div>
-      <div><TextField name="bp2Dia" /></div>
-      <div><TextField name="bp3Sys" /></div>
-      <div><TextField name="bp3Dia" /></div>
-      <div><BoolField name="docConsultForBP" /></div>
-    </Fragment>
-  ),
+  "Women's Edu":{
+    "Pre-Women's Education Quiz":(
+      <Fragment>
+        Completed breast examination?
+        <BoolField name="breastCompleted" />
+        From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
+        <SelectField name="preWomenEduSurvey1" />
+        Which of the following is/are normal symptom(s) of menstrual periods?
+        <SelectField name="preWomenEduQ1" />
+        All of the following are reasons for missed periods except
+        <SelectField name="preWomenEduQ2" />
+        Which of the following is true about menstruation
+        <SelectField name="preWomenEduQ3" />
+        When is the best time to do a breast self examination?
+        <SelectField name="preWomenEduQ4" />
+        How often should you do a breast self examination?
+        <SelectField name="preWomenEduQ5" />
+        You should go to the doctor if you notice:
+        <SelectField name="preWomenEduQ6" />
+      </Fragment>
+    ),
+
+    "Post-Women's Education Quiz":(
+      <Fragment>
+        From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
+        <SelectField name="postWomenEduSurvey1" />
+        Which of the following is/are normal symptom(s) of menstrual periods?
+        <SelectField name="postWomenEduQ1" />
+        All of the following are reasons for missed periods except
+        <SelectField name="postWomenEduQ2" />
+        Which of the following is true about menstruation
+        <SelectField name="postWomenEduQ3" />
+        When is the best time to do a breast self examination?
+        <SelectField name="postWomenEduQ4" />
+        How often should you do a breast self examination?
+        <SelectField name="postWomenEduQ5" />
+        You should go to the doctor if you notice:
+        <SelectField name="postWomenEduQ6" />
+      </Fragment>
+    ),
+  },
 
   "Doctors' Consult":(
     <Fragment>
@@ -470,48 +512,6 @@ export const formLayouts = {
       <LongTextField name="nameDoc" />
     </Fragment>
   ),
-  
-  "Women's Edu":{
-    "Pre-Women's Education Quiz":(
-      <Fragment>
-        Completed breast examination?
-        <BoolField name="breastCompleted" />
-        From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
-        <SelectField name="preWomenEduSurvey1" />
-        Which of the following is/are normal symptom(s) of menstrual periods?
-        <SelectField name="preWomenEduQ1" />
-        All of the following are reasons for missed periods except
-        <SelectField name="preWomenEduQ2" />
-        Which of the following is true about menstruation
-        <SelectField name="preWomenEduQ3" />
-        When is the best time to do a breast self examination?
-        <SelectField name="preWomenEduQ4" />
-        How often should you do a breast self examination?
-        <SelectField name="preWomenEduQ5" />
-        You should go to the doctor if you notice:
-        <SelectField name="preWomenEduQ6" />
-      </Fragment>
-    ),
-
-    "Post-Women's Education Quiz":(
-      <Fragment>
-        From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
-        <SelectField name="postWomenEduSurvey1" />
-        Which of the following is/are normal symptom(s) of menstrual periods?
-        <SelectField name="postWomenEduQ1" />
-        All of the following are reasons for missed periods except
-        <SelectField name="postWomenEduQ2" />
-        Which of the following is true about menstruation
-        <SelectField name="postWomenEduQ3" />
-        When is the best time to do a breast self examination?
-        <SelectField name="postWomenEduQ4" />
-        How often should you do a breast self examination?
-        <SelectField name="postWomenEduQ5" />
-        You should go to the doctor if you notice:
-        <SelectField name="postWomenEduQ6" />
-      </Fragment>
-    ),
-  },
 
   "Education" : {
     "Pre-Education Survey":(
@@ -585,39 +585,40 @@ export const formLayouts = {
         <SelectField name="postEduQuiz7" />
       </Fragment>
     ),
-
-    "Post-Screening Feedback":(
-      <Fragment>
-        I have had a good experience at the screening
-        <SelectField name="postScreeningFeedback1" />
-        I came for the screening because: (Select all that apply)
-        <AutoField name="postScreeningFeedback2" />
-        I know that regular health screening is important
-        <SelectField name="postScreeningFeedback3" />
-        I know that it is important to detect chronic diseases and cancers early
-        <SelectField name="postScreeningFeedback4" />
-        I am willing to take the trouble to attend health screenings
-        <SelectField name="postScreeningFeedback5" />
-        I am willing to attend my follow-up sessions
-        <SelectField name="postScreeningFeedback6" />
-        The student volunteers attended to my needs
-        <SelectField name="postScreeningFeedback7" />
-        The student volunteers were well-trained
-        <SelectField name="postScreeningFeedback8" />
-        The waiting time to enter the screening was reasonable
-        <SelectField name="postScreeningFeedback9" />
-        The waiting time for each station was reasonable
-        <SelectField name="postScreeningFeedback10" />
-        The flow of the screening was easy to follow
-        <SelectField name="postScreeningFeedback11" />
-        I would recommend my family/friends to attend this screening
-        <SelectField name="postScreeningFeedback12" />
-        What encouraged you to come for our event? Select all that apply
-        <AutoField name="postScreeningFeedback13" />
-        How often do you attend a health screening?
-        <SelectField name="postScreeningFeedback14" />
-      </Fragment>
-    ),
   },
+
+  "Post-Screening Feedback":(
+    <Fragment>
+      I have had a good experience at the screening
+      <SelectField name="postScreeningFeedback1" />
+      I came for the screening because: (Select all that apply)
+      <AutoField name="postScreeningFeedback2" />
+      I know that regular health screening is important
+      <SelectField name="postScreeningFeedback3" />
+      I know that it is important to detect chronic diseases and cancers early
+      <SelectField name="postScreeningFeedback4" />
+      I am willing to take the trouble to attend health screenings
+      <SelectField name="postScreeningFeedback5" />
+      I am willing to attend my follow-up sessions
+      <SelectField name="postScreeningFeedback6" />
+      The student volunteers attended to my needs
+      <SelectField name="postScreeningFeedback7" />
+      The student volunteers were well-trained
+      <SelectField name="postScreeningFeedback8" />
+      The waiting time to enter the screening was reasonable
+      <SelectField name="postScreeningFeedback9" />
+      The waiting time for each station was reasonable
+      <SelectField name="postScreeningFeedback10" />
+      The flow of the screening was easy to follow
+      <SelectField name="postScreeningFeedback11" />
+      I would recommend my family/friends to attend this screening
+      <SelectField name="postScreeningFeedback12" />
+      What encouraged you to come for our event? Select all that apply
+      <AutoField name="postScreeningFeedback13" />
+      How often do you attend a health screening?
+      <SelectField name="postScreeningFeedback14" />
+    </Fragment>
+  ),
+  
 
 };

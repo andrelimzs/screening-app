@@ -296,6 +296,7 @@ export const formSchemas = {
       },
       ocularHisQ3d: {
         type: Array,
+        optional: true,
       },
       'ocularHisQ3d.$': {
         type: String,
