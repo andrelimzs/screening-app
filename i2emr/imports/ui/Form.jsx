@@ -164,7 +164,7 @@ class Form extends Component {
         <AppBar position="static" color="default">
           <Tabs value={tabValue} onChange={this.handleTabChange}>
             <Tab label="Form" />
-            <Tab label="Subsequent Stations" />
+            <Tab label="Stations" />
           </Tabs>
         </AppBar>
         {tabValue === 0 && newForm()}

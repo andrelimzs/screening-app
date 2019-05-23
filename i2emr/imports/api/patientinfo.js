@@ -22,13 +22,16 @@ Meteor.methods({
     const isChild = (data["Patient Info"].age <= 18);
 
     // Stations to remove
-    const stationsToRemove = ["Registration", "Height & weight"];
+    var stationsToRemove = ["Registration", "Height & weight"];
     if (isMale) {
       stationsToRemove.push("Pap Smear", "Breast Exam", "Women's Edu");
     }
     if (isChild) {
       stationsToRemove.push("Blood Pressure", "Phlebotomy", "Pap Smear", "Breast Exam");
     }
+    // Remove opt-out stations
+    console.log(data["Station Selection"]);
+    // stationsToRemove.concat()
 
     // Construct station queue by filtering out stations to exclude
     // https://stackoverflow.com/questions/5767325/how-do-i-remove-a-particular-element-from-an-array-in-javascript
