@@ -117,10 +117,22 @@ class Info extends Component {
         // Convert object to array
         const individualForm = Object.entries(field[1]);
 
-        // Map each field in the form to display
-        const subFieldInfo = individualForm.map(
-          subField => this.makeInfoEntry(subField, field[0])
-        );
+        // // Map each field in the form to display
+        // const subFieldInfo = individualForm.map(
+        //   subField => this.makeInfoEntry(subField, field[0])
+        // );
+        
+        var j;
+        var subFieldInfo = [];
+        for (j = 0; j < individualForm.length; j++) {
+          const subField = individualForm[j];
+    
+          // Skip array fields
+          if (!Array.isArray(subField[1])) {
+            subFieldInfo.push(this.makeInfoEntry(subField, field[0]));
+          }
+        }
+
         listInfo.push(subFieldInfo);
       } else {
         // Display individual field directly
