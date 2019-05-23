@@ -20,6 +20,7 @@ import LongTextField from 'uniforms-material/LongTextField';
 import BaseField from 'uniforms/BaseField';
 import nothing from 'uniforms/nothing';
 import {Children} from 'react';
+import { Radio } from '@material-ui/core';
 
 // Define DisplayIf
 // Used to display fields depending on another field's response
@@ -49,7 +50,7 @@ export const formLayouts = {
 
         <RadioField name="anyDrugAllergies" />
         <DisplayIf condition={context => context.model.anyDrugAllergies === "Yes"}>
-          <TextField name="drugAllergies" />
+          <RadioField name="drugAllergies" />
         </DisplayIf>
         <Divider variant="middle"/>
 
@@ -137,7 +138,7 @@ export const formLayouts = {
 
             <h2>TB Screening</h2>
             Have you ever been diagnosed with tuberculosis?
-            <SelectField name="TBQ1" />
+            <RadioField name="TBQ1" />
             Have you ever lived with someone with tuberculosis?
             <SelectField name="TBQ2" />
             Do you have any of the following symptoms? Select all that apply
@@ -157,13 +158,13 @@ export const formLayouts = {
 
             <h2>Surgery and hospitalisations</h2>
             Have you had any surgery previously?
-            <SelectField name="surgAndHospQ1" />
+            <RadioField name="surgAndHospQ1" />
             <DisplayIf condition={context => context.model.surgAndHospQ1 === "Yes"}><Fragment>
               If yes to Q1, what surgery?
               <TextField name="surgAndHospQ2" />
             </Fragment></DisplayIf>
             Have you been hospitalised in the past 5 years? 
-            <SelectField name="surgAndHospQ3" />
+            <RadioField name="surgAndHospQ3" />
             <DisplayIf condition={context => context.model.surgAndHospQ3 === "Yes"}><Fragment>
               If yes to Q3, why were you hospitalised?
               <TextField name="surgAndHospQ4" />
@@ -171,19 +172,19 @@ export const formLayouts = {
 
             <h2>Ocular History</h2>
             Have you had any eye surgeries?
-            <SelectField name="ocularHisQ1a" />
+            <RadioField name="ocularHisQ1a" />
             <DisplayIf condition={context => context.model.ocularHisQ1a === "Yes"}><Fragment>
               If yes to 1a, please specify
               <TextField name="ocularHisQ1b" />
             </Fragment></DisplayIf>
             Any previous trauma to the eye?
-            <SelectField name="ocularHisQ2a" />
+            <RadioField name="ocularHisQ2a" />
             <DisplayIf condition={context => context.model.ocularHisQ2a === "Yes"}><Fragment>
               If yes to 2a, please specify
               <TextField name="ocularHisQ2b" />
             </Fragment></DisplayIf>
             Are you under the care of any eye specialist or receiving treatment for the eye from any hospital/clinic?
-            <SelectField name="ocularHisQ3a" />
+            <RadioField name="ocularHisQ3a" />
             <DisplayIf condition={context => context.model.ocularHisQ3a === "Yes"}><Fragment>
               If yes to 3a, please specify where
               <TextField name="ocularHisQ3b" />
@@ -196,12 +197,12 @@ export const formLayouts = {
               <TextField name="otherOcularCond" />
             </Fragment></DisplayIf>          
             Have you had any falls in the last 1 year?
-            <SelectField name="ocularHisQ4" />
+            <RadioField name="ocularHisQ4" />
             How do you perceive your vision?
             <SelectField name="ocularHisQ5a" />
             <DisplayIf condition={context => context.model.ocularHisQ5a === "Poor"}><Fragment>
               If answer to 5a was 'Poor', do you intend to seek medical help?
-              <SelectField name="ocularHisQ5b" />
+              <RadioField name="ocularHisQ5b" />
             </Fragment></DisplayIf>
             <DisplayIf condition={context => context.model.ocularHisQ5b === "No"}><Fragment>
               If no to 5b, why?
@@ -236,13 +237,13 @@ export const formLayouts = {
             Has a doctor told you that you have any heart problems? If yes, please elaborate
             <TextField name="FLRSQ1" />
             Have you ever been diagnosed by your doctor to have a stroke?
-            <SelectField name="FLRSQ2" />
+            <RadioField name="FLRSQ2" />
             Has your doctor ever told you that you have any problems with your blood vessels/blood flow? If yes, please elaborate
             <TextField name="FLRSQ3" />
             Have you ever been diagnosed by your doctor to have chronic kidney disease?
-            <SelectField name="FLRSQ4" />
+            <RadioField name="FLRSQ4" />
             Do you currently smoke?
-            <SelectField name="FLRSQ5" />
+            <RadioField name="FLRSQ5" />
             <DisplayIf condition={context => context.model.FLRSQ5 === "Yes"}><Fragment>
               If yes to Q5, what do you smoke? (select all that apply)
               <AutoField name="FLRSQ6" />
@@ -256,11 +257,11 @@ export const formLayouts = {
               <SelectField name="FLRSQ9" />
             </Fragment></DisplayIf>
             Do you chew paan or tobacco?
-            <SelectField name="FLRSQ10" />
+            <RadioField name="FLRSQ10" />
 
             <h2>Social History</h2>
             Do you drink alcohol?
-            <SelectField name="socialHisQ1" />
+            <RadioField name="socialHisQ1" />
             <DisplayIf condition={context => context.model.socialHisQ1 === "Yes"}><Fragment>
               If yes to Q1, how many glasses of alcohol do you drink per day?
               <NumField name="socialHisQ2" />
@@ -286,7 +287,7 @@ export const formLayouts = {
             <SelectField name="socialHisQ4" />
             <DisplayIf condition={context => context.model.socialHisQ3 === "Farming/Agriculture"}><Fragment>
               If answer to Q3 is 'Farming/agriculture', do you use pesticides in your farming?
-              <SelectField name="socialHisQ5" />
+              <RadioField name="socialHisQ5" />
             </Fragment></DisplayIf>
             Monthly Income in INR (only if participant is willing to disclose)<br />
             <NumField name="socialHisQ6" />
@@ -316,48 +317,48 @@ export const formLayouts = {
       <Fragment>
       <h2>Height and Weight + Waist:Hip measurement</h2>
       Can we measure your height, weight, waist size and hip size?
-      <SelectField name="stationSelect1" />
+      <RadioField name="stationSelect1" />
       <h2>Blood glucose and Hb</h2>
       Can we check your blood sugar? This will be done by pricking your finger to get a small drop of blood
-      <SelectField name="stationSelect2" />
+      <RadioField name="stationSelect2" />
       Can we check if you have anemia? This will be done by pricking your finger to get a small drop of blood
-      <SelectField name="stationSelect3" />
+      <RadioField name="stationSelect3" />
       <h2>BP</h2>
       Can we check your blood pressure?
-      <SelectField name="stationSelect4" />
+      <RadioField name="stationSelect4" />
       <h2>Phlebotomy (for patients aged 40 years old and above)</h2>
       For patients aged 40 years old and above, Do you have the following conditions?
       <AutoField name="stationSelect5" />
       <DisplayIf condition={context => Array.isArray(context.model.stationSelect5) && context.model.stationSelect5.length >= 2}><Fragment>
         Can we do a blood test to see if you have high cholesterol? A blood sample will be taken by a trained staff. This will then be sent to the lab, and a report will be mailed to you after some time
-        <SelectField name="stationSelect6" />
+        <RadioField name="stationSelect6" />
       </Fragment></DisplayIf>
       <h2>Pap Smear</h2>
       Are you married (or have you ever been married)?
-      <SelectField name="stationSelect7" />
+      <RadioField name="stationSelect7" />
       <DisplayIf condition={context => context.model.stationSelect7 === "Yes"}><Fragment>
         If yes to Q7, have you done a Pap smear in the past 3 years?
-        <SelectField name="stationSelect8" />
+        <RadioField name="stationSelect8" />
       </Fragment></DisplayIf>
       <DisplayIf condition={context => context.model.stationSelect8 === "No"}><Fragment>
         If no to Q8, would you want to undergo a free Pap smear today to check for cervical cancer?
-        <SelectField name="stationSelect9" />
+        <RadioField name="stationSelect9" />
       </Fragment></DisplayIf>
       <h2>Breast</h2>
       Would you want to undergo a breast examination for breast cancer today? 
-      <SelectField name="stationSelect10" />
+      <RadioField name="stationSelect10" />
       <h2>Women's Edu</h2>
       Can we teach you about women's health? For adults, we will be sharing about menstrual health and breast self examinations. For girls aged 10-18 years old, we will be sharing about menstrual health only.
-      <SelectField name="stationSelect11" />
+      <RadioField name="stationSelect11" />
       <h2>Doctors' consult</h2>
       Would you like to see a doctor today? (You will be asked to see the doctor if your test results are abnormal, but would you otherwise want to see the doctor?)
-      <SelectField name="stationSelect12" />
+      <RadioField name="stationSelect12" />
       <h2>Eye screening</h2>
       Can we check your eyes/vision?
-      <SelectField name="stationSelect13" />
+      <RadioField name="stationSelect13" />
       <h2>Education</h2>
       Can we teach you about healthy lifestyles and how to prevent common diseases like diabetes and high blood pressure?
-      <SelectField name="stationSelect14" />
+      <RadioField name="stationSelect14" />
       </Fragment>
     ),
   },
@@ -396,8 +397,12 @@ export const formLayouts = {
       <div><TextField name="bp1Dia" /></div>
       <div><TextField name="bp2Sys" /></div>
       <div><TextField name="bp2Dia" /></div>
-      <div><TextField name="bp3Sys" /></div>
-      <div><TextField name="bp3Dia" /></div>
+
+      <DisplayIf condition={context => Math.abs(context.model.bp2Sys - context.model.bp1Sys) > 5 || Math.abs(context.model.bp2Dia - context.model.bp1Dia) > 5 }><Fragment>
+        <div><TextField name="bp3Sys" /></div>
+        <div><TextField name="bp3Dia" /></div>
+      </Fragment></DisplayIf>
+
       <div><BoolField name="docConsultForBP" /></div>
     </Fragment>
   ),
@@ -419,7 +424,9 @@ export const formLayouts = {
   "Breast Exam":(
     <Fragment>
       <BoolField name="abnormalities" />
-      <LongTextField name="abDescribe" />
+      <DisplayIf condition={context => context.model.abnormalities === true}><Fragment>
+        <LongTextField name="abDescribe" />  
+      </Fragment></DisplayIf>
       <BoolField name="fnacCompleted" />
       <BoolField name="eduCompleted" />
     </Fragment>
@@ -478,8 +485,10 @@ export const formLayouts = {
       Doctors' notes/advice
       <LongTextField name="docConsult2" />
       <BoolField name="docConsult3" />
-      Referral details
-      <LongTextField name="docConsult4" />
+      <DisplayIf condition={context => context.model.docConsult3 === true}><Fragment>
+        Referral details
+        <LongTextField name="docConsult4" />
+      </Fragment></DisplayIf>
       Name of doctor
       <TextField name="docConsult5" />
     </Fragment>
