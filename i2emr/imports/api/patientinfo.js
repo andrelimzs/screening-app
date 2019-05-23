@@ -22,7 +22,7 @@ Meteor.methods({
     const isChild = (data["Patient Info"].age <= 18);
 
     // Stations to remove
-    var stationsToRemove = ["Registration", "Height & weight"];
+    var stationsToRemove = ["Registration"];
     if (isMale) {
       stationsToRemove.push("Pap Smear", "Breast Exam", "Women's Edu");
     }
@@ -59,8 +59,8 @@ Meteor.methods({
     var stationQueue = Patientinfo.find({id:id}).fetch()[0].stationQueue;
     
     // Proceed to next station
-    const nextStation = (typeof(stationQueue[0]) !== "undefined") ? stationQueue[0] : "Done";
     stationQueue.shift();
+    const nextStation = (typeof(stationQueue[0]) !== "undefined") ? stationQueue[0] : "Done";
     
     Patientinfo.update({id:id},{$set:{nextStation:nextStation,busy:false,stationQueue:stationQueue}, $push:data});
 
@@ -88,18 +88,26 @@ Meteor.methods({
     }
 
   },
-  'patientinfo.skipStation'(id, stationToSkip) {
+  'patientinfo.skipStation'(id, currentStation, stationToSkip) {
     // Retrieve station queue
     const stationQueue = Patientinfo.find({id:id}).fetch()[0].stationQueue;
     
     // Filter out station
     const newQueue = stationQueue.filter(field => field !== stationToSkip);
-    
-    Patientinfo.update({id:id},{$set:{stationQueue:newQueue}});
+    const nextStation = (typeof(newQueue[0]) !== "undefined") ? newQueue[0] : "Done";
+    const isChangingCurrent = (currentStation === stationToSkip);
+    Patientinfo.update({id:id},{$set:{nextStation:nextStation,busy:isChangingCurrent,stationQueue:newQueue}});
   },
-  'patientinfo.getSkipList'(id) {
-    const stationQueue = Patientinfo.find({id:id}).fetch()[0].stationQueue;
-    
-    return stationQueue;
-  },
+  'patientinfo.editPatientInfo'(id, parent, label, value) {
+    console.log(value);
+    const constructOperator = parent + "." + label;
+    Patientinfo.update({
+      id: id
+    },
+    {
+      $set:{
+        [constructOperator]: value
+      }
+    });
+  }
 });
