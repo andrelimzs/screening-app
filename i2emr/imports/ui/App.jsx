@@ -88,7 +88,8 @@ class App extends Component {
             >
               <Grid item xs={4}>
                 {station !== "Finished Patients" && 
-                  <Form station={station} id={Session.get('currentPatient')} stationQueue={this.props.patientInfo.stationQueue} />
+                  <Form station={station} id={Session.get('currentPatient')}
+                        stationQueue={this.props.patientInfo.stationQueue} patientInfo={this.props.patientInfo}/>
                 }
                 {station === "Finished Patients" && typeof(this.props.patientList) !== "undefined" &&
                   console.log(Patientinfo.find({}).fetch())

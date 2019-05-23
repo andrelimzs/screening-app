@@ -30,7 +30,7 @@ DisplayIf.contextTypes = BaseField.contextTypes;
 // Define the layouts
 export const formLayouts = {
   "Registration":{
-    "Patient Info": (
+    "Patient Info": (info) => (
       <Fragment>
         <TextField name="name" />
         {/* <HiddenField name="id" /> */}
@@ -59,7 +59,7 @@ export const formLayouts = {
       </Fragment>
     ),
 
-    "Patient Profiling": (
+    "Patient Profiling": (info) => (
       <Fragment>
         <h2>Diabetes Mellitus</h2>
         Has a western-trained doctor ever told you that you have diabetes?
@@ -313,7 +313,7 @@ export const formLayouts = {
       
     ),
 
-    "Station Selection": (
+    "Station Selection": (info) => (
       <Fragment>
       <h2>Height and Weight + Waist:Hip measurement</h2>
       Can we measure your height, weight, waist size and hip size?
@@ -364,9 +364,10 @@ export const formLayouts = {
   },
 
 
-  "Height & weight": (
+  "Height & weight": (info) => (
     <Fragment>
       <h2>Height and Weight</h2>
+      {/* {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age} */}
       <TextField name="height" />
       <br />
       <TextField name="weight" />
@@ -381,7 +382,7 @@ export const formLayouts = {
     </Fragment>
   ),
 
-  "Blood Glucose & Hb":(
+  "Blood Glucose & Hb": (info) => (
     <Fragment>
       <TextField name="cbg" />
       <br />
@@ -391,7 +392,7 @@ export const formLayouts = {
     </Fragment>
   ),
 
-  "Blood Pressure":(
+  "Blood Pressure": (info) => (
     <Fragment>
       <div><TextField name="bp1Sys" /></div>
       <div><TextField name="bp1Dia" /></div>
@@ -407,13 +408,13 @@ export const formLayouts = {
     </Fragment>
   ),
 
-  "Phlebotomy":(
+  "Phlebotomy": (info) => (
     <Fragment>
       <BoolField name="phleboCompleted" />
     </Fragment>
   ),
 
-  "Pap Smear":(
+  "Pap Smear": (info) => (
     <Fragment>
       <BoolField name="papCompleted" />
       <LongTextField name="papNotes" />
@@ -421,7 +422,7 @@ export const formLayouts = {
     </Fragment>
   ),
     
-  "Breast Exam":(
+  "Breast Exam": (info) => (
     <Fragment>
       <BoolField name="abnormalities" />
       <DisplayIf condition={context => context.model.abnormalities === true}><Fragment>
@@ -432,8 +433,8 @@ export const formLayouts = {
     </Fragment>
   ),
 
-  "Women's Edu":{
-    "Pre-Women's Education Quiz":(
+  "Women's Edu": {
+    "Pre-Women's Education Quiz": (info) => (
       <Fragment>
         Completed breast examination?
         <BoolField name="breastCompleted" />
@@ -454,7 +455,7 @@ export const formLayouts = {
       </Fragment>
     ),
 
-    "Post-Women's Education Quiz":(
+    "Post-Women's Education Quiz": (info) => (
       <Fragment>
         From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
         <SelectField name="postWomenEduSurvey1" />
@@ -474,7 +475,7 @@ export const formLayouts = {
     ),
   },
 
-  "Doctors' Consult":(
+  "Doctors' Consult": (info) => (
     <Fragment>
       Chief complaint
       <SelectField name="docConsult1" />
@@ -494,7 +495,7 @@ export const formLayouts = {
     </Fragment>
   ),
 
-  "Eye Screening":(
+  "Eye Screening": (info) => (
     <Fragment>
       <BoolField name="specs" />
       <TextField name="rightWoGlass" />
@@ -523,7 +524,7 @@ export const formLayouts = {
   ),
 
   "Education" : {
-    "Pre-Education Survey":(
+    "Pre-Education Survey": (info) => (
       <Fragment>
         From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
         1 being not at all, and 5 being a lot
@@ -540,7 +541,7 @@ export const formLayouts = {
       </Fragment>
     ),
 
-    "Pre-Education Quiz":(
+    "Pre-Education Quiz": (info) => (
       <Fragment>
         You are at higher risk of developing high cholesterol if you
         <SelectField name="preEduQuiz1" />
@@ -559,7 +560,7 @@ export const formLayouts = {
       </Fragment>
     ),
 
-    "Post-Education Survey":(
+    "Post-Education Survey": (info) => (
       <Fragment>
         From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
         1 being not at all, and 5 being a lot
@@ -576,7 +577,7 @@ export const formLayouts = {
       </Fragment>
     ),
 
-    "Post-Education Quiz":(
+    "Post-Education Quiz": (info) => (
       <Fragment>
         You are at higher risk of developing high cholesterol if you
         <SelectField name="postEduQuiz1" />
@@ -596,7 +597,7 @@ export const formLayouts = {
     ),
   },
 
-  "Post-Screening Feedback":(
+  "Post-Screening Feedback": (info) => (
     <Fragment>
       I have had a good experience at the screening
       <SelectField name="postScreeningFeedback1" />
