@@ -75,7 +75,6 @@ export const formSchemas = {
       anyDrugAllergies: {
         type: String,
         allowedValues: ['Yes', 'No'],
-        optional: true,
       },
       drugAllergies: {
         type: String,
@@ -336,7 +335,6 @@ export const formSchemas = {
       },
       'ocularHisQ5c.$': {
         type: String,
-        optional: true,
         allowedValues: ['Concerns about finances',
                         'Too far away/difficult to get to the clinic/hospital',
                         'Previously told by eye specialist that nothing can be done',
@@ -758,6 +756,7 @@ export const formSchemas = {
     },
     abDescribe: {
       type: String,
+      optional: true,
       label: "If yes to the previous question, please describe the abnormalities"
     },
     fnacCompleted: {
@@ -852,6 +851,7 @@ export const formSchemas = {
     },
     docConsult4: {
       type: String,
+      optional: true,
     },
     docConsult5: {
       type: String,
@@ -999,7 +999,7 @@ export const formSchemas = {
       },
       postWomenEduQ1: {
         type: String,
-        allowedValues: ['1', '2', '3', '4', '5'],   
+        allowedValues: ['Abdominal cramps','Acne','Headache','All of the above'], 
         },
       postWomenEduQ2: {
         type: String,
