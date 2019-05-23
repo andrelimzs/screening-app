@@ -36,6 +36,13 @@ export const formSchemas = {
       age: {
         type: SimpleSchema.Integer,
         min: 0,
+        autoValue: function () {
+          const birthdate = this.siblingField("birthday").value;
+          const currentYear = new Date();
+          const birthYear = Number(birthdate.substring(birthdate.length-4,birthdate.length));
+          const age = currentYear.getFullYear() - birthYear;
+          return age
+        }
       },
       district: {
         type: String,
