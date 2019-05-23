@@ -49,7 +49,7 @@ Meteor.methods({
     delete data.nextStation;
 
     // Retrieve station queue
-    const stationQueue = Patientinfo.find({id:id}).fetch()[0].stationQueue;
+    var stationQueue = Patientinfo.find({id:id}).fetch()[0].stationQueue;
     
     // Proceed to next station
     const nextStation = (typeof(stationQueue[0]) !== "undefined") ? stationQueue[0] : "Done";
@@ -80,6 +80,15 @@ Meteor.methods({
       return true;
     }
 
+  },
+  'patientinfo.skipStation'(id, stationToSkip) {
+    // Retrieve station queue
+    const stationQueue = Patientinfo.find({id:id}).fetch()[0].stationQueue;
+    
+    // Filter out station
+    const newQueue = stationQueue.filter(field => field !== stationToSkip);
+    
+    Patientinfo.update({id:id},{$set:{stationQueue:newQueue}});
   },
   'patientinfo.getSkipList'(id) {
     const stationQueue = Patientinfo.find({id:id}).fetch()[0].stationQueue;
