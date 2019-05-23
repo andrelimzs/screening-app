@@ -457,7 +457,6 @@ export const formSchemas = {
       socialHisQ1: {
         type: String,
         allowedValues: ['Yes','No'],
-        optional: true,
       },
       socialHisQ2: {
         type: Number,

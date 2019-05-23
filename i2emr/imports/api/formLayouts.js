@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
 import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
 
 import { formSchemas } from '/imports/api/formSchemas';
 
@@ -477,6 +478,27 @@ export const formLayouts = {
 
   "Doctors' Consult": (info) => (
     <Fragment>
+      { typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW &&
+        <Typography
+          color='secondary'>
+          Required from Height and Weight Station
+        </Typography> }
+      { typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb &&
+      <Typography
+        color='secondary'>
+        Required from Blood Glucose and Hb Station
+      </Typography> }
+      { typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap &&
+      <Typography
+        color='secondary'>
+        Required from Pap Smear Station
+      </Typography> }
+      { typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP &&
+      <Typography
+        color='secondary'>
+        Required from Blood Pressure Station
+      </Typography> }
+        <Divider variant="middle"/>
       Chief complaint
       <SelectField name="docConsult1" />
       <DisplayIf condition={context => Array.isArray(context.model.docConsult1) && context.model.docConsult1.includes('Others (free text)')}><Fragment>
