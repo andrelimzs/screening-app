@@ -28,6 +28,35 @@ import { Radio } from '@material-ui/core';
 const DisplayIf = ({children, condition}, {uniforms}) => (condition(uniforms) ? Children.only(children) : nothing);
 DisplayIf.contextTypes = BaseField.contextTypes;
 
+const requireDoctorConsult = (info) => (
+  <Fragment>
+    {((typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW) ||
+      (typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb) ||
+      (typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap) ||
+      (typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP)) &&
+      <Divider /> &&
+      <Typography color='secondary' variant='h6'>
+        Require consult for:
+      </Typography> }
+    { typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW &&
+      <Typography color='secondary'>
+        Height and Weight
+      </Typography> }
+    { typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb &&
+      <Typography color='secondary'>
+        Blood Glucose and Hb
+      </Typography> }
+    { typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap &&
+      <Typography color='secondary'>
+        Pap Smear
+      </Typography> }
+    { typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP &&
+      <Typography color='secondary'>
+        Blood Pressure
+      </Typography> &&
+    <Divider />}
+  </Fragment>
+);
 // Define the layouts
 export const formLayouts = {
   "Registration":{
@@ -478,31 +507,7 @@ export const formLayouts = {
 
   "Doctors' Consult": (info) => (
     <Fragment>
-      { typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW &&
-        <Typography
-          color='secondary'
-          variant='h5'>
-          Required from Height and Weight Station
-        </Typography> }
-      { typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb &&
-      <Typography
-        color='secondary'
-        variant='h5'>
-        Required from Blood Glucose and Hb Station
-      </Typography> }
-      { typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap &&
-      <Typography
-        color='secondary'
-        variant='h5'>
-        Required from Pap Smear Station
-      </Typography> }
-      { typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP &&
-      <Typography
-        color='secondary'
-        variant='h5'>
-        Required from Blood Pressure Station
-      </Typography> }
-        <Divider variant="middle"/>
+      {requireDoctorConsult(info)}
       Chief complaint
       <SelectField name="docConsult1" />
       <DisplayIf condition={context => Array.isArray(context.model.docConsult1) && context.model.docConsult1.includes('Others (free text)')}><Fragment>
@@ -552,174 +557,79 @@ export const formLayouts = {
   "Education" : {
     "Pre-Education Survey": (info) => (
       <Fragment>
-        { typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW &&
-        <Typography
-          color='secondary'
-          variant='h5'>
-          Required from Height and Weight Station
-        </Typography> }
-      { typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb &&
-      <Typography
-        color='secondary'
-        variant='h5'>
-        Required from Blood Glucose and Hb Station
-      </Typography> }
-      { typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap &&
-      <Typography
-        color='secondary'
-        variant='h5'>
-        Required from Pap Smear Station
-      </Typography> }
-      { typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP &&
-      <Typography
-        color='secondary'
-        variant='h5'>
-        Required from Blood Pressure Station
-      </Typography> }
-      <Divider variant="middle"/>
-      From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
-      1 being not at all, and 5 being a lot
-      <SelectField name="preEduSurvey1" />
-      From a scale of 1-5, how much do you know about healthy lifestyle and diet?
-      1 being not at all, and 5 being a lot
-      <SelectField name="preEduSurvey2" />
-      From a scale of 1-5, how much do you know about cancer risk factors?
-      1 being not at all, and 5 being a lot
-      <SelectField name="preEduSurvey3" />
-      From a scale of 1-5, how much do you know about good eyecare habits?
-      1 being not at all, and 5 being a lot
-      <SelectField name="preEduSurvey4" />
-    </Fragment>
+        {requireDoctorConsult(info)}
+        From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
+        1 being not at all, and 5 being a lot
+        <SelectField name="preEduSurvey1" />
+        From a scale of 1-5, how much do you know about healthy lifestyle and diet?
+        1 being not at all, and 5 being a lot
+        <SelectField name="preEduSurvey2" />
+        From a scale of 1-5, how much do you know about cancer risk factors?
+        1 being not at all, and 5 being a lot
+        <SelectField name="preEduSurvey3" />
+        From a scale of 1-5, how much do you know about good eyecare habits?
+        1 being not at all, and 5 being a lot
+        <SelectField name="preEduSurvey4" />
+      </Fragment>
     ),
 
     "Pre-Education Quiz": (info) => (
       <Fragment>
-      { typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW &&
-        <Typography
-          color='secondary'
-          variant='h5'>
-          Required from Height and Weight Station
-        </Typography> }
-      { typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb &&
-      <Typography
-        color='secondary'
-        variant='h5'>
-        Required from Blood Glucose and Hb Station
-      </Typography> }
-      { typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap &&
-      <Typography
-        color='secondary'
-        variant='h5'>
-        Required from Pap Smear Station
-      </Typography> }
-      { typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP &&
-      <Typography
-        color='secondary'
-        variant='h5'>
-        Required from Blood Pressure Station
-      </Typography> }
-      <Divider variant="middle"/>
-      You are at higher risk of developing high cholesterol if you
-      <SelectField name="preEduQuiz1" />
-      All of the following are complications of diabetes except
-      <SelectField name="preEduQuiz2" />
-      How much exercise should we get a week?
-      <SelectField name="preEduQuiz3" />
-      What makes up a healthy plate?
-      <SelectField name="preEduQuiz4" />
-      Which of the following is the healthier choice to make?
-      <SelectField name="preEduQuiz5" />
-      Which of the following is a cancer risk factor(s)?
-      <SelectField name="preEduQuiz6" />
-      Which of the following is not considered good eyecare habits?
-      <SelectField name="preEduQuiz7" />
-    </Fragment>
+        {requireDoctorConsult(info)}
+        <Divider variant="middle"/>
+        You are at higher risk of developing high cholesterol if you
+        <SelectField name="preEduQuiz1" />
+        All of the following are complications of diabetes except
+        <SelectField name="preEduQuiz2" />
+        How much exercise should we get a week?
+        <SelectField name="preEduQuiz3" />
+        What makes up a healthy plate?
+        <SelectField name="preEduQuiz4" />
+        Which of the following is the healthier choice to make?
+        <SelectField name="preEduQuiz5" />
+        Which of the following is a cancer risk factor(s)?
+        <SelectField name="preEduQuiz6" />
+        Which of the following is not considered good eyecare habits?
+        <SelectField name="preEduQuiz7" />
+      </Fragment>
     ),
 
     "Post-Education Survey": (info) => (
       <Fragment>
-      { typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW &&
-        <Typography
-          color='secondary'
-          variant='h5'>
-          Required from Height and Weight Station
-        </Typography> }
-      { typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb &&
-      <Typography
-        color='secondary'
-        variant='h5'>
-        Required from Blood Glucose and Hb Station
-      </Typography> }
-      { typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap &&
-      <Typography
-        color='secondary'
-        variant='h5'>
-        Required from Pap Smear Station
-      </Typography> }
-      { typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP &&
-      <Typography
-        color='secondary'
-        variant='h5'>
-        Required from Blood Pressure Station
-      </Typography> }
-      <Divider variant="middle"/>
-      From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
-      1 being not at all, and 5 being a lot
-      <SelectField name="postEduSurvey1" />
-      From a scale of 1-5, how much do you know about healthy lifestyle and diet?
-      1 being not at all, and 5 being a lot
-      <SelectField name="postEduSurvey2" />
-      From a scale of 1-5, how much do you know about cancer risk factors?
-      1 being not at all, and 5 being a lot
-      <SelectField name="postEduSurvey3" />
-      From a scale of 1-5, how much do you know about good eyecare habits?
-      1 being not at all, and 5 being a lot
-      <SelectField name="postEduSurvey4" />
-    </Fragment>
+        {requireDoctorConsult(info)}
+        From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
+        1 being not at all, and 5 being a lot
+        <SelectField name="postEduSurvey1" />
+        From a scale of 1-5, how much do you know about healthy lifestyle and diet?
+        1 being not at all, and 5 being a lot
+        <SelectField name="postEduSurvey2" />
+        From a scale of 1-5, how much do you know about cancer risk factors?
+        1 being not at all, and 5 being a lot
+        <SelectField name="postEduSurvey3" />
+        From a scale of 1-5, how much do you know about good eyecare habits?
+        1 being not at all, and 5 being a lot
+        <SelectField name="postEduSurvey4" />
+      </Fragment>
     ),
 
     "Post-Education Quiz": (info) => (
       <Fragment>
-      { typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW &&
-        <Typography
-          color='secondary'
-          variant='h5'>
-          Required from Height and Weight Station
-        </Typography> }
-      { typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb &&
-      <Typography
-        color='secondary'
-        variant='h5'>
-        Required from Blood Glucose and Hb Station
-      </Typography> }
-      { typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap &&
-      <Typography
-        color='secondary'
-        variant='h5'>
-        Required from Pap Smear Station
-      </Typography> }
-      { typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP &&
-      <Typography
-        color='secondary'
-        variant='h5'>
-        Required from Blood Pressure Station
-      </Typography> }
-      <Divider variant="middle"/>
-      You are at higher risk of developing high cholesterol if you
-      <SelectField name="postEduQuiz1" />
-      All of the following are complications of diabetes except
-      <SelectField name="postEduQuiz2" />
-      How much exercise should we get a week?
-      <SelectField name="postEduQuiz3" />
-      What makes up a healthy plate?
-      <SelectField name="postEduQuiz4" />
-      Which of the following is the healthier choice to make?
-      <SelectField name="postEduQuiz5" />
-      Which of the following is a cancer risk factor(s)?
-      <SelectField name="postEduQuiz6" />
-      Which of the following is not considered good eyecare habits?
-      <SelectField name="postEduQuiz7" />
-    </Fragment>
+        {requireDoctorConsult(info)}
+        You are at higher risk of developing high cholesterol if you
+        <SelectField name="postEduQuiz1" />
+        All of the following are complications of diabetes except
+        <SelectField name="postEduQuiz2" />
+        How much exercise should we get a week?
+        <SelectField name="postEduQuiz3" />
+        What makes up a healthy plate?
+        <SelectField name="postEduQuiz4" />
+        Which of the following is the healthier choice to make?
+        <SelectField name="postEduQuiz5" />
+        Which of the following is a cancer risk factor(s)?
+        <SelectField name="postEduQuiz6" />
+        Which of the following is not considered good eyecare habits?
+        <SelectField name="postEduQuiz7" />
+      </Fragment>
     ),
   },
 
