@@ -30,7 +30,8 @@ export const formSchemas = {
         allowedValues: ['male', 'female'],
       },
       birthday: {
-        type: Date,
+        type: String,
+        regEx: /^[0-9]{1,2}\/[0-9]{1,2}\/[1-2][0-9]{3}$/,
       },
       age: {
         type: SimpleSchema.Integer,
