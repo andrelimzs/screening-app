@@ -402,10 +402,14 @@ export const formLayouts = {
       <br />
       <TextField name="weight" />
       <br />
+      <TextField name="bmi" />
+      <br />
       <h2>Waist:Hip</h2>
       <TextField name="waist" />
       <br />
       <TextField name="hip" />
+      <br />
+      <TextField name="waistHipRatio" />
       <br />
       <h2>Overview</h2>
       <BoolField name="docConsultForHW" />

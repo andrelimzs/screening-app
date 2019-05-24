@@ -682,6 +682,11 @@ export const formSchemas = {
       max: 500,
       label: "Weight (kg)",
     },
+    bmi: {
+      type: Number,
+      min: 0,
+      label: "Body Mass Index",
+    },
     // childWeight:{
     //   type: String,
     //   allowedValues: ['Below 3rd percentile curve', 
@@ -695,6 +700,11 @@ export const formSchemas = {
     hip: {
       type: Number,
       label: "Hip circumference (cm)",
+    },
+    waistHipRatio: {
+      type: Number,
+      min: 0,
+      label: "Waist:hip ratio",
     },
     docConsultForHW: {
       type: Boolean,
