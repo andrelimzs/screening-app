@@ -15,8 +15,8 @@ function addForm(station, formData) {
 }
 
 Meteor.startup(() => {
-  // Patientinfo.remove({});
-  // Stationforms.remove({});
+  Patientinfo.remove({});
+  Stationforms.remove({});
 
   // Reset all patients who were midway through a station
   Patientinfo.update({ busy: true },{
@@ -37,7 +37,7 @@ Meteor.startup(() => {
         anyDrugAllergies: 'Yes',
         drugAllergies: 'Panadol',
       },
-      stationQueue:["Blood Glucose & Hb", "Blood Pressure", "Phlebotomy", "Doctors' Consult", "Eye Screening", "Education"],
+      stationQueue:["Height & weight", "Blood Glucose & Hb", "Blood Pressure", "Phlebotomy", "Doctors' Consult", "Eye Screening", "Education"],
       nextStation: 'Height & weight',
       busy:false,
       createdAt: new Date()
@@ -54,7 +54,7 @@ Meteor.startup(() => {
         address: 'Baker Street',
         anyDrugAllergies: 'No',
       },
-      stationQueue:["Blood Glucose & Hb", "Blood Pressure", "Phlebotomy", "Doctors' Consult","Eye Screening", "Education"],
+      stationQueue:["Height & weight", "Blood Glucose & Hb", "Blood Pressure", "Phlebotomy", "Doctors' Consult","Eye Screening", "Education"],
       nextStation: 'Height & weight',
       busy:false,
       createdAt: new Date()

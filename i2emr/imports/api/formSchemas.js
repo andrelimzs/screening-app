@@ -738,6 +738,18 @@ export const formSchemas = {
       max: 200,
       label: "3rd Diastolic blood pressure"
     },
+    bpAvgSys: {
+      type: Number,
+      min: 50,
+      max: 300,
+      label: "Average Systolic blood pressure"
+    },
+    bpAvgDia: {
+      type: Number,
+      min: 20,
+      max: 200,
+      label: "Average Diastolic blood pressure"
+    },
     docConsultForBP: {
       type: Boolean,
       label: "Doctors consult required?",

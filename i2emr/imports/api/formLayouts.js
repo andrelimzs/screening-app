@@ -182,7 +182,7 @@ export const formLayouts = {
                 Immediate Doctor's consult for TB
               </Typography>
             </Fragment></DisplayIf>
-            
+
             <h2>Medical history: others</h2>
             Do you have any medical conditions we should take note of? (if none, indicate NIL)
             <TextField name="medicalHistory1" />
@@ -418,6 +418,18 @@ export const formLayouts = {
       <DisplayIf condition={context => Math.abs(context.model.bp2Sys - context.model.bp1Sys) > 5 || Math.abs(context.model.bp2Dia - context.model.bp1Dia) > 5 }><Fragment>
         <div><TextField name="bp3Sys" /></div>
         <div><TextField name="bp3Dia" /></div>
+      </Fragment></DisplayIf>
+
+      <div><TextField name="bpAvgSys" /></div>
+      <div><TextField name="bpAvgDia" /></div>
+
+      <DisplayIf condition={context => (
+        context.model.bpAvgSys < 90 || context.model.bpAvgSys > 180 ||
+        context.model.bpAvgDia < 60 || context.model.bpAvgDia > 120
+      )}><Fragment>
+        <Typography color='secondary' variant='h5'>
+          Immediate Doctor's consult for Blood Pressure
+        </Typography>
       </Fragment></DisplayIf>
 
       <div><BoolField name="docConsultForBP" /></div>
