@@ -385,7 +385,7 @@ export const formSchemas = {
       anyOtherBarriers: {
         type: Boolean,
         optional: true,
-        label: "Others: (free text)",
+        label: "Others",
       },
       otherBarriers: {
         type: String,
@@ -436,10 +436,7 @@ export const formSchemas = {
       },
       FLRSQ7: {
         type: String,
-        optional: true,
-        allowedValues: ['Less than 1 cigarette (or equivalent) per day on average',
-                        'Between 1 to 10 cigarettes (or equivalent) per day on average',
-                        'More than 10 cigarettes (or equivalent) per day on average'],      
+        optional: true,   
       },    
       FLRSQ8: {
         type: String,
@@ -462,65 +459,23 @@ export const formSchemas = {
         type: Number,
         optional: true,
       },
-      student: {
-        type: Boolean,
-        optional: true,
-        label: "Student",
+      socialHisQ3: {
+        type: Array,
       },
-      housewife: {
-        type: Boolean,
-        optional: true,
-        label: "Homemaker/Housewife",
-      },
-      relig:{
-        type: Boolean,
-        optional: true,
-        label: "Religious Work",
-      },
-      prof: {
-        type: Boolean,
-        optional: true,
-        label: "Professional (teacher, engineer, architect, doctor, nurse, lawyer, management, finance, etc)",
-      },
-      service: {
-        type: Boolean,
-        optional: true,
-        label: "Service industry (e.g. restaurant server, call centre, receptionist, hotel staff)",
-      },
-      manual: {
-        type: Boolean,
-        optional: true,
-        label: "Manual labourer (e.g. construction, cleaning, clothes washing)",
-      },
-      skilledLab:{
-        type: Boolean,
-        optional: true,
-        label: "Skilled labourer (e.g. plumbing, electrician, cook, tailor)",
-      },
-      farming: {
-        type: Boolean,
-        optional: true,
-        label: "Farming/Agriculture",
-      },
-      mining: {
-        type: Boolean,
-        optional: true,
-        label: "Mining",
-      },
-      manu: {
-        type: Boolean,
-        optional: true,
-        label: "Manufacturing",
-      },
-      unemployed: {
-        type: Boolean,
-        optional: true,
-        label: "Unemployed",
-      },
-      anyOtherOcc: {
-        type: Boolean,
-        optional: true,
-        label: "Others (please specify) - free text",
+      'socialHisQ3.$': {
+        type: String,
+        allowedValues: ['Student', 
+                        'Homemaker/Housewife',
+                        'Religious work',
+                        'Professional (teacher, engineer, architect, doctor, nurse, lawyer, management, finance, etc)',
+                        'Service industry (e.g. restaurant server, call centre, receptionist, hotel staff)',
+                        'Manual labourer (e.g. construction, cleaning, clothes washing)',
+                        'Skilled labourer (e.g. plumbing, electrician, cook, tailor)',
+                        'Farming/Agriculture',
+                        'Mining',
+                        'Manufacturing',
+                        'Unemployed',
+                        'Others (please specify)'],
       },
       otherOcc: {
         type: String,
@@ -543,16 +498,7 @@ export const formSchemas = {
         type: String,
         allowedValues: ['Unmarried', 'Married','Widowed','Divorced'],
       },
-      socialHisQ8: {
-        type: Number,
-      },
       socialHisQ9: {
-        type: Number,
-      },
-      socialHisQ10: {
-        type: Number,
-      },
-      socialHisQ11: {
         type: Number,
       },
       socialHisQ13: {
@@ -835,7 +781,7 @@ export const formSchemas = {
                       'Alcohol overuse',
                       'Drug addiction',
                       'Infectious diseases e.g. malaria, tuberculosis',
-                      'Others (free text)'],
+                      'Others'],
     },
     otherComplaints: {
       type: String,

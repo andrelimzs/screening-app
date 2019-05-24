@@ -278,7 +278,7 @@ export const formLayouts = {
               If yes to Q5, what do you smoke? (select all that apply)
               <AutoField name="FLRSQ6" />
               If yes to Q5, how much do you smoke?
-              <SelectField name="FLRSQ7" />
+              <TextField name="FLRSQ7" />
               If yes to Q5, how many years have you been smoking for?
               <TextField name="FLRSQ8" />
             </Fragment></DisplayIf>
@@ -297,20 +297,9 @@ export const formLayouts = {
               <NumField name="socialHisQ2" /><br />
             </Fragment></DisplayIf>
             What is your occupation?
-            <BoolField name="student" />
-            <BoolField name="housewife" />
-            <BoolField name="relig" />
-            <BoolField name="prof" />
-            <BoolField name="service" />
-            <BoolField name="manual" />
-            <BoolField name="skilledLab" />
-            <BoolField name="farming" />
-            <BoolField name="mining" />
-            <BoolField name="manu" />
-            <BoolField name="unemployed" />
-            <BoolField name="anyOtherOcc" />
-            <DisplayIf condition={context => context.model.anyOtherOcc === true}><Fragment>
-              If yes to Q1, how many glasses of alcohol do you drink per day?
+            <AutoField name="socialHisQ3" />
+            <DisplayIf condition={context => Array.isArray(context.model.docConsult1) && context.model.socialHisQ3.includes('Others (free text)')}><Fragment>
+              Other complaints
               <TextField name="otherOcc" />
             </Fragment></DisplayIf>
             Nature of work/lifestyle
@@ -319,23 +308,13 @@ export const formLayouts = {
               If answer to Q3 is 'Farming/agriculture', do you use pesticides in your farming?
               <RadioField name="socialHisQ5" />
             </Fragment></DisplayIf>
-            Monthly Income in INR (only if participant is willing to disclose)<br />
+            Monthly Household Income in INR (only if participant is willing to disclose)<br />
             <NumField name="socialHisQ6" />
             <Divider variant="middle" />Marital status
             <SelectField name="socialHisQ7" />
-            Number of children<br />
-            <NumField name="socialHisQ8"/>
             <Divider variant="middle" />
             How many people live in your household (including you)?<br />
             <NumField name="socialHisQ9"/>
-            <Divider variant="middle" />
-            How many dependents are there in your household (children, spouse, parents, relatives living with you who rely on you for financial support)?
-            <NumField name="socialHisQ10"/>
-            <Divider variant="middle" />
-            How many people in your household contribute to household income?<br />
-            <NumField name="socialHisQ11"/>
-            <Divider variant="middle" />
-            How many people in your household do not contribute to or depend on household income? (KIV)
             <Divider variant="middle" />
             What is your highest education level?
             <SelectField name="socialHisQ13" />
