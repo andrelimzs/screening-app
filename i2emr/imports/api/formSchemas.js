@@ -352,40 +352,18 @@ export const formSchemas = {
                         'Traditional Medicine',
                         'Seldom/Never visits the doctor'],
       },
-      noNeed: {
-        type: Boolean,
-        optional: true,
-        label: "Do not see the need for the tests",
+      barrierQ2: {
+        type: Array,
       },
-      time: {
-        type: Boolean,
-        optional: true,
-        label: "Challenging to make time to go for appointments",
-      },
-      mobility: {
-        type: Boolean,
-        optional: true,
-        label: "Difficulty getting to clinic (mobility)",
-      },
-      financial: {
-        type: Boolean,
-        optional: true,
-        label: "Financial issues",
-      },
-      scared: {
-        type: Boolean,
-        optional: true,
-        label: "Scared of doctor",
-      },
-      preferTradMed: {
-        type: Boolean,
-        optional: true,
-        label: "Prefer traditional medicine",
-      },
-      anyOtherBarriers: {
-        type: Boolean,
-        optional: true,
-        label: "Others",
+      'barrierQ2.$': {
+        type: String,
+        allowedValues: ['Do not see the need for the tests',
+                        'Challenging to make time to go for appointments',
+                        'Difficulty getting to clinic (mobility)',
+                        'Financial issues',
+                        'Scared of doctor',
+                        'Prefer traditional medicine',
+                        'Others'],
       },
       otherBarriers: {
         type: String,

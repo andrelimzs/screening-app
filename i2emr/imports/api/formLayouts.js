@@ -247,15 +247,9 @@ export const formLayouts = {
             <SelectField name="barrierQ1" />
             <DisplayIf condition={context => context.model.barrierQ1 === "Seldom/Never visits the doctor"}><Fragment>
               If answer to Q1 was 'Seldom/Never visits the doctor', why do you not follow-up with your doctor for your existing conditions?
-              <BoolField name="noNeed" />
-              <BoolField name="time" />
-              <BoolField name="mobility" />
-              <BoolField name="financial" />
-              <BoolField name="scared" />
-              <BoolField name="preferTradMed" />
-              <BoolField name="anyOtherBarriers" />
+              <AutoField name="barrierQ2" />
             </Fragment></DisplayIf>
-            <DisplayIf condition={context => context.model.anyOtherBarriers === true}><Fragment>
+            <DisplayIf condition={context => Array.isArray(context.model.barrierQ2) && context.model.barrierQ2.includes('Others (please specify)')}><Fragment>
               <TextField name="otherBarriers" />
             </Fragment></DisplayIf>
 
@@ -298,7 +292,7 @@ export const formLayouts = {
             </Fragment></DisplayIf>
             What is your occupation?
             <AutoField name="socialHisQ3" />
-            <DisplayIf condition={context => Array.isArray(context.model.docConsult1) && context.model.socialHisQ3.includes('Others (free text)')}><Fragment>
+            <DisplayIf condition={context => Array.isArray(context.model.socialHisQ3) && context.model.socialHisQ3.includes('Others (free text)')}><Fragment>
               Other complaints
               <TextField name="otherOcc" />
             </Fragment></DisplayIf>
