@@ -173,6 +173,15 @@ export const formLayouts = {
             <SelectField name="TBQ2" />
             Do you have any of the following symptoms? Select all that apply
             <AutoField name="TBQ3" />
+            <DisplayIf condition={context => (
+              context.model.TBQ1 === "Yes" ||
+              context.model.TBQ2 === 'Yes, the person was diagnosed with TB within the past 4 months' ||
+              typeof(context.model.TBQ3) !== "undefined" && context.model.TBQ3.length > 0 && !context.model.TBQ3.includes('None of the above')
+            )}><Fragment>
+              <Typography color='secondary' variant='h5'>
+                Immediate Doctor's consult for TB
+              </Typography>
+            </Fragment></DisplayIf>
             
             <h2>Medical history: others</h2>
             Do you have any medical conditions we should take note of? (if none, indicate NIL)
