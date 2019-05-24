@@ -80,7 +80,7 @@ export const formLayouts = {
 
         <RadioField name="anyDrugAllergies" />
         <DisplayIf condition={context => context.model.anyDrugAllergies === "Yes"}>
-          <RadioField name="drugAllergies" />
+          <TextField name="drugAllergies" />
         </DisplayIf>
         <Divider variant="middle"/>
 
@@ -293,8 +293,8 @@ export const formLayouts = {
             Do you drink alcohol?
             <RadioField name="socialHisQ1" />
             <DisplayIf condition={context => context.model.socialHisQ1 === "Yes"}><Fragment>
-              If yes to Q1, how many glasses of alcohol do you drink per day?
-              <NumField name="socialHisQ2" />
+              If yes to Q1, how many glasses of alcohol do you drink per day?<br />
+              <NumField name="socialHisQ2" /><br />
             </Fragment></DisplayIf>
             What is your occupation?
             <BoolField name="student" />

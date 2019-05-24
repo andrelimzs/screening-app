@@ -15,8 +15,8 @@ function addForm(station, formData) {
 }
 
 Meteor.startup(() => {
-  Patientinfo.remove({});
-  Stationforms.remove({});
+  // Patientinfo.remove({});
+  // Stationforms.remove({});
 
   if (Patientinfo.find().count() === 0) {
     Patientinfo.insert({

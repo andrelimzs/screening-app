@@ -28,7 +28,11 @@ class Info extends Component {
   }
 
   handleChange = (event, value) => {
-    this.setState({ value });
+    if (value == 1 && prompt("Password") === "iloveodisha" ) {
+      this.setState({ value });
+    } else {
+      this.setState({ value });
+    }
   };
 
   editField(field, parent, event) {
