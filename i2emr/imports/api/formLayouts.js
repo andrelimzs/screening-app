@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
 import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
 
 import { formSchemas } from '/imports/api/formSchemas';
 
@@ -27,6 +28,35 @@ import { Radio } from '@material-ui/core';
 const DisplayIf = ({children, condition}, {uniforms}) => (condition(uniforms) ? Children.only(children) : nothing);
 DisplayIf.contextTypes = BaseField.contextTypes;
 
+const requireDoctorConsult = (info) => (
+  <Fragment>
+    {((typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW) ||
+      (typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb) ||
+      (typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap) ||
+      (typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP)) &&
+      <Divider /> &&
+      <Typography color='secondary' variant='h6'>
+        Require consult for:
+      </Typography> }
+    { typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW &&
+      <Typography color='secondary'>
+        Height and Weight
+      </Typography> }
+    { typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb &&
+      <Typography color='secondary'>
+        Blood Glucose and Hb
+      </Typography> }
+    { typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap &&
+      <Typography color='secondary'>
+        Pap Smear
+      </Typography> }
+    { typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP &&
+      <Typography color='secondary'>
+        Blood Pressure
+      </Typography> &&
+    <Divider />}
+  </Fragment>
+);
 // Define the layouts
 export const formLayouts = {
   "Registration":{
@@ -477,6 +507,7 @@ export const formLayouts = {
 
   "Doctors' Consult": (info) => (
     <Fragment>
+      {requireDoctorConsult(info)}
       Chief complaint
       <SelectField name="docConsult1" />
       <DisplayIf condition={context => Array.isArray(context.model.docConsult1) && context.model.docConsult1.includes('Others (free text)')}><Fragment>
@@ -526,6 +557,7 @@ export const formLayouts = {
   "Education" : {
     "Pre-Education Survey": (info) => (
       <Fragment>
+        {requireDoctorConsult(info)}
         From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
         1 being not at all, and 5 being a lot
         <SelectField name="preEduSurvey1" />
@@ -543,6 +575,8 @@ export const formLayouts = {
 
     "Pre-Education Quiz": (info) => (
       <Fragment>
+        {requireDoctorConsult(info)}
+        <Divider variant="middle"/>
         You are at higher risk of developing high cholesterol if you
         <SelectField name="preEduQuiz1" />
         All of the following are complications of diabetes except
@@ -562,6 +596,7 @@ export const formLayouts = {
 
     "Post-Education Survey": (info) => (
       <Fragment>
+        {requireDoctorConsult(info)}
         From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
         1 being not at all, and 5 being a lot
         <SelectField name="postEduSurvey1" />
@@ -579,6 +614,7 @@ export const formLayouts = {
 
     "Post-Education Quiz": (info) => (
       <Fragment>
+        {requireDoctorConsult(info)}
         You are at higher risk of developing high cholesterol if you
         <SelectField name="postEduQuiz1" />
         All of the following are complications of diabetes except
