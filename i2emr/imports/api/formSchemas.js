@@ -718,10 +718,6 @@ export const formSchemas = {
       type: Boolean, 
       label: "FNAC Completed?"
     },
-    eduCompleted: {
-      type: Boolean,
-      label: "Breast Screening Education Completed?"
-    }
   }),
 
   "Blood Pressure":
@@ -912,9 +908,9 @@ export const formSchemas = {
   "Women's Edu":{
     "Pre-Women's Education Quiz":
     new SimpleSchema ({
-      breastCompleted: {
-        type: Boolean, 
-        label: "Breast Screening Completed?"
+      eduCompleted: {
+        type: String,
+        allowedValues: ['Yes','No'],
       },
       preWomenEduSurvey1: {
       type: String,

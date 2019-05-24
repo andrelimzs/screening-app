@@ -441,16 +441,17 @@ export const formLayouts = {
       <DisplayIf condition={context => context.model.abnormalities === true}><Fragment>
         <LongTextField name="abDescribe" />  
       </Fragment></DisplayIf>
-      <BoolField name="fnacCompleted" />
-      <BoolField name="eduCompleted" />
+      <BoolField name="fnacCompleted" />     
+      Completed breast examination?
+      <BoolField name="breastCompleted" />
     </Fragment>
   ),
 
   "Women's Edu": {
     "Pre-Women's Education Quiz": (info) => (
       <Fragment>
-        Completed breast examination?
-        <BoolField name="breastCompleted" />
+        Breast education completed?
+        <RadioField name="eduCompleted" />
         From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
         <SelectField name="preWomenEduSurvey1" />
         Which of the following is/are normal symptom(s) of menstrual periods?
