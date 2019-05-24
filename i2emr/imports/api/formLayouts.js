@@ -402,6 +402,13 @@ export const formLayouts = {
     <Fragment>
       <TextField name="cbg" />
       <br />
+      <DisplayIf condition={context => (
+        context.model.cbg < 3 || context.model.cbg > 20
+      )}><Fragment>
+        <Typography color='secondary' variant='h5'>
+          Immediate Doctor's consult for CBG
+        </Typography>
+      </Fragment></DisplayIf>
       <TextField name="hb" />
       <br />
       <BoolField name="docConsultForBloodGlucAndHb" />
