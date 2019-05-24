@@ -18,6 +18,11 @@ Meteor.startup(() => {
   // Patientinfo.remove({});
   // Stationforms.remove({});
 
+  // Reset all patients who were midway through a station
+  Patientinfo.update({ busy: true },{
+    $set:{ busy: false }
+  }, { multi: true });
+
   if (Patientinfo.find().count() === 0) {
     Patientinfo.insert({
       id: '1',

@@ -97,6 +97,10 @@ class Info extends Component {
         <Typography>
           Drug Allergies: {typeof(this.props.patientInfo["Patient Info"]) !== "undefined" && this.props.patientInfo["Patient Info"].drugAllergies}
         </Typography>
+        <Divider />
+        <Typography>
+          Pregnant: {typeof(this.props.patientInfo["Patient Info"]) !== "undefined" && this.props.patientInfo["Patient Info"].pregnant}
+        </Typography>
       </Fragment>
     );
   }
