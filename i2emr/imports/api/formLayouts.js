@@ -443,17 +443,37 @@ export const formLayouts = {
       <h2>India Diabetes Risk Assessment</h2>
       Have you previously been diagnosed with diabetes?
       <SelectField name="previousDiabetesDiagnosis" />
-      1. Age
-      <TextField name="riskAssessAge" />
-      2. Waist circumference (refer to Waist:Hip Ratio section)
-      <TextField name="riskAssessWaist" />
-      3. Physical activity
-      <SelectField name="riskAssessPhysicalActivity" />
-      4. Family history
-      <SelectField name="riskAssessFamilyHis" />
-      Risk level
-      <TextField name="riskAssessRiskLevel" />
-      <Divider variant="middle" />
+
+      <DisplayIf condition={context => (typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age > 17)}>
+        <Fragment>
+          1. Age
+          <SomeComp calculation={(model) => (<TextField name="riskAssessAge" value={
+            ((typeof(info["Patient Info"]) !== "undefined") ? info["Patient Info"].age : "")
+          } />)} />
+          2. Waist circumference (refer to Waist:Hip Ratio section)
+          <SomeComp calculation={(model) => (<TextField name="riskAssessWaist" value={
+            (
+              (typeof(info["Height & weight"]) !== "undefined") ? 
+              (
+                (info["Height & weight"][0].waist < ((info["Patient Info"].gender==="male")?90:80) ) ? "0 points" : 
+                  (
+                    (info["Height & weight"][0].waist < ((info["Patient Info"].gender==="male")?90:100) ) ? "10 points" : "20 points"
+                  )
+              ) : ""
+            )
+          } />)} />
+          3. Physical activity
+          <SelectField name="riskAssessPhysicalActivity" />
+          4. Family history
+          <SelectField name="riskAssessFamilyHis" />
+          Risk level
+          <TextField name="riskAssessRiskLevel" />
+          {/* <SomeComp calculation={(model) => (<TextField name="riskAssessRiskLevel" value={
+            ((Number(model.riskAssessAge)<35) ? 0 : (Number(model.riskAssessAge)<50) ? 20 : 30)
+          } />)} /> */}
+          <Divider variant="middle" />
+        </Fragment>
+      </DisplayIf>
       
       <TextField name="cbg" />
       <br />
