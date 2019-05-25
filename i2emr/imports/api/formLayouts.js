@@ -22,6 +22,7 @@ import BaseField from 'uniforms/BaseField';
 import nothing from 'uniforms/nothing';
 import {Children} from 'react';
 import { Radio } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 
 // Define DisplayIf
 // Used to display fields depending on another field's response
@@ -32,11 +33,16 @@ const requireDoctorConsult = (info) => (
   <Fragment>
     {((typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW) ||
       (typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb) ||
-      (typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap) ||
-      (typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP)) &&
+      (typeof(info["Station Selection"]) !== "undefined" && info["Station Selection"].stationSelect12 === "Yes") ||
+      (typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP) ||
+      (typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap)) &&
       <Divider /> &&
       <Typography color='secondary' variant='h6'>
         Require consult for:
+      </Typography> }
+    { typeof(info["Station Selection"]) !== "undefined" && info["Station Selection"].stationSelect12 === "Yes" &&
+      <Typography color='secondary'>
+        Registration
       </Typography> }
     { typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW &&
       <Typography color='secondary'>
@@ -46,15 +52,15 @@ const requireDoctorConsult = (info) => (
       <Typography color='secondary'>
         Blood Glucose and Hb
       </Typography> }
-    { typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap &&
-      <Typography color='secondary'>
-        Pap Smear
-      </Typography> }
     { typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP &&
       <Typography color='secondary'>
         Blood Pressure
+      </Typography> }
+    { typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap &&
+      <Typography color='secondary'>
+        Pap Smear
       </Typography> &&
-    <Divider />}
+    <Divider /> }
   </Fragment>
 );
 // Define the layouts
@@ -173,7 +179,16 @@ export const formLayouts = {
             <SelectField name="TBQ2" />
             Do you have any of the following symptoms? Select all that apply
             <AutoField name="TBQ3" />
-            
+            <DisplayIf condition={context => (
+              context.model.TBQ1 === "Yes" ||
+              context.model.TBQ2 === 'Yes, the person was diagnosed with TB within the past 4 months' ||
+              typeof(context.model.TBQ3) !== "undefined" && context.model.TBQ3.length > 0 && !context.model.TBQ3.includes('None of the above')
+            )}><Fragment>
+              <Typography color='secondary' variant='h5'>
+                Immediate Doctor's consult for TB
+              </Typography>
+            </Fragment></DisplayIf>
+
             <h2>Medical history: others</h2>
             Do you have any medical conditions we should take note of? (if none, indicate NIL)
             <TextField name="medicalHistory1" />
@@ -393,6 +408,13 @@ export const formLayouts = {
     <Fragment>
       <TextField name="cbg" />
       <br />
+      <DisplayIf condition={context => (
+        context.model.cbg < 3 || context.model.cbg > 20
+      )}><Fragment>
+        <Typography color='secondary' variant='h5'>
+          Immediate Doctor's consult for CBG
+        </Typography>
+      </Fragment></DisplayIf>
       <TextField name="hb" />
       <br />
       <BoolField name="docConsultForBloodGlucAndHb" />
@@ -409,6 +431,18 @@ export const formLayouts = {
       <DisplayIf condition={context => Math.abs(context.model.bp2Sys - context.model.bp1Sys) > 5 || Math.abs(context.model.bp2Dia - context.model.bp1Dia) > 5 }><Fragment>
         <div><TextField name="bp3Sys" /></div>
         <div><TextField name="bp3Dia" /></div>
+      </Fragment></DisplayIf>
+
+      <div><TextField name="bpAvgSys" /></div>
+      <div><TextField name="bpAvgDia" /></div>
+
+      <DisplayIf condition={context => (
+        context.model.bpAvgSys < 90 || context.model.bpAvgSys > 180 ||
+        context.model.bpAvgDia < 60 || context.model.bpAvgDia > 120
+      )}><Fragment>
+        <Typography color='secondary' variant='h5'>
+          Immediate Doctor's consult for Blood Pressure
+        </Typography>
       </Fragment></DisplayIf>
 
       <div><BoolField name="docConsultForBP" /></div>
@@ -507,25 +541,179 @@ export const formLayouts = {
   "Eye Screening": (info) => (
     <Fragment>
       <BoolField name="specs" />
-      <TextField name="rightWoGlass" />
-      <TextField name="leftWoGlass" />
-      <TextField name="rightWiGlass" />
-      <TextField name="leftWiGlass" />
-      <TextField name="rightNearVis" />
-      <TextField name="leftNearVis" />
-      <LongTextField name="lids" />
-      <LongTextField name="conjunctiva" />
-      <LongTextField name="cornea" />
-      <LongTextField name="antSeg" />
-      <LongTextField name="iris" />
-      <LongTextField name="pupil" />
-      <LongTextField name="lens" />
-      <LongTextField name="ocuMvmt" />
-      <LongTextField name="iop" />
-      <LongTextField name="duct" />
-      <LongTextField name="cdr" />
-      <LongTextField name="macula" />
-      <LongTextField name="retina" />
+      Visual Acuity
+      <Grid
+        container
+        direction="column"
+        justify="flex-start"
+        alignItems="center"
+      >
+        <Grid container direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5}>
+            <TextField name="rightWoGlass" />
+          </Grid>
+          <Grid item xs={5}>
+            <TextField name="leftWoGlass" />
+          </Grid>
+        </Grid>
+        <DisplayIf condition={context => context.model.specs == true}><Fragment>
+          <Grid container  direction="row" justify="space-around" alignItems="center" item>
+            <Grid item xs={5} item>
+              <TextField name="rightWiGlass" />
+            </Grid>
+            <Grid item xs={5} item>
+              <TextField name="leftWiGlass" />
+            </Grid>
+          </Grid>
+        </Fragment></DisplayIf>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="rightNearVis" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="leftNearVis" />
+          </Grid>
+        </Grid>
+      </Grid>
+      
+      <Divider /><br /> 
+      Finding in the Eye
+      <Grid
+        container
+        direction="column"
+        justify="flex-start"
+        alignItems="center"
+      >
+        <Grid container direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5}>
+            <TextField name="lidsRight" />
+          </Grid>
+          <Grid item xs={5}>
+            <TextField name="lidsLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="conjunctivaRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="conjunctivaLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="corneaRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="corneaLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="antSegRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="antSegLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="irisRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="irisLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="pupilRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="pupilLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="lensRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="lensLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="ocuMvmtRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="ocuMvmtLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="iopRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="iopLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="ductRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="ductLeft" />
+          </Grid>
+        </Grid>
+      </Grid>
+
+      <Divider /><br /> 
+      Posterior Segment Examination
+      <Grid
+        container
+        direction="column"
+        justify="flex-start"
+        alignItems="center"
+      >
+        <Grid container direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5}>
+            <TextField name="cdrRight" />
+          </Grid>
+          <Grid item xs={5}>
+            <TextField name="cdrLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="maculaRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="maculaLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="retinaRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="retinaLeft" />
+          </Grid>
+        </Grid>
+      </Grid>
+      
+      <Divider /><br />
+
       <LongTextField name="diagnosis" />
       <LongTextField name="advice" />
       <LongTextField name="nameDoc" />
