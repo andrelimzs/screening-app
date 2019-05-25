@@ -48,10 +48,13 @@ class Queue extends Component {
         {this.props.patientList.map(patient => (
           <Card>
             <CardContent>
-              <Typography variant="h5">
-                {patient.id} {patient["Patient Info"].name}
+              <Typography variant="h6">
+                ID {patient.id}
               </Typography>
-              <Typography variant="body1">
+              <Typography variant="h6">
+                {patient["Patient Info"].name}
+              </Typography>
+              <Typography variant="body2">
                 {patient["Patient Info"].gender}, {patient["Patient Info"].age}
               </Typography>
             </CardContent>

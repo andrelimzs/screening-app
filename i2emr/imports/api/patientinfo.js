@@ -47,6 +47,7 @@ Meteor.methods({
 
     // Assign unique id
     data.id = Patientinfo.find({}).count() + 1;
+    data.lastSubmit = new Date();
 
     Patientinfo.insert(data);
   },
@@ -83,7 +84,12 @@ Meteor.methods({
 
     const nextStation = (typeof(stationQueue[0]) !== "undefined") ? stationQueue[0] : "Done";
     
-    Patientinfo.update({id:id},{$set:{nextStation:nextStation,busy:false,stationQueue:stationQueue}, $push:data});
+    Patientinfo.update({id:id},{$set:{
+      nextStation: nextStation,
+      busy: false,
+      stationQueue: stationQueue,
+      lastSubmit: new Date()
+    }});
 
     // console.log(Patientinfo.findOne({id:id}));
   },
