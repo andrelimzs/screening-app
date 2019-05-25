@@ -608,8 +608,7 @@ export const formSchemas = {
       label: "Weight (kg)",
     },
     bmi: {
-      type: Number,
-      min: 0,
+      type: String,
       label: "Body Mass Index",
     },
     // childWeight:{
@@ -627,8 +626,7 @@ export const formSchemas = {
       label: "Hip circumference (cm)",
     },
     waistHipRatio: {
-      type: Number,
-      min: 0,
+      type: String,
       label: "Waist:hip ratio",
     },
     docConsultForHW: {

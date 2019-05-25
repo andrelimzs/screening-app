@@ -29,6 +29,13 @@ import Grid from '@material-ui/core/Grid';
 const DisplayIf = ({children, condition}, {uniforms}) => (condition(uniforms) ? Children.only(children) : nothing);
 DisplayIf.contextTypes = BaseField.contextTypes;
 
+
+// Use to calculate values from uniform.model.<>
+const SomeComp =
+  ({ calculation }, { uniforms: { model, onChange, error } }) => ( calculation(model) );
+
+SomeComp.contextTypes = BaseField.contextTypes;
+
 const requireDoctorConsult = (info) => (
   <Fragment>
     {((typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW) ||
@@ -390,14 +397,15 @@ export const formLayouts = {
       <br />
       <TextField name="weight" />
       <br />
-      <TextField name="bmi" />
+      <SomeComp calculation={(model) => (<TextField name="bmi" value={(model.weight/model.height/model.height).toFixed(1)} />)} />
       <br />
       <h2>Waist:Hip</h2>
       <TextField name="waist" />
       <br />
       <TextField name="hip" />
       <br />
-      <TextField name="waistHipRatio" />
+      <SomeComp calculation={(model) => (<TextField name="waistHipRatio" value={(model.waist/model.hip).toFixed(1)} />)} />
+      {/* <TextField name="waistHipRatio" /> */}
       <br />
       <h2>Overview</h2>
       <BoolField name="docConsultForHW" />
