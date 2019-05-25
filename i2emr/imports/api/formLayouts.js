@@ -33,11 +33,16 @@ const requireDoctorConsult = (info) => (
   <Fragment>
     {((typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW) ||
       (typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb) ||
-      (typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap) ||
-      (typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP)) &&
+      (typeof(info["Station Selection"]) !== "undefined" && info["Station Selection"].stationSelect12 === "Yes") ||
+      (typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP) ||
+      (typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap)) &&
       <Divider /> &&
       <Typography color='secondary' variant='h6'>
         Require consult for:
+      </Typography> }
+    { typeof(info["Station Selection"]) !== "undefined" && info["Station Selection"].stationSelect12 === "Yes" &&
+      <Typography color='secondary'>
+        Registration
       </Typography> }
     { typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW &&
       <Typography color='secondary'>
@@ -47,15 +52,15 @@ const requireDoctorConsult = (info) => (
       <Typography color='secondary'>
         Blood Glucose and Hb
       </Typography> }
-    { typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap &&
-      <Typography color='secondary'>
-        Pap Smear
-      </Typography> }
     { typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP &&
       <Typography color='secondary'>
         Blood Pressure
+      </Typography> }
+    { typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap &&
+      <Typography color='secondary'>
+        Pap Smear
       </Typography> &&
-    <Divider />}
+    <Divider /> }
   </Fragment>
 );
 // Define the layouts

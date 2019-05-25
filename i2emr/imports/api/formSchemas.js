@@ -354,6 +354,7 @@ export const formSchemas = {
       },
       barrierQ2: {
         type: Array,
+        optional: true,
       },
       'barrierQ2.$': {
         type: String,
