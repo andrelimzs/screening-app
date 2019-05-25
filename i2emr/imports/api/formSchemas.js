@@ -650,6 +650,37 @@ export const formSchemas = {
 
   "Blood Glucose & Hb":
   new SimpleSchema({
+    previousDiabetesDiagnosis: {
+      type: String,
+      allowedValues: ['Yes','No'],
+    },
+    riskAssessAge: {
+      type: String,
+      optional: true,
+    },
+    riskAssessWaist: {
+      type: String,
+      optional: true,
+    },
+    riskAssessPhysicalActivity:{
+      type: String,
+      optional: true,
+      allowedValues: ['Below 3rd percentile curve',
+                      'Between 3rd percentile and overweight curves',
+                      'Between overweight and obese curves',
+                      'Above obese curve'],
+    },
+    riskAssessFamilyHis: {
+      type: String,
+      optional: true,
+      allowedValues: ['0 diabetic parents (0 points)',
+                      '1 diabetic parent (10 points)',
+                      '2 diabetic parents (20 points)'],
+    },
+    riskAssessRiskLevel: {
+      type: String,
+      optional: true,
+    },
     cbg: {
       type: SimpleSchema.Integer,
       min: 20,
