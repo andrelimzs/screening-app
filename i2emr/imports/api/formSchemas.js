@@ -746,15 +746,11 @@ export const formSchemas = {
       label: "3rd Diastolic blood pressure"
     },
     bpAvgSys: {
-      type: Number,
-      min: 50,
-      max: 300,
+      type: String,
       label: "Average Systolic blood pressure"
     },
     bpAvgDia: {
-      type: Number,
-      min: 20,
-      max: 200,
+      type: String,
       label: "Average Diastolic blood pressure"
     },
     docConsultForBP: {
