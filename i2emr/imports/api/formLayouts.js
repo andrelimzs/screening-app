@@ -22,6 +22,7 @@ import BaseField from 'uniforms/BaseField';
 import nothing from 'uniforms/nothing';
 import {Children} from 'react';
 import { Radio } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 
 // Define DisplayIf
 // Used to display fields depending on another field's response
@@ -535,25 +536,179 @@ export const formLayouts = {
   "Eye Screening": (info) => (
     <Fragment>
       <BoolField name="specs" />
-      <TextField name="rightWoGlass" />
-      <TextField name="leftWoGlass" />
-      <TextField name="rightWiGlass" />
-      <TextField name="leftWiGlass" />
-      <TextField name="rightNearVis" />
-      <TextField name="leftNearVis" />
-      <LongTextField name="lids" />
-      <LongTextField name="conjunctiva" />
-      <LongTextField name="cornea" />
-      <LongTextField name="antSeg" />
-      <LongTextField name="iris" />
-      <LongTextField name="pupil" />
-      <LongTextField name="lens" />
-      <LongTextField name="ocuMvmt" />
-      <LongTextField name="iop" />
-      <LongTextField name="duct" />
-      <LongTextField name="cdr" />
-      <LongTextField name="macula" />
-      <LongTextField name="retina" />
+      Visual Acuity
+      <Grid
+        container
+        direction="column"
+        justify="flex-start"
+        alignItems="center"
+      >
+        <Grid container direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5}>
+            <TextField name="rightWoGlass" />
+          </Grid>
+          <Grid item xs={5}>
+            <TextField name="leftWoGlass" />
+          </Grid>
+        </Grid>
+        <DisplayIf condition={context => context.model.specs == true}><Fragment>
+          <Grid container  direction="row" justify="space-around" alignItems="center" item>
+            <Grid item xs={5} item>
+              <TextField name="rightWiGlass" />
+            </Grid>
+            <Grid item xs={5} item>
+              <TextField name="leftWiGlass" />
+            </Grid>
+          </Grid>
+        </Fragment></DisplayIf>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="rightNearVis" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="leftNearVis" />
+          </Grid>
+        </Grid>
+      </Grid>
+      
+      <Divider /><br /> 
+      Finding in the Eye
+      <Grid
+        container
+        direction="column"
+        justify="flex-start"
+        alignItems="center"
+      >
+        <Grid container direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5}>
+            <TextField name="lidsRight" />
+          </Grid>
+          <Grid item xs={5}>
+            <TextField name="lidsLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="conjunctivaRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="conjunctivaLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="corneaRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="corneaLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="antSegRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="antSegLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="irisRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="irisLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="pupilRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="pupilLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="lensRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="lensLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="ocuMvmtRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="ocuMvmtLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="iopRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="iopLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="ductRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="ductLeft" />
+          </Grid>
+        </Grid>
+      </Grid>
+
+      <Divider /><br /> 
+      Posterior Segment Examination
+      <Grid
+        container
+        direction="column"
+        justify="flex-start"
+        alignItems="center"
+      >
+        <Grid container direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5}>
+            <TextField name="cdrRight" />
+          </Grid>
+          <Grid item xs={5}>
+            <TextField name="cdrLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="maculaRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="maculaLeft" />
+          </Grid>
+        </Grid>
+
+        <Grid container  direction="row" justify="space-around" alignItems="center" item>
+          <Grid item xs={5} item>
+            <TextField name="retinaRight" />
+          </Grid>
+          <Grid item xs={5} item>
+            <TextField name="retinaLeft" />
+          </Grid>
+        </Grid>
+      </Grid>
+      
+      <Divider /><br />
+
       <LongTextField name="diagnosis" />
       <LongTextField name="advice" />
       <LongTextField name="nameDoc" />

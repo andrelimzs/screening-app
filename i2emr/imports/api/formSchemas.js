@@ -819,11 +819,13 @@ export const formSchemas = {
     },
     rightWiGlass: {
       type: String,
-      label: "Right eye with glasses"
+      label: "Right eye with glasses",
+      optional: true,
     },
     leftWiGlass: {
       type: String,
-      label: "Left eye with glasses"
+      label: "Left eye with glasses",
+      optional: true,
     },
     rightNearVis: {
       type: String,
@@ -833,57 +835,111 @@ export const formSchemas = {
       type: String,
       label: "Left eye near vision"
     },
-    lids: {
+    
+    lidsLeft: {
       type: String,
-      label: "Lids"
+      label: "Left Lid"
     },
-    conjunctiva: {
+    lidsRight: {
       type: String,
-      label: "Conjunctiva"
+      label: "Right Lid"
     },
-    cornea: {
+    conjunctivaLeft: {
       type: String,
-      label: "Cornea"
+      label: "Left Conjunctiva"
     },
-    antSeg: {
+    conjunctivaRight: {
       type: String,
-      label: "Anterior Segment"
+      label: "Right Conjunctiva"
     },
-    iris: {
+    corneaLeft: {
       type: String,
-      label: "Iris"
+      label: "Left Cornea"
     },
-    pupil: {
+    corneaRight: {
       type: String,
-      label: "Pupil"
+      label: "Right Cornea"
     },
-    lens: {
+    antSegLeft: {
       type: String,
-      label: "Lens"
+      label: "Left Anterior Segment"
     },
-    ocuMvmt: {
+    antSegRight: {
       type: String,
-      label: "Ocular Movements"
+      label: "Right Anterior Segment"
     },
-    iop: {
+    irisLeft: {
       type: String,
-      label: "IOP"
+      label: "Left Iris"
     },
-    duct: {
+    irisRight: {
       type: String,
-      label: "Duct"
+      label: "Right Iris"
     },
-    cdr: {
+    pupilLeft: {
       type: String,
-      label: "CDR"
+      label: "Left Pupil"
     },
-    macula: {
+    pupilRight: {
       type: String,
-      label: "Macula"
+      label: "Right Pupil"
     },
-    retina: {
+    lensLeft: {
       type: String,
-      label: "Retina"
+      label: "Left Lens"
+    },
+    lensRight: {
+      type: String,
+      label: "Right Lens"
+    },
+    ocuMvmtLeft: {
+      type: String,
+      label: "Left Ocular Movements"
+    },
+    ocuMvmtRight: {
+      type: String,
+      label: "Right Ocular Movements"
+    },
+    iopLeft: {
+      type: String,
+      label: "Left IOP"
+    },
+    iopRight: {
+      type: String,
+      label: "Right IOP"
+    },
+    ductLeft: {
+      type: String,
+      label: "Left Duct"
+    },
+    ductRight: {
+      type: String,
+      label: "Right Duct"
+    },
+
+    cdrLeft: {
+      type: String,
+      label: "Left CDR"
+    },
+    cdrRight: {
+      type: String,
+      label: "Right CDR"
+    },
+    maculaLeft: {
+      type: String,
+      label: "Left Macula"
+    },
+    maculaRight: {
+      type: String,
+      label: "Right Macula"
+    },
+    retinaLeft: {
+      type: String,
+      label: "Left Retina"
+    },
+    retinaRight: {
+      type: String,
+      label: "Right Retina"
     },
     diagnosis: {
       type: String,
