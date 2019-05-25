@@ -440,6 +440,21 @@ export const formLayouts = {
 
   "Blood Glucose & Hb": (info) => (
     <Fragment>
+      <h2>India Diabetes Risk Assessment</h2>
+      Have you previously been diagnosed with diabetes?
+      <SelectField name="previousDiabetesDiagnosis" />
+      1. Age
+      <TextField name="riskAssessAge" />
+      2. Waist circumference (refer to Waist:Hip Ratio section)
+      <TextField name="riskAssessWaist" />
+      3. Physical activity
+      <SelectField name="riskAssessPhysicalActivity" />
+      4. Family history
+      <SelectField name="riskAssessFamilyHis" />
+      Risk level
+      <TextField name="riskAssessRiskLevel" />
+      <Divider variant="middle" />
+      
       <TextField name="cbg" />
       <br />
       <DisplayIf condition={context => (
