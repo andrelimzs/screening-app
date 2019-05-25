@@ -615,8 +615,7 @@ export const formSchemas = {
                       'Above 97th percentile curve'],
     },
     bmi: {
-      type: Number,
-      min: 0,
+      type: String,
       label: "Body Mass Index",
     },
     childBmiAssessment:{
@@ -635,8 +634,7 @@ export const formSchemas = {
       label: "Hip circumference (cm)",
     },
     waistHipRatio: {
-      type: Number,
-      min: 0,
+      type: String,
       label: "Waist:hip ratio",
     },
   }),
