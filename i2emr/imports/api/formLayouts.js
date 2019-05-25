@@ -38,9 +38,14 @@ SomeComp.contextTypes = BaseField.contextTypes;
 
 const requireDoctorConsult = (info) => (
   <Fragment>
-    {((typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW) ||
+    { (typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW) ||
       (typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb) ||
       (typeof(info["Station Selection"]) !== "undefined" && info["Station Selection"].stationSelect12 === "Yes") ||
+      (typeof(info["Height & weight"]) !== "undefined" && 
+        info["Height & weight"].childHeight.includes("Below 3rd percentile curve","Above 97th percentile curve") ||
+        info["Height & weight"].childWeight.includes("Below 3rd percentile curve","Above 97th percentile curve") ||
+        (info["Height & weight"].adultBmi < 18.5 || info["Height & weight"].adultBmi >= 23) ||
+        !info["Height & weight"].childHeight.includes("Between 3rd percentile and overweight curves") ||
       (typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP) ||
       (typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap)) &&
       <Divider /> &&
@@ -51,9 +56,21 @@ const requireDoctorConsult = (info) => (
       <Typography color='secondary'>
         Registration
       </Typography> }
-    { typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW &&
+    { typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"].childHeightAssessment.includes("Below 3rd percentile curve","Above 97th percentile curve") &&
       <Typography color='secondary'>
-        Height and Weight
+        Height (Child)
+      </Typography> }
+    { typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"].childWeightAssessment.includes("Below 3rd percentile curve","Above 97th percentile curve") &&
+      <Typography color='secondary'>
+        Weight (Child)
+      </Typography> }
+    { typeof(info["Height & weight"]) !== "undefined" && (info["Height & weight"].Bmi < 18.5 || info["Height & weight"].Bmi >= 23) &&
+      <Typography color='secondary'>
+        BMI (Adult): 
+      </Typography> }
+    { typeof(info["Height & weight"]) !== "undefined" && !info["Height & weight"].childBmiAssesment.includes("Between 3rd percentile and overweight curves") &&
+      <Typography color='secondary'>
+        BMI (Child): 
       </Typography> }
     { typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb &&
       <Typography color='secondary'>
@@ -82,7 +99,7 @@ export const formLayouts = {
         <TextField name="birthday" />
         <NumField name="age" decimal={false} />
         <Divider variant="middle"/>
-
+        
         <TextField name="district" />
         <TextField name="address" />
         <TextField name="zipcode" decimal={false} /><br />
@@ -392,12 +409,20 @@ export const formLayouts = {
   "Height & weight": (info) => (
     <Fragment>
       <h2>Height and Weight</h2>
-      {/* {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age} */}
       <TextField name="height" />
+      <br />
+      {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age <= 18 &&
+        <SelectField name="childHeightAssessment" />}
       <br />
       <TextField name="weight" />
       <br />
       <SomeComp calculation={(model) => (<TextField name="bmi" value={(model.weight/model.height/model.height).toFixed(1)} />)} />
+      {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age <= 18 &&
+        <SelectField name="childWeightAssessment" />}
+      <br />
+      <br />
+      {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age <= 18 &&
+        <SelectField name="childBmiAssessment" />}
       <br />
       <h2>Waist:Hip</h2>
       <TextField name="waist" />
@@ -407,8 +432,6 @@ export const formLayouts = {
       <SomeComp calculation={(model) => (<TextField name="waistHipRatio" value={(model.waist/model.hip).toFixed(1)} />)} />
       {/* <TextField name="waistHipRatio" /> */}
       <br />
-      <h2>Overview</h2>
-      <BoolField name="docConsultForHW" />
     </Fragment>
   ),
 

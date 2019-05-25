@@ -72,6 +72,7 @@ Meteor.methods({
       // Check for any consult flags -> otherwise skip consult
       if ((typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW) || 
           (typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb) || 
+          (typeof(info["Station Selection"]) !== "undefined" && info["Station Selection"].stationSelect12 === "Yes") ||
           (typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap) ||
           (typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP)) {
         console.log("Flagged for doctor's consult");

@@ -150,11 +150,18 @@ class Form extends Component {
       <ClearableAutoForm
         schema={currentFormSchema}
         onSubmit={this.handleSubmit}
-        onSubmitSuccess={() => {
-          const next = (this.props.stationQueue.length > 1) ? this.props.stationQueue[1] : "Done";
-          alert("Next station is: " + next);
-          }}
-        onSubmitFailure={() => alert('Unsuccessful')}
+        onSubmitSuccess={() => { 
+          console.log(!this.isMultipage);
+          console.log(this.state.pageIndex);
+          console.log(Object.keys(formSchemas[this.props.station]).length - 1);
+          if (!this.isMultipage || (this.state.pageIndex >= Object.keys(formSchemas[this.props.station]).length - 1)) {
+            const next = (typeof(this.props.stationQueue) !== "undefined" && this.props.stationQueue.length > 1) ? this.props.stationQueue[1] : "Done";
+            alert("Next station is: " + next);
+          }}}
+        onSubmitFailure={() => {
+          if (!this.isMultipage || (this.state.pageIndex >= Object.keys(formSchemas[this.props.station]).length - 1)) {
+            alert('Unsuccessful')
+          }}}
       >
         {currentFormLayout(this.props.patientInfo)}
         <ErrorsField />
