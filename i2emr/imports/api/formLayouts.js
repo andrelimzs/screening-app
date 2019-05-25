@@ -35,10 +35,10 @@ const requireDoctorConsult = (info) => (
       (typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb) ||
       (typeof(info["Station Selection"]) !== "undefined" && info["Station Selection"].stationSelect12 === "Yes") ||
       (typeof(info["Height & weight"]) !== "undefined" && 
-        info["Height & weight"].childHeight.includes("Below 3rd percentile curve","Above 97th percentile curve") ||
-        info["Height & weight"].childWeight.includes("Below 3rd percentile curve","Above 97th percentile curve") ||
-        (info["Height & weight"].adultBmi < 18.5 || info["Height & weight"].adultBmi >= 23) ||
-        !info["Height & weight"].childHeight.includes("Between 3rd percentile and overweight curves") ||
+        info["Height & weight"].childHeightAssessment.includes("Below 3rd percentile curve","Above 97th percentile curve") ||
+        info["Height & weight"].childWeightAssessment.includes("Below 3rd percentile curve","Above 97th percentile curve") ||
+        (info["Height & weight"].bmi < 18.5 || info["Height & weight"].bmi >= 23) ||
+        !info["Height & weight"].childBmiAssessment.includes("Between 3rd percentile and overweight curves") ||
       (typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP) ||
       (typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap)) &&
       <Divider /> &&
@@ -57,7 +57,7 @@ const requireDoctorConsult = (info) => (
       <Typography color='secondary'>
         Weight (Child)
       </Typography> }
-    { typeof(info["Height & weight"]) !== "undefined" && (info["Height & weight"].Bmi < 18.5 || info["Height & weight"].Bmi >= 23) &&
+    { typeof(info["Height & weight"]) !== "undefined" && (info["Height & weight"].bmi < 18.5 || info["Height & weight"].bmi >= 23) &&
       <Typography color='secondary'>
         BMI (Adult): 
       </Typography> }
@@ -92,7 +92,7 @@ export const formLayouts = {
         <TextField name="birthday" />
         <NumField name="age" decimal={false} />
         <Divider variant="middle"/>
-        
+
         <TextField name="district" />
         <TextField name="address" />
         <TextField name="zipcode" decimal={false} /><br />

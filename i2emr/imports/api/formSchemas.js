@@ -521,6 +521,7 @@ export const formSchemas = {
       },
       stationSelect5: {
         type: Array,
+        optional: true,
       },
       'stationSelect5.$': {
         type: String,
