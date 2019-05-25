@@ -98,6 +98,9 @@ export const formLayouts = {
         Enter birthdate in dd/mm/yyyy format
         <TextField name="birthday" />
         <NumField name="age" decimal={false} />
+        {/* <SomeComp calculation={(model) => (<NumField name="age" decimal={false} value={
+          new Date().getFullYear() - Number(model.birthday.substring(model.birthday.length-4,model.birthday.length))
+        }/>)} /> */}
         <Divider variant="middle"/>
         
         <TextField name="district" />
@@ -464,8 +467,18 @@ export const formLayouts = {
         <div><TextField name="bp3Dia" /></div>
       </Fragment></DisplayIf>
 
-      <div><TextField name="bpAvgSys" /></div>
-      <div><TextField name="bpAvgDia" /></div>
+      {/* <div><TextField name="bpAvgSys" /></div> */}
+      <SomeComp calculation={(model) => (<TextField name="bpAvgSys" value={
+        (
+          (Number(model.bp1Sys) + Number(model.bp2Sys) + ((typeof(model.bp3Sys) === "undefined") ? 0 : Number(model.bp3Sys))) / ((typeof(model.bp3Sys) === "undefined") ? 2:3)
+        ).toFixed(1)
+        } />)} />
+      {/* <div><TextField name="bpAvgDia" /></div> */}
+      <SomeComp calculation={(model) => (<TextField name="bpAvgDia" value={
+        (
+          (Number(model.bp1Dia) + Number(model.bp2Dia) + ((typeof(model.bp3Dia) === "undefined") ? 0 : Number(model.bp3Dia))) / ((typeof(model.bp3Sys) === "undefined") ? 2:3)
+        ).toFixed(1)
+        } />)} />
 
       <DisplayIf condition={context => (
         context.model.bpAvgSys < 90 || context.model.bpAvgSys > 180 ||
@@ -767,6 +780,9 @@ export const formLayouts = {
         From a scale of 1-5, how much do you know about good eyecare habits?
         1 being not at all, and 5 being a lot
         <SelectField name="preEduSurvey4" />
+        <Divider />
+        Score
+        <TextField value={10} />
       </Fragment>
     ),
 
