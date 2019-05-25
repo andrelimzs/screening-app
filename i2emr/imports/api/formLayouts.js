@@ -42,12 +42,12 @@ const requireDoctorConsult = (info) => (
       (typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb) ||
       (typeof(info["Station Selection"]) !== "undefined" && info["Station Selection"].stationSelect12 === "Yes") ||
       (typeof(info["Height & weight"]) !== "undefined" && 
-        info["Height & weight"].childHeightAssessment.includes("Below 3rd percentile curve","Above 97th percentile curve") ||
-        info["Height & weight"].childWeightAssessment.includes("Below 3rd percentile curve","Above 97th percentile curve") ||
-        (info["Height & weight"].bmi < 18.5 || info["Height & weight"].bmi >= 23) ||
-        !info["Height & weight"].childBmiAssessment.includes("Between 3rd percentile and overweight curves") ||
+        (info["Height & weight"][0].childHeightAssessment.includes("Below 3rd percentile curve","Above 97th percentile curve") ||
+        info["Height & weight"][0].childWeightAssessment.includes("Below 3rd percentile curve","Above 97th percentile curve") ||
+        (info["Height & weight"][0].bmi < 18.5 || info["Height & weight"][0].bmi >= 23) ||
+        !info["Height & weight"][0].childBmiAssessment.includes("Between 3rd percentile and overweight curves"))) ||
       (typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP) ||
-      (typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap)) &&
+      (typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap) &&
       <Divider /> &&
       <Typography color='secondary' variant='h6'>
         Require consult for:
@@ -56,19 +56,19 @@ const requireDoctorConsult = (info) => (
       <Typography color='secondary'>
         Registration
       </Typography> }
-    { typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"].childHeightAssessment.includes("Below 3rd percentile curve","Above 97th percentile curve") &&
+    { typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].childHeightAssessment.includes("Below 3rd percentile curve","Above 97th percentile curve") &&
       <Typography color='secondary'>
         Height (Child)
       </Typography> }
-    { typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"].childWeightAssessment.includes("Below 3rd percentile curve","Above 97th percentile curve") &&
+    { typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].childWeightAssessment.includes("Below 3rd percentile curve","Above 97th percentile curve") &&
       <Typography color='secondary'>
-        Weight (Child)
+        Height (Child)
       </Typography> }
-    { typeof(info["Height & weight"]) !== "undefined" && (info["Height & weight"].bmi < 18.5 || info["Height & weight"].bmi >= 23) &&
+    { typeof(info["Height & weight"]) !== "undefined" && (info["Height & weight"][0].bmi < 18.5 || info["Height & weight"][0].bmi >= 23) &&
       <Typography color='secondary'>
         BMI (Adult): 
       </Typography> }
-    { typeof(info["Height & weight"]) !== "undefined" && !info["Height & weight"].childBmiAssesment.includes("Between 3rd percentile and overweight curves") &&
+    { typeof(info["Height & weight"]) !== "undefined" && !info["Height & weight"][0].childBmiAssessment.includes("Between 3rd percentile and overweight curves") &&
       <Typography color='secondary'>
         BMI (Child): 
       </Typography> }
@@ -333,7 +333,7 @@ export const formLayouts = {
               <NumField name="socialHisQ2" /><br />
             </Fragment></DisplayIf>
             What is your occupation?
-            <AutoField name="socialHisQ3" />
+            <SelectField name="socialHisQ3" />
             <DisplayIf condition={context => Array.isArray(context.model.socialHisQ3) && context.model.socialHisQ3.includes('Others (free text)')}><Fragment>
               Other complaints
               <TextField name="otherOcc" />
@@ -419,10 +419,10 @@ export const formLayouts = {
       <br />
       <TextField name="weight" />
       <br />
-      <SomeComp calculation={(model) => (<TextField name="bmi" value={(model.weight/model.height/model.height).toFixed(1)} />)} />
       {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age <= 18 &&
         <SelectField name="childWeightAssessment" />}
       <br />
+      <SomeComp calculation={(model) => (<TextField name="bmi" value={(model.weight/model.height/model.height).toFixed(1)} />)} />
       <br />
       {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age <= 18 &&
         <SelectField name="childBmiAssessment" />}
@@ -782,7 +782,6 @@ export const formLayouts = {
         <SelectField name="preEduSurvey4" />
         <Divider />
         Score
-        <TextField value={10} />
       </Fragment>
     ),
 
