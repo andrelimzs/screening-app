@@ -680,6 +680,9 @@ export const formSchemas = {
     riskAssessRiskLevel: {
       type: String,
       optional: true,
+      allowedValues: ['0-20: Low risk',
+                      '30-50: Medium risk',
+                      '60-100: High risk'],
     },
     cbg: {
       type: SimpleSchema.Integer,
@@ -788,15 +791,11 @@ export const formSchemas = {
       label: "3rd Diastolic blood pressure"
     },
     bpAvgSys: {
-      type: Number,
-      min: 50,
-      max: 300,
+      type: String,
       label: "Average Systolic blood pressure"
     },
     bpAvgDia: {
-      type: Number,
-      min: 20,
-      max: 200,
+      type: String,
       label: "Average Diastolic blood pressure"
     },
     docConsultForBP: {
