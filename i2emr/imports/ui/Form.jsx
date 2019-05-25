@@ -150,11 +150,8 @@ class Form extends Component {
       <ClearableAutoForm
         schema={currentFormSchema}
         onSubmit={this.handleSubmit}
-        onSubmitSuccess={() => { 
-          console.log(!this.isMultipage);
-          console.log(this.state.pageIndex);
-          console.log(Object.keys(formSchemas[this.props.station]).length);
-          if (!this.isMultipage || (this.state.pageIndex == 0)) {
+        onSubmitSuccess={() => {
+          if (this.props.station !== "Registration" && (!this.isMultipage || (this.state.pageIndex == 0))) {
             const next = (typeof(this.props.stationQueue) !== "undefined" && this.props.stationQueue.length > 1) ? this.props.stationQueue[1] : "Done";
             alert("Next station is: " + next);
           }}}

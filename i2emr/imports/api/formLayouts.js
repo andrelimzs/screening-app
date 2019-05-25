@@ -29,39 +29,58 @@ import Grid from '@material-ui/core/Grid';
 const DisplayIf = ({children, condition}, {uniforms}) => (condition(uniforms) ? Children.only(children) : nothing);
 DisplayIf.contextTypes = BaseField.contextTypes;
 
+
+// Use to calculate values from uniform.model.<>
+const SomeComp =
+  ({ calculation }, { uniforms: { model, onChange, error } }) => ( calculation(model) );
+
+SomeComp.contextTypes = BaseField.contextTypes;
+
+const checkInfo = (station,field,msg1,msg2) => (
+  typeof(station) !== "undefined" &&
+  typeof(station[0][field]) !== "undefined" &&
+  station[0][field].includes(msg1,msg2)
+);
+const checkInfo2 = (station,field,msg1) => (
+  typeof(station) !== "undefined" &&
+  typeof(station[0][field]) !== "undefined" &&
+  !station[0][field].includes(msg1)
+);
+
 const requireDoctorConsult = (info) => (
   <Fragment>
-    { (typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW) ||
+    {((typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW) ||
       (typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb) ||
       (typeof(info["Station Selection"]) !== "undefined" && info["Station Selection"].stationSelect12 === "Yes") ||
-      (typeof(info["Height & weight"]) !== "undefined" && 
-        info["Height & weight"].childHeightAssessment.includes("Below 3rd percentile curve","Above 97th percentile curve") ||
-        info["Height & weight"].childWeightAssessment.includes("Below 3rd percentile curve","Above 97th percentile curve") ||
-        (info["Height & weight"].bmi < 18.5 || info["Height & weight"].bmi >= 23) ||
-        !info["Height & weight"].childBmiAssessment.includes("Between 3rd percentile and overweight curves") ||
       (typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP) ||
-      (typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap)) &&
+      (typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap) ||
+      (typeof(info["Height & weight"]) !== "undefined" &&
+        (checkInfo(info["Height & weight"], "childHeightAssessment", "Below 3rd percentile curve","Above 97th percentile curve") ||
+        checkInfo(info["Height & weight"], "childWeightAssessment", "Below 3rd percentile curve","Above 97th percentile curve") ||
+        (info["Height & weight"][0].bmi < 18.5 || info["Height & weight"][0].bmi >= 23) ||
+        checkInfo2(info["Height & weight"], "childBmiAssessment", "Between 3rd percentile and overweight curves")))) &&
       <Divider /> &&
       <Typography color='secondary' variant='h6'>
         Require consult for:
       </Typography> }
+
     { typeof(info["Station Selection"]) !== "undefined" && info["Station Selection"].stationSelect12 === "Yes" &&
       <Typography color='secondary'>
         Registration
       </Typography> }
-    { typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"].childHeightAssessment.includes("Below 3rd percentile curve","Above 97th percentile curve") &&
+    { checkInfo(info["Height & weight"], "childHeightAssessment", "Below 3rd percentile curve","Above 97th percentile curve") &&
       <Typography color='secondary'>
         Height (Child)
       </Typography> }
-    { typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"].childWeightAssessment.includes("Below 3rd percentile curve","Above 97th percentile curve") &&
+    { checkInfo(info["Height & weight"], "childWeightAssessment", "Below 3rd percentile curve","Above 97th percentile curve") &&
       <Typography color='secondary'>
-        Weight (Child)
+        Height (Child)
       </Typography> }
-    { typeof(info["Height & weight"]) !== "undefined" && (info["Height & weight"].bmi < 18.5 || info["Height & weight"].bmi >= 23) &&
+    { typeof(info["Height & weight"]) !== "undefined" && (info["Height & weight"][0].bmi < 18.5 || info["Height & weight"][0].bmi >= 23) &&
       <Typography color='secondary'>
         BMI (Adult): 
       </Typography> }
-    { typeof(info["Height & weight"]) !== "undefined" && !info["Height & weight"].childBmiAssesment.includes("Between 3rd percentile and overweight curves") &&
+    { checkInfo2(info["Height & weight"], "childBmiAssessment", "Between 3rd percentile and overweight curves") &&
       <Typography color='secondary'>
         BMI (Child): 
       </Typography> }
@@ -91,6 +110,9 @@ export const formLayouts = {
         Enter birthdate in dd/mm/yyyy format
         <TextField name="birthday" />
         <NumField name="age" decimal={false} />
+        {/* <SomeComp calculation={(model) => (<NumField name="age" decimal={false} value={
+          new Date().getFullYear() - Number(model.birthday.substring(model.birthday.length-4,model.birthday.length))
+        }/>)} /> */}
         <Divider variant="middle"/>
 
         <TextField name="district" />
@@ -323,7 +345,7 @@ export const formLayouts = {
               <NumField name="socialHisQ2" /><br />
             </Fragment></DisplayIf>
             What is your occupation?
-            <AutoField name="socialHisQ3" />
+            <SelectField name="socialHisQ3" />
             <DisplayIf condition={context => Array.isArray(context.model.socialHisQ3) && context.model.socialHisQ3.includes('Others (free text)')}><Fragment>
               Other complaints
               <TextField name="otherOcc" />
@@ -412,7 +434,7 @@ export const formLayouts = {
       {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age <= 18 &&
         <SelectField name="childWeightAssessment" />}
       <br />
-      <TextField name="bmi" />
+      <SomeComp calculation={(model) => (<TextField name="bmi" value={(model.weight/model.height/model.height).toFixed(1)} />)} />
       <br />
       {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age <= 18 &&
         <SelectField name="childBmiAssessment" />}
@@ -422,13 +444,49 @@ export const formLayouts = {
       <br />
       <TextField name="hip" />
       <br />
-      <TextField name="waistHipRatio" />
+      <SomeComp calculation={(model) => (<TextField name="waistHipRatio" value={(model.waist/model.hip).toFixed(1)} />)} />
+      {/* <TextField name="waistHipRatio" /> */}
       <br />
     </Fragment>
   ),
 
   "Blood Glucose & Hb": (info) => (
     <Fragment>
+      <h2>India Diabetes Risk Assessment</h2>
+      Have you previously been diagnosed with diabetes?
+      <SelectField name="previousDiabetesDiagnosis" />
+
+      <DisplayIf condition={context => (typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age > 17)}>
+        <Fragment>
+          1. Age
+          <SomeComp calculation={(model) => (<TextField name="riskAssessAge" value={
+            ((typeof(info["Patient Info"]) !== "undefined") ? info["Patient Info"].age : "")
+          } />)} />
+          2. Waist circumference (refer to Waist:Hip Ratio section)
+          <SomeComp calculation={(model) => (<TextField name="riskAssessWaist" value={
+            (
+              (typeof(info["Height & weight"]) !== "undefined") ? 
+              (
+                (info["Height & weight"][0].waist < ((info["Patient Info"].gender==="male")?90:80) ) ? "0 points" : 
+                  (
+                    (info["Height & weight"][0].waist < ((info["Patient Info"].gender==="male")?90:100) ) ? "10 points" : "20 points"
+                  )
+              ) : ""
+            )
+          } />)} />
+          3. Physical activity
+          <SelectField name="riskAssessPhysicalActivity" />
+          4. Family history
+          <SelectField name="riskAssessFamilyHis" />
+          Risk level
+          <TextField name="riskAssessRiskLevel" />
+          {/* <SomeComp calculation={(model) => (<TextField name="riskAssessRiskLevel" value={
+            ((Number(model.riskAssessAge)<35) ? 0 : (Number(model.riskAssessAge)<50) ? 20 : 30)
+          } />)} /> */}
+          <Divider variant="middle" />
+        </Fragment>
+      </DisplayIf>
+      
       <TextField name="cbg" />
       <br />
       <DisplayIf condition={context => (
@@ -456,8 +514,18 @@ export const formLayouts = {
         <div><TextField name="bp3Dia" /></div>
       </Fragment></DisplayIf>
 
-      <div><TextField name="bpAvgSys" /></div>
-      <div><TextField name="bpAvgDia" /></div>
+      {/* <div><TextField name="bpAvgSys" /></div> */}
+      <SomeComp calculation={(model) => (<TextField name="bpAvgSys" value={
+        (
+          (Number(model.bp1Sys) + Number(model.bp2Sys) + ((typeof(model.bp3Sys) === "undefined") ? 0 : Number(model.bp3Sys))) / ((typeof(model.bp3Sys) === "undefined") ? 2:3)
+        ).toFixed(1)
+        } />)} />
+      {/* <div><TextField name="bpAvgDia" /></div> */}
+      <SomeComp calculation={(model) => (<TextField name="bpAvgDia" value={
+        (
+          (Number(model.bp1Dia) + Number(model.bp2Dia) + ((typeof(model.bp3Dia) === "undefined") ? 0 : Number(model.bp3Dia))) / ((typeof(model.bp3Sys) === "undefined") ? 2:3)
+        ).toFixed(1)
+        } />)} />
 
       <DisplayIf condition={context => (
         context.model.bpAvgSys < 90 || context.model.bpAvgSys > 180 ||
@@ -759,6 +827,8 @@ export const formLayouts = {
         From a scale of 1-5, how much do you know about good eyecare habits?
         1 being not at all, and 5 being a lot
         <SelectField name="preEduSurvey4" />
+        <Divider />
+        Score
       </Fragment>
     ),
 

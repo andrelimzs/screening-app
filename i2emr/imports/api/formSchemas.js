@@ -598,6 +598,20 @@ export const formSchemas = {
     },
     childHeightAssessment: {
       type: String,
+      optional: true,
+      allowedValues: ['Below 3rd percentile curve', 
+                      'Between 3rd and 97th percentile curves',
+                      'Above 97th percentile curve'],
+        },
+    weight: {
+      type: Number,
+      min: 5,
+      max: 500,
+      label: "Weight (kg)",
+    },    
+    childWeightAssessment: {
+      type: String,
+      optional: true,
       allowedValues: ['Below 3rd percentile curve', 
                       'Between 3rd and 97th percentile curves',
                       'Above 97th percentile curve'],
@@ -608,19 +622,13 @@ export const formSchemas = {
       max: 500,
       label: "Weight (kg)",
     },
-    childWeightAssessment:{
-      type: String,
-      allowedValues: ['Below 3rd percentile curve', 
-                      'Between 3rd and 97th percentile curves',
-                      'Above 97th percentile curve'],
-    },
     bmi: {
-      type: Number,
-      min: 0,
+      type: String,
       label: "Body Mass Index",
     },
     childBmiAssessment:{
       type: String,
+      optional: true,
       allowedValues: ['Below 3rd percentile curve',
                       'Between 3rd percentile and overweight curves',
                       'Between overweight and obese curves',
@@ -635,24 +643,59 @@ export const formSchemas = {
       label: "Hip circumference (cm)",
     },
     waistHipRatio: {
-      type: Number,
-      min: 0,
+      type: String,
       label: "Waist:hip ratio",
     },
   }),
 
   "Blood Glucose & Hb":
   new SimpleSchema({
+    previousDiabetesDiagnosis: {
+      type: String,
+      allowedValues: ['Yes','No'],
+    },
+    riskAssessAge: {
+      type: String,
+      optional: true,
+    },
+    riskAssessWaist: {
+      type: String,
+      optional: true,
+    },
+    riskAssessPhysicalActivity:{
+      type: String,
+      optional: true,
+      allowedValues: ['Below 3rd percentile curve',
+                      'Between 3rd percentile and overweight curves',
+                      'Between overweight and obese curves',
+                      'Above obese curve'],
+    },
+    riskAssessFamilyHis: {
+      type: String,
+      optional: true,
+      allowedValues: ['0 diabetic parents (0 points)',
+                      '1 diabetic parent (10 points)',
+                      '2 diabetic parents (20 points)'],
+    },
+    riskAssessRiskLevel: {
+      type: String,
+      optional: true,
+      allowedValues: ['0-20: Low risk',
+                      '30-50: Medium risk',
+                      '60-100: High risk'],
+    },
     cbg: {
       type: SimpleSchema.Integer,
       min: 20,
       max: 400,
+      optional: true,
       label: "Capillary Blood Glucose (mg/dL)",
     },
     hb: {
       type: Number,
       min: 4,
       max: 40,
+      optional: true,
       label: "Hemoglobin (g/dL)",
     },
     docConsultForBloodGlucAndHb:{
@@ -748,15 +791,11 @@ export const formSchemas = {
       label: "3rd Diastolic blood pressure"
     },
     bpAvgSys: {
-      type: Number,
-      min: 50,
-      max: 300,
+      type: String,
       label: "Average Systolic blood pressure"
     },
     bpAvgDia: {
-      type: Number,
-      min: 20,
-      max: 200,
+      type: String,
       label: "Average Diastolic blood pressure"
     },
     docConsultForBP: {
@@ -1054,33 +1093,36 @@ export const formSchemas = {
     "Pre-Education Quiz":
     new SimpleSchema ({
       preEduQuiz1: {
-      type: String,
-      allowedValues: ['Do not exercise', 'Have diabetes', 'Smoke', 'All of the above'],   
+        type: String,
+        allowedValues: ['Do not exercise', 'Have diabetes', 'Smoke', 'All of the above'],   
       },
       preEduQuiz2: {
         type: String,
-        allowedValues: ['Do not exercise', 'Have diabetes', 'Smoke', 'All of the above'],   
-        },
+        allowedValues: ['Blindness',
+                        'Amputation',
+                        'Craving sweet food',
+                        'Kidney failure'],   
+      },
         preEduQuiz3: {
         type: String,
         allowedValues: ['60 mins', '90 mins', '120 mins', '150 mins'],    
-        },
+      },
       preEduQuiz4: {
         type: String,
         allowedValues: ['1/2 rice, 1/4 fruits and vegetables, 1/4 protein', '2/5 rice, 1/5 vegetables, 1/5 fruits, 1/5 protein', '1/3 rice, 1/3 vegetables, 1/3 protein', '1/2 fruits and vegetables, 1/4 rice, 1/4 protein'],   
-        },
+      },
       preEduQuiz5: {
         type: String,
         allowedValues: ['Daal', 'Mattar Paneer', 'Chole Bhattura', 'Butter Paneer'],   
-        },
+      },
       preEduQuiz6: {
         type: String,
         allowedValues: ['Tobacco', 'Alcohol', 'Pesticides', 'All of the above'],   
-        },
+      },
       preEduQuiz7: {
         type: String,
         allowedValues: ['Get comprehensive eye exams regularly', 'Use a computer for 2h to finish my work', 'Read under sufficiently bright light', 'Wear sunglasses and caps when outdoors to protect eyes from UV rays'],   
-        },
+      },
     }),
 
     "Post-Education Survey":
@@ -1111,28 +1153,31 @@ export const formSchemas = {
       },
       postEduQuiz2: {
         type: String,
-        allowedValues: ['Do not exercise', 'Have diabetes', 'Smoke', 'All of the above'],   
-        },
+        allowedValues: ['Blindness',
+                        'Amputation',
+                        'Craving sweet food',
+                        'Kidney failure'],   
+      },
       postEduQuiz3: {
         type: String,
         allowedValues: ['60 mins', '90 mins', '120 mins', '150 mins'],    
-        },
+      },
       postEduQuiz4: {
         type: String,
         allowedValues: ['1/2 rice, 1/4 fruits and vegetables, 1/4 protein', '2/5 rice, 1/5 vegetables, 1/5 fruits, 1/5 protein', '1/3 rice, 1/3 vegetables, 1/3 protein', '1/2 fruits and vegetables, 1/4 rice, 1/4 protein'],   
-        },
+      },
       postEduQuiz5: {
         type: String,
         allowedValues: ['Daal', 'Mattar Paneer', 'Chole Bhattura', 'Butter Paneer'],   
-        },
+      },
       postEduQuiz6: {
         type: String,
         allowedValues: ['Tobacco', 'Alcohol', 'Pesticides', 'All of the above'],   
-        },
+      },
       postEduQuiz7: {
         type: String,
         allowedValues: ['Get comprehensive eye exams regularly', 'Use a computer for 2h to finish my work', 'Read under sufficiently bright light', 'Wear sunglasses and caps when outdoors to protect eyes from UV rays'],   
-        },
+      },
     }),
   },
 
