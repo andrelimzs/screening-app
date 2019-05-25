@@ -595,29 +595,36 @@ export const formSchemas = {
       max: 2.8,
       label: "Height (m)",
     },
-    // childHeight: {
-    //   type: String,
-    //   allowedValues: ['Below 3rd percentile curve', 
-    //                   'Between 3rd and 97th percentile curves',
-    //                   'Above 97th percentile curve'],
-    // },
+    childHeightAssessment: {
+      type: String,
+      allowedValues: ['Below 3rd percentile curve', 
+                      'Between 3rd and 97th percentile curves',
+                      'Above 97th percentile curve'],
+        },
     weight: {
       type: Number,
       min: 5,
       max: 500,
       label: "Weight (kg)",
     },
+    childWeightAssessment:{
+      type: String,
+      allowedValues: ['Below 3rd percentile curve', 
+                      'Between 3rd and 97th percentile curves',
+                      'Above 97th percentile curve'],
+    },
     bmi: {
       type: Number,
       min: 0,
       label: "Body Mass Index",
     },
-    // childWeight:{
-    //   type: String,
-    //   allowedValues: ['Below 3rd percentile curve', 
-    //                   'Between 3rd and 97th percentile curves',
-    //                   'Above 97th percentile curve'],
-    // },
+    childBmiAssessment:{
+      type: String,
+      allowedValues: ['Below 3rd percentile curve',
+                      'Between 3rd percentile and overweight curves',
+                      'Between overweight and obese curves',
+                      'Above obese curve'],
+    },
     waist: {
       type: Number,
       label: "Waist circumference (cm)",
@@ -630,10 +637,6 @@ export const formSchemas = {
       type: Number,
       min: 0,
       label: "Waist:hip ratio",
-    },
-    docConsultForHW: {
-      type: Boolean,
-      label: "Doctors consult required?",
     },
   }),
 
