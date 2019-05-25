@@ -40,6 +40,7 @@ Meteor.startup(() => {
       stationQueue:["Height & weight", "Blood Glucose & Hb", "Blood Pressure", "Phlebotomy", "Doctors' Consult", "Eye Screening", "Education"],
       nextStation: 'Height & weight',
       busy:false,
+      lastSubmit: new Date(),
       createdAt: new Date()
     });
     Patientinfo.insert({
@@ -57,6 +58,7 @@ Meteor.startup(() => {
       stationQueue:["Height & weight", "Blood Glucose & Hb", "Blood Pressure", "Phlebotomy", "Doctors' Consult","Eye Screening", "Education"],
       nextStation: 'Height & weight',
       busy:false,
+      lastSubmit: new Date(),
       createdAt: new Date()
     });
     Patientinfo.insert({

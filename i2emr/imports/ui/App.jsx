@@ -127,9 +127,8 @@ const AppContainer = withTracker(() => {
   const station = Session.get('station');
   const currentPatientID = Session.get('currentPatient');
   const patientList = Patientinfo.find(
-    {$and:[{nextStation:station},
-      {$or:[{busy:false},{id:currentPatientID}]}
-    ]}).fetch();
+    { $and:[{ nextStation: station }, { $or:[{ busy: false },{ id: currentPatientID }] }
+    ]}, { sort: { lastSubmit: 1 } }).fetch();
 
   // TODO - Find better way to sent patient info in
   // Retrieve current patient info for Info component
