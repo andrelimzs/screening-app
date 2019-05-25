@@ -36,31 +36,43 @@ const SomeComp =
 
 SomeComp.contextTypes = BaseField.contextTypes;
 
+const checkInfo = (station,field,msg1,msg2) => (
+  typeof(station) !== "undefined" &&
+  typeof(station[0][field]) !== "undefined" &&
+  station[0][field].includes(msg1,msg2)
+);
+const checkInfo2 = (station,field,msg1) => (
+  typeof(station) !== "undefined" &&
+  typeof(station[0][field]) !== "undefined" &&
+  !station[0][field].includes(msg1)
+);
+
 const requireDoctorConsult = (info) => (
   <Fragment>
-    { (typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW) ||
+    {((typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW) ||
       (typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb) ||
       (typeof(info["Station Selection"]) !== "undefined" && info["Station Selection"].stationSelect12 === "Yes") ||
-      (typeof(info["Height & weight"]) !== "undefined" && 
-        (info["Height & weight"][0].childHeightAssessment.includes("Below 3rd percentile curve","Above 97th percentile curve") ||
-        info["Height & weight"][0].childWeightAssessment.includes("Below 3rd percentile curve","Above 97th percentile curve") ||
-        (info["Height & weight"][0].bmi < 18.5 || info["Height & weight"][0].bmi >= 23) ||
-        !info["Height & weight"][0].childBmiAssessment.includes("Between 3rd percentile and overweight curves"))) ||
       (typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP) ||
-      (typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap) &&
+      (typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap) ||
+      (typeof(info["Height & weight"]) !== "undefined" &&
+        (checkInfo(info["Height & weight"], "childHeightAssessment", "Below 3rd percentile curve","Above 97th percentile curve") ||
+        checkInfo(info["Height & weight"], "childWeightAssessment", "Below 3rd percentile curve","Above 97th percentile curve") ||
+        (info["Height & weight"][0].bmi < 18.5 || info["Height & weight"][0].bmi >= 23) ||
+        checkInfo2(info["Height & weight"], "childBmiAssessment", "Between 3rd percentile and overweight curves")))) &&
       <Divider /> &&
       <Typography color='secondary' variant='h6'>
         Require consult for:
       </Typography> }
+
     { typeof(info["Station Selection"]) !== "undefined" && info["Station Selection"].stationSelect12 === "Yes" &&
       <Typography color='secondary'>
         Registration
       </Typography> }
-    { typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].childHeightAssessment.includes("Below 3rd percentile curve","Above 97th percentile curve") &&
+    { checkInfo(info["Height & weight"], "childHeightAssessment", "Below 3rd percentile curve","Above 97th percentile curve") &&
       <Typography color='secondary'>
         Height (Child)
       </Typography> }
-    { typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].childWeightAssessment.includes("Below 3rd percentile curve","Above 97th percentile curve") &&
+    { checkInfo(info["Height & weight"], "childWeightAssessment", "Below 3rd percentile curve","Above 97th percentile curve") &&
       <Typography color='secondary'>
         Height (Child)
       </Typography> }
@@ -68,7 +80,7 @@ const requireDoctorConsult = (info) => (
       <Typography color='secondary'>
         BMI (Adult): 
       </Typography> }
-    { typeof(info["Height & weight"]) !== "undefined" && !info["Height & weight"][0].childBmiAssessment.includes("Between 3rd percentile and overweight curves") &&
+    { checkInfo2(info["Height & weight"], "childBmiAssessment", "Between 3rd percentile and overweight curves") &&
       <Typography color='secondary'>
         BMI (Child): 
       </Typography> }
