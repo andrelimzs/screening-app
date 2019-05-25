@@ -696,6 +696,10 @@ export const formSchemas = {
       type: Boolean, 
       label: "FNAC Completed?"
     },
+    breastCompleted: {
+      type: Boolean,
+      label: "Breast screening completed",
+    }
   }),
 
   "Blood Pressure":

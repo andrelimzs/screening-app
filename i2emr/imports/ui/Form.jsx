@@ -94,7 +94,7 @@ class Form extends Component {
       formData.id = this.props.id;
 
       // if (!this.isMultipage || this.pageIndex >= Object.keys(formSchemas[this.props.station]).length - 1) {
-      console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
+      // console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
       newForm.nextStation = this.stations[this.stations.indexOf(this.props.station)+1];
 
       Meteor.call('patientinfo.update', formData);
@@ -109,7 +109,7 @@ class Form extends Component {
 
   handleSkipStation(stationToSkip, event) {
     if (confirm("Confirm skip " + stationToSkip + "?")) {
-      Meteor.call('patientinfo.skipStation', this.props.id, this.props.id.station, stationToSkip);
+      Meteor.call('patientinfo.skipStation', this.props.id, this.props.station, stationToSkip);
     }
   }
 
@@ -147,7 +147,10 @@ class Form extends Component {
     }
     
     const newForm = () => (
-      <ClearableAutoForm schema={currentFormSchema} onSubmit={this.handleSubmit} >
+      <ClearableAutoForm
+        schema={currentFormSchema}
+        onSubmit={this.handleSubmit}
+      >
         {currentFormLayout(this.props.patientInfo)}
         <ErrorsField />
         <div>
