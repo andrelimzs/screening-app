@@ -95,7 +95,7 @@ class Form extends Component {
 
       // if (!this.isMultipage || this.pageIndex >= Object.keys(formSchemas[this.props.station]).length - 1) {
       // console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
-      newForm.nextStation = this.stations[this.stations.indexOf(this.props.station)+1];
+      // newForm.nextStation = this.stations[this.stations.indexOf(this.props.station)+1];
 
       Meteor.call('patientinfo.update', formData);
 
@@ -150,12 +150,24 @@ class Form extends Component {
       <ClearableAutoForm
         schema={currentFormSchema}
         onSubmit={this.handleSubmit}
+        onSubmitSuccess={() => {
+          const next = (this.props.stationQueue.length > 1) ? this.props.stationQueue[1] : "Done";
+          alert("Next station is: " + next);
+          }}
+        onSubmitFailure={() => alert('Unsuccessful')}
       >
         {currentFormLayout(this.props.patientInfo)}
         <ErrorsField />
         <div>
           <SubmitField inputRef={(ref) => this.formRef = ref} />
         </div>
+        
+        <br /><Divider />
+        {typeof(this.props.stationQueue) !== "undefined" &&
+          <Typography variant="h6">
+            Next station: {this.props.stationQueue[1]}
+          </Typography>
+        }
       </ClearableAutoForm>
     );
     

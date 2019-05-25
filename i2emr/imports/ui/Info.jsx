@@ -31,7 +31,7 @@ class Info extends Component {
     if (value == 1 && prompt("Password") === "iloveodisha" ) {
       this.setState({ value });
     } else {
-      this.setState({ value });
+      this.setState({ value: 0 });
     }
   };
 
