@@ -95,7 +95,7 @@ Meteor.methods({
     // Filter out station
     const newQueue = stationQueue.filter(field => field !== stationToSkip);
     const nextStation = (typeof(newQueue[0]) !== "undefined") ? newQueue[0] : "Done";
-    const isChangingCurrent = (currentStation === stationToSkip);
+    const isChangingCurrent = (currentStation !== stationToSkip);
     Patientinfo.update({id:id},{$set:{nextStation:nextStation,busy:isChangingCurrent,stationQueue:newQueue}});
   },
   'patientinfo.editPatientInfo'(id, parent, label, value) {
