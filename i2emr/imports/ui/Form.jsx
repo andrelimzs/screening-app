@@ -153,13 +153,13 @@ class Form extends Component {
         onSubmitSuccess={() => { 
           console.log(!this.isMultipage);
           console.log(this.state.pageIndex);
-          console.log(Object.keys(formSchemas[this.props.station]).length - 1);
-          if (!this.isMultipage || (this.state.pageIndex >= Object.keys(formSchemas[this.props.station]).length - 1)) {
+          console.log(Object.keys(formSchemas[this.props.station]).length);
+          if (!this.isMultipage || (this.state.pageIndex == 0)) {
             const next = (typeof(this.props.stationQueue) !== "undefined" && this.props.stationQueue.length > 1) ? this.props.stationQueue[1] : "Done";
             alert("Next station is: " + next);
           }}}
         onSubmitFailure={() => {
-          if (!this.isMultipage || (this.state.pageIndex >= Object.keys(formSchemas[this.props.station]).length - 1)) {
+          if (!this.isMultipage || (this.state.pageIndex == 0)) {
             alert('Unsuccessful')
           }}}
       >
