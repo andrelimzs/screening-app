@@ -447,30 +447,27 @@ export const formLayouts = {
       <SomeComp calculation={(model) => (<TextField name="waistHipRatio" value={(model.waist/model.hip).toFixed(1)} />)} />
       {/* <TextField name="waistHipRatio" /> */}
       <br />
-    </Fragment>
-  ),
-
-  "Blood Glucose & Hb": (info) => (
-    <Fragment>
       <h2>India Diabetes Risk Assessment</h2>
       Have you previously been diagnosed with diabetes?
       <SelectField name="previousDiabetesDiagnosis" />
 
       <DisplayIf condition={context => (typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age > 17)}>
         <Fragment>
-          1. Age
-          <SomeComp calculation={(model) => (<TextField name="riskAssessAge" value={
+          1. Age: 
+          <SomeComp calculation={(model) => (
+              ((typeof(info["Patient Info"]) !== "undefined") ? info["Patient Info"].age : "")
+          )}/>
+          {/* <SomeComp calculation={(model) => (<TextField name="riskAssessAge" value={
             ((typeof(info["Patient Info"]) !== "undefined") ? info["Patient Info"].age : "")
-          } />)} />
+          } />)} /> */}
+          <SelectField name="riskAssessAge" />
           2. Waist circumference (refer to Waist:Hip Ratio section)
           <SomeComp calculation={(model) => (<TextField name="riskAssessWaist" value={
             (
-              (typeof(info["Height & weight"]) !== "undefined") ? 
+              (typeof(info["Patient Info"]) !== "undefined") ? 
               (
-                (info["Height & weight"][0].waist < ((info["Patient Info"].gender==="male")?90:80) ) ? "0 points" : 
-                  (
-                    (info["Height & weight"][0].waist < ((info["Patient Info"].gender==="male")?90:100) ) ? "10 points" : "20 points"
-                  )
+                (model.waist < ((info["Patient Info"].gender==="male")?90:80) ) ? "0 points" : 
+                  ( (model.waist < ((info["Patient Info"].gender==="male")?90:100) ) ? "10 points" : "20 points" )
               ) : ""
             )
           } />)} />
@@ -485,10 +482,13 @@ export const formLayouts = {
           {/* <SomeComp calculation={(model) => (<TextField name="riskAssessRiskLevel" value={
             ((Number(model.riskAssessAge)<35) ? 0 : (Number(model.riskAssessAge)<50) ? 20 : 30)
           } />)} /> */}
-          <Divider variant="middle" />
         </Fragment>
       </DisplayIf>
-      
+    </Fragment>
+  ),
+
+  "Blood Glucose & Hb": (info) => (
+    <Fragment>      
       <TextField name="cbg" />
       <br />
       <DisplayIf condition={context => (

@@ -646,16 +646,15 @@ export const formSchemas = {
       type: String,
       label: "Waist:hip ratio",
     },
-  }),
-
-  "Blood Glucose & Hb":
-  new SimpleSchema({
     previousDiabetesDiagnosis: {
       type: String,
       allowedValues: ['Yes','No'],
     },
     riskAssessAge: {
       type: String,
+      allowedValues: ['Less than 35 years (0 points)',
+                      '35-49 years (20 points)',
+                      '50 years and above (30 points)'],
       optional: true,
     },
     riskAssessWaist: {
@@ -686,7 +685,11 @@ export const formSchemas = {
                       '30-50: Medium risk',
                       '60-100: High risk'],
     },
-    cbg: {
+  }),
+
+  "Blood Glucose & Hb":
+  new SimpleSchema({
+      cbg: {
       type: SimpleSchema.Integer,
       min: 20,
       max: 400,
