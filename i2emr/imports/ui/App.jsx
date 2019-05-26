@@ -128,16 +128,16 @@ const AppContainer = withTracker(() => {
   const currentPatientID = Session.get('currentPatient');
   const patientList = Patientinfo.find(
     { $and:[{ nextStation: station }, { $or:[{ busy: false },{ id: currentPatientID }] }
-    ]}, { sort: { lastSubmit: 1 } }).fetch();
-
+    ]}).fetch();
+  //, { sort: { lastSubmit: 1 } }
   // TODO - Find better way to sent patient info in
   // Retrieve current patient info for Info component
   // If no current patient, set to null
   const patientInfo = (currentPatientID !== undefined && currentPatientID !== null) ? 
                       Patientinfo.findOne({id:currentPatientID}) : {name: ""};
-  if (currentPatientID !== undefined && currentPatientID !== null) {
-    console.log(currentPatientID);
-  }
+  // if (currentPatientID !== undefined && currentPatientID !== null) {
+  //   console.log(currentPatientID);
+  // }
 
   return {
     patientList: patientList,
