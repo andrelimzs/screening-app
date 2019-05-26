@@ -665,10 +665,10 @@ export const formSchemas = {
     riskAssessPhysicalActivity:{
       type: String,
       optional: true,
-      allowedValues: ['Below 3rd percentile curve',
-                      'Between 3rd percentile and overweight curves',
-                      'Between overweight and obese curves',
-                      'Above obese curve'],
+      allowedValues: ['Vigorous exercise or strenuous work (0 points)',
+                      'Moderate exercise at work/home (10 points)',
+                      'Mild exercise at work/home (20 points)',
+                      'No exercise and sedentary at work/home (30 points)'],
     },
     riskAssessFamilyHis: {
       type: String,
@@ -677,9 +677,11 @@ export const formSchemas = {
                       '1 diabetic parent (10 points)',
                       '2 diabetic parents (20 points)'],
     },
+    riskAssessTotalScore: {
+      type: Number,
+    },
     riskAssessRiskLevel: {
       type: String,
-      optional: true,
       allowedValues: ['0-20: Low risk',
                       '30-50: Medium risk',
                       '60-100: High risk'],

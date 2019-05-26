@@ -478,8 +478,10 @@ export const formLayouts = {
           <SelectField name="riskAssessPhysicalActivity" />
           4. Family history
           <SelectField name="riskAssessFamilyHis" />
+          Total score (maximum 100)
+          <TextField name="riskAssessTotalScore" />
           Risk level
-          <TextField name="riskAssessRiskLevel" />
+          <SelectField name="riskAssessRiskLevel" />
           {/* <SomeComp calculation={(model) => (<TextField name="riskAssessRiskLevel" value={
             ((Number(model.riskAssessAge)<35) ? 0 : (Number(model.riskAssessAge)<50) ? 20 : 30)
           } />)} /> */}
@@ -498,6 +500,17 @@ export const formLayouts = {
       </Fragment></DisplayIf>
       <TextField name="hb" />
       <br />
+      {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age > 17 &&
+      <Fragment>
+        Doctors consult if:
+        <p>{"Males: <13.8 OR >17.2"}</p>
+        <p>{"Females: <12.1 OR >15.1"}</p>
+      </Fragment>}
+      {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age <= 17 &&
+      <Fragment>
+        Doctors consult if:
+        <p>{"<11 OR >16"}</p>
+      </Fragment>}
       <BoolField name="docConsultForBloodGlucAndHb" />
     </Fragment>
   ),
