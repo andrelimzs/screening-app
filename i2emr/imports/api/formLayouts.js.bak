@@ -99,31 +99,6 @@ const requireDoctorConsult = (info) => (
     <Divider /> }
   </Fragment>
 );
-const requireEducation = (info) => (
-  <Fragment>
-    {((typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP) ||
-      (typeof(info["Height & weight"]) !== "undefined" &&
-        (info["Height & weight"][0].bmi < 18.5 || info["Height & weight"][0].bmi >= 23 ||
-        info["Height & weight"][0].waistHipRatio > ((info["Patient Info"].gender === "male")? 0.9:0.8) ))) &&
-      <Divider /> &&
-      <Typography color='secondary' variant='h6'>
-        Require education for:
-      </Typography> }
-
-    { typeof(info["Height & weight"]) !== "undefined" && (info["Height & weight"][0].bmi < 18.5 || info["Height & weight"][0].bmi >= 23) &&
-      <Typography color='secondary'>
-        BMI: {info["Height & weight"][0].bmi}
-      </Typography> }
-    { typeof(info["Height & weight"]) !== "undefined" && (info["Height & weight"][0].waistHipRatio > ((info["Patient Info"].gender === "male")? 0.9:0.8) ) &&
-      <Typography color='secondary'>
-        waist:hip {info["Height & weight"][0].waistHipRatio}
-      </Typography> }
-    { typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP &&
-      <Typography color='secondary'>
-        Blood Pressure
-      </Typography>}
-  </Fragment>
-);
 // Define the layouts
 export const formLayouts = {
   "Registration":{
@@ -161,6 +136,81 @@ export const formLayouts = {
 
     "Patient Profiling": (info) => (
       <Fragment>
+        <h2>Diabetes Mellitus</h2>
+        Has a western-trained doctor ever told you that you have diabetes?
+        <RadioField name="patientProfile1" />
+          <DisplayIf condition={context => context.model.patientProfile1 === "No"}><Fragment>
+            If no to Q1, when was the last time you checked your blood sugar?
+            <SelectField name="patientProfile2" />
+            If no to Q1, do you have any of the following symptoms? (select all that apply)
+            <AutoField name="patientProfile3" />
+          </Fragment></DisplayIf>
+          <DisplayIf condition={context => context.model.patientProfile1 === "Yes"}><Fragment>
+            If yes to Q1, how often are you seeing your doctor for your diabetes?
+            <SelectField name="patientProfile4" />
+            If yes to Q1, are you taking any medication for your diabetes? If so, can you name them?
+            <BoolField name="anyWesternMedicine" />
+          </Fragment></DisplayIf>
+          <DisplayIf condition={context => context.model.anyWesternMedicine === true}><Fragment>
+            <TextField name="westernMedicine" />
+            If yes to Western medicine, how many times do you forget to take your diabetes medication in a week?
+            <SelectField name="patientProfile6" />
+          </Fragment></DisplayIf>
+          <DisplayIf condition={context => context.model.patientProfile1 === "Yes"}><Fragment>
+            <BoolField name="anyTraditionalMedicine" />
+          </Fragment></DisplayIf>
+          <DisplayIf condition= {context => context.model.anyTraditionalMedicine === true}><Fragment>
+            <TextField name="traditionalMedicine" />
+          </Fragment></DisplayIf>
+        
+        <h2>Hyperlipidemia</h2>
+        Has a western-trained doctor ever told you that you have high cholesterol?
+        <RadioField name="hyperlipidemiaQ1" />
+        <DisplayIf condition={context => context.model.hyperlipidemiaQ1 === "No"}><Fragment>
+          If no to Q1, when was the last time you checked your blood cholesterol?
+          <SelectField name="hyperlipidemiaQ2" />
+        </Fragment></DisplayIf>
+        <DisplayIf condition={context => context.model.hyperlipidemiaQ1 === "Yes"}><Fragment>
+          If yes to Q1, how often are you seeing your doctor for your high cholesterol?
+          <SelectField name="hyperlipidemiaQ3" />
+          If yes to Q1, are you taking any medication for your high cholesterol? If so, can you name them?
+          <BoolField name="hyperlipidemiaAnyWesternMedicine" />
+          </Fragment></DisplayIf>
+          <DisplayIf condition={context => context.model.hyperlipidemiaAnyWesternMedicine === true}><Fragment>
+            <TextField name="hyperlipidemiaWesternMedicine" />
+            If yes to taking Western medicine, how many times do you forget to take your high cholesterol medication in a week?
+            <SelectField name="hyperlipidemiaQ5" />
+          </Fragment></DisplayIf>
+          <DisplayIf condition={context => context.model.hyperlipidemiaQ1 === "Yes"}><Fragment> 
+            <BoolField name="hyperlipidemiaAnyTraditionalMedicine" />
+            <DisplayIf condition= {context => context.model.hyperlipidemiaAnyTraditionalMedicine === true}><Fragment>
+              <TextField name="hyperlipidemiaTraditionalMedicine" />
+            </Fragment></DisplayIf>
+          </Fragment></DisplayIf>
+
+          <h2>Hypertension</h2>
+          Has a western-trained doctor ever told you that you have high blood pressure (BP)?
+          <RadioField name="hypertensionQ1" />
+          When was the last time you checked your blood pressure?
+          <SelectField name="hypertensionQ2" />
+          <DisplayIf condition={context => context.model.hypertensionQ1 === "Yes"}><Fragment>
+            If yes to Q1, how often are you seeing your doctor for your high blood pressure?
+            <SelectField name="hypertensionQ3" />
+            If yes to Q1, are you taking any medication for your high blood pressure? If so, can you name them?
+            <BoolField name="hypertensionAnyWesternMedicine" />
+            </Fragment></DisplayIf>
+            <DisplayIf condition={context => context.model.hypertensionAnyWesternMedicine === true}><Fragment>
+              <TextField name="hypertensionWesternMedicine" />
+              If yes to taking Western medicine, how many times do you forget to take your high blood pressure medication in a week?
+              <SelectField name="hypertensionQ5" />
+            </Fragment></DisplayIf>
+            <DisplayIf condition={context => context.model.hypertensionQ1 === "Yes"}><Fragment> 
+              <BoolField name="hypertensionAnyTraditionalMedicine" />
+              <DisplayIf condition= {context => context.model.hypertensionAnyTraditionalMedicine === true}><Fragment>
+                <TextField name="hypertensionTraditionalMedicine" />
+              </Fragment></DisplayIf>
+            </Fragment></DisplayIf>
+
             <h2>TB Screening</h2>
             Have you ever been diagnosed with tuberculosis?
             <RadioField name="TBQ1" />
@@ -180,13 +230,29 @@ export const formLayouts = {
 
             <h2>Medical history: others</h2>
             Do you have any medical conditions we should take note of? (if none, indicate NIL)
-            <AutoField name="medicalHistory1" />
-            <DisplayIf condition={context => Array.isArray(context.model.medicalHistory1) && context.model.medicalHistory1.includes('Others')}><Fragment>
-              Other medical conditions
-              <LongTextField name="otherMedicalConditions" />
-            </Fragment></DisplayIf>
+            <TextField name="medicalHistory1" />
             How are you managing these conditions? (check-ups, medicines, diet/exercise, others)
             <TextField name="medicalHistory2" />
+            Where do you go to for routine healthcare?
+            <TextField name="medicalHistory3" />
+            Where do you go to for emergency medical services (eg. fall, injury, fainting)?
+            <TextField name="medicalHistory4" />
+            Are you taking any other medications? (If yes, indicate what medication and why. If none, indicate NIL)
+            <TextField name="medicalHistory5" />
+
+            <h2>Surgery and hospitalisations</h2>
+            Have you had any surgery previously?
+            <RadioField name="surgAndHospQ1" />
+            <DisplayIf condition={context => context.model.surgAndHospQ1 === "Yes"}><Fragment>
+              If yes to Q1, what surgery?
+              <TextField name="surgAndHospQ2" />
+            </Fragment></DisplayIf>
+            Have you been hospitalised in the past 5 years? 
+            <RadioField name="surgAndHospQ3" />
+            <DisplayIf condition={context => context.model.surgAndHospQ3 === "Yes"}><Fragment>
+              If yes to Q3, why were you hospitalised?
+              <TextField name="surgAndHospQ4" />
+            </Fragment></DisplayIf>
 
             <h2>Ocular History</h2>
             Have you had any eye surgeries?
@@ -229,6 +295,77 @@ export const formLayouts = {
             <DisplayIf condition={context => Array.isArray(context.model.ocularHisQ5c) && context.model.ocularHisQ5c.includes('Others (please specify)')}><Fragment>
               <TextField name="otherReasons" />
             </Fragment></DisplayIf>
+
+            <h2>Barriers to Healthcare</h2>
+            What type of doctor do you see for your existing conditions?
+            <SelectField name="barrierQ1" />
+            <DisplayIf condition={context => context.model.barrierQ1 === "Seldom/Never visits the doctor"}><Fragment>
+              If answer to Q1 was 'Seldom/Never visits the doctor', why do you not follow-up with your doctor for your existing conditions?
+              <AutoField name="barrierQ2" />
+            </Fragment></DisplayIf>
+            <DisplayIf condition={context => Array.isArray(context.model.barrierQ2) && context.model.barrierQ2.includes('Others (please specify)')}><Fragment>
+              <TextField name="otherBarriers" />
+            </Fragment></DisplayIf>
+
+            <h2>Family History</h2>
+            Do your parents, siblings or children have any of the following conditions? Note: CAD = coronary artery disease (narrowed blood vessels supplying heart muscle)
+            <AutoField name="familyHistory" />
+
+            <h2>Framingham Lipids Risk Stratification</h2>
+            Has a doctor told you that you have any heart problems? If yes, please elaborate
+            <TextField name="FLRSQ1" />
+            Have you ever been diagnosed by your doctor to have a stroke?
+            <RadioField name="FLRSQ2" />
+            Has your doctor ever told you that you have any problems with your blood vessels/blood flow? If yes, please elaborate
+            <TextField name="FLRSQ3" />
+            Have you ever been diagnosed by your doctor to have chronic kidney disease?
+            <RadioField name="FLRSQ4" />
+            Do you currently smoke?
+            <RadioField name="FLRSQ5" />
+            <DisplayIf condition={context => context.model.FLRSQ5 === "Yes"}><Fragment>
+              If yes to Q5, what do you smoke? (select all that apply)
+              <AutoField name="FLRSQ6" />
+              If yes to Q5, how much do you smoke?
+              <TextField name="FLRSQ7" />
+              If yes to Q5, how many years have you been smoking for?
+              <TextField name="FLRSQ8" />
+            </Fragment></DisplayIf>
+            <DisplayIf condition={context => context.model.FLRSQ5 === "No"}><Fragment>
+              If no to Q5, have you ever smoked before?
+              <SelectField name="FLRSQ9" />
+            </Fragment></DisplayIf>
+            Do you chew paan or tobacco?
+            <RadioField name="FLRSQ10" />
+
+            <h2>Social History</h2>
+            Do you drink alcohol?
+            <RadioField name="socialHisQ1" />
+            <DisplayIf condition={context => context.model.socialHisQ1 === "Yes"}><Fragment>
+              If yes to Q1, how many glasses of alcohol do you drink per day?<br />
+              <NumField name="socialHisQ2" /><br />
+            </Fragment></DisplayIf>
+            What is your occupation?
+            <SelectField name="socialHisQ3" />
+            <DisplayIf condition={context => Array.isArray(context.model.socialHisQ3) && context.model.socialHisQ3.includes('Others (free text)')}><Fragment>
+              Other complaints
+              <TextField name="otherOcc" />
+            </Fragment></DisplayIf>
+            Nature of work/lifestyle
+            <SelectField name="socialHisQ4" />
+            <DisplayIf condition={context => context.model.socialHisQ3 === "Farming/Agriculture"}><Fragment>
+              If answer to Q3 is 'Farming/agriculture', do you use pesticides in your farming?
+              <RadioField name="socialHisQ5" />
+            </Fragment></DisplayIf>
+            Monthly Household Income in INR (only if participant is willing to disclose)<br />
+            <NumField name="socialHisQ6" />
+            <Divider variant="middle" />Marital status
+            <SelectField name="socialHisQ7" />
+            <Divider variant="middle" />
+            How many people live in your household (including you)?<br />
+            <NumField name="socialHisQ9"/>
+            <Divider variant="middle" />
+            What is your highest education level?
+            <SelectField name="socialHisQ13" />
       </Fragment>
       
     ),
@@ -690,7 +827,7 @@ export const formLayouts = {
   "Education" : {
     "Pre-Education Survey": (info) => (
       <Fragment>
-        {requireEducation(info)}
+        {requireDoctorConsult(info)}
         From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
         1 being not at all, and 5 being a lot
         <SelectField name="preEduSurvey1" />
@@ -710,7 +847,7 @@ export const formLayouts = {
 
     "Pre-Education Quiz": (info) => (
       <Fragment>
-        {requireEducation(info)}
+        {requireDoctorConsult(info)}
         <Divider variant="middle"/>
         You are at higher risk of developing high cholesterol if you
         <SelectField name="preEduQuiz1" />
@@ -731,7 +868,7 @@ export const formLayouts = {
 
     "Post-Education Survey": (info) => (
       <Fragment>
-        {requireEducation(info)}
+        {requireDoctorConsult(info)}
         From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
         1 being not at all, and 5 being a lot
         <SelectField name="postEduSurvey1" />
@@ -749,7 +886,7 @@ export const formLayouts = {
 
     "Post-Education Quiz": (info) => (
       <Fragment>
-        {requireEducation(info)}
+        {requireDoctorConsult(info)}
         You are at higher risk of developing high cholesterol if you
         <SelectField name="postEduQuiz1" />
         All of the following are complications of diabetes except

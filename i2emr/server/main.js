@@ -167,6 +167,8 @@ Stationforms.remove({});
         anyDrugAllergies: 'No',
       },
       "Blood Glucose & Hb": [{"docConsultForBloodGlucAndHb": true}],
+      "Blood Pressure": [{"docConsultForBP": true}],
+      "Height & weight": [{"bmi":30,"waistHipRatio":0.91}],
       stationQueue:["Education","Post-Screening Feedback"],
       nextStation: "Education",
       busy:false,

@@ -88,135 +88,6 @@ export const formSchemas = {
 
     "Patient Profiling":
     new SimpleSchema({
-      patientProfile1: {
-        type: String,
-        allowedValues: ['Yes', 'No'],   
-        },
-      patientProfile2: {
-        type: String,
-        allowedValues: ['Within past 3 years', 'More than 3 years ago'],   
-        optional: true,
-        },
-      patientProfile3: {
-        type: Array,
-        optional: true,
-      },
-      'patientProfile3.$': {
-        type: String,
-        optional: true,
-        allowedValues: ['Increased urination', 
-                        'Increased thirst', 
-                        'Weight loss', 
-                        'Increased hunger',
-                        'Increased tiredness',
-                        'Blurred vision',
-                        'Slow-healing wounds',
-                        'Numbness/tingling in hands and/or feet',
-                        'None of the above'
-                      ],
-                      
-      },
-      patientProfile4: {
-        type: String,
-        optional: true,
-        allowedValues: ['Regular (Interval of 6 months or less)', 'Occasionally (Interval of more than 6 months)','Seldom (last appointment was >1 year ago)','Not at all'],   
-      },
-      anyWesternMedicine: {
-        type: Boolean,
-        optional: true,
-        label: "Yes, Western medicine",
-      },
-      westernMedicine: {
-        type: String,
-        optional: true,
-      },
-      anyTraditionalMedicine: {
-        type: Boolean,
-        optional: true,
-        label: "Yes, Traditional medicine",
-      },
-      traditionalMedicine: {
-        type: String,
-        optional: true,
-      },
-      patientProfile6: {
-        type: String,
-        optional: true,
-        allowedValues: ['0', '1-3','4-6','> or equal to 7'],   
-      },
-      hyperlipidemiaQ1: {
-        type: String,
-        allowedValues: ['Yes', 'No'],   
-        },
-      hyperlipidemiaQ2: {
-        type: String,
-        optional: true,
-        allowedValues: ['Within past 3 years', 'More than 3 years ago'],   
-        },
-      hyperlipidemiaQ3: {
-        type: String,
-        optional: true,
-        allowedValues: ['Regular (Interval of 6 months or less)', 'Occasionally (Interval of more than 6 months)','Seldom (last appointment was >1 year ago)','Not at all'],   
-      },
-      hyperlipidemiaAnyWesternMedicine: {
-        type: Boolean,
-        optional: true,
-        label: "Yes, Western medicine",
-      },
-      hyperlipidemiaWesternMedicine: {
-        type: String,
-        optional: true,
-      },
-      hyperlipidemiaAnyTraditionalMedicine: {
-        type: Boolean,
-        optional: true,
-        label: "Yes, Traditional medicine",
-      },
-      hyperlipidemiaTraditionalMedicine: {
-        type: String,
-        optional: true,
-      },
-      hyperlipidemiaQ5: {
-        type: String,
-        optional: true,
-        allowedValues: ['0', '1-3','4-6','> or equal to 7'],   
-      },
-      hypertensionQ1: {
-        type: String,
-        allowedValues: ['Yes', 'No'],   
-        },
-      hypertensionQ2: {
-        type: String,
-        allowedValues: ['Within past 3 years', 'More than 3 years ago'],   
-        },
-      hypertensionQ3: {
-        type: String,
-        optional: true,
-        allowedValues: ['Regular (Interval of 6 months or less)', 'Occasionally (Interval of more than 6 months)','Seldom (last appointment was >1 year ago)','Not at all'],   
-      },
-      hypertensionAnyWesternMedicine: {
-        type: Boolean,
-        optional: true,
-        label: "Yes, Western medicine",
-      },
-      hypertensionWesternMedicine: {
-        type: String,
-        optional: true,
-      },
-      hypertensionAnyTraditionalMedicine: {
-        type: Boolean,
-        optional: true,
-        label: "Yes, Traditional medicine",
-      },
-      hypertensionTraditionalMedicine: {
-        type: String,
-        optional: true,
-      },
-      hypertensionQ5: {
-        type: String,
-        optional: true,
-        allowedValues: ['0', '1-3','4-6','> or equal to 7'],   
-      },
       TBQ1: {
         type: String,
         allowedValues: ['Yes','No'],
@@ -242,35 +113,22 @@ export const formSchemas = {
                         'None of the above'],
       },
       medicalHistory1: {
+        type: Array,
+      },
+      'medicalHistory1.$': {
         type: String,
+        allowedValues: ['Diabetes',
+                        'High blood pressure',
+                        'High cholesterol',
+                        'Others',
+                        'None of the above'],
+      },
+      otherMedicalConditions: {
+        type: String,
+        optional: true,
       },
       medicalHistory2: {
         type: String,
-      },
-      medicalHistory3: {
-        type: String,
-      },
-      medicalHistory4: {
-        type: String,
-      },
-      medicalHistory5: {
-        type: String,
-      },
-      surgAndHospQ1: {
-        type: String,
-        allowedValues: ['Yes','No'],
-      },
-      surgAndHospQ2: {
-        type: String,
-        optional: true,
-      },
-      surgAndHospQ3: {
-        type: String,
-        allowedValues: ['Yes','No'],
-      },
-      surgAndHospQ4: {
-        type: String,
-        optional: true,
       },
       ocularHisQ1a: {
         type: String,
@@ -344,154 +202,6 @@ export const formSchemas = {
       otherReasons: {
         type: String,
         optional: true,
-      },
-      barrierQ1:{
-        type: String,
-        allowedValues: ['Hospital',
-                        'Clinics',
-                        'Traditional Medicine',
-                        'Seldom/Never visits the doctor'],
-      },
-      barrierQ2: {
-        type: Array,
-        optional: true,
-      },
-      'barrierQ2.$': {
-        type: String,
-        allowedValues: ['Do not see the need for the tests',
-                        'Challenging to make time to go for appointments',
-                        'Difficulty getting to clinic (mobility)',
-                        'Financial issues',
-                        'Scared of doctor',
-                        'Prefer traditional medicine',
-                        'Others'],
-      },
-      otherBarriers: {
-        type: String,
-        optional: true,
-      },
-      familyHistory: {
-        type: Array,
-      },
-      'familyHistory.$': {
-        type: String,
-        allowedValues: ['High blood pressure', 
-                        'High blood cholesterol', 
-                        'Heart attack or coronary arterial disease (narrowed blood vessel supplying the heart)*', 
-                        'Stroke',
-                        'Diabetes',
-                        'Cancer',
-                        'No, they do not have any of the above'],
-      },
-      FLRSQ1: {
-        type: String,
-      },
-      FLRSQ2: {
-        type: String,
-        allowedValues: ['Yes','No'],
-      },
-      FLRSQ3: {
-        type: String,
-      },
-      FLRSQ4: {
-        type: String,
-        allowedValues: ['Yes','No','Unsure'],
-      },
-      FLRSQ5: {
-        type: String,
-        allowedValues: ['Yes','No'],      
-      },
-      FLRSQ6: {
-        type: Array,
-        optional: true,
-      },
-      'FLRSQ6.$': {
-        type: String,
-        optional: true,
-        allowedValues: ['Cigarette', 
-                        'Beedi', 
-                        'Tobacco', 
-                        'Opium'],
-      },
-      FLRSQ7: {
-        type: String,
-        optional: true,   
-      },    
-      FLRSQ8: {
-        type: String,
-        optional: true,
-      },
-      FLRSQ9: {
-        type: String,
-        optional: true,
-        allowedValues: ['I have stopped smoking completely','I have never smoked before'],      
-      },
-      FLRSQ10: {
-        type: String,
-        allowedValues: ['Yes','No'],      
-      },
-      socialHisQ1: {
-        type: String,
-        allowedValues: ['Yes','No'],
-      },
-      socialHisQ2: {
-        type: Number,
-        optional: true,
-      },
-      socialHisQ3: {
-        type: Array,
-      },
-      'socialHisQ3.$': {
-        type: String,
-        allowedValues: ['Student', 
-                        'Homemaker/Housewife',
-                        'Religious work',
-                        'Professional (teacher, engineer, architect, doctor, nurse, lawyer, management, finance, etc)',
-                        'Service industry (e.g. restaurant server, call centre, receptionist, hotel staff)',
-                        'Manual labourer (e.g. construction, cleaning, clothes washing)',
-                        'Skilled labourer (e.g. plumbing, electrician, cook, tailor)',
-                        'Farming/Agriculture',
-                        'Mining',
-                        'Manufacturing',
-                        'Unemployed',
-                        'Others (please specify)'],
-      },
-      otherOcc: {
-        type: String,
-        optional: true,
-      },
-      socialHisQ4: {
-        type: String,
-        allowedValues: ['Labour', 'Sedentary'],
-      },
-      socialHisQ5:{
-        type: String,
-        allowedValues: ['Yes', 'No'],
-        optional: true,
-      },
-      socialHisQ6: {
-        type: String,
-        optional: true,
-      },
-      socialHisQ7: {
-        type: String,
-        allowedValues: ['Unmarried', 'Married','Widowed','Divorced'],
-      },
-      socialHisQ9: {
-        type: Number,
-      },
-      socialHisQ13: {
-        type: String,
-        allowedValues: ['No Formal Qualifications', 
-                        '6th standard or less',
-                        '7th-9th standard',
-                        '10th standard',
-                        '11th standard',
-                        '12th standard',
-                        'Vocational training (e.g. plumbing, construction, cooking)',
-                        'Bachelors or equivalent',
-                        'Post-graduate (Masters/Doctorate or equivalent)',
-                        'Refuse to answer'],
       },
     }),
 
@@ -646,16 +356,15 @@ export const formSchemas = {
       type: String,
       label: "Waist:hip ratio",
     },
-  }),
-
-  "Blood Glucose & Hb":
-  new SimpleSchema({
     previousDiabetesDiagnosis: {
       type: String,
       allowedValues: ['Yes','No'],
     },
     riskAssessAge: {
       type: String,
+      allowedValues: ['Less than 35 years (0 points)',
+                      '35-49 years (20 points)',
+                      '50 years and above (30 points)'],
       optional: true,
     },
     riskAssessWaist: {
@@ -665,10 +374,10 @@ export const formSchemas = {
     riskAssessPhysicalActivity:{
       type: String,
       optional: true,
-      allowedValues: ['Below 3rd percentile curve',
-                      'Between 3rd percentile and overweight curves',
-                      'Between overweight and obese curves',
-                      'Above obese curve'],
+      allowedValues: ['Vigorous exercise or strenuous work (0 points)',
+                      'Moderate exercise at work/home (10 points)',
+                      'Mild exercise at work/home (20 points)',
+                      'No exercise and sedentary at work/home (30 points)'],
     },
     riskAssessFamilyHis: {
       type: String,
@@ -677,14 +386,20 @@ export const formSchemas = {
                       '1 diabetic parent (10 points)',
                       '2 diabetic parents (20 points)'],
     },
+    riskAssessTotalScore: {
+      type: Number,
+    },
     riskAssessRiskLevel: {
       type: String,
-      optional: true,
       allowedValues: ['0-20: Low risk',
                       '30-50: Medium risk',
                       '60-100: High risk'],
     },
-    cbg: {
+  }),
+
+  "Blood Glucose & Hb":
+  new SimpleSchema({
+      cbg: {
       type: SimpleSchema.Integer,
       min: 20,
       max: 400,
