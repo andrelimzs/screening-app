@@ -103,7 +103,8 @@ const requireEducation = (info) => (
   <Fragment>
     {((typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP) ||
       (typeof(info["Height & weight"]) !== "undefined" &&
-        (info["Height & weight"][0].bmi < 18.5 || info["Height & weight"][0].bmi >= 23) )) &&
+        (info["Height & weight"][0].bmi < 18.5 || info["Height & weight"][0].bmi >= 23 ||
+        info["Height & weight"][0].waistHipRatio > ((info["Patient Info"].gender === "male")? 0.9:0.8) ))) &&
       <Divider /> &&
       <Typography color='secondary' variant='h6'>
         Require education for:
@@ -112,6 +113,10 @@ const requireEducation = (info) => (
     { typeof(info["Height & weight"]) !== "undefined" && (info["Height & weight"][0].bmi < 18.5 || info["Height & weight"][0].bmi >= 23) &&
       <Typography color='secondary'>
         BMI: {info["Height & weight"][0].bmi}
+      </Typography> }
+    { typeof(info["Height & weight"]) !== "undefined" && (info["Height & weight"][0].waistHipRatio > ((info["Patient Info"].gender === "male")? 0.9:0.8) ) &&
+      <Typography color='secondary'>
+        waist:hip {info["Height & weight"][0].waistHipRatio}
       </Typography> }
     { typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP &&
       <Typography color='secondary'>
