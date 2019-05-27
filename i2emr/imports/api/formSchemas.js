@@ -397,6 +397,11 @@ export const formSchemas = {
                       '30-50: Medium risk',
                       '60-100: High risk'],
     },
+    docConsultForHW : {
+      type: Boolean,
+      optional: true,
+      label: "Doctor's consult for child height, weight or BMI"
+    }
   }),
 
   "Blood Glucose & Hb":

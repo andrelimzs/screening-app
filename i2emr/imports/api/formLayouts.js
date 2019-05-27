@@ -57,7 +57,6 @@ const requireDoctorConsult = (info) => (
       (typeof(info["Height & weight"]) !== "undefined" &&
         (checkInfo(info["Height & weight"], "childHeightAssessment", "Below 3rd percentile curve","Above 97th percentile curve") ||
         checkInfo(info["Height & weight"], "childWeightAssessment", "Below 3rd percentile curve","Above 97th percentile curve") ||
-        (info["Height & weight"][0].bmi < 18.5 || info["Height & weight"][0].bmi >= 23) ||
         checkInfo2(info["Height & weight"], "childBmiAssessment", "Between 3rd percentile and overweight curves")))) &&
       <Divider /> &&
       <Typography color='secondary' variant='h6'>
@@ -75,10 +74,6 @@ const requireDoctorConsult = (info) => (
     { checkInfo(info["Height & weight"], "childWeightAssessment", "Below 3rd percentile curve","Above 97th percentile curve") &&
       <Typography color='secondary'>
         Height (Child)
-      </Typography> }
-    { typeof(info["Height & weight"]) !== "undefined" && (info["Height & weight"][0].bmi < 18.5 || info["Height & weight"][0].bmi >= 23) &&
-      <Typography color='secondary'>
-        BMI (Adult): 
       </Typography> }
     { checkInfo2(info["Height & weight"], "childBmiAssessment", "Between 3rd percentile and overweight curves") &&
       <Typography color='secondary'>
@@ -297,18 +292,22 @@ export const formLayouts = {
       {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age <= 18 &&
         <SelectField name="childWeightAssessment" />}
       <br />
-      <SomeComp calculation={(model) => (<TextField name="bmi" value={(model.weight/model.height/model.height).toFixed(1)} />)} />
+      {/* <SomeComp calculation={(model) => (<TextField name="bmi" value={((model.weight && model.height) ? (model.weight/model.height/model.height).toFixed(1):"")} />)} /> */}
+      <TextField name="bmi" />
       <br />
       {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age <= 18 &&
         <SelectField name="childBmiAssessment" />}
+      <br />
+      {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age <= 18 &&
+        <BoolField name="docConsultForHW" />}
       <br />
       <h2>Waist:Hip</h2>
       <TextField name="waist" />
       <br />
       <TextField name="hip" />
       <br />
-      <SomeComp calculation={(model) => (<TextField name="waistHipRatio" value={(model.waist/model.hip).toFixed(1)} />)} />
-      {/* <TextField name="waistHipRatio" /> */}
+      {/* <SomeComp calculation={(model) => (<TextField name="waistHipRatio" value={((model.waist && model.hip) ? (model.waist/model.hip).toFixed(2) : "")} />)} /> */}
+      <TextField name="waistHipRatio" />
       <br />
       <h2>India Diabetes Risk Assessment</h2>
       Have you previously been diagnosed with diabetes?
