@@ -325,12 +325,13 @@ export const formLayouts = {
           } />)} /> */}
           <SelectField name="riskAssessAge" />
           2. Waist circumference (refer to Waist:Hip Ratio section)
-          <SomeComp calculation={(model) => (<TextField name="riskAssessWaist" value={
+          <SomeComp calculation={(model) => (<LongTextField name="riskAssessWaist" value={
             (
               (typeof(info["Patient Info"]) !== "undefined") ? 
               (
-                (model.waist < ((info["Patient Info"].gender==="male")?90:80) ) ? "0 points" : 
-                  ( (model.waist < ((info["Patient Info"].gender==="male")?90:100) ) ? "10 points" : "20 points" )
+                (model.waist < ((info["Patient Info"].gender==="male")?90:80) ) ? "Female < 80cm, Male < 90cm (0 points)" : 
+                  ( (model.waist < ((info["Patient Info"].gender==="male")?100:90) ) ? "Female 80-89cm, Male 90-99cm (10 points)" : 
+                  "Female >= 90cm, Male >= 100cm (20 points)" )
               ) : ""
             )
           } />)} />
