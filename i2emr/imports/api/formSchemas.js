@@ -388,9 +388,11 @@ export const formSchemas = {
     },
     riskAssessTotalScore: {
       type: Number,
+      optional: true,
     },
     riskAssessRiskLevel: {
       type: String,
+      optional: true,
       allowedValues: ['0-20: Low risk',
                       '30-50: Medium risk',
                       '60-100: High risk'],
