@@ -72,7 +72,10 @@ class Form extends Component {
 
         // On last subpage
         if (this.props.station == "Registration") {
-          Meteor.call('patientinfo.insert', this.multiData);
+          // Meteor.call('patientinfo.insert', this.multiData);
+          Meteor.call('patientinfo.insert', this.multiData, (error, result) => {
+            if (result) alert("Successful! ID is " + String(result));
+          });
         } else {
           Meteor.call('patientinfo.update', this.multiData);
           Session.set('currentPatient',null);

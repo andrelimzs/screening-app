@@ -50,6 +50,8 @@ Meteor.methods({
     data.lastSubmit = new Date();
 
     Patientinfo.insert(data);
+
+    return data.id;
   },
   'patientinfo.update'(data) {
     const id = data.id;
