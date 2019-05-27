@@ -355,7 +355,7 @@ export const formLayouts = {
       <TextField name="cbg" />
       <br />
       <DisplayIf condition={context => (
-        context.model.cbg < 3 || context.model.cbg > 20
+        context.model.cbg < 54 || context.model.cbg > 360
       )}><Fragment>
         <Typography color='secondary' variant='h5'>
           Immediate Doctor's consult for CBG

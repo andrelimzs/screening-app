@@ -401,15 +401,11 @@ export const formSchemas = {
   new SimpleSchema({
       cbg: {
       type: SimpleSchema.Integer,
-      min: 20,
-      max: 400,
       optional: true,
       label: "Capillary Blood Glucose (mg/dL)",
     },
     hb: {
       type: Number,
-      min: 4,
-      max: 40,
       optional: true,
       label: "Hemoglobin (g/dL)",
     },
