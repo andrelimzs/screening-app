@@ -233,21 +233,28 @@ export const formLayouts = {
       <h2>Height and Weight + Waist:Hip measurement</h2>
       Can we measure your height, weight, waist size and hip size?
       <RadioField name="stationSelect1" />
+
       <h2>Blood glucose and Hb</h2>
       Can we check your blood sugar? This will be done by pricking your finger to get a small drop of blood
       <RadioField name="stationSelect2" />
+
       Can we check if you have anemia? This will be done by pricking your finger to get a small drop of blood
       <RadioField name="stationSelect3" />
+      
       <h2>BP</h2>
       Can we check your blood pressure?
       <RadioField name="stationSelect4" />
+
       <h2>Phlebotomy (for patients aged 40 years old and above)</h2>
-      For patients aged 40 years old and above, Do you have the following conditions?
+      {/* For patients aged 40 years old and above, Do you have the following conditions?
       <AutoField name="stationSelect5" />
       <DisplayIf condition={context => Array.isArray(context.model.stationSelect5) && context.model.stationSelect5.length >= 2}><Fragment>
         Can we do a blood test to see if you have high cholesterol? A blood sample will be taken by a trained staff. This will then be sent to the lab, and a report will be mailed to you after some time
         <RadioField name="stationSelect6" />
-      </Fragment></DisplayIf>
+      </Fragment></DisplayIf> */}
+      Can we do a blood test to see if you have high cholesterol? A blood sample will be taken by a trained staff. This will then be sent to the lab, and a report will be mailed to you after some time
+      <RadioField name="stationSelect6" />
+
       <h2>Pap Smear</h2>
       Are you married (or have you ever been married)?
       <RadioField name="stationSelect7" />
@@ -259,18 +266,23 @@ export const formLayouts = {
         If no to Q8, would you want to undergo a free Pap smear today to check for cervical cancer?
         <RadioField name="stationSelect9" />
       </Fragment></DisplayIf>
+
       <h2>Breast</h2>
       Would you want to undergo a breast examination for breast cancer today? 
       <RadioField name="stationSelect10" />
+
       <h2>Women's Edu</h2>
       Can we teach you about women's health? For adults, we will be sharing about menstrual health and breast self examinations. For girls aged 10-18 years old, we will be sharing about menstrual health only.
       <RadioField name="stationSelect11" />
+
       <h2>Doctors' consult</h2>
       Would you like to see a doctor today? (You will be asked to see the doctor if your test results are abnormal, but would you otherwise want to see the doctor?)
       <RadioField name="stationSelect12" />
+
       <h2>Eye screening</h2>
       Can we check your eyes/vision?
       <RadioField name="stationSelect13" />
+
       <h2>Education</h2>
       Can we teach you about healthy lifestyles and how to prevent common diseases like diabetes and high blood pressure?
       <RadioField name="stationSelect14" />
@@ -505,268 +517,268 @@ export const formLayouts = {
     </Fragment>
   ),
 
-  "Eye Screening": (info) => (
-    <Fragment>
-      <BoolField name="specs" />
-      Visual Acuity
-      <Grid
-        container
-        direction="column"
-        justify="flex-start"
-        alignItems="center"
-      >
-        <Grid container direction="row" justify="space-around" alignItems="center" item>
-          <Grid item xs={5}>
-            <TextField name="rightWoGlass" />
-          </Grid>
-          <Grid item xs={5}>
-            <TextField name="leftWoGlass" />
-          </Grid>
-        </Grid>
-        <DisplayIf condition={context => context.model.specs == true}><Fragment>
-          <Grid container  direction="row" justify="space-around" alignItems="center" item>
-            <Grid item xs={5} item>
-              <TextField name="rightWiGlass" />
-            </Grid>
-            <Grid item xs={5} item>
-              <TextField name="leftWiGlass" />
-            </Grid>
-          </Grid>
-        </Fragment></DisplayIf>
+  // "Eye Screening": (info) => (
+  //   <Fragment>
+  //     <BoolField name="specs" />
+  //     Visual Acuity
+  //     <Grid
+  //       container
+  //       direction="column"
+  //       justify="flex-start"
+  //       alignItems="center"
+  //     >
+  //       <Grid container direction="row" justify="space-around" alignItems="center" item>
+  //         <Grid item xs={5}>
+  //           <TextField name="rightWoGlass" />
+  //         </Grid>
+  //         <Grid item xs={5}>
+  //           <TextField name="leftWoGlass" />
+  //         </Grid>
+  //       </Grid>
+  //       <DisplayIf condition={context => context.model.specs == true}><Fragment>
+  //         <Grid container  direction="row" justify="space-around" alignItems="center" item>
+  //           <Grid item xs={5} item>
+  //             <TextField name="rightWiGlass" />
+  //           </Grid>
+  //           <Grid item xs={5} item>
+  //             <TextField name="leftWiGlass" />
+  //           </Grid>
+  //         </Grid>
+  //       </Fragment></DisplayIf>
 
-        <Grid container  direction="row" justify="space-around" alignItems="center" item>
-          <Grid item xs={5} item>
-            <TextField name="rightNearVis" />
-          </Grid>
-          <Grid item xs={5} item>
-            <TextField name="leftNearVis" />
-          </Grid>
-        </Grid>
-      </Grid>
+  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
+  //         <Grid item xs={5} item>
+  //           <TextField name="rightNearVis" />
+  //         </Grid>
+  //         <Grid item xs={5} item>
+  //           <TextField name="leftNearVis" />
+  //         </Grid>
+  //       </Grid>
+  //     </Grid>
       
-      <Divider /><br /> 
-      Finding in the Eye
-      <Grid
-        container
-        direction="column"
-        justify="flex-start"
-        alignItems="center"
-      >
-        <Grid container direction="row" justify="space-around" alignItems="center" item>
-          <Grid item xs={5}>
-            <TextField name="lidsRight" />
-          </Grid>
-          <Grid item xs={5}>
-            <TextField name="lidsLeft" />
-          </Grid>
-        </Grid>
+  //     <Divider /><br /> 
+  //     Finding in the Eye
+  //     <Grid
+  //       container
+  //       direction="column"
+  //       justify="flex-start"
+  //       alignItems="center"
+  //     >
+  //       <Grid container direction="row" justify="space-around" alignItems="center" item>
+  //         <Grid item xs={5}>
+  //           <TextField name="lidsRight" />
+  //         </Grid>
+  //         <Grid item xs={5}>
+  //           <TextField name="lidsLeft" />
+  //         </Grid>
+  //       </Grid>
 
-        <Grid container  direction="row" justify="space-around" alignItems="center" item>
-          <Grid item xs={5} item>
-            <TextField name="conjunctivaRight" />
-          </Grid>
-          <Grid item xs={5} item>
-            <TextField name="conjunctivaLeft" />
-          </Grid>
-        </Grid>
+  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
+  //         <Grid item xs={5} item>
+  //           <TextField name="conjunctivaRight" />
+  //         </Grid>
+  //         <Grid item xs={5} item>
+  //           <TextField name="conjunctivaLeft" />
+  //         </Grid>
+  //       </Grid>
 
-        <Grid container  direction="row" justify="space-around" alignItems="center" item>
-          <Grid item xs={5} item>
-            <TextField name="corneaRight" />
-          </Grid>
-          <Grid item xs={5} item>
-            <TextField name="corneaLeft" />
-          </Grid>
-        </Grid>
+  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
+  //         <Grid item xs={5} item>
+  //           <TextField name="corneaRight" />
+  //         </Grid>
+  //         <Grid item xs={5} item>
+  //           <TextField name="corneaLeft" />
+  //         </Grid>
+  //       </Grid>
 
-        <Grid container  direction="row" justify="space-around" alignItems="center" item>
-          <Grid item xs={5} item>
-            <TextField name="antSegRight" />
-          </Grid>
-          <Grid item xs={5} item>
-            <TextField name="antSegLeft" />
-          </Grid>
-        </Grid>
+  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
+  //         <Grid item xs={5} item>
+  //           <TextField name="antSegRight" />
+  //         </Grid>
+  //         <Grid item xs={5} item>
+  //           <TextField name="antSegLeft" />
+  //         </Grid>
+  //       </Grid>
 
-        <Grid container  direction="row" justify="space-around" alignItems="center" item>
-          <Grid item xs={5} item>
-            <TextField name="irisRight" />
-          </Grid>
-          <Grid item xs={5} item>
-            <TextField name="irisLeft" />
-          </Grid>
-        </Grid>
+  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
+  //         <Grid item xs={5} item>
+  //           <TextField name="irisRight" />
+  //         </Grid>
+  //         <Grid item xs={5} item>
+  //           <TextField name="irisLeft" />
+  //         </Grid>
+  //       </Grid>
 
-        <Grid container  direction="row" justify="space-around" alignItems="center" item>
-          <Grid item xs={5} item>
-            <TextField name="pupilRight" />
-          </Grid>
-          <Grid item xs={5} item>
-            <TextField name="pupilLeft" />
-          </Grid>
-        </Grid>
+  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
+  //         <Grid item xs={5} item>
+  //           <TextField name="pupilRight" />
+  //         </Grid>
+  //         <Grid item xs={5} item>
+  //           <TextField name="pupilLeft" />
+  //         </Grid>
+  //       </Grid>
 
-        <Grid container  direction="row" justify="space-around" alignItems="center" item>
-          <Grid item xs={5} item>
-            <TextField name="lensRight" />
-          </Grid>
-          <Grid item xs={5} item>
-            <TextField name="lensLeft" />
-          </Grid>
-        </Grid>
+  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
+  //         <Grid item xs={5} item>
+  //           <TextField name="lensRight" />
+  //         </Grid>
+  //         <Grid item xs={5} item>
+  //           <TextField name="lensLeft" />
+  //         </Grid>
+  //       </Grid>
 
-        <Grid container  direction="row" justify="space-around" alignItems="center" item>
-          <Grid item xs={5} item>
-            <TextField name="ocuMvmtRight" />
-          </Grid>
-          <Grid item xs={5} item>
-            <TextField name="ocuMvmtLeft" />
-          </Grid>
-        </Grid>
+  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
+  //         <Grid item xs={5} item>
+  //           <TextField name="ocuMvmtRight" />
+  //         </Grid>
+  //         <Grid item xs={5} item>
+  //           <TextField name="ocuMvmtLeft" />
+  //         </Grid>
+  //       </Grid>
 
-        <Grid container  direction="row" justify="space-around" alignItems="center" item>
-          <Grid item xs={5} item>
-            <TextField name="iopRight" />
-          </Grid>
-          <Grid item xs={5} item>
-            <TextField name="iopLeft" />
-          </Grid>
-        </Grid>
+  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
+  //         <Grid item xs={5} item>
+  //           <TextField name="iopRight" />
+  //         </Grid>
+  //         <Grid item xs={5} item>
+  //           <TextField name="iopLeft" />
+  //         </Grid>
+  //       </Grid>
 
-        <Grid container  direction="row" justify="space-around" alignItems="center" item>
-          <Grid item xs={5} item>
-            <TextField name="ductRight" />
-          </Grid>
-          <Grid item xs={5} item>
-            <TextField name="ductLeft" />
-          </Grid>
-        </Grid>
-      </Grid>
+  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
+  //         <Grid item xs={5} item>
+  //           <TextField name="ductRight" />
+  //         </Grid>
+  //         <Grid item xs={5} item>
+  //           <TextField name="ductLeft" />
+  //         </Grid>
+  //       </Grid>
+  //     </Grid>
 
-      <Divider /><br /> 
-      Posterior Segment Examination
-      <Grid
-        container
-        direction="column"
-        justify="flex-start"
-        alignItems="center"
-      >
-        <Grid container direction="row" justify="space-around" alignItems="center" item>
-          <Grid item xs={5}>
-            <TextField name="cdrRight" />
-          </Grid>
-          <Grid item xs={5}>
-            <TextField name="cdrLeft" />
-          </Grid>
-        </Grid>
+  //     <Divider /><br /> 
+  //     Posterior Segment Examination
+  //     <Grid
+  //       container
+  //       direction="column"
+  //       justify="flex-start"
+  //       alignItems="center"
+  //     >
+  //       <Grid container direction="row" justify="space-around" alignItems="center" item>
+  //         <Grid item xs={5}>
+  //           <TextField name="cdrRight" />
+  //         </Grid>
+  //         <Grid item xs={5}>
+  //           <TextField name="cdrLeft" />
+  //         </Grid>
+  //       </Grid>
 
-        <Grid container  direction="row" justify="space-around" alignItems="center" item>
-          <Grid item xs={5} item>
-            <TextField name="maculaRight" />
-          </Grid>
-          <Grid item xs={5} item>
-            <TextField name="maculaLeft" />
-          </Grid>
-        </Grid>
+  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
+  //         <Grid item xs={5} item>
+  //           <TextField name="maculaRight" />
+  //         </Grid>
+  //         <Grid item xs={5} item>
+  //           <TextField name="maculaLeft" />
+  //         </Grid>
+  //       </Grid>
 
-        <Grid container  direction="row" justify="space-around" alignItems="center" item>
-          <Grid item xs={5} item>
-            <TextField name="retinaRight" />
-          </Grid>
-          <Grid item xs={5} item>
-            <TextField name="retinaLeft" />
-          </Grid>
-        </Grid>
-      </Grid>
+  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
+  //         <Grid item xs={5} item>
+  //           <TextField name="retinaRight" />
+  //         </Grid>
+  //         <Grid item xs={5} item>
+  //           <TextField name="retinaLeft" />
+  //         </Grid>
+  //       </Grid>
+  //     </Grid>
       
-      <Divider /><br />
+  //     <Divider /><br />
 
-      <LongTextField name="diagnosis" />
-      <LongTextField name="advice" />
-      <LongTextField name="nameDoc" />
-    </Fragment>
-  ),
+  //     <LongTextField name="diagnosis" />
+  //     <LongTextField name="advice" />
+  //     <LongTextField name="nameDoc" />
+  //   </Fragment>
+  // ),
 
-  "Education" : {
-    "Pre-Education Survey": (info) => (
-      <Fragment>
-        {requireEducation(info)}
-        From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
-        1 being not at all, and 5 being a lot
-        <SelectField name="preEduSurvey1" />
-        From a scale of 1-5, how much do you know about healthy lifestyle and diet?
-        1 being not at all, and 5 being a lot
-        <SelectField name="preEduSurvey2" />
-        From a scale of 1-5, how much do you know about cancer risk factors?
-        1 being not at all, and 5 being a lot
-        <SelectField name="preEduSurvey3" />
-        From a scale of 1-5, how much do you know about good eyecare habits?
-        1 being not at all, and 5 being a lot
-        <SelectField name="preEduSurvey4" />
-        <Divider />
-        Score
-      </Fragment>
-    ),
+  // "Education" : {
+  //   "Pre-Education Survey": (info) => (
+  //     <Fragment>
+  //       {requireEducation(info)}
+  //       From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
+  //       1 being not at all, and 5 being a lot
+  //       <SelectField name="preEduSurvey1" />
+  //       From a scale of 1-5, how much do you know about healthy lifestyle and diet?
+  //       1 being not at all, and 5 being a lot
+  //       <SelectField name="preEduSurvey2" />
+  //       From a scale of 1-5, how much do you know about cancer risk factors?
+  //       1 being not at all, and 5 being a lot
+  //       <SelectField name="preEduSurvey3" />
+  //       From a scale of 1-5, how much do you know about good eyecare habits?
+  //       1 being not at all, and 5 being a lot
+  //       <SelectField name="preEduSurvey4" />
+  //       <Divider />
+  //       Score
+  //     </Fragment>
+  //   ),
 
-    "Pre-Education Quiz": (info) => (
-      <Fragment>
-        {requireEducation(info)}
-        <Divider variant="middle"/>
-        You are at higher risk of developing high cholesterol if you
-        <SelectField name="preEduQuiz1" />
-        All of the following are complications of diabetes except
-        <SelectField name="preEduQuiz2" />
-        How much exercise should we get a week?
-        <SelectField name="preEduQuiz3" />
-        What makes up a healthy plate?
-        <SelectField name="preEduQuiz4" />
-        Which of the following is the healthier choice to make?
-        <SelectField name="preEduQuiz5" />
-        Which of the following is a cancer risk factor(s)?
-        <SelectField name="preEduQuiz6" />
-        Which of the following is not considered good eyecare habits?
-        <SelectField name="preEduQuiz7" />
-      </Fragment>
-    ),
+  //   "Pre-Education Quiz": (info) => (
+  //     <Fragment>
+  //       {requireEducation(info)}
+  //       <Divider variant="middle"/>
+  //       You are at higher risk of developing high cholesterol if you
+  //       <SelectField name="preEduQuiz1" />
+  //       All of the following are complications of diabetes except
+  //       <SelectField name="preEduQuiz2" />
+  //       How much exercise should we get a week?
+  //       <SelectField name="preEduQuiz3" />
+  //       What makes up a healthy plate?
+  //       <SelectField name="preEduQuiz4" />
+  //       Which of the following is the healthier choice to make?
+  //       <SelectField name="preEduQuiz5" />
+  //       Which of the following is a cancer risk factor(s)?
+  //       <SelectField name="preEduQuiz6" />
+  //       Which of the following is not considered good eyecare habits?
+  //       <SelectField name="preEduQuiz7" />
+  //     </Fragment>
+  //   ),
 
-    "Post-Education Survey": (info) => (
-      <Fragment>
-        {requireEducation(info)}
-        From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
-        1 being not at all, and 5 being a lot
-        <SelectField name="postEduSurvey1" />
-        From a scale of 1-5, how much do you know about healthy lifestyle and diet?
-        1 being not at all, and 5 being a lot
-        <SelectField name="postEduSurvey2" />
-        From a scale of 1-5, how much do you know about cancer risk factors?
-        1 being not at all, and 5 being a lot
-        <SelectField name="postEduSurvey3" />
-        From a scale of 1-5, how much do you know about good eyecare habits?
-        1 being not at all, and 5 being a lot
-        <SelectField name="postEduSurvey4" />
-      </Fragment>
-    ),
+  //   "Post-Education Survey": (info) => (
+  //     <Fragment>
+  //       {requireEducation(info)}
+  //       From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
+  //       1 being not at all, and 5 being a lot
+  //       <SelectField name="postEduSurvey1" />
+  //       From a scale of 1-5, how much do you know about healthy lifestyle and diet?
+  //       1 being not at all, and 5 being a lot
+  //       <SelectField name="postEduSurvey2" />
+  //       From a scale of 1-5, how much do you know about cancer risk factors?
+  //       1 being not at all, and 5 being a lot
+  //       <SelectField name="postEduSurvey3" />
+  //       From a scale of 1-5, how much do you know about good eyecare habits?
+  //       1 being not at all, and 5 being a lot
+  //       <SelectField name="postEduSurvey4" />
+  //     </Fragment>
+  //   ),
 
-    "Post-Education Quiz": (info) => (
-      <Fragment>
-        {requireEducation(info)}
-        You are at higher risk of developing high cholesterol if you
-        <SelectField name="postEduQuiz1" />
-        All of the following are complications of diabetes except
-        <SelectField name="postEduQuiz2" />
-        How much exercise should we get a week?
-        <SelectField name="postEduQuiz3" />
-        What makes up a healthy plate?
-        <SelectField name="postEduQuiz4" />
-        Which of the following is the healthier choice to make?
-        <SelectField name="postEduQuiz5" />
-        Which of the following is a cancer risk factor(s)?
-        <SelectField name="postEduQuiz6" />
-        Which of the following is not considered good eyecare habits?
-        <SelectField name="postEduQuiz7" />
-      </Fragment>
-    ),
-  },
+  //   "Post-Education Quiz": (info) => (
+  //     <Fragment>
+  //       {requireEducation(info)}
+  //       You are at higher risk of developing high cholesterol if you
+  //       <SelectField name="postEduQuiz1" />
+  //       All of the following are complications of diabetes except
+  //       <SelectField name="postEduQuiz2" />
+  //       How much exercise should we get a week?
+  //       <SelectField name="postEduQuiz3" />
+  //       What makes up a healthy plate?
+  //       <SelectField name="postEduQuiz4" />
+  //       Which of the following is the healthier choice to make?
+  //       <SelectField name="postEduQuiz5" />
+  //       Which of the following is a cancer risk factor(s)?
+  //       <SelectField name="postEduQuiz6" />
+  //       Which of the following is not considered good eyecare habits?
+  //       <SelectField name="postEduQuiz7" />
+  //     </Fragment>
+  //   ),
+  // },
 
   "Post-Screening Feedback": (info) => (
     <Fragment>
