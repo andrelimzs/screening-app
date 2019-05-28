@@ -240,7 +240,7 @@ export const formLayouts = {
 
       Can we check if you have anemia? This will be done by pricking your finger to get a small drop of blood
       <RadioField name="stationSelect3" />
-      
+
       <h2>BP</h2>
       Can we check your blood pressure?
       <RadioField name="stationSelect4" />
@@ -454,47 +454,53 @@ export const formLayouts = {
     </Fragment>
   ),
 
-  "Women's Edu": {
-    "Pre-Women's Education Quiz": (info) => (
-      <Fragment>
-        Breast education completed?
-        <RadioField name="eduCompleted" />
-        From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
-        <SelectField name="preWomenEduSurvey1" />
-        Which of the following is/are normal symptom(s) of menstrual periods?
-        <SelectField name="preWomenEduQ1" />
-        All of the following are reasons for missed periods except
-        <SelectField name="preWomenEduQ2" />
-        Which of the following is true about menstruation
-        <SelectField name="preWomenEduQ3" />
-        When is the best time to do a breast self examination?
-        <SelectField name="preWomenEduQ4" />
-        How often should you do a breast self examination?
-        <SelectField name="preWomenEduQ5" />
-        You should go to the doctor if you notice:
-        <SelectField name="preWomenEduQ6" />
-      </Fragment>
-    ),
+  // "Women's Edu": {
+  //   "Pre-Women's Education Quiz": (info) => (
+  //     <Fragment>
+  //       Breast education completed?
+  //       <RadioField name="eduCompleted" />
+  //       From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
+  //       <SelectField name="preWomenEduSurvey1" />
+  //       Which of the following is/are normal symptom(s) of menstrual periods?
+  //       <SelectField name="preWomenEduQ1" />
+  //       All of the following are reasons for missed periods except
+  //       <SelectField name="preWomenEduQ2" />
+  //       Which of the following is true about menstruation
+  //       <SelectField name="preWomenEduQ3" />
+  //       When is the best time to do a breast self examination?
+  //       <SelectField name="preWomenEduQ4" />
+  //       How often should you do a breast self examination?
+  //       <SelectField name="preWomenEduQ5" />
+  //       You should go to the doctor if you notice:
+  //       <SelectField name="preWomenEduQ6" />
+  //     </Fragment>
+  //   ),
 
-    "Post-Women's Education Quiz": (info) => (
-      <Fragment>
-        From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
-        <SelectField name="postWomenEduSurvey1" />
-        Which of the following is/are normal symptom(s) of menstrual periods?
-        <SelectField name="postWomenEduQ1" />
-        All of the following are reasons for missed periods except
-        <SelectField name="postWomenEduQ2" />
-        Which of the following is true about menstruation
-        <SelectField name="postWomenEduQ3" />
-        When is the best time to do a breast self examination?
-        <SelectField name="postWomenEduQ4" />
-        How often should you do a breast self examination?
-        <SelectField name="postWomenEduQ5" />
-        You should go to the doctor if you notice:
-        <SelectField name="postWomenEduQ6" />
-      </Fragment>
-    ),
-  },
+  //   "Post-Women's Education Quiz": (info) => (
+  //     <Fragment>
+  //       From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
+  //       <SelectField name="postWomenEduSurvey1" />
+  //       Which of the following is/are normal symptom(s) of menstrual periods?
+  //       <SelectField name="postWomenEduQ1" />
+  //       All of the following are reasons for missed periods except
+  //       <SelectField name="postWomenEduQ2" />
+  //       Which of the following is true about menstruation
+  //       <SelectField name="postWomenEduQ3" />
+  //       When is the best time to do a breast self examination?
+  //       <SelectField name="postWomenEduQ4" />
+  //       How often should you do a breast self examination?
+  //       <SelectField name="postWomenEduQ5" />
+  //       You should go to the doctor if you notice:
+  //       <SelectField name="postWomenEduQ6" />
+  //     </Fragment>
+  //   ),
+  // },
+
+  "Women's Edu": (info) => (
+    <Fragment>
+      <BoolField name="womensEduCompleted" />
+    </Fragment>
+  ),
 
   "Doctors' Consult": (info) => (
     <Fragment>

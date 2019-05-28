@@ -717,76 +717,84 @@ export const formSchemas = {
     },
   }),
 
-  "Women's Edu":{
-    "Pre-Women's Education Quiz":
-    new SimpleSchema ({
-      eduCompleted: {
-        type: String,
-        allowedValues: ['Yes','No'],
-      },
-      preWomenEduSurvey1: {
-      type: String,
-      allowedValues: ['1', '2', '3', '4', '5'],   
-      },
-        preWomenEduQ1: {
-          type: String,
-          allowedValues: ['Abdominal cramps','Acne','Headache','All of the above'], 
-          },
-        preWomenEduQ2: {
-          type: String,
-          allowedValues: ['Stress', 'Pregnancy', 'Weight loss', 'Abrasions'],   
-          },
-          preWomenEduQ3: {
-          type: String,
-          allowedValues: ['Menstruation is dirty', 'Menstruation happens every 28 days, on average', 'We should change our sanitary pads once every few days', 'We should clean the area from back to front'],   
-          },
-        preWomenEduQ4: {
-          type: String,
-          allowedValues: ['1st day of menses', '7-10 days after start of menses', '21 days after start of menses', '2 days before start of menses'],   
-          },
-        preWomenEduQ5: {
-          type: String,
-          allowedValues: ['Once a week', 'Once a month', 'Once a year', 'Once in 2 years'],   
-          },
-        preWomenEduQ6: {
-          type: String,
-          allowedValues: ['A lump that can be seen/felt in the breast or underarm', 'Nipple that is pushed inwards', 'Dimpling of skin over the breast', 'Ulceration of skin over the breast','All of the above'],   
-          },
-      }),
+  // "Women's Edu":{
+  //   "Pre-Women's Education Quiz":
+  //   new SimpleSchema ({
+  //     eduCompleted: {
+  //       type: String,
+  //       allowedValues: ['Yes','No'],
+  //     },
+  //     preWomenEduSurvey1: {
+  //     type: String,
+  //     allowedValues: ['1', '2', '3', '4', '5'],   
+  //     },
+  //       preWomenEduQ1: {
+  //         type: String,
+  //         allowedValues: ['Abdominal cramps','Acne','Headache','All of the above'], 
+  //         },
+  //       preWomenEduQ2: {
+  //         type: String,
+  //         allowedValues: ['Stress', 'Pregnancy', 'Weight loss', 'Abrasions'],   
+  //         },
+  //         preWomenEduQ3: {
+  //         type: String,
+  //         allowedValues: ['Menstruation is dirty', 'Menstruation happens every 28 days, on average', 'We should change our sanitary pads once every few days', 'We should clean the area from back to front'],   
+  //         },
+  //       preWomenEduQ4: {
+  //         type: String,
+  //         allowedValues: ['1st day of menses', '7-10 days after start of menses', '21 days after start of menses', '2 days before start of menses'],   
+  //         },
+  //       preWomenEduQ5: {
+  //         type: String,
+  //         allowedValues: ['Once a week', 'Once a month', 'Once a year', 'Once in 2 years'],   
+  //         },
+  //       preWomenEduQ6: {
+  //         type: String,
+  //         allowedValues: ['A lump that can be seen/felt in the breast or underarm', 'Nipple that is pushed inwards', 'Dimpling of skin over the breast', 'Ulceration of skin over the breast','All of the above'],   
+  //         },
+  //     }),
 
-    "Post-Women's Education Quiz":
-    new SimpleSchema ({
-      postWomenEduSurvey1: {
-      type: String,
-      allowedValues: ['1', '2', '3', '4', '5'],   
-      },
-      postWomenEduQ1: {
-        type: String,
-        allowedValues: ['Abdominal cramps','Acne','Headache','All of the above'], 
-        },
-      postWomenEduQ2: {
-        type: String,
-        allowedValues: ['Stress', 'Pregnancy', 'Weight loss', 'Abrasions'],   
-        },
-      postWomenEduQ3: {
-        type: String,
-        allowedValues: ['Menstruation is dirty', 'Menstruation happens every 28 days, on average', 'We should change our sanitary pads once every few days', 'We should clean the area from back to front'],   
-        },
-      postWomenEduQ4: {
-        type: String,
-        allowedValues: ['1st day of menses', '7-10 days after start of menses', '21 days after start of menses', '2 days before start of menses'],   
-        },
-      postWomenEduQ5: {
-        type: String,
-        allowedValues: ['Once a week', 'Once a month', 'Once a year', 'Once in 2 years'],   
-        },
-      postWomenEduQ6: {
-        type: String,
-        allowedValues: ['A lump that can be seen/felt in the breast or underarm', 'Nipple that is pushed inwards', 'Dimpling of skin over the breast', 'Ulceration of skin over the breast','All of the above'],   
-        },
-    }),
-  },
+  //   "Post-Women's Education Quiz":
+  //   new SimpleSchema ({
+  //     postWomenEduSurvey1: {
+  //     type: String,
+  //     allowedValues: ['1', '2', '3', '4', '5'],   
+  //     },
+  //     postWomenEduQ1: {
+  //       type: String,
+  //       allowedValues: ['Abdominal cramps','Acne','Headache','All of the above'], 
+  //       },
+  //     postWomenEduQ2: {
+  //       type: String,
+  //       allowedValues: ['Stress', 'Pregnancy', 'Weight loss', 'Abrasions'],   
+  //       },
+  //     postWomenEduQ3: {
+  //       type: String,
+  //       allowedValues: ['Menstruation is dirty', 'Menstruation happens every 28 days, on average', 'We should change our sanitary pads once every few days', 'We should clean the area from back to front'],   
+  //       },
+  //     postWomenEduQ4: {
+  //       type: String,
+  //       allowedValues: ['1st day of menses', '7-10 days after start of menses', '21 days after start of menses', '2 days before start of menses'],   
+  //       },
+  //     postWomenEduQ5: {
+  //       type: String,
+  //       allowedValues: ['Once a week', 'Once a month', 'Once a year', 'Once in 2 years'],   
+  //       },
+  //     postWomenEduQ6: {
+  //       type: String,
+  //       allowedValues: ['A lump that can be seen/felt in the breast or underarm', 'Nipple that is pushed inwards', 'Dimpling of skin over the breast', 'Ulceration of skin over the breast','All of the above'],   
+  //       },
+  //   }),
+  // },
   
+  "Women's Edu":
+  new SimpleSchema ({
+    womensEduCompleted: {
+      type: Boolean,
+      label: "Women's education completed?"
+    },
+  }),
+
   "Education":{
     "Pre-Education Survey":
     new SimpleSchema ({
