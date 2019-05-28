@@ -63,14 +63,14 @@ export const formSchemas = {
       },
       'spokenLanguages.$': {
         type: String,
-        allowedValues: ['Sambalpuri', 'Odia', 'English', 'Others'],
+        allowedValues: ['Hindi', 'Sambalpuri', 'Odia', 'English', 'Others'],
       },
       writtenLanguages: {
         type: Array,
       },
       'writtenLanguages.$': {
         type: String,
-        allowedValues: ['Sambalpuri', 'Odia', 'English', 'Others'],
+        allowedValues: ['Hindi', 'Sambalpuri', 'Odia', 'English', 'Others'],
       },
       anyDrugAllergies: {
         type: String,
