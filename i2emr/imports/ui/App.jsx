@@ -5,6 +5,7 @@ import Station from './Station.jsx';
 import Queue from './Queue.jsx';
 import Form from './Form.jsx';
 import Info from './Info.jsx';
+import PrintSummary from './PrintSummary.jsx';
 
 import Patientinfo from '/imports/api/patientinfo';
 import { formLayouts } from '/imports/api/formLayouts';
@@ -36,7 +37,7 @@ const styles = theme => ({
 class App extends Component {
   state = {
     currentPatient: "",
-    links: Object.keys(formLayouts).concat(["Finished Patients"]),
+    links: Object.keys(formLayouts).concat(["Finished Patients", "Done"]),
   }
 
   selectStation(newStation, e) {
@@ -66,11 +67,44 @@ class App extends Component {
   render() {
     const station = Session.get('station');
     
-    // if ( !this.props.connected ) {
-    //   alert("Please reconnect wifi, and refresh page");
-    // }
-    
-    if ( station ) {
+    if ( station && station === "Done") {
+      return (
+        <div>
+          
+          {/* <Button variant="outlined" onClick={this.selectStation.bind(this, "")}>Back</Button>
+          <br /> */}
+          
+          <Grid container
+            justify="flex-start"
+            spacing={16}>
+            
+            {typeof(Session.get('currentPatient')) !== "number" && <Grid item xs={12}>
+              <Queue patientList={this.props.patientList} />
+            </Grid>}
+            
+            <Grid item xs={12}>
+              <PrintSummary station={station} id={Session.get('currentPatient')}
+                    stationQueue={this.props.patientInfo.stationQueue} patientInfo={this.props.patientInfo}/>
+            </Grid>
+          </Grid>
+
+          <Dialog
+            open={!this.props.connected}
+            // onClose={this.handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{"You have been disconnected"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Please reconnect to wifi network.
+              </DialogContentText>
+            </DialogContent>
+          </Dialog>
+
+        </div>
+      );
+    } else if ( station ) {
       return (
         <div>
           
