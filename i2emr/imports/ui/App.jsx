@@ -13,6 +13,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import { DialogTitle,DialogContent,DialogContentText } from '@material-ui/core';
 
 const styles = theme => ({
   root: {
@@ -63,7 +65,11 @@ class App extends Component {
 
   render() {
     const station = Session.get('station');
-
+    
+    // if ( !this.props.connected ) {
+    //   alert("Please reconnect wifi, and refresh page");
+    // }
+    
     if ( station ) {
       return (
         <div>
@@ -104,6 +110,21 @@ class App extends Component {
 
             </Grid>
           </Grid>
+
+          <Dialog
+            open={!this.props.connected}
+            // onClose={this.handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{"You have been disconnected"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Please reconnect to wifi network.
+              </DialogContentText>
+            </DialogContent>
+          </Dialog>
+
         </div>
       );
 
@@ -115,6 +136,19 @@ class App extends Component {
 
       return (
         <div>
+          <Dialog
+            open={!this.props.connected}
+            // onClose={this.handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{"Disconnected"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                You have been disconnected. Please connect to wifi network.
+              </DialogContentText>
+            </DialogContent>
+          </Dialog>
           <h1>Select Station </h1>
           {links}
         </div>
@@ -124,6 +158,7 @@ class App extends Component {
   }
 }
 const AppContainer = withTracker(() => {
+  const connected = Meteor.status().connected;
   const station = Session.get('station');
   const currentPatientID = Session.get('currentPatient');
   const patientList = Patientinfo.find(
@@ -140,6 +175,7 @@ const AppContainer = withTracker(() => {
   // }
 
   return {
+    connected: connected,
     patientList: patientList,
     patientInfo: patientInfo,
   };
