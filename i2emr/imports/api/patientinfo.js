@@ -44,7 +44,7 @@ Meteor.methods({
       stationSelect9: "",
       stationSelect10: "Breast Exam",
       stationSelect11: "Women's Edu",
-      stationSelect12: "Doctors' Consult",
+      stationSelect12: "",
       stationSelect13: "Eye Screening",
       stationSelect14: "Education"
     }
