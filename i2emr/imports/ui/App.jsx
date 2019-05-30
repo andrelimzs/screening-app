@@ -37,7 +37,7 @@ const styles = theme => ({
 class App extends Component {
   state = {
     currentPatient: "",
-    links: Object.keys(formLayouts).concat(["Finished Patients", "Done"]),
+    links: Object.keys(formLayouts).concat(["Done"]),
   }
 
   selectStation(newStation, e) {
