@@ -25,62 +25,62 @@ class PrintSummary extends Component {
       >
         {/* <Typography >PERSONAL INFORMATION</Typography><br /> */}
         <Grid container direction="row" justify="space-between" alignItems="center" >
-          <Grid item xs={12}>Name: <TextField variant="outlined" fullWidth={true} margin="dense" value={info["Patient Info"].name} /></Grid>
+          <Grid item xs={12}>Name: <TextField variant="outlined" fullWidth={true} margin="dense" defaultValue={info["Patient Info"].name} /></Grid>
         </Grid><br />
         <Divider />
 
         <Grid container direction="row" justify="space-between" alignItems="center" >
-          <Grid item xs={6}>Gender: <TextField variant="outlined" fullWidth={true} margin="dense" name="gender" value={info["Patient Info"].gender} /></Grid>
-          <Grid item xs={6}>Birthdate: <TextField variant="outlined" fullWidth={true} margin="dense" name="birthday" value={info["Patient Info"].birthday} /></Grid>
+          <Grid item xs={6}>Gender: <TextField variant="outlined" fullWidth={true} margin="dense" name="gender" defaultValue={info["Patient Info"].gender} /></Grid>
+          <Grid item xs={6}>Birthdate: <TextField variant="outlined" fullWidth={true} margin="dense" name="birthday" defaultValue={info["Patient Info"].birthday} /></Grid>
         </Grid><br />
         <Divider />
 
         <Grid container direction="row" justify="space-between" alignItems="center" >
-          <Grid item xs={6}>Date of Screening: <TextField variant="outlined" fullWidth={true} margin="dense" name="dateOfScreening" value={
+          <Grid item xs={6}>Date of Screening: <TextField variant="outlined" fullWidth={true} margin="dense" name="dateOfScreening" defaultValue={
             info.lastSubmit.getDate() + "/" + info.lastSubmit.getMonth() + "/" + info.lastSubmit.getFullYear()}/></Grid>
-          <Grid item xs={6}>Age: <TextField variant="outlined" fullWidth={true} margin="dense" name="age" value={info["Patient Info"].age} /></Grid>
+          <Grid item xs={6}>Age: <TextField variant="outlined" fullWidth={true} margin="dense" name="age" defaultValue={info["Patient Info"].age} /></Grid>
         </Grid><br />
         <Divider />
         
         {/* <Typography >HEIGHT & WEIGHT</Typography><br /> */}
         <Grid container direction="row" justify="space-between" alignItems="center" >
           <Grid item xs={4}>Height (m):
-            <TextField variant="outlined" fullWidth={true} margin="dense" name="height" value={
+            <TextField variant="outlined" fullWidth={true} margin="dense" name="height" defaultValue={
               (typeof(info["Height & weight"]) !== "undefined") ? info["Height & weight"][0].height : "-"} />
           </Grid>
           <Grid item xs={4}>Weight (kg):
-            <TextField variant="outlined" fullWidth={true} margin="dense" name="weight" value={
+            <TextField variant="outlined" fullWidth={true} margin="dense" name="weight" defaultValue={
               (typeof(info["Height & weight"]) !== "undefined") ? info["Height & weight"][0].weight : "-"} />
           </Grid>
           <Grid item xs={4}>BMI (kg/m2):
-            <TextField variant="outlined" fullWidth={true} margin="dense" name="bmi" value={
+            <TextField variant="outlined" fullWidth={true} margin="dense" name="bmi" defaultValue={
               (typeof(info["Height & weight"]) !== "undefined") ? info["Height & weight"][0].bmi : "-"} />
           </Grid>
         </Grid><br />
 
         <Grid container direction="row" justify="space-between" alignItems="center" >
           <Grid item xs={6}>Child height assessment:
-            <TextField variant="outlined" fullWidth={true} margin="dense" name="childHeightAssessment" value={
+            <TextField variant="outlined" fullWidth={true} margin="dense" name="childHeightAssessment" defaultValue={
               (typeof(info["Height & weight"]) !== "undefined") ? info["Height & weight"][0].childHeightAssessment : "-"}/>
           </Grid>
           <Grid item xs={6}>Child weight assessment:
-            <TextField variant="outlined" fullWidth={true} margin="dense" name="childWeightAssessment" value={
+            <TextField variant="outlined" fullWidth={true} margin="dense" name="childWeightAssessment" defaultValue={
               (typeof(info["Height & weight"]) !== "undefined") ? info["Height & weight"][0].childWeightAssessment : "-"}/>
           </Grid>
         </Grid><br />
 
         <Grid container direction="row" justify="space-between" alignItems="center" >
           <Grid item xs={6}>Child BMI assessment:
-            <TextField variant="outlined" fullWidth={true} margin="dense" name="childBmiAssessment" value={
+            <TextField variant="outlined" fullWidth={true} margin="dense" name="childBmiAssessment" defaultValue={
               (typeof(info["Height & weight"]) !== "undefined") ? info["Height & weight"][0].childBmiAssessment : "-"}/>
           </Grid>
           <Grid item xs={6}>Adult BMI assessment:
-            <TextField variant="outlined" fullWidth={true} margin="dense" name="adultBmiAssessment" value={
+            <TextField variant="outlined" fullWidth={true} margin="dense" name="adultBmiAssessment" defaultValue={
               (typeof(info["Height & weight"]) === "undefined") ? "-" : 
                 (info["Height & weight"][0].bmi < 18.5) ? "Underweight (BMI < 18.5)" :
                 (info["Height & weight"][0].bmi < 23.0) ? "Normal (18.5 <= BMI < 23.0)" :
                 (info["Height & weight"][0].bmi < 25.0) ? "Overweight (23.0 <= BMI < 25.0)" :
-                "Obease (BMI >= 25.0"
+                "Obese (BMI >= 25.0)"
             } />
           </Grid>
         </Grid><br />
@@ -89,15 +89,15 @@ class PrintSummary extends Component {
         {/* <Typography >WAIST : HIP RATIO</Typography><br /> */}
         <Grid container direction="row" justify="space-between" alignItems="center" >
           <Grid item xs={4}>Waist (cm):
-            <TextField variant="outlined" fullWidth={true} margin="dense" name="waist" value={
+            <TextField variant="outlined" fullWidth={true} margin="dense" name="waist" defaultValue={
               (typeof(info["Height & weight"]) !== "undefined") ? info["Height & weight"][0].waist : "-"}/>
           </Grid>
           <Grid item xs={4}>Hip (cm):
-            <TextField variant="outlined" fullWidth={true} margin="dense" name="hip" value={
+            <TextField variant="outlined" fullWidth={true} margin="dense" name="hip" defaultValue={
               (typeof(info["Height & weight"]) !== "undefined") ? info["Height & weight"][0].hip : "-"}/>
           </Grid>
           <Grid item xs={4}>Waist:Hip Ratio
-            <TextField variant="outlined" fullWidth={true} margin="dense" name="waistHipRatio" value={
+            <TextField variant="outlined" fullWidth={true} margin="dense" name="waistHipRatio" defaultValue={
               (typeof(info["Height & weight"]) !== "undefined") ? info["Height & weight"][0].waistHipRatio : "-"}/>
           </Grid>
         </Grid><br />
@@ -106,20 +106,20 @@ class PrintSummary extends Component {
         {/* <Typography >DIABETES RISK ASSESSMENT & CAPILLARY BLOOD GLUCOSE</Typography><br /> */}
         <Grid container direction="row" justify="space-between" alignItems="center" >
           <Grid item xs={3}>Diabetes Risk:
-            <TextField variant="outlined" fullWidth={true} margin="dense" name="diabetesRisk" value={
+            <TextField variant="outlined" fullWidth={true} margin="dense" name="diabetesRisk" defaultValue={
               (typeof(info["Height & weight"]) !== "undefined") ? info["Height & weight"][0].riskAssessRiskLevel : "-"}/>
           </Grid>
           <Grid item xs={3}>Blood Glucose
-            <TextField variant="outlined" fullWidth={true} margin="dense" name="cbg" value={
+            <TextField variant="outlined" fullWidth={true} margin="dense" name="cbg" defaultValue={
               (typeof(info["Blood Glucose & Hb"]) !== "undefined") ? String(info["Blood Glucose & Hb"][0].cbg) + " mg/dL" : "-"}/>
           </Grid>
           <Grid item xs={3}>Haemoglobin
-            <TextField variant="outlined" fullWidth={true} margin="dense" name="hb" value={
+            <TextField variant="outlined" fullWidth={true} margin="dense" name="hb" defaultValue={
               (typeof(info["Blood Glucose & Hb"]) !== "undefined") ? String(info["Blood Glucose & Hb"][0].hb) + " g/dL" : "-"}/>
           </Grid>
           <Grid item xs={2}>
             Average Blood Pressure:
-            <TextField variant="outlined" fullWidth={true} margin="dense" name="bpAvgSys" value={
+            <TextField variant="outlined" fullWidth={true} margin="dense" name="bpAvgSys" defaultValue={
               (typeof(info["Blood Pressure"]) !== "undefined") ? 
                 String((Number(info["Blood Pressure"][0].bp1Sys)+
                   Number(info["Blood Pressure"][0].bp2Sys))/2) + "/" +
@@ -132,7 +132,7 @@ class PrintSummary extends Component {
         {/* <Typography >DOCTOR'S NOTES</Typography><br /> */}
         <Grid container direction="row" justify="space-between" alignItems="center" >
           <Grid item xs={12}>Doctor's Notes:
-            <TextField rows={13} variant="outlined" fullWidth={true} multiline={true} name="docConsult2" value={
+            <TextField rows={13} variant="outlined" fullWidth={true} multiline={true} name="docConsult2" defaultValue={
               (typeof(info["Doctors' Consult"]) !== "undefined") ? info["Doctors' Consult"][0].docConsult2 : "-"}/>
           </Grid>
         </Grid><br />
@@ -180,20 +180,23 @@ class PrintSummary extends Component {
         </Grid><br />
 
         <Typography variant="h5">
-        Please collect blood test report from Railway Community Hall after receiving a call from us. Thank you.
+        Please collect blood test report from Trilochan Netralaya on 4-5 June 2019 5pm – 7.30pm. 
         </Typography>
         <br />
         <Typography variant="h5">
-        ଯେତେବେଳେ ଆମେ ଆପଣଂକୁ ଫୋନ କରିବୁ,କୂପାକରି ରେଲବୌ ସାମୁଦାୟିକ ହଲ ରୁ ରକତ ପରୀକ୍ଷା ର ରିପୋଟ ନେଇଯାନତୁ ।          ଧନଐବାଦ
+        त्रिलोचन नेत्रालय से 4-5 जून 2019 शाम 5 बजे - 7.30 बजे रक्त परीक्षण रिपोर्ट एकत्र करें। धन्यवाद।
         </Typography>
         <br />
         <Typography variant="h5">
-        जब हम आपको कॉल करते हैं, तो कृपया रेलवे सामुदायिक हॉल से रक्त परीक्षण रिपोर्ट एकत्र करें। धन्यवाद।
+        ଦୟ।କରି ତ୍ରିଲୋଚନ ନେତାଲୟରୁ ୪-୫ ଜୁନ ୨୦୧୯ ସଂଧ। ୭.୩୦ ରେ ରକତ ପରିକ୍ଷାର ରିପୋଟ ନେଇଯିବେ ।
+        </Typography>
+        <Typography variant="h5">
+        ଧନୟବାଦ
         </Typography>
 
       </Grid>
     );
-    console.log(this.props.id);
+    
     return (
       <Paper elevation={0} p={0} m={0}>
         {typeof(this.props.id) === "number" && newForm(this.props.patientInfo)}
