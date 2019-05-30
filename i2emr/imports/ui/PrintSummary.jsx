@@ -37,7 +37,7 @@ class PrintSummary extends Component {
 
         <Grid container direction="row" justify="space-between" alignItems="center" >
           <Grid item xs={6}>Date of Screening: <TextField variant="outlined" fullWidth={true} margin="dense" name="dateOfScreening" defaultValue={
-            info.lastSubmit.getDate() + "/" + info.lastSubmit.getMonth() + "/" + info.lastSubmit.getFullYear()}/></Grid>
+            info.lastSubmit.getDate() + "/" + (info.lastSubmit.getMonth()+1) + "/" + info.lastSubmit.getFullYear()}/></Grid>
           <Grid item xs={6}>Age: <TextField variant="outlined" fullWidth={true} margin="dense" name="age" defaultValue={info["Patient Info"].age} /></Grid>
         </Grid><br />
         <Divider />
