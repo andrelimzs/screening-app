@@ -84,6 +84,10 @@ Meteor.methods({
 
     Patientinfo.insert(data);
 
+    // Print a patient insertion summary
+    console.log(String(data.id) + " | " + String(data.name));
+    console.log(data.stationQueue);
+
     return data.id;
   },
   'patientinfo.update'(data) {
@@ -126,14 +130,16 @@ Meteor.methods({
       lastSubmit: new Date()
     }});
 
-    // console.log(Patientinfo.findOne({id:id}));
+    // // Print a next station msg
+    // console.log(String(id) + " | " + String( );
+    // console.log(data.stationQueue);
   },
   'patientinfo.setBusy'(id, value) {
     const patientStatus = (Patientinfo.findOne({id:id}) !== "undefined") ? Patientinfo.findOne({id:id}).busy : false;
     
     if (patientStatus === value) {
 
-      console.log("Patient conflict");
+      // console.log("Patient conflict");
       return false;
       
     } else {
