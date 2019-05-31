@@ -23,6 +23,15 @@ Meteor.startup(() => {
     $set:{ busy: false }
   }, { multi: true });
 
+  const setAllToDone = false;
+  
+  if (setAllToDone) {
+      Patientinfo.update({ },{
+        $set:{ nextStation: "Done" }
+      }, { multi: true });
+  }
+
+
   if (Patientinfo.find().count() === 0) {
     // Patientinfo.insert({
     //   id: '1',

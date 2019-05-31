@@ -63,7 +63,7 @@ class Form extends Component {
           pageIndex: state.pageIndex + 1
         }));
 
-        console.log("Next subpage");
+        // console.log("Next subpage");
       } else {
         const subSchemaName = Object.keys(formSchemas[this.props.station])[this.state.pageIndex];
         this.multiData[subSchemaName] = newForm;
@@ -74,8 +74,10 @@ class Form extends Component {
         if (this.props.station == "Registration") {
           // Meteor.call('patientinfo.insert', this.multiData);
           Meteor.call('patientinfo.insert', this.multiData, (error, result) => {
-            if (result) alert("Successful! ID is " + String(result));
+            if (result) { alert("Successful! ID is " + String(result)); }
+            else { alert("Unsuccessful"); } 
           });
+
         } else {
           Meteor.call('patientinfo.update', this.multiData);
           Session.set('currentPatient',null);

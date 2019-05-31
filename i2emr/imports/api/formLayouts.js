@@ -361,35 +361,7 @@ export const formLayouts = {
       </DisplayIf>
     </Fragment>
   ),
-
-  "Blood Glucose & Hb": (info) => (
-    <Fragment>      
-      <TextField name="cbg" />
-      <br />
-      <DisplayIf condition={context => (
-        context.model.cbg < 54 || context.model.cbg > 360
-      )}><Fragment>
-        <Typography color='secondary' variant='h5'>
-          Immediate Doctor's consult for CBG
-        </Typography>
-      </Fragment></DisplayIf>
-      <TextField name="hb" />
-      <br />
-      {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age > 17 &&
-      <Fragment>
-        Doctors consult if:
-        <p>{"Males: <13.8 OR >17.2"}</p>
-        <p>{"Females: <12.1 OR >15.1"}</p>
-      </Fragment>}
-      {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age <= 17 &&
-      <Fragment>
-        Doctors consult if:
-        <p>{"<11 OR >16"}</p>
-      </Fragment>}
-      <BoolField name="docConsultForBloodGlucAndHb" />
-    </Fragment>
-  ),
-
+  
   "Blood Pressure": (info) => (
     <Fragment>
       <div><TextField name="bp1Sys" /></div>
@@ -425,6 +397,34 @@ export const formLayouts = {
       </Fragment></DisplayIf>
 
       <div><BoolField name="docConsultForBP" /></div>
+    </Fragment>
+  ),
+
+  "Blood Glucose & Hb": (info) => (
+    <Fragment>      
+      <TextField name="cbg" />
+      <br />
+      <DisplayIf condition={context => (
+        context.model.cbg < 54 || context.model.cbg > 360
+      )}><Fragment>
+        <Typography color='secondary' variant='h5'>
+          Immediate Doctor's consult for CBG
+        </Typography>
+      </Fragment></DisplayIf>
+      <TextField name="hb" />
+      <br />
+      {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age > 17 &&
+      <Fragment>
+        Doctors consult if:
+        <p>{"Males: <13.8 OR >17.2"}</p>
+        <p>{"Females: <12.1 OR >15.1"}</p>
+      </Fragment>}
+      {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age <= 17 &&
+      <Fragment>
+        Doctors consult if:
+        <p>{"<11 OR >16"}</p>
+      </Fragment>}
+      <BoolField name="docConsultForBloodGlucAndHb" />
     </Fragment>
   ),
 
@@ -496,11 +496,11 @@ export const formLayouts = {
   //   ),
   // },
 
-  "Women's Edu": (info) => (
-    <Fragment>
-      <BoolField name="womensEduCompleted" />
-    </Fragment>
-  ),
+  // "Women's Edu": (info) => (
+  //   <Fragment>
+  //     <BoolField name="womensEduCompleted" />
+  //   </Fragment>
+  // ),
 
   "Doctors' Consult": (info) => (
     <Fragment>
@@ -786,38 +786,38 @@ export const formLayouts = {
   //   ),
   // },
 
-  "Post-Screening Feedback": (info) => (
-    <Fragment>
-      I have had a good experience at the screening
-      <SelectField name="postScreeningFeedback1" />
-      I came for the screening because: (Select all that apply)
-      <AutoField name="postScreeningFeedback2" />
-      I know that regular health screening is important
-      <SelectField name="postScreeningFeedback3" />
-      I know that it is important to detect chronic diseases and cancers early
-      <SelectField name="postScreeningFeedback4" />
-      I am willing to take the trouble to attend health screenings
-      <SelectField name="postScreeningFeedback5" />
-      I am willing to attend my follow-up sessions
-      <SelectField name="postScreeningFeedback6" />
-      The student volunteers attended to my needs
-      <SelectField name="postScreeningFeedback7" />
-      The student volunteers were well-trained
-      <SelectField name="postScreeningFeedback8" />
-      The waiting time to enter the screening was reasonable
-      <SelectField name="postScreeningFeedback9" />
-      The waiting time for each station was reasonable
-      <SelectField name="postScreeningFeedback10" />
-      The flow of the screening was easy to follow
-      <SelectField name="postScreeningFeedback11" />
-      I would recommend my family/friends to attend this screening
-      <SelectField name="postScreeningFeedback12" />
-      What encouraged you to come for our event? Select all that apply
-      <AutoField name="postScreeningFeedback13" />
-      How often do you attend a health screening?
-      <SelectField name="postScreeningFeedback14" />
-    </Fragment>
-  ),
+  // "Post-Screening Feedback": (info) => (
+  //   <Fragment>
+  //     I have had a good experience at the screening
+  //     <SelectField name="postScreeningFeedback1" />
+  //     I came for the screening because: (Select all that apply)
+  //     <AutoField name="postScreeningFeedback2" />
+  //     I know that regular health screening is important
+  //     <SelectField name="postScreeningFeedback3" />
+  //     I know that it is important to detect chronic diseases and cancers early
+  //     <SelectField name="postScreeningFeedback4" />
+  //     I am willing to take the trouble to attend health screenings
+  //     <SelectField name="postScreeningFeedback5" />
+  //     I am willing to attend my follow-up sessions
+  //     <SelectField name="postScreeningFeedback6" />
+  //     The student volunteers attended to my needs
+  //     <SelectField name="postScreeningFeedback7" />
+  //     The student volunteers were well-trained
+  //     <SelectField name="postScreeningFeedback8" />
+  //     The waiting time to enter the screening was reasonable
+  //     <SelectField name="postScreeningFeedback9" />
+  //     The waiting time for each station was reasonable
+  //     <SelectField name="postScreeningFeedback10" />
+  //     The flow of the screening was easy to follow
+  //     <SelectField name="postScreeningFeedback11" />
+  //     I would recommend my family/friends to attend this screening
+  //     <SelectField name="postScreeningFeedback12" />
+  //     What encouraged you to come for our event? Select all that apply
+  //     <AutoField name="postScreeningFeedback13" />
+  //     How often do you attend a health screening?
+  //     <SelectField name="postScreeningFeedback14" />
+  //   </Fragment>
+  // ),
   
 
 };

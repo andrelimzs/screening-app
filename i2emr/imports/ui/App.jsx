@@ -5,6 +5,7 @@ import Station from './Station.jsx';
 import Queue from './Queue.jsx';
 import Form from './Form.jsx';
 import Info from './Info.jsx';
+import PrintSummary from './PrintSummary.jsx';
 
 import Patientinfo from '/imports/api/patientinfo';
 import { formLayouts } from '/imports/api/formLayouts';
@@ -13,6 +14,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import { DialogTitle,DialogContent,DialogContentText } from '@material-ui/core';
 
 const styles = theme => ({
   root: {
@@ -34,7 +37,7 @@ const styles = theme => ({
 class App extends Component {
   state = {
     currentPatient: "",
-    links: Object.keys(formLayouts).concat(["Finished Patients"]),
+    links: Object.keys(formLayouts).concat(["Done"]),
   }
 
   selectStation(newStation, e) {
@@ -63,8 +66,45 @@ class App extends Component {
 
   render() {
     const station = Session.get('station');
+    
+    if ( station && station === "Done") {
+      return (
+        <div>
+          
+          {/* <Button variant="outlined" onClick={this.selectStation.bind(this, "")}>Back</Button>
+          <br /> */}
+          
+          <Grid container
+            justify="flex-start"
+            spacing={16}>
+            
+            {typeof(Session.get('currentPatient')) !== "number" && <Grid item xs={12}>
+              <Queue patientList={this.props.patientList} />
+            </Grid>}
+            
+            <Grid item xs={12}>
+              <PrintSummary station={station} id={Session.get('currentPatient')}
+                    stationQueue={this.props.patientInfo.stationQueue} patientInfo={this.props.patientInfo}/>
+            </Grid>
+          </Grid>
 
-    if ( station ) {
+          <Dialog
+            open={!this.props.connected}
+            // onClose={this.handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{"You have been disconnected"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Please reconnect to wifi network.
+              </DialogContentText>
+            </DialogContent>
+          </Dialog>
+
+        </div>
+      );
+    } else if ( station ) {
       return (
         <div>
           
@@ -104,6 +144,21 @@ class App extends Component {
 
             </Grid>
           </Grid>
+
+          <Dialog
+            open={!this.props.connected}
+            // onClose={this.handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{"You have been disconnected"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Please reconnect to wifi network.
+              </DialogContentText>
+            </DialogContent>
+          </Dialog>
+
         </div>
       );
 
@@ -115,6 +170,19 @@ class App extends Component {
 
       return (
         <div>
+          <Dialog
+            open={!this.props.connected}
+            // onClose={this.handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{"Disconnected"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                You have been disconnected. Please connect to wifi network.
+              </DialogContentText>
+            </DialogContent>
+          </Dialog>
           <h1>Select Station </h1>
           {links}
         </div>
@@ -124,11 +192,19 @@ class App extends Component {
   }
 }
 const AppContainer = withTracker(() => {
+  const connected = Meteor.status().connected;
   const station = Session.get('station');
   const currentPatientID = Session.get('currentPatient');
-  const patientList = Patientinfo.find(
-    { $and:[{ nextStation: station }, { $or:[{ busy: false },{ id: currentPatientID }] }
-    ]}).fetch();
+  var patientList;
+
+  if (station === "Done") {
+    patientList = Patientinfo.find().fetch();
+  } else {
+    patientList = Patientinfo.find(
+      { $and:[{ nextStation: station }, { $or:[{ busy: false },{ id: currentPatientID }] }
+      ]}).fetch();
+  }
+  
   //, { sort: { lastSubmit: 1 } }
   // TODO - Find better way to sent patient info in
   // Retrieve current patient info for Info component
@@ -140,6 +216,7 @@ const AppContainer = withTracker(() => {
   // }
 
   return {
+    connected: connected,
     patientList: patientList,
     patientInfo: patientInfo,
   };
