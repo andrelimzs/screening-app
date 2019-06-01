@@ -64,9 +64,11 @@ class Search extends Component {
       <div>
         <TextField
           name="search"
-          type="text"
+          type="number"
           variant="outlined"
           margin="dense"
+          autoComplete="off"
+          placeholder="Search ID"
           ref= {this.searchBar} 
           onChange={this.handleChangeID}
         />
