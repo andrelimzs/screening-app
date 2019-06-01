@@ -13,7 +13,7 @@ export default class Station extends Component {
             <h1>{this.props.station}</h1>
           </Grid>
           <Grid item xs={5}>
-            <Search />
+            <Search station={this.props.station}/>
           </Grid>
         </Grid>
       </div>

@@ -90,6 +90,7 @@ Meteor.methods({
 
     return data.id;
   },
+
   'patientinfo.update'(data) {
     const id = data.id;
     delete data.id;
@@ -134,6 +135,7 @@ Meteor.methods({
     // console.log(String(id) + " | " + String( );
     // console.log(data.stationQueue);
   },
+
   'patientinfo.setBusy'(id, value) {
     const patientStatus = (Patientinfo.findOne({id:id}) !== "undefined") ? Patientinfo.findOne({id:id}).busy : false;
     
@@ -156,6 +158,7 @@ Meteor.methods({
     }
 
   },
+
   'patientinfo.skipStation'(id, currentStation, stationToSkip) {
     // Retrieve station queue
     const stationQueue = Patientinfo.find({id:id}).fetch()[0].stationQueue;
@@ -166,6 +169,7 @@ Meteor.methods({
     const isChangingCurrent = (currentStation !== stationToSkip);
     Patientinfo.update({id:id},{$set:{nextStation:nextStation,busy:isChangingCurrent,stationQueue:newQueue}});
   },
+
   'patientinfo.editPatientInfo'(id, parent, label, value) {
     console.log(value);
     const constructOperator = parent + "." + label;
@@ -177,5 +181,46 @@ Meteor.methods({
         [constructOperator]: value
       }
     });
-  }
+  },
+
+  'patientinfo.findid'(id) {
+    // Retrieve and return patient info
+    return Patientinfo.find({id:id}).fetch()[0];
+  },
+
+  'patientinfo.movePatient'(id, station) {
+    // Retrieve station queue
+    const info = Patientinfo.find({id:id}).fetch()[0];
+    var stationQueue = info.stationQueue;
+
+    stationQueue = stationQueue.filter(field => field !== station);
+
+    stationQueue.unshift(station);
+
+    // TODO Refactor this to share code with 'update'
+    // Check for special case - "Doctors Consult"
+    // The only station to be opt-in instead of opt-out
+    if (stationQueue[0] === "Doctors' Consult") {
+      // Check for any consult flags -> otherwise skip consult
+      if ((typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW) || 
+          (typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb) || 
+          (typeof(info["Station Selection"]) !== "undefined" && info["Station Selection"].stationSelect12 === "Yes") ||
+          (typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap) ||
+          (typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP)) {
+        console.log("Flagged for doctor's consult");
+      } else {
+        stationQueue.shift();
+        console.log("Skipping doctor's consult");
+      }
+    }
+
+    const nextStation = (typeof(stationQueue[0]) !== "undefined") ? stationQueue[0] : "Done";
+    
+    Patientinfo.update({id:id},{$set:{
+      nextStation: nextStation,
+      busy: false,
+      stationQueue: stationQueue,
+      lastSubmit: new Date()
+    }});
+  },
 });
