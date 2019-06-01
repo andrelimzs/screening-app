@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { Tracker } from 'meteor/tracker'
+
 import TextField from '@material-ui/core/TextField';
 import Popper from '@material-ui/core/Popper';
 import Typography from '@material-ui/core/Typography';
@@ -13,6 +15,8 @@ class Search extends Component {
     super(props);
     
     this.searchBar = React.createRef();
+    this.computation;
+
     this.state = {
       searchResult: null,
       anchorEl: null
@@ -25,8 +29,11 @@ class Search extends Component {
 
     // RegEx match to ensure valid id numbers
     if (searchQuery.match("^[0-9]+$")) {
-      // console.log(event.target.value);
-      Meteor.call('patientinfo.findid', Number(searchQuery), (error, result) => {
+      
+      Tracker.autorun((computation) => {
+        this.computation = computation
+        const result = Patientinfo.find({id:Number(searchQuery)}).fetch()[0];
+
         if (result) {
           this.setState({ searchResult: result,
                           anchorEl: currentTarget })
@@ -36,22 +43,25 @@ class Search extends Component {
                           anchorEl: null })
         }
       });
+        
+
     } else {
       this.setState({ searchResult: null,
                       anchorEl: null })
     }
   }
 
-  movePatient(id, e) {
+  movePatient(id, busy, e) {
     e.preventDefault();
     
-    Meteor.call('patientinfo.movePatient', id, this.props.station);
+    if (!busy) {
+      Meteor.call('patientinfo.movePatient', id, this.props.station);
 
-    this.setState({ searchResult: null,
-                    anchorEl: null })
-    
-    console.log(this.searchBar);
-    // this.searchBar.value = '';
+      this.setState({ searchResult: null,
+                      anchorEl: null })
+      
+      this.computation.stop()
+    }
   }
   
   render() {
@@ -93,8 +103,8 @@ class Search extends Component {
               <Button
                 variant={(patientInfo.busy) ? "contained": "outlined"}
                 color={(patientInfo.busy) ? "secondary": "default"}
-                onClick={this.movePatient.bind(this, patientInfo.id)}>
-                  Move
+                onClick={this.movePatient.bind(this, patientInfo.id, patientInfo.busy)}>
+                  {(patientInfo.busy) ? "Busy" : "Move"}
               </Button>
             </CardActions>
           </Card>}
