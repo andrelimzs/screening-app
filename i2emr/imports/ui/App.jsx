@@ -198,7 +198,7 @@ const AppContainer = withTracker(() => {
   var patientList;
 
   if (station === "Done") {
-    patientList = Patientinfo.find().fetch();
+    patientList = Patientinfo.find({ nextStation: {$ne: "Hidden"} }).fetch();
   } else {
     patientList = Patientinfo.find(
       { $and:[{ nextStation: station }, { $or:[{ busy: false },{ id: currentPatientID }] }
