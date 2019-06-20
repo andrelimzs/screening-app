@@ -56,7 +56,7 @@ export const formSchemas = {
       },
       contactNumber: {
         type: String,
-        regEx: /^[0-9]+$/,
+        regEx: /^[0-9]{10}$/,
       },
       spokenLanguages: {
         type: Array,

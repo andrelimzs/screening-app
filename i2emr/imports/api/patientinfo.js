@@ -85,7 +85,7 @@ Meteor.methods({
     Patientinfo.insert(data);
 
     // Print a patient insertion summary
-    console.log(String(data.id) + " | " + String(data.name));
+    console.log(String(data.id) + " | " + String(data['Patient Info'].name));
     console.log(data.stationQueue);
 
     return data.id;

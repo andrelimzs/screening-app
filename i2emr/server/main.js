@@ -26,10 +26,15 @@ Meteor.startup(() => {
   const setAllToDone = false;
   
   if (setAllToDone) {
-      Patientinfo.update({ },{
+      Patientinfo.update({ nextStation: {$ne:"Hidden"} },{
         $set:{ nextStation: "Done" }
       }, { multi: true });
   }
+
+  Patientinfo.update({ },{
+    $set:{ nextStation: "Done" }
+  }, { multi: true });
+
 
 
   if (Patientinfo.find().count() === 0) {
