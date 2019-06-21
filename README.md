@@ -1,6 +1,6 @@
 #  i2emr
 
-## Getting Started
+## Installation
 
 ### Download i2emr
 1. Press `Clone or Download` in the top right corner, then `Download ZIP`
@@ -31,4 +31,10 @@ npm  install uniforms
 npm  install uniforms-bridge-simple-schema
 npm  install uniforms-bridge-simple-schema-2
 npm  install uniforms-material
+```
+## Run
+
+Open command prompt in the folder and run:
+```
+meteor
 ```
