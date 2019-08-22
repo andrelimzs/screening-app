@@ -7,30 +7,32 @@ from pandas import ExcelFile
 FORMS_LOCATION = './Forms/'
 OUTPUT_LOCATION = './GeneratedForms/'
 string_formats = {
-    'Label': '<h2>{text}</h2>\n',
-    'Small Label': '<h3>{text}</h3>\n',
-    'Radio': '{text}\n<RadioField name=\"{name}\" />\n',
-    'TextField': '{text}\n<TextField name=\"{name}\" />\n',
-    'Dropdown': '{text}\n<SelectField name=\"{name}\" />\n',
-    'Agreement': '{text}\n<BoolField name=\"{name}\" />\n',
-    'Checkbox': '{text}\n<SelectField name=\"{name}\" checkboxes="true"/>\n',
-    'TextArea': '{text}\n<LongTextField name=\"{name}\" />\n',
-    'Number': '{text}\n<NumberField name=\"{name}\" />\n',
+    'label': '<h2>{text}</h2>\n',
+    'smalllabel': '<h3>{text}</h3>\n',
+    'radio': '{text}\n<RadioField name=\"{name}\" />\n',
+    'textfield': '{text}\n<TextField name=\"{name}\" />\n',
+    'textbox': '{text}\n<TextField name=\"{name}\" />\n',
+    'dropdown': '{text}\n<SelectField name=\"{name}\" />\n',
+    'agreement': '{text}\n<BoolField name=\"{name}\" />\n',
+    'checkbox': '{text}\n<SelectField name=\"{name}\" checkboxes="true"/>\n',
+    'textarea': '{text}\n<LongTextField name=\"{name}\" />\n',
+    'number': '{text}\n<NumberField name=\"{name}\" />\n',
 }
 
 def run():
-    # for filename in os.listdir(FORMS_LOCATION):    
-    #     df = pd.read_excel(os.path.join(FORMS_LOCATION, filename), nrows=1, headers=None)
-    #     form_name = df['Unnamed: 2'][0]
+    for filename in os.listdir(FORMS_LOCATION)[0:4]:
+        print(filename)
+        df = pd.read_excel(os.path.join(FORMS_LOCATION, filename), nrows=1, headers=None)
+        form_name = df['Unnamed: 2'][0]
 
-    #     df = pd.read_excel(os.path.join(FORMS_LOCATION, filename), skiprows=4)
-    #     generate_strings(df, form_name)
+        df = pd.read_excel(os.path.join(FORMS_LOCATION, filename), skiprows=4)
+        generate_strings(df, form_name)
 
-    df = pd.read_excel('./Forms/1b. PHS Data Collection Reg Form 19-8-2019.xlsx', nrows=1, headers=None)
-    form_name = df['Unnamed: 2'][0]
+    # df = pd.read_excel('./Forms/1b. PHS Data Collection Reg Form 19-8-2019.xlsx', nrows=1, headers=None)
+    # form_name = df['Unnamed: 2'][0]
 
-    df = pd.read_excel('./Forms/1b. PHS Data Collection Reg Form 19-8-2019.xlsx', skiprows=4)
-    generate_strings(df, form_name)
+    # df = pd.read_excel('./Forms/1b. PHS Data Collection Reg Form 19-8-2019.xlsx', skiprows=4)
+    # generate_strings(df, form_name)
     
 
 def generate_strings(df, form_name):
@@ -38,31 +40,33 @@ def generate_strings(df, form_name):
     schema_obj = {}
     question_count = 1
     for i in range(df.shape[0]):
-        question_type = df['Type '][i] # Label has a space at the end
+        print(i)
+        print(df['Type '][i])
+        question_type = df['Type '][i].lower().replace(' ', '') # Label has a space at the end
         question_name = camelCase(form_name + ' Q' + str(question_count))
 
-        if question_type in ('Label', 'Small Label'):
+        if question_type in ('label', 'smalllabel'):
             form_string += string_formats[question_type].format(text=df['Label Text'][i].replace('\n','<br />'))
             continue
 
-        elif question_type in ('Radio', 'Dropdown'):
+        elif question_type in ('radio', 'dropdown'):
             schema_obj[question_name] = {
                 'type': check_data_type(df, i),
                 'allowedValues': get_allowed_values(df, i)
             }
 
-        elif question_type in ('TextField', 'TextArea'):
+        elif question_type in ('textfield', 'textarea', 'textbox'):
             schema_obj[question_name] = {
                 'type': 'String',
             }
         
-        elif question_type == 'Agreement':
+        elif question_type == 'agreement':
             schema_obj[question_name] = {
                     'type': 'Boolean',
                     'label': '\"' + df['Value 1'][i] + '\"'
                 }
 
-        elif question_type == 'Checkbox':
+        elif question_type == 'checkbox':
             schema_obj[question_name] = {
                     'type': 'Array',
                 }
@@ -71,11 +75,10 @@ def generate_strings(df, form_name):
                 'allowedValues': get_allowed_values(df, i)
             }
         
-        elif question_type == 'Number':
+        elif question_type == 'number':
             schema_obj[question_name] = {
                     'type': 'Number'
                 }
-
 
         question_count += 1
         schema_obj[question_name]['optional'] = 'false' if df['Mandatory'][i] == 'Y' else 'true'

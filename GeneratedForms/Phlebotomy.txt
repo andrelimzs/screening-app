@@ -1,0 +1,26 @@
+"Phlebotomy" : (info) => (
+	<Fragment>
+		Blood sample collected?
+		<SelectField name="phlebotomyQ1" checkboxes="true"/>
+		Circled 'Completed' under Phlebotomy on Form A?
+		<SelectField name="phlebotomyQ2" checkboxes="true"/>
+		
+	</Fragment>
+),
+
+
+==========================================================================================================================================
+
+
+"Phlebotomy" : new SimpleSchema({
+	phlebotomyQ1: {
+	type: Array, optional: true
+	}, "phlebotomyQ1.$": {
+	type: String, allowedValues: ["Yes"]
+	}, phlebotomyQ2: {
+	type: Array, optional: true
+	}, "phlebotomyQ2.$": {
+	type: String, allowedValues: ["Yes"]
+	}
+	}
+ ),
