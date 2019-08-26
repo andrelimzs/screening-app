@@ -52,10 +52,11 @@ class Queue extends Component {
                 ID {patient.id}
               </Typography>
               <Typography variant="h6">
-                {patient["Patient Info"].name}
+                {patient["Pre-Registration"].preRegistrationQ2}
               </Typography>
               <Typography variant="body2">
-                {patient["Patient Info"].gender}, {patient["Patient Info"].age}
+                {patient["Pre-Registration"].preRegistrationQ1},
+                NRIC: {patient["Pre-Registration"].preRegistrationQ3}
               </Typography>
             </CardContent>
             <CardActions>
