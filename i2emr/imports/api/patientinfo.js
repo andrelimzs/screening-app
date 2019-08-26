@@ -16,63 +16,14 @@ export default Patientinfo = new Mongo.Collection('patientinfo');
 
 Meteor.methods({
   'patientinfo.insert'(data) {
-    // Determine stations to visit based on:
-    // Based on gender & age
-    const isMale = (data["Patient Info"].gender === "male");
-    const isChild = (data["Patient Info"].age <= 18);
+    console.log(data)
+    const isChoosePhlebo = data["Pre-Registration"].preRegistrationQ4 === "Y"
 
-    // Stations to remove
-    var stationsToRemove = ["Registration"];
-    if (isMale) {
-      stationsToRemove.push("Pap Smear", "Breast Exam", "Women's Edu");
+    data.stationQueue = ["Registration"];
+
+    if (isChoosePhlebo) {
+      data.stationQueue.push("Phlebotomy")
     }
-    if (isChild) {
-      stationsToRemove.push("Blood Pressure", "Phlebotomy", "Pap Smear", "Breast Exam");
-    }
-    // Remove opt-out stations
-    // console.log(data["Station Selection"]);
-
-    const stationSelection = {
-      stationSelect1: "Height & weight",
-      stationSelect2: "",
-      stationSelect3: "",
-      stationSelect4: "Blood Pressure",
-      stationSelect5: "",
-      stationSelect6: "Phlebotomy",
-      stationSelect7: "",
-      stationSelect8: "",
-      stationSelect9: "",
-      stationSelect10: "Breast Exam",
-      stationSelect11: "Women's Edu",
-      stationSelect12: "",
-      stationSelect13: "Eye Screening",
-      stationSelect14: "Education"
-    }
-
-    var skipBloodGlucose = 0;
-
-    for (var station in data["Station Selection"]) {
-      if (station === "stationSelect2" || station === "stationSelect3") {
-        
-        skipBloodGlucose += (data["Station Selection"][station] === "No") ? 1 : 0;
-
-      } else if (station === "stationSelect7" || station === "stationSelect9") {
-        
-        if (data["Station Selection"][station] === "No") stationsToRemove.push("Pap Smear");
-
-      } else if (stationSelection[station] !== "") {
-        
-        if (data["Station Selection"][station] === "No") stationsToRemove.push(stationSelection[station]);
-
-      }
-    }
-
-    if (skipBloodGlucose == 2) stationsToRemove.push("Blood Glucose & Hb");
-
-
-    // Construct station queue by filtering out stations to exclude
-    // https://stackoverflow.com/questions/5767325/how-do-i-remove-a-particular-element-from-an-array-in-javascript
-    data.stationQueue = Object.keys(formLayouts).filter(s => !stationsToRemove.includes(s));
     
     data.nextStation = data.stationQueue[0];
     
