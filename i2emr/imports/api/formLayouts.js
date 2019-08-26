@@ -121,175 +121,66 @@ const requireEducation = (info) => (
 );
 // Define the layouts
 export const formLayouts = {
-  "Registration":{
-    "Patient Info": (info) => (
-      <Fragment>
-        <TextField name="name" />
-        {/* <HiddenField name="id" /> */}
-        <SelectField name="gender" />
-        Enter birthdate in dd/mm/yyyy format
-        <TextField name="birthday" />
-        <NumField name="age" decimal={false} />
-        {/* <SomeComp calculation={(model) => (<NumField name="age" decimal={false} value={
-          new Date().getFullYear() - Number(model.birthday.substring(model.birthday.length-4,model.birthday.length))
-        }/>)} /> */}
-        <Divider variant="middle"/>
-
-        <TextField name="district" />
-        <TextField name="address" />
-        <TextField name="zipcode" decimal={false} /><br />
-        <TextField name="contactNumber" decimal={false} />
-        <AutoField name="spokenLanguages" />
-        <AutoField name="writtenLanguages" />
-        <Divider variant="middle"/>
-
-        <RadioField name="anyDrugAllergies" />
-        <DisplayIf condition={context => context.model.anyDrugAllergies === "Yes"}>
-          <TextField name="drugAllergies" />
-        </DisplayIf>
-        <Divider variant="middle"/>
-
-        <RadioField name="pregnant" />
-
-      </Fragment>
-    ),
-
-    "Patient Profiling": (info) => (
-      <Fragment>
-            <h2>TB Screening</h2>
-            Have you ever been diagnosed with tuberculosis?
-            <RadioField name="TBQ1" />
-            Have you ever lived with someone with tuberculosis?
-            <SelectField name="TBQ2" />
-            Do you have any of the following symptoms? Select all that apply
-            <AutoField name="TBQ3" />
-            <DisplayIf condition={context => (
-              context.model.TBQ1 === "Yes" ||
-              context.model.TBQ2 === 'Yes, the person was diagnosed with TB within the past 4 months' ||
-              typeof(context.model.TBQ3) !== "undefined" && context.model.TBQ3.length > 0 && !context.model.TBQ3.includes('None of the above')
-            )}><Fragment>
-              <Typography color='secondary' variant='h5'>
-                Immediate Doctor's consult for TB
-              </Typography>
-            </Fragment></DisplayIf>
-
-            <h2>Medical history: others</h2>
-            Do you have any medical conditions we should take note of? (if none, indicate NIL)
-            <AutoField name="medicalHistory1" />
-            <DisplayIf condition={context => Array.isArray(context.model.medicalHistory1) && context.model.medicalHistory1.includes('Others')}><Fragment>
-              Other medical conditions
-              <LongTextField name="otherMedicalConditions" />
-            </Fragment></DisplayIf>
-            How are you managing these conditions? (check-ups, medicines, diet/exercise, others)
-            <TextField name="medicalHistory2" />
-
-            <h2>Ocular History</h2>
-            Have you had any eye surgeries?
-            <RadioField name="ocularHisQ1a" />
-            <DisplayIf condition={context => context.model.ocularHisQ1a === "Yes"}><Fragment>
-              If yes to 1a, please specify
-              <TextField name="ocularHisQ1b" />
-            </Fragment></DisplayIf>
-            Any previous trauma to the eye?
-            <RadioField name="ocularHisQ2a" />
-            <DisplayIf condition={context => context.model.ocularHisQ2a === "Yes"}><Fragment>
-              If yes to 2a, please specify
-              <TextField name="ocularHisQ2b" />
-            </Fragment></DisplayIf>
-            Are you under the care of any eye specialist or receiving treatment for the eye from any hospital/clinic?
-            <RadioField name="ocularHisQ3a" />
-            <DisplayIf condition={context => context.model.ocularHisQ3a === "Yes"}><Fragment>
-              If yes to 3a, please specify where
-              <TextField name="ocularHisQ3b" />
-              If yes to 3a, when was your last review?
-              <TextField name="ocularHisQ3c" />
-              If yes to 3a, what was the condition?
-              <AutoField name="ocularHisQ3d" />
-            </Fragment></DisplayIf>
-            <DisplayIf condition={context => Array.isArray(context.model.ocularHisQ3d) && context.model.ocularHisQ3d.includes('Others (please specify)')}><Fragment> 
-              <TextField name="otherOcularCond" />
-            </Fragment></DisplayIf>          
-            Have you had any falls in the last 1 year?
-            <RadioField name="ocularHisQ4" />
-            How do you perceive your vision?
-            <SelectField name="ocularHisQ5a" />
-            <DisplayIf condition={context => context.model.ocularHisQ5a === "Poor"}><Fragment>
-              If answer to 5a was 'Poor', do you intend to seek medical help?
-              <RadioField name="ocularHisQ5b" />
-            </Fragment></DisplayIf>
-            <DisplayIf condition={context => context.model.ocularHisQ5b === "No"}><Fragment>
-              If no to 5b, why?
-              <AutoField name="ocularHisQ5c" />
-            </Fragment></DisplayIf>
-            <DisplayIf condition={context => Array.isArray(context.model.ocularHisQ5c) && context.model.ocularHisQ5c.includes('Others (please specify)')}><Fragment>
-              <TextField name="otherReasons" />
-            </Fragment></DisplayIf>
-      </Fragment>
+  "Pre-Registration" : (info) => (
+    <Fragment>
+      <h2>Pre-Registration</h2>
+      Gender
+      <RadioField name="preRegistrationQ1" />
+      Initials (Surname must be spelt out. E.g. John Tan Soo Keng = Tan S.K.J. ; Alan Simon Lee = A.S. Lee)
+      <TextField name="preRegistrationQ2" />
+      Last 4 digits of NRIC (e.g. 987A)
+      <TextField name="preRegistrationQ3" />
+      Going for Phlebotomy?<br /><br /><i>Conditions:<br />1) Fasted for minimum 10 hours <br />          Note: Water is allowed, coffee/tea is not. Medications are fine. <br />2) NOT previously diagnosed with Diabetes/ High Cholesterol/ High Blood Pressure.<br />3) Have not done a blood test within 1 year.</i>
+      <RadioField name="preRegistrationQ4" />
       
-    ),
+    </Fragment>
+  ),
 
-    "Station Selection": (info) => (
-      <Fragment>
-      <h2>Height and Weight + Waist:Hip measurement</h2>
-      Can we measure your height, weight, waist size and hip size?
-      <RadioField name="stationSelect1" />
+  "Registration" : (info) => (
+    <Fragment>
+      <h2>Registration</h2>
+      Salutation 称谓
+      <SelectField name="registrationQ1" />
+      Race 种族
+      <RadioField name="registrationQ2" />
+      Nationality 国籍 <br />Please Note: Non Singapore Citizens/ Non-PRs are unfortunately not eligible for this health<br />screening
+      <RadioField name="registrationQ3" />
+      Marital Status 婚姻状况
+      <SelectField name="registrationQ4" />
+      Occupation 工作
+      <TextField name="registrationQ5" />
+      GRC/SMC Subdivision [https://www.parliament.gov.sg/mps/find-my-mp]
+      <SelectField name="registrationQ6" />
+      Household Income Per Capita
+      <SelectField name="registrationQ7" />
+      CHAS Status 社保援助计划
+      <SelectField name="registrationQ8" />
+      Pioneer Generation Status 建国一代配套
+      <RadioField name="registrationQ9" />
+      <h2>Follow up at GP Clinics</h2>
+      <i>Your Health Report & Blood Test Results (if applicable) will be mailed out about <b>4-6 weeks</b> after the screening.  Depending on your results, our team <b>may</b> shortlist you for further follow-up.<br />Scenario 1: If <b>no follow-up</b> is required, the report will be mailed directly to you.<br />Scenario 2: If follow-up is required, you will need to <b>visit a GP clinic</b> to collect your report. <br />Please choose a preferred GP Clinic from the following list in case of Scenario 2.</i>
+      <RadioField name="registrationQ10" />
+      Preferred Language for Health Report
+      <RadioField name="registrationQ11" />
+      <h2>Phlebotomy Eligibility</h2>
+      Before entering our screening, do note the following <b>eligibility criteria for Phlebotomy</b> <br />1) Fasted for minimum 10 hours <br />          Note: Water is allowed, coffee/tea is not. Medications are fine. <br />2) NOT previously diagnosed with Diabetes/ High Cholesterol/ High Blood Pressure.<br />3) Have not done a blood test within 1 year.<br /><br /><i>Rationale: PHS aims to reach out to undiagnosed people. Patients that are already aware of their condition would have regular follow-ups with the GPs/polyclinics/hospitals. This information is available in our publicity material. Please approach our registration volunteers should you have any queries. We are happy to explain further. Thank you!</i><br /><br />抽血合格标准:<br />1) 十个小时内没有吃东西或喝饮料. 可以喝水, 吃药。不能喝咖啡, 喝茶。<br />2) 在过去的一年内沒有验过血。<br />3) 没有糖尿病, 高血压, 高胆固醇。
+      <BoolField name="registrationQ12" />
+      <h2>Compliance to PDPA 同意书</h2>
+      <i>I hereby give my consent to the Public Health Service Executive Committee to collect my personal information for the purpose of participating in the Public Health Service (hereby called “PHS”) and its related events, and to contact me via calls, SMS, text messages or emails regarding the event and follow-up process.  <br /><br />Should you wish to withdraw your consent for us to contact you for the purposes stated above, please notify a member of the PHS Executive Committee at ask.phs@gmail.com in writing. We will then remove your personal information from our database. Please allow 3 business days for your withdrawal of consent to take effect. All personal information will be kept confidential, will only be disseminated to members of the PHS Executive Committee, and will be strictly used by these parties for the purposes stated.</i>
+      <BoolField name="registrationQ13" />
+      
+    </Fragment>
+  ),
 
-      <h2>Blood glucose and Hb</h2>
-      Can we check your blood sugar? This will be done by pricking your finger to get a small drop of blood
-      <RadioField name="stationSelect2" />
-
-      Can we check if you have anemia? This will be done by pricking your finger to get a small drop of blood
-      <RadioField name="stationSelect3" />
-
-      <h2>BP</h2>
-      Can we check your blood pressure?
-      <RadioField name="stationSelect4" />
-
-      <h2>Phlebotomy (for patients aged 40 years old and above)</h2>
-      {/* For patients aged 40 years old and above, Do you have the following conditions?
-      <AutoField name="stationSelect5" />
-      <DisplayIf condition={context => Array.isArray(context.model.stationSelect5) && context.model.stationSelect5.length >= 2}><Fragment>
-        Can we do a blood test to see if you have high cholesterol? A blood sample will be taken by a trained staff. This will then be sent to the lab, and a report will be mailed to you after some time
-        <RadioField name="stationSelect6" />
-      </Fragment></DisplayIf> */}
-      Can we do a blood test to see if you have high cholesterol? A blood sample will be taken by a trained staff. This will then be sent to the lab, and a report will be mailed to you after some time
-      <RadioField name="stationSelect6" />
-
-      <h2>Pap Smear</h2>
-      Are you married (or have you ever been married)?
-      <RadioField name="stationSelect7" />
-      <DisplayIf condition={context => context.model.stationSelect7 === "Yes"}><Fragment>
-        If yes to Q7, have you done a Pap smear in the past 3 years?
-        <RadioField name="stationSelect8" />
-      </Fragment></DisplayIf>
-      <DisplayIf condition={context => context.model.stationSelect8 === "No"}><Fragment>
-        If no to Q8, would you want to undergo a free Pap smear today to check for cervical cancer?
-        <RadioField name="stationSelect9" />
-      </Fragment></DisplayIf>
-
-      <h2>Breast</h2>
-      Would you want to undergo a breast examination for breast cancer today? 
-      <RadioField name="stationSelect10" />
-
-      <h2>Women's Edu</h2>
-      Can we teach you about women's health? For adults, we will be sharing about menstrual health and breast self examinations. For girls aged 10-18 years old, we will be sharing about menstrual health only.
-      <RadioField name="stationSelect11" />
-
-      <h2>Doctors' consult</h2>
-      Would you like to see a doctor today? (You will be asked to see the doctor if your test results are abnormal, but would you otherwise want to see the doctor?)
-      <RadioField name="stationSelect12" />
-
-      <h2>Eye screening</h2>
-      Can we check your eyes/vision?
-      <RadioField name="stationSelect13" />
-
-      <h2>Education</h2>
-      Can we teach you about healthy lifestyles and how to prevent common diseases like diabetes and high blood pressure?
-      <RadioField name="stationSelect14" />
-      </Fragment>
-    ),
-  },
-
+  "Phlebotomy" : (info) => (
+    <Fragment>
+      Blood sample collected?
+      <BoolField name="phlebotomyQ1" />
+      Circled 'Completed' under Phlebotomy on Form A?
+      <BoolField name="phlebotomyQ2" />
+      
+    </Fragment>
+  ),
 
   "Height & weight": (info) => (
     <Fragment>
@@ -425,12 +316,6 @@ export const formLayouts = {
         <p>{"<11 OR >16"}</p>
       </Fragment>}
       <BoolField name="docConsultForBloodGlucAndHb" />
-    </Fragment>
-  ),
-
-  "Phlebotomy": (info) => (
-    <Fragment>
-      <BoolField name="phleboCompleted" />
     </Fragment>
   ),
 
