@@ -59,9 +59,9 @@ export const formSchemas = {
 
    "Phlebotomy" : new SimpleSchema({
     phlebotomyQ1: {
-    type: Boolean, label: "Yes", optional: true
+    type: Boolean, label: "Yes", optional: false
     }, phlebotomyQ2: {
-    type: Boolean, label: "Yes", optional: true
+    type: Boolean, label: "Yes", optional: false
     }
     }
    ),
