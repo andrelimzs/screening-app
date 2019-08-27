@@ -126,7 +126,7 @@ class App extends Component {
               alignItems="flex-start"
               spacing={16}
             >
-              <Grid item xs={4}>
+              <Grid item xs={6}>
                 {station !== "Finished Patients" && 
                   <Form station={station} id={Session.get('currentPatient')}
                         stationQueue={this.props.patientInfo.stationQueue} patientInfo={this.props.patientInfo}/>
