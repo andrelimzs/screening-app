@@ -17,7 +17,7 @@ string_formats = {
     'checkbox': '{text}\n<SelectField name=\"{name}\" checkboxes="true"/>\n',
     'textarea': '{text}\n<LongTextField name=\"{name}\" />\n',
     'number': '{text}\n<NumberField name=\"{name}\" />\n',
-    'todo': '{text}<TODO-MANUALLY name=\"{name}\">'
+    'todo': '{text}<TODO-MANUALLY name=\"{name}\">\n'
 }
 
 def run():
@@ -28,10 +28,12 @@ def run():
     #     df = pd.read_excel(os.path.join(FORMS_LOCATION, filename), skiprows=4)
     #     generate_strings(df, form_name)
 
-    df = pd.read_excel('./Forms/1b. PHS Data Collection Reg Form 19-8-2019.xlsx', nrows=1, headers=None)
+    filename = './Forms/6a. PHS Data Collection Geri - AMT.xlsx'
+
+    df = pd.read_excel(filename, nrows=1, headers=None)
     form_name = df['Unnamed: 2'][0]
 
-    df = pd.read_excel('./Forms/1b. PHS Data Collection Reg Form 19-8-2019.xlsx', skiprows=4)
+    df = pd.read_excel(filename, skiprows=4)
     generate_strings(df, form_name)
     
 
@@ -83,7 +85,7 @@ def generate_strings(df, form_name):
             continue    
 
         question_count += 1
-        schema_obj[question_name]['optional'] = 'false' if df['Mandatory'][i] == 'Y' else 'true'
+        schema_obj[question_name]['optional'] = 'false' if df['Mandatory'][i].startswith('Y') else 'true'
         form_string += string_formats[question_type].format(text=df['Label Text'][i].replace('\n','<br />'), name=question_name)
     
     form_string = format_form_string(form_string, form_name)
@@ -122,12 +124,14 @@ def format_schema_string(schema_obj, form_name):
 def check_data_type(df, i):
     try:
         # Check if there are only two options
-        if not math.isnan(df['Value 3'][i]):
+        if math.isnan(df['Value 3'][i]):
             # Check if start with (Y and N) or (Yes and No)
             if (df['Value 1'][i].startswith('Y') and df['Value 2'][i].startswith('N')) or (df['Value 1'][i].startswith('N') and df['Value 2'][i].startswith('Y')):
                 return 'Boolean'
     except:
-        return 'String'
+        pass
+    # default    
+    return 'String'
 
 def get_allowed_values(df, i):
     values = []
