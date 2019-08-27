@@ -66,113 +66,39 @@ export const formSchemas = {
     }
    ),
 
-
-
-  "Height & weight":
-  new SimpleSchema({
-    height: {
-      type: Number,
-      min: 0.7,
-      max: 2.8,
-      label: "Height (m)",
-    },
-    childHeightAssessment: {
-      type: String,
-      optional: true,
-      allowedValues: ['Below 3rd percentile curve', 
-                      'Between 3rd and 97th percentile curves',
-                      'Above 97th percentile curve'],
-        },
-    weight: {
-      type: Number,
-      min: 5,
-      max: 500,
-      label: "Weight (kg)",
-    },    
-    childWeightAssessment: {
-      type: String,
-      optional: true,
-      allowedValues: ['Below 3rd percentile curve', 
-                      'Between 3rd and 97th percentile curves',
-                      'Above 97th percentile curve'],
-        },
-    weight: {
-      type: Number,
-      min: 5,
-      max: 500,
-      label: "Weight (kg)",
-    },
-    bmi: {
-      type: String,
-      label: "Body Mass Index",
-    },
-    childBmiAssessment:{
-      type: String,
-      optional: true,
-      allowedValues: ['Below 3rd percentile curve',
-                      'Between 3rd percentile and overweight curves',
-                      'Between overweight and obese curves',
-                      'Above obese curve'],
-    },
-    waist: {
-      type: Number,
-      label: "Waist circumference (cm)",
-    },
-    hip: {
-      type: Number,
-      label: "Hip circumference (cm)",
-    },
-    waistHipRatio: {
-      type: String,
-      label: "Waist:hip ratio",
-    },
-    previousDiabetesDiagnosis: {
-      type: String,
-      allowedValues: ['Yes','No'],
-    },
-    riskAssessAge: {
-      type: String,
-      allowedValues: ['Less than 35 years (0 points)',
-                      '35-49 years (20 points)',
-                      '50 years and above (30 points)'],
-      optional: true,
-    },
-    riskAssessWaist: {
-      type: String,
-      optional: true,
-    },
-    riskAssessPhysicalActivity:{
-      type: String,
-      optional: true,
-      allowedValues: ['Vigorous exercise or strenuous work (0 points)',
-                      'Moderate exercise at work/home (10 points)',
-                      'Mild exercise at work/home (20 points)',
-                      'No exercise and sedentary at work/home (30 points)'],
-    },
-    riskAssessFamilyHis: {
-      type: String,
-      optional: true,
-      allowedValues: ['0 diabetic parents (0 points)',
-                      '1 diabetic parent (10 points)',
-                      '2 diabetic parents (20 points)'],
-    },
-    riskAssessTotalScore: {
-      type: Number,
-      optional: true,
-    },
-    riskAssessRiskLevel: {
-      type: String,
-      optional: true,
-      allowedValues: ['0-20: Low risk',
-                      '30-50: Medium risk',
-                      '60-100: High risk'],
-    },
-    docConsultForHW : {
-      type: Boolean,
-      optional: true,
-      label: "Doctor's consult for child height, weight or BMI"
+   "Geri - AMT" : new SimpleSchema({
+    geriAmtQ1: {
+    type: Boolean, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
+    }, geriAmtQ2: {
+    type: Boolean, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
+    }, geriAmtQ3: {
+    type: Boolean, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
+    }, geriAmtQ4: {
+    type: Boolean, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
+    }, geriAmtQ5: {
+    type: Boolean, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
+    }, geriAmtQ6: {
+    type: Boolean, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
+    }, geriAmtQ7: {
+    type: Boolean, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
+    }, geriAmtQ8: {
+    type: Boolean, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
+    }, geriAmtQ9: {
+    type: Boolean, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
+    }, geriAmtQ10: {
+    type: Boolean, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
+    }, geriAmtQ11: {
+    type: String, allowedValues: ["0 to 6 years of education", "More than 6 years of education"], optional: false
+    }, geriAmtQ12: {
+    type: Boolean, allowedValues: ["Yes", "No"], optional: false
+    }, geriAmtQ13: {
+    type: Boolean, allowedValues: ["Yes", "No"], optional: false
     }
-  }),
+    }
+   ),
+
+
+  
 
   "Blood Glucose & Hb":
   new SimpleSchema({

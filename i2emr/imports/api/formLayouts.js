@@ -186,74 +186,50 @@ export const formLayouts = {
     </Fragment>
   ),
 
-  "Height & weight": (info) => (
+  "Geri - AMT" : (info) => (
     <Fragment>
-      <h2>Height and Weight</h2>
-      <TextField name="height" />
-      <br />
-      {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age <= 18 &&
-        <SelectField name="childHeightAssessment" />}
-      <br />
-      <TextField name="weight" />
-      <br />
-      {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age <= 18 &&
-        <SelectField name="childWeightAssessment" />}
-      <br />
-      {/* <SomeComp calculation={(model) => (<TextField name="bmi" value={((model.weight && model.height) ? (model.weight/model.height/model.height).toFixed(1):"")} />)} /> */}
-      <TextField name="bmi" />
-      <br />
-      {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age <= 18 &&
-        <SelectField name="childBmiAssessment" />}
-      <br />
-      {typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age <= 18 &&
-        <BoolField name="docConsultForHW" />}
-      <br />
-      <h2>Waist:Hip</h2>
-      <TextField name="waist" />
-      <br />
-      <TextField name="hip" />
-      <br />
-      {/* <SomeComp calculation={(model) => (<TextField name="waistHipRatio" value={((model.waist && model.hip) ? (model.waist/model.hip).toFixed(2) : "")} />)} /> */}
-      <TextField name="waistHipRatio" />
-      <br />
-      <h2>India Diabetes Risk Assessment</h2>
-      Have you previously been diagnosed with diabetes?
-      <SelectField name="previousDiabetesDiagnosis" />
-
-      <DisplayIf condition={context => (typeof(info["Patient Info"]) !== "undefined" && info["Patient Info"].age > 17)}>
-        <Fragment>
-          1. Age: 
-          <SomeComp calculation={(model) => (
-              ((typeof(info["Patient Info"]) !== "undefined") ? info["Patient Info"].age : "")
-          )}/>
-          {/* <SomeComp calculation={(model) => (<TextField name="riskAssessAge" value={
-            ((typeof(info["Patient Info"]) !== "undefined") ? info["Patient Info"].age : "")
-          } />)} /> */}
-          <SelectField name="riskAssessAge" />
-          2. Waist circumference (refer to Waist:Hip Ratio section)
-          <SomeComp calculation={(model) => (<LongTextField name="riskAssessWaist" value={
-            (
-              (typeof(info["Patient Info"]) !== "undefined") ? 
-              (
-                (model.waist < ((info["Patient Info"].gender==="male")?90:80) ) ? "Female < 80cm, Male < 90cm (0 points)" : 
-                  ( (model.waist < ((info["Patient Info"].gender==="male")?100:90) ) ? "Female 80-89cm, Male 90-99cm (10 points)" : 
-                  "Female >= 90cm, Male >= 100cm (20 points)" )
-              ) : ""
-            )
-          } />)} />
-          3. Physical activity
-          <SelectField name="riskAssessPhysicalActivity" />
-          4. Family history
-          <SelectField name="riskAssessFamilyHis" />
-          Total score (maximum 100)
-          <TextField name="riskAssessTotalScore" />
-          Risk level
-          <SelectField name="riskAssessRiskLevel" />
-          {/* <SomeComp calculation={(model) => (<TextField name="riskAssessRiskLevel" value={
-            ((Number(model.riskAssessAge)<35) ? 0 : (Number(model.riskAssessAge)<50) ? 20 : 30)
-          } />)} /> */}
-        </Fragment>
-      </DisplayIf>
+      <h2>1.1 ABBREVIATED MENTAL TEST (for dementia)</h2>
+      <h3>Please select ‘Yes’ if participant answered correctly or ‘No’ if participant answered incorrectly.</h3>
+      <h3>1) What is the year? <br />请问今是什么年份？</h3>
+      Was Q1 answered correctly?
+      <RadioField name="geriAmtQ1" />
+      <h3>2) About what time is it? (within 1 hour) <br />请问现在大约是几点钟 （一在一个小时之内）？</h3>
+      Was Q2 answered correctly?
+      <RadioField name="geriAmtQ2" />
+      <h3>Ask volunteer to memorise memory phase: “ 37 Bukit Timah Road ”<br />请您记住以下这个地址，<br />我将在数分钟后要您重复一遍：37 号， 武吉支马路<br /></h3>
+      <h3>3) What is your age? <br /> 请问您今年几岁？</h3>
+      Was Q3 answered correctly?
+      <RadioField name="geriAmtQ3" />
+      <h3>4) What is your date of birth? <br />  请问您的出生日期或生日？ • 几月 • 几号</h3>
+      Was Q4 answered correctly?
+      <RadioField name="geriAmtQ4" />
+      <h3>5) What is your home address?<br />请问您的（住家）地址是在什么地方？<br />(1) 门牌;(2)几楼或哪一层; (3)大牌; (4)路名</h3>
+      Was Q5 answered correctly?
+      <RadioField name="geriAmtQ5" />
+      <h3>6) Where are we now? (The name of building or the nature of the building e.g. hospital, day centre etc)<br />请问我们现在正在什么地方？（例：建筑名称或用途）</h3>
+      Was Q6 answered correctly?
+      <RadioField name="geriAmtQ6" />
+      <h3>7) Who is our country’s Prime Minister?<br />请问新加坡现任总理是哪位？</h3>
+      Was Q7 answered correctly?
+      <RadioField name="geriAmtQ7" />
+      <h3>8) What is his/her job? (show picture)<br />请问图片里的人士很有可能是从事哪种行业？</h3>
+      <img src='/images/geri-amt/q8.png' alt='Doctor' /> <br />
+      Was Q8 answered correctly?
+      <RadioField name="geriAmtQ8" />
+      <h3>9) Count backwards from 20 to 1.<br /> 请您从二十开始，倒数到一。</h3>
+      Was Q9 answered correctly?
+      <RadioField name="geriAmtQ9" />
+      <h3>10) Recall memory phase<br /> 请您把刚才我要您记住的地址重复一遍。</h3>
+      Was Q10 answered correctly?
+      <RadioField name="geriAmtQ10" />
+      {/* AMT Total Score: __/10 <TODO-MANUALLY name="geriAmtQ11"> */}
+      What is your education level?
+      <img src='/images/geri-amt/edu.png' alt='Education' /> <br />
+      <RadioField name="geriAmtQ11" />
+      Need referral to cognitive - 2nd Tier Screening ?
+      <RadioField name="geriAmtQ12" />
+      Referral to cognitive - 2nd Tier Screening
+      <RadioField name="geriAmtQ13" />
     </Fragment>
   ),
   
