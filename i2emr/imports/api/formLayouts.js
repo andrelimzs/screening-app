@@ -29,12 +29,21 @@ import Grid from '@material-ui/core/Grid';
 const DisplayIf = ({children, condition}, {uniforms}) => (condition(uniforms) ? Children.only(children) : nothing);
 DisplayIf.contextTypes = BaseField.contextTypes;
 
-
 // Use to calculate values from uniform.model.<>
 const SomeComp =
   ({ calculation }, { uniforms: { model, onChange, error } }) => ( calculation(model) );
 
 SomeComp.contextTypes = BaseField.contextTypes;
+
+function getScore (model, questionList, expectedAnswer) {
+  let score = 0;
+  questionList.forEach(function(question) {
+    if (question in model && model[question] === expectedAnswer){
+      score++;
+    }
+  })
+  return score
+}
 
 const checkInfo = (station,field,msg1,msg2) => (
   typeof(station) !== "undefined" &&
@@ -222,7 +231,16 @@ export const formLayouts = {
       <h3>10) Recall memory phase<br /> 请您把刚才我要您记住的地址重复一遍。</h3>
       Was Q10 answered correctly?
       <RadioField name="geriAmtQ10" />
-      {/* AMT Total Score: __/10 <TODO-MANUALLY name="geriAmtQ11"> */}
+      <SomeComp calculation={(model) => (
+        <h3>
+          AMT Total Score: 
+          {
+            getScore(model, ['geriAmtQ1', 'geriAmtQ2', 'geriAmtQ3', 'geriAmtQ4', 'geriAmtQ5', 'geriAmtQ6', 'geriAmtQ7', 'geriAmtQ8', 'geriAmtQ9', 'geriAmtQ10'], 'Yes (Answered correctly)')
+          }
+          /10
+        </h3>
+      )} />
+      <br /><br />
       What is your education level?
       <img src='/images/geri-amt/edu.png' alt='Education' /> <br />
       <RadioField name="geriAmtQ11" />
