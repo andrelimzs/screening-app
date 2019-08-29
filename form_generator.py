@@ -4,20 +4,23 @@ import re
 import pandas as pd
 from pandas import ExcelFile
 
+#TODO
+# Illegal character replacement (e.g. < > ) 
+
 FORMS_LOCATION = './Forms/'
 OUTPUT_LOCATION = './GeneratedForms/'
 string_formats = {
     'label': '<h2>{text}</h2>\n',
     'smalllabel': '<h3>{text}</h3>\n',
-    'radio': '{text}\n<RadioField name=\"{name}\" />\n',
-    'textfield': '{text}\n<TextField name=\"{name}\" />\n',
-    'textbox': '{text}\n<TextField name=\"{name}\" />\n',
-    'dropdown': '{text}\n<SelectField name=\"{name}\" />\n',
-    'agreement': '{text}\n<BoolField name=\"{name}\" />\n',
-    'checkbox': '{text}\n<SelectField name=\"{name}\" checkboxes="true"/>\n',
-    'textarea': '{text}\n<LongTextField name=\"{name}\" />\n',
-    'number': '{text}\n<NumberField name=\"{name}\" />\n',
-    'todo': '{text}<TODO-MANUALLY name=\"{name}\">\n'
+    'radio': '{text}\n<RadioField name=\"{name}\" label=\"{label}\"/>\n',
+    'textfield': '{text}\n<TextField name=\"{name}\" label=\"{label}\"/>\n',
+    'textbox': '{text}\n<TextField name=\"{name}\" label=\"{label}\"/>\n',
+    'dropdown': '{text}\n<SelectField name=\"{name}\" label=\"{label}\"/>\n',
+    'agreement': '{text}\n<BoolField name=\"{name}\" label=\"{label}\"/>\n',
+    'checkbox': '{text}\n<SelectField name=\"{name}\" checkboxes="true" label=\"{label}\" />\n',
+    'textarea': '{text}\n<LongTextField name=\"{name}\" label=\"{label}\" />\n',
+    'number': '{text}\n<NumberField name=\"{name}\" label=\"{label}\" />\n',
+    'todo': '{text}<TODO-MANUALLY name=\"{name}\" label=\"{label}\" />\n'
 }
 
 def run():
@@ -28,7 +31,8 @@ def run():
     #     df = pd.read_excel(os.path.join(FORMS_LOCATION, filename), skiprows=4)
     #     generate_strings(df, form_name)
 
-    filename = './Forms/6a. PHS Data Collection Geri - AMT.xlsx'
+
+    filename = './Forms/6o. PHS Data Collection Geri - Geri Appointment.xlsx'
 
     df = pd.read_excel(filename, nrows=1, headers=None)
     form_name = df['Unnamed: 2'][0]
@@ -44,7 +48,8 @@ def generate_strings(df, form_name):
     for i in range(df.shape[0]):
         question_type = df['Type '][i].lower().replace(' ', '') # Label has a space at the end
 
-        question_name = camelCase(form_name + ' Q' + str(question_count))
+        label = form_name + ' Q' + str(question_count)
+        question_name = camelCase(label)
 
         if question_type in ('label', 'smalllabel'):
             form_string += string_formats[question_type].format(text=df['Label Text'][i].replace('\n','<br />'))
@@ -52,7 +57,7 @@ def generate_strings(df, form_name):
 
         elif question_type in ('radio', 'dropdown'):
             schema_obj[question_name] = {
-                'type': check_data_type(df, i),
+                'type': 'String',
                 'allowedValues': get_allowed_values(df, i)
             }
 
@@ -81,12 +86,12 @@ def generate_strings(df, form_name):
                     'type': 'Number'
                 }
         else:
-            form_string += string_formats['todo'].format(text=df['Label Text'][i].replace('\n','<br />'), name=question_name)
+            form_string += string_formats['todo'].format(text=df['Label Text'][i].replace('\n','<br />'), name=question_name, label=label)
             continue    
 
         question_count += 1
         schema_obj[question_name]['optional'] = 'false' if df['Mandatory'][i].startswith('Y') else 'true'
-        form_string += string_formats[question_type].format(text=df['Label Text'][i].replace('\n','<br />'), name=question_name)
+        form_string += string_formats[question_type].format(text=df['Label Text'][i].replace('\n','<br />'), name=question_name, label=label)
     
     form_string = format_form_string(form_string, form_name)
     schema_string = format_schema_string(schema_obj, form_name)
@@ -121,21 +126,9 @@ def format_schema_string(schema_obj, form_name):
     return schema_string
 
 
-def check_data_type(df, i):
-    try:
-        # Check if there are only two options
-        if math.isnan(df['Value 3'][i]):
-            # Check if start with (Y and N) or (Yes and No)
-            if (df['Value 1'][i].startswith('Y') and df['Value 2'][i].startswith('N')) or (df['Value 1'][i].startswith('N') and df['Value 2'][i].startswith('Y')):
-                return 'Boolean'
-    except:
-        pass
-    # default    
-    return 'String'
-
 def get_allowed_values(df, i):
     values = []
-    for j in range(1,10):
+    for j in range(1,13):
         try:
             # Until no more values (is nan)
             if math.isnan(df['Value {}'.format(j)][i]):
@@ -143,7 +136,7 @@ def get_allowed_values(df, i):
         except:
             pass
     
-        values.append('\"' + df['Value {}'.format(j)][i].strip() + '\"')
+        values.append('\"' + str(df['Value {}'.format(j)][i]).strip() + '\"')
         
     return values
 
