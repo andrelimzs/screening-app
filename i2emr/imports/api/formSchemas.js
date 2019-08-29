@@ -68,56 +68,282 @@ export const formSchemas = {
 
    "Geri - AMT" : new SimpleSchema({
     geriAmtQ1: {
-    type: Boolean, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
+    type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
     }, geriAmtQ2: {
-    type: Boolean, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
+    type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
     }, geriAmtQ3: {
-    type: Boolean, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
+    type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
     }, geriAmtQ4: {
-    type: Boolean, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
+    type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
     }, geriAmtQ5: {
-    type: Boolean, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
+    type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
     }, geriAmtQ6: {
-    type: Boolean, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
+    type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
     }, geriAmtQ7: {
-    type: Boolean, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
+    type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
     }, geriAmtQ8: {
-    type: Boolean, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
+    type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
     }, geriAmtQ9: {
-    type: Boolean, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
+    type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
     }, geriAmtQ10: {
-    type: Boolean, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
+    type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
     }, geriAmtQ11: {
     type: String, allowedValues: ["0 to 6 years of education", "More than 6 years of education"], optional: false
     }, geriAmtQ12: {
-    type: Boolean, allowedValues: ["Yes", "No"], optional: false
+    type: String, allowedValues: ["Yes", "No"], optional: false
     }, geriAmtQ13: {
-    type: Boolean, allowedValues: ["Yes", "No"], optional: false
+    type: String, allowedValues: ["Yes", "No"], optional: false
     }
     }
    ),
 
+   "Geri - EBAS-DEP" : new SimpleSchema({
+    geriEbasDepQ1: {
+    type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
+    }, geriEbasDepQ2: {
+    type: String, optional: false
+    }, geriEbasDepQ3: {
+    type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
+    }, geriEbasDepQ4: {
+    type: String, optional: false
+    }, geriEbasDepQ5: {
+    type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
+    }, geriEbasDepQ6: {
+    type: String, optional: false
+    }, geriEbasDepQ7: {
+    type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
+    }, geriEbasDepQ8: {
+    type: String, optional: false
+    }, geriEbasDepQ9: {
+    type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
+    }, geriEbasDepQ10: {
+    type: String, optional: false
+    }, geriEbasDepQ11: {
+    type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
+    }, geriEbasDepQ12: {
+    type: String, optional: false
+    }, geriEbasDepQ13: {
+    type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
+    }, geriEbasDepQ14: {
+    type: String, optional: false
+    }, geriEbasDepQ15: {
+    type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
+    }, geriEbasDepQ16: {
+    type: String, optional: false
+    }, geriEbasDepQ18: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriEbasDepQ19: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriEbasDepQ20: {
+    type: String, optional: true
+    }
+    }
+   ),
 
+   "Geri - Vision" : new SimpleSchema({
+    geriVisionQ1: {
+    type: String, allowedValues: ["Yes (Specify in textbox )", "No"], optional: false
+    }, geriVisionQ2: {
+    type: String, optional: true
+    }, geriVisionQ3: {
+    type: Number, optional: false
+    }, geriVisionQ4: {
+    type: Number, optional: false
+    }, geriVisionQ5: {
+    type: Number, optional: true
+    }, geriVisionQ6: {
+    type: Number, optional: true
+    }, geriVisionQ7: {
+    type: String, allowedValues: ["CF2M", "CF1M", "HM", "LP", "NLP", "NIL"], optional: true
+    }, geriVisionQ8: {
+    type: Array, optional: true
+    }, "geriVisionQ8.$": {
+    type: String, allowedValues: ["Referred to OT Consult"]
+    }, geriVisionQ9: {
+    type: Array, optional: true
+    }, "geriVisionQ9.$": {
+    type: String, allowedValues: ["Referred to Doctor\s Consult"]
+    }
+    }
+   ),
   
+  "Geri - PAR-Q" : new SimpleSchema({
+    geriParQQ1: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriParQQ2: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriParQQ3: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriParQQ4: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriParQQ5: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriParQQ6: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriParQQ7: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriParQQ8: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }
+    }
+   ),
 
-  "Blood Glucose & Hb":
-  new SimpleSchema({
-      cbg: {
-      type: SimpleSchema.Integer,
-      optional: true,
-      label: "Capillary Blood Glucose (mg/dL)",
-    },
-    hb: {
-      type: Number,
-      optional: true,
-      label: "Hemoglobin (g/dL)",
-    },
-    docConsultForBloodGlucAndHb:{
-      type: Boolean,
-      label: "Doctors consult required?",
-    },
-  }),
+  "Geri - Physical Activity Level" : new SimpleSchema({
+    geriPhysicalActivityLevelQ1: {
+    type: String, optional: false
+    }, geriPhysicalActivityLevelQ2: {
+    type: String, optional: false
+    }, geriPhysicalActivityLevelQ3: {
+    type: String, optional: false
+    }, geriPhysicalActivityLevelQ4: {
+    type: String, allowedValues: ["0 (Nothing at all)", "1 (Very light)", "2 (Fairly light)", "3 (Moderate)", "4 (Somewhat hard)", "5 (Hard)", "6", "7 (Very Hard)", "8", "9", "10 (Very, Very Hard)"], optional: false
+    }, geriPhysicalActivityLevelQ5: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriPhysicalActivityLevelQ6: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }
+    }
+   ),
 
+  "Geri - Frail Scale" : new SimpleSchema({
+    geriFrailScaleQ1: {
+    type: String, allowedValues: ["1", "0"], optional: false
+    }, geriFrailScaleQ2: {
+    type: String, allowedValues: ["1", "0"], optional: false
+    }, geriFrailScaleQ3: {
+    type: String, allowedValues: ["1", "0"], optional: false
+    }, geriFrailScaleQ4: {
+    type: Array, optional: false
+    }, "geriFrailScaleQ4.$": {
+    type: String, allowedValues: ["Hypertension", "Diabetes", "Cancer (other than a minor skin cancer)", "Chronic lung disease", "Heart attack", "Congestive heart failure", "Angina", "Asthma", "Arthritis", "Stroke", "Kidney disease", "NIL"]
+    }, geriFrailScaleQ5: {
+    type: Number, optional: false
+    }, geriFrailScaleQ6: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }
+    }
+   ),
+
+   "Geri - OT Questionnaire" : new SimpleSchema({
+    geriOtQuestionnaireQ1: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriOtQuestionnaireQ2: {
+    type: String, allowedValues: ["Yes (Specify in textbox )", "No"], optional: false
+    }, geriOtQuestionnaireQ3: {
+    type: String, optional: true
+    }, geriOtQuestionnaireQ4: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriOtQuestionnaireQ5: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriOtQuestionnaireQ6: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriOtQuestionnaireQ7: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriOtQuestionnaireQ8: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }
+    }
+   ),
+
+   "Geri - SPPB" : new SimpleSchema({
+    geriSppbQ1: {
+    type: String, optional: true
+    }, geriSppbQ2: {
+    type: String, allowedValues: ["0       (If not able to complete 5 chair stands)", "1       (> 16.7s )", "2       (16.6 – 13.7s )", "3       (13.6 – 11.2s )", "4       (< 11.1s )"], optional: false
+    }, geriSppbQ3: {
+    type: String, optional: true
+    }, geriSppbQ4: {
+    type: String, optional: true
+    }, geriSppbQ5: {
+    type: String, optional: true
+    }, geriSppbQ6: {
+    type: String, allowedValues: ["0        (Side by side < 10s or unable)", "1       (Side by side 10s AND < 10s semi tandem)", "2       (Semi tandem 10s AND tandem < 3s)", "3       (Semi tandem 10s AND tandem < 10s but > 3s)", "4       (Tandem >= 10s)", "Refused to do"], optional: false
+    }, geriSppbQ7: {
+    type: String, optional: true
+    }, geriSppbQ8: {
+    type: String, allowedValues: ["0       (Could not do)", "1       (> 5.7s )", "2       (4.1 – 5.7s )", "3       (3.2 – 4.0s )", "4       (< 3.1s )"], optional: false
+    }, geriSppbQ9: {
+    type: String, optional: false
+    }, geriSppbQ10: {
+    type: String, allowedValues: ["High Falls Risk (score ≤ 6)", "Low Falls Risk (score > 6)"], optional: false
+    }, geriSppbQ11: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }
+    }
+   ),
+
+   "Geri - TUG" : new SimpleSchema({
+    geriTugQ1: {
+    type: Array, optional: true
+    }, "geriTugQ1.$": {
+    type: String, allowedValues: ["Walking frame", "Walking frame with wheels", "Crutches/ Elbow crutches", "Quadstick (Narrow/ Broad)", "Walking stick", "Umbrella", "Others (Please specify in textbox )"]
+    }, geriTugQ2: {
+    type: String, optional: true
+    }, geriTugQ3: {
+    type: Number, optional: false
+    }, geriTugQ4: {
+    type: String, allowedValues: ["High Falls Risk (> 15sec)", "Low Falls Risk (≤ 15 sec)"], optional: false
+    }, geriTugQ5: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }
+    }
+   ),
+
+   "Geri - PT Consult" : new SimpleSchema({
+    geriPtConsultQ1: {
+    type: String, optional: false
+    }, geriPtConsultQ2: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriPtConsultQ3: {
+    type: String, optional: true
+    }, geriPtConsultQ4: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriPtConsultQ5: {
+    type: String, optional: true
+    }
+    }
+   ),
+
+  "Geri - OT Consult" : new SimpleSchema({
+    geriOtConsultQ1: {
+    type: String, optional: false
+    }, geriOtConsultQ2: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriOtConsultQ3: {
+    type: String, optional: true
+    }, geriOtConsultQ4: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriOtConsultQ5: {
+    type: String, optional: true
+    }, geriOtConsultQ6: {
+    type: String, allowedValues: ["HDB EASE", "SWCDC Safe and Bright Homes", "Own Vendors"], optional: true
+    }
+    }
+   ),
+
+   "Geri - Geri Appt" : new SimpleSchema({
+    geriGeriApptQ1: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriGeriApptQ2: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriGeriApptQ3: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriGeriApptQ4: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriGeriApptQ5: {
+    type: Array, optional: true
+    }, "geriGeriApptQ5.$": {
+    type: String, allowedValues: ["Done"]
+    }, geriGeriApptQ6: {
+    type: String, allowedValues: ["Yes, requirement met.", "No, requirement not met."], optional: false
+    }, geriGeriApptQ7: {
+    type: String, allowedValues: ["Yes", "No"], optional: true
+    }, geriGeriApptQ8: {
+    type: String, allowedValues: ["Yes", "No"], optional: true
+    }
+    }
+   ),
+   
   "Pap Smear":
   new SimpleSchema({
     papCompleted: {

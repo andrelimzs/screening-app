@@ -49,7 +49,13 @@ class Form extends Component {
     };
   }
 
-  handleSubmit(newForm) {
+  handleSubmit(newForm) {    
+    // If no user
+    if (this.props.id === null) {
+        alert("Please take a patient before submitting");
+        return
+    }
+
     // Insert/update patientinfo database
     if (this.isMultipage) {
       if (this.state.pageIndex < Object.keys(formSchemas[this.props.station]).length - 1) {
@@ -157,7 +163,7 @@ class Form extends Component {
         schema={currentFormSchema}
         onSubmit={this.handleSubmit}
         onSubmitSuccess={() => {
-          if (this.props.station !== "Pre-Registration" && (!this.isMultipage || (this.state.pageIndex == 0))) {
+          if (this.props.id !== null && this.props.station !== "Pre-Registration" && (!this.isMultipage || (this.state.pageIndex == 0))) {
             alert("Successful");
           }}}
         onSubmitFailure={() => {
