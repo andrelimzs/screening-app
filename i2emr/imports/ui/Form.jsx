@@ -51,7 +51,7 @@ class Form extends Component {
 
   handleSubmit(newForm) {    
     // If no user
-    if (this.props.id === null) {
+    if (this.props.id === null && this.props.station !== "Pre-Registration") {
         alert("Please take a patient before submitting");
         return
     }
