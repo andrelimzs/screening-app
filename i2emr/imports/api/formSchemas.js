@@ -101,40 +101,24 @@ export const formSchemas = {
     geriEbasDepQ1: {
     type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
     }, geriEbasDepQ2: {
-    type: String, optional: false
+    type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
     }, geriEbasDepQ3: {
     type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
     }, geriEbasDepQ4: {
-    type: String, optional: false
+    type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
     }, geriEbasDepQ5: {
     type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
     }, geriEbasDepQ6: {
-    type: String, optional: false
+    type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
     }, geriEbasDepQ7: {
     type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
     }, geriEbasDepQ8: {
-    type: String, optional: false
+    type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
     }, geriEbasDepQ9: {
-    type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
+    type: String, allowedValues: ["Yes", "No"], optional: false
     }, geriEbasDepQ10: {
-    type: String, optional: false
+    type: String, allowedValues: ["Yes", "No"], optional: false
     }, geriEbasDepQ11: {
-    type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
-    }, geriEbasDepQ12: {
-    type: String, optional: false
-    }, geriEbasDepQ13: {
-    type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
-    }, geriEbasDepQ14: {
-    type: String, optional: false
-    }, geriEbasDepQ15: {
-    type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
-    }, geriEbasDepQ16: {
-    type: String, optional: false
-    }, geriEbasDepQ18: {
-    type: String, allowedValues: ["Yes", "No"], optional: false
-    }, geriEbasDepQ19: {
-    type: String, allowedValues: ["Yes", "No"], optional: false
-    }, geriEbasDepQ20: {
     type: String, optional: true
     }
     }
