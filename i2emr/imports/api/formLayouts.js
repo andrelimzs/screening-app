@@ -611,7 +611,6 @@ export const formLayouts = {
       </DisplayIf>
 
       <DisplayIf condition={() => (
-        console.log(info) ||
         (typeof(info["Geri - EBAS-DEP"]) !== "undefined" && info["Geri - EBAS-DEP"].geriEbasDepQ18 === "Yes") ||
         (typeof(info["Geri - EBAS-DEP"]) !== "undefined" && info["Geri - EBAS-DEP"].geriEbasDepQ19 === "Yes") ||
         (typeof(info["Geri - PT Consult"]) !== "undefined" && info["Geri - PT Consult"].geriPtConsultQ4 === "Yes") ||
