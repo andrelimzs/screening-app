@@ -345,547 +345,112 @@ export const formSchemas = {
     },
   }),
 
-  "Breast Exam":
-  new SimpleSchema({
-    abnormalities: {
-      type: Boolean,
-      label: "Any abnormalities noted (e.g. lumps, skin changes)?"
-    },
-    abDescribe: {
-      type: String,
-      optional: true,
-      label: "If yes to the previous question, please describe the abnormalities"
-    },
-    fnacCompleted: {
-      type: Boolean, 
-      label: "FNAC Completed?"
-    },
-    breastCompleted: {
-      type: Boolean,
-      label: "Breast screening completed",
+  "Doctor's Consult" : new SimpleSchema({
+    doctorSConsultQ1: {
+    type: String, optional: true
+    }, doctorSConsultQ2: {
+    type: String, optional: true
+    }, doctorSConsultQ3: {
+    type: String, optional: true
+    }, doctorSConsultQ4: {
+    type: Array, optional: true
+    }, "doctorSConsultQ4.$": {
+    type: String, allowedValues: []
+    }, doctorSConsultQ5: {
+    type: String, optional: true
+    }, doctorSConsultQ6: {
+    type: Array, optional: true
+    }, "doctorSConsultQ6.$": {
+    type: String, allowedValues: ["Yes"]
+    }, doctorSConsultQ7: {
+    type: Array, optional: false
+    }, "doctorSConsultQ7.$": {
+    type: String, allowedValues: ["Yes"]
     }
-  }),
+    }
+   ),
 
-  "Blood Pressure":
-  new SimpleSchema({
-    bp1Sys: {
-      type: SimpleSchema.Integer,
-      min: 50,
-      max: 300,
-      label: "1st Systolic blood pressure"
-    },
-    bp1Dia: {
-      type: SimpleSchema.Integer,
-      min: 20,
-      max: 200,
-      label: "1st Diastolic blood pressure"
-    },
-    bp2Sys: {
-      type: SimpleSchema.Integer,
-      min: 50,
-      max: 300,
-      label: "2nd Systolic blood pressure"
-    },
-    bp2Dia: {
-      type: SimpleSchema.Integer,
-      min: 20,
-      max: 200,
-      label: "2nd Diastolic blood pressure"
-    },
-    bp3Sys: {
-      type: SimpleSchema.Integer,
-      optional: true,
-      min: 50,
-      max: 300,
-      label: "3rd Systolic blood pressure"
-    },
-    bp3Dia: {
-      type: SimpleSchema.Integer,
-      optional: true,
-      min: 20,
-      max: 200,
-      label: "3rd Diastolic blood pressure"
-    },
-    bpAvgSys: {
-      type: String,
-      label: "Average Systolic blood pressure"
-    },
-    bpAvgDia: {
-      type: String,
-      label: "Average Diastolic blood pressure"
-    },
-    docConsultForBP: {
-      type: Boolean,
-      label: "Doctors consult required?",
-    },
-  }),
-
-  "Doctors' Consult":
-  new SimpleSchema({
-    docConsult1: {
-      type: Array,
-    },
-    'docConsult1.$': {
-      type: String,
-      allowedValues: ['Overweight/obesity', 
-                      'Heart burn', 
-                      'Diabetes', 
-                      'High blood pressure',
-                      'Heart disease',
-                      'Unexplained weight loss',
-                      'Respiratory problems',
-                      'Joint pain/back pain',
-                      'Stroke',
-                      'Visual impairment',
-                      'Mental health issues',
-                      'Alcohol overuse',
-                      'Drug addiction',
-                      'Infectious diseases e.g. malaria, tuberculosis',
-                      'Others'],
-    },
-    otherComplaints: {
-      type: String,
-      optional: true,
-    },
-    docConsult2: {
-      type: String,
-    },
-    docConsult3: {
-      type: Boolean,
-      label: "Provided with referral letter?"
-    },
-    docConsult4: {
-      type: String,
-      optional: true,
-    },
-    docConsult5: {
-      type: String,
-    },
-  }),
-
-  "Eye Screening":
-  new SimpleSchema ({
-    specs: {
-      type: Boolean,
-      label: "Does the participant use spectacles?"
-    },
-    rightWoGlass: {
-      type: String,
-      label: "Right eye without glasses"
-    },
-    leftWoGlass: {
-      type: String,
-      label: "Left eye without glasses"
-    },
-    rightWiGlass: {
-      type: String,
-      label: "Right eye with glasses",
-      optional: true,
-    },
-    leftWiGlass: {
-      type: String,
-      label: "Left eye with glasses",
-      optional: true,
-    },
-    rightNearVis: {
-      type: String,
-      label: "Right eye near vision"
-    },
-    leftNearVis: {
-      type: String,
-      label: "Left eye near vision"
-    },
-    
-    lidsLeft: {
-      type: String,
-      label: "Left Lid"
-    },
-    lidsRight: {
-      type: String,
-      label: "Right Lid"
-    },
-    conjunctivaLeft: {
-      type: String,
-      label: "Left Conjunctiva"
-    },
-    conjunctivaRight: {
-      type: String,
-      label: "Right Conjunctiva"
-    },
-    corneaLeft: {
-      type: String,
-      label: "Left Cornea"
-    },
-    corneaRight: {
-      type: String,
-      label: "Right Cornea"
-    },
-    antSegLeft: {
-      type: String,
-      label: "Left Anterior Segment"
-    },
-    antSegRight: {
-      type: String,
-      label: "Right Anterior Segment"
-    },
-    irisLeft: {
-      type: String,
-      label: "Left Iris"
-    },
-    irisRight: {
-      type: String,
-      label: "Right Iris"
-    },
-    pupilLeft: {
-      type: String,
-      label: "Left Pupil"
-    },
-    pupilRight: {
-      type: String,
-      label: "Right Pupil"
-    },
-    lensLeft: {
-      type: String,
-      label: "Left Lens"
-    },
-    lensRight: {
-      type: String,
-      label: "Right Lens"
-    },
-    ocuMvmtLeft: {
-      type: String,
-      label: "Left Ocular Movements"
-    },
-    ocuMvmtRight: {
-      type: String,
-      label: "Right Ocular Movements"
-    },
-    iopLeft: {
-      type: String,
-      label: "Left IOP"
-    },
-    iopRight: {
-      type: String,
-      label: "Right IOP"
-    },
-    ductLeft: {
-      type: String,
-      label: "Left Duct"
-    },
-    ductRight: {
-      type: String,
-      label: "Right Duct"
-    },
-
-    cdrLeft: {
-      type: String,
-      label: "Left CDR"
-    },
-    cdrRight: {
-      type: String,
-      label: "Right CDR"
-    },
-    maculaLeft: {
-      type: String,
-      label: "Left Macula"
-    },
-    maculaRight: {
-      type: String,
-      label: "Right Macula"
-    },
-    retinaLeft: {
-      type: String,
-      label: "Left Retina"
-    },
-    retinaRight: {
-      type: String,
-      label: "Right Retina"
-    },
-    diagnosis: {
-      type: String,
-      label: "Diagnosis"
-    },
-    advice: {
-      type: String,
-      label: "Advice"
-    },
-    nameDoc: {
-      type: String,
-      label: "Name of Doctor"
-    },
-  }),
-
-  // "Women's Edu":{
-  //   "Pre-Women's Education Quiz":
-  //   new SimpleSchema ({
-  //     eduCompleted: {
-  //       type: String,
-  //       allowedValues: ['Yes','No'],
-  //     },
-  //     preWomenEduSurvey1: {
-  //     type: String,
-  //     allowedValues: ['1', '2', '3', '4', '5'],   
-  //     },
-  //       preWomenEduQ1: {
-  //         type: String,
-  //         allowedValues: ['Abdominal cramps','Acne','Headache','All of the above'], 
-  //         },
-  //       preWomenEduQ2: {
-  //         type: String,
-  //         allowedValues: ['Stress', 'Pregnancy', 'Weight loss', 'Abrasions'],   
-  //         },
-  //         preWomenEduQ3: {
-  //         type: String,
-  //         allowedValues: ['Menstruation is dirty', 'Menstruation happens every 28 days, on average', 'We should change our sanitary pads once every few days', 'We should clean the area from back to front'],   
-  //         },
-  //       preWomenEduQ4: {
-  //         type: String,
-  //         allowedValues: ['1st day of menses', '7-10 days after start of menses', '21 days after start of menses', '2 days before start of menses'],   
-  //         },
-  //       preWomenEduQ5: {
-  //         type: String,
-  //         allowedValues: ['Once a week', 'Once a month', 'Once a year', 'Once in 2 years'],   
-  //         },
-  //       preWomenEduQ6: {
-  //         type: String,
-  //         allowedValues: ['A lump that can be seen/felt in the breast or underarm', 'Nipple that is pushed inwards', 'Dimpling of skin over the breast', 'Ulceration of skin over the breast','All of the above'],   
-  //         },
-  //     }),
-
-  //   "Post-Women's Education Quiz":
-  //   new SimpleSchema ({
-  //     postWomenEduSurvey1: {
-  //     type: String,
-  //     allowedValues: ['1', '2', '3', '4', '5'],   
-  //     },
-  //     postWomenEduQ1: {
-  //       type: String,
-  //       allowedValues: ['Abdominal cramps','Acne','Headache','All of the above'], 
-  //       },
-  //     postWomenEduQ2: {
-  //       type: String,
-  //       allowedValues: ['Stress', 'Pregnancy', 'Weight loss', 'Abrasions'],   
-  //       },
-  //     postWomenEduQ3: {
-  //       type: String,
-  //       allowedValues: ['Menstruation is dirty', 'Menstruation happens every 28 days, on average', 'We should change our sanitary pads once every few days', 'We should clean the area from back to front'],   
-  //       },
-  //     postWomenEduQ4: {
-  //       type: String,
-  //       allowedValues: ['1st day of menses', '7-10 days after start of menses', '21 days after start of menses', '2 days before start of menses'],   
-  //       },
-  //     postWomenEduQ5: {
-  //       type: String,
-  //       allowedValues: ['Once a week', 'Once a month', 'Once a year', 'Once in 2 years'],   
-  //       },
-  //     postWomenEduQ6: {
-  //       type: String,
-  //       allowedValues: ['A lump that can be seen/felt in the breast or underarm', 'Nipple that is pushed inwards', 'Dimpling of skin over the breast', 'Ulceration of skin over the breast','All of the above'],   
-  //       },
-  //   }),
-  // },
+   "Social Service" : new SimpleSchema({
+    socialServiceQ1: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, socialServiceQ2: {
+    type: String, optional: false
+    }, socialServiceQ3: {
+    type: String, optional: false
+    }
+    }
+   ),
   
-  "Women's Edu":
-  new SimpleSchema ({
-    womensEduCompleted: {
-      type: Boolean,
-      label: "Women's education completed?"
-    },
-  }),
-
-  "Education":{
-    "Pre-Education Survey":
-    new SimpleSchema ({
-      preEduSurvey1: {
-      type: String,
-      allowedValues: ['1', '2', '3', '4', '5'],   
-      },
-      preEduSurvey2: {
-        type: String,
-        allowedValues: ['1', '2', '3', '4', '5'],   
-        },
-      preEduSurvey3: {
-        type: String,
-        allowedValues: ['1', '2', '3', '4', '5'],    
-        },
-      preEduSurvey4: {
-        type: String,
-        allowedValues: ['1', '2', '3', '4', '5'],   
-        },
-    }),
-
-    "Pre-Education Quiz":
-    new SimpleSchema ({
-      preEduQuiz1: {
-        type: String,
-        allowedValues: ['Do not exercise', 'Have diabetes', 'Smoke', 'All of the above'],   
-      },
-      preEduQuiz2: {
-        type: String,
-        allowedValues: ['Blindness',
-                        'Amputation',
-                        'Craving sweet food',
-                        'Kidney failure'],   
-      },
-        preEduQuiz3: {
-        type: String,
-        allowedValues: ['60 mins', '90 mins', '120 mins', '150 mins'],    
-      },
-      preEduQuiz4: {
-        type: String,
-        allowedValues: ['1/2 rice, 1/4 fruits and vegetables, 1/4 protein', '2/5 rice, 1/5 vegetables, 1/5 fruits, 1/5 protein', '1/3 rice, 1/3 vegetables, 1/3 protein', '1/2 fruits and vegetables, 1/4 rice, 1/4 protein'],   
-      },
-      preEduQuiz5: {
-        type: String,
-        allowedValues: ['Daal', 'Mattar Paneer', 'Chole Bhattura', 'Butter Paneer'],   
-      },
-      preEduQuiz6: {
-        type: String,
-        allowedValues: ['Tobacco', 'Alcohol', 'Pesticides', 'All of the above'],   
-      },
-      preEduQuiz7: {
-        type: String,
-        allowedValues: ['Get comprehensive eye exams regularly', 'Use a computer for 2h to finish my work', 'Read under sufficiently bright light', 'Wear sunglasses and caps when outdoors to protect eyes from UV rays'],   
-      },
-    }),
-
-    "Post-Education Survey":
-    new SimpleSchema ({
-      postEduSurvey1: {
-      type: String,
-      allowedValues: ['1', '2', '3', '4', '5'],   
-      },
-      postEduSurvey2: {
-        type: String,
-        allowedValues: ['1', '2', '3', '4', '5'],   
-        },
-      postEduSurvey3: {
-        type: String,
-        allowedValues: ['1', '2', '3', '4', '5'],    
-        },
-      postEduSurvey4: {
-        type: String,
-        allowedValues: ['1', '2', '3', '4', '5'],   
-        },
-    }),
-
-    "Post-Education Quiz":
-    new SimpleSchema ({
-      postEduQuiz1: {
-      type: String,
-      allowedValues: ['Do not exercise', 'Have diabetes', 'Smoke', 'All of the above'],   
-      },
-      postEduQuiz2: {
-        type: String,
-        allowedValues: ['Blindness',
-                        'Amputation',
-                        'Craving sweet food',
-                        'Kidney failure'],   
-      },
-      postEduQuiz3: {
-        type: String,
-        allowedValues: ['60 mins', '90 mins', '120 mins', '150 mins'],    
-      },
-      postEduQuiz4: {
-        type: String,
-        allowedValues: ['1/2 rice, 1/4 fruits and vegetables, 1/4 protein', '2/5 rice, 1/5 vegetables, 1/5 fruits, 1/5 protein', '1/3 rice, 1/3 vegetables, 1/3 protein', '1/2 fruits and vegetables, 1/4 rice, 1/4 protein'],   
-      },
-      postEduQuiz5: {
-        type: String,
-        allowedValues: ['Daal', 'Mattar Paneer', 'Chole Bhattura', 'Butter Paneer'],   
-      },
-      postEduQuiz6: {
-        type: String,
-        allowedValues: ['Tobacco', 'Alcohol', 'Pesticides', 'All of the above'],   
-      },
-      postEduQuiz7: {
-        type: String,
-        allowedValues: ['Get comprehensive eye exams regularly', 'Use a computer for 2h to finish my work', 'Read under sufficiently bright light', 'Wear sunglasses and caps when outdoors to protect eyes from UV rays'],   
-      },
-    }),
-  },
-
-  "Post-Screening Feedback":
-  new SimpleSchema ({
-    postScreeningFeedback1: {
-    type: String,
-    allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
-    },
-    postScreeningFeedback2: {
-      type: Array,
-    },
-    'postScreeningFeedback2.$': {
-      type: String,
-      allowedValues: ['I am concerned about my health', 
-                      'I have never been screened before', 
-                      'Friends/family told me to come', 
-                      'There is a free health screening',
-                      'There is a free goodie bag',
-                      'I was drawn to the crowd',
-                      'It was conveniently located',
-                      'It is at a convenient time'],
-    },
-    postScreeningFeedback3: {
-      type: String,
-      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
-      },
-    postScreeningFeedback4: {
-      type: String,
-      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
-    },
-    postScreeningFeedback5: {
-      type: String,
-      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
-      },
-    postScreeningFeedback6: {
-      type: String,
-      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
-    }, 
-    postScreeningFeedback7: {
-      type: String,
-      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
-      },
-    postScreeningFeedback8: {
-      type: String,
-      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
-    }, 
-    postScreeningFeedback9: {
-      type: String,
-      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
-      },
-    postScreeningFeedback10: {
-      type: String,
-      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
-    }, 
-    postScreeningFeedback11: {
-      type: String,
-      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
-      },
-    postScreeningFeedback12: {
-      type: String,
-      allowedValues: ['Strongly agree', 'Agree', 'Disagree', 'Strongly disagree'],   
-    },   
-    postScreeningFeedback13: {
-      type: Array,
-    },
-    'postScreeningFeedback13.$': {
-      type: String,
-      allowedValues: ['Happened to pass by', 
-                      'Posters', 
-                      'Newspaper', 
-                      'Door-to-door publicity',
-                      'Heard from neighbours/relatives/friends'],
-    },
-    postScreeningFeedback14: {
-      type: String,
-      allowedValues: ['Never', 
-                      'More than 3 years ago', 
-                      'Once in 3 years', 
-                      'Once in 2 years',
-                      'Once a year',
-                      'More than once a year'],   
-    },   
-
-  }),
-  
+   "Feedback Form" : new SimpleSchema({
+    feedbackFormQ1: {
+    type: String, allowedValues: ["Strongly Agree 非常同意", "Agree 同意", "Disagree 不同意", "Strongly Disagree 非常不同意"], optional: false
+    }, feedbackFormQ2: {
+    type: Array, optional: false
+    }, "feedbackFormQ2.$": {
+    type: String, allowedValues: ["I am concerned about my health 我关心自己的健康", "I have never been screened before 我从未经过身体检查", "Friends/family told me to come 朋友/家人劝我应该参与", "There is a free health screening 这项身体检验是免费的", "There is a free goodie bag 活动有赠送礼包", "I was drawn by the exhibition booths 我被健康展览所吸引", "I was drawn by the carnival 我被嘉年华会所吸引", "I was drawn to the crowd 我被人群所吸引", "It is conveniently located 活动地点对我很方便", "It is at a convenient timing 活动时间对我很方便", "Others (please specify) 其他原因：(请注明)"]
+    }, feedbackFormQ3: {
+    type: String, optional: true
+    }, feedbackFormQ4: {
+    type: String, allowedValues: ["Yes 是", "No 否"], optional: false
+    }, feedbackFormQ5: {
+    type: String, allowedValues: ["NIL", "Only once (Today) 一次而已 （今天）", "Two Times 两次", "Thrice 三次", "Four Times 四次", "Five Times (五次）", "Six Times (六次）", "Seven or more times (七次以上）"], optional: false
+    }, feedbackFormQ6: {
+    type: String, allowedValues: ["Yes 是", "No 否"], optional: false
+    }, feedbackFormQ7: {
+    type: String, allowedValues: ["Not Applicable", "In the past month 这个月", "In the past year 今年内", "2-3 years ago 两到三年前", ">4 years ago 多过四年前"], optional: false
+    }, feedbackFormQ8: {
+    type: String, allowedValues: ["Never 没做过", "Infrequent 不经常", "1 in 3 years 三年一次", "1 in 2 years 两年一次", "Once a year 每年一次", "More than once a year 每年多于一次"], optional: false
+    }, feedbackFormQ9: {
+    type: String, allowedValues: ["No I am unaware of other screenings 没有", "Community Centre (CC) 民众俱乐部（CC）", "Polyclinic 综合诊疗所", "GP clinic 私人诊所", "Others (please specify) 其他 (请注明)"], optional: false
+    }, feedbackFormQ10: {
+    type: String, optional: true
+    }, feedbackFormQ11: {
+    type: String, allowedValues: ["Strongly Agree 非常同意", "Agree 同意", "Disagree 不同意", "Strongly Disagree 非常不同意"], optional: false
+    }, feedbackFormQ12: {
+    type: String, allowedValues: ["Strongly Agree 非常同意", "Agree 同意", "Disagree 不同意", "Strongly Disagree 非常不同意"], optional: false
+    }, feedbackFormQ13: {
+    type: String, allowedValues: ["Strongly Agree 非常同意", "Agree 同意", "Disagree 不同意", "Strongly Disagree 非常不同意"], optional: false
+    }, feedbackFormQ14: {
+    type: String, allowedValues: ["Strongly Agree 非常同意", "Agree 同意", "Disagree 不同意", "Strongly Disagree 非常不同意"], optional: false
+    }, feedbackFormQ15: {
+    type: Array, optional: false
+    }, "feedbackFormQ15.$": {
+    type: String, allowedValues: ["Expensive  太贵", "Too Far 太远", "Too time consuming 太费时间"]
+    }, feedbackFormQ16: {
+    type: String, allowedValues: ["Strongly Agree 非常同意", "Agree 同意", "Disagree 不同意", "Strongly Disagree 非常不同意"], optional: false
+    }, feedbackFormQ17: {
+    type: String, allowedValues: ["Strongly Agree 非常同意", "Agree 同意", "Disagree 不同意", "Strongly Disagree 非常不同意"], optional: false
+    }, feedbackFormQ18: {
+    type: String, optional: true
+    }, feedbackFormQ19: {
+    type: String, optional: true
+    }, feedbackFormQ20: {
+    type: String, allowedValues: ["Strongly Agree 非常同意", "Agree 同意", "Disagree 不同意", "Strongly Disagree 非常不同意", "Not applicable 不适用"], optional: false
+    }, feedbackFormQ21: {
+    type: String, allowedValues: ["Strongly Agree 非常同意", "Agree 同意", "Disagree 不同意", "Strongly Disagree 非常不同意"], optional: false
+    }, feedbackFormQ22: {
+    type: String, allowedValues: ["Strongly Agree 非常同意", "Agree 同意", "Disagree 不同意", "Strongly Disagree 非常不同意"], optional: false
+    }, feedbackFormQ23: {
+    type: String, allowedValues: ["Strongly Agree 非常同意", "Agree 同意", "Disagree 不同意", "Strongly Disagree 非常不同意"], optional: false
+    }, feedbackFormQ24: {
+    type: String, optional: true
+    }, feedbackFormQ25: {
+    type: String, optional: true
+    }, feedbackFormQ26: {
+    type: String, allowedValues: ["Strongly Agree 非常同意", "Agree 同意", "Disagree 不同意", "Strongly Disagree 非常不同意"], optional: false
+    }, feedbackFormQ27: {
+    type: Array, optional: false
+    }, "feedbackFormQ27.$": {
+    type: String, allowedValues: ["Happened to pass by 刚好经过", "Posters, banners 海报/旗帜", "PHS Facebook Page 公共健康服务官方脸书", "Community Centre (CC) 社区中心（CC）", "SMS Reminder (简讯）", "PHS Instagram 公共健康服务 Instagram", "Door-to-Door Publicity 义工上门宣传", "Lamp post banners 路灯上的海报", "PHS Website (www.publichealthservice.org) 公共健康服务官方网站", "Newspaper 报纸", "Others (Please specify) 其他（请注明)"]
+    }, feedbackFormQ28: {
+    type: String, optional: true
+    }, feedbackFormQ29: {
+    type: String, allowedValues: ["Yes", "No", "Did not receive brochure"], optional: true
+    }, feedbackFormQ30: {
+    type: String, optional: true
+    }, feedbackFormQ31: {
+    type: String, optional: true
+    }
+    }
+   ),
 }

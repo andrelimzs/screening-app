@@ -77,89 +77,6 @@ function getSppbScore(model) {
   return score;
 }
 
-const checkInfo = (station,field,msg1,msg2) => (
-  typeof(station) !== "undefined" &&
-  typeof(station[0][field]) !== "undefined" &&
-  station[0][field].includes(msg1,msg2)
-);
-const checkInfo2 = (station,field,msg1) => (
-  typeof(station) !== "undefined" &&
-  typeof(station[0][field]) !== "undefined" &&
-  !station[0][field].includes(msg1)
-);
-
-const requireDoctorConsult = (info) => (
-  <Fragment>
-    {((typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW) ||
-      (typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb) ||
-      (typeof(info["Station Selection"]) !== "undefined" && info["Station Selection"].stationSelect12 === "Yes") ||
-      (typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP) ||
-      (typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap) ||
-      (typeof(info["Height & weight"]) !== "undefined" &&
-        (checkInfo(info["Height & weight"], "childHeightAssessment", "Below 3rd percentile curve","Above 97th percentile curve") ||
-        checkInfo(info["Height & weight"], "childWeightAssessment", "Below 3rd percentile curve","Above 97th percentile curve") ||
-        checkInfo2(info["Height & weight"], "childBmiAssessment", "Between 3rd percentile and overweight curves")))) &&
-      <Divider /> &&
-      <Typography color='secondary' variant='h6'>
-        Require consult for:
-      </Typography> }
-
-    { typeof(info["Station Selection"]) !== "undefined" && info["Station Selection"].stationSelect12 === "Yes" &&
-      <Typography color='secondary'>
-        Registration
-      </Typography> }
-    { checkInfo(info["Height & weight"], "childHeightAssessment", "Below 3rd percentile curve","Above 97th percentile curve") &&
-      <Typography color='secondary'>
-        Height (Child)
-      </Typography> }
-    { checkInfo(info["Height & weight"], "childWeightAssessment", "Below 3rd percentile curve","Above 97th percentile curve") &&
-      <Typography color='secondary'>
-        Height (Child)
-      </Typography> }
-    { checkInfo2(info["Height & weight"], "childBmiAssessment", "Between 3rd percentile and overweight curves") &&
-      <Typography color='secondary'>
-        BMI (Child): 
-      </Typography> }
-    { typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb &&
-      <Typography color='secondary'>
-        Blood Glucose and Hb
-      </Typography> }
-    { typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP &&
-      <Typography color='secondary'>
-        Blood Pressure
-      </Typography> }
-    { typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap &&
-      <Typography color='secondary'>
-        Pap Smear
-      </Typography> &&
-    <Divider /> }
-  </Fragment>
-);
-const requireEducation = (info) => (
-  <Fragment>
-    {((typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP) ||
-      (typeof(info["Height & weight"]) !== "undefined" &&
-        (info["Height & weight"][0].bmi < 18.5 || info["Height & weight"][0].bmi >= 23 ||
-        info["Height & weight"][0].waistHipRatio > ((info["Patient Info"].gender === "male")? 0.9:0.8) ))) &&
-      <Divider /> &&
-      <Typography color='secondary' variant='h6'>
-        Require education for:
-      </Typography> }
-
-    { typeof(info["Height & weight"]) !== "undefined" && (info["Height & weight"][0].bmi < 18.5 || info["Height & weight"][0].bmi >= 23) &&
-      <Typography color='secondary'>
-        BMI: {info["Height & weight"][0].bmi}
-      </Typography> }
-    { typeof(info["Height & weight"]) !== "undefined" && (info["Height & weight"][0].waistHipRatio > ((info["Patient Info"].gender === "male")? 0.9:0.8) ) &&
-      <Typography color='secondary'>
-        waist:hip {info["Height & weight"][0].waistHipRatio}
-      </Typography> }
-    { typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP &&
-      <Typography color='secondary'>
-        Blood Pressure
-      </Typography>}
-  </Fragment>
-);
 // Define the layouts
 export const formLayouts = {
   "Pre-Registration" : (info) => (
@@ -623,390 +540,144 @@ export const formLayouts = {
     </Fragment>
   ),
 
-  "Pap Smear": (info) => (
+  "Doctor's Consult" : (info) => (
     <Fragment>
-      <BoolField name="papCompleted" />
-      <LongTextField name="papNotes" />
-      <BoolField name="docConsultForPap" />
-    </Fragment>
-  ),
-    
-  "Breast Exam": (info) => (
-    <Fragment>
-      <BoolField name="abnormalities" />
-      <DisplayIf condition={context => context.model.abnormalities === true}><Fragment>
-        <LongTextField name="abDescribe" />  
-      </Fragment></DisplayIf>
-      <BoolField name="fnacCompleted" />     
-      Completed breast examination?
-      <BoolField name="breastCompleted" />
-    </Fragment>
-  ),
-
-  // "Women's Edu": {
-  //   "Pre-Women's Education Quiz": (info) => (
-  //     <Fragment>
-  //       Breast education completed?
-  //       <RadioField name="eduCompleted" />
-  //       From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
-  //       <SelectField name="preWomenEduSurvey1" />
-  //       Which of the following is/are normal symptom(s) of menstrual periods?
-  //       <SelectField name="preWomenEduQ1" />
-  //       All of the following are reasons for missed periods except
-  //       <SelectField name="preWomenEduQ2" />
-  //       Which of the following is true about menstruation
-  //       <SelectField name="preWomenEduQ3" />
-  //       When is the best time to do a breast self examination?
-  //       <SelectField name="preWomenEduQ4" />
-  //       How often should you do a breast self examination?
-  //       <SelectField name="preWomenEduQ5" />
-  //       You should go to the doctor if you notice:
-  //       <SelectField name="preWomenEduQ6" />
-  //     </Fragment>
-  //   ),
-
-  //   "Post-Women's Education Quiz": (info) => (
-  //     <Fragment>
-  //       From a scale of 1-5, how much do you know about menstrual cycles? 1 being not at all, and 5 being a lot
-  //       <SelectField name="postWomenEduSurvey1" />
-  //       Which of the following is/are normal symptom(s) of menstrual periods?
-  //       <SelectField name="postWomenEduQ1" />
-  //       All of the following are reasons for missed periods except
-  //       <SelectField name="postWomenEduQ2" />
-  //       Which of the following is true about menstruation
-  //       <SelectField name="postWomenEduQ3" />
-  //       When is the best time to do a breast self examination?
-  //       <SelectField name="postWomenEduQ4" />
-  //       How often should you do a breast self examination?
-  //       <SelectField name="postWomenEduQ5" />
-  //       You should go to the doctor if you notice:
-  //       <SelectField name="postWomenEduQ6" />
-  //     </Fragment>
-  //   ),
-  // },
-
-  // "Women's Edu": (info) => (
-  //   <Fragment>
-  //     <BoolField name="womensEduCompleted" />
-  //   </Fragment>
-  // ),
-
-  "Doctors' Consult": (info) => (
-    <Fragment>
-      {requireDoctorConsult(info)}
-      Chief complaint
-      <SelectField name="docConsult1" />
-      <DisplayIf condition={context => Array.isArray(context.model.docConsult1) && context.model.docConsult1.includes('Others (free text)')}><Fragment>
-        Other complaints
-        <TextField name="otherComplaints" />
-      </Fragment></DisplayIf>
-      Doctors' notes/advice
-      <LongTextField name="docConsult2" />
-      <BoolField name="docConsult3" />
-      <DisplayIf condition={context => context.model.docConsult3 === true}><Fragment>
-        Referral details
-        <LongTextField name="docConsult4" />
-      </Fragment></DisplayIf>
-      Name of doctor
-      <TextField name="docConsult5" />
-    </Fragment>
-  ),
-
-  // "Eye Screening": (info) => (
-  //   <Fragment>
-  //     <BoolField name="specs" />
-  //     Visual Acuity
-  //     <Grid
-  //       container
-  //       direction="column"
-  //       justify="flex-start"
-  //       alignItems="center"
-  //     >
-  //       <Grid container direction="row" justify="space-around" alignItems="center" item>
-  //         <Grid item xs={5}>
-  //           <TextField name="rightWoGlass" />
-  //         </Grid>
-  //         <Grid item xs={5}>
-  //           <TextField name="leftWoGlass" />
-  //         </Grid>
-  //       </Grid>
-  //       <DisplayIf condition={context => context.model.specs == true}><Fragment>
-  //         <Grid container  direction="row" justify="space-around" alignItems="center" item>
-  //           <Grid item xs={5} item>
-  //             <TextField name="rightWiGlass" />
-  //           </Grid>
-  //           <Grid item xs={5} item>
-  //             <TextField name="leftWiGlass" />
-  //           </Grid>
-  //         </Grid>
-  //       </Fragment></DisplayIf>
-
-  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
-  //         <Grid item xs={5} item>
-  //           <TextField name="rightNearVis" />
-  //         </Grid>
-  //         <Grid item xs={5} item>
-  //           <TextField name="leftNearVis" />
-  //         </Grid>
-  //       </Grid>
-  //     </Grid>
+      Doctor's Name:
+      <TextField name="doctorSConsultQ1" label="Doctor's Consult Q1"/>
+      MCR No.:
+      <TextField name="doctorSConsultQ2" label="Doctor's Consult Q2"/>
+      Doctor's Memo
+      <LongTextField name="doctorSConsultQ3" label="Doctor's Consult Q3" />
+      Refer to dietitian?
+      <SelectField name="doctorSConsultQ4" checkboxes="true" label="Doctor's Consult Q4" />
+      Reason for referral
+      <TextField name="doctorSConsultQ5" label="Doctor's Consult Q5"/>
+      Does patient require urgent follow up 
+      <SelectField name="doctorSConsultQ6" checkboxes="true" label="Doctor's Consult Q6" />
+      Completed Doctor’s Consult station. Please check that Form A is filled.
+      <SelectField name="doctorSConsultQ7" checkboxes="true" label="Doctor's Consult Q7" />
       
-  //     <Divider /><br /> 
-  //     Finding in the Eye
-  //     <Grid
-  //       container
-  //       direction="column"
-  //       justify="flex-start"
-  //       alignItems="center"
-  //     >
-  //       <Grid container direction="row" justify="space-around" alignItems="center" item>
-  //         <Grid item xs={5}>
-  //           <TextField name="lidsRight" />
-  //         </Grid>
-  //         <Grid item xs={5}>
-  //           <TextField name="lidsLeft" />
-  //         </Grid>
-  //       </Grid>
+    </Fragment>
+  ),
 
-  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
-  //         <Grid item xs={5} item>
-  //           <TextField name="conjunctivaRight" />
-  //         </Grid>
-  //         <Grid item xs={5} item>
-  //           <TextField name="conjunctivaLeft" />
-  //         </Grid>
-  //       </Grid>
-
-  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
-  //         <Grid item xs={5} item>
-  //           <TextField name="corneaRight" />
-  //         </Grid>
-  //         <Grid item xs={5} item>
-  //           <TextField name="corneaLeft" />
-  //         </Grid>
-  //       </Grid>
-
-  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
-  //         <Grid item xs={5} item>
-  //           <TextField name="antSegRight" />
-  //         </Grid>
-  //         <Grid item xs={5} item>
-  //           <TextField name="antSegLeft" />
-  //         </Grid>
-  //       </Grid>
-
-  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
-  //         <Grid item xs={5} item>
-  //           <TextField name="irisRight" />
-  //         </Grid>
-  //         <Grid item xs={5} item>
-  //           <TextField name="irisLeft" />
-  //         </Grid>
-  //       </Grid>
-
-  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
-  //         <Grid item xs={5} item>
-  //           <TextField name="pupilRight" />
-  //         </Grid>
-  //         <Grid item xs={5} item>
-  //           <TextField name="pupilLeft" />
-  //         </Grid>
-  //       </Grid>
-
-  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
-  //         <Grid item xs={5} item>
-  //           <TextField name="lensRight" />
-  //         </Grid>
-  //         <Grid item xs={5} item>
-  //           <TextField name="lensLeft" />
-  //         </Grid>
-  //       </Grid>
-
-  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
-  //         <Grid item xs={5} item>
-  //           <TextField name="ocuMvmtRight" />
-  //         </Grid>
-  //         <Grid item xs={5} item>
-  //           <TextField name="ocuMvmtLeft" />
-  //         </Grid>
-  //       </Grid>
-
-  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
-  //         <Grid item xs={5} item>
-  //           <TextField name="iopRight" />
-  //         </Grid>
-  //         <Grid item xs={5} item>
-  //           <TextField name="iopLeft" />
-  //         </Grid>
-  //       </Grid>
-
-  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
-  //         <Grid item xs={5} item>
-  //           <TextField name="ductRight" />
-  //         </Grid>
-  //         <Grid item xs={5} item>
-  //           <TextField name="ductLeft" />
-  //         </Grid>
-  //       </Grid>
-  //     </Grid>
-
-  //     <Divider /><br /> 
-  //     Posterior Segment Examination
-  //     <Grid
-  //       container
-  //       direction="column"
-  //       justify="flex-start"
-  //       alignItems="center"
-  //     >
-  //       <Grid container direction="row" justify="space-around" alignItems="center" item>
-  //         <Grid item xs={5}>
-  //           <TextField name="cdrRight" />
-  //         </Grid>
-  //         <Grid item xs={5}>
-  //           <TextField name="cdrLeft" />
-  //         </Grid>
-  //       </Grid>
-
-  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
-  //         <Grid item xs={5} item>
-  //           <TextField name="maculaRight" />
-  //         </Grid>
-  //         <Grid item xs={5} item>
-  //           <TextField name="maculaLeft" />
-  //         </Grid>
-  //       </Grid>
-
-  //       <Grid container  direction="row" justify="space-around" alignItems="center" item>
-  //         <Grid item xs={5} item>
-  //           <TextField name="retinaRight" />
-  //         </Grid>
-  //         <Grid item xs={5} item>
-  //           <TextField name="retinaLeft" />
-  //         </Grid>
-  //       </Grid>
-  //     </Grid>
+  "Doctor's Consult" : (info) => (
+    <Fragment>
+      Doctor's Name:
+      <TextField name="doctorSConsultQ1" label="Doctor's Consult Q1"/>
+      MCR No.:
+      <TextField name="doctorSConsultQ2" label="Doctor's Consult Q2"/>
+      Doctor's Memo
+      <LongTextField name="doctorSConsultQ3" label="Doctor's Consult Q3" />
+      Refer to dietitian?
+      <SelectField name="doctorSConsultQ4" checkboxes="true" label="Doctor's Consult Q4" />
+      Reason for referral
+      <TextField name="doctorSConsultQ5" label="Doctor's Consult Q5"/>
+      Does patient require urgent follow up
+      <SelectField name="doctorSConsultQ6" checkboxes="true" label="Doctor's Consult Q6" />
+      Completed Doctor’s Consult station. Please check that Form A is filled.
+      <SelectField name="doctorSConsultQ7" checkboxes="true" label="Doctor's Consult Q7" />
       
-  //     <Divider /><br />
+    </Fragment>
+  ),
 
-  //     <LongTextField name="diagnosis" />
-  //     <LongTextField name="advice" />
-  //     <LongTextField name="nameDoc" />
-  //   </Fragment>
-  // ),
+  "Social Service" : (info) => (
+    <Fragment>
+      <h2>Social Service Station</h2>
+      1. Has the participant visited the social service station?
+      <RadioField name="socialServiceQ1" label="Social Service Q1"/>
+      2. Brief summary of the participant's concerns
+      <LongTextField name="socialServiceQ2" label="Social Service Q2" />
+      3. Brief summary of what will be done for the participant (Eg name of scheme participant wants to apply for)
+      <LongTextField name="socialServiceQ3" label="Social Service Q3" />
+      
+    </Fragment>
+  ),
 
-  // "Education" : {
-  //   "Pre-Education Survey": (info) => (
-  //     <Fragment>
-  //       {requireEducation(info)}
-  //       From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
-  //       1 being not at all, and 5 being a lot
-  //       <SelectField name="preEduSurvey1" />
-  //       From a scale of 1-5, how much do you know about healthy lifestyle and diet?
-  //       1 being not at all, and 5 being a lot
-  //       <SelectField name="preEduSurvey2" />
-  //       From a scale of 1-5, how much do you know about cancer risk factors?
-  //       1 being not at all, and 5 being a lot
-  //       <SelectField name="preEduSurvey3" />
-  //       From a scale of 1-5, how much do you know about good eyecare habits?
-  //       1 being not at all, and 5 being a lot
-  //       <SelectField name="preEduSurvey4" />
-  //       <Divider />
-  //       Score
-  //     </Fragment>
-  //   ),
-
-  //   "Pre-Education Quiz": (info) => (
-  //     <Fragment>
-  //       {requireEducation(info)}
-  //       <Divider variant="middle"/>
-  //       You are at higher risk of developing high cholesterol if you
-  //       <SelectField name="preEduQuiz1" />
-  //       All of the following are complications of diabetes except
-  //       <SelectField name="preEduQuiz2" />
-  //       How much exercise should we get a week?
-  //       <SelectField name="preEduQuiz3" />
-  //       What makes up a healthy plate?
-  //       <SelectField name="preEduQuiz4" />
-  //       Which of the following is the healthier choice to make?
-  //       <SelectField name="preEduQuiz5" />
-  //       Which of the following is a cancer risk factor(s)?
-  //       <SelectField name="preEduQuiz6" />
-  //       Which of the following is not considered good eyecare habits?
-  //       <SelectField name="preEduQuiz7" />
-  //     </Fragment>
-  //   ),
-
-  //   "Post-Education Survey": (info) => (
-  //     <Fragment>
-  //       {requireEducation(info)}
-  //       From a scale of 1-5, how much do you know about metabolic syndrome (Hypertension, Hyperlipidemia, Obesity, High Blood Sugar)?
-  //       1 being not at all, and 5 being a lot
-  //       <SelectField name="postEduSurvey1" />
-  //       From a scale of 1-5, how much do you know about healthy lifestyle and diet?
-  //       1 being not at all, and 5 being a lot
-  //       <SelectField name="postEduSurvey2" />
-  //       From a scale of 1-5, how much do you know about cancer risk factors?
-  //       1 being not at all, and 5 being a lot
-  //       <SelectField name="postEduSurvey3" />
-  //       From a scale of 1-5, how much do you know about good eyecare habits?
-  //       1 being not at all, and 5 being a lot
-  //       <SelectField name="postEduSurvey4" />
-  //     </Fragment>
-  //   ),
-
-  //   "Post-Education Quiz": (info) => (
-  //     <Fragment>
-  //       {requireEducation(info)}
-  //       You are at higher risk of developing high cholesterol if you
-  //       <SelectField name="postEduQuiz1" />
-  //       All of the following are complications of diabetes except
-  //       <SelectField name="postEduQuiz2" />
-  //       How much exercise should we get a week?
-  //       <SelectField name="postEduQuiz3" />
-  //       What makes up a healthy plate?
-  //       <SelectField name="postEduQuiz4" />
-  //       Which of the following is the healthier choice to make?
-  //       <SelectField name="postEduQuiz5" />
-  //       Which of the following is a cancer risk factor(s)?
-  //       <SelectField name="postEduQuiz6" />
-  //       Which of the following is not considered good eyecare habits?
-  //       <SelectField name="postEduQuiz7" />
-  //     </Fragment>
-  //   ),
-  // },
-
-  // "Post-Screening Feedback": (info) => (
-  //   <Fragment>
-  //     I have had a good experience at the screening
-  //     <SelectField name="postScreeningFeedback1" />
-  //     I came for the screening because: (Select all that apply)
-  //     <AutoField name="postScreeningFeedback2" />
-  //     I know that regular health screening is important
-  //     <SelectField name="postScreeningFeedback3" />
-  //     I know that it is important to detect chronic diseases and cancers early
-  //     <SelectField name="postScreeningFeedback4" />
-  //     I am willing to take the trouble to attend health screenings
-  //     <SelectField name="postScreeningFeedback5" />
-  //     I am willing to attend my follow-up sessions
-  //     <SelectField name="postScreeningFeedback6" />
-  //     The student volunteers attended to my needs
-  //     <SelectField name="postScreeningFeedback7" />
-  //     The student volunteers were well-trained
-  //     <SelectField name="postScreeningFeedback8" />
-  //     The waiting time to enter the screening was reasonable
-  //     <SelectField name="postScreeningFeedback9" />
-  //     The waiting time for each station was reasonable
-  //     <SelectField name="postScreeningFeedback10" />
-  //     The flow of the screening was easy to follow
-  //     <SelectField name="postScreeningFeedback11" />
-  //     I would recommend my family/friends to attend this screening
-  //     <SelectField name="postScreeningFeedback12" />
-  //     What encouraged you to come for our event? Select all that apply
-  //     <AutoField name="postScreeningFeedback13" />
-  //     How often do you attend a health screening?
-  //     <SelectField name="postScreeningFeedback14" />
-  //   </Fragment>
-  // ),
-  
+  "Feedback Form" : (info) => (
+    <Fragment>
+      <h2>PHS 2019 Screening Feedback Form <br />公共健康服务 2019 检验反馈表</h2>
+      <h3>We would like to know how you felt about our health screening, as well as how you came to know about it :) Your feedback will go a long way in helping us improve our event!<br /> 我们想寻求您对我们公共健康服务 2019 的感受，并且告诉我们您在什么情况下得知这活动的详情! </h3>
+      1. I have had a good experience at the PHS 2019 screening.<br /> 我在公共健康服务 2019 中有良好的体验。
+      <RadioField name="feedbackFormQ1" label="Feedback Form Q1"/>
+      <h3>2. We would like to find out some of the reasons why you came for the PHS 2019 screening. Select all that apply. <br />我们想寻求一些关于您参与此活动的原因</h3>
+      a. I came for PHS 2019 because<br /> 我会参与此活动因为
+      <SelectField name="feedbackFormQ2" checkboxes="true" label="Feedback Form Q2" />
+      <DisplayIf condition={(context) => (typeof(context.model.feedbackFormQ2) !== "undefined" && context.model.feedbackFormQ2.includes("Others (please specify) 其他原因：(请注明)"))}>
+        <Fragment>
+          Please Specify for "Others" 请注明:
+          <TextField name="feedbackFormQ3" label="Feedback Form Q3"/>
+        </Fragment>
+      </DisplayIf>
+      3a.Have you been to PHS before? <br />您是否来过公共健康服务？
+      <RadioField name="feedbackFormQ4" label="Feedback Form Q4"/>
+      b. If yes, how many times have you been to PHS screening? (including this year) <br />若有，您来过几次？(包括今年）
+      <RadioField name="feedbackFormQ5" label="Feedback Form Q5"/>
+      4. Have you been to other health screenings/checkups before? <br />您有没有参加过其他的健康检查？
+      <RadioField name="feedbackFormQ6" label="Feedback Form Q6"/>
+      5. When was your last screening/checkup done? <br />您最近的健康检查是几时做的？
+      <RadioField name="feedbackFormQ7" label="Feedback Form Q7"/>
+      6. How often do you have a health screening?  <br />您多久会进行一次健康检查？
+      <RadioField name="feedbackFormQ8" label="Feedback Form Q8"/>
+      7. Are you aware of other screening programmes in your community?<br /> 您是否对社区里的其他健康检查有所认识？
+      <RadioField name="feedbackFormQ9" label="Feedback Form Q9"/>
+      <DisplayIf condition={(context) => (typeof(context.model.feedbackFormQ9) !== "undefined" && context.model.feedbackFormQ9 === "Others (please specify) 其他 (请注明)")}>
+        <Fragment>
+          Please Specify for "Others" 请注明:
+          <TextField name="feedbackFormQ10" label="Feedback Form Q10"/>
+        </Fragment>
+      </DisplayIf>
+      <h3>8. We would like to find out more about your health beliefs and knowledge. <br />我们想寻求关于您的健康价值观以及健康知识。</h3>
+      a. I think I am at risk of getting cancer (colorectal/ breast/ cervical)<br />我认为我有可能患上癌症（大肠癌/乳癌/子宫颈癌）
+      <RadioField name="feedbackFormQ11" label="Feedback Form Q11"/>
+      b. I think I am at risk of getting chronic diseases <br />我认为我有可能患上慢性疾病 
+      <RadioField name="feedbackFormQ12" label="Feedback Form Q12"/>
+      c. It is important to me to detect chronic diseases and cancer early <br />我认为早期发现慢性疾病与癌症很重要
+      <RadioField name="feedbackFormQ13" label="Feedback Form Q13"/>
+      d. I think that health screening is essential to detect chronic diseases and cancer early <br />为了早期发现慢性疾病/癌症，参加健康检查是必须的
+      <RadioField name="feedbackFormQ14" label="Feedback Form Q14"/>
+      e. I think that going for health screening is (can tick >1 option)<br /> 我认为参加健康检查... （可以选择>1个选项）
+      <SelectField name="feedbackFormQ15" checkboxes="true" label="Feedback Form Q15" />
+      <h3>9. We would like to find out more about how you felt about our student volunteers.<br /> 您对我们学生义工们的表现有所看法？</h3>
+      a. The student volunteers attended to my needs <br />学生义工们有做足我的需求
+      <RadioField name="feedbackFormQ16" label="Feedback Form Q16"/>
+      b. The student volunteers were well-trained <br />学生义工们有受够专业训练
+      <RadioField name="feedbackFormQ17" label="Feedback Form Q17"/>
+      c. Others (Please specify) <br />其他意见（请注明）
+      <LongTextField name="feedbackFormQ18" label="Feedback Form Q18" />
+      10. Do you have any suggestions on how our student volunteers can improve? <br />您有没有建议让我们的学生义工进步？
+      <LongTextField name="feedbackFormQ19" label="Feedback Form Q19" />
+      <h3>11. Do let us know how you felt about the operational aspects of the screening<br />. 您对此健康检查的执行方式有任何评语？</h3>
+      a. The SMS system at the queue was beneficial to me<br /> 排队时使用的简讯系统对我有所帮助
+      <RadioField name="feedbackFormQ20" label="Feedback Form Q20"/>
+      b. The waiting time to enter the screening was reasonable<br /> 我对等候参与身体检查的时间感到合理
+      <RadioField name="feedbackFormQ21" label="Feedback Form Q21"/>
+      c. The waiting time for each station was reasonable<br /> 我对身体检查中各检查站的等候时间感到合理
+      <RadioField name="feedbackFormQ22" label="Feedback Form Q22"/>
+      d. The flow of the screening was easy to follow <br />身体检查的流程易人遵循
+      <RadioField name="feedbackFormQ23" label="Feedback Form Q23"/>
+      e. Others (Please specify) <br />其他意见（请注明）
+      <TextField name="feedbackFormQ24" label="Feedback Form Q24"/>
+      12. What else do you think PHS should screen for? <br />您认为公共健康服务还可以检查那些其他的疾病？
+      <TextField name="feedbackFormQ25" label="Feedback Form Q25"/>
+      13. I would recommend my family and/or friends to come for the PHS 2019 screening. <br />我会推荐家人与朋友来参与公共健康服务 2019 的身体检查。
+      <RadioField name="feedbackFormQ26" label="Feedback Form Q26"/>
+      14. How did you come to know of the PHS 2019 screening? Select all that apply. <br />您如何认知此活动的智讯？（请在所有适当的空格中打勾）<br />
+      <SelectField name="feedbackFormQ27" checkboxes="true" label="Feedback Form Q27" />
+      <DisplayIf condition={(context) => (typeof(context.model.feedbackFormQ27) !== "undefined" && context.model.feedbackFormQ27.includes("Others (Please specify) 其他（请注明)"))}>
+        <Fragment>
+          Please Specify for "Others" 请注明:
+          <TextField name="feedbackFormQ28" label="Feedback Form Q28"/>
+        </Fragment>
+      </DisplayIf>
+      15. If you have been contacted for Door-to-Door Publicity, did you learn about healthy ageing/metabolic syndrome through our volunteers/brochure? <br />若您有遇见义工上门宣传您是否从义工们/健康宣传册中学到更多关于健康老龄化/代谢综合症的相关知识？
+      <RadioField name="feedbackFormQ29" label="Feedback Form Q29"/>
+      16. What else do you want to learn more about through PHS?<br />您还有什么想更加了解/更深入学习的东西吗？
+      <TextField name="feedbackFormQ30" label="Feedback Form Q30"/>
+      17. Any other feedback? <br />您有其他的意见吗？
+      <LongTextField name="feedbackFormQ31" label="Feedback Form Q31" />
+      <h2>Thank you for completing this survey! :) <br />谢谢您为我们提供您宝贵的意见！</h2>
+      
+    </Fragment>
+  ),
 
 };
