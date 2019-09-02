@@ -13,290 +13,60 @@ SimpleSchema.setDefaultMessages({
 
 // Define the schema
 export const formSchemas = {
-  "Registration":{
-    "Patient Info":
-    new SimpleSchema({
-      name: {
-        type: String,
-        regEx: /^\D+$/,
-        label: "Name",
-      },
-      // id: {
-      //   type: String,
-      //   regEx: /^[0-9]+$/,
-      // },
-      gender: {
-        type: String,
-        allowedValues: ['male', 'female'],
-      },
-      birthday: {
-        type: String,
-        regEx: /^[0-9]{1,2}\/[0-9]{1,2}\/[1-2][0-9]{3}$/,
-      },
-      age: {
-        type: SimpleSchema.Integer,
-        min: 0,
-        autoValue: function () {
-          const birthdate = this.siblingField("birthday").value;
-          const currentYear = new Date();
-          const birthYear = Number(birthdate.substring(birthdate.length-4,birthdate.length));
-          const age = currentYear.getFullYear() - birthYear;
-          return age
-        }
-      },
-      district: {
-        type: String,
-      },
-      address: {
-        type: String,
-      },
-      zipcode: {
-        type: String,
-        regEx: /^[0-9]+$/,
-      },
-      contactNumber: {
-        type: String,
-        regEx: /^[0-9]+$/,
-      },
-      spokenLanguages: {
-        type: Array,
-      },
-      'spokenLanguages.$': {
-        type: String,
-        allowedValues: ['Hindi', 'Sambalpuri', 'Odia', 'English', 'Others'],
-      },
-      writtenLanguages: {
-        type: Array,
-      },
-      'writtenLanguages.$': {
-        type: String,
-        allowedValues: ['Hindi', 'Sambalpuri', 'Odia', 'English', 'Others'],
-      },
-      anyDrugAllergies: {
-        type: String,
-        allowedValues: ['Yes', 'No'],
-      },
-      drugAllergies: {
-        type: String,
-        optional: true,
-      },
-      pregnant: {
-        type: String,
-        allowedValues: ['Yes', 'No'],
-      }
-    }),
+  "Pre-Registration" : new SimpleSchema({
+    preRegistrationQ1: {
+    type: String, allowedValues: ["Male", "Female"], optional: false
+    }, preRegistrationQ2: {
+    type: String, optional: false
+    }, preRegistrationQ3: {
+    type: String, optional: false
+    }, preRegistrationQ4: {
+    type: String, allowedValues: ["Y", "N"], optional: false
+    }
+    }
+   ),
 
-    "Patient Profiling":
-    new SimpleSchema({
-      TBQ1: {
-        type: String,
-        allowedValues: ['Yes','No'],
-      },
-      TBQ2: {
-        type: String,
-        allowedValues: ['Yes, the person was diagnosed with TB within the past 4 months', 
-                        'Yes, the person was diagnosed with TB more than 4 months ago',
-                        'No'],
-      },
-      TBQ3: {
-        type: Array,
-      },
-      'TBQ3.$': {
-        type: String,
-        allowedValues: ['Cough that has lasted more than 2 weeks', 
-                        'Coughing up blood', 
-                        'Breathlessness', 
-                        'Weight loss',
-                        'Night sweats',
-                        'Fever',
-                        'Loss of appetite',
-                        'None of the above'],
-      },
-      medicalHistory1: {
-        type: Array,
-      },
-      'medicalHistory1.$': {
-        type: String,
-        allowedValues: ['Diabetes',
-                        'High blood pressure',
-                        'High cholesterol',
-                        'Others',
-                        'None of the above'],
-      },
-      otherMedicalConditions: {
-        type: String,
-        optional: true,
-      },
-      medicalHistory2: {
-        type: String,
-      },
-      ocularHisQ1a: {
-        type: String,
-        allowedValues: ['Yes','No'],
-      },
-      ocularHisQ1b: {
-        type: String,
-        optional: true,
-      },
-      ocularHisQ2a: {
-        type: String,
-        allowedValues: ['Yes','No'],
-      },
-      ocularHisQ2b: {
-        type: String,
-        optional: true,
-      },
-      ocularHisQ3a: {
-        type: String,
-        allowedValues: ['Yes','No'],
-      },
-      ocularHisQ3b: {
-        type: String,
-        optional: true,
-      },
-      ocularHisQ3c: {
-        type: String,
-        optional: true,
-      },
-      ocularHisQ3d: {
-        type: Array,
-        optional: true,
-      },
-      'ocularHisQ3d.$': {
-        type: String,
-        allowedValues: ['Cataract', 
-                        'Glaucoma', 
-                        'Diabetic Retinopathy', 
-                        'Age-related Macular Degeneration',
-                        'Others (please specify)'],
-      },
-      otherOcularCond:{
-        type: String,
-        optional: true,
-      },
-      ocularHisQ4: {
-        type: String,
-        allowedValues: ['Yes','No'],
-      },
-      ocularHisQ5a: {
-        type: String,
-        allowedValues: ['Normal','Good enough for my daily activities','Poor'],
-      },
-      ocularHisQ5b: {
-        type: String,
-        optional: true,
-        allowedValues: ['Yes','No'],
-      },
-      ocularHisQ5c: {
-        type: Array,
-        optional: true,
-      },
-      'ocularHisQ5c.$': {
-        type: String,
-        allowedValues: ['Concerns about finances',
-                        'Too far away/difficult to get to the clinic/hospital',
-                        'Previously told by eye specialist that nothing can be done',
-                        'Nothing can be done as it is part of ageing',
-                        'Others (please specify)'],
-      },
-      otherReasons: {
-        type: String,
-        optional: true,
-      },
-    }),
+   "Registration" : new SimpleSchema({
+    registrationQ1: {
+    type: String, allowedValues: ["Mr", "Ms", "Mrs", "Dr"], optional: false
+    }, registrationQ2: {
+    type: String, allowedValues: ["Chinese 华裔", "Malay 巫裔", "Indian 印裔", "Eurasian 欧亚裔", "Others 其他 (please specify): (insert textbox here)"], optional: false
+    }, registrationQ3: {
+    type: String, allowedValues: ["Singapore Citizen 新加坡公民", "Singapore Permanent Resident (PR) \n新加坡永久居民"], optional: false
+    }, registrationQ4: {
+    type: String, allowedValues: ["Single 单身", "Married 已婚", "Widowed 已寡", "Separated 已分居", "Divorced 已离婚"], optional: false
+    }, registrationQ5: {
+    type: String, optional: false
+    }, registrationQ6: {
+    type: String, allowedValues: ["Buki Batok East", "Clementi", "Yuhua", "Central Jurong", "Taman Jurong", "Jurong Spring", "Others"], optional: false
+    }, registrationQ7: {
+    type: String, allowedValues: ["Below 1,100 per month (少于 1,100)", "1,100 - 1,799 per month (每月1,100 - 1,799)", "1,800 - 2,799 per month (每月1,800 - 2,799)", "2,800 & above (2,800 或以上)"], optional: false
+    }, registrationQ8: {
+    type: String, allowedValues: ["CHAS Orange", "CHAS Blue", "Merdeka Generation", "No CHAS"], optional: false
+    }, registrationQ9: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, registrationQ10: {
+    type: String, allowedValues: ["Bukit Batok Medical Clinic \nBlk 207 Bukit Batok Street 21, #01-114", "Kang An Clinic\nBlk 644 Bukit Batok Central,\xa0#01-70", "Lai Medical Clinic\nBlk 213 Bukit Batok Street 21, #01-209", "Lakeside Family Clinic\n518A Jurong West St 52 # 01-02", "Boon Lay Corporation Clinic\nBlk 350 Jurong East Ave 1, #01-1225", "EJ. Tan Clinic & Surgery\nBlk 104 Jurong East Street 13, #01-100", "Frontier Family Medicine Clinic\n#04-01 Grantral Mall @ Clementi\n3151 Commonwealth Ave West"], optional: false
+    }, registrationQ11: {
+    type: String, allowedValues: ["English", "Mandarin", "Malay", "Tamil"], optional: false
+    }, registrationQ12: {
+    type: Boolean, label: "I have read and acknowledged the eligibility criteria for Phlebotomy. 我知道抽血的合格标准。", optional: false
+    }, registrationQ13: {
+    type: Boolean, label: "I agree and consent to the above.", optional: false
+    }
+    }
+   ),
 
-    "Station Selection":
-    new SimpleSchema({
-      stationSelect1: {
-        type: String,
-        allowedValues: ['Yes', 
-                        'No'],
-      },
-      stationSelect2:{
-        type: String,
-        allowedValues: ['Yes', 
-                        'No',
-                        'Not applicable (child)'],
-      },
-      stationSelect3: {
-        type: String,
-        allowedValues: ['Yes', 
-                        'No'],
-      },
-      stationSelect4: {
-        type: String,
-        allowedValues: ['Yes', 
-                        'No',
-                        'Not applicable (child)'],
-      },
-      stationSelect5: {
-        type: Array,
-        optional: true,
-      },
-      'stationSelect5.$': {
-        type: String,
-        allowedValues: ['High blood pressure', 
-                        'Diabetes', 
-                        'Cigarette smoking', 
-                        'Family member with coronary artery disease',
-                        'Family member with high cholesterol',
-                        'Chronic kidney disease',
-                        'None of the above/not applicable (Age < 40)'],
-      },
-      stationSelect6: {
-        type: String,
-        optional: true,
-        allowedValues: ['Yes', 
-                        'No',
-                        'Not applicable (child)'],
-      },
-      stationSelect7: {
-        type: String,
-        allowedValues: ['Yes', 
-                        'No'],
-      },
-      stationSelect8: {
-        type: String,
-        optional: true,
-        allowedValues: ['Yes', 
-                        'No'],
-      },
-      stationSelect9: {
-        type: String,
-        optional: true,
-        allowedValues: ['Yes', 
-                        'No'],
-      },
-      stationSelect10: {
-        type: String,
-        allowedValues: ['Yes', 
-                        'No',
-                        'Not applicable (child)'],
-      },
-      stationSelect11: {
-        type: String,
-        allowedValues: ['Yes', 
-                        'No',
-                        'Not applicable (child < 10 years old)'],
-      },
-      stationSelect12: {
-        type: String,
-        allowedValues: ['Yes', 
-                        'No'],
-      },
-      stationSelect13: {
-        type: String,
-        allowedValues: ['Yes', 
-                        'No'],
-      },
-      stationSelect14: {
-        type: String,
-        allowedValues: ['Yes', 
-                        'No',
-                        'Not applicable (child)'],
-      },
-    }),
-  },
+   "Phlebotomy" : new SimpleSchema({
+    phlebotomyQ1: {
+    type: Boolean, label: "Yes", optional: false
+    }, phlebotomyQ2: {
+    type: Boolean, label: "Yes", optional: false
+    }
+    }
+   ),
+
+
 
   "Height & weight":
   new SimpleSchema({
@@ -419,14 +189,6 @@ export const formSchemas = {
     docConsultForBloodGlucAndHb:{
       type: Boolean,
       label: "Doctors consult required?",
-    },
-  }),
-
-  "Phlebotomy": 
-  new SimpleSchema({
-    phleboCompleted: {
-      type: Boolean,
-      label: "Phlebotomy completed?"
     },
   }),
 

@@ -115,7 +115,7 @@ class App extends Component {
           <Grid container
             justify="flex-start"
             spacing={16}>
-            {station != "Registration" &&
+            {station != "Pre-Registration" &&
               <Grid item xs={12}>
                 <Queue patientList={this.props.patientList} />
               </Grid>
@@ -136,10 +136,12 @@ class App extends Component {
                 }
               </Grid>
               
-              <Grid item xs={4}>
-                {station !== "Registration" && 
+              <Grid item xs={4}>              
+                {/* TODO: Determine which stations need patient info
+                {station !== "Pre-Registration" && 
+                station !== "Registration" && 
                   <Info station={station} id={Session.get('currentPatient')} patientInfo={this.props.patientInfo} />
-                }
+                } */}
               </Grid>
 
             </Grid>
