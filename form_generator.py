@@ -31,7 +31,6 @@ def run():
     #     df = pd.read_excel(os.path.join(FORMS_LOCATION, filename), skiprows=4)
     #     generate_strings(df, form_name)
 
-
     filename = './Forms/6o. PHS Data Collection Geri - Geri Appointment.xlsx'
 
     df = pd.read_excel(filename, nrows=1, headers=None)
@@ -91,6 +90,7 @@ def generate_strings(df, form_name):
 
         question_count += 1
         schema_obj[question_name]['optional'] = 'false' if df['Mandatory'][i].startswith('Y') else 'true'
+
         form_string += string_formats[question_type].format(text=df['Label Text'][i].replace('\n','<br />'), name=question_name, label=label)
     
     form_string = format_form_string(form_string, form_name)
@@ -124,7 +124,6 @@ def format_schema_string(schema_obj, form_name):
     schema_string = '\"' + form_name + "\" : new SimpleSchema(" + schema_string + '\n ),'
 
     return schema_string
-
 
 def get_allowed_values(df, i):
     values = []
