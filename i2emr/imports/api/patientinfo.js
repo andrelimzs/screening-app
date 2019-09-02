@@ -47,7 +47,7 @@ Meteor.methods({
     delete data.nextStation;
 
     // Insert new station data
-    Patientinfo.update({id:id},{$push:data});
+    Patientinfo.update({id:id},{$set:data});
 
     // Retrieve station queue
     const info = Patientinfo.find({id:id}).fetch()[0];

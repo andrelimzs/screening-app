@@ -126,7 +126,7 @@ class App extends Component {
               alignItems="flex-start"
               spacing={16}
             >
-              <Grid item xs={4}>
+              <Grid item xs={6}>
                 {station !== "Finished Patients" && 
                   <Form station={station} id={Session.get('currentPatient')}
                         stationQueue={this.props.patientInfo.stationQueue} patientInfo={this.props.patientInfo}/>
@@ -201,10 +201,14 @@ const AppContainer = withTracker(() => {
 
   if (station === "Done") {
     patientList = Patientinfo.find().fetch();
-  } else {
+  } else if (station == "Registration" || station == "Phlebotomy"){
     patientList = Patientinfo.find(
       { $and:[{ nextStation: station }, { $or:[{ busy: false },{ id: currentPatientID }] }
       ]}).fetch();
+  } else {
+    patientList = Patientinfo.find(
+      {  $or:[{ busy: false },{ id: currentPatientID }] 
+      }).fetch();
   }
   
   //, { sort: { lastSubmit: 1 } }
