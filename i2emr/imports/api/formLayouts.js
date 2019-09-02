@@ -77,6 +77,13 @@ function getSppbScore(model) {
   return score;
 }
 
+function getBmi(model) {
+  if (typeof(model['hxCancerQ20']) !== "undefined" && typeof(model['hxCancerQ19']) !== "undefined") {
+    const bmi = model['hxCancerQ20'] / (model['hxCancerQ19'] / 100) / (model['hxCancerQ19'] / 100)
+    return Number(Math.round(bmi+'e2')+'e-2') // rounds to 2dp
+  }
+}
+
 // Define the layouts
 export const formLayouts = {
   "Pre-Registration" : (info) => (
@@ -143,6 +150,291 @@ export const formLayouts = {
       
     </Fragment>
   ),
+  
+  "History Taking" : {
+    "Hx HCSR" : (info) => (
+      <Fragment>
+        <h2>PARTICIPANT IDENTIFICATION</h2>
+        <font color="red"><h3>Please verify participant's identity using his/her NRIC before proceeding <br />A. S/N B. Surname followed by Initials C. Last 4 digits of Participant's NRIC and Letter</h3></font>
+        <b>Booth number</b> and <b>History-taker's Surname</b> followed by <b>Initials</b><br /><b><font color="red">**On Page 2 of Form A, under Doctor's Consultation (Hx-taking column, 1st row), please write down booth number and history taker's name.**</font><br />(Eg. Booth 18 David Choo Ah Beng = 18 David Choo A B)</b>
+        <LongTextField name="hxHcsrQ1" label="Hx HCSR Q1" />
+        <h2>HISTORY TAKING PART 1: HEALTH CONCERNS AND SYSTEMS REVIEW</h2>
+        <b>TAKE 1ST BP READING NOW & RECORD ON FORM A.</b> Ensure participant is comfortable at rest before measuring their BP. They should not have taken caffeine or smoked in the past 30 minutes either. <br /> <br />
+        <b><font color="red">IF SYSTOLIC  ≥ 180 AND/OR DIASTOLIC ≥ 110 mmHg, please take a second reading and ask for symptoms of malignant hypertension (severe headache, giddiness, numbness in extremities,blurred vision etc.)</font></b>
+        <h2>1. HEALTH CONCERNS</h2>
+        If the participant has any <b>presenting complaints or concern(s)</b>, please take a <b>brief history. (Please write NIL if otherwise).</b><br />E.g.<b>"Do you have any health issues that you are currently concerned about?"</b> "最近有没有哪里不舒服？”<br /> <br /><font color="red"><b><u>Please advise that there will be no diagnosis or prescription made at our screening.</u></b></font> Kindly advise the participant to see a GP/polyclinic instead if he/she is expecting treatment for their problems.<br /> <br /><b>REFER TO DR CONSULT</b> under Form A if <b>worrying problems / participant strongly insists or if you feel 'Health Concerns' requires closer scrutiny by doctors later.</b><br />Indicate for Doctor's Consultation station under: <br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A<br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation 
+        Reasons for recommendation
+        <LongTextField name="hxHcsrQ2" label="Hx HCSR Q2" />
+        <h2>2. SYSTEMS REVIEW</h2>
+        <b>Please rule out red flags based on <font color="red"><u>participants's health concerns.</u></font> (Please write NIL if otherwise)</b><br /><br />Below is a non-exhaustive list of possible red flags:<br />- Constitutional Symptoms: LOA, LOW, Fever<br />- CVS: Chest pain, Palpitations<br />- Respi: SOB, Haemoptysis, Night Sweat, Cough<br />- GI: change in BO habits, PR bleed, Haematemesis<br />- Frequent falls<br /><br /><b>REFER TO DR CONSULT</b> under Form A if <b>worrying problems / participant strongly insists or if you feel 'Health Concerns' requires closer scrutiny by doctors later.</b><br />Indicate for Doctor's Consultation station under: <br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation         Reasons for recommendation
+        <LongTextField name="hxHcsrQ3" label="Hx HCSR Q3" /> 
+        <br /> 2a. <b> <font color="blue">Do you have any problems passing urine or motion? Please specify if yes.</font> <br /><font color="red">REFER TO DR CONSULT and EXHIBITION SFCS booth if have urinary/bowel problem.</font> Indicate on: <br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation <br />3) Page 2 of Form A, under Exhibition - Recommendation, tick renal and bladder health, write down SFCS booth. </b>
+        <RadioField name="hxHcsrQ4" label="Hx HCSR Q4"/>
+        <DisplayIf condition={(context) => (typeof(context.model.hxHcsrQ4) !== "undefined" && context.model.hxHcsrQ4 === "Yes, (Please specify):")}>
+          <Fragment>
+            Please specify:
+            <LongTextField name="hxHcsrQ5" label="Hx HCSR Q5" />
+          </Fragment>
+        </DisplayIf>
+        2b. <b><font color="blue">Do you have any vision problems? Please specify if yes. Exclude complaints like unspecific itchy eyes etc</font><br /><font color="red">REFER TO DR CONSULT if have vision problems for 40-59. For 60 and above, indicate for Geriatrics - Geriatrics Functional Screening includes vision screening. </font><br />Indicate on: <br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation </b>
+        <RadioField name="hxHcsrQ6" label="Hx HCSR Q6"/>
+        <DisplayIf condition={(context) => (typeof(context.model.hxHcsrQ6) !== "undefined" && context.model.hxHcsrQ6 === "Yes, (Please specify):")}>
+          <Fragment>
+            Please specify:
+            <LongTextField name="hxHcsrQ7" label="Hx HCSR Q7" />
+          </Fragment>
+        </DisplayIf>
+        2c. <b><font color="blue">Do you have any hearing problems? Please specify if yes. </font><br /><font color="red">REFER TO DR CONSULT if have hearing problem for 40-59. Please give the participant the PHS Hearing Questionnaire 2019, remind them to complete it by themselves before passing it to the doctors at doctor's consult. For 60 and above, indicate for Geriatrics - Geriatrics Functional Screening includes audiometry screening.</font><br />Indicate on: <br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation </b>
+        <RadioField name="hxHcsrQ8" label="Hx HCSR Q8"/>
+        <DisplayIf condition={(context) => (typeof(context.model.hxHcsrQ8) !== "undefined" && context.model.hxHcsrQ8 === "Yes, (Please specify):")}>
+          <Fragment>
+            Please specify:
+            <LongTextField name="hxHcsrQ9" label="Hx HCSR Q9" />
+          </Fragment>
+        </DisplayIf>
+        
+      </Fragment>
+    ),
+
+    "Hx NSS" : (info) => (
+      <Fragment>
+        <h2>HISTORY TAKING PART 2: NSS HEALTH AND LIFESTYLE QUESTIONNAIRE</h2>
+        <font color="red"><h3>Please go through NSS Questionnaire now.</h3></font>
+        <h2>1. Past Medical History</h2>
+        1a. Has a doctor ever told you that you have the following condition? Please tick the appropriate box(es) if the answer is "Yes" to any of the conditions listed below, or tick the last box if you have none.
+        <SelectField name="hxNssQ1" checkboxes="true" label="Hx NSS Q1" />
+        <font color="red"><b>For respondent with known hypertension, diabetes, high cholesterol and stroke only.</b></font><br />2a. Are you currently on follow up with a doctor for the existing conditions you have indicated?
+        <RadioField name="hxNssQ2" label="Hx NSS Q2"/>
+        <DisplayIf condition={(context) => (typeof(context.model.hxNssQ2) !== "undefined" && context.model.hxNssQ2 === "Yes (please answer question below)")}>
+          <Fragment>
+            (Only proceed when answered "Yes" to the previous question)
+            <SelectField name="hxNssQ3" checkboxes="true" label="Hx NSS Q3" />
+            <DisplayIf condition={(context) => (typeof(context.model.hxNssQ3) !== "undefined" && context.model.hxNssQ3.includes("No, the last appointment was > 1 year ago (Please proceed to Q2b and 2c)"))}>
+              <Fragment>
+                2b. What is the reason that you are not following up with your doctor for your existing conditions such as diabetes, high cholesterol, high blood pressure and stroke?
+                <SelectField name="hxNssQ4" checkboxes="true" label="Hx NSS Q4" />
+              </Fragment>
+            </DisplayIf>
+          </Fragment>
+        </DisplayIf>
+        <h5>2c. Are you currently being prescribed any medication for any of the conditions below?</h5>
+        Hypertension** (High Blood Pressure)
+        <RadioField name="hxNssQ5" label="Hx NSS Q5"/>
+        Diabetes** (High Blood Sugar)
+        <RadioField name="hxNssQ6" label="Hx NSS Q6"/>
+        High Cholesterol**
+        <RadioField name="hxNssQ7" label="Hx NSS Q7"/>
+        Stroke** <font color="blue"><b>(including transient ischaemic attack)</b></font>
+        <RadioField name="hxNssQ8" label="Hx NSS Q8"/>
+        <h3>PLEASE TAKE 2ND BP READING NOW AND RECORD ON FORM A.<br /><br /></h3>
+        Hypertension criteria:<br />○ Younger participants: > 140/90<br />○ Participants > 80 years old: > 150/90 <br />○ CKD w proteinuria (mod to severe albuminuria): > 130/80<br />○ DM: > 130/80<br /> <br /> <b>REFER TO DR CONSULT: (FOR THE FOLLOWING SCENARIOS)<br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A  <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation   <br /><br /> <font color="red">HYPERTENSIVE EMERGENCY<br />• SYSTOLIC  <mark>≥ 180</mark> AND/OR DIASTOLIC ≥ <mark>110 mmHg</mark> AND <mark><u>SYMPTOMATIC</u></mark> (make sure pt has rested and 2nd reading was taken)<br /><mark>o ASK THE DOCTOR TO COME AND REVIEW!</mark><br /> <br />HYPERTENSIVE URGENCY<br />• SYSTOLIC  <mark>≥ 180</mark> AND/OR DIASTOLIC ≥ <mark>110 mmHg</mark> AND <mark>ASYMPTOMATIC</mark> (make sure pt has rested and 2nd reading was taken)<br />o ESCORT TO DC DIRECTLY!<br />o Follow the patient, continue clerking the patient afterward if doctor acknowledges patient is well enough to continue the screening<br /><br />RISK OF HYPERTENSIVE CRISIS<br />• IF SYSTOLIC between <mark>160 - 180 mmHg</mark> <br />• IF <mark>ASYMPTOMATIC</mark>, continue clerking. <br />• IF <mark>SYMPTOMATIC</mark>, ESCORT TO DC DIRECTLY!<br /><br />If systolic between 140 - 160 mmHg: </font><br />o Ask for:<br />- Has hypertension been pre-diagnosed? If not, refer to DC (possible new HTN diagnosis)<br />- If diagnosed before, ask about compliance and whether he/she goes for regular follow up? If non-compliant or not on regular follow-up, refer to DC (chronic HTN, uncontrolled).</b>
+        <font color="blue"><h3>THE FOLLOWING QUESTIONS ARE NOT PART OF NSS QUESTIONNAIRE. PLEASE ASK THE PARTICIPANT ACCORDINGLY. </h3></font>
+        <font color="blue"><b>2d. Are you on any types of medications not listed above? (includes use of traditional medicine)</b></font>
+        <RadioField name="hxNssQ9" label="Hx NSS Q9"/>
+        <DisplayIf condition={(context) => (typeof(context.model.hxNssQ9) !== "undefined" && context.model.hxNssQ9 === "Yes, (Please specify):")}>
+          <Fragment>
+            Please specify:
+            <LongTextField name="hxNssQ10" label="Hx NSS Q10" />
+          </Fragment>
+        </DisplayIf>
+        <font color="blue"><b>2e. Please tick to highlight if you feel 'Past Medical History' requires closer scrutiny by doctors later. (If indicated 'Yes', please complete the question below.)</b></font>
+        <RadioField name="hxNssQ11" label="Hx NSS Q11"/>
+        <DisplayIf condition={(context) => (typeof(context.model.hxNssQ11) !== "undefined" && context.model.hxNssQ11 === "Yes")}>
+          <Fragment>
+            <h2>Only complete Q2f if you are referring participant to Doctor's Consultation station.</h2>
+            <font color="blue"><b>2f. Based on <u>participant's history taken thus far</u>, please summarise his/her <mark>RELEVANT</mark> Past Medical History briefly for the doctors to refer to during doctors consultation.<br />1) Conditions<br />2) Duration <br />3) Control <br />4) Compliance <br />5) Complications <br />6) Follow up route (specifiy whether GP/Polyclinic/FMC/SOC)</b></font> <br /> <br />If participant is not engaged with any follow-up, ask "what is the reason that you re not following up with your doctor for your existing conditions?" <br />- e.g. do not see the purpose for tests, busy/ no time, lack of access e.g. mobility issues, financial issues, fear of doctors/ clinics/ hospitals etc <br /><br />If a participant is not compliant to medications, do probe further on his/her reasons for not consuming medications as prescribed. <br />- Medication not effective? Can be managed without medication? Forget to take? Lost/Ran out of medication?
+            <LongTextField name="hxNssQ12" label="Hx NSS Q12" />
+          </Fragment>
+        </DisplayIf>
+        <b>Based on participant medical hx, please recommend relevant stations:<br />1) Doctor's Consultation station, tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation<br />3) Relevant exhibition booths on page 2 of form A. Indicate accordingly for past history of DM / CVS Disease (including HTN, HLD, IHD) / CVA.</b><br /><br />For participant with DM, refer to DC if:<br />• Symptomatic, and non-compliant <br />• Asymptomatic, but non-compliant<br />Also, refer to DC if participant has not been diagnosed with DM, but has signs of DM (polyuria, polydipsia, periphery neuropathy, blurring of vision etc)
+        <font color="red"><h3>CONTINUE REFERRING TO NSS QUESTIONNAIRE. </h3></font>
+        3. Have your immediate family members (parents/ siblings/ children) ever been diagnosed/ told by a doctor that they have any of the chronic condition(s) listed below? Please tick if the answer is "Yes" to any of the conditions. You may select more than one. Please tick the last box if they have none.
+        <SelectField name="hxNssQ13" checkboxes="true" label="Hx NSS Q13" />
+        4. Do you smoke?
+        <RadioField name="hxNssQ14" label="Hx NSS Q14"/>
+        <h3>If participant is a smoker, recommend HPB iQuit exhibition booth on Page 2 of Form A.</h3>
+        5. Do you consume alcoholic drinks? (Note: Standard drink means a shot of hard liquor, a can or bottle of beer, or a glass of wine.)
+        <RadioField name="hxNssQ15" label="Hx NSS Q15"/>
+        6. Do you consciously try to eat more fruits, vegetables, whole grain and cereals? Please tick where applicable.
+        <SelectField name="hxNssQ16" checkboxes="true" label="Hx NSS Q16" />
+        7. Do you exercise or participate in any form of moderate physical activity for at least 150 minutes OR intense physical activity at least 75 minutes throughout the week? Note: Examples of physical activity includes exercising, walking, playing sports, washing your car, lifting/ moving moderately heavy luggage and doing housework.
+        <RadioField name="hxNssQ17" label="Hx NSS Q17"/>
+        <b>Counsel for positive diet and lifestyle modification if deemed necessary. Refer to dietitian at Doctor's Consultation station, Indicate: 1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A 2) Write reasons under dietitian referral on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation</b><br /><br />Indicate Smoking/Alcohol Consumption on Page 2 of Form A for exhibition ambassadors if applicable. Smoking cessation engagement by HPB iQuit.<br />Recommend for lifestyle follow up on Page 2 of Form A if you deem necessary.
+        <h5>8. When was the last time you had a blood test to check for hypertension, diabetes and cholesterol? Please answer all.</h5>
+        Hypertension
+        <RadioField name="hxNssQ18" label="Hx NSS Q18"/>
+        Diabetes
+        <RadioField name="hxNssQ19" label="Hx NSS Q19"/>
+        High Cholesterol
+        <RadioField name="hxNssQ20" label="Hx NSS Q20"/>
+        <font color="red"><h3>Please encourage participants to go for Phlebotomy screening every 3 years if relevant risk factors absent. If present, counsel for yearly screening.</h3></font>
+        9. Has your doctor told you that the blood vessels to your limbs are diseased and have become narrower (periphery artery disease) or that any other major blood vessels in your body have weakened walls that have "ballooned out" (aneurysm)?
+        <RadioField name="hxNssQ21" label="Hx NSS Q21"/>
+        <h3>PLEASE TAKE 3RD BP READING (IF MORE THAN 5MMHG) AND RECORD ON FORM A.</h3>
+        
+      </Fragment>
+    ),
+
+    "Hx Social" : (info) => (
+      <Fragment>
+        <font color="blue"><h2>THE FOLLOWING QUESTIONS ARE NOT PART OF NSS QUESTIONNAIRE. PLEASE ASK THE PARTICIPANT ACCORDINGLY. </h2></font>
+        <h2>HISTORY TAKING PART 3: SOCIAL HISTORY</h2>
+        <h2>1. DIET AND EXERCISE<br /><font color="red">(Taken in NSS Questionnaire portion earlier on)</font></h2>
+        <h2>2. FINANCIAL STATUS<br /><font color="red">Please refer to page 1 of Form A for following questions.</font></h2>
+        1. Current CHAS status? 
+        <b>
+        {info["Registration"] && 
+        info["Registration"].registrationQ8} <br />
+        </b>
+        2. For participants born before 1949. Pioneer Generation Card? 
+        <b>
+        {info["Registration"] &&
+          info["Registration"].registrationQ9} <br /><br />
+        </b>
+        3. Are you currently on any other Government Financial Assistance, other than CHAS and PG (e.g. Public Assistance Scheme)?
+        <RadioField name="hxSocialQ1" label="Hx Social Q1"/>
+        <DisplayIf condition={(context) => (typeof(context.model.hxSocialQ1) !== "undefined" && context.model.hxSocialQ1 === "Yes, (Please specify):")}>
+          <Fragment>
+            Please specify
+            <LongTextField name="hxSocialQ2" label="Hx Social Q2" />
+          </Fragment>
+        </DisplayIf>
+        <font color="red"><h3>PLEASE REFER TO PAGE 2 OF NSS FORM FOR RESPONSES. PLEASE ASK MORE as NECESSARY. </h3></font>
+        4a. What is the average earnings of participant's household per month? (Refer to NSS Form Page 2, Put 'NIL' if participant unable to provide)
+        <RadioField name="hxSocialQ3" label="Hx Social Q3"/>
+        4b. Number of household members (including yourself): 
+        <TextField name="hxSocialQ4" label="Hx Social Q4"/>
+        4c. Do you want to apply for CHAS card? (if you are currently not on CHAS but qualify) <br />
+        <img src='/images/hx/chas.jpg' alt='CHAS' /> <br />
+        <RadioField name="hxSocialQ5" label="Hx Social Q5"/>
+        <DisplayIf condition={(context) => (typeof(context.model.hxSocialQ5) !== "undefined" && context.model.hxSocialQ5 === "Yes, (Please specify):")}>
+          <Fragment>
+            Please specify
+            <TextField name="hxSocialQ6" label="Hx Social Q6"/>
+          </Fragment>
+        </DisplayIf>
+        5. Do you need advice on financial schemes that are available in Singapore or require further financial assistance?
+        <RadioField name="hxSocialQ7" label="Hx Social Q7"/>
+        <DisplayIf condition={(context) => (typeof(context.model.hxSocialQ7) !== "undefined" && context.model.hxSocialQ7 === "Yes, (Please specify):")}>
+          <Fragment>
+            Please specify
+            <TextField name="hxSocialQ8" label="Hx Social Q8"/>
+          </Fragment>
+        </DisplayIf>
+        <b>REFER TO SOCIAL SERVICE STATION</b> if participant is in need of <b>financial aid.</b>  <br />Indicate for Social Service station on:  <br /><b>1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons for referral on the right column</b><br /><br />Note the following criteria for your assessment: (wef from 1st Nov 2019)<br />Per-capita monthly income for CHAS: <b>Green Card: Above $2000; Orange Card: $1201- $2000; Blue Card: $1200 and below</b>
+        <h2>3. SOCIAL ISSUES</h2>
+        1. Are you caring for a loved one?
+        <RadioField name="hxSocialQ9" label="Hx Social Q9"/>
+        <DisplayIf condition={(context) => (typeof(context.model.hxSocialQ9) !== "undefined" && context.model.hxSocialQ9 === "Yes")}>
+          <Fragment>
+            2. If you are caring for a loved one, do you need training?
+            <RadioField name="hxSocialQ10" label="Hx Social Q10"/>
+            3. Do you need assistance? (eg funds to hire a helper / funds to offset caretaking costs, subsidies for home healthcare items, arranging for short term care in nursing homes/senior care centres)
+            <RadioField name="hxSocialQ11" label="Hx Social Q11"/>
+          </Fragment>
+        </DisplayIf>
+        4. Do you require social support?
+        <RadioField name="hxSocialQ12" label="Hx Social Q12"/>
+        <b>REFER TO SOCIAL SERVICE STATION if participant has social issues that require further consult.<br />Indicate for Social Service station on:  <br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons for referral on the right column</b>
+        <h2>4. ORAL ISSUES</h2>
+        <b>Please do a quick inspection of participant's oral health status: <br />1. Lips, Tongue, Gums & Tissues (Healthy - pink and moist)<br />2. Natural Teeth, Oral Cleanliness & Dentures (Tooth/Root decay, no cracked/broken dentures, No food particles/tartar in mouth)<br />3. Saliva status (free-flowing) and Any dental pain </b>
+        1. How is the participant's Oral Health?
+        <RadioField name="hxSocialQ13" label="Hx Social Q13"/>
+        2. Would you like to go through free Oral Health screening by NUS Dentistry dentists and students?
+        <RadioField name="hxSocialQ14" label="Hx Social Q14"/>
+        <b>REFER TO NUS DENTISTRY ORAL SCREENING if participant has <mark>poor dental hygiene</mark> and <mark>interested</mark> to go through dental screening for participants aged <mark>40-59</mark>. <font color="red">For participants 60 and above, functional screening includes oral screening.</font><br />Indicate for Dentistry on:  <br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons for referral on the right column</b>
+        
+      </Fragment>
+    ),
+
+    "Hx Cancer" : (info) => (
+      <Fragment>
+        <h2>HISTORY TAKING PART 4: CANCER SCREENING</h2>
+        <h2>1. HISTORY OF CANCER & FAMILY HISTORY</h2>
+        <b><font color="blue">1. Has a doctor ever told you that you have the following conditions?</font>Do be sensitive when asking for personal history of cancer. (please select all that apply)</b> 
+        <SelectField name="hxCancerQ1" checkboxes="true" label="Hx Cancer Q1" />
+        <b><font color="blue">2. Is there positive family history (AMONG FIRST DEGREE RELATIVES) for the following cancers?</font></b>
+        <SelectField name="hxCancerQ2" checkboxes="true" label="Hx Cancer Q2" />
+        <DisplayIf condition={(context) => (typeof(context.model.hxCancerQ2) !== "undefined" && context.model.hxCancerQ2.includes("Others, (Please Specify condition and age of diagnosis):"))}>
+          <Fragment>
+            Please specify:
+            <LongTextField name="hxCancerQ3" label="Hx Cancer Q3" />
+          </Fragment>
+        </DisplayIf>
+        <b><font color="blue">3. Any other significant family history?</font></b> Indicate 'NIL' if none. 
+        <LongTextField name="hxCancerQ4" label="Hx Cancer Q4" />
+        <b>Counsel for screening if positive family history of cancer or chronic disease. <br /><br />Based on participant family hx, please recommend FIT/WCE and Doctor's Consultation (if applicable) <br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A  <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation   <br />3) Recommend relevant exhibition booths on Page 2 of Form A Exhibition - Recommendation<br /></b>
+        <font color="red"><h3>CONTINUE REFERRING TO NSS QUESTIONNAIRE. </h3></font>
+        <h2>2. NSS CANCER SCREENING PRACTICES SURVEY.</h2>
+        <font color="red"><b>1. For respondent aged 50 and above only,</b></font> unless positive family history for colorectal cancer.<br />When was the last time you had a blood stool test? (A blood stool test is a test to determine whether the stool contains blood.)
+        <RadioField name="hxCancerQ5" label="Hx Cancer Q5"/>
+        <font color="red"><b>2. For respondent aged 50 and above only,</b></font> unless positive family history for colorectal cancer.<br />When was the last time you had a colonoscopy? (A colonoscopy is an examination in which a tube is inserted in the rectum to view the colon for signs of cancer or other health problems.)
+        <RadioField name="hxCancerQ6" label="Hx Cancer Q6"/>
+        <font color="red"><b>Please encourage participants to go for FIT every year if participant is above 50, asymptomatic and no positive family history of colorectal cancer in first degree relatives. <br />If deemed to be in high risk (positive family history of colorectal cancer in first degree relatives, counsel for colonoscopy every 3 years), refer to risk categorization given.</b></font><br />
+        <font color="red"><b>3. For female respondent aged 40 and above only.</b></font><br />When was the last time you had your last mammogram? (A mammogram is an x-ray of each breast to look for breast cancer.)
+        <RadioField name="hxCancerQ7" label="Hx Cancer Q7"/>
+        <font color="red"><b>4. For female respondent aged 25 and above, who have/had a husband/boyfriend and not had their womb completely surgically removed only.</b></font><br />When was the last time you had a PAP smear test? (A PAP smear test is a simple test involving the scrapping of cells fom the mouth of the womb, to check for changes in the cells of your cervix, which may develop into cancer later.)
+        <RadioField name="hxCancerQ8" label="Hx Cancer Q8"/>
+        <b><font color="red">For women 40-49, advise yearly mammogram. 50-69, advise mammogram every 2 years. 70 and above and if interested, refer to WCE.<br />Please encourage participants to go for HPV test every 5 years. <br />Refer to WCE: </font><br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A</b>
+        <b>If participant has a <mark>history of cancer</mark> or if <mark>participant's family history</mark> requires further scrutiny by doctors, refer to doctor's consult. <font color="red">(If indicated 'Yes', please complete the question below.)</font></b>
+        <RadioField name="hxCancerQ9" label="Hx Cancer Q9"/>
+        <DisplayIf condition={(context) => (typeof(context.model.hxCancerQ9) !== "undefined" && context.model.hxCancerQ9 === "Yes")}>
+          <Fragment>
+            <h2>Only complete Q6 if you are referring participant to Doctor's Consultation station.</h2>
+            6. Based on participant's history taken thus far, please summarise his/her RELEVANT Family History briefly for the doctors to refer to during doctors consultation.<br /><br />1) Participant's history of Cancers (if any)<br />2) Positive family history of medical conditions in first-degree relatives:<br />3) Positive family history of Cancers (Cervical, Breast, Colorectal)
+            <LongTextField name="hxCancerQ10" label="Hx Cancer Q10" />
+          </Fragment>
+        </DisplayIf>
+        <h2>3. VITALS</h2>
+        <h3>Please fill in the participant's BP and BMI based on what you earlier recorded on Form A and copy to NSS form too.</h3>
+        <b><u>1) BLOOD PRESSURE</u></b> (Before measuring BP: ensure no caffeine, anxiety, running and smoking in the last 30 minutes.)<br />
+        1st Reading Systolic (units in mmHg) <br />
+        <NumField name="hxCancerQ11" label="Hx Cancer Q11" /> <br />
+        1st Reading Diastolic (units in mmHg) <br />
+        <NumField name="hxCancerQ12" label="Hx Cancer Q12" /> <br />
+        2nd Reading Systolic (units in mmHg) <br />
+        <NumField name="hxCancerQ13" label="Hx Cancer Q13" /> <br />
+        2nd Reading Diastolic (units in mmHg) <br />
+        <NumField name="hxCancerQ14" label="Hx Cancer Q14" /> <br />
+        3rd Reading Systolic (ONLY if 1st and 2nd systolic reading differ by <b>>5mmHg</b>) <br />
+        <NumField name="hxCancerQ15" label="Hx Cancer Q15" /> <br />
+        3rd Reading Diastolic (ONLY if 1st and 2nd systolic reading differ by >5mmHg) <br />
+        <NumField name="hxCancerQ16" label="Hx Cancer Q16" /> <br />
+        Average Reading Systolic (average of closest 2 readings) <br />
+        <NumField name="hxCancerQ17" label="Hx Cancer Q17" /> <br />
+        Average Reading Diastolic (average of closest 2 readings) <br />
+        <NumField name="hxCancerQ18" label="Hx Cancer Q18" /> <br />
+        Hypertension criteria:<br />○ Younger participants: > 140/90<br />○ Participants > 80 years old: > 150/90 <br />○ CKD w proteinuria (mod to severe albuminuria): > 130/80<br />○ DM: > 130/80<br /> <br /><b>REFER TO DR CONSULT: (FOR THE FOLLOWING SCENARIOS)<br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A  <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation   <br /><br /><font color="red"><u>HYPERTENSIVE EMERGENCY</u><br />• SYSTOLIC  <mark>≥ 180</mark> AND/OR DIASTOLIC ≥ <mark>110 mmHg</mark> AND <mark><u>SYMPTOMATIC</u></mark> (make sure pt has rested and 2nd reading was taken)<br />o <mark>ASK THE DOCTOR TO COME AND REVIEW!</mark><br /> <br /><u>HYPERTENSIVE URGENCY</u><br />• SYSTOLIC  <mark>≥ 180</mark> AND/OR DIASTOLIC <mark>≥ 110 mmHg</mark> AND <mark>ASYMPTOMATIC</mark> (make sure pt has rested and 2nd reading was taken)<br />o ESCORT TO DC DIRECTLY!<br />o Follow the patient, continue clerking the patient afterward if doctor acknowledges patient is well enough to continue the screening<br /><br /><u>RISK OF HYPERTENSIVE CRISIS</u><br />• IF SYSTOLIC between <mark>160 - 180 mmHg</mark> <br />• IF <mark>ASYMPTOMATIC</mark>, continue clerking. <br />• IF <mark>SYMPTOMATIC</mark>, ESCORT TO DC DIRECTLY!<br /><br /><u>If systolic between 140 - 160 mmHg:</u></font><br />o Ask for:<br />- Has hypertension been pre-diagnosed? If not, refer to DC (possible new HTN diagnosis)<br />- If diagnosed before, ask about compliance and whether he/she goes for regular follow up? If non-compliant or not on regular follow-up, refer to DC (chronic HTN, uncontrolled).<br /></b>
+        <h2><u>2) BMI</u></h2>
+        Height (in cm) <br />
+        <NumField name="hxCancerQ19" label="Hx Cancer Q19" /> <br />
+        Weight (in kg) <br />
+        <NumField name="hxCancerQ20" label="Hx Cancer Q20" /> <br />
+        <SomeComp calculation={(model) => (
+        <h3>
+          BMI: 
+          {
+            getBmi(model)
+          }
+        </h3>
+      )} />
+      <br /><br />
+        2a. Has a doctor ever told you that you are overweight or obese before?
+        <RadioField name="hxCancerQ21" label="Hx Cancer Q21"/>
+        2b. Please tick to highlight if you feel BMI or BP requires closer scrutiny by doctors and dietitians later. 
+        <SelectField name="hxCancerQ22" checkboxes="true" label="Hx Cancer Q22" />
+        <b>REFER TO DR CONSULT at: <br />1) <font color="red">Doctor's Consultation station</font>, tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation, <br />IF BMI IS:<br />≥ 23 as overweight (if positive for other risk factors) and ≥ 27.5 as obese, write reasons under dietitian referral on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation<br /></b>
+        <h3><u>3) Waist Circumference</u> (taken only if cannot measure BMI e.g. wheelchair, prosthetic legs)</h3>
+        Waist Circumference (in cm) <br />
+        <NumField name="hxCancerQ23" label="Hx Cancer Q23" /> <br />
+        <h2>HISTORY TAKING PART 5: REFERRALS/MEGA SORTING STATION </h2>
+        1. REFERRALS<br />Please reference page 1 of form A for various criteria.
+        <SelectField name="hxCancerQ24" checkboxes="true" label="Hx Cancer Q24" />
+        
+      </Fragment>
+    ),
+  },
+  
 
   "Geri - AMT" : (info) => (
     <Fragment>

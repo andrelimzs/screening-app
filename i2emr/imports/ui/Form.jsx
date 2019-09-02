@@ -49,9 +49,10 @@ class Form extends Component {
     };
   }
 
-  handleSubmit(newForm) {    
+  handleSubmit(newForm) { 
     // If no user
     if (this.props.id === null && this.props.station !== "Pre-Registration") {
+        window.scrollTo(0, 0)
         alert("Please take a patient before submitting");
         return
     }
@@ -112,6 +113,7 @@ class Form extends Component {
       Meteor.call('patientinfo.update', formData);
 
       Session.set('currentPatient',null);
+      window.scrollTo(0, 0)
     }
   }
 
