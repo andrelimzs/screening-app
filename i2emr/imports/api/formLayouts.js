@@ -274,7 +274,6 @@ export const formLayouts = {
        Please <b>refer to Doctor’s Consult if pinhole</b> visual acuity <u><b>is ≥ 6/12</b></u>
       <SelectField name="geriVisionQ9" checkboxes="true" label="Geri - Vision Q9" />
       <font color="red"><h2>IF THE PATIENT NEEDS TO GO TO DOCTOR'S CONSULT MODALITY THAT YOU RECOMMENDED, PLEASE INDICATE ON FORM A.</h2></font>
-      
     </Fragment>
   ),
 
@@ -298,7 +297,6 @@ export const formLayouts = {
       <RadioField name="geriParQQ7" label="Geri - PAR-Q Q7"/>
       <font color="red">*Referral to Physiotherapist Consult</font>
       <RadioField name="geriParQQ8" label="Geri - PAR-Q Q8"/>
-      
     </Fragment>
   ),
 
