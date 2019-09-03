@@ -411,25 +411,23 @@ export const formLayouts = {
         Weight (in kg) <br />
         <NumField name="hxCancerQ20" label="Hx Cancer Q20" /> <br />
         <SomeComp calculation={(model) => (
-        <h3>
-          BMI: 
-          {
-            getBmi(model)
-          }
-        </h3>
-      )} />
-      <br /><br />
+          <h3>
+            BMI:
+              {model['hxCancerQ20'] = getBmi(model)}
+          </h3>
+        )} />
+        <br /><br />
         2a. Has a doctor ever told you that you are overweight or obese before?
-        <RadioField name="hxCancerQ21" label="Hx Cancer Q21"/>
+        <RadioField name="hxCancerQ22" label="Hx Cancer Q21"/>
         2b. Please tick to highlight if you feel BMI or BP requires closer scrutiny by doctors and dietitians later. 
-        <SelectField name="hxCancerQ22" checkboxes="true" label="Hx Cancer Q22" />
+        <SelectField name="hxCancerQ23" checkboxes="true" label="Hx Cancer Q22" />
         <b>REFER TO DR CONSULT at: <br />1) <font color="red">Doctor's Consultation station</font>, tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation, <br />IF BMI IS:<br />≥ 23 as overweight (if positive for other risk factors) and ≥ 27.5 as obese, write reasons under dietitian referral on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation<br /></b>
         <h3><u>3) Waist Circumference</u> (taken only if cannot measure BMI e.g. wheelchair, prosthetic legs)</h3>
         Waist Circumference (in cm) <br />
-        <NumField name="hxCancerQ23" label="Hx Cancer Q23" /> <br />
+        <NumField name="hxCancerQ24" label="Hx Cancer Q23" /> <br />
         <h2>HISTORY TAKING PART 5: REFERRALS/MEGA SORTING STATION </h2>
         1. REFERRALS<br />Please reference page 1 of form A for various criteria.
-        <SelectField name="hxCancerQ24" checkboxes="true" label="Hx Cancer Q24" />
+        <SelectField name="hxCancerQ25" checkboxes="true" label="Hx Cancer Q24" />
         
       </Fragment>
     ),
@@ -475,20 +473,18 @@ export const formLayouts = {
       <SomeComp calculation={(model) => (
         <h3>
           AMT Total Score: 
-          {
-            getScore(model, ['geriAmtQ1', 'geriAmtQ2', 'geriAmtQ3', 'geriAmtQ4', 'geriAmtQ5', 'geriAmtQ6', 'geriAmtQ7', 'geriAmtQ8', 'geriAmtQ9', 'geriAmtQ10'], 'Yes (Answered correctly)')
-          }
+          {model['geriAmtQ11'] = getScore(model, ['geriAmtQ1', 'geriAmtQ2', 'geriAmtQ3', 'geriAmtQ4', 'geriAmtQ5', 'geriAmtQ6', 'geriAmtQ7', 'geriAmtQ8', 'geriAmtQ9', 'geriAmtQ10'], 'Yes (Answered correctly)')}
           /10
         </h3>
       )} />
       <br /><br />
       What is your education level?
       <img src='/images/geri-amt/edu.png' alt='Education' /> <br />
-      <RadioField name="geriAmtQ11" label="Geri - AMT Q11" />
+      <RadioField name="geriAmtQ12" label="Geri - AMT Q11" />
       Need referral to cognitive - 2nd Tier Screening ?
-      <RadioField name="geriAmtQ12" label="Geri - AMT Q12" />
+      <RadioField name="geriAmtQ13" label="Geri - AMT Q12" />
       Referral to cognitive - 2nd Tier Screening
-      <RadioField name="geriAmtQ13" label="Geri - AMT Q13" />
+      <RadioField name="geriAmtQ14" label="Geri - AMT Q13" />
     </Fragment>
   ),
 
@@ -516,9 +512,7 @@ export const formLayouts = {
       <SomeComp calculation={(model) => (
         <h3>
           EBAS Total Score: 
-          {
-            getScore(model, ['geriEbasDepQ1', 'geriEbasDepQ2', 'geriEbasDepQ2', 'geriEbasDepQ4', 'geriEbasDepQ5', 'geriEbasDepQ6', 'geriEbasDepQ7', 'geriEbasDepQ8'], '1 (Abnormal)')
-          }
+          {model["geriEbasDepQ9"] = getScore(model, ['geriEbasDepQ1', 'geriEbasDepQ2', 'geriEbasDepQ2', 'geriEbasDepQ4', 'geriEbasDepQ5', 'geriEbasDepQ6', 'geriEbasDepQ7', 'geriEbasDepQ8'], '1 (Abnormal)')}/>
           /8
         </h3>
       )} />
@@ -526,13 +520,13 @@ export const formLayouts = {
       <h3>A score of 3 or greater indicates the probable presence of a depressive disorder which may need treatment and the patient should be assessed in more detail. Please refer to Social Support if score is 3 OR GREATER.</h3>
       To be referred for social support (failed EBAS-DEP) - from Geriatrics EBAS
       <br />
-      <RadioField name="geriEbasDepQ9" label="Geri - EBAS-DEP Q18" />
+      <RadioField name="geriEbasDepQ10" label="Geri - EBAS-DEP Q10" />
       To be referred for social support (for potential financial/ family difficulties) - from Geriatrics EBAS
-      <RadioField name="geriEbasDepQ10" label="Geri - EBAS-DEP Q19" />
+      <RadioField name="geriEbasDepQ11" label="Geri - EBAS-DEP Q11" />
       <DisplayIf condition={(context) => (typeof(context.model.geriEbasDepQ10) !== "undefined" && context.model.geriEbasDepQ10 === "Yes")}>
         <Fragment>
             Reasons for referral to social support - from Geriatrics EBAS:
-          <LongTextField name="geriEbasDepQ11" label="Geri - EBAS-DEP Q20" />
+          <LongTextField name="geriEbasDepQ12" label="Geri - EBAS-DEP Q12" />
         </Fragment>
       </DisplayIf>
       <font color="red"><h2>IF THE PATIENT NEEDS TO GO TO SOCIAL SUPPORT MODALITY THAT YOU RECOMMENDED, PLEASE INDICATE ON FORM A.</h2></font>

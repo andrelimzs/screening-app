@@ -226,16 +226,18 @@ export const formSchemas = {
       }, hxCancerQ20: {
       type: Number, optional: false
       }, hxCancerQ21: {
-      type: String, allowedValues: ["Yes", "No"], optional: false
+      type: Number, optional: false
       }, hxCancerQ22: {
-      type: Array, optional: true
-      }, "hxCancerQ22.$": {
-      type: String, allowedValues: ["Yes"]
+      type: String, allowedValues: ["Yes", "No"], optional: false
       }, hxCancerQ23: {
-      type: Number, optional: true
+      type: Array, optional: true
+      }, "hxCancerQ23.$": {
+      type: String, allowedValues: ["Yes"]
       }, hxCancerQ24: {
+      type: Number, optional: true
+      }, hxCancerQ25: {
       type: Array, optional: false
-      }, "hxCancerQ24.$": {
+      }, "hxCancerQ25.$": {
       type: String, allowedValues: ["FIT (50 and above, FIT not done in past 1 year, Colonoscopy not done in past 10 years, Not diagnosed with colorectal cancer)", "WCE (40 and above, females only)", "Geriatrics (60 and above)", "Doctor\s Consultation (& Dietitian) - As recommended by hx-taker, undiagnosed or non-compliant cases (HTN, DM, Vision Impairment, Hearing Impairment, Urinary Incontinence, Any other pertinent medical issues)", "Social Service - As recommended by hx-taker (CHAS Application, Financial Support required, Social Support required)", "Oral Health Screening - participants aged 40-59 with poor dental hygiene", "Exhibition - recommended as per necessary"]
       }
       }
@@ -264,10 +266,12 @@ export const formSchemas = {
     }, geriAmtQ10: {
     type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
     }, geriAmtQ11: {
-    type: String, allowedValues: ["0 to 6 years of education", "More than 6 years of education"], optional: false
+    type: Number, optional: false
     }, geriAmtQ12: {
-    type: String, allowedValues: ["Yes", "No"], optional: false
+    type: String, allowedValues: ["0 to 6 years of education", "More than 6 years of education"], optional: false
     }, geriAmtQ13: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriAmtQ14: {
     type: String, allowedValues: ["Yes", "No"], optional: false
     }
     }
@@ -291,10 +295,12 @@ export const formSchemas = {
     }, geriEbasDepQ8: {
     type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
     }, geriEbasDepQ9: {
-    type: String, allowedValues: ["Yes", "No"], optional: false
+    type: Number, optional: false
     }, geriEbasDepQ10: {
     type: String, allowedValues: ["Yes", "No"], optional: false
     }, geriEbasDepQ11: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, geriEbasDepQ12: {
     type: String, optional: true
     }
     }
@@ -503,23 +509,6 @@ export const formSchemas = {
     }
     }
    ),
-   
-  "Pap Smear":
-  new SimpleSchema({
-    papCompleted: {
-      type: Boolean,
-      label: "Pap smear completed?"
-    },
-    papNotes:{
-      type: String,
-      optional: true,
-      label: "Notes (if any)",
-    },
-    docConsultForPap: {
-      type: Boolean,
-      label: "Doctors consult required?",
-    },
-  }),
 
   "Doctor's Consult" : new SimpleSchema({
     doctorSConsultQ1: {
