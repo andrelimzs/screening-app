@@ -817,7 +817,7 @@ export const formLayouts = {
         <h3>
           <font color="red">Total score (out of 5): 
           {
-            getFrailScore(model)
+            model['geriFrailScaleQ7'] = getFrailScore(model)
           }
           </font>
         </h3>
@@ -890,7 +890,7 @@ export const formLayouts = {
         <h3>
           <font color="blue">Total score (Max Score: 12): 
           {
-            getSppbScore(model)
+            model['geriSppbQ9'] = getSppbScore(model)
           }
           </font>
         </h3>
