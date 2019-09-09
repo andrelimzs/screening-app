@@ -12,7 +12,7 @@ export default class Station extends Component {
           <Grid item xs={5}>
             <h1>{this.props.station}</h1>
           </Grid>
-          {this.props.station !== "Registration" &&
+          {this.props.station !== "Pre-Registration" &&
             <Grid item xs={5}>
               <Search station={this.props.station}/>
             </Grid>
