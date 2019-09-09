@@ -84,12 +84,37 @@ function getBmi(model) {
   }
 }
 
+// Average of two closest bp readings
 function getAverageBp(bp1, bp2, bp3) {
-  if (typeof(bp3) === "undefined") {
-    return (bp1 + bp2) / 2;
-  }
+  let avg_bp;
+  if (typeof(bp1) !== "undefined" && typeof(bp2) !== "undefined") {
+    if (typeof(bp3) === "undefined") {
+      avg_bp = (bp1 + bp2) / 2;
+    } else {
+      const diff_bp1_bp2 = Math.abs(bp1-bp2)
+      const diff_bp1_bp3 = Math.abs(bp1-bp3)
+      const diff_bp2_bp3 = Math.abs(bp2-bp3)
 
-  
+      // If there are 2 pairs of equidistant readings. i.e. 100 110 120
+      if (diff_bp1_bp2 === diff_bp1_bp3 || diff_bp1_bp2 === diff_bp2_bp3 || diff_bp1_bp3 === diff_bp2_bp3) {
+        avg_bp = (bp1 + bp2 + bp3) / 3;
+      }
+      // bp1_bp2 min so use bp1 and bp2
+      else if (diff_bp1_bp2 < diff_bp1_bp3 && diff_bp1_bp2 < diff_bp2_bp3) {
+        avg_bp = (bp1 + bp2) / 2;
+      }
+      // bp1_bp3 min so use bp1 and bp3
+      else if (diff_bp1_bp3 < diff_bp1_bp2 && diff_bp1_bp3 < diff_bp2_bp3) {
+        avg_bp = (bp1 + bp3) / 2;
+      }
+      else { //bp2_bp3 min so use bp2 and bp3
+        avg_bp = (bp2 + bp3) / 2;
+      }
+    }
+  } else {
+    return 0;
+  }
+  return Number(Math.round(avg_bp+'e2')+'e-2');
 }
 
 // Define the layouts
@@ -315,7 +340,7 @@ export const formLayouts = {
         4c. Do you want to apply for CHAS card? (if you are currently not on CHAS but qualify) <br />
         <img src='/images/hx/chas.jpg' alt='CHAS' /> <br />
         <RadioField name="hxSocialQ5" label="Hx Social Q5"/>
-        <DisplayIf condition={(context) => (typeof(context.model.hxSocialQ5) !== "undefined" && context.model.hxSocialQ5 === "Yes, (Please specify):")}>
+        <DisplayIf condition={(context) => (typeof(context.model.hxSocialQ5) !== "undefined" && context.model.hxSocialQ5 === "No, I qualify but...(Please specify the reasons for not applying if you qualify):" || context.model.hxSocialQ5 === "Yes, (Please specify):")}>
           <Fragment>
             Please specify
             <TextField name="hxSocialQ6" label="Hx Social Q6"/>
@@ -361,9 +386,15 @@ export const formLayouts = {
         <h2>1. HISTORY OF CANCER & FAMILY HISTORY</h2>
         <b><font color="blue">1. Has a doctor ever told you that you have the following conditions?</font>Do be sensitive when asking for personal history of cancer. (please select all that apply)</b> 
         <SelectField name="hxCancerQ1" checkboxes="true" label="Hx Cancer Q1" />
+        <DisplayIf condition={(context) => (typeof(context.model.hxCancerQ1) !== "undefined" && context.model.hxCancerQ1.length !== 0 && !context.model.hxCancerQ1.includes("No, I don't have any of the above"))}>
+          <Fragment>
+            Please specify:
+            <LongTextField name="hxCancerQ26" label="Hx Cancer Q26" />
+          </Fragment>
+        </DisplayIf>
         <b><font color="blue">2. Is there positive family history (AMONG FIRST DEGREE RELATIVES) for the following cancers?</font></b>
         <SelectField name="hxCancerQ2" checkboxes="true" label="Hx Cancer Q2" />
-        <DisplayIf condition={(context) => (typeof(context.model.hxCancerQ2) !== "undefined" && context.model.hxCancerQ2.includes("Others, (Please Specify condition and age of diagnosis):"))}>
+        <DisplayIf condition={(context) => (typeof(context.model.hxCancerQ2) !== "undefined" && context.model.hxCancerQ2.length !== 0  && !context.model.hxCancerQ2.includes("No"))}>
           <Fragment>
             Please specify:
             <LongTextField name="hxCancerQ3" label="Hx Cancer Q3" />
@@ -402,9 +433,11 @@ export const formLayouts = {
         <NumField name="hxCancerQ12" label="Hx Cancer Q12" /> <br />
         <DisplayIf condition={(context) => (
           typeof(context.model.hxCancerQ11) !== "undefined" && context.model.hxCancerQ11 > 140 ||
-          typeof(context.model.hxCancerQ12) !== "undefined" && context.model.hxCancerQ11 > 90
+          typeof(context.model.hxCancerQ12) !== "undefined" && context.model.hxCancerQ12 > 90
           )}>
-          <font color="red"><b>BP HIGH!</b></font>
+          <Fragment>
+            <font color="red"><b>BP HIGH!</b></font> <br />
+          </Fragment>
         </DisplayIf>
         2nd Reading Systolic (units in mmHg) <br />
         <NumField name="hxCancerQ13" label="Hx Cancer Q13" /> <br />
@@ -414,7 +447,9 @@ export const formLayouts = {
           typeof(context.model.hxCancerQ13) !== "undefined" && context.model.hxCancerQ13 > 140 ||
           typeof(context.model.hxCancerQ14) !== "undefined" && context.model.hxCancerQ14 > 90
           )}>
-          <font color="red"><b>BP HIGH!</b></font>
+          <Fragment>
+            <font color="red"><b>BP HIGH!</b></font> <br />
+          </Fragment>
         </DisplayIf>
         3rd Reading Systolic (ONLY if 1st and 2nd systolic reading differ by <b>>5mmHg</b>) <br />
         <NumField name="hxCancerQ15" label="Hx Cancer Q15" /> <br />
@@ -424,18 +459,20 @@ export const formLayouts = {
           typeof(context.model.hxCancerQ15) !== "undefined" && context.model.hxCancerQ15 > 140 ||
           typeof(context.model.hxCancerQ16) !== "undefined" && context.model.hxCancerQ16 > 90
           )}>
-          <font color="red"><b>BP HIGH!</b></font>
+          <Fragment>
+            <font color="red"><b>BP HIGH!</b></font> <br />
+          </Fragment>
         </DisplayIf>
         <SomeComp calculation={(model) => (
           <h3>
             Average Reading Systolic (average of closest 2 readings):
-              {model['hxCancerQ17'] = getAverageBp(model, ['hxCancerQ11', 'hxCancerQ13', 'hxCancerQ15'])}
+              {model['hxCancerQ17'] = getAverageBp(model['hxCancerQ11'], model['hxCancerQ13'], model['hxCancerQ15'])}
           </h3>
         )} />
         <SomeComp calculation={(model) => (
           <h3>
             Average Reading Diastolic (average of closest 2 readings):
-              {model['hxCancerQ18'] = getAverageBp(model, ['hxCancerQ12', 'hxCancerQ14', 'hxCancerQ16'])}
+              {model['hxCancerQ18'] = getAverageBp(model['hxCancerQ12'], model['hxCancerQ14'], model['hxCancerQ16'])}
           </h3>
         )} />
         Hypertension criteria:<br />○ Younger participants: > 140/90<br />○ Participants > 80 years old: > 150/90 <br />○ CKD w proteinuria (mod to severe albuminuria): > 130/80<br />○ DM: > 130/80<br /> <br /><b>REFER TO DR CONSULT: (FOR THE FOLLOWING SCENARIOS)<br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A  <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation   <br /><br /><font color="red"><u>HYPERTENSIVE EMERGENCY</u><br />• SYSTOLIC  <mark>≥ 180</mark> AND/OR DIASTOLIC ≥ <mark>110 mmHg</mark> AND <mark><u>SYMPTOMATIC</u></mark> (make sure pt has rested and 2nd reading was taken)<br />o <mark>ASK THE DOCTOR TO COME AND REVIEW!</mark><br /> <br /><u>HYPERTENSIVE URGENCY</u><br />• SYSTOLIC  <mark>≥ 180</mark> AND/OR DIASTOLIC <mark>≥ 110 mmHg</mark> AND <mark>ASYMPTOMATIC</mark> (make sure pt has rested and 2nd reading was taken)<br />o ESCORT TO DC DIRECTLY!<br />o Follow the patient, continue clerking the patient afterward if doctor acknowledges patient is well enough to continue the screening<br /><br /><u>RISK OF HYPERTENSIVE CRISIS</u><br />• IF SYSTOLIC between <mark>160 - 180 mmHg</mark> <br />• IF <mark>ASYMPTOMATIC</mark>, continue clerking. <br />• IF <mark>SYMPTOMATIC</mark>, ESCORT TO DC DIRECTLY!<br /><br /><u>If systolic between 140 - 160 mmHg:</u></font><br />o Ask for:<br />- Has hypertension been pre-diagnosed? If not, refer to DC (possible new HTN diagnosis)<br />- If diagnosed before, ask about compliance and whether he/she goes for regular follow up? If non-compliant or not on regular follow-up, refer to DC (chronic HTN, uncontrolled).<br /></b>
@@ -447,21 +484,21 @@ export const formLayouts = {
         <SomeComp calculation={(model) => (
           <h3>
             BMI:
-              {model['hxCancerQ20'] = getBmi(model)}
+              {model['hxCancerQ21'] = getBmi(model)}
           </h3>
         )} />
         <br /><br />
         2a. Has a doctor ever told you that you are overweight or obese before?
-        <RadioField name="hxCancerQ22" label="Hx Cancer Q21"/>
+        <RadioField name="hxCancerQ22" label="Hx Cancer Q22"/>
         2b. Please tick to highlight if you feel BMI or BP requires closer scrutiny by doctors and dietitians later. 
-        <SelectField name="hxCancerQ23" checkboxes="true" label="Hx Cancer Q22" />
+        <SelectField name="hxCancerQ23" checkboxes="true" label="Hx Cancer Q23" />
         <b>REFER TO DR CONSULT at: <br />1) <font color="red">Doctor's Consultation station</font>, tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation, <br />IF BMI IS:<br />≥ 23 as overweight (if positive for other risk factors) and ≥ 27.5 as obese, write reasons under dietitian referral on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation<br /></b>
         <h3><u>3) Waist Circumference</u> (taken only if cannot measure BMI e.g. wheelchair, prosthetic legs)</h3>
         Waist Circumference (in cm) <br />
-        <NumField name="hxCancerQ24" label="Hx Cancer Q23" /> <br />
+        <NumField name="hxCancerQ24" label="Hx Cancer Q24" /> <br />
         <h2>HISTORY TAKING PART 5: REFERRALS/MEGA SORTING STATION </h2>
         1. REFERRALS<br />Please reference page 1 of form A for various criteria.
-        <SelectField name="hxCancerQ25" checkboxes="true" label="Hx Cancer Q24" />
+        <SelectField name="hxCancerQ25" checkboxes="true" label="Hx Cancer Q25" />
         
       </Fragment>
     ),
