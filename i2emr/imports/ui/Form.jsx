@@ -49,7 +49,13 @@ class Form extends Component {
     };
   }
 
-  handleSubmit(newForm) {
+  handleSubmit(newForm) {    
+    // If no user
+    if (this.props.id === null && this.props.station !== "Pre-Registration") {
+        alert("Please take a patient before submitting");
+        return
+    }
+
     // Insert/update patientinfo database
     if (this.isMultipage) {
       if (this.state.pageIndex < Object.keys(formSchemas[this.props.station]).length - 1) {
@@ -64,24 +70,15 @@ class Form extends Component {
         }));
 
         // console.log("Next subpage");
-      } else {
+      } else { // On last subpage
         const subSchemaName = Object.keys(formSchemas[this.props.station])[this.state.pageIndex];
         this.multiData[subSchemaName] = newForm;
 
         this.multiData.id = this.props.id;
 
-        // On last subpage
-        if (this.props.station == "Registration") {
-          // Meteor.call('patientinfo.insert', this.multiData);
-          Meteor.call('patientinfo.insert', this.multiData, (error, result) => {
-            if (result) { alert("Successful! ID is " + String(result)); }
-            else { alert("Unsuccessful"); } 
-          });
-
-        } else {
-          Meteor.call('patientinfo.update', this.multiData);
-          Session.set('currentPatient',null);
-        }
+        Meteor.call('patientinfo.update', this.multiData);
+        Session.set('currentPatient',null);
+        
         // Empty data for multipage form
         this.multiData = {};
         // Reset page index
@@ -91,7 +88,17 @@ class Form extends Component {
           tabValue: 0,
         });
       }
+    }
 
+    if (this.props.station == "Pre-Registration") {
+        // Meteor.call('patientinfo.insert', this.multiData);
+        var formData = {};
+        formData[this.props.station] = newForm;
+        formData.id = this.props.id;
+        Meteor.call('patientinfo.insert', formData, (error, result) => {
+          if (result) { alert("Successful! ID is " + String(result)); }
+          else { alert("Unsuccessful"); } 
+        });
     } else {
       // Store data in array, so that it can be $push[ed] into mongo
       var formData = {};
@@ -156,9 +163,8 @@ class Form extends Component {
         schema={currentFormSchema}
         onSubmit={this.handleSubmit}
         onSubmitSuccess={() => {
-          if (this.props.station !== "Registration" && (!this.isMultipage || (this.state.pageIndex == 0))) {
-            const next = (typeof(this.props.stationQueue) !== "undefined" && this.props.stationQueue.length > 1) ? this.props.stationQueue[1] : "Done";
-            alert("Next station is: " + next);
+          if (this.props.id !== null && this.props.station !== "Pre-Registration" && (!this.isMultipage || (this.state.pageIndex == 0))) {
+            alert("Successful");
           }}}
         onSubmitFailure={() => {
           if (!this.isMultipage || (this.state.pageIndex == 0)) {
@@ -172,11 +178,11 @@ class Form extends Component {
         </div>
         
         <br /><Divider />
-        {typeof(this.props.stationQueue) !== "undefined" &&
+        {/* {typeof(this.props.stationQueue) !== "undefined" &&
           <Typography variant="h6">
             Next station: {this.props.stationQueue[1]}
           </Typography>
-        }
+        } */}
       </ClearableAutoForm>
     );
     
