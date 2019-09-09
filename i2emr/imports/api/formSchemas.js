@@ -438,7 +438,9 @@ export const formSchemas = {
     type: Number, optional: false
     }, geriFrailScaleQ6: {
     type: String, allowedValues: ["Yes", "No"], optional: false
-    }
+    }, geriFrailScaleQ7: {
+    type: Number, optional: true
+    },
     }
    ),
 
@@ -481,7 +483,7 @@ export const formSchemas = {
     }, geriSppbQ8: {
     type: String, allowedValues: ["0       (Could not do)", "1       (> 5.7s )", "2       (4.1 – 5.7s )", "3       (3.2 – 4.0s )", "4       (< 3.1s )"], optional: false
     }, geriSppbQ9: {
-    type: String, optional: false
+    type: Number, optional: false
     }, geriSppbQ10: {
     type: String, allowedValues: ["High Falls Risk (score ≤ 6)", "Low Falls Risk (score > 6)"], optional: false
     }, geriSppbQ11: {
