@@ -244,6 +244,56 @@ export const formSchemas = {
      ),
    },
 
+   "FIT" : new SimpleSchema({
+    fitQ1: {
+    type: String, allowedValues: ["Every 6 months", "Every year", "Once every 2 years", "Once every 3 years", "Once every 4 years", "Never", "Others, (Please specify):"], optional: false
+    }, fitQ2: {
+    type: String, optional: true
+    }, fitQ3: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, fitQ4: {
+    type: String, allowedValues: ["Every 6 months", "Every year", "Once every 2 years", "Once every 3 years", "Once every 4 years", "Never", "Others, (Please specify):"], optional: false
+    }, fitQ5: {
+    type: String, optional: true
+    }, fitQ6: {
+    type: String, allowedValues: ["Every 6 months", "Every year", "Once every 2 years", "Once every 3 years", "Once every 4 years", "Once every 5 years", "Once every 10 years", "Never", "Others, (Please specify):"], optional: false
+    }, fitQ7: {
+    type: String, optional: true
+    }, fitQ8: {
+    type: String, allowedValues: ["Every 6 months", "Every year", "Once every 2 years", "Once every 3 years", "Once every 4 years", "Once every 5 years", "Once every 10 years", "Never", "Others, (Please specify):"], optional: false
+    }, fitQ9: {
+    type: String, optional: true
+    }, fitQ10: {
+    type: String, allowedValues: ["Every 6 months", "Every year", "Once every 2 years", "Once every 3 years", "Once every 4 years", "Once every 5 years", "Once every 10 years", "Never", "Others, (Please specify):"], optional: false
+    }, fitQ11: {
+    type: String, optional: true
+    }, fitQ12: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, fitQ13: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }
+    }
+   ),
+
+   "WCE" : new SimpleSchema({
+    wceQ1: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
+    }, wceQ2: {
+    type: String, allowedValues: ["Yes", "No", "Not Applicable"], optional: false
+    }, wceQ3: {
+    type: String, allowedValues: ["Yes", "No", "Not Applicable"], optional: false
+    }, wceQ4: {
+    type: String, allowedValues: ["Yes", "No", "Not Applicable"], optional: false
+    }, wceQ5: {
+    type: String, allowedValues: ["Yes", "No", "Not Applicable"], optional: false
+    }, wceQ6: {
+    type: String, allowedValues: ["Yes, (Please specify date of appointment if given):", "No", "Not Applicable"], optional: false
+    }, wceQ7: {
+    type: String, optional: true
+    }
+    }
+   ),
+
    "Geri - AMT" : new SimpleSchema({
     geriAmtQ1: {
     type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false

@@ -84,6 +84,14 @@ function getBmi(model) {
   }
 }
 
+function getAverageBp(bp1, bp2, bp3) {
+  if (typeof(bp3) === "undefined") {
+    return (bp1 + bp2) / 2;
+  }
+
+  
+}
+
 // Define the layouts
 export const formLayouts = {
   "Pre-Registration" : (info) => (
@@ -370,12 +378,12 @@ export const formLayouts = {
         <RadioField name="hxCancerQ5" label="Hx Cancer Q5"/>
         <font color="red"><b>2. For respondent aged 50 and above only,</b></font> unless positive family history for colorectal cancer.<br />When was the last time you had a colonoscopy? (A colonoscopy is an examination in which a tube is inserted in the rectum to view the colon for signs of cancer or other health problems.)
         <RadioField name="hxCancerQ6" label="Hx Cancer Q6"/>
-        <font color="red"><b>Please encourage participants to go for FIT every year if participant is above 50, asymptomatic and no positive family history of colorectal cancer in first degree relatives. <br />If deemed to be in high risk (positive family history of colorectal cancer in first degree relatives, counsel for colonoscopy every 3 years), refer to risk categorization given.</b></font><br />
+        <font color="red"><b>Please encourage participants to go for FIT every year if participant is above 50, asymptomatic and no positive family history of colorectal cancer in first degree relatives. <br />If deemed to be in high risk (positive family history of colorectal cancer in first degree relatives, counsel for colonoscopy every 3 years), refer to risk categorization given.</b></font><br /><br />
         <font color="red"><b>3. For female respondent aged 40 and above only.</b></font><br />When was the last time you had your last mammogram? (A mammogram is an x-ray of each breast to look for breast cancer.)
         <RadioField name="hxCancerQ7" label="Hx Cancer Q7"/>
         <font color="red"><b>4. For female respondent aged 25 and above, who have/had a husband/boyfriend and not had their womb completely surgically removed only.</b></font><br />When was the last time you had a PAP smear test? (A PAP smear test is a simple test involving the scrapping of cells fom the mouth of the womb, to check for changes in the cells of your cervix, which may develop into cancer later.)
         <RadioField name="hxCancerQ8" label="Hx Cancer Q8"/>
-        <b><font color="red">For women 40-49, advise yearly mammogram. 50-69, advise mammogram every 2 years. 70 and above and if interested, refer to WCE.<br />Please encourage participants to go for HPV test every 5 years. <br />Refer to WCE: </font><br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A</b>
+        <b><font color="red">For women 40-49, advise yearly mammogram. 50-69, advise mammogram every 2 years. 70 and above and if interested, refer to WCE.<br />Please encourage participants to go for HPV test every 5 years. <br />Refer to WCE: </font><br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A</b><br /><br />
         <b>If participant has a <mark>history of cancer</mark> or if <mark>participant's family history</mark> requires further scrutiny by doctors, refer to doctor's consult. <font color="red">(If indicated 'Yes', please complete the question below.)</font></b>
         <RadioField name="hxCancerQ9" label="Hx Cancer Q9"/>
         <DisplayIf condition={(context) => (typeof(context.model.hxCancerQ9) !== "undefined" && context.model.hxCancerQ9 === "Yes")}>
@@ -392,18 +400,44 @@ export const formLayouts = {
         <NumField name="hxCancerQ11" label="Hx Cancer Q11" /> <br />
         1st Reading Diastolic (units in mmHg) <br />
         <NumField name="hxCancerQ12" label="Hx Cancer Q12" /> <br />
+        <DisplayIf condition={(context) => (
+          typeof(context.model.hxCancerQ11) !== "undefined" && context.model.hxCancerQ11 > 140 ||
+          typeof(context.model.hxCancerQ12) !== "undefined" && context.model.hxCancerQ11 > 90
+          )}>
+          <font color="red"><b>BP HIGH!</b></font>
+        </DisplayIf>
         2nd Reading Systolic (units in mmHg) <br />
         <NumField name="hxCancerQ13" label="Hx Cancer Q13" /> <br />
         2nd Reading Diastolic (units in mmHg) <br />
         <NumField name="hxCancerQ14" label="Hx Cancer Q14" /> <br />
+        <DisplayIf condition={(context) => (
+          typeof(context.model.hxCancerQ13) !== "undefined" && context.model.hxCancerQ13 > 140 ||
+          typeof(context.model.hxCancerQ14) !== "undefined" && context.model.hxCancerQ14 > 90
+          )}>
+          <font color="red"><b>BP HIGH!</b></font>
+        </DisplayIf>
         3rd Reading Systolic (ONLY if 1st and 2nd systolic reading differ by <b>>5mmHg</b>) <br />
         <NumField name="hxCancerQ15" label="Hx Cancer Q15" /> <br />
         3rd Reading Diastolic (ONLY if 1st and 2nd systolic reading differ by >5mmHg) <br />
         <NumField name="hxCancerQ16" label="Hx Cancer Q16" /> <br />
-        Average Reading Systolic (average of closest 2 readings) <br />
-        <NumField name="hxCancerQ17" label="Hx Cancer Q17" /> <br />
-        Average Reading Diastolic (average of closest 2 readings) <br />
-        <NumField name="hxCancerQ18" label="Hx Cancer Q18" /> <br />
+        <DisplayIf condition={(context) => (
+          typeof(context.model.hxCancerQ15) !== "undefined" && context.model.hxCancerQ15 > 140 ||
+          typeof(context.model.hxCancerQ16) !== "undefined" && context.model.hxCancerQ16 > 90
+          )}>
+          <font color="red"><b>BP HIGH!</b></font>
+        </DisplayIf>
+        <SomeComp calculation={(model) => (
+          <h3>
+            Average Reading Systolic (average of closest 2 readings):
+              {model['hxCancerQ17'] = getAverageBp(model, ['hxCancerQ11', 'hxCancerQ13', 'hxCancerQ15'])}
+          </h3>
+        )} />
+        <SomeComp calculation={(model) => (
+          <h3>
+            Average Reading Diastolic (average of closest 2 readings):
+              {model['hxCancerQ18'] = getAverageBp(model, ['hxCancerQ12', 'hxCancerQ14', 'hxCancerQ16'])}
+          </h3>
+        )} />
         Hypertension criteria:<br />○ Younger participants: > 140/90<br />○ Participants > 80 years old: > 150/90 <br />○ CKD w proteinuria (mod to severe albuminuria): > 130/80<br />○ DM: > 130/80<br /> <br /><b>REFER TO DR CONSULT: (FOR THE FOLLOWING SCENARIOS)<br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A  <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation   <br /><br /><font color="red"><u>HYPERTENSIVE EMERGENCY</u><br />• SYSTOLIC  <mark>≥ 180</mark> AND/OR DIASTOLIC ≥ <mark>110 mmHg</mark> AND <mark><u>SYMPTOMATIC</u></mark> (make sure pt has rested and 2nd reading was taken)<br />o <mark>ASK THE DOCTOR TO COME AND REVIEW!</mark><br /> <br /><u>HYPERTENSIVE URGENCY</u><br />• SYSTOLIC  <mark>≥ 180</mark> AND/OR DIASTOLIC <mark>≥ 110 mmHg</mark> AND <mark>ASYMPTOMATIC</mark> (make sure pt has rested and 2nd reading was taken)<br />o ESCORT TO DC DIRECTLY!<br />o Follow the patient, continue clerking the patient afterward if doctor acknowledges patient is well enough to continue the screening<br /><br /><u>RISK OF HYPERTENSIVE CRISIS</u><br />• IF SYSTOLIC between <mark>160 - 180 mmHg</mark> <br />• IF <mark>ASYMPTOMATIC</mark>, continue clerking. <br />• IF <mark>SYMPTOMATIC</mark>, ESCORT TO DC DIRECTLY!<br /><br /><u>If systolic between 140 - 160 mmHg:</u></font><br />o Ask for:<br />- Has hypertension been pre-diagnosed? If not, refer to DC (possible new HTN diagnosis)<br />- If diagnosed before, ask about compliance and whether he/she goes for regular follow up? If non-compliant or not on regular follow-up, refer to DC (chronic HTN, uncontrolled).<br /></b>
         <h2><u>2) BMI</u></h2>
         Height (in cm) <br />
@@ -432,6 +466,125 @@ export const formLayouts = {
       </Fragment>
     ),
   },
+
+  "FIT" : (info) => (
+    <Fragment>
+      <h2>PARTICIPANT IDENTIFICATION</h2>
+      <h3><font color="red">Please verify participant's identity using his/her NRIC before proceeding <br />A. S/N B. Surname followed by Initials C. Last 4 digits of Participant's NRIC and Letter</font></h3>
+      <h2>1. SCREENING AWARENESS SURVEY</h2>
+      1. How often do you think you should go for health check-up for chronic diseases? (i.e. HTN, DM, HLD)
+      <RadioField name="fitQ1" label="FIT Q1"/>
+      <DisplayIf condition = {(context) => (typeof(context.model.fitQ1) !== undefined && context.model.fitQ1 === 'Others, (Please specify):')} >
+        <Fragment>
+          Please specify:
+          <TextField name="fitQ2" label="FIT Q2"/>
+        </Fragment>
+      </DisplayIf>
+      2. Do you know what is a FIT kit?
+      <RadioField name="fitQ3" label="FIT Q3"/>
+      3. How often should people above 50 years old utilize a FIT kit?
+      <RadioField name="fitQ4" label="FIT Q4"/>
+      <DisplayIf condition={(context) => (typeof(context.model.fitQ4) !== undefined && context.model.fitQ4 === 'Others, (Please specify):')}>
+        <Fragment>
+          Please specify:
+          <TextField name="fitQ5" label="FIT Q5"/>
+        </Fragment>
+      </DisplayIf>
+      4. How often should people go for a colonoscopy?
+      <RadioField name="fitQ6" label="FIT Q6"/>
+      <DisplayIf condition = {(context) => (typeof(context.model.fitQ6) !== undefined && context.model.fitQ6 === 'Others, (Please specify):')} >
+        <Fragment>
+          Please specify:
+          <TextField name="fitQ7" label="FIT Q7"/>
+        </Fragment>
+      </DisplayIf>
+      5. How often should women go for a HPV test?
+      <RadioField name="fitQ8" label="FIT Q8"/>
+      <DisplayIf condition = {(context) => (typeof(context.model.fitQ8) !== undefined && context.model.fitQ8 === 'Others, (Please specify):')} >
+        <Fragment>
+          Please specify:
+          <TextField name="fitQ9" label="FIT Q9"/>
+        </Fragment>
+      </DisplayIf>
+      6. How often should women go for a mammogram?
+      <RadioField name="fitQ10" label="FIT Q10"/>
+      <DisplayIf condition = {(context) => (typeof(context.model.fitQ10) !== undefined && context.model.fitQ10 === 'Others, (Please specify):')} >
+        <Fragment>
+          Please specify:
+          <TextField name="fitQ11" label="FIT Q11"/>
+        </Fragment>
+      </DisplayIf>
+      <h2>2. NSS CANCER SCREENING PRACTICES SURVEY.</h2>
+      1. <font color="red"><b>For respondent aged 50 and above only,</b></font> unless positive family history for colorectal cancer.<br />When was the last time you had a blood stool test? (A blood stool test is a test to determine whether the stool contains blood.)
+      <h2><font color="green">{info["Hx Cancer"] && info["Hx Cancer"].hxCancerQ5}</font></h2>
+      2. <font color="red"><b>For respondent aged 50 and above only,</b></font> unless positive family history for colorectal cancer.<br />When was the last time you had a colonoscopy? (A colonoscopy is an examination in which a tube is inserted in the rectum to view the colon for signs of cancer or other health problems.)
+      <h2><font color="green">{info["Hx Cancer"] && info["Hx Cancer"].hxCancerQ6}</font></h2>
+      <h3><font color="red">Please encourage participants to go for FIT every year if participant is above 50, asymptomatic and no positive family history of colorectal cancer in first degree relatives.</font> </h3>
+      Does participant has a history of cancer or his/her family history requires further scrutiny by doctors?<font color="red"><b>(If indicated 'Yes', please refer to doctor's consult by following the steps below.)</b></font> 
+      <RadioField name="fitQ12" label="FIT Q12"/>
+      <DisplayIf condition = {(context) => (typeof(context.model.fitQ12) !== undefined && context.model.fitQ12 === 'Yes')} >
+        <Fragment>
+          <b>REFER TO DR CONSULT</b> by indicating on: <br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A under Doctor's Consultation row<br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation
+        </Fragment>
+      </DisplayIf>
+      3. Was participant issued 2 FIT kits?
+      <RadioField name="fitQ13" label="FIT Q13"/>
+      
+    </Fragment>
+  ),
+
+  "WCE" : (info) => (
+    <Fragment>
+      <h2>PARTICIPANT IDENTIFICATION</h2>
+      <h3><font color="red">Please verify participant's identity using his/her NRIC before proceeding <br />A. S/N B. Surname followed by Initials C. Last 4 digits of Participant's NRIC and Letter</font></h3>
+      <h2>1. FINANCIAL STATUS<br /></h2>
+      <font color="red"><b>Please refer to page 1 of Form A for following questions.</b></font>
+      1. Current CHAS status?
+      <h2><font color="green">{info["Registration"] && 
+        info["Registration"].registrationQ8}</ font></h2>
+      2. For participants born before 1949. Pioneer Generation Card? 
+      <h2><font color="green">{info["Registration"] && 
+        info["Registration"].registrationQ9}</ font></h2>
+      3. Are you currently on any other Government Financial Assistance, other than CHAS and PG (e.g. Public Assistance Scheme)?
+      <h2><font color="green">
+        { info["Hx Social"] && 
+          (info["Hx Social"].hxSocialQ1 === "Yes (Please specify):" && info["Hx Social"].hxSocialQ1 + info["Hx Social"].hxSocialQ2 ||
+          info["Hx Social"].hxSocialQ1)
+        }
+      </font></h2>
+      <h2>2. NSS CANCER SCREENING PRACTICES SURVEY.</h2>
+      1. <font color="red"><b>For female respondent aged 40 and above only.</b></font><br />When was the last time you had your last mammogram? (A mammogram is an x-ray of each breast to look for breast cancer.)
+      <h2><font color="green">{info["Hx Cancer"] && info["Hx Cancer"].hxCancerQ7}</font></h2>
+      2. <font color="red"><b></b>For female respondent aged 25 and above, who have/had a husband/boyfriend and not had their womb completely surgically removed only.</font><br />When was the last time you had a PAP smear test? (A PAP smear test is a simple test involving the scrapping of cells fom the mouth of the womb, to check for changes in the cells of your cervix, which may develop into cancer later.)
+      <h2><font color="green">{info["Hx Cancer"] && info["Hx Cancer"].hxCancerQ8}</font></h2>
+      <font color="red"><b>For women 40-49, advise yearly mammogram. 50-69, advise mammogram every 2 years. 70 and above, seek doctor's advice.<br />Please encourage participants to go for HPV test every 5 years.</b></font> <br />
+      Does participant has a history of cancer or his/her family history requires further scrutiny by doctors? <font color="red"><b>(If indicated 'Yes', please refer to doctor's consult by following the steps below.)</b></font>
+      <RadioField name="wceQ1" label="WCE Q1"/>
+      <DisplayIf condition = {(context) => (typeof(context.model.wceQ1) !== undefined && context.model.wceQ1 === 'Yes')} >
+        <Fragment>
+          <b>REFER TO DR CONSULT by indicating on:</b> <br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A under Doctor's Consultation row<br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation <br />
+        </Fragment>
+      </DisplayIf>
+      <h2>3. FOLLOW UP PLAN</h2>
+      1. Completed Breast Self Examination station?
+      <RadioField name="wceQ2" label="WCE Q2"/>
+      2. Completed Cervical Education station?
+      <RadioField name="wceQ3" label="WCE Q3"/>
+      3. Indicated interest for HPV Test under SCS?
+      <RadioField name="wceQ4" label="WCE Q4"/>
+      4. Indicated interest for Mammogram under SCS?
+      <RadioField name="wceQ5" label="WCE Q5"/>
+      5. Registered for Mammogram under NHGD?
+      <RadioField name="wceQ6" label="WCE Q6" />
+      <DisplayIf condition = {(context) => (typeof(context.model.wceQ6) !== undefined && context.model.wceQ6 === 'Yes, (Please specify date of appointment if given):')} >
+        <Fragment>
+          Please specify date:
+          <TextField name="wceQ7" label="WCE Q7"/>
+        </Fragment>
+      </DisplayIf>
+      
+    </Fragment>
+  ),
   
 
   "Geri - AMT" : (info) => (
