@@ -126,7 +126,7 @@ class App extends Component {
               alignItems="flex-start"
               spacing={16}
             >
-              <Grid item xs={6}>
+              <Grid item xs={8}>
                 {station !== "Finished Patients" && 
                   <Form station={station} id={Session.get('currentPatient')}
                         stationQueue={this.props.patientInfo.stationQueue} patientInfo={this.props.patientInfo}/>
@@ -137,11 +137,9 @@ class App extends Component {
               </Grid>
               
               <Grid item xs={4}>              
-                {/* TODO: Determine which stations need patient info
-                {station !== "Pre-Registration" && 
-                station !== "Registration" && 
+                {(station === "Geri - PT Consult" || station === "Geri - OT Consult") && 
                   <Info station={station} id={Session.get('currentPatient')} patientInfo={this.props.patientInfo} />
-                } */}
+                }
               </Grid>
 
             </Grid>
