@@ -178,20 +178,19 @@ class PrintSummary extends Component {
             <TextField rows={26} variant="outlined" fullWidth={true} margin="dense" multiline={true} name="docConsult2" />
           </Grid>
         </Grid><br />
+        
+
 
         <Typography variant="h5">
-        Please collect blood test report from Trilochan Netralaya on 4-5 June 2019 5pm – 7.30pm. 
+        Please collect blood test report from Burla Kalayan Mandap on 7 June from 10am-12pm. Thank you.
         </Typography>
         <br />
         <Typography variant="h5">
-        त्रिलोचन नेत्रालय से 4-5 जून 2019 शाम 5 बजे - 7.30 बजे रक्त परीक्षण रिपोर्ट एकत्र करें। धन्यवाद।
+        कृपया 7 जून को सुबह 10 से दोपहर 12 बजे तक बुर्ला कल्याण मंडप से अपनी रक्त परीक्षण रिपोर्ट एकत्र करें
         </Typography>
         <br />
         <Typography variant="h5">
-        ଦୟ।କରି ତ୍ରିଲୋଚନ ନେତାଲୟରୁ ୪-୫ ଜୁନ ୨୦୧୯ ସଂଧ। ୭.୩୦ ରେ ରକତ ପରିକ୍ଷାର ରିପୋଟ ନେଇଯିବେ ।
-        </Typography>
-        <Typography variant="h5">
-        ଧନୟବାଦ
+        ଦୟ। କରି   ୭ଯୁନ୍ ରେ ସକ।ଳ ୧୦ ରୁ : ଦୂପହର ୧୨ଟ। ପର୍ଯନ୍ତ ବୁର୍ଲା କଲ୍ୟାଣ ମଣ୍ଡପ ରେ ଆପଣମାନଙ୍କର ରକ୍ତ ପରୀକ୍ଷା ର ରିପୋର୍ଟ ନେଇଯାନ୍ତୁ । ଧନ୍ୟବାଦ
         </Typography>
 
       </Grid>
