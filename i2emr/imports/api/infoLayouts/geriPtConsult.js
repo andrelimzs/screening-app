@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 
 export const geriPtConsult = (info) => {    
     return <Fragment>
-        <h3>PAR-Q Results</h3>
+        <h2>PAR-Q Results</h2>
         1.     Has your doctor ever said that you have a heart condition and that you should only do physical activity recommended by a doctor?<br />
         <b>{typeof(info['Geri - PAR-Q']) !== "undefined" &&
             info['Geri - PAR-Q'].geriParQQ1}<br /><br /></b>
@@ -25,7 +25,7 @@ export const geriPtConsult = (info) => {
         <b>{typeof(info['Geri - PAR-Q']) !== "undefined" &&
             info['Geri - PAR-Q'].geriParQQ7}<br /><br /></b>
 
-        <h3>Physical Activity Level Results</h3>
+        <h2>Physical Activity Level Results</h2>
         1.     How often do you exercise in a week?<br />*If &lt; 3 x/week and would like to start exercising more, suggest physiotherapist consultation<br />
         <b>{typeof(info['Geri - Physical Activity Level']) !== "undefined" &&
             info['Geri - Physical Activity Level'].geriPhysicalActivityLevelQ1}<br /><br /></b>
@@ -43,7 +43,7 @@ export const geriPtConsult = (info) => {
         <b>{typeof(info['Geri - Physical Activity Level']) !== "undefined" &&
             info['Geri - Physical Activity Level'].geriPhysicalActivityLevelQ5}<br /><br /></b>
         
-        <h3>Frail Scale Results</h3>
+        <h2>Frail Scale Results</h2>
         1. Fatigue: How much of the time during the past 4 weeks did you feel tired?<br />1 = All of the time<br />2 = Most of the time<br />3 = Some of the time<br />4 = A little of the time<br />5 = None of the time<br /><br />Responses of “1” or “2” are scored as 1 and all others as 0.<br />
         <b>{typeof(info['Geri - Frail Scale']) !== "undefined" &&
             info['Geri - Frail Scale'].geriFrailScaleQ1}<br /><br /></b>
@@ -63,7 +63,7 @@ export const geriPtConsult = (info) => {
         <b>{typeof(info['Geri - Frail Scale']) !== "undefined" &&
             info['Geri - Frail Scale'].geriFrailScaleQ7}<br /><br /></b>
 
-        <h3>SPPB Results</h3>
+        <h2>SPPB Results</h2>
         1) REPEATED CHAIR STANgeriSppDS<br />Time taken in seconds (only if 5 chair stands were completed):<br />
         <b>{typeof(info['Geri - SPPB']) !== "undefined" &&
             info['Geri - SPPB'].geriSppbQ1}<br /><br /></b>
@@ -95,8 +95,8 @@ export const geriPtConsult = (info) => {
         <b>{typeof(info['Geri - SPPB']) !== "undefined" &&
             info['Geri - SPPB'].geriSppbQ10}<br /><br /></b>
 
-        <h3>TUG Results</h3>
-        <h2>3.3b Time-Up and Go (TUG)</h2>
+        <h2>TUG Results</h2>
+        3.3b Time-Up and Go (TUG)<br/>
         Walking aid (if any):  <br />
         <b>{typeof(info['Geri - TUG']) !== "undefined" &&
             info['Geri - TUG'].geriTugQ1}<br /><br /></b>
