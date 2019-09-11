@@ -84,39 +84,6 @@ function getBmi(model) {
   }
 }
 
-// Average of two closest bp readings
-function getAverageBp(bp1, bp2, bp3) {
-  let avg_bp;
-  if (typeof(bp1) !== "undefined" && typeof(bp2) !== "undefined") {
-    if (typeof(bp3) === "undefined") {
-      avg_bp = (bp1 + bp2) / 2;
-    } else {
-      const diff_bp1_bp2 = Math.abs(bp1-bp2)
-      const diff_bp1_bp3 = Math.abs(bp1-bp3)
-      const diff_bp2_bp3 = Math.abs(bp2-bp3)
-
-      // If there are 2 pairs of equidistant readings. i.e. 100 110 120
-      if (diff_bp1_bp2 === diff_bp1_bp3 || diff_bp1_bp2 === diff_bp2_bp3 || diff_bp1_bp3 === diff_bp2_bp3) {
-        avg_bp = (bp1 + bp2 + bp3) / 3;
-      }
-      // bp1_bp2 min so use bp1 and bp2
-      else if (diff_bp1_bp2 < diff_bp1_bp3 && diff_bp1_bp2 < diff_bp2_bp3) {
-        avg_bp = (bp1 + bp2) / 2;
-      }
-      // bp1_bp3 min so use bp1 and bp3
-      else if (diff_bp1_bp3 < diff_bp1_bp2 && diff_bp1_bp3 < diff_bp2_bp3) {
-        avg_bp = (bp1 + bp3) / 2;
-      }
-      else { //bp2_bp3 min so use bp2 and bp3
-        avg_bp = (bp2 + bp3) / 2;
-      }
-    }
-  } else {
-    return 0;
-  }
-  return Number(Math.round(avg_bp+'e2')+'e-2');
-}
-
 // Define the layouts
 export const formLayouts = {
   "Pre-Registration" : (info) => (
@@ -463,18 +430,10 @@ export const formLayouts = {
             <font color="red"><b>BP HIGH!</b></font> <br />
           </Fragment>
         </DisplayIf>
-        <SomeComp calculation={(model) => (
-          <h3>
-            Average Reading Systolic (average of closest 2 readings):
-              {model['hxCancerQ17'] = getAverageBp(model['hxCancerQ11'], model['hxCancerQ13'], model['hxCancerQ15'])}
-          </h3>
-        )} />
-        <SomeComp calculation={(model) => (
-          <h3>
-            Average Reading Diastolic (average of closest 2 readings):
-              {model['hxCancerQ18'] = getAverageBp(model['hxCancerQ12'], model['hxCancerQ14'], model['hxCancerQ16'])}
-          </h3>
-        )} />
+        Average Reading Systolic (average of closest 2 readings):
+        <NumField name="hxCancerQ17" label="Hx Cancer Q17" /> <br />
+        Average Reading Diastolic (average of closest 2 readings):
+        <NumField name="hxCancerQ18" label="Hx Cancer Q18" /> <br />
         Hypertension criteria:<br />○ Younger participants: > 140/90<br />○ Participants > 80 years old: > 150/90 <br />○ CKD w proteinuria (mod to severe albuminuria): > 130/80<br />○ DM: > 130/80<br /> <br /><b>REFER TO DR CONSULT: (FOR THE FOLLOWING SCENARIOS)<br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A  <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation   <br /><br /><font color="red"><u>HYPERTENSIVE EMERGENCY</u><br />• SYSTOLIC  <mark>≥ 180</mark> AND/OR DIASTOLIC ≥ <mark>110 mmHg</mark> AND <mark><u>SYMPTOMATIC</u></mark> (make sure pt has rested and 2nd reading was taken)<br />o <mark>ASK THE DOCTOR TO COME AND REVIEW!</mark><br /> <br /><u>HYPERTENSIVE URGENCY</u><br />• SYSTOLIC  <mark>≥ 180</mark> AND/OR DIASTOLIC <mark>≥ 110 mmHg</mark> AND <mark>ASYMPTOMATIC</mark> (make sure pt has rested and 2nd reading was taken)<br />o ESCORT TO DC DIRECTLY!<br />o Follow the patient, continue clerking the patient afterward if doctor acknowledges patient is well enough to continue the screening<br /><br /><u>RISK OF HYPERTENSIVE CRISIS</u><br />• IF SYSTOLIC between <mark>160 - 180 mmHg</mark> <br />• IF <mark>ASYMPTOMATIC</mark>, continue clerking. <br />• IF <mark>SYMPTOMATIC</mark>, ESCORT TO DC DIRECTLY!<br /><br /><u>If systolic between 140 - 160 mmHg:</u></font><br />o Ask for:<br />- Has hypertension been pre-diagnosed? If not, refer to DC (possible new HTN diagnosis)<br />- If diagnosed before, ask about compliance and whether he/she goes for regular follow up? If non-compliant or not on regular follow-up, refer to DC (chronic HTN, uncontrolled).<br /></b>
         <h2><u>2) BMI</u></h2>
         Height (in cm) <br />
