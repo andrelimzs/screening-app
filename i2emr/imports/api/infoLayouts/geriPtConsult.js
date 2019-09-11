@@ -99,7 +99,9 @@ export const geriPtConsult = (info) => {
         3.3b Time-Up and Go (TUG)<br/>
         Walking aid (if any):  <br />
         <b>{typeof(info['Geri - TUG']) !== "undefined" &&
-            info['Geri - TUG'].geriTugQ1}<br /><br /></b>
+            info['Geri - TUG'].geriTugQ1.map((data) => {
+                return data + ", ";            
+            })}<br /><br /></b>
         {typeof(info['Geri - TUG']) !== "undefined" &&
             <div>
                 Type of Walking Aid: <br />

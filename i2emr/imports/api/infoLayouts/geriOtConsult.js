@@ -29,7 +29,9 @@ export const geriOtConsult = (info) => {
 
         6. Eye Functional Test *only applicable if vision is worse than 6/60<br/>
         <b>{info['Geri - Vision'] && 
-        info['Geri - Vision'].geriVisionQ7}<br /><br /></b>
+        info['Geri - Vision'].geriVisionQ7.map(data => {
+            return data + ', ';
+        })}<br /><br /></b>
 
 
         <h2>OT Questionnaire Results</h2>
@@ -103,7 +105,10 @@ export const geriOtConsult = (info) => {
         3.3b Time-Up and Go (TUG) <br/>
         Walking aid (if any):  <br />
         <b>{typeof(info['Geri - TUG']) !== "undefined" &&
-            info['Geri - TUG'].geriTugQ1}<br /><br /></b>
+            info['Geri - TUG'].geriTugQ1.map((data) => {
+                data + ", ";            
+                })
+            }<br /><br /></b>
         {typeof(info['Geri - TUG']) !== "undefined" &&
             <div>
                 Type of Walking Aid: <br />
