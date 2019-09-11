@@ -137,7 +137,9 @@ class App extends Component {
               </Grid>
               
               <Grid item xs={4}>              
-                {(station === "Geri - PT Consult" || station === "Geri - OT Consult") && 
+                {(station === "Geri - PT Consult" ||
+                 station === "Geri - OT Consult" ||
+                 station === "Screening Review") && 
                   <Info station={station} id={Session.get('currentPatient')} patientInfo={this.props.patientInfo} />
                 }
               </Grid>
