@@ -467,64 +467,21 @@ export const formLayouts = {
     <Fragment>
       <h2>PARTICIPANT IDENTIFICATION</h2>
       <h3><font color="red">Please verify participant's identity using his/her NRIC before proceeding <br />A. S/N B. Surname followed by Initials C. Last 4 digits of Participant's NRIC and Letter</font></h3>
-      <h2>1. SCREENING AWARENESS SURVEY</h2>
-      1. How often do you think you should go for health check-up for chronic diseases? (i.e. HTN, DM, HLD)
-      <RadioField name="fitQ1" label="FIT Q1"/>
-      <DisplayIf condition = {(context) => (typeof(context.model.fitQ1) !== undefined && context.model.fitQ1 === 'Others, (Please specify):')} >
-        <Fragment>
-          Please specify:
-          <TextField name="fitQ2" label="FIT Q2"/>
-        </Fragment>
-      </DisplayIf>
-      2. Do you know what is a FIT kit?
-      <RadioField name="fitQ3" label="FIT Q3"/>
-      3. How often should people above 50 years old utilize a FIT kit?
-      <RadioField name="fitQ4" label="FIT Q4"/>
-      <DisplayIf condition={(context) => (typeof(context.model.fitQ4) !== undefined && context.model.fitQ4 === 'Others, (Please specify):')}>
-        <Fragment>
-          Please specify:
-          <TextField name="fitQ5" label="FIT Q5"/>
-        </Fragment>
-      </DisplayIf>
-      4. How often should people go for a colonoscopy?
-      <RadioField name="fitQ6" label="FIT Q6"/>
-      <DisplayIf condition = {(context) => (typeof(context.model.fitQ6) !== undefined && context.model.fitQ6 === 'Others, (Please specify):')} >
-        <Fragment>
-          Please specify:
-          <TextField name="fitQ7" label="FIT Q7"/>
-        </Fragment>
-      </DisplayIf>
-      5. How often should women go for a HPV test?
-      <RadioField name="fitQ8" label="FIT Q8"/>
-      <DisplayIf condition = {(context) => (typeof(context.model.fitQ8) !== undefined && context.model.fitQ8 === 'Others, (Please specify):')} >
-        <Fragment>
-          Please specify:
-          <TextField name="fitQ9" label="FIT Q9"/>
-        </Fragment>
-      </DisplayIf>
-      6. How often should women go for a mammogram?
-      <RadioField name="fitQ10" label="FIT Q10"/>
-      <DisplayIf condition = {(context) => (typeof(context.model.fitQ10) !== undefined && context.model.fitQ10 === 'Others, (Please specify):')} >
-        <Fragment>
-          Please specify:
-          <TextField name="fitQ11" label="FIT Q11"/>
-        </Fragment>
-      </DisplayIf>
-      <h2>2. NSS CANCER SCREENING PRACTICES SURVEY.</h2>
+      <h2>1. NSS CANCER SCREENING PRACTICES SURVEY.</h2>
       1. <font color="red"><b>For respondent aged 50 and above only,</b></font> unless positive family history for colorectal cancer.<br />When was the last time you had a blood stool test? (A blood stool test is a test to determine whether the stool contains blood.)
       <h2><font color="green">{info["Hx Cancer"] && info["Hx Cancer"].hxCancerQ5}</font></h2>
       2. <font color="red"><b>For respondent aged 50 and above only,</b></font> unless positive family history for colorectal cancer.<br />When was the last time you had a colonoscopy? (A colonoscopy is an examination in which a tube is inserted in the rectum to view the colon for signs of cancer or other health problems.)
       <h2><font color="green">{info["Hx Cancer"] && info["Hx Cancer"].hxCancerQ6}</font></h2>
       <h3><font color="red">Please encourage participants to go for FIT every year if participant is above 50, asymptomatic and no positive family history of colorectal cancer in first degree relatives.</font> </h3>
       Does participant has a history of cancer or his/her family history requires further scrutiny by doctors?<font color="red"><b>(If indicated 'Yes', please refer to doctor's consult by following the steps below.)</b></font> 
-      <RadioField name="fitQ12" label="FIT Q12"/>
-      <DisplayIf condition = {(context) => (typeof(context.model.fitQ12) !== undefined && context.model.fitQ12 === 'Yes')} >
+      <RadioField name="fitQ1" label="FIT Q12"/>
+      <DisplayIf condition = {(context) => (typeof(context.model.fitQ1) !== undefined && context.model.fitQ1 === 'Yes')} >
         <Fragment>
           <b>REFER TO DR CONSULT</b> by indicating on: <br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A under Doctor's Consultation row<br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation
         </Fragment>
       </DisplayIf>
       3. Was participant issued 2 FIT kits?
-      <RadioField name="fitQ13" label="FIT Q13"/>
+      <RadioField name="fitQ12" label="FIT Q13"/>
       
     </Fragment>
   ),

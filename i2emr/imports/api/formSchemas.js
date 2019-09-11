@@ -248,30 +248,8 @@ export const formSchemas = {
 
    "FIT" : new SimpleSchema({
     fitQ1: {
-    type: String, allowedValues: ["Every 6 months", "Every year", "Once every 2 years", "Once every 3 years", "Once every 4 years", "Never", "Others, (Please specify):"], optional: false
-    }, fitQ2: {
-    type: String, optional: true
-    }, fitQ3: {
     type: String, allowedValues: ["Yes", "No"], optional: false
-    }, fitQ4: {
-    type: String, allowedValues: ["Every 6 months", "Every year", "Once every 2 years", "Once every 3 years", "Once every 4 years", "Never", "Others, (Please specify):"], optional: false
-    }, fitQ5: {
-    type: String, optional: true
-    }, fitQ6: {
-    type: String, allowedValues: ["Every 6 months", "Every year", "Once every 2 years", "Once every 3 years", "Once every 4 years", "Once every 5 years", "Once every 10 years", "Never", "Others, (Please specify):"], optional: false
-    }, fitQ7: {
-    type: String, optional: true
-    }, fitQ8: {
-    type: String, allowedValues: ["Every 6 months", "Every year", "Once every 2 years", "Once every 3 years", "Once every 4 years", "Once every 5 years", "Once every 10 years", "Never", "Others, (Please specify):"], optional: false
-    }, fitQ9: {
-    type: String, optional: true
-    }, fitQ10: {
-    type: String, allowedValues: ["Every 6 months", "Every year", "Once every 2 years", "Once every 3 years", "Once every 4 years", "Once every 5 years", "Once every 10 years", "Never", "Others, (Please specify):"], optional: false
-    }, fitQ11: {
-    type: String, optional: true
     }, fitQ12: {
-    type: String, allowedValues: ["Yes", "No"], optional: false
-    }, fitQ13: {
     type: String, allowedValues: ["Yes", "No"], optional: false
     }
     }
