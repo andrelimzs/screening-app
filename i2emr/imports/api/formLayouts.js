@@ -755,7 +755,7 @@ export const formLayouts = {
       <DisplayIf condition={(context) => (typeof(context.model.geriOtQuestionnaireQ2) !== "undefined" && context.model.geriOtQuestionnaireQ2 === "Yes (Specify in textbox )")}>
         <Fragment>
           Please Specify:
-          <TextField name="geriOtQuestionnaireQ3" label="Geri - OT Questionnaire Q3"/>
+          <LongTextField name="geriOtQuestionnaireQ3" label="Geri - OT Questionnaire Q3"/>
         </Fragment>
       </DisplayIf>
       <h4>If yes, refer occupational therapist consultation</h4>

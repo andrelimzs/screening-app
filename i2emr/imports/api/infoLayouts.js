@@ -3,6 +3,7 @@ import React, { Component, Fragment } from 'react';
 import { geriPtConsult } from './infoLayouts/geriPtConsult'
 import { geriOtConsult } from './infoLayouts/geriOtConsult'
 import { screeningReview } from './infoLayouts/screeningReview'
+import { doctorSConsult } from './infoLayouts/doctorSConsult'
 
 // Define the layouts
 export const infoLayouts = {
@@ -16,6 +17,11 @@ export const infoLayouts = {
 
   "Screening Review" : (info) => {
     return screeningReview(info);
-  }
+  },
+
+  "Doctor's Consult" : (info) => {
+    return doctorSConsult(info);
+  },
+
 
 };
