@@ -49,9 +49,10 @@ class Form extends Component {
     };
   }
 
-  handleSubmit(newForm) {    
+  handleSubmit(newForm) { 
     // If no user
     if (this.props.id === null && this.props.station !== "Pre-Registration") {
+        window.scrollTo(0, 0)
         alert("Please take a patient before submitting");
         return
     }
@@ -88,9 +89,8 @@ class Form extends Component {
           tabValue: 0,
         });
       }
-    }
-
-    if (this.props.station == "Pre-Registration") {
+    } else { // not multipage
+      if (this.props.station == "Pre-Registration") {
         // Meteor.call('patientinfo.insert', this.multiData);
         var formData = {};
         formData[this.props.station] = newForm;
@@ -99,20 +99,22 @@ class Form extends Component {
           if (result) { alert("Successful! ID is " + String(result)); }
           else { alert("Unsuccessful"); } 
         });
-    } else {
-      // Store data in array, so that it can be $push[ed] into mongo
-      var formData = {};
-      formData[this.props.station] = newForm;
-      formData.id = this.props.id;
+      } else {
+        // Store data in array, so that it can be $push[ed] into mongo
+        var formData = {};
+        formData[this.props.station] = newForm;
+        formData.id = this.props.id;
 
-      // if (!this.isMultipage || this.pageIndex >= Object.keys(formSchemas[this.props.station]).length - 1) {
-      // console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
-      // newForm.nextStation = this.stations[this.stations.indexOf(this.props.station)+1];
+        // if (!this.isMultipage || this.pageIndex >= Object.keys(formSchemas[this.props.station]).length - 1) {
+        // console.log(this.stations[this.stations.indexOf(this.props.station)+1]);
+        // newForm.nextStation = this.stations[this.stations.indexOf(this.props.station)+1];
 
-      Meteor.call('patientinfo.update', formData);
+        Meteor.call('patientinfo.update', formData);
 
-      Session.set('currentPatient',null);
+        Session.set('currentPatient',null);
+      }
     }
+    window.scrollTo(0, 0)
   }
 
   handleTabChange = (event, value) => {

@@ -12,6 +12,7 @@ OUTPUT_LOCATION = './GeneratedForms/'
 string_formats = {
     'label': '<h2>{text}</h2>\n',
     'smalllabel': '<h3>{text}</h3>\n',
+    'text': '{text}<br />\n',
     'radio': '{text}\n<RadioField name=\"{name}\" label=\"{label}\"/>\n',
     'textfield': '{text}\n<TextField name=\"{name}\" label=\"{label}\"/>\n',
     'textbox': '{text}\n<TextField name=\"{name}\" label=\"{label}\"/>\n',
@@ -19,8 +20,8 @@ string_formats = {
     'agreement': '{text}\n<BoolField name=\"{name}\" label=\"{label}\"/>\n',
     'checkbox': '{text}\n<SelectField name=\"{name}\" checkboxes="true" label=\"{label}\" />\n',
     'textarea': '{text}\n<LongTextField name=\"{name}\" label=\"{label}\" />\n',
-    'number': '{text}\n<NumberField name=\"{name}\" label=\"{label}\" />\n',
-    'todo': '{text}<TODO-MANUALLY name=\"{name}\" label=\"{label}\" />\n'
+    'number': '{text} <br />\n<NumField name=\"{name}\" label=\"{label}\" /><br />\n',
+    'todo': '{text}\n<TODO-MANUALLY name=\"{name}\" label=\"{label}\" />\n'
 }
 
 def run():
@@ -31,12 +32,12 @@ def run():
     #     df = pd.read_excel(os.path.join(FORMS_LOCATION, filename), skiprows=4)
     #     generate_strings(df, form_name)
 
-    filename = './Forms/6o. PHS Data Collection Geri - Geri Appointment.xlsx'
+    filename = './Forms/PHS Data Collection Hx Taking 31-08-2019.xlsx'
 
-    df = pd.read_excel(filename, nrows=1, headers=None)
+    df = pd.read_excel(filename, nrows=1, headers=None,sheet_name="4")
     form_name = df['Unnamed: 2'][0]
 
-    df = pd.read_excel(filename, skiprows=4)
+    df = pd.read_excel(filename, skiprows=4,sheet_name="4")
     generate_strings(df, form_name)
     
 
@@ -50,7 +51,7 @@ def generate_strings(df, form_name):
         label = form_name + ' Q' + str(question_count)
         question_name = camelCase(label)
 
-        if question_type in ('label', 'smalllabel'):
+        if question_type in ('label', 'smalllabel', 'text'):
             form_string += string_formats[question_type].format(text=df['Label Text'][i].replace('\n','<br />'))
             continue
 

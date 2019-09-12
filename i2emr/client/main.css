@@ -2,3 +2,8 @@ body {
   padding: 10px;
   font-family: sans-serif;
 }
+
+mark {
+  background-color: yellow;
+  color: inherit;
+}
