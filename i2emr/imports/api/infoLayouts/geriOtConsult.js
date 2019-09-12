@@ -45,7 +45,9 @@ export const geriOtConsult = (info) => {
         info['Geri - OT Questionnaire'].geriOtQuestionnaireQ2}</b><br/>
         <b>{info['Geri - OT Questionnaire'] && 
         typeof(info['Geri - OT Questionnaire'].geriOtQuestionnaireQ3) !== "undefined" && 
-        info['Geri - OT Questionnaire'].geriOtQuestionnaireQ3}</b><br/><br/>
+        info['Geri - OT Questionnaire'].geriOtQuestionnaireQ3.split("\n").map((text) => {
+            return <p>{text}<br /></p>
+        })}</b><br/><br/>
 
         3. Do you use anything to support yourself (e.g. walking aid, umbrella) when moving about your daily activities?<br/>
         <b>{info['Geri - OT Questionnaire'] && 
