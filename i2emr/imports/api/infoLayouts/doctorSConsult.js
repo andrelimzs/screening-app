@@ -51,7 +51,7 @@ export const doctorSConsult = (info) => {
         }
         <br />
         {typeof(info['Hx HCSR']) !== "undefined" &&
-            info['Hx HCSR'].hxHcsrQ7 !== "undefined" &&
+            typeof(info['Hx HCSR'].hxHcsrQ7) !== "undefined" &&
             info['Hx HCSR'].hxHcsrQ7.split("\n").map((text) => {
                 return <p>{text}<br /></p>
             })
@@ -71,7 +71,7 @@ export const doctorSConsult = (info) => {
         }
         <br />
         {typeof(info['Hx HCSR']) !== "undefined" &&
-            info['Hx HCSR'].hxHcsrQ9 !== "undefined" &&
+            typeof(info['Hx HCSR'].hxHcsrQ9) !== "undefined" &&
             info['Hx HCSR'].hxHcsrQ9.split("\n").map((text) => {
                 return <p>{text}<br /></p>
             })
