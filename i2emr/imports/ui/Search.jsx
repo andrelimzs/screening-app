@@ -89,14 +89,14 @@ class Search extends Component {
               <Typography variant="h6">
                 ID {patientInfo.id}
               </Typography>
-              <Typography variant="h6">
+              {/* <Typography variant="h6">
                 At {patientInfo.nextStation}
-              </Typography>
+              </Typography> */}
               <Typography variant="h6">
-                {patientInfo["Patient Info"].name}
+                {patientInfo["Pre-Registration"].preRegistrationQ2}
               </Typography>
               <Typography variant="body2">
-                {patientInfo["Patient Info"].gender}, {patientInfo["Patient Info"].age}
+                {patientInfo["Pre-Registration"].preRegistrationQ1}, NRIC: {patientInfo["Pre-Registration"].preRegistrationQ3}
               </Typography>
             </CardContent>
             <CardActions>
