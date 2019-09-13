@@ -139,7 +139,7 @@ class App extends Component {
               <Grid item xs={4}>              
                 {(station === "Geri - PT Consult" ||
                  station === "Geri - OT Consult" ||
-                 station === "Screening Review") && 
+                 station === "Doctor's Consult" ) && 
                   <Info station={station} id={Session.get('currentPatient')} patientInfo={this.props.patientInfo} />
                 }
               </Grid>
@@ -197,19 +197,21 @@ const AppContainer = withTracker(() => {
   const connected = Meteor.status().connected;
   const station = Session.get('station');
   const currentPatientID = Session.get('currentPatient');
-  var patientList;
+  var patientList = [];
 
   if (station === "Done") {
     patientList = Patientinfo.find().fetch();
-  } else if (station == "Registration" || station == "Phlebotomy"){
+  // } else if (station == "Registration" || station == "Phlebotomy"){
+  } else {
     patientList = Patientinfo.find(
       { $and:[{ nextStation: station }, { $or:[{ busy: false },{ id: currentPatientID }] }
       ]}).fetch();
-  } else {
-    patientList = Patientinfo.find(
-      {  $or:[{ busy: false },{ id: currentPatientID }] 
-      }).fetch();
   }
+  // } else {
+  //   patientList = Patientinfo.find(
+  //     {  $or:[{ busy: false },{ id: currentPatientID }] 
+  //     }).fetch();
+  // }
   
   //, { sort: { lastSubmit: 1 } }
   // TODO - Find better way to sent patient info in
