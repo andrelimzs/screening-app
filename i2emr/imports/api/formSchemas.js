@@ -520,13 +520,7 @@ export const formSchemas = {
    ),
 
    "Geri - Geri Appt" : new SimpleSchema({
-    geriGeriApptQ1: {
-    type: String, allowedValues: ["Yes", "No"], optional: false
-    }, geriGeriApptQ2: {
-    type: String, allowedValues: ["Yes", "No"], optional: false
-    }, geriGeriApptQ3: {
-    type: String, allowedValues: ["Yes", "No"], optional: false
-    }, geriGeriApptQ4: {
+    geriGeriApptQ4: {
     type: String, allowedValues: ["Yes", "No"], optional: false
     }, geriGeriApptQ5: {
     type: Array, optional: true

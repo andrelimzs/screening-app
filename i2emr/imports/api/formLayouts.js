@@ -889,13 +889,6 @@ export const formLayouts = {
       )}>
         <Fragment>
           <h3>Visual acuity is ≥ 6/12: </h3>
-          1) Check if participant is a CHAS card holder (Needs to present CHAS card on site)
-          <RadioField name="geriGeriApptQ1" label="Geri - Geri Appt Q1"/>
-          2) Check if participant is a SWCDC Resident (Link: http://sis.pa-apps.sg/NASApp/sim/SearchResults.jsp)
-          <RadioField name="geriGeriApptQ2" label="Geri - Geri Appt Q2"/>
-          <h3>If YES to both, please give either SWCDC Eye Voucher OR Pearl's Optical Voucher:</h3>
-          SWCDC Eye Voucher given? - to be given if qn 1 and 2 answers are BOTH 'Yes'
-          <RadioField name="geriGeriApptQ3" label="Geri - Geri Appt Q3"/>
           Pearl's Optical Voucher given? - to be given if either qn 1 or qn 2 (or both) answers is 'No'
           <RadioField name="geriGeriApptQ4" label="Geri - Geri Appt Q4"/>
         </Fragment>
