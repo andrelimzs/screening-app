@@ -36,7 +36,7 @@ Meteor.methods({
     Patientinfo.insert(data);
 
     // Print a patient insertion summary
-    console.log(String(data.id) + " | " + String(data['Patient Info'].name));
+    console.log(String(data.id) + " | " + String(data['Pre-Registration'].preRegistrationQ2));
     console.log(data.stationQueue);
 
     return data.id;
@@ -73,7 +73,8 @@ Meteor.methods({
       }
     }
 
-    const nextStation = (typeof(stationQueue[0]) !== "undefined") ? stationQueue[0] : "Done";
+    // const nextStation = (typeof(stationQueue[0]) !== "undefined") ? stationQueue[0] : "Done";
+    const nextStation = (typeof(stationQueue[0]) !== "undefined") ? stationQueue[0] : "";
     
     Patientinfo.update({id:id},{$set:{
       nextStation: nextStation,
@@ -151,21 +152,22 @@ Meteor.methods({
     // TODO Refactor this to share code with 'update'
     // Check for special case - "Doctors Consult"
     // The only station to be opt-in instead of opt-out
-    if (stationQueue[0] === "Doctors' Consult") {
-      // Check for any consult flags -> otherwise skip consult
-      if ((typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW) || 
-          (typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb) || 
-          (typeof(info["Station Selection"]) !== "undefined" && info["Station Selection"].stationSelect12 === "Yes") ||
-          (typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap) ||
-          (typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP)) {
-        console.log("Flagged for doctor's consult");
-      } else {
-        stationQueue.shift();
-        console.log("Skipping doctor's consult");
-      }
-    }
+    // if (stationQueue[0] === "Doctors' Consult") {
+    //   // Check for any consult flags -> otherwise skip consult
+    //   if ((typeof(info["Height & weight"]) !== "undefined" && info["Height & weight"][0].docConsultForHW) || 
+    //       (typeof(info["Blood Glucose & Hb"]) !== "undefined" && info["Blood Glucose & Hb"][0].docConsultForBloodGlucAndHb) || 
+    //       (typeof(info["Station Selection"]) !== "undefined" && info["Station Selection"].stationSelect12 === "Yes") ||
+    //       (typeof(info["Pap Smear"]) !== "undefined" && info["Pap Smear"][0].docConsultForPap) ||
+    //       (typeof(info["Blood Pressure"]) !== "undefined" && info["Blood Pressure"][0].docConsultForBP)) {
+    //     console.log("Flagged for doctor's consult");
+    //   } else {
+    //     stationQueue.shift();
+    //     console.log("Skipping doctor's consult");
+    //   }
+    // }
 
-    const nextStation = (typeof(stationQueue[0]) !== "undefined") ? stationQueue[0] : "Done";
+    // const nextStation = (typeof(stationQueue[0]) !== "undefined") ? stationQueue[0] : "Done";
+    const nextStation = (typeof(stationQueue[0]) !== "undefined") ? stationQueue[0] : "";
     
     Patientinfo.update({id:id},{$set:{
       nextStation: nextStation,
