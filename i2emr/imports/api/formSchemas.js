@@ -336,6 +336,15 @@ export const formSchemas = {
     }
    ),
 
+   "Geri - Cognitive Follow Up" : new SimpleSchema({
+    geriCognitiveFollowUpQ1: {
+    type: String, allowedValues: ["NTUC Health (Jurong West)", "SACS (Jurong East/Bukit Batok)", "Feiyue (Choa Chu Kang)", "Others (Please Specify):"], optional: false
+    }, geriCognitiveFollowUpQ2: {
+    type: String, optional: true
+    }
+    } 
+   ),
+
    "Geri - Vision" : new SimpleSchema({
     geriVisionQ1: {
     type: String, allowedValues: ["Yes (Specify in textbox )", "No"], optional: false

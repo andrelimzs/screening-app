@@ -16,6 +16,9 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import { DialogTitle,DialogContent,DialogContentText } from '@material-ui/core';
+import { infoLayouts } from '../api/infoLayouts.js';
+
+const stationsWithInfo = new Set(Object.keys(infoLayouts))
 
 const styles = theme => ({
   root: {
@@ -137,9 +140,7 @@ class App extends Component {
               </Grid>
               
               <Grid item xs={4}>              
-                {(station === "Geri - PT Consult" ||
-                 station === "Geri - OT Consult" ||
-                 station === "Doctor's Consult" ) && 
+                { stationsWithInfo.has(station) && 
                   <Info station={station} id={Session.get('currentPatient')} patientInfo={this.props.patientInfo} />
                 }
               </Grid>

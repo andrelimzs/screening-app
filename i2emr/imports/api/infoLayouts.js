@@ -4,6 +4,7 @@ import { geriPtConsult } from './infoLayouts/geriPtConsult'
 import { geriOtConsult } from './infoLayouts/geriOtConsult'
 import { screeningReview } from './infoLayouts/screeningReview'
 import { doctorSConsult } from './infoLayouts/doctorSConsult'
+import { geriCognitiveFollowUp } from './infoLayouts/geriCognitiveFollowUp'
 
 // Define the layouts
 export const infoLayouts = {
@@ -21,6 +22,10 @@ export const infoLayouts = {
 
   "Doctor's Consult" : (info) => {
     return doctorSConsult(info);
+  },
+
+  "Geri - Cognitive Follow Up" : (info) => {
+    return geriCognitiveFollowUp(info);
   },
 
 

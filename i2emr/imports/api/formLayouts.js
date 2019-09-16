@@ -640,6 +640,19 @@ export const formLayouts = {
     </Fragment>
   ),
 
+  "Geri - Cognitive Follow Up" : (info) => (
+    <Fragment>
+      <h2> Cognitive Follow Up</h2>
+      <RadioField name="geriCognitiveFollowUpQ1" label="Geri - Cognitive Follow Up Q1" />
+      <DisplayIf condition={(context) => (typeof(context.model.geriCognitiveFollowUpQ1) !== "undefined" && context.model.geriCognitiveFollowUpQ1 === "Others (Please Specify):")}>
+        <Fragment>
+          Please Specify:
+          <TextField name="geriCognitiveFollowUpQ2" label="Geri - Cognitive Follow Up Q2" />
+        </Fragment>
+      </DisplayIf>
+    </Fragment>
+  ),
+
   "Geri - Vision" : (info) => (
     <Fragment>
       <h2>2. VISION SCREENING</h2>
