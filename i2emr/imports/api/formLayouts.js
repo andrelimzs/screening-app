@@ -1055,6 +1055,8 @@ export const formLayouts = {
       <TextField name="feedbackFormQ30" label="Feedback Form Q30"/>
       17. Any other feedback? <br />您有其他的意见吗？
       <LongTextField name="feedbackFormQ31" label="Feedback Form Q31" />
+      18. Would you like to attend the PHS2019 Fitness Carnival?
+      <RadioField name="feedbackFormQ32" label="Feedback Form Q32"/>
       <h2>Thank you for completing this survey! :) <br />谢谢您为我们提供您宝贵的意见！</h2>
       
     </Fragment>

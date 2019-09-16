@@ -652,6 +652,8 @@ export const formSchemas = {
     type: String, optional: true
     }, feedbackFormQ31: {
     type: String, optional: true
+    }, feedbackFormQ32: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
     }
     }
    ),
