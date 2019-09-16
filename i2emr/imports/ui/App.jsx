@@ -40,11 +40,12 @@ const styles = theme => ({
 class App extends Component {
   state = {
     currentPatient: "",
-    links: Object.keys(formLayouts).concat(["Done"]),
+    links: Object.keys(formLayouts),
   }
 
   selectStation(newStation, e) {
     e.preventDefault();
+    window.scrollTo(0, 0);
 
     Session.set("station",newStation);
 
