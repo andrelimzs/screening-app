@@ -943,26 +943,6 @@ export const formLayouts = {
     </Fragment>
   ),
 
-  "Doctor's Consult" : (info) => (
-    <Fragment>
-      Doctor's Name:
-      <TextField name="doctorSConsultQ1" label="Doctor's Consult Q1"/>
-      MCR No.:
-      <TextField name="doctorSConsultQ2" label="Doctor's Consult Q2"/>
-      Doctor's Memo
-      <LongTextField name="doctorSConsultQ3" label="Doctor's Consult Q3" />
-      Refer to dietitian?
-      <SelectField name="doctorSConsultQ4" checkboxes="true" label="Doctor's Consult Q4" />
-      Reason for referral
-      <TextField name="doctorSConsultQ5" label="Doctor's Consult Q5"/>
-      Does patient require urgent follow up
-      <SelectField name="doctorSConsultQ6" checkboxes="true" label="Doctor's Consult Q6" />
-      Completed Doctor’s Consult station. Please check that Form A is filled.
-      <SelectField name="doctorSConsultQ7" checkboxes="true" label="Doctor's Consult Q7" />
-      
-    </Fragment>
-  ),
-
   "Social Service" : (info) => (
     <Fragment>
       <h2>Social Service Station</h2>
