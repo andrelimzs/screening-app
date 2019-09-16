@@ -57,5 +57,14 @@ export const socialService = (info) => {
         Does the participant require social support<br/>
         <b>{typeof(info['Hx Social']) !== "undefined" &&
             info['Hx Social'].hxSocialQ12}</b><br /><br />
+
+        <h2>Referral from Doctor's Consult</h2>
+        Reasons for referral<br/>
+        <b>{typeof(info['Doctor\'s Consult']) !== "undefined" &&
+            typeof(info['Doctor\'s Consult'].doctorSConsultQ7) !== "undefined" && 
+            info['Doctor\'s Consult'].doctorSConsultQ7.split("\n").map((text) => {
+                return <p>{text}<br /></p>
+            })
+        }</b>
     </Fragment>
 }

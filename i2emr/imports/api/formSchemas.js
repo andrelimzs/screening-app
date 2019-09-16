@@ -563,8 +563,20 @@ export const formSchemas = {
     }, "doctorSConsultQ6.$": {
     type: String, allowedValues: ["Yes"]
     }, doctorSConsultQ7: {
+    type: String, optional: true
+    }, doctorSConsultQ8: {
+    type: Array, optional: true
+    }, "doctorSConsultQ8.$": {
+    type: String, allowedValues: ["Yes"]
+    }, doctorSConsultQ9: {
+    type: String, optional: true
+    }, doctorSConsultQ10: {
+    type: Array, optional: true
+    }, "doctorSConsultQ10.$": {
+    type: String, allowedValues: ["Yes"]
+    }, doctorSConsultQ11: {
     type: Array, optional: false
-    }, "doctorSConsultQ7.$": {
+    }, "doctorSConsultQ11.$": {
     type: String, allowedValues: ["Yes"]
     }
     }

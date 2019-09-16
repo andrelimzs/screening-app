@@ -947,11 +947,19 @@ export const formLayouts = {
       Refer to dietitian?
       <SelectField name="doctorSConsultQ4" checkboxes="true" label="Doctor's Consult Q4" />
       Reason for referral
-      <TextField name="doctorSConsultQ5" label="Doctor's Consult Q5"/>
+      <LongTextField name="doctorSConsultQ5" label="Doctor's Consult Q5"/>
+      Refer to Social Support?
+      <SelectField name="doctorSConsultQ6" checkboxes="true" label="Doctor's Consult Q4" />
+      Reason for referral
+      <LongTextField name="doctorSConsultQ7" label="Doctor's Consult Q5"/>
+      Refer to Dental?
+      <SelectField name="doctorSConsultQ8" checkboxes="true" label="Doctor's Consult Q4" />
+      Reason for referral
+      <LongTextField name="doctorSConsultQ9" label="Doctor's Consult Q5"/>
       Does patient require urgent follow up 
-      <SelectField name="doctorSConsultQ6" checkboxes="true" label="Doctor's Consult Q6" />
+      <SelectField name="doctorSConsultQ10" checkboxes="true" label="Doctor's Consult Q6" />
       Completed Doctor’s Consult station. Please check that Form A is filled.
-      <SelectField name="doctorSConsultQ7" checkboxes="true" label="Doctor's Consult Q7" />
+      <SelectField name="doctorSConsultQ11" checkboxes="true" label="Doctor's Consult Q7" />
       
     </Fragment>
   ),
