@@ -37,7 +37,7 @@ class Queue extends Component {
       return (
         <React.Fragment><Card><CardContent>
           <Typography>
-            Empty
+            Your list is empty. Please search for a participant using their ID.
           </Typography>
         </CardContent></Card></React.Fragment>
       )
