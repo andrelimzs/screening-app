@@ -65,6 +65,37 @@ export const socialService = (info) => {
             info['Doctor\'s Consult'].doctorSConsultQ7.split("\n").map((text) => {
                 return <p>{text}<br /></p>
             })
-        }</b>
+        }
+        <br /><br /></b>
+
+        <h2>Geriatrics EBAS</h2>
+        Reasons for referral from geriatrics EBAS <br />
+        <b>{typeof(info['Geri - EBAS-DEP']) !== "undefined" &&
+            typeof(info['Geri - EBAS-DEP'].geriEbasDepQ12) !== "undefined" && 
+            info['Geri - EBAS-DEP'].geriEbasDepQ12.split("\n").map((text) => {
+                return <p>{text}<br /></p>
+            })
+        }
+        <br /><br /></b>
+
+        <h2>OT Consult</h2>
+        Reasons for referral from OT consult <br />
+        <b>{typeof(info['Geri - OT Consult']) !== "undefined" &&
+            typeof(info['Geri - OT Consult'].geriOtConsultQ5) !== "undefined" && 
+            info['Geri - OT Consult'].geriOtConsultQ5.split("\n").map((text) => {
+                return <p>{text}<br /></p>
+            })
+        }
+        <br /><br /></b>
+
+        <h2>PT Consult</h2>
+        Reasons for referral from PT consult <br />
+        <b>{typeof(info['Geri - PT Consult']) !== "undefined" &&
+            typeof(info['Geri - PT Consult'].geriPtConsultQ5) !== "undefined" && 
+            info['Geri - PT Consult'].geriPtConsultQ5.split("\n").map((text) => {
+                return <p>{text}<br /></p>
+            })
+        }
+        <br /><br /></b>
     </Fragment>
 }
