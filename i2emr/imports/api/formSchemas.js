@@ -338,7 +338,7 @@ export const formSchemas = {
 
    "Geri - Cognitive Follow Up" : new SimpleSchema({
     geriCognitiveFollowUpQ1: {
-    type: String, allowedValues: ["NTUC Health (Jurong West)", "SACS (Jurong East/Bukit Batok)", "Feiyue (Choa Chu Kang)", "Others (Please Specify):"], optional: false
+    type: String, allowedValues: ["NTUC Health (Jurong West)", "SACS (Jurong East/Bukit Batok)", "Others (Please Specify):"], optional: false
     }, geriCognitiveFollowUpQ2: {
     type: String, optional: true
     }
@@ -580,6 +580,20 @@ export const formSchemas = {
     type: String, allowedValues: ["Yes"]
     }
     }
+   ),
+
+   "Dietitian" : new SimpleSchema({
+    dietitianQ1: {
+    type: String, optional: true
+    }, dietitianQ2: {
+    type: String, optional: true
+    }, dietitianQ3: {
+    type: String, optional: true
+    }, dietitianQ4: {
+    type: Array, optional: true
+    }, "dietitianQ4.$": {
+    type: String, allowedValues: ["Yes"]
+    },
    ),
 
    "Social Service" : new SimpleSchema({

@@ -587,9 +587,9 @@ export const formLayouts = {
       What is your education level?
       <img src='/images/geri-amt/edu.png' alt='Education' /> <br />
       <RadioField name="geriAmtQ12" label="Geri - AMT Q11" />
-      Need referral to cognitive - 2nd Tier Screening ?
+      Need referral to Cognitive Follow-Up?
       <RadioField name="geriAmtQ13" label="Geri - AMT Q12" />
-      Referral to cognitive - 2nd Tier Screening
+      Referral to Cognitive Follow-Up
       <RadioField name="geriAmtQ14" label="Geri - AMT Q13" />
     </Fragment>
   ),
@@ -961,6 +961,19 @@ export const formLayouts = {
       Completed Doctor’s Consult station. Please check that Form A is filled.
       <SelectField name="doctorSConsultQ11" checkboxes="true" label="Doctor's Consult Q7" />
       
+    </Fragment>
+  ),
+
+  "Dietitian" : (info) => (
+    <Fragment>
+      Dietitian's Name:
+      <TextField name="dietitianQ1" label="Dietitian Q1"/>
+      Dietitian's License No.:
+      <TextField name="dietitianQ2" label="Dietitian Q2"/>
+      Dietitian's Notes
+      <LongTextField name="dietitianQ3" label="Dietitian Q3" />
+      Does patient require urgent follow up?
+      <SelectField name="dietitianQ4" checkboxes="true" label="Dietitian Q4" />
     </Fragment>
   ),
 
