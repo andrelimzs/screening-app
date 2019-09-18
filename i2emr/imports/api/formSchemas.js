@@ -547,11 +547,11 @@ export const formSchemas = {
 
   "Doctor's Consult" : new SimpleSchema({
     doctorSConsultQ1: {
-    type: String, optional: true
+    type: String, optional: false
     }, doctorSConsultQ2: {
-    type: String, optional: true
+    type: String, optional: false
     }, doctorSConsultQ3: {
-    type: String, optional: true
+    type: String, optional: false
     }, doctorSConsultQ4: {
     type: Array, optional: true
     }, "doctorSConsultQ4.$": {
@@ -594,6 +594,7 @@ export const formSchemas = {
     }, "dietitianQ4.$": {
     type: String, allowedValues: ["Yes"]
     },
+    }
    ),
 
    "Social Service" : new SimpleSchema({
