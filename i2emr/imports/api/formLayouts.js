@@ -618,7 +618,7 @@ export const formLayouts = {
       <SomeComp calculation={(model) => (
         <h3>
           EBAS Total Score: 
-          {model["geriEbasDepQ9"] = getScore(model, ['geriEbasDepQ1', 'geriEbasDepQ2', 'geriEbasDepQ2', 'geriEbasDepQ4', 'geriEbasDepQ5', 'geriEbasDepQ6', 'geriEbasDepQ7', 'geriEbasDepQ8'], '1 (Abnormal)')}/>
+          {model["geriEbasDepQ9"] = getScore(model, ['geriEbasDepQ1', 'geriEbasDepQ2', 'geriEbasDepQ2', 'geriEbasDepQ4', 'geriEbasDepQ5', 'geriEbasDepQ6', 'geriEbasDepQ7', 'geriEbasDepQ8'], '1 (Abnormal)')}
           /8
         </h3>
       )} />
