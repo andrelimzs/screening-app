@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react';
 
-import { geriPtConsult } from './infoLayouts/geriPtConsult'
-import { geriOtConsult } from './infoLayouts/geriOtConsult'
-import { screeningReview } from './infoLayouts/screeningReview'
-import { doctorSConsult } from './infoLayouts/doctorSConsult'
-import { geriCognitiveFollowUp } from './infoLayouts/geriCognitiveFollowUp'
-import { socialService } from './infoLayouts/socialService'
+import { geriPtConsult } from './infoLayouts/geriPtConsult';
+import { geriOtConsult } from './infoLayouts/geriOtConsult';
+import { screeningReview } from './infoLayouts/screeningReview';
+import { doctorSConsult } from './infoLayouts/doctorSConsult';
+import { geriCognitiveFollowUp } from './infoLayouts/geriCognitiveFollowUp';
+import { socialService } from './infoLayouts/socialService';
+import { dietitian } from './infoLayouts/dietitian';
 
 // Define the layouts
 export const infoLayouts = {
@@ -33,5 +34,8 @@ export const infoLayouts = {
     return socialService(info);
   },
 
+  "Dietitian" : (info) => {
+    return dietitian(info);
+  },
 
 };
