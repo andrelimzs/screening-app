@@ -9,7 +9,8 @@ export const doctorSConsult = (info) => {
             info['Hx HCSR'].hxHcsrQ2.split("\n").map((text) => {
                 return <p>{text}<br /></p>
             })
-        }</b>
+        }
+        <br /><br /></b>
 
         <h2>Systems Review</h2>
         Summarised systems review<br />
@@ -18,7 +19,8 @@ export const doctorSConsult = (info) => {
             info['Hx HCSR'].hxHcsrQ3.split("\n").map((text) => {
                 return <p>{text}<br /></p>
             })
-        }</b>
+        }
+        <br /><br /></b>
 
 
         <h2>Urinary/Faecal incontinence</h2>
@@ -85,7 +87,8 @@ export const doctorSConsult = (info) => {
             info['Hx NSS'].hxNssQ12.split("\n").map((text) => {
                 return <p>{text}<br /></p>
             })
-        }</b>
+        }
+        <br /><br /></b>
 
         <h2>Family History</h2>
         Summary of Relevant Family History<br />
@@ -94,14 +97,15 @@ export const doctorSConsult = (info) => {
             info['Hx Cancer'].hxCancerQ10.split("\n").map((text) => {
                 return <p>{text}<br /></p>
             })
-        }</b>
+        }
+        <br /><br /></b>
 
         <h2>Blood Pressure</h2>
         Average Blood Pressure<br />
         <b>{typeof(info['Hx Cancer']) !== "undefined" &&
             info['Hx Cancer'].hxCancerQ17
         }
-        /
+        
         {typeof(info['Hx Cancer']) !== "undefined" &&
             info['Hx Cancer'].hxCancerQ18
         }
@@ -111,6 +115,26 @@ export const doctorSConsult = (info) => {
         BMI<br />
         <b>{typeof(info['Hx Cancer']) !== "undefined" &&
             info['Hx Cancer'].hxCancerQ21
+        }
+        <br /><br /></b>
+
+        <h2>OT Consult</h2>
+        Reasons for referral from OT consult <br />
+        <b>{typeof(info['Geri - OT Consult']) !== "undefined" &&
+            typeof(info['Geri - OT Consult'].geriOtConsultQ3) !== "undefined" && 
+            info['Geri - OT Consult'].geriOtConsultQ3.split("\n").map((text) => {
+                return <p>{text}<br /></p>
+            })
+        }
+        <br /><br /></b>
+
+        <h2>PT Consult</h2>
+        Reasons for referral from PT consult <br />
+        <b>{typeof(info['Geri - PT Consult']) !== "undefined" &&
+            typeof(info['Geri - PT Consult'].geriPtConsultQ3) !== "undefined" && 
+            info['Geri - PT Consult'].geriPtConsultQ3.split("\n").map((text) => {
+                return <p>{text}<br /></p>
+            })
         }
         <br /><br /></b>
       
