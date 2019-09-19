@@ -108,7 +108,7 @@ export const geriOtConsult = (info) => {
         Walking aid (if any):  <br />
         <b>{typeof(info['Geri - TUG']) !== "undefined" &&
             info['Geri - TUG'].geriTugQ1.map((data) => {
-                data + ", ";            
+                return data + ", "
                 })
             }<br /><br /></b>
         {typeof(info['Geri - TUG']) !== "undefined" &&
