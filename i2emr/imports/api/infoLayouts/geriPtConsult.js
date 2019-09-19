@@ -55,7 +55,11 @@ export const geriPtConsult = (info) => {
             info['Geri - Frail Scale'].geriFrailScaleQ3}<br /><br /></b>
         4. Illnesses: For 11 illnesses, participants are asked, “Did a doctor ever tell you that you have [illness]?” <br />The illnesses include hypertension, diabetes, cancer (other than a minor skin cancer), chronic lung disease, heart attack, congestive heart failure, angina, asthma, arthritis, stroke, and kidney disease.<br /><br />The total illnesses (0–11) are recorded as <br />0–4 = 0 and 5–11 = 1.<br />
         <b>{typeof(info['Geri - Frail Scale']) !== "undefined" &&
-            info['Geri - Frail Scale'].geriFrailScaleQ4}<br /><br /></b>
+            typeof(info['Geri - Frail Scale'].geriFrailScaleQ4) !== "undefined" &&
+            info['Geri - Frail Scale'].geriFrailScaleQ4.map(text => {
+                return <p>{text}<br/></p>
+            })
+            }<br /><br /></b>
         5. Loss of weight: How much do you weigh with your clothes on but without shoes? [current weight] <br />One year ago, in October 2018, how much did you weigh without your shoes and with your clothes on? [weight 1 year ago]. <br /><br />Percent weight change is computed as: <br />[[weight 1 year ago - current weight]/weight 1 year ago]] * 100.<br />What is the percentage (%) weight change?<br /><br />Percent change > 5 (representing a 5% loss of weight) is scored as 1 and &lt; 5 as 0.<br /><br />If participant cannot remember his/her weight, ask if there was any significant loss in weight the past year.<br />
         <b>{typeof(info['Geri - Frail Scale']) !== "undefined" &&
             info['Geri - Frail Scale'].geriFrailScaleQ5}<br /><br /></b>
@@ -103,6 +107,8 @@ export const geriPtConsult = (info) => {
                 return data + ", ";            
             })}<br /><br /></b>
         {typeof(info['Geri - TUG']) !== "undefined" &&
+        typeof(info['Geri - TUG'] !== "undefined") &&
+        info['Geri - TUG'].geriTugQ1.includes("Others (Please specify in textbox )") &&
             <div>
                 Type of Walking Aid: <br />
                 <b>{typeof(info['Geri - TUG']) !== "undefined" &&

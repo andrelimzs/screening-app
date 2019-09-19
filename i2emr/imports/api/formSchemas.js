@@ -528,7 +528,7 @@ export const formSchemas = {
 
    "Geri - Geri Appt" : new SimpleSchema({
     geriGeriApptQ4: {
-    type: String, allowedValues: ["Yes", "No"], optional: false
+    type: String, allowedValues: ["Yes", "No"], optional: true
     }, geriGeriApptQ5: {
     type: Boolean, label:"Done", optional: true
     }, geriGeriApptQ6: {

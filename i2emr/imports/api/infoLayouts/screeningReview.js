@@ -20,9 +20,9 @@ export const screeningReview = (info) => {
         }
         <font color="red">{typeof(info['Hx Cancer']) !== "undefined" &&
             info['Hx Cancer'].hxCancerQ17 >= 130 && 
-            <div>{info['Hx Cancer'].hxCancerQ17}
+            <span>{info['Hx Cancer'].hxCancerQ17}
             <p><br/>Blood pressure is high, please see a GP if you have not been diagnosed with hypertension<br/></p>
-            </div>
+            </span>
         }</font>
         <br /><br /></b>
 
@@ -33,8 +33,8 @@ export const screeningReview = (info) => {
         }
         <font color="red">{typeof(info['Hx Cancer']) !== "undefined" &&
             info['Hx Cancer'].hxCancerQ18 >= 85 && 
-            <div>{info['Hx Cancer'].hxCancerQ18}
-            <p><br/>Blood pressure is high, please see a GP if you have not been diagnosed with hypertension<br/></p></div>
+            <span>{info['Hx Cancer'].hxCancerQ18}
+            <p><br/>Blood pressure is high, please see a GP if you have not been diagnosed with hypertension<br/></p></span>
         }</font>
         <br /><br /></b>
 
@@ -48,13 +48,13 @@ export const screeningReview = (info) => {
         }
         <font color="red">{typeof(info['Hx Cancer']) !== "undefined" &&
             info['Hx Cancer'].hxCancerQ21 >= 23 &&
-            <div>{info['Hx Cancer'].hxCancerQ21}
-            <p><br/>BMI is overweight<br/></p></div>
+            <span>{info['Hx Cancer'].hxCancerQ21}
+            <p><br/>BMI is overweight<br/></p></span>
         }
         {typeof(info['Hx Cancer']) !== "undefined" &&
             info['Hx Cancer'].hxCancerQ21 <= 18.5 &&
-            <div>{info['Hx Cancer'].hxCancerQ21}
-            <p><br/>BMI is underweight<br/></p></div>
+            <span>{info['Hx Cancer'].hxCancerQ21}
+            <p><br/>BMI is underweight<br/></p></span>
         }
         </font>
         <br /><br /></b>
@@ -146,8 +146,8 @@ export const screeningReview = (info) => {
         <font color ="red">
         {info['Geri - Vision'] && 
         info['Geri - Vision'].geriVisionQ3 >= 12 &&
-        <div>{info['Geri - Vision'].geriVisionQ3} 
-        <p><br/>See VA with pinhole<br/></p></div>
+        <span>{info['Geri - Vision'].geriVisionQ3} 
+        <p><br/>See VA with pinhole<br/></p></span>
         }
         </font>
         <br /><br /></b>
@@ -159,9 +159,9 @@ export const screeningReview = (info) => {
         <font color ="red">
             {info['Geri - Vision'] && 
         info['Geri - Vision'].geriVisionQ4 >= 12 &&
-        <div>
+        <span>
         {info['Geri - Vision'].geriVisionQ4}
-        <p><br/>See VA with pinhole<br/></p></div>}
+        <p><br/>See VA with pinhole<br/></p></span>}
         </font>
         <br /><br /></b>
 
@@ -169,14 +169,14 @@ export const screeningReview = (info) => {
         6/<b>{info['Geri - Vision'] && 
         typeof(info['Geri - Vision'].geriVisionQ5) !== "undefined" &&
         info['Geri - Vision'].geriVisionQ5 < 12 &&
-        <div>{info['Geri - Vision'].geriVisionQ5}
-        <p><br/>Refractive error, participant should have received spectacles vouchers<br/></p></div>}
+        <span>{info['Geri - Vision'].geriVisionQ5}
+        <p><br/>Refractive error, participant should have received spectacles vouchers<br/></p></span>}
         <font color ="red">
         {info['Geri - Vision'] && 
         typeof(info['Geri - Vision'].geriVisionQ5) !== "undefined" &&
         info['Geri - Vision'].geriVisionQ5 >= 12 &&
-        <div>{info['Geri - Vision'].geriVisionQ5}
-        <p><br/>Non-refractive error, participant should have consulted on-site doctor<br/></p></div>}
+        <span>{info['Geri - Vision'].geriVisionQ5}
+        <p><br/>Non-refractive error, participant should have consulted on-site doctor<br/></p></span>}
         </font>
         <br /><br /></b>
 
@@ -184,14 +184,14 @@ export const screeningReview = (info) => {
         6/<b>{info['Geri - Vision'] && 
         typeof(info['Geri - Vision'].geriVisionQ6) !== "undefined" &&
         info['Geri - Vision'].geriVisionQ6 < 12 &&
-        <div>{info['Geri - Vision'].geriVisionQ6}
-        <p><br/>Refractive error, participant should have received spectacles vouchers<br/></p></div>}
+        <span>{info['Geri - Vision'].geriVisionQ6}
+        <p><br/>Refractive error, participant should have received spectacles vouchers<br/></p></span>}
         <font color ="red">
         {info['Geri - Vision'] && 
         typeof(info['Geri - Vision'].geriVisionQ6) !== "undefined" &&
         info['Geri - Vision'].geriVisionQ6 >= 12 &&
-        <div>{info['Geri - Vision'].geriVisionQ6}
-        <p><br/>Non-refractive error, participant should have consulted on-site doctor<br/></p></div>}
+        <span>{info['Geri - Vision'].geriVisionQ6}
+        <p><br/>Non-refractive error, participant should have consulted on-site doctor<br/></p></span>}
         </font>
         <br /><br /></b>
 
@@ -207,7 +207,7 @@ export const screeningReview = (info) => {
             <div>
             Yes. Details:<br />
             {typeof(info['Hx HCSR'].hxHcsrQ9) !== "undefined" &&
-            <div>info['Hx HCSR'].hxHcsrQ9
+            <div>{info['Hx HCSR'].hxHcsrQ9}
             <p><br /><br />If it is a Geri participant, inform them HPB will follow-up with them. If it is a non-Geri participant, advice them to visit a polyclinic to follow-up with their hearing issue</p></div>}</div>
         }
         <br /></font>
@@ -242,8 +242,8 @@ export const screeningReview = (info) => {
         {
             typeof(info['Hx NSS']) !== "undefined" &&
             typeof(info['Hx NSS'].hxNssQ2) !== "undefined" && 
-            info['Hx NSS'].hxNssQ2 !== "No" && 
-            info['Hx NSS'].hxNssQ2
+            info['Hx NSS'].hxNssQ2 !== "No" &&         
+            (info['Hx NSS'].hxNssQ2 === "Yes (please answer question below)" ? "Yes" : info['Hx NSS'].hxNssQ2)
         }
         <br /><br /></b>
 
@@ -259,6 +259,16 @@ export const screeningReview = (info) => {
         Do you consume alcoholic drinks? (Note: Standard drink means a shot of hard liquor, a can or bottle of beer, or a glass of wine.) <br/>
         <b>{typeof(info['Hx NSS']) !== "undefined" &&
             typeof(info['Hx NSS'].hxNssQ15) !== "undefined" && 
+            (info['Hx NSS'].hxNssQ15 === "Less than 2 standard drinks per day on average." || info['Hx NSS'].hxNssQ15 === "More than 2 standard drinks per day on average.") &&
+            <div>
+                {info['Hx NSS'].hxNssQ15}
+                <p><br/>Check if participant is referred to Health Promotion Board (HPB) Metabolic booth at Exhibition. If no, tick on PHS Passport and indicate<br/></p>
+            </div>
+        }
+        {typeof(info['Hx NSS']) !== "undefined" &&
+            typeof(info['Hx NSS'].hxNssQ15) !== "undefined" && 
+            info['Hx NSS'].hxNssQ15 !== "Less than 2 standard drinks per day on average." &&
+            info['Hx NSS'].hxNssQ15 !== "More than 2 standard drinks per day on average." &&
             info['Hx NSS'].hxNssQ15
         }<br /><br /></b>
         {/* Pending conditions */}
@@ -287,7 +297,8 @@ export const screeningReview = (info) => {
         Registered for Mammogram under NHGD?<br/>
         <b>{typeof(info['WCE']) !== "undefined" &&
             typeof(info['WCE'].wceQ6) !== "undefined" && 
-            info['WCE'].wceQ6
+            info['WCE'].wceQ6 === "Yes, (Please specify date of appointment if given):" && 
+            "Yes"
         }<br /><br /></b>
 
         <h2>Geriatrics</h2>
@@ -309,7 +320,11 @@ export const screeningReview = (info) => {
                 {info['Geri - PT Consult'].geriPtConsultQ4}
                 <p><br/>Reasons for referral to social support exhibition booth/ AIC (PT):<br/></p>
                 {typeof(info['Geri - PT Consult'].geriPtConsultQ5) !== "undefined" &&
-                info['Geri - PT Consult'].geriPtConsultQ5}
+                typeof(info['Geri - PT Consult'].geriPtConsultQ5) !== "undefined" &&
+                info['Geri - PT Consult'].geriPtConsultQ5.split("\n").map(text => {
+                    return <p>{text}<br/></p>
+                })
+                }
             </div>
         }</font>
         <br /><br /></b>
@@ -327,7 +342,11 @@ export const screeningReview = (info) => {
             {info['Geri - OT Consult'].geriOtConsultQ4}
             <p><br/>Reasons for referral to social support exhibition booth/ AIC (OT):<br/></p>
             {typeof(info['Geri - OT Consult'].geriOtConsultQ5) !== "undefined" &&
-            info['Geri - OT Consult'].geriOtConsultQ5}
+            typeof(info['Geri - OT Consult'].geriOtConsultQ5) !== "undefined" &&
+            info['Geri - OT Consult'].geriOtConsultQ5.split("\n").map(text => {
+                return <p>{text}<br/></p>
+            })
+            }
             </div>
         }</font>
         <br /><br /></b>
@@ -380,8 +399,8 @@ export const screeningReview = (info) => {
             info['Doctor\'s Consult'].doctorSConsultQ4 ? "Yes" : "No"
         }<br /><br /></b>
 
-        <h3><font color="red">"All participants will receive a more detailed health report from PHS within 4-6 weeks of the screening. 
-*If you have gone for phlebotomy, you will receive the blood test results from NUHS within 4 - 6 weeks of the screening."</font></h3>
+        <h3><font color="red">All participants will receive a more detailed health report from PHS within 4-6 weeks of the screening. 
+*If you have gone for phlebotomy, you will receive the blood test results from NUHS within 4 - 6 weeks of the screening.</font></h3>
       
     </Fragment>
 }

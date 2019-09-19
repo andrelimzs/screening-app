@@ -30,7 +30,7 @@ export const geriOtConsult = (info) => {
         6. Eye Functional Test *only applicable if vision is worse than 6/60<br/>
         <b>{info['Geri - Vision'] && 
         info['Geri - Vision'].geriVisionQ7
-        })}<br /><br /></b>
+        }<br /><br /></b>
 
 
         <h2>OT Questionnaire Results</h2>
@@ -41,7 +41,8 @@ export const geriOtConsult = (info) => {
 
         2. Has any medication you've taken caused you drowsiness/ giddiness?<br/>
         <b>{info['Geri - OT Questionnaire'] && 
-        info['Geri - OT Questionnaire'].geriOtQuestionnaireQ2}</b><br/>
+        info['Geri - OT Questionnaire'].geriOtQuestionnaireQ2 === "Yes (Specify in textbox )" && 
+        "Yes. Details:"}</b><br/>
         <b>{info['Geri - OT Questionnaire'] && 
         typeof(info['Geri - OT Questionnaire'].geriOtQuestionnaireQ3) !== "undefined" && 
         info['Geri - OT Questionnaire'].geriOtQuestionnaireQ3.split("\n").map((text) => {
@@ -111,12 +112,13 @@ export const geriOtConsult = (info) => {
                 })
             }<br /><br /></b>
         {typeof(info['Geri - TUG']) !== "undefined" &&
+        typeof(info['Geri - TUG'] !== "undefined") &&
+        info['Geri - TUG'].geriTugQ1.includes("Others (Please specify in textbox )") &&
             <div>
                 Type of Walking Aid: <br />
                 <b>{typeof(info['Geri - TUG']) !== "undefined" &&
                     info['Geri - TUG'].geriTugQ2}<br /><br /></b>
             </div>}
-            
         Time taken (in seconds): <br />
         <b>{typeof(info['Geri - TUG']) !== "undefined" &&
             info['Geri - TUG'].geriTugQ3}<br /><br /></b>
