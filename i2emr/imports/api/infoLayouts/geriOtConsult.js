@@ -29,8 +29,7 @@ export const geriOtConsult = (info) => {
 
         6. Eye Functional Test *only applicable if vision is worse than 6/60<br/>
         <b>{info['Geri - Vision'] && 
-        info['Geri - Vision'].geriVisionQ7.map(data => {
-            return data + ', ';
+        info['Geri - Vision'].geriVisionQ7
         })}<br /><br /></b>
 
 

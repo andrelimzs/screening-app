@@ -108,7 +108,51 @@ class App extends Component {
 
         </div>
       );
-    } else if ( station ) {
+    } else if ( station && station === "Screening Review")  {
+      return (
+      <div>
+          
+          <Button variant="outlined" onClick={this.selectStation.bind(this, "")}>Back</Button>
+          <br />
+          <Station station={station} />
+          
+          <Grid container
+            justify="flex-start"
+            spacing={16}>
+            <Grid item xs={12}>
+              <Queue patientList={this.props.patientList} />
+            </Grid>
+            <Grid container
+              direction="row"
+              justify="flex-start"
+              alignItems="flex-start"
+              spacing={16}
+            > 
+              <Grid item xs={12}>              
+                <Info station={station} id={Session.get('currentPatient')} patientInfo={this.props.patientInfo} />
+              </Grid>
+
+            </Grid>
+          </Grid>
+
+          <Dialog
+            open={!this.props.connected}
+            // onClose={this.handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{"You have been disconnected"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Please reconnect to wifi network.
+              </DialogContentText>
+            </DialogContent>
+          </Dialog>
+
+        </div>)
+    }
+    
+    else if ( station ) {
       return (
         <div>
           

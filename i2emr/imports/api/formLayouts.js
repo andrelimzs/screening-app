@@ -450,7 +450,7 @@ export const formLayouts = {
         2a. Has a doctor ever told you that you are overweight or obese before?
         <RadioField name="hxCancerQ22" label="Hx Cancer Q22"/>
         2b. Please tick to highlight if you feel BMI or BP requires closer scrutiny by doctors and dietitians later. 
-        <SelectField name="hxCancerQ23" checkboxes="true" label="Hx Cancer Q23" />
+        <BoolField name="hxCancerQ23" />
         <b>REFER TO DR CONSULT at: <br />1) <font color="red">Doctor's Consultation station</font>, tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation, <br />IF BMI IS:<br />≥ 23 as overweight (if positive for other risk factors) and ≥ 27.5 as obese, write reasons under dietitian referral on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation<br /></b>
         <h3><u>3) Waist Circumference</u> (taken only if cannot measure BMI e.g. wheelchair, prosthetic legs)</h3>
         Waist Circumference (in cm) <br />
@@ -643,6 +643,7 @@ export const formLayouts = {
   "Geri - Cognitive Follow Up" : (info) => (
     <Fragment>
       <h2> Cognitive Follow Up</h2>
+      Which organisation is the participant referred to?
       <RadioField name="geriCognitiveFollowUpQ1" label="Geri - Cognitive Follow Up Q1" />
       <DisplayIf condition={(context) => (typeof(context.model.geriCognitiveFollowUpQ1) !== "undefined" && context.model.geriCognitiveFollowUpQ1 === "Others (Please Specify):")}>
         <Fragment>
@@ -916,7 +917,7 @@ export const formLayouts = {
         <Fragment>
           <h3>Participant is recommended for social support:</h3>
           Persuade participant to go to social support booth and explain that AIC can help
-          <SelectField name="geriGeriApptQ5" checkboxes="true" label="Geri - Geri Appt Q5" />
+          <BoolField name="geriGeriApptQ5" />
         </Fragment>
       </DisplayIf>
 
@@ -945,21 +946,21 @@ export const formLayouts = {
       Doctor's Memo
       <LongTextField name="doctorSConsultQ3" label="Doctor's Consult Q3" />
       Refer to dietitian?
-      <SelectField name="doctorSConsultQ4" checkboxes="true" label="Doctor's Consult Q4" />
+      <BoolField name="doctorSConsultQ4" />
       Reason for referral
       <LongTextField name="doctorSConsultQ5" label="Doctor's Consult Q5"/>
       Refer to Social Support?
-      <SelectField name="doctorSConsultQ6" checkboxes="true" label="Doctor's Consult Q4" />
+      <BoolField name="doctorSConsultQ6" />
       Reason for referral
       <LongTextField name="doctorSConsultQ7" label="Doctor's Consult Q5"/>
       Refer to Dental?
-      <SelectField name="doctorSConsultQ8" checkboxes="true" label="Doctor's Consult Q4" />
+      <BoolField name="doctorSConsultQ8" />
       Reason for referral
       <LongTextField name="doctorSConsultQ9" label="Doctor's Consult Q5"/>
       Does patient require urgent follow up 
-      <SelectField name="doctorSConsultQ10" checkboxes="true" label="Doctor's Consult Q6" />
+      <BoolField name="doctorSConsultQ10" />
       Completed Doctor’s Consult station. Please check that Form A is filled.
-      <SelectField name="doctorSConsultQ11" checkboxes="true" label="Doctor's Consult Q7" />
+      <BoolField name="doctorSConsultQ11" />
       
     </Fragment>
   ),
@@ -973,7 +974,7 @@ export const formLayouts = {
       Dietitian's Notes
       <LongTextField name="dietitianQ3" label="Dietitian Q3" />
       Does patient require urgent follow up?
-      <SelectField name="dietitianQ4" checkboxes="true" label="Dietitian Q4" />
+      <BoolField name="dietitianQ4" label="Dietitian Q4" />
     </Fragment>
   ),
 

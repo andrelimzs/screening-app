@@ -35,7 +35,7 @@ export const doctorSConsult = (info) => {
         }
         <br />
         {typeof(info['Hx HCSR']) !== "undefined" &&
-            info['Hx HCSR'].hxHcsrQ5 !== "undefined" &&
+            typeof(info['Hx HCSR'].hxHcsrQ5) !== "undefined" &&
             info['Hx HCSR'].hxHcsrQ5
         }</font>
         <br /><br /></b>

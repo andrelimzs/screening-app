@@ -230,9 +230,7 @@ export const formSchemas = {
       }, hxCancerQ22: {
       type: String, allowedValues: ["Yes", "No"], optional: false
       }, hxCancerQ23: {
-      type: Array, optional: true
-      }, "hxCancerQ23.$": {
-      type: String, allowedValues: ["Yes"]
+      type: Boolean, label:"Yes", optional: true
       }, hxCancerQ24: {
       type: Number, optional: true
       }, hxCancerQ25: {
@@ -532,9 +530,7 @@ export const formSchemas = {
     geriGeriApptQ4: {
     type: String, allowedValues: ["Yes", "No"], optional: false
     }, geriGeriApptQ5: {
-    type: Array, optional: true
-    }, "geriGeriApptQ5.$": {
-    type: String, allowedValues: ["Done"]
+    type: Boolean, label:"Done", optional: true
     }, geriGeriApptQ6: {
     type: String, allowedValues: ["Yes, requirement met.", "No, requirement not met."], optional: false
     }, geriGeriApptQ7: {
@@ -553,31 +549,21 @@ export const formSchemas = {
     }, doctorSConsultQ3: {
     type: String, optional: false
     }, doctorSConsultQ4: {
-    type: Array, optional: true
-    }, "doctorSConsultQ4.$": {
-    type: String, allowedValues: ["Yes"]
+    type: Boolean, label:"Yes", optional: true
     }, doctorSConsultQ5: {
     type: String, optional: true
     }, doctorSConsultQ6: {
-    type: Array, optional: true
-    }, "doctorSConsultQ6.$": {
-    type: String, allowedValues: ["Yes"]
+    type: Boolean, label:"Yes", optional: true
     }, doctorSConsultQ7: {
     type: String, optional: true
     }, doctorSConsultQ8: {
-    type: Array, optional: true
-    }, "doctorSConsultQ8.$": {
-    type: String, allowedValues: ["Yes"]
+    type: Boolean, label:"Yes", optional: true
     }, doctorSConsultQ9: {
     type: String, optional: true
     }, doctorSConsultQ10: {
-    type: Array, optional: true
-    }, "doctorSConsultQ10.$": {
-    type: String, allowedValues: ["Yes"]
+    type: Boolean, label:"Yes", optional: true
     }, doctorSConsultQ11: {
-    type: Array, optional: false
-    }, "doctorSConsultQ11.$": {
-    type: String, allowedValues: ["Yes"]
+    type: Boolean, label:"Yes",  optional: false
     }
     }
    ),
@@ -590,10 +576,8 @@ export const formSchemas = {
     }, dietitianQ3: {
     type: String, optional: true
     }, dietitianQ4: {
-    type: Array, optional: true
-    }, "dietitianQ4.$": {
-    type: String, allowedValues: ["Yes"]
-    },
+    type: Boolean, label:"Yes", optional: true
+    }
     }
    ),
 
