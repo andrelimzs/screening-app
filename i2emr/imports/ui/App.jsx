@@ -16,6 +16,9 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import { DialogTitle,DialogContent,DialogContentText } from '@material-ui/core';
+import { infoLayouts } from '../api/infoLayouts.js';
+
+const stationsWithInfo = new Set(Object.keys(infoLayouts))
 
 const styles = theme => ({
   root: {
@@ -37,11 +40,12 @@ const styles = theme => ({
 class App extends Component {
   state = {
     currentPatient: "",
-    links: Object.keys(formLayouts).concat(["Done"]),
+    links: Object.keys(formLayouts),
   }
 
   selectStation(newStation, e) {
     e.preventDefault();
+    window.scrollTo(0, 0);
 
     Session.set("station",newStation);
 
@@ -104,7 +108,51 @@ class App extends Component {
 
         </div>
       );
-    } else if ( station ) {
+    } else if ( station && station === "Screening Review")  {
+      return (
+      <div>
+          
+          <Button variant="outlined" onClick={this.selectStation.bind(this, "")}>Back</Button>
+          <br />
+          <Station station={station} />
+          
+          <Grid container
+            justify="flex-start"
+            spacing={16}>
+            <Grid item xs={12}>
+              <Queue patientList={this.props.patientList} />
+            </Grid>
+            <Grid container
+              direction="row"
+              justify="flex-start"
+              alignItems="flex-start"
+              spacing={16}
+            > 
+              <Grid item xs={12}>              
+                <Info station={station} id={Session.get('currentPatient')} patientInfo={this.props.patientInfo} />
+              </Grid>
+
+            </Grid>
+          </Grid>
+
+          <Dialog
+            open={!this.props.connected}
+            // onClose={this.handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{"You have been disconnected"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Please reconnect to wifi network.
+              </DialogContentText>
+            </DialogContent>
+          </Dialog>
+
+        </div>)
+    }
+    
+    else if ( station ) {
       return (
         <div>
           
@@ -126,7 +174,7 @@ class App extends Component {
               alignItems="flex-start"
               spacing={16}
             >
-              <Grid item xs={6}>
+              <Grid item xs={8}>
                 {station !== "Finished Patients" && 
                   <Form station={station} id={Session.get('currentPatient')}
                         stationQueue={this.props.patientInfo.stationQueue} patientInfo={this.props.patientInfo}/>
@@ -137,11 +185,9 @@ class App extends Component {
               </Grid>
               
               <Grid item xs={4}>              
-                {/* TODO: Determine which stations need patient info
-                {station !== "Pre-Registration" && 
-                station !== "Registration" && 
+                { stationsWithInfo.has(station) && 
                   <Info station={station} id={Session.get('currentPatient')} patientInfo={this.props.patientInfo} />
-                } */}
+                }
               </Grid>
 
             </Grid>
@@ -197,19 +243,21 @@ const AppContainer = withTracker(() => {
   const connected = Meteor.status().connected;
   const station = Session.get('station');
   const currentPatientID = Session.get('currentPatient');
-  var patientList;
+  var patientList = [];
 
   if (station === "Done") {
     patientList = Patientinfo.find().fetch();
-  } else if (station == "Registration" || station == "Phlebotomy"){
+  // } else if (station == "Registration" || station == "Phlebotomy"){
+  } else {
     patientList = Patientinfo.find(
       { $and:[{ nextStation: station }, { $or:[{ busy: false },{ id: currentPatientID }] }
       ]}).fetch();
-  } else {
-    patientList = Patientinfo.find(
-      {  $or:[{ busy: false },{ id: currentPatientID }] 
-      }).fetch();
   }
+  // } else {
+  //   patientList = Patientinfo.find(
+  //     {  $or:[{ busy: false },{ id: currentPatientID }] 
+  //     }).fetch();
+  // }
   
   //, { sort: { lastSubmit: 1 } }
   // TODO - Find better way to sent patient info in

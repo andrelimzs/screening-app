@@ -46,7 +46,7 @@ export const formSchemas = {
     }, registrationQ9: {
     type: String, allowedValues: ["Yes", "No"], optional: false
     }, registrationQ10: {
-    type: String, allowedValues: ["Bukit Batok Medical Clinic \nBlk 207 Bukit Batok Street 21, #01-114", "Kang An Clinic\nBlk 644 Bukit Batok Central,\xa0#01-70", "Lai Medical Clinic\nBlk 213 Bukit Batok Street 21, #01-209", "Lakeside Family Clinic\n518A Jurong West St 52 # 01-02", "Boon Lay Corporation Clinic\nBlk 350 Jurong East Ave 1, #01-1225", "EJ. Tan Clinic & Surgery\nBlk 104 Jurong East Street 13, #01-100", "Frontier Family Medicine Clinic\n#04-01 Grantral Mall @ Clementi\n3151 Commonwealth Ave West"], optional: false
+    type: String, allowedValues: [ "Bukit Batok Medical Clinic \n Blk 207 Bukit Batok Street 21 #01-114", "Kang An Clinic \n Blk 644 Bukit Batok Central, #01-70", "Lai Medical Clinic \n Blk 213 Bukit Batok Street 21, #01-209", "St Luke's Hospital \n 2 Bukit Batok St 11", "Frontier Family Medicine Clinic (Clementi) \n 3151 Commonwealth Ave West, #04-01 Grantral Mall @ Clementi", "Healthway Medical (Clementi) \n 443 Clementi Ave 3, #01-63", "Healthway Medical (West Coast) \n 727 Clementi West St 2, #01-258", "West Coast Clinic & Surgery (Clementi West) \n 722 Clementi West St 2, #01-162", "Drs Koo, Fok & Associates (Pioneer) \n 31 Jurong West St 63, #02-04", "Lakeside Family Medicine Clinic \n 518A Jurong West St 52, #01-02", "Lee Family Clinic \n Gek Poh Shopping Centre \n 762 Jurong West St 75, #02-262", "Drs Koo, Loh & Associates \n 152 Yung Ho Rd, #B1-03", "Drs. Tang & Partners \n 64 Yung Kuang Rd, #01-115", "Boon Lay Corporation Clinic \n 350 Jurong East Ave 1, #01-1225", "E.J. Tan Clinic & Surgery \n 104 Jurong East St 13, #01-100", "Trinity Medical Clinic & Dental Surgery (Jurong East) \n 130 Jurong Gateway Rd, #02-205/207"], optional: false
     }, registrationQ11: {
     type: String, allowedValues: ["English", "Mandarin", "Malay", "Tamil"], optional: false
     }, registrationQ12: {
@@ -230,9 +230,7 @@ export const formSchemas = {
       }, hxCancerQ22: {
       type: String, allowedValues: ["Yes", "No"], optional: false
       }, hxCancerQ23: {
-      type: Array, optional: true
-      }, "hxCancerQ23.$": {
-      type: String, allowedValues: ["Yes"]
+      type: Boolean, label:"Yes", optional: true
       }, hxCancerQ24: {
       type: Number, optional: true
       }, hxCancerQ25: {
@@ -248,30 +246,8 @@ export const formSchemas = {
 
    "FIT" : new SimpleSchema({
     fitQ1: {
-    type: String, allowedValues: ["Every 6 months", "Every year", "Once every 2 years", "Once every 3 years", "Once every 4 years", "Never", "Others, (Please specify):"], optional: false
-    }, fitQ2: {
-    type: String, optional: true
-    }, fitQ3: {
     type: String, allowedValues: ["Yes", "No"], optional: false
-    }, fitQ4: {
-    type: String, allowedValues: ["Every 6 months", "Every year", "Once every 2 years", "Once every 3 years", "Once every 4 years", "Never", "Others, (Please specify):"], optional: false
-    }, fitQ5: {
-    type: String, optional: true
-    }, fitQ6: {
-    type: String, allowedValues: ["Every 6 months", "Every year", "Once every 2 years", "Once every 3 years", "Once every 4 years", "Once every 5 years", "Once every 10 years", "Never", "Others, (Please specify):"], optional: false
-    }, fitQ7: {
-    type: String, optional: true
-    }, fitQ8: {
-    type: String, allowedValues: ["Every 6 months", "Every year", "Once every 2 years", "Once every 3 years", "Once every 4 years", "Once every 5 years", "Once every 10 years", "Never", "Others, (Please specify):"], optional: false
-    }, fitQ9: {
-    type: String, optional: true
-    }, fitQ10: {
-    type: String, allowedValues: ["Every 6 months", "Every year", "Once every 2 years", "Once every 3 years", "Once every 4 years", "Once every 5 years", "Once every 10 years", "Never", "Others, (Please specify):"], optional: false
-    }, fitQ11: {
-    type: String, optional: true
     }, fitQ12: {
-    type: String, allowedValues: ["Yes", "No"], optional: false
-    }, fitQ13: {
     type: String, allowedValues: ["Yes", "No"], optional: false
     }
     }
@@ -358,6 +334,15 @@ export const formSchemas = {
     }
    ),
 
+   "Geri - Cognitive Follow Up" : new SimpleSchema({
+    geriCognitiveFollowUpQ1: {
+    type: String, allowedValues: ["NTUC Health (Jurong West)", "SACS (Jurong East/Bukit Batok)", "Others (Please Specify):"], optional: false
+    }, geriCognitiveFollowUpQ2: {
+    type: String, optional: true
+    }
+    } 
+   ),
+
    "Geri - Vision" : new SimpleSchema({
     geriVisionQ1: {
     type: String, allowedValues: ["Yes (Specify in textbox )", "No"], optional: false
@@ -438,7 +423,9 @@ export const formSchemas = {
     type: Number, optional: false
     }, geriFrailScaleQ6: {
     type: String, allowedValues: ["Yes", "No"], optional: false
-    }
+    }, geriFrailScaleQ7: {
+    type: Number, optional: true
+    },
     }
    ),
 
@@ -481,7 +468,7 @@ export const formSchemas = {
     }, geriSppbQ8: {
     type: String, allowedValues: ["0       (Could not do)", "1       (> 5.7s )", "2       (4.1 – 5.7s )", "3       (3.2 – 4.0s )", "4       (< 3.1s )"], optional: false
     }, geriSppbQ9: {
-    type: String, optional: false
+    type: Number, optional: false
     }, geriSppbQ10: {
     type: String, allowedValues: ["High Falls Risk (score ≤ 6)", "Low Falls Risk (score > 6)"], optional: false
     }, geriSppbQ11: {
@@ -540,18 +527,10 @@ export const formSchemas = {
    ),
 
    "Geri - Geri Appt" : new SimpleSchema({
-    geriGeriApptQ1: {
-    type: String, allowedValues: ["Yes", "No"], optional: false
-    }, geriGeriApptQ2: {
-    type: String, allowedValues: ["Yes", "No"], optional: false
-    }, geriGeriApptQ3: {
-    type: String, allowedValues: ["Yes", "No"], optional: false
-    }, geriGeriApptQ4: {
-    type: String, allowedValues: ["Yes", "No"], optional: false
+    geriGeriApptQ4: {
+    type: String, allowedValues: ["Yes", "No"], optional: true
     }, geriGeriApptQ5: {
-    type: Array, optional: true
-    }, "geriGeriApptQ5.$": {
-    type: String, allowedValues: ["Done"]
+    type: Boolean, label:"Done", optional: true
     }, geriGeriApptQ6: {
     type: String, allowedValues: ["Yes, requirement met.", "No, requirement not met."], optional: false
     }, geriGeriApptQ7: {
@@ -564,25 +543,40 @@ export const formSchemas = {
 
   "Doctor's Consult" : new SimpleSchema({
     doctorSConsultQ1: {
-    type: String, optional: true
+    type: String, optional: false
     }, doctorSConsultQ2: {
-    type: String, optional: true
+    type: String, optional: false
     }, doctorSConsultQ3: {
-    type: String, optional: true
+    type: String, optional: false
     }, doctorSConsultQ4: {
-    type: Array, optional: true
-    }, "doctorSConsultQ4.$": {
-    type: String, allowedValues: []
+    type: Boolean, label:"Yes", optional: true
     }, doctorSConsultQ5: {
     type: String, optional: true
     }, doctorSConsultQ6: {
-    type: Array, optional: true
-    }, "doctorSConsultQ6.$": {
-    type: String, allowedValues: ["Yes"]
+    type: Boolean, label:"Yes", optional: true
     }, doctorSConsultQ7: {
-    type: Array, optional: false
-    }, "doctorSConsultQ7.$": {
-    type: String, allowedValues: ["Yes"]
+    type: String, optional: true
+    }, doctorSConsultQ8: {
+    type: Boolean, label:"Yes", optional: true
+    }, doctorSConsultQ9: {
+    type: String, optional: true
+    }, doctorSConsultQ10: {
+    type: Boolean, label:"Yes", optional: true
+    }, doctorSConsultQ11: {
+    type: Boolean, label:"Yes",  optional: false
+    }
+    }
+   ),
+
+   "Dietitian" : new SimpleSchema({
+    dietitianQ1: {
+    type: String, optional: true
+    }, dietitianQ2: {
+    type: String, optional: true
+    }, dietitianQ3: {
+    type: String, optional: true
+    }, dietitianQ4: {
+    type: Boolean, label:"Yes", optional: true
     }
     }
    ),
@@ -597,6 +591,8 @@ export const formSchemas = {
     }
     }
    ),
+
+   "Screening Review" : new SimpleSchema({}),
   
    "Feedback Form" : new SimpleSchema({
     feedbackFormQ1: {
@@ -667,6 +663,8 @@ export const formSchemas = {
     type: String, optional: true
     }, feedbackFormQ31: {
     type: String, optional: true
+    }, feedbackFormQ32: {
+    type: String, allowedValues: ["Yes", "No"], optional: false
     }
     }
    ),

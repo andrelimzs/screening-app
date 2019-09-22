@@ -84,39 +84,6 @@ function getBmi(model) {
   }
 }
 
-// Average of two closest bp readings
-function getAverageBp(bp1, bp2, bp3) {
-  let avg_bp;
-  if (typeof(bp1) !== "undefined" && typeof(bp2) !== "undefined") {
-    if (typeof(bp3) === "undefined") {
-      avg_bp = (bp1 + bp2) / 2;
-    } else {
-      const diff_bp1_bp2 = Math.abs(bp1-bp2)
-      const diff_bp1_bp3 = Math.abs(bp1-bp3)
-      const diff_bp2_bp3 = Math.abs(bp2-bp3)
-
-      // If there are 2 pairs of equidistant readings. i.e. 100 110 120
-      if (diff_bp1_bp2 === diff_bp1_bp3 || diff_bp1_bp2 === diff_bp2_bp3 || diff_bp1_bp3 === diff_bp2_bp3) {
-        avg_bp = (bp1 + bp2 + bp3) / 3;
-      }
-      // bp1_bp2 min so use bp1 and bp2
-      else if (diff_bp1_bp2 < diff_bp1_bp3 && diff_bp1_bp2 < diff_bp2_bp3) {
-        avg_bp = (bp1 + bp2) / 2;
-      }
-      // bp1_bp3 min so use bp1 and bp3
-      else if (diff_bp1_bp3 < diff_bp1_bp2 && diff_bp1_bp3 < diff_bp2_bp3) {
-        avg_bp = (bp1 + bp3) / 2;
-      }
-      else { //bp2_bp3 min so use bp2 and bp3
-        avg_bp = (bp2 + bp3) / 2;
-      }
-    }
-  } else {
-    return 0;
-  }
-  return Number(Math.round(avg_bp+'e2')+'e-2');
-}
-
 // Define the layouts
 export const formLayouts = {
   "Pre-Registration" : (info) => (
@@ -125,9 +92,9 @@ export const formLayouts = {
       Gender
       <RadioField name="preRegistrationQ1" />
       Initials (Surname must be spelt out. E.g. John Tan Soo Keng = Tan S.K.J. ; Alan Simon Lee = A.S. Lee)
-      <TextField name="preRegistrationQ2" />
+      <LongTextField name="preRegistrationQ2" />
       Last 4 digits of NRIC (e.g. 987A)
-      <TextField name="preRegistrationQ3" />
+      <LongTextField name="preRegistrationQ3" />
       Going for Phlebotomy?<br /><br /><i>Conditions:<br />1) Fasted for minimum 10 hours <br />          Note: Water is allowed, coffee/tea is not. Medications are fine. <br />2) NOT previously diagnosed with Diabetes/ High Cholesterol/ High Blood Pressure.<br />3) Have not done a blood test within 1 year.</i>
       <RadioField name="preRegistrationQ4" />
       
@@ -146,7 +113,7 @@ export const formLayouts = {
       Marital Status 婚姻状况
       <SelectField name="registrationQ4" />
       Occupation 工作
-      <TextField name="registrationQ5" />
+      <LongTextField name="registrationQ5" />
       GRC/SMC Subdivision [https://www.parliament.gov.sg/mps/find-my-mp]
       <SelectField name="registrationQ6" />
       Household Income Per Capita
@@ -336,14 +303,14 @@ export const formLayouts = {
         4a. What is the average earnings of participant's household per month? (Refer to NSS Form Page 2, Put 'NIL' if participant unable to provide)
         <RadioField name="hxSocialQ3" label="Hx Social Q3"/>
         4b. Number of household members (including yourself): 
-        <TextField name="hxSocialQ4" label="Hx Social Q4"/>
+        <LongTextField name="hxSocialQ4" label="Hx Social Q4"/>
         4c. Do you want to apply for CHAS card? (if you are currently not on CHAS but qualify) <br />
         <img src='/images/hx/chas.jpg' alt='CHAS' /> <br />
         <RadioField name="hxSocialQ5" label="Hx Social Q5"/>
         <DisplayIf condition={(context) => (typeof(context.model.hxSocialQ5) !== "undefined" && context.model.hxSocialQ5 === "No, I qualify but...(Please specify the reasons for not applying if you qualify):" || context.model.hxSocialQ5 === "Yes, (Please specify):")}>
           <Fragment>
             Please specify
-            <TextField name="hxSocialQ6" label="Hx Social Q6"/>
+            <LongTextField name="hxSocialQ6" label="Hx Social Q6"/>
           </Fragment>
         </DisplayIf>
         5. Do you need advice on financial schemes that are available in Singapore or require further financial assistance?
@@ -351,7 +318,7 @@ export const formLayouts = {
         <DisplayIf condition={(context) => (typeof(context.model.hxSocialQ7) !== "undefined" && context.model.hxSocialQ7 === "Yes, (Please specify):")}>
           <Fragment>
             Please specify
-            <TextField name="hxSocialQ8" label="Hx Social Q8"/>
+            <LongTextField name="hxSocialQ8" label="Hx Social Q8"/>
           </Fragment>
         </DisplayIf>
         <b>REFER TO SOCIAL SERVICE STATION</b> if participant is in need of <b>financial aid.</b>  <br />Indicate for Social Service station on:  <br /><b>1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons for referral on the right column</b><br /><br />Note the following criteria for your assessment: (wef from 1st Nov 2019)<br />Per-capita monthly income for CHAS: <b>Green Card: Above $2000; Orange Card: $1201- $2000; Blue Card: $1200 and below</b>
@@ -463,18 +430,10 @@ export const formLayouts = {
             <font color="red"><b>BP HIGH!</b></font> <br />
           </Fragment>
         </DisplayIf>
-        <SomeComp calculation={(model) => (
-          <h3>
-            Average Reading Systolic (average of closest 2 readings):
-              {model['hxCancerQ17'] = getAverageBp(model['hxCancerQ11'], model['hxCancerQ13'], model['hxCancerQ15'])}
-          </h3>
-        )} />
-        <SomeComp calculation={(model) => (
-          <h3>
-            Average Reading Diastolic (average of closest 2 readings):
-              {model['hxCancerQ18'] = getAverageBp(model['hxCancerQ12'], model['hxCancerQ14'], model['hxCancerQ16'])}
-          </h3>
-        )} />
+        Average Reading Systolic (average of closest 2 readings):
+        <NumField name="hxCancerQ17" label="Hx Cancer Q17" /> <br />
+        Average Reading Diastolic (average of closest 2 readings):
+        <NumField name="hxCancerQ18" label="Hx Cancer Q18" /> <br />
         Hypertension criteria:<br />○ Younger participants: > 140/90<br />○ Participants > 80 years old: > 150/90 <br />○ CKD w proteinuria (mod to severe albuminuria): > 130/80<br />○ DM: > 130/80<br /> <br /><b>REFER TO DR CONSULT: (FOR THE FOLLOWING SCENARIOS)<br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A  <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation   <br /><br /><font color="red"><u>HYPERTENSIVE EMERGENCY</u><br />• SYSTOLIC  <mark>≥ 180</mark> AND/OR DIASTOLIC ≥ <mark>110 mmHg</mark> AND <mark><u>SYMPTOMATIC</u></mark> (make sure pt has rested and 2nd reading was taken)<br />o <mark>ASK THE DOCTOR TO COME AND REVIEW!</mark><br /> <br /><u>HYPERTENSIVE URGENCY</u><br />• SYSTOLIC  <mark>≥ 180</mark> AND/OR DIASTOLIC <mark>≥ 110 mmHg</mark> AND <mark>ASYMPTOMATIC</mark> (make sure pt has rested and 2nd reading was taken)<br />o ESCORT TO DC DIRECTLY!<br />o Follow the patient, continue clerking the patient afterward if doctor acknowledges patient is well enough to continue the screening<br /><br /><u>RISK OF HYPERTENSIVE CRISIS</u><br />• IF SYSTOLIC between <mark>160 - 180 mmHg</mark> <br />• IF <mark>ASYMPTOMATIC</mark>, continue clerking. <br />• IF <mark>SYMPTOMATIC</mark>, ESCORT TO DC DIRECTLY!<br /><br /><u>If systolic between 140 - 160 mmHg:</u></font><br />o Ask for:<br />- Has hypertension been pre-diagnosed? If not, refer to DC (possible new HTN diagnosis)<br />- If diagnosed before, ask about compliance and whether he/she goes for regular follow up? If non-compliant or not on regular follow-up, refer to DC (chronic HTN, uncontrolled).<br /></b>
         <h2><u>2) BMI</u></h2>
         Height (in cm) <br />
@@ -491,7 +450,7 @@ export const formLayouts = {
         2a. Has a doctor ever told you that you are overweight or obese before?
         <RadioField name="hxCancerQ22" label="Hx Cancer Q22"/>
         2b. Please tick to highlight if you feel BMI or BP requires closer scrutiny by doctors and dietitians later. 
-        <SelectField name="hxCancerQ23" checkboxes="true" label="Hx Cancer Q23" />
+        <BoolField name="hxCancerQ23" />
         <b>REFER TO DR CONSULT at: <br />1) <font color="red">Doctor's Consultation station</font>, tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation, <br />IF BMI IS:<br />≥ 23 as overweight (if positive for other risk factors) and ≥ 27.5 as obese, write reasons under dietitian referral on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation<br /></b>
         <h3><u>3) Waist Circumference</u> (taken only if cannot measure BMI e.g. wheelchair, prosthetic legs)</h3>
         Waist Circumference (in cm) <br />
@@ -508,64 +467,21 @@ export const formLayouts = {
     <Fragment>
       <h2>PARTICIPANT IDENTIFICATION</h2>
       <h3><font color="red">Please verify participant's identity using his/her NRIC before proceeding <br />A. S/N B. Surname followed by Initials C. Last 4 digits of Participant's NRIC and Letter</font></h3>
-      <h2>1. SCREENING AWARENESS SURVEY</h2>
-      1. How often do you think you should go for health check-up for chronic diseases? (i.e. HTN, DM, HLD)
-      <RadioField name="fitQ1" label="FIT Q1"/>
-      <DisplayIf condition = {(context) => (typeof(context.model.fitQ1) !== undefined && context.model.fitQ1 === 'Others, (Please specify):')} >
-        <Fragment>
-          Please specify:
-          <TextField name="fitQ2" label="FIT Q2"/>
-        </Fragment>
-      </DisplayIf>
-      2. Do you know what is a FIT kit?
-      <RadioField name="fitQ3" label="FIT Q3"/>
-      3. How often should people above 50 years old utilize a FIT kit?
-      <RadioField name="fitQ4" label="FIT Q4"/>
-      <DisplayIf condition={(context) => (typeof(context.model.fitQ4) !== undefined && context.model.fitQ4 === 'Others, (Please specify):')}>
-        <Fragment>
-          Please specify:
-          <TextField name="fitQ5" label="FIT Q5"/>
-        </Fragment>
-      </DisplayIf>
-      4. How often should people go for a colonoscopy?
-      <RadioField name="fitQ6" label="FIT Q6"/>
-      <DisplayIf condition = {(context) => (typeof(context.model.fitQ6) !== undefined && context.model.fitQ6 === 'Others, (Please specify):')} >
-        <Fragment>
-          Please specify:
-          <TextField name="fitQ7" label="FIT Q7"/>
-        </Fragment>
-      </DisplayIf>
-      5. How often should women go for a HPV test?
-      <RadioField name="fitQ8" label="FIT Q8"/>
-      <DisplayIf condition = {(context) => (typeof(context.model.fitQ8) !== undefined && context.model.fitQ8 === 'Others, (Please specify):')} >
-        <Fragment>
-          Please specify:
-          <TextField name="fitQ9" label="FIT Q9"/>
-        </Fragment>
-      </DisplayIf>
-      6. How often should women go for a mammogram?
-      <RadioField name="fitQ10" label="FIT Q10"/>
-      <DisplayIf condition = {(context) => (typeof(context.model.fitQ10) !== undefined && context.model.fitQ10 === 'Others, (Please specify):')} >
-        <Fragment>
-          Please specify:
-          <TextField name="fitQ11" label="FIT Q11"/>
-        </Fragment>
-      </DisplayIf>
-      <h2>2. NSS CANCER SCREENING PRACTICES SURVEY.</h2>
+      <h2>1. NSS CANCER SCREENING PRACTICES SURVEY.</h2>
       1. <font color="red"><b>For respondent aged 50 and above only,</b></font> unless positive family history for colorectal cancer.<br />When was the last time you had a blood stool test? (A blood stool test is a test to determine whether the stool contains blood.)
       <h2><font color="green">{info["Hx Cancer"] && info["Hx Cancer"].hxCancerQ5}</font></h2>
       2. <font color="red"><b>For respondent aged 50 and above only,</b></font> unless positive family history for colorectal cancer.<br />When was the last time you had a colonoscopy? (A colonoscopy is an examination in which a tube is inserted in the rectum to view the colon for signs of cancer or other health problems.)
       <h2><font color="green">{info["Hx Cancer"] && info["Hx Cancer"].hxCancerQ6}</font></h2>
       <h3><font color="red">Please encourage participants to go for FIT every year if participant is above 50, asymptomatic and no positive family history of colorectal cancer in first degree relatives.</font> </h3>
       Does participant has a history of cancer or his/her family history requires further scrutiny by doctors?<font color="red"><b>(If indicated 'Yes', please refer to doctor's consult by following the steps below.)</b></font> 
-      <RadioField name="fitQ12" label="FIT Q12"/>
-      <DisplayIf condition = {(context) => (typeof(context.model.fitQ12) !== undefined && context.model.fitQ12 === 'Yes')} >
+      <RadioField name="fitQ1" label="FIT Q12"/>
+      <DisplayIf condition = {(context) => (typeof(context.model.fitQ1) !== undefined && context.model.fitQ1 === 'Yes')} >
         <Fragment>
           <b>REFER TO DR CONSULT</b> by indicating on: <br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A under Doctor's Consultation row<br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation
         </Fragment>
       </DisplayIf>
       3. Was participant issued 2 FIT kits?
-      <RadioField name="fitQ13" label="FIT Q13"/>
+      <RadioField name="fitQ12" label="FIT Q13"/>
       
     </Fragment>
   ),
@@ -616,7 +532,7 @@ export const formLayouts = {
       <DisplayIf condition = {(context) => (typeof(context.model.wceQ6) !== undefined && context.model.wceQ6 === 'Yes, (Please specify date of appointment if given):')} >
         <Fragment>
           Please specify date:
-          <TextField name="wceQ7" label="WCE Q7"/>
+          <LongTextField name="wceQ7" label="WCE Q7"/>
         </Fragment>
       </DisplayIf>
       
@@ -671,9 +587,9 @@ export const formLayouts = {
       What is your education level?
       <img src='/images/geri-amt/edu.png' alt='Education' /> <br />
       <RadioField name="geriAmtQ12" label="Geri - AMT Q11" />
-      Need referral to cognitive - 2nd Tier Screening ?
+      Need referral to Cognitive Follow-Up?
       <RadioField name="geriAmtQ13" label="Geri - AMT Q12" />
-      Referral to cognitive - 2nd Tier Screening
+      Referral to Cognitive Follow-Up
       <RadioField name="geriAmtQ14" label="Geri - AMT Q13" />
     </Fragment>
   ),
@@ -702,7 +618,7 @@ export const formLayouts = {
       <SomeComp calculation={(model) => (
         <h3>
           EBAS Total Score: 
-          {model["geriEbasDepQ9"] = getScore(model, ['geriEbasDepQ1', 'geriEbasDepQ2', 'geriEbasDepQ2', 'geriEbasDepQ4', 'geriEbasDepQ5', 'geriEbasDepQ6', 'geriEbasDepQ7', 'geriEbasDepQ8'], '1 (Abnormal)')}/>
+          {model["geriEbasDepQ9"] = getScore(model, ['geriEbasDepQ1', 'geriEbasDepQ2', 'geriEbasDepQ2', 'geriEbasDepQ4', 'geriEbasDepQ5', 'geriEbasDepQ6', 'geriEbasDepQ7', 'geriEbasDepQ8'], '1 (Abnormal)')}
           /8
         </h3>
       )} />
@@ -724,6 +640,20 @@ export const formLayouts = {
     </Fragment>
   ),
 
+  "Geri - Cognitive Follow Up" : (info) => (
+    <Fragment>
+      <h2> Cognitive Follow Up</h2>
+      Which organisation is the participant referred to?
+      <RadioField name="geriCognitiveFollowUpQ1" label="Geri - Cognitive Follow Up Q1" />
+      <DisplayIf condition={(context) => (typeof(context.model.geriCognitiveFollowUpQ1) !== "undefined" && context.model.geriCognitiveFollowUpQ1 === "Others (Please Specify):")}>
+        <Fragment>
+          Please Specify:
+          <LongTextField name="geriCognitiveFollowUpQ2" label="Geri - Cognitive Follow Up Q2" />
+        </Fragment>
+      </DisplayIf>
+    </Fragment>
+  ),
+
   "Geri - Vision" : (info) => (
     <Fragment>
       <h2>2. VISION SCREENING</h2>
@@ -732,7 +662,7 @@ export const formLayouts = {
       <DisplayIf condition={(context) => (typeof(context.model.geriVisionQ1) !== "undefined" && context.model.geriVisionQ1 === "Yes (Specify in textbox )")}>
         <Fragment>
             Explanation
-          <TextField name="geriVisionQ2" label="Geri - Vision Q2"/>
+          <LongTextField name="geriVisionQ2" label="Geri - Vision Q2"/>
         </Fragment>
       </DisplayIf>
       2. Visual acuity (w/o pinhole occluder) - Right Eye 6/__ <br />
@@ -781,11 +711,11 @@ export const formLayouts = {
       <h2>3.1 PHYSICAL ACTIVITY SECTION</h2>
       <h2>3.1.2. PHYSICAL ACTIVITY LEVELS</h2>
       1.     How often do you exercise in a week?<br />*If &lt; 3 x/week and would like to start exercising more, suggest physiotherapist consultation
-      <TextField name="geriPhysicalActivityLevelQ1" label="Geri - Physical Activity Level Q1"/>
+      <LongTextField name="geriPhysicalActivityLevelQ1" label="Geri - Physical Activity Level Q1"/>
       2.     How long do you exercise each time?<br />*If &lt; 30 minutes per session and would like to increase, suggest physiotherapist consultation. 
-      <TextField name="geriPhysicalActivityLevelQ2" label="Geri - Physical Activity Level Q2"/>
+      <LongTextField name="geriPhysicalActivityLevelQ2" label="Geri - Physical Activity Level Q2"/>
       3.     What do you do for exercise?<br />*Take down salient points. <br />*Dangerous/ inappropriate exercises are defined to the participants as  exercises that cause pain or difficulty to to the participant in performing.<br />*If exercises are dangerous or deemed inappropriate, to REFER FOR PHYSIOTHERAPIST CONSULATION. 
-      <TextField name="geriPhysicalActivityLevelQ3" label="Geri - Physical Activity Level Q3"/>
+      <LongTextField name="geriPhysicalActivityLevelQ3" label="Geri - Physical Activity Level Q3"/>
       4.     Using the following scale, can you rate the level of exertion when you exercise?<br />(Borg Scale – Rate Perceived Exertion (RPE))<br /><b>*If &lt; 3, to suggest physiotherapist consultation. If >7, to REFER FOR PHYSIOTHERAPIST CONSULATION.</b>
       <img src='/images/geri-physical-activity-level/borg-scale.png' alt='Borg Scale' /> <br />
       <RadioField name="geriPhysicalActivityLevelQ4" label="Geri - Physical Activity Level Q4"/>
@@ -817,7 +747,7 @@ export const formLayouts = {
         <h3>
           <font color="red">Total score (out of 5): 
           {
-            getFrailScore(model)
+            model['geriFrailScaleQ7'] = getFrailScore(model)
           }
           </font>
         </h3>
@@ -839,7 +769,7 @@ export const formLayouts = {
       <DisplayIf condition={(context) => (typeof(context.model.geriOtQuestionnaireQ2) !== "undefined" && context.model.geriOtQuestionnaireQ2 === "Yes (Specify in textbox )")}>
         <Fragment>
           Please Specify:
-          <TextField name="geriOtQuestionnaireQ3" label="Geri - OT Questionnaire Q3"/>
+          <LongTextField name="geriOtQuestionnaireQ3" label="Geri - OT Questionnaire Q3"/>
         </Fragment>
       </DisplayIf>
       <h4>If yes, refer occupational therapist consultation</h4>
@@ -865,23 +795,23 @@ export const formLayouts = {
     <Fragment>
       <h2>3.3a SHORT PHYSICAL PERFORMANCE BATTERY (SPPB)</h2>
       1) REPEATED CHAIR STANDS<br />Time taken in seconds (only if 5 chair stands were completed):
-      <TextField name="geriSppbQ1" label="Geri - SPPB Q1"/>
+      <LongTextField name="geriSppbQ1" label="Geri - SPPB Q1"/>
       <font color="blue"><b>
         Score for REPEATED CHAIR STANDS (out of 4):
         <RadioField name="geriSppbQ2" label="Geri - SPPB Q2"/>
       </b></font>
       2a) BALANCE Side-by-side Stand <br />Time held for in seconds:
-      <TextField name="geriSppbQ3" label="Geri - SPPB Q3"/>
+      <LongTextField name="geriSppbQ3" label="Geri - SPPB Q3"/>
       2b) BALANCE Semi-tandem Stand <br />Time held for in seconds:
-      <TextField name="geriSppbQ4" label="Geri - SPPB Q4"/>
+      <LongTextField name="geriSppbQ4" label="Geri - SPPB Q4"/>
       2c) BALANCE Tandem Stand <br />Time held for in seconds:
-      <TextField name="geriSppbQ5" label="Geri - SPPB Q5"/>
+      <LongTextField name="geriSppbQ5" label="Geri - SPPB Q5"/>
       <font color="blue"><b>
         Score for BALANCE (out of 4):
         <RadioField name="geriSppbQ6" label="Geri - SPPB Q6"/>
       </b></font>
       3) 8’ WALK <br />Time taken in seconds:
-      <TextField name="geriSppbQ7" label="Geri - SPPB Q7"/>
+      <LongTextField name="geriSppbQ7" label="Geri - SPPB Q7"/>
       <font color="blue"><b>
         Score for 8' WALK (out of 4):
         <RadioField name="geriSppbQ8" label="Geri - SPPB Q8"/>
@@ -890,7 +820,7 @@ export const formLayouts = {
         <h3>
           <font color="blue">Total score (Max Score: 12): 
           {
-            getSppbScore(model)
+            model['geriSppbQ9'] = getSppbScore(model)
           }
           </font>
         </h3>
@@ -912,11 +842,11 @@ export const formLayouts = {
       <DisplayIf condition={(context) => (typeof(context.model.geriTugQ1) !== "undefined" && context.model.geriTugQ1.includes("Others (Please specify in textbox )"))}>
         <Fragment>
           Please Specify Walking Aid
-        <TextField name="geriTugQ2" label="Geri - TUG Q2"/>
+        <LongTextField name="geriTugQ2" label="Geri - TUG Q2"/>
         </Fragment>
       </DisplayIf>
       Time taken (in seconds):
-      <TextField name="geriTugQ3" label="Geri - TUG Q3"/>
+      <LongTextField name="geriTugQ3" label="Geri - TUG Q3"/>
       <h3>If > 15 seconds, participant has a high falls risk.</h3>
       Falls Risk Level: 
       <RadioField name="geriTugQ4" label="Geri - TUG Q4"/>
@@ -973,13 +903,6 @@ export const formLayouts = {
       )}>
         <Fragment>
           <h3>Visual acuity is ≥ 6/12: </h3>
-          1) Check if participant is a CHAS card holder (Needs to present CHAS card on site)
-          <RadioField name="geriGeriApptQ1" label="Geri - Geri Appt Q1"/>
-          2) Check if participant is a SWCDC Resident (Link: http://sis.pa-apps.sg/NASApp/sim/SearchResults.jsp)
-          <RadioField name="geriGeriApptQ2" label="Geri - Geri Appt Q2"/>
-          <h3>If YES to both, please give either SWCDC Eye Voucher OR Pearl's Optical Voucher:</h3>
-          SWCDC Eye Voucher given? - to be given if qn 1 and 2 answers are BOTH 'Yes'
-          <RadioField name="geriGeriApptQ3" label="Geri - Geri Appt Q3"/>
           Pearl's Optical Voucher given? - to be given if either qn 1 or qn 2 (or both) answers is 'No'
           <RadioField name="geriGeriApptQ4" label="Geri - Geri Appt Q4"/>
         </Fragment>
@@ -994,7 +917,7 @@ export const formLayouts = {
         <Fragment>
           <h3>Participant is recommended for social support:</h3>
           Persuade participant to go to social support booth and explain that AIC can help
-          <SelectField name="geriGeriApptQ5" checkboxes="true" label="Geri - Geri Appt Q5" />
+          <BoolField name="geriGeriApptQ5" />
         </Fragment>
       </DisplayIf>
 
@@ -1017,40 +940,41 @@ export const formLayouts = {
   "Doctor's Consult" : (info) => (
     <Fragment>
       Doctor's Name:
-      <TextField name="doctorSConsultQ1" label="Doctor's Consult Q1"/>
+      <LongTextField name="doctorSConsultQ1" label="Doctor's Consult Q1"/>
       MCR No.:
-      <TextField name="doctorSConsultQ2" label="Doctor's Consult Q2"/>
+      <LongTextField name="doctorSConsultQ2" label="Doctor's Consult Q2"/>
       Doctor's Memo
       <LongTextField name="doctorSConsultQ3" label="Doctor's Consult Q3" />
       Refer to dietitian?
-      <SelectField name="doctorSConsultQ4" checkboxes="true" label="Doctor's Consult Q4" />
+      <BoolField name="doctorSConsultQ4" />
       Reason for referral
-      <TextField name="doctorSConsultQ5" label="Doctor's Consult Q5"/>
+      <LongTextField name="doctorSConsultQ5" label="Doctor's Consult Q5"/>
+      Refer to Social Support?
+      <BoolField name="doctorSConsultQ6" />
+      Reason for referral
+      <LongTextField name="doctorSConsultQ7" label="Doctor's Consult Q5"/>
+      Refer to Dental?
+      <BoolField name="doctorSConsultQ8" />
+      Reason for referral
+      <LongTextField name="doctorSConsultQ9" label="Doctor's Consult Q5"/>
       Does patient require urgent follow up 
-      <SelectField name="doctorSConsultQ6" checkboxes="true" label="Doctor's Consult Q6" />
+      <BoolField name="doctorSConsultQ10" />
       Completed Doctor’s Consult station. Please check that Form A is filled.
-      <SelectField name="doctorSConsultQ7" checkboxes="true" label="Doctor's Consult Q7" />
+      <BoolField name="doctorSConsultQ11" />
       
     </Fragment>
   ),
 
-  "Doctor's Consult" : (info) => (
+  "Dietitian" : (info) => (
     <Fragment>
-      Doctor's Name:
-      <TextField name="doctorSConsultQ1" label="Doctor's Consult Q1"/>
-      MCR No.:
-      <TextField name="doctorSConsultQ2" label="Doctor's Consult Q2"/>
-      Doctor's Memo
-      <LongTextField name="doctorSConsultQ3" label="Doctor's Consult Q3" />
-      Refer to dietitian?
-      <SelectField name="doctorSConsultQ4" checkboxes="true" label="Doctor's Consult Q4" />
-      Reason for referral
-      <TextField name="doctorSConsultQ5" label="Doctor's Consult Q5"/>
-      Does patient require urgent follow up
-      <SelectField name="doctorSConsultQ6" checkboxes="true" label="Doctor's Consult Q6" />
-      Completed Doctor’s Consult station. Please check that Form A is filled.
-      <SelectField name="doctorSConsultQ7" checkboxes="true" label="Doctor's Consult Q7" />
-      
+      Dietitian's Name:
+      <LongTextField name="dietitianQ1" label="Dietitian Q1"/>
+      Dietitian's License No.:
+      <LongTextField name="dietitianQ2" label="Dietitian Q2"/>
+      Dietitian's Notes
+      <LongTextField name="dietitianQ3" label="Dietitian Q3" />
+      Does patient require urgent follow up?
+      <BoolField name="dietitianQ4" label="Dietitian Q4" />
     </Fragment>
   ),
 
@@ -1067,6 +991,10 @@ export const formLayouts = {
     </Fragment>
   ),
 
+  "Screening Review" : (info) => (
+    <Fragment />
+  ),
+
   "Feedback Form" : (info) => (
     <Fragment>
       <h2>PHS 2019 Screening Feedback Form <br />公共健康服务 2019 检验反馈表</h2>
@@ -1079,7 +1007,7 @@ export const formLayouts = {
       <DisplayIf condition={(context) => (typeof(context.model.feedbackFormQ2) !== "undefined" && context.model.feedbackFormQ2.includes("Others (please specify) 其他原因：(请注明)"))}>
         <Fragment>
           Please Specify for "Others" 请注明:
-          <TextField name="feedbackFormQ3" label="Feedback Form Q3"/>
+          <LongTextField name="feedbackFormQ3" label="Feedback Form Q3"/>
         </Fragment>
       </DisplayIf>
       3a.Have you been to PHS before? <br />您是否来过公共健康服务？
@@ -1097,7 +1025,7 @@ export const formLayouts = {
       <DisplayIf condition={(context) => (typeof(context.model.feedbackFormQ9) !== "undefined" && context.model.feedbackFormQ9 === "Others (please specify) 其他 (请注明)")}>
         <Fragment>
           Please Specify for "Others" 请注明:
-          <TextField name="feedbackFormQ10" label="Feedback Form Q10"/>
+          <LongTextField name="feedbackFormQ10" label="Feedback Form Q10"/>
         </Fragment>
       </DisplayIf>
       <h3>8. We would like to find out more about your health beliefs and knowledge. <br />我们想寻求关于您的健康价值观以及健康知识。</h3>
@@ -1130,9 +1058,9 @@ export const formLayouts = {
       d. The flow of the screening was easy to follow <br />身体检查的流程易人遵循
       <RadioField name="feedbackFormQ23" label="Feedback Form Q23"/>
       e. Others (Please specify) <br />其他意见（请注明）
-      <TextField name="feedbackFormQ24" label="Feedback Form Q24"/>
+      <LongTextField name="feedbackFormQ24" label="Feedback Form Q24"/>
       12. What else do you think PHS should screen for? <br />您认为公共健康服务还可以检查那些其他的疾病？
-      <TextField name="feedbackFormQ25" label="Feedback Form Q25"/>
+      <LongTextField name="feedbackFormQ25" label="Feedback Form Q25"/>
       13. I would recommend my family and/or friends to come for the PHS 2019 screening. <br />我会推荐家人与朋友来参与公共健康服务 2019 的身体检查。
       <RadioField name="feedbackFormQ26" label="Feedback Form Q26"/>
       14. How did you come to know of the PHS 2019 screening? Select all that apply. <br />您如何认知此活动的智讯？（请在所有适当的空格中打勾）<br />
@@ -1140,15 +1068,17 @@ export const formLayouts = {
       <DisplayIf condition={(context) => (typeof(context.model.feedbackFormQ27) !== "undefined" && context.model.feedbackFormQ27.includes("Others (Please specify) 其他（请注明)"))}>
         <Fragment>
           Please Specify for "Others" 请注明:
-          <TextField name="feedbackFormQ28" label="Feedback Form Q28"/>
+          <LongTextField name="feedbackFormQ28" label="Feedback Form Q28"/>
         </Fragment>
       </DisplayIf>
       15. If you have been contacted for Door-to-Door Publicity, did you learn about healthy ageing/metabolic syndrome through our volunteers/brochure? <br />若您有遇见义工上门宣传您是否从义工们/健康宣传册中学到更多关于健康老龄化/代谢综合症的相关知识？
       <RadioField name="feedbackFormQ29" label="Feedback Form Q29"/>
       16. What else do you want to learn more about through PHS?<br />您还有什么想更加了解/更深入学习的东西吗？
-      <TextField name="feedbackFormQ30" label="Feedback Form Q30"/>
+      <LongTextField name="feedbackFormQ30" label="Feedback Form Q30"/>
       17. Any other feedback? <br />您有其他的意见吗？
       <LongTextField name="feedbackFormQ31" label="Feedback Form Q31" />
+      18. Would you like to attend the PHS2019 Fitness Carnival?
+      <RadioField name="feedbackFormQ32" label="Feedback Form Q32"/>
       <h2>Thank you for completing this survey! :) <br />谢谢您为我们提供您宝贵的意见！</h2>
       
     </Fragment>
