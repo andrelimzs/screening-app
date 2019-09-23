@@ -30,7 +30,7 @@ export const formSchemas = {
     registrationQ1: {
     type: String, allowedValues: ["Mr", "Ms", "Mrs", "Dr"], optional: false
     }, registrationQ2: {
-    type: String, allowedValues: ["Chinese 华裔", "Malay 巫裔", "Indian 印裔", "Eurasian 欧亚裔", "Others 其他 (please specify): (insert textbox here)"], optional: false
+    type: String, allowedValues: ["Chinese 华裔", "Malay 巫裔", "Indian 印裔", "Eurasian 欧亚裔", "Others 其他 (please specify):"], optional: false
     }, registrationQ3: {
     type: String, allowedValues: ["Singapore Citizen 新加坡公民", "Singapore Permanent Resident (PR) \n新加坡永久居民"], optional: false
     }, registrationQ4: {
@@ -46,13 +46,15 @@ export const formSchemas = {
     }, registrationQ9: {
     type: String, allowedValues: ["Yes", "No"], optional: false
     }, registrationQ10: {
-    type: String, allowedValues: [ "Bukit Batok Medical Clinic \n Blk 207 Bukit Batok Street 21 #01-114", "Kang An Clinic \n Blk 644 Bukit Batok Central, #01-70", "Lai Medical Clinic \n Blk 213 Bukit Batok Street 21, #01-209", "St Luke's Hospital \n 2 Bukit Batok St 11", "Frontier Family Medicine Clinic (Clementi) \n 3151 Commonwealth Ave West, #04-01 Grantral Mall @ Clementi", "Healthway Medical (Clementi) \n 443 Clementi Ave 3, #01-63", "Healthway Medical (West Coast) \n 727 Clementi West St 2, #01-258", "West Coast Clinic & Surgery (Clementi West) \n 722 Clementi West St 2, #01-162", "Drs Koo, Fok & Associates (Pioneer) \n 31 Jurong West St 63, #02-04", "Lakeside Family Medicine Clinic \n 518A Jurong West St 52, #01-02", "Lee Family Clinic \n Gek Poh Shopping Centre \n 762 Jurong West St 75, #02-262", "Drs Koo, Loh & Associates \n 152 Yung Ho Rd, #B1-03", "Drs. Tang & Partners \n 64 Yung Kuang Rd, #01-115", "Boon Lay Corporation Clinic \n 350 Jurong East Ave 1, #01-1225", "E.J. Tan Clinic & Surgery \n 104 Jurong East St 13, #01-100", "Trinity Medical Clinic & Dental Surgery (Jurong East) \n 130 Jurong Gateway Rd, #02-205/207"], optional: false
+    type: String, allowedValues: [ "Bukit Batok Medical Clinic \n Blk 207 Bukit Batok Street 21 #01-114", "Kang An Clinic \n Blk 644 Bukit Batok Central, #01-70", "Lai Medical Clinic \n Blk 213 Bukit Batok Street 21, #01-209", "St Luke's Hospital \n 2 Bukit Batok St 11", "Frontier Family Medicine Clinic (Clementi) \n 3151 Commonwealth Ave West, #04-01 Grantral Mall @ Clementi", "Healthway Medical (Clementi) \n 443 Clementi Ave 3, #01-63", "Healthway Medical (West Coast) \n 727 Clementi West St 2, #01-258", "West Coast Clinic & Surgery (Clementi West) \n 722 Clementi West St 2, #01-162", "Drs Koo, Fok & Associates (Pioneer) \n 31 Jurong West St 63, #02-04", "Lakeside Family Medicine Clinic \n 518A Jurong West St 52, #01-02", "Lee Family Clinic \n Gek Poh Shopping Centre \n 762 Jurong West St 75, #02-262", "Drs Koo, Loh & Associates \n 152 Yung Ho Rd, #B1-03", "Drs. Tang & Partners \n 64 Yung Kuang Rd, #01-115", "Boon Lay Corporation Clinic \n 350 Jurong East Ave 1, #01-1225", "E.J. Tan Clinic & Surgery \n 104 Jurong East St 13, #01-100", "Trinity Medical Clinic & Dental Surgery (Jurong East) \n 130 Jurong Gateway Rd, #02-205/207"], optional: true
     }, registrationQ11: {
     type: String, allowedValues: ["English", "Mandarin", "Malay", "Tamil"], optional: false
     }, registrationQ12: {
     type: Boolean, label: "I have read and acknowledged the eligibility criteria for Phlebotomy. 我知道抽血的合格标准。", optional: true
     }, registrationQ13: {
     type: Boolean, label: "I agree and consent to the above.", optional: false
+    }, registrationQ14: {
+    type: String, optional: true
     }
     }
    ),
