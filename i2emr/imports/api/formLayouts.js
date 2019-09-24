@@ -506,8 +506,11 @@ export const formLayouts = {
       3. Are you currently on any other Government Financial Assistance, other than CHAS and PG (e.g. Public Assistance Scheme)?
       <h2><font color="green">
         { info["Hx Social"] && 
-          (info["Hx Social"].hxSocialQ1 === "Yes (Please specify):" && info["Hx Social"].hxSocialQ1 + info["Hx Social"].hxSocialQ2 ||
-          info["Hx Social"].hxSocialQ1)
+          info["Hx Social"].hxSocialQ1
+        }
+        { info["Hx Social"] &&
+          info["Hx Social"].hxSocialQ1 === "Yes (Please specify):" && 
+          info["Hx Social"].hxSocialQ2
         }
       </font></h2>
       <h2>2. NSS CANCER SCREENING PRACTICES SURVEY.</h2>
@@ -623,7 +626,7 @@ export const formLayouts = {
       <SomeComp calculation={(model) => (
         <h3>
           EBAS Total Score: 
-          {model["geriEbasDepQ9"] = getScore(model, ['geriEbasDepQ1', 'geriEbasDepQ2', 'geriEbasDepQ2', 'geriEbasDepQ4', 'geriEbasDepQ5', 'geriEbasDepQ6', 'geriEbasDepQ7', 'geriEbasDepQ8'], '1 (Abnormal)')}
+          {model["geriEbasDepQ9"] = getScore(model, ['geriEbasDepQ1', 'geriEbasDepQ2', 'geriEbasDepQ3', 'geriEbasDepQ4', 'geriEbasDepQ5', 'geriEbasDepQ6', 'geriEbasDepQ7', 'geriEbasDepQ8'], '1 (Abnormal)')}
           /8
         </h3>
       )} />
@@ -634,7 +637,7 @@ export const formLayouts = {
       <RadioField name="geriEbasDepQ10" label="Geri - EBAS-DEP Q10" />
       To be referred for social support (for potential financial/ family difficulties) - from Geriatrics EBAS
       <RadioField name="geriEbasDepQ11" label="Geri - EBAS-DEP Q11" />
-      <DisplayIf condition={(context) => (typeof(context.model.geriEbasDepQ10) !== "undefined" && context.model.geriEbasDepQ10 === "Yes")}>
+      <DisplayIf condition={(context) => (typeof(context.model.geriEbasDepQ11) !== "undefined" && context.model.geriEbasDepQ11 === "Yes")}>
         <Fragment>
             Reasons for referral to social support - from Geriatrics EBAS:
           <LongTextField name="geriEbasDepQ12" label="Geri - EBAS-DEP Q12" />
