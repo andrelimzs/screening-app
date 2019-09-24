@@ -160,7 +160,6 @@ class Form extends Component {
       currentFormSchema = currentFormSchema[Object.keys(currentFormSchema)[this.state.pageIndex]];
       currentFormLayout = currentFormLayout[Object.keys(currentFormLayout)[this.state.pageIndex]];
     }
-    console.log(currentFormSchema)
     
     const newForm = () => (
       <ClearableAutoForm
