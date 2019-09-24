@@ -509,7 +509,7 @@ export const formLayouts = {
           info["Hx Social"].hxSocialQ1
         }
         { info["Hx Social"] &&
-          info["Hx Social"].hxSocialQ1 === "Yes (Please specify):" && 
+          info["Hx Social"].hxSocialQ1 === "Yes, (Please specify):" && 
           info["Hx Social"].hxSocialQ2
         }
       </font></h2>
