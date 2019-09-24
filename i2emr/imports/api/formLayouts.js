@@ -108,7 +108,7 @@ export const formLayouts = {
       <SelectField name="registrationQ1" />
       Race 种族
       <RadioField name="registrationQ2" />
-      <DisplayIf condition={() => (typeof(info["Pre-Registration"]) !== "undefined" && info["Pre-Registration"].preRegistrationQ4 === "Others 其他 (please specify):")}>
+      <DisplayIf condition={(context) => (typeof(context.model.registrationQ2) !== "undefined" && context.model.registrationQ2 === "Others 其他 (please specify):")}>
         <Fragment>
           Please Specify
           <LongTextField name="registrationQ14" />
@@ -128,13 +128,13 @@ export const formLayouts = {
       <SelectField name="registrationQ8" />
       Pioneer Generation Status 建国一代配套
       <RadioField name="registrationQ9" />
-      Preferred Language for Health Report
-      <RadioField name="registrationQ11" />
       <DisplayIf condition={() => (typeof(info["Pre-Registration"]) !== "undefined" && info["Pre-Registration"].preRegistrationQ4 === "Y")}>
         <Fragment>
           <h2>Follow up at GP Clinics</h2>
           <i>Your Health Report & Blood Test Results (if applicable) will be mailed out about <b>4-6 weeks</b> after the screening.  Depending on your results, our team <b>may</b> shortlist you for further follow-up.<br />Scenario 1: If <b>no follow-up</b> is required, the report will be mailed directly to you.<br />Scenario 2: If follow-up is required, you will need to <b>visit a GP clinic</b> to collect your report. <br />Please choose a preferred GP Clinic from the following list in case of Scenario 2.</i>
           <RadioField name="registrationQ10" />
+          Preferred Language for Health Report
+          <RadioField name="registrationQ11" />
           <h2>Phlebotomy Eligibility</h2>
           Before entering our screening, do note the following <b>eligibility criteria for Phlebotomy</b> <br />1) Fasted for minimum 10 hours <br />          Note: Water is allowed, coffee/tea is not. Medications are fine. <br />2) NOT previously diagnosed with Diabetes/ High Cholesterol/ High Blood Pressure.<br />3) Have not done a blood test within 1 year.<br /><br /><i>Rationale: PHS aims to reach out to undiagnosed people. Patients that are already aware of their condition would have regular follow-ups with the GPs/polyclinics/hospitals. This information is available in our publicity material. Please approach our registration volunteers should you have any queries. We are happy to explain further. Thank you!</i><br /><br />抽血合格标准:<br />1) 十个小时内没有吃东西或喝饮料. 可以喝水, 吃药。不能喝咖啡, 喝茶。<br />2) 在过去的一年内沒有验过血。<br />3) 没有糖尿病, 高血压, 高胆固醇。
           <BoolField name="registrationQ12" />
@@ -143,7 +143,6 @@ export const formLayouts = {
       <h2>Compliance to PDPA 同意书</h2>
       <i>I hereby give my consent to the Public Health Service Executive Committee to collect my personal information for the purpose of participating in the Public Health Service (hereby called “PHS”) and its related events, and to contact me via calls, SMS, text messages or emails regarding the event and follow-up process.  <br /><br />Should you wish to withdraw your consent for us to contact you for the purposes stated above, please notify a member of the PHS Executive Committee at ask.phs@gmail.com in writing. We will then remove your personal information from our database. Please allow 3 business days for your withdrawal of consent to take effect. All personal information will be kept confidential, will only be disseminated to members of the PHS Executive Committee, and will be strictly used by these parties for the purposes stated. <br /> This question is mandatory.</i>
       <BoolField name="registrationQ13" />
-      
     </Fragment>
   ),
 
@@ -909,14 +908,14 @@ export const formLayouts = {
       )}>
         <Fragment>
           <h3>Visual acuity is ≥ 6/12: </h3>
-          Pearl's Optical Voucher given? - to be given if either qn 1 or qn 2 (or both) answers is 'No'
+          Pearl's Optical Voucher given?
           <RadioField name="geriGeriApptQ4" label="Geri - Geri Appt Q4"/>
         </Fragment>
       </DisplayIf>
 
       <DisplayIf condition={() => (
-        (typeof(info["Geri - EBAS-DEP"]) !== "undefined" && info["Geri - EBAS-DEP"].geriEbasDepQ9 === "Yes") ||
         (typeof(info["Geri - EBAS-DEP"]) !== "undefined" && info["Geri - EBAS-DEP"].geriEbasDepQ10 === "Yes") ||
+        (typeof(info["Geri - EBAS-DEP"]) !== "undefined" && info["Geri - EBAS-DEP"].geriEbasDepQ11 === "Yes") ||
         (typeof(info["Geri - PT Consult"]) !== "undefined" && info["Geri - PT Consult"].geriPtConsultQ4 === "Yes") ||
         (typeof(info["Geri - OT Consult"]) !== "undefined" && info["Geri - OT Consult"].geriOtConsultQ4 === "Yes")
       )}>
