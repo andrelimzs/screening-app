@@ -38,7 +38,8 @@ class Form extends Component {
 
     this.stations = Object.keys(formLayouts);
 
-    this.isMultipage = (formSchemas[this.props.station].__proto__.constructor.name !== "SimpleSchema");
+    // Non multipage forms are functions (in order to pass in patientinfo). Multipage forms are objects with functions for each page
+    this.isMultipage = typeof(formSchemas[this.props.station]) === 'object';
     // this.pageIndex = 0;
     this.oldID = null;
     this.multiData = {};
@@ -159,10 +160,11 @@ class Form extends Component {
       currentFormSchema = currentFormSchema[Object.keys(currentFormSchema)[this.state.pageIndex]];
       currentFormLayout = currentFormLayout[Object.keys(currentFormLayout)[this.state.pageIndex]];
     }
+    console.log(currentFormSchema)
     
     const newForm = () => (
       <ClearableAutoForm
-        schema={currentFormSchema}
+        schema={currentFormSchema(this.props.patientInfo)}
         onSubmit={this.handleSubmit}
         onSubmitSuccess={() => {
           if (this.props.id !== null && this.props.station !== "Pre-Registration" && (!this.isMultipage || (this.state.pageIndex == 0))) {
