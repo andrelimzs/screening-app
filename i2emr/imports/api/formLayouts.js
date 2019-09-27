@@ -896,7 +896,7 @@ export const formLayouts = {
       Reasons for referral to social support (OT):
       <LongTextField name="geriOtConsultQ5" label="Geri - OT Consult Q5" />
       Which of the following programmes would you recommend the participant for? (Please select the most appropriate programme)
-      <RadioField name="geriOtConsultQ6" label="Geri - OT Consult Q6"/>
+      <SelectField name="geriOtConsultQ6" checkboxes="true" label="Geri - OT Consult Q6"/>
       <font color="red"><h2>IF THE PATIENT NEEDS TO GO TO DOCTOR'S CONSULT/ SOCIAL SUPPORT MODALITY THAT YOU RECOMMENDED, PLEASE EDIT ON FORM A.</h2></font>
       
     </Fragment>

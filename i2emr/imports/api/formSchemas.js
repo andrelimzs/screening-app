@@ -675,7 +675,9 @@ export const formSchemas = {
     }, geriOtConsultQ5: {
     type: String, optional: true
     }, geriOtConsultQ6: {
-    type: String, allowedValues: ["HDB EASE", "SWCDC Safe and Bright Homes", "Own Vendors"], optional: true
+    type: Array, optional: true
+    }, "geriOtConsultQ6.$": {
+      type: String, allowedValues: ["HDB EASE", "SWCDC Safe and Bright Homes", "Own Vendors"],
     }
     }
    )},
