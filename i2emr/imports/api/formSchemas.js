@@ -19,7 +19,7 @@ export const formSchemas = {
     }, preRegistrationQ2: {
     type: String, optional: false
     }, preRegistrationQ3: {
-    type: String, optional: false
+    type: String, optional: false, regEx: /^[0-9]{3}[a-zA-Z]$/
     }, preRegistrationQ4: {
     type: String, allowedValues: ["Y", "N"], optional: false
     }
