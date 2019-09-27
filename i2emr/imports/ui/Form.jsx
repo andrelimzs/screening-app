@@ -18,9 +18,17 @@ import SubmitField from 'uniforms-material/SubmitField';
 import ErrorsField from 'uniforms-material/ErrorsField';
 
 class ClearableAutoForm extends AutoForm {
+  constructor(props) {
+    super(props);
+  }
+
   onSubmit () {
       // If you don't care about this Promise
-      return super.onSubmit(...arguments).then(() => this.reset());
+      return super.onSubmit(...arguments).then(() => {
+        if (!this.props.noUserSelected) {
+          this.reset()
+        }
+      });
 
       // If you do care about this Promise
       return super.onSubmit(...arguments).then(result => {
@@ -173,6 +181,7 @@ class Form extends Component {
           if (!this.isMultipage || (this.state.pageIndex == 0)) {
             alert('Unsuccessful')
           }}}
+        noUserSelected = {this.props.id === null && this.props.station !== "Pre-Registration"}
       >
         {currentFormLayout(this.props.patientInfo)}
         <ErrorsField />
