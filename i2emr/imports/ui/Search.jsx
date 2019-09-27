@@ -60,6 +60,22 @@ class Search extends Component {
       this.setState({ searchResult: null,
                       anchorEl: null })
       
+      const previousPatient = Session.get('currentPatient');
+      if (previousPatient) {
+        Meteor.call('patientinfo.setBusy', previousPatient, false);
+      }
+
+      // If previous == current (toggling off)
+      // Don't change anything
+      var patientConflict;
+      if (previousPatient != id) {
+        Meteor.call('patientinfo.setBusy', id, true, (error, result) => {
+          if (result) Session.set('currentPatient',id);
+        });
+      } else {
+        Session.set('currentPatient',null); 
+      }
+
       this.computation.stop()
     }
   }
@@ -104,7 +120,7 @@ class Search extends Component {
                 variant={(patientInfo.busy) ? "contained": "outlined"}
                 color={(patientInfo.busy) ? "secondary": "default"}
                 onClick={this.movePatient.bind(this, patientInfo.id, patientInfo.busy)}>
-                  {(patientInfo.busy) ? "Busy" : "Move"}
+                  {(patientInfo.busy) ? "Busy" : "Take"}
               </Button>
             </CardActions>
           </Card>}
