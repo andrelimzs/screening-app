@@ -357,7 +357,9 @@ export const screeningReview = (info) => {
         }
         <font color="red">{typeof(info['Geri - OT Consult']) !== "undefined" &&
             typeof(info['Geri - OT Consult'].geriOtConsultQ6) !== "undefined" &&
-            info['Geri - OT Consult'].geriOtConsultQ6
+            info['Geri - OT Consult'].geriOtConsultQ6.map(text => {
+                return <p>{text}<br/></p>
+            })
         }</font>
         <br /><br /></b>
 

@@ -27,6 +27,7 @@ class Queue extends Component {
         if (result) Session.set('currentPatient',id);
       });
     } else {
+      Meteor.call('patientinfo.resetStation', id);
       Session.set('currentPatient',null); 
     }
     

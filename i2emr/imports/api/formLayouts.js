@@ -95,7 +95,7 @@ export const formLayouts = {
       <LongTextField name="preRegistrationQ2" />
       Last 4 digits of NRIC (e.g. 987A)
       <LongTextField name="preRegistrationQ3" />
-      Going for Phlebotomy?<br /><br /><i>Conditions:<br />1) Fasted for minimum 10 hours <br />          Note: Water is allowed, coffee/tea is not. Medications are fine. <br />2) NOT previously diagnosed with Diabetes/ High Cholesterol/ High Blood Pressure.<br />3) Have not done a blood test within 1 year.</i>
+      Going for Phlebotomy?<br /><br /><i>Conditions:<br />1) Fasted for minimum 8 hours <br />          Note: Water is allowed, coffee/tea is not. Medications are fine. <br />2) NOT previously diagnosed with Diabetes/ High Cholesterol/ High Blood Pressure.<br />3) Have not done a blood test within 1 year.</i>
       <RadioField name="preRegistrationQ4" />
       
     </Fragment>
@@ -131,7 +131,7 @@ export const formLayouts = {
       <DisplayIf condition={() => (typeof(info["Pre-Registration"]) !== "undefined" && info["Pre-Registration"].preRegistrationQ4 === "Y")}>
         <Fragment>
           <h2>Follow up at GP Clinics</h2>
-          <i>Your Health Report & Blood Test Results (if applicable) will be mailed out about <b>4-6 weeks</b> after the screening.  Depending on your results, our team <b>may</b> shortlist you for further follow-up.<br />Scenario 1: If <b>no follow-up</b> is required, the report will be mailed directly to you.<br />Scenario 2: If follow-up is required, you will need to <b>visit a GP clinic</b> to collect your report. <br />Please choose a preferred GP Clinic from the following list in case of Scenario 2.</i>
+          <i>Your Health Report & Blood Test Results (if applicable) will be mailed out about <b>4-6 weeks</b> after the screening.  Depending on your results, our team <b>may</b> shortlist you for further follow-up.<br />Scenario 1: If <b>no follow-up</b> is required, the report will be mailed directly to you.<br />Scenario 2: If follow-up is required, you will need to <b>visit a GP clinic</b> to collect your report. <br />Please choose a preferred GP Clinic from the following list in case of Scenario 2.</i> <br/> Some residents such as PRs and residents who have been registered in the National Screening System in the past 3 years will not be eligible. 
           <RadioField name="registrationQ10" />
           Preferred Language for Health Report
           <RadioField name="registrationQ11" />
@@ -896,7 +896,7 @@ export const formLayouts = {
       Reasons for referral to social support (OT):
       <LongTextField name="geriOtConsultQ5" label="Geri - OT Consult Q5" />
       Which of the following programmes would you recommend the participant for? (Please select the most appropriate programme)
-      <RadioField name="geriOtConsultQ6" label="Geri - OT Consult Q6"/>
+      <SelectField name="geriOtConsultQ6" checkboxes="true" label="Geri - OT Consult Q6"/>
       <font color="red"><h2>IF THE PATIENT NEEDS TO GO TO DOCTOR'S CONSULT/ SOCIAL SUPPORT MODALITY THAT YOU RECOMMENDED, PLEASE EDIT ON FORM A.</h2></font>
       
     </Fragment>
