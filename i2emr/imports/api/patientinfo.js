@@ -49,13 +49,6 @@ Meteor.methods({
 
     // Insert new station data
     Patientinfo.update({id:id},{$set:data});
-
-    // Retrieve station queue
-    const info = Patientinfo.find({id:id}).fetch()[0];
-    var stationQueue = info.stationQueue;
-
-    // Proceed to next station
-    stationQueue.shift();
     
     // Check for special case - "Doctors Consult"
     // The only station to be opt-in instead of opt-out
@@ -74,18 +67,32 @@ Meteor.methods({
     // }
 
     // const nextStation = (typeof(stationQueue[0]) !== "undefined") ? stationQueue[0] : "Done";
-    const nextStation = (typeof(stationQueue[0]) !== "undefined") ? stationQueue[0] : "";
     
     Patientinfo.update({id:id},{$set:{
-      nextStation: "",
-      busy: false,
-      stationQueue: stationQueue,
       lastSubmit: new Date()
     }});
 
     // // Print a next station msg
     // console.log(String(id) + " | " + String( );
     // console.log(data.stationQueue);
+  },
+
+  'patientinfo.nextstation'(id) {
+    // Retrieve station queue
+    const info = Patientinfo.find({id:id}).fetch()[0];
+    var stationQueue = info.stationQueue;
+
+    // Proceed to next station
+    stationQueue.shift();
+
+    const nextStation = (typeof(stationQueue[0]) !== "undefined") ? stationQueue[0] : "";
+
+    Patientinfo.update({id:id},{$set:{
+      nextStation: "",
+      busy: false,
+      stationQueue: stationQueue,
+      lastSubmit: new Date()
+    }});
   },
 
   'patientinfo.setBusy'(id, value) {
