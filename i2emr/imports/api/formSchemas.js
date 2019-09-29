@@ -377,7 +377,7 @@ export const formSchemas = {
    "FIT": (info) => { return new SimpleSchema({
     fitQ1: {
     type: String, allowedValues: ["Yes", "No"], optional: false
-    }, fitQ12: {
+    }, fitQ2: {
     type: String, allowedValues: ["Yes", "No"], optional: false
     }
     }
