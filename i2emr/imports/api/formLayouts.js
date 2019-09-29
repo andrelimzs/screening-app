@@ -455,7 +455,7 @@ export const formLayouts = {
         2a. Has a doctor ever told you that you are overweight or obese before?
         <RadioField name="hxCancerQ22" label="Hx Cancer Q22"/>
         2b. Please tick to highlight if you feel BMI or BP requires closer scrutiny by doctors and dietitians later. 
-        <BoolField name="hxCancerQ23" />
+        <BoolField name="hxCancerQ23" label="Hx Cancer Q23"/>
         <b>REFER TO DR CONSULT at: <br />1) <font color="red">Doctor's Consultation station</font>, tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation, <br />IF BMI IS:<br />≥ 23 as overweight (if positive for other risk factors) and ≥ 27.5 as obese, write reasons under dietitian referral on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation<br /></b>
         <h3><u>3) Waist Circumference</u> (taken only if cannot measure BMI e.g. wheelchair, prosthetic legs)</h3>
         Waist Circumference (in cm) <br />
@@ -479,14 +479,14 @@ export const formLayouts = {
       <h2><font color="green">{info["Hx Cancer"] && info["Hx Cancer"].hxCancerQ6}</font></h2>
       <h3><font color="red">Please encourage participants to go for FIT every year if participant is above 50, asymptomatic and no positive family history of colorectal cancer in first degree relatives.</font> </h3>
       Does participant has a history of cancer or his/her family history requires further scrutiny by doctors?<font color="red"><b>(If indicated 'Yes', please refer to doctor's consult by following the steps below.)</b></font> 
-      <RadioField name="fitQ1" label="FIT Q12"/>
+      <RadioField name="fitQ1" label="FIT Q1"/>
       <DisplayIf condition = {(context) => (typeof(context.model.fitQ1) !== undefined && context.model.fitQ1 === 'Yes')} >
         <Fragment>
           <b>REFER TO DR CONSULT</b> by indicating on: <br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A under Doctor's Consultation row<br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation
         </Fragment>
       </DisplayIf>
       3. Was participant issued 2 FIT kits?
-      <RadioField name="fitQ12" label="FIT Q13"/>
+      <RadioField name="fitQ2" label="FIT Q2"/>
       
     </Fragment>
   ),
@@ -594,11 +594,11 @@ export const formLayouts = {
       <br /><br />
       What is your education level?
       <img src='/images/geri-amt/edu.png' alt='Education' /> <br />
-      <RadioField name="geriAmtQ12" label="Geri - AMT Q11" />
+      <RadioField name="geriAmtQ12" label="Geri - AMT Q12" />
       Need referral to Cognitive Follow-Up?
-      <RadioField name="geriAmtQ13" label="Geri - AMT Q12" />
+      <RadioField name="geriAmtQ13" label="Geri - AMT Q13" />
       Referral to Cognitive Follow-Up
-      <RadioField name="geriAmtQ14" label="Geri - AMT Q13" />
+      <RadioField name="geriAmtQ14" label="Geri - AMT Q14" />
     </Fragment>
   ),
 
@@ -954,21 +954,21 @@ export const formLayouts = {
       Doctor's Memo
       <LongTextField name="doctorSConsultQ3" label="Doctor's Consult Q3" />
       Refer to dietitian?
-      <BoolField name="doctorSConsultQ4" />
+      <BoolField name="doctorSConsultQ4" label="Doctor's Consult Q4"/>
       Reason for referral
       <LongTextField name="doctorSConsultQ5" label="Doctor's Consult Q5"/>
       Refer to Social Support?
-      <BoolField name="doctorSConsultQ6" />
+      <BoolField name="doctorSConsultQ6" label="Doctor's Consult Q6"/>
       Reason for referral
-      <LongTextField name="doctorSConsultQ7" label="Doctor's Consult Q5"/>
+      <LongTextField name="doctorSConsultQ7" label="Doctor's Consult Q7"/>
       Refer to Dental?
-      <BoolField name="doctorSConsultQ8" />
+      <BoolField name="doctorSConsultQ8" label="Doctor's Consult Q8"/>
       Reason for referral
-      <LongTextField name="doctorSConsultQ9" label="Doctor's Consult Q5"/>
+      <LongTextField name="doctorSConsultQ9" label="Doctor's Consult Q9"/>
       Does patient require urgent follow up 
-      <BoolField name="doctorSConsultQ10" />
+      <BoolField name="doctorSConsultQ10" label="Doctor's Consult Q10"/>
       Completed Doctor’s Consult station. Please check that Form A is filled.
-      <BoolField name="doctorSConsultQ11" />
+      <BoolField name="doctorSConsultQ11" label="Doctor's Consult Q11"/>
       
     </Fragment>
   ),

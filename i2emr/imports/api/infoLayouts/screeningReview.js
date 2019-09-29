@@ -276,10 +276,10 @@ export const screeningReview = (info) => {
         <h2>FIT Kits</h2>
         Was participant issued 2 FIT kits? <br/>
         <b>{typeof(info['FIT']) !== "undefined" &&
-            typeof(info['FIT'].fitQ12) !== "undefined" && 
+            typeof(info['FIT'].fitQ2) !== "undefined" && 
             <div>
-            {info['FIT'].fitQ12}
-            {info['FIT'].fitQ12 === "Yes" && 
+            {info['FIT'].fitQ2}
+            {info['FIT'].fitQ2 === "Yes" && 
             <p><br/>Kindly remind the participant to adhere to the instructions regarding FIT kit application and sending. Teach the participant how to use the kit if he/she is unsure or has forgotten<br/></p>}</div>
         }<br /><br /></b>
 
