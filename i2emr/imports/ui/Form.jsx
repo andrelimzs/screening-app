@@ -72,7 +72,13 @@ class Form extends Component {
         // If not at last subpage
         // Concat and store multipage form data
         const subSchemaName = Object.keys(formSchemas[this.props.station])[this.state.pageIndex];
-        this.multiData[subSchemaName] = newForm;
+        // this.multiData[subSchemaName] = newForm;
+
+        var formData = {};
+        formData[subSchemaName] = newForm;
+        formData.id = this.props.id;
+
+        Meteor.call('patientinfo.update', formData);
 
         // this.pageIndex++;
         this.setState((state, props) => ({
@@ -82,11 +88,14 @@ class Form extends Component {
         // console.log("Next subpage");
       } else { // On last subpage
         const subSchemaName = Object.keys(formSchemas[this.props.station])[this.state.pageIndex];
-        this.multiData[subSchemaName] = newForm;
+        // this.multiData[subSchemaName] = newForm;
+        
+        var formData = {};
+        formData[subSchemaName] = newForm;
+        formData.id = this.props.id;
 
-        this.multiData.id = this.props.id;
-
-        Meteor.call('patientinfo.update', this.multiData);
+        Meteor.call('patientinfo.update', formData);
+        Meteor.call('patientinfo.nextstation', this.props.id);
         Session.set('currentPatient',null);
         
         // Empty data for multipage form
@@ -119,6 +128,7 @@ class Form extends Component {
         // newForm.nextStation = this.stations[this.stations.indexOf(this.props.station)+1];
 
         Meteor.call('patientinfo.update', formData);
+        Meteor.call('patientinfo.nextstation', this.props.id);
 
         Session.set('currentPatient',null);
       }

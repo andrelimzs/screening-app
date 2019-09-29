@@ -8,12 +8,12 @@ export const historyTaking = (info) => {
             info['Hx HCSR'].hxHcsrQ1}</b><br /><br />
         Brief History <br/>
         <b>{typeof(info['Hx HCSR']) !== "undefined" &&
-            info['Hx HCSR'].hxHcsrQ2.map( text => {
+            info['Hx HCSR'].hxHcsrQ2.split('\n').map( text => {
                 return <p>{text}<br/></p>
             })}</b><br /><br />
         Red Flags <br/>
         <b>{typeof(info['Hx HCSR']) !== "undefined" &&
-            info['Hx HCSR'].hxHcsrQ3.map( text => {
+            info['Hx HCSR'].hxHcsrQ3.split('\n').map( text => {
                 return <p>{text}<br/></p>
             })}</b><br /><br />
         Do you have any problems passing urine or motion? <br/>
@@ -21,7 +21,7 @@ export const historyTaking = (info) => {
             info['Hx HCSR'].hxHcsrQ4}<br />
             {typeof(info['Hx HCSR']) !== "undefined" &&
             typeof(info['Hx HCSR'].hxHcsrQ5) !== "undefined" &&
-            info['Hx HCSR'].hxHcsrQ5.map( text => {
+            info['Hx HCSR'].hxHcsrQ5.split('\n').map( text => {
                 return <p>{text}<br/></p>
             })}</b><br /><br />
         Do you have any vision problems? <br/>
@@ -29,7 +29,7 @@ export const historyTaking = (info) => {
             info['Hx HCSR'].hxHcsrQ6}<br />
             {typeof(info['Hx HCSR']) !== "undefined" &&
             typeof(info['Hx HCSR'].hxHcsrQ7) !== "undefined" &&
-            info['Hx HCSR'].hxHcsrQ7.map( text => {
+            info['Hx HCSR'].hxHcsrQ7.split('\n').map( text => {
                 return <p>{text}<br/></p>
             })}</b><br /><br />
        Do you have any hearing problems? <br/>
@@ -37,7 +37,7 @@ export const historyTaking = (info) => {
             info['Hx HCSR'].hxHcsrQ8}<br />
             {typeof(info['Hx HCSR']) !== "undefined" &&
             typeof(info['Hx HCSR'].hxHcsrQ9) !== "undefined" &&
-            info['Hx HCSR'].hxHcsrQ9.map( text => {
+            info['Hx HCSR'].hxHcsrQ9.split('\n').map( text => {
                 return <p>{text}<br/></p>
             })}</b><br /><br />
     </Fragment>
