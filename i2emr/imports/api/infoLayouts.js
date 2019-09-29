@@ -7,6 +7,7 @@ import { doctorSConsult } from './infoLayouts/doctorSConsult';
 import { geriCognitiveFollowUp } from './infoLayouts/geriCognitiveFollowUp';
 import { socialService } from './infoLayouts/socialService';
 import { dietitian } from './infoLayouts/dietitian';
+import { historyTaking } from './infoLayouts/historyTaking';
 
 // Define the layouts
 export const infoLayouts = {
@@ -36,6 +37,10 @@ export const infoLayouts = {
 
   "Dietitian" : (info) => {
     return dietitian(info);
+  },
+
+  "History Taking" : (info) => {
+    return historyTaking(info);
   },
 
 };
