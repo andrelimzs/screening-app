@@ -70,7 +70,11 @@ export const formSchemas = {
       }
     }
     }, registrationQ13: {
-    type: Boolean, label: "I agree and consent to the above.", optional: false
+    type: Boolean, label: "I agree and consent to the above.", custom: function () {
+        if(!this.isSet || !this.value) {
+          return SimpleSchema.ErrorTypes.REQUIRED
+        }
+    }
     }, registrationQ14: {
     type: String, optional: true, custom: function () {
       if (this.field('registrationQ2').isSet && this.field('registrationQ2').value === 'Others 其他 (please specify):') {
@@ -87,9 +91,17 @@ export const formSchemas = {
 
    "Phlebotomy": (info) => { return new SimpleSchema({
     phlebotomyQ1: {
-    type: Boolean, label: "Yes", optional: false
+    type: Boolean, label: "Yes", custom: function () {
+        if(!this.isSet || !this.value) {
+          return SimpleSchema.ErrorTypes.REQUIRED
+        }
+    }
     }, phlebotomyQ2: {
-    type: Boolean, label: "Yes", optional: false
+    type: Boolean, label: "Yes", custom: function () {
+        if(!this.isSet || !this.value) {
+          return SimpleSchema.ErrorTypes.REQUIRED
+        }
+    }
     }
     }
    )},
@@ -747,7 +759,11 @@ export const formSchemas = {
     }, doctorSConsultQ10: {
     type: Boolean, label:"Yes", optional: true
     }, doctorSConsultQ11: {
-    type: Boolean, label:"Yes",  optional: false
+    type: Boolean, label:"Yes", custom: function () {
+      if(!this.isSet || !this.value) {
+        return SimpleSchema.ErrorTypes.REQUIRED
+      }
+    }
     }
     }
    )},

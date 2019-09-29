@@ -79,7 +79,7 @@ Meteor.methods({
     Patientinfo.update({id:id},{$set:{
       nextStation: "",
       busy: false,
-      // stationQueue: stationQueue,
+      stationQueue: stationQueue,
       lastSubmit: new Date()
     }});
 
