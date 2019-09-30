@@ -159,7 +159,7 @@ export const formLayouts = {
   "History Taking" : {
     "Hx HCSR" : (info) => (
       <Fragment>
-        <font color="red"><h3>Please verify participant's identity using his/her NRIC before proceeding <br />A. S/N B. Surname followed by Initials C. Last 4 characters of Participant's NRIC and Letter</h3></font>
+        <font color="red"><h3>Please verify participant's identity using his/her NRIC before proceeding <br />A. S/N B. Surname followed by Initials C. Last 4 characters of Participant's NRIC and Letter</h3></font><br/><br/>
         <h2>PARTICIPANT IDENTIFICATION</h2>
         <b>Booth number</b> and <b>History-taker's Name</b><br />
         <LongTextField name="hxHcsrQ1" label="Hx HCSR Q1" />
@@ -175,18 +175,18 @@ export const formLayouts = {
         <RadioField name="hxHcsrQ11" label="Hx HCSR Q11"/>
         <DisplayIf condition={(context) => (typeof(context.model.hxHcsrQ11) !== "undefined" && context.model.hxHcsrQ11 === "Yes")}>
           <Fragment>
-            <br /><b>REFER TO DR CONSULT</b> under Form A if <b>worrying problems / participant strongly insists or if you feel 'Health Concerns' requires closer scrutiny by doctors later.</b><br />Indicate for Doctor's Consultation station under: <br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A<br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation 
+            <br /><b>REFER TO DR CONSULT</b> under Form A if <b>worrying problems / participant strongly insists or if you feel 'Health Concerns' requires closer scrutiny by doctors later.</b><br />Indicate for Doctor's Consultation station under: <br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A<br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation<br/>3) Please write relevant medical/social history of participant under history taking box
           </Fragment>
         </DisplayIf>
         <h2>2. SYSTEMS REVIEW</h2>
-        <b>Below is a non-exhaustive list of possible red flags:</b><br />- Constitutional Symptoms: LOA, LOW, Fever<br />- CVS: Chest pain, Palpitations<br />- Respi: SOB, Haemoptysis, Night Sweat, Cough<br />- GI: change in BO habits, PR bleed, Haematemesis<br />- Frequent falls<br /><br />
+        <b>Below is a non-exhaustive list of possible red flags:</b><br />- Constitutional Symptoms: LOA, LOW, Fever, Lethargy<br />- CVS: Chest pain, Palpitations<br />- Respi: SOB, Cough, Wheeze, Night Sweats, Sputum Production<br />- GI: change in BO habits, PR bleed, Haematemesis, Nausea/Vomiting<br />CNS: Headaches, Dizziness, Fainting, Weakness/Numbness <br/> - MSK: Frequent falls<br /><br />
         <b>Based on <font color="red"><u>participants's health concerns,</u></font></b> please rule out red flags <b>(Please write NIL if otherwise)</b><br />
         <LongTextField name="hxHcsrQ3" label="Hx HCSR Q3" /> 
         Please tick to highlight if you feel <b>SYSTEMS REVIEW</b> require closer scrutiny by doctors later or if <b>participant strongly insists.</b>
         <RadioField name="hxHcsrQ12" label="Hx HCSR Q12"/>
         <DisplayIf condition={(context) => (typeof(context.model.hxHcsrQ12) !== "undefined" && context.model.hxHcsrQ12 === "Yes")}>
           <Fragment>
-            <b>REFER TO DR CONSULT</b> under Form A if <b>worrying problems / participant strongly insists or if you feel 'Health Concerns' requires closer scrutiny by doctors later.</b><br />Indicate for Doctor's Consultation station under: <br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation         Reasons for recommendation<br/><br/>
+            <b>REFER TO DR CONSULT</b> under Form A if <b>worrying problems / participant strongly insists or if you feel 'Health Concerns' requires closer scrutiny by doctors later.</b><br />Indicate for Doctor's Consultation station under: <br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation         Reasons for recommendation<br/>3) Please write relevant medical/social history of participant under history taking box<br/><br/>
           </Fragment>
         </DisplayIf>
         2a. Do you have any problems passing urine or motion? Please specify if yes.
@@ -213,7 +213,7 @@ export const formLayouts = {
           <Fragment>
             Please Specify:
             <LongTextField name="hxHcsrQ9" label="Hx HCSR Q9" />
-            <b>REFER TO <font color="red">DR CONSULT</font> if have hearing problem for <font color="red">40-59</font>. Please give the participant the PHS Hearing Questionnaire 2019, remind them to complete it by themselves before passing it to the doctors at doctor's consult. For 60 and above, indicate for Geriatrics - Geriatrics Functional Screening includes audiometry screening.</b><br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation
+            <b>REFER TO <font color="red">DR CONSULT</font> if have hearing problem for <font color="red">40-59</font>. Please give the participant the PHS Hearing Questionnaire 2019, remind them to complete it by themselves before passing it to the doctors at doctor's consult. For 60 and above, indicate for Geriatrics - Geriatrics Functional Screening includes audiometry screening.</b><br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation<br/>3) Please write relevant medical/social history of participant under history taking box
           </Fragment>
         </DisplayIf>
         
