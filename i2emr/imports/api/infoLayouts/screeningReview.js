@@ -307,7 +307,7 @@ export const screeningReview = (info) => {
             typeof(info['Geri - Cognitive Follow Up'].geriCognitiveFollowUpQ1) !== "undefined" && 
             info['Geri - Cognitive Follow Up'].geriCognitiveFollowUpQ1
         }<br /><br /></b>
-        To be referred for social support exhibition booth/ AIC (For HDB Ease Sign-up) (PT): <br />
+        To be referred for social support (For HDB Ease Sign-up) (PT): <br />
         <b>{typeof(info['Geri - PT Consult']) !== "undefined" &&
             typeof(info['Geri - PT Consult'].geriPtConsultQ4) !== "undefined" && 
             info['Geri - PT Consult'].geriPtConsultQ4 === "No" && 
@@ -318,7 +318,7 @@ export const screeningReview = (info) => {
             info['Geri - PT Consult'].geriPtConsultQ4 === "Yes" && 
             <div>
                 {info['Geri - PT Consult'].geriPtConsultQ4}
-                <p><br/>Reasons for referral to social support exhibition booth/ AIC (PT):<br/></p>
+                <p><br/>Reasons for referral to social support (PT):<br/></p>
                 {typeof(info['Geri - PT Consult'].geriPtConsultQ5) !== "undefined" &&
                 typeof(info['Geri - PT Consult'].geriPtConsultQ5) !== "undefined" &&
                 info['Geri - PT Consult'].geriPtConsultQ5.split("\n").map(text => {
@@ -329,7 +329,7 @@ export const screeningReview = (info) => {
         }</font>
         <br /><br /></b>
 
-        To be referred for social support exhibition booth/ AIC (For HDB Ease Sign-up) (OT): <br />
+        To be referred for social support (For HDB Ease Sign-up) (OT): <br />
         <b>{typeof(info['Geri - OT Consult']) !== "undefined" &&
             typeof(info['Geri - OT Consult'].geriOtConsultQ4) !== "undefined" && 
             info['Geri - OT Consult'].geriOtConsultQ4 === "No" && 
@@ -340,7 +340,7 @@ export const screeningReview = (info) => {
             info['Geri - OT Consult'].geriOtConsultQ4 === "Yes" && 
             <div>
             {info['Geri - OT Consult'].geriOtConsultQ4}
-            <p><br/>Reasons for referral to social support exhibition booth/ AIC (OT):<br/></p>
+            <p><br/>Reasons for referral to social support (OT):<br/></p>
             {typeof(info['Geri - OT Consult'].geriOtConsultQ5) !== "undefined" &&
             typeof(info['Geri - OT Consult'].geriOtConsultQ5) !== "undefined" &&
             info['Geri - OT Consult'].geriOtConsultQ5.split("\n").map(text => {
@@ -362,6 +362,13 @@ export const screeningReview = (info) => {
             })
         }</font>
         <br /><br /></b>
+        Referred to go for L2 Eye Screening?
+        <b>{typeof(info['Geri - Vision']) !== "undefined" && 
+            typeof(info['Geri - Vision'].geriVisionQ9) !== "undefined" &&
+            info['Geri - Vision'].geriVisionQ9
+            }
+        <br /><br /></b>
+
 
         <h2>Social Service</h2>
         Did the participant visit the social service station? <br/>

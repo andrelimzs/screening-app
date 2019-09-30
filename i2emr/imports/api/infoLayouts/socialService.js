@@ -6,7 +6,7 @@ export const socialService = (info) => {
         CHAS Status<br />
         <b>{typeof(info['Registration']) !== "undefined" &&
             info['Registration'].registrationQ8}</b><br /><br />
-        Pioneer Generation Status <br/>
+        Pioneer / Merdeka Generation Status <br/>
         <b>{typeof(info['Registration']) !== "undefined" &&
             info['Registration'].registrationQ9}</b><br /><br />
         Is the participant on any Government Financial Assistance? <br />
