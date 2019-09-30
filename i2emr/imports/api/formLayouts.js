@@ -223,21 +223,21 @@ export const formLayouts = {
     "Hx NSS" : (info) => (
       <Fragment>
         <h2>HISTORY TAKING PART 2: NSS HEALTH AND LIFESTYLE QUESTIONNAIRE</h2>
-        <font color="red"><h3>Please go through NSS Questionnaire now.</h3></font>
+        <font color="red"><h3>Please go through NSS Questionnaire now.</h3></font><br/><br/>
         <h2>1. Past Medical History</h2>
         1a. Has a doctor ever told you that you have the following condition? Please tick the appropriate box(es) if the answer is "Yes" to any of the conditions listed below, or tick the last box if you have none.
-        <SelectField name="hxNssQ1" checkboxes="true" label="Hx NSS Q1" />
-        <br/><br/><font color="red"><b>For respondent with known hypertension, diabetes, high cholesterol and stroke only.</b></font><br /><br />
+        <SelectField name="hxNssQ1" checkboxes="true" label="Hx NSS Q1" /><br/><br/>
+        <br/><br/><font color="red"><b>For respondent with known hypertension, diabetes, high cholesterol and stroke only.</b></font><br /><br /><br/><br/>
         2a. Are you currently on follow up with a doctor for the existing conditions you have indicated?<br/><br/>
         <RadioField name="hxNssQ2" label="Hx NSS Q2"/>
         <DisplayIf condition={(context) => (typeof(context.model.hxNssQ2) !== "undefined" && context.model.hxNssQ2 === "Yes (please answer question below)")}>
           <Fragment>
-            (Only proceed when answered "Yes" to the previous question)
+            (Only proceed when answered "Yes" to the previous question)<br/><br/>
             <RadioField name="hxNssQ3" checkboxes="true" label="Hx NSS Q3" />
             <DisplayIf condition={(context) => (typeof(context.model.hxNssQ3) !== "undefined" && context.model.hxNssQ3 === "No, the last appointment was > 1 year ago (Please proceed to Q2b and 2c)")}>
               <Fragment>
                 2b. What is the reason that you are not following up with your doctor for your existing conditions such as diabetes, high cholesterol, high blood pressure and stroke?
-                <SelectField name="hxNssQ4" checkboxes="true" label="Hx NSS Q4" />
+                <SelectField name="hxNssQ4" checkboxes="true" label="Hx NSS Q4" /><br/><br/>
                 <DisplayIf condition={(context) => (typeof(context.model.hxNssQ4) !== "undefined" && context.model.hxNssQ4.includes("Others: (please specify reason)"))}>
                   <Fragment>
                     Please Specify:
@@ -268,7 +268,9 @@ export const formLayouts = {
           <u>If systolic between 140 - 160 mmHg: </u></font></b><br />o Ask for:<br />- Has hypertension been pre-diagnosed? If not, refer to DC (possible new HTN diagnosis)<br />- If diagnosed before, ask about compliance and whether he/she goes for regular follow up?
           </Fragment>
         </DisplayIf>
+        <br/><br/>
         <font color="blue"><h3>THE FOLLOWING QUESTIONS ARE NOT PART OF NSS QUESTIONNAIRE. PLEASE ASK THE PARTICIPANT ACCORDINGLY. </h3></font>
+        <br/><br/>
         <font color="blue"><b>2d. Are you on any types of medications not listed above? (includes use of traditional medicine)</b></font>
         <RadioField name="hxNssQ9" label="Hx NSS Q9"/>
         <DisplayIf condition={(context) => (typeof(context.model.hxNssQ9) !== "undefined" && context.model.hxNssQ9 === "Yes, (Please specify):")}>
@@ -296,20 +298,20 @@ export const formLayouts = {
             <LongTextField name="hxNssQ23" label="Hx NSS Q23" />
           </Fragment>
         </DisplayIf>
-        4. Do you smoke?
+        <br/><br/>4. Do you smoke?
         <RadioField name="hxNssQ14" label="Hx NSS Q14"/>
         <DisplayIf condition={(context) => (typeof(context.model.hxNssQ14) !== "undefined" && context.model.hxNssQ14.startsWith("Yes"))}>
           <h3>If participant is a smoker, recommend HPB iQuit exhibition booth on Page 2 of Form A.</h3>
         </DisplayIf>
         5. Do you consume alcoholic drinks? (Note: Standard drink means a shot of hard liquor, a can or bottle of beer, or a glass of wine.)
         <RadioField name="hxNssQ15" label="Hx NSS Q15"/>
-        6. Do you consciously try to eat more fruits, vegetables, whole grain and cereals? Please tick where applicable.
+        <br/><br/>6. Do you consciously try to eat more fruits, vegetables, whole grain and cereals? Please tick where applicable.
         <SelectField name="hxNssQ16" checkboxes="true" label="Hx NSS Q16" />
-        7. Do you exercise or participate in any form of moderate physical activity for at least 150 minutes OR intense physical activity at least 75 minutes throughout the week? Note: Examples of physical activity includes exercising, walking, playing sports, washing your car, lifting/ moving moderately heavy luggage and doing housework.
+        <br/><br/>7. Do you exercise or participate in any form of moderate physical activity for at least 150 minutes OR intense physical activity at least 75 minutes throughout the week? Note: Examples of physical activity includes exercising, walking, playing sports, washing your car, lifting/ moving moderately heavy luggage and doing housework.
         <RadioField name="hxNssQ17" label="Hx NSS Q17"/>
         <b>Counsel for positive diet and lifestyle modification if deemed necessary. Refer to <font color="red">dietitian</font> at Doctor's Consultation station, Indicate:</b><br/>
         1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A<br/>2) Write reasons under dietitian referral on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation<br /><br />
-        Indicate Smoking/Alcohol Consumption on Page 2 of Form A for exhibition ambassadors if applicable. Smoking cessation engagement by HPB iQuit.<br />Recommend for lifestyle follow up on Page 2 of Form A if you deem necessary.
+        Indicate Smoking/Alcohol Consumption on Page 2 of Form A for exhibition ambassadors if applicable. Smoking cessation engagement by HPB iQuit.<br />Recommend for lifestyle follow up on Page 2 of Form A if you deem necessary.<br/><br/><br/><br/>
         8. When was the last time you had a blood test to check for hypertension, diabetes and cholesterol? Please answer all.
         Hypertension
         <RadioField name="hxNssQ18" label="Hx NSS Q18"/>
@@ -351,12 +353,12 @@ export const formLayouts = {
         </DisplayIf>
         <font color="red"><h3>PLEASE REFER TO PAGE 2 OF NSS FORM FOR RESPONSES. PLEASE ASK MORE as NECESSARY. </h3></font>
         4a. What is the average earnings of participant's household per month? (Refer to NSS Form Page 2, Put 'NIL' if participant unable to provide)
-        <RadioField name="hxSocialQ3" label="Hx Social Q3"/>
+        <RadioField name="hxSocialQ3" label="Hx Social Q3"/><br/><br/>
         4b. Number of household members (including yourself): 
-        <LongTextField name="hxSocialQ4" label="Hx Social Q4"/>
+        <LongTextField name="hxSocialQ4" label="Hx Social Q4"/><br/><br/>
         4c. Do you want to apply for CHAS card? (if you are currently not on CHAS but qualify) <br />
         <img src='/images/hx/chas.jpg' alt='CHAS' /> <br />
-        <RadioField name="hxSocialQ5" label="Hx Social Q5"/>
+        <RadioField name="hxSocialQ5" label="Hx Social Q5"/><br/><br/>
         <DisplayIf condition={(context) => (typeof(context.model.hxSocialQ5) !== "undefined" && context.model.hxSocialQ5 === "No, I qualify but...(Please specify the reasons for not applying if you qualify):" || context.model.hxSocialQ5 === "Yes, (Please specify):")}>
           <Fragment>
             Please specify
@@ -398,7 +400,7 @@ export const formLayouts = {
           </Fragment>
         </DisplayIf>
         <h2>4. ORAL ISSUES</h2>
-        <b>Please do a quick inspection of participant's oral health status:</b> <br />1. Lips, Tongue, Gums & Tissues (Healthy - pink and moist)<br />2. Natural Teeth, Oral Cleanliness & Dentures (Tooth/Root decay, no cracked/broken dentures, No food particles/tartar in mouth)<br />3. Saliva status (free-flowing) and Any dental pain <br />
+        <b>Please do a quick inspection of participant's oral health status:</b> <br />1. Lips, Tongue, Gums & Tissues (Healthy - pink and moist)<br />2. Natural Teeth, Oral Cleanliness & Dentures (Tooth/Root decay, no cracked/broken dentures, No food particles/tartar in mouth)<br />3. Saliva status (free-flowing) and Any dental pain <br /><br/><br/>
         1. How is the participant's Oral Health?
         <RadioField name="hxSocialQ13" label="Hx Social Q13"/>
         2. Would you like to go through free Oral Health screening by NUS Dentistry dentists and students?
@@ -417,37 +419,37 @@ export const formLayouts = {
         <h2>HISTORY TAKING PART 4: CANCER SCREENING</h2>
         <h2>1. HISTORY OF CANCER & FAMILY HISTORY</h2>
         <b><font color="blue">1. Has a doctor ever told you that you have the following conditions?</font>Do be sensitive when asking for personal history of cancer. (please select all that apply)</b> 
-        <SelectField name="hxCancerQ1" checkboxes="true" label="Hx Cancer Q1" />
+        <SelectField name="hxCancerQ1" checkboxes="true" label="Hx Cancer Q1" /><br/><br/>
         <DisplayIf condition={(context) => (typeof(context.model.hxCancerQ1) !== "undefined" && context.model.hxCancerQ1.length !== 0 && !context.model.hxCancerQ1.includes("No, I don't have any of the above"))}>
           <Fragment>
             Please specify:
-            <LongTextField name="hxCancerQ26" label="Hx Cancer Q26" />
+            <LongTextField name="hxCancerQ26" label="Hx Cancer Q26" /><br/><br/>
           </Fragment>
         </DisplayIf>
         <b><font color="blue">2. Is there positive family history (AMONG FIRST DEGREE RELATIVES) for the following cancers?</font></b>
-        <SelectField name="hxCancerQ2" checkboxes="true" label="Hx Cancer Q2" />
+        <SelectField name="hxCancerQ2" checkboxes="true" label="Hx Cancer Q2" /><br/><br/>
         <DisplayIf condition={(context) => (typeof(context.model.hxCancerQ2) !== "undefined" && context.model.hxCancerQ2.length !== 0  && !context.model.hxCancerQ2.includes("No"))}>
           <Fragment>
             Please specify:
-            <LongTextField name="hxCancerQ3" label="Hx Cancer Q3" />
+            <LongTextField name="hxCancerQ3" label="Hx Cancer Q3" /><br/><br/>
           </Fragment>
         </DisplayIf>
         <b><font color="blue">3. Any other significant family history?</font></b> Indicate 'NIL' if none. 
-        <LongTextField name="hxCancerQ4" label="Hx Cancer Q4" />
+        <LongTextField name="hxCancerQ4" label="Hx Cancer Q4" /><br/><br/>
         <b>Counsel for screening if positive family history of cancer or chronic disease. <br /><br />
-        Based on participant family hx, please recommend FIT/WCE and Doctor's Consultation (if applicable)</b> <br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A  <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation   <br />3) Recommend relevant exhibition booths on Page 2 of Form A Exhibition - Recommendation<br />
+        Based on participant family hx, please recommend FIT/WCE and Doctor's Consultation (if applicable)</b> <br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A  <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation   <br />3) Recommend relevant exhibition booths on Page 2 of Form A Exhibition - Recommendation<br /><br/><br/>
         <font color="red"><h3>CONTINUE REFERRING TO NSS QUESTIONNAIRE. </h3></font>
-        <h2>2. NSS CANCER SCREENING PRACTICES SURVEY.</h2>
+        <h2>2. NSS CANCER SCREENING PRACTICES SURVEY.</h2><br/><br/>
         <font color="red"><b>1. For respondent aged 50 and above only,</b></font> unless positive family history for colorectal cancer.<br />When was the last time you had a blood stool test? (A blood stool test is a test to determine whether the stool contains blood.)
-        <RadioField name="hxCancerQ5" label="Hx Cancer Q5"/>
+        <RadioField name="hxCancerQ5" label="Hx Cancer Q5"/><br/><br/>
         <font color="red"><b>2. For respondent aged 50 and above only,</b></font> unless positive family history for colorectal cancer.<br />When was the last time you had a colonoscopy? (A colonoscopy is an examination in which a tube is inserted in the rectum to view the colon for signs of cancer or other health problems.)
         <RadioField name="hxCancerQ6" label="Hx Cancer Q6"/>
-        <font color="red"><b>Please encourage participants to go for FIT every year if participant is above 50, asymptomatic and no positive family history of colorectal cancer in first degree relatives. <br />If deemed to be in high risk (positive family history of colorectal cancer in first degree relatives, counsel for colonoscopy every 3 years), refer to risk categorization given.</b></font><br /><br />
+        <font color="red"><b>Please encourage participants to go for FIT every year if participant is above 50, asymptomatic and no positive family history of colorectal cancer in first degree relatives. <br />If deemed to be in high risk (positive family history of colorectal cancer in first degree relatives, counsel for colonoscopy every 3 years), refer to risk categorization given.</b></font><br /><br /><br/><br/>
         <font color="red"><b>3. For <u>female</u> respondent aged 40 and above only.</b></font><br />When was the last time you had your last mammogram? (A mammogram is an x-ray of each breast to look for breast cancer.)
-        <RadioField name="hxCancerQ7" label="Hx Cancer Q7"/>
+        <RadioField name="hxCancerQ7" label="Hx Cancer Q7"/><br/><br/>
         <font color="red"><b>4. For <u>female</u> respondent aged 25 and above, who have/had a husband/boyfriend and not had their womb completely surgically removed only.</b></font><br />When was the last time you had a PAP smear test? (A PAP smear test is a simple test involving the scrapping of cells fom the mouth of the womb, to check for changes in the cells of your cervix, which may develop into cancer later.)
         <RadioField name="hxCancerQ8" label="Hx Cancer Q8"/>
-        <b><font color="red">For women 40-49, advise yearly mammogram. 50-69, advise mammogram every 2 years. 70 and above and if interested, refer to WCE.<br />Please encourage participants to go for HPV test every 5 years. <br />Refer to WCE: </font><br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A</b><br /><br />
+        <b><font color="red">For women 40-49, advise yearly mammogram. 50-69, advise mammogram every 2 years. 70 and above and if interested, refer to WCE.<br />Please encourage participants to go for HPV test every 5 years. <br />Refer to WCE: </font><br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A</b><br /><br /><br/><br/>
         <b>If participant has a <mark>history of cancer</mark> or if <mark>participant's family history</mark> requires further scrutiny by doctors, refer to doctor's consult. <font color="red">(If indicated 'Yes', please complete the question below.)</font></b>
         <RadioField name="hxCancerQ9" label="Hx Cancer Q9"/>
         <DisplayIf condition={(context) => (typeof(context.model.hxCancerQ9) !== "undefined" && context.model.hxCancerQ9 === "Yes")}>
