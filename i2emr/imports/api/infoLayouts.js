@@ -43,4 +43,8 @@ export const infoLayouts = {
     return historyTaking(info);
   },
 
+  "History Taking - Non Phleb" : (info) => {
+    return historyTaking(info);
+  },
+
 };

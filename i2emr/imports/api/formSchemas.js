@@ -250,6 +250,284 @@ export const formSchemas = {
               }
             }
           }
+        }, hxNssQ24: {
+          type: String, allowedValues: ["Yes", "No"], optional: false
+        }
+      }
+      )
+    },
+
+    "Hx Social": (info) => {
+      return new SimpleSchema({
+        hxSocialQ1: {
+          type: String, allowedValues: ["Yes, (Please specify):", "No"], optional: false
+        }, hxSocialQ2: {
+          type: String, optional: true, custom: function () {
+            if (this.field('hxSocialQ1').isSet && this.field('hxSocialQ1').value === 'Yes, (Please specify):') {
+              if (!this.isSet || this.value.length === 0) {
+                return SimpleSchema.ErrorTypes.REQUIRED
+              }
+            }
+          }
+        }, hxSocialQ3: {
+          type: String, allowedValues: ["1200 and below per month", "1,201 - 2,000 per month", "2,001 - 3,999 per month", "4,000 - 5,999 per month", "6,000 - 9,999 per month", "10,000 & above", "NIL"], optional: false
+        }, hxSocialQ4: {
+          type: String, optional: false
+        }, hxSocialQ5: {
+          type: String, allowedValues: ["Yes, (Please specify):", "No, I do not qualify", "No, I qualify but...(Please specify the reasons for not applying if you qualify):"], optional: false
+        }, hxSocialQ6: {
+          type: String, optional: true, custom: function () {
+            if (this.field('hxSocialQ5').isSet && (this.field('hxSocialQ5').value === 'Yes, (Please specify):' || this.field('hxSocialQ5').value === 'No, I qualify but...(Please specify the reasons for not applying if you qualify):')) {
+              if (!this.isSet || this.value.length === 0) {
+                return SimpleSchema.ErrorTypes.REQUIRED
+              }
+            }
+          }
+        }, hxSocialQ7: {
+          type: String, allowedValues: ["Yes, (Please specify):", "No"], optional: false
+        }, hxSocialQ8: {
+          type: String, optional: true, custom: function () {
+            if (this.field('hxSocialQ7').isSet && this.field('hxSocialQ7').value === 'Yes, (Please specify):') {
+              if (!this.isSet || this.value.length === 0) {
+                return SimpleSchema.ErrorTypes.REQUIRED
+              }
+            }
+          }
+        }, hxSocialQ9: {
+          type: String, allowedValues: ["Yes", "No"], optional: false
+        }, hxSocialQ10: {
+          type: String, allowedValues: ["Yes", "No"], optional: true, custom: function () {
+            if (this.field('hxSocialQ9').isSet && this.field('hxSocialQ9').value === 'Yes') {
+              if (!this.isSet || this.value.length === 0) {
+                return SimpleSchema.ErrorTypes.REQUIRED
+              }
+            }
+          }
+        }, hxSocialQ11: {
+          type: String, allowedValues: ["Yes", "No"], optional: true, custom: function () {
+            if (this.field('hxSocialQ9').isSet && this.field('hxSocialQ9').value === 'Yes') {
+              if (!this.isSet || this.value.length === 0) {
+                return SimpleSchema.ErrorTypes.REQUIRED
+              }
+            }
+          }
+        }, hxSocialQ12: {
+          type: String, allowedValues: ["Yes", "No"], optional: false
+        }, hxSocialQ13: {
+          type: String, allowedValues: ["Healthy", "Moderate", "Poor"], optional: false
+        }, hxSocialQ14: {
+          type: String, allowedValues: ["Yes", "No"], optional: false
+        }
+      }
+      )
+    },
+
+    "Hx Cancer": (info) => {
+      return new SimpleSchema({
+        hxCancerQ1: {
+          type: Array, optional: false
+        }, "hxCancerQ1.$": {
+          type: String, allowedValues: ["Ischaemic Heart Disease (Including Coronary Artery Diseases) 缺血性心脏病（包括心脏血管阻塞)", "Cervical Cancer 子宫颈癌, (Please specify age of diagnosis): (Free text)", "Breast Cancer 乳癌, (Please specify age of diagnosis): (Free text)", "Colorectal Cancer 大肠癌, (Please specify age of diagnosis): (Free text)", "Others, (Please Specify condition and age of diagnosis): (Free text)", "No, I don't have any of the above"]
+        }, hxCancerQ2: {
+          type: Array, optional: false
+        }, "hxCancerQ2.$": {
+          type: String, allowedValues: ["Cervical Cancer 子宫颈癌, (Please specify age of diagnosis):", "Breast Cancer 乳癌, (Please specify age of diagnosis):", "Colorectal Cancer 大肠癌, (Please specify age of diagnosis):", "Others, (Please Specify condition and age of diagnosis):", "No"]
+        }, hxCancerQ3: {
+          type: String, optional: true, custom: function () {
+            if (this.field('hxCancerQ2').isSet && this.field('hxCancerQ2').value.length !== 0 && !this.field('hxCancerQ2').value.includes("No")) {
+              if (!this.isSet || this.value.length === 0) {
+                return SimpleSchema.ErrorTypes.REQUIRED
+              }
+            }
+          }
+        }, hxCancerQ4: {
+          type: String, optional: false
+        }, hxCancerQ5: {
+          type: String, allowedValues: ["1 year ago or less", "More than 1 year to 2 years", "More than 2 years to 3 years", "More than 3 years to 4 years", "More than 4 years to 5 years", "More than 5 years", "Never been checked"], optional: true
+        }, hxCancerQ6: {
+          type: String, allowedValues: ["1 year ago or less", "More than 1 year to 2 years", "More than 2 years to 3 years", "More than 3 years to 4 years", "More than 4 years to 5 years", "More than 5 years", "Never been checked"], optional: true
+        }, hxCancerQ7: {
+          type: String, allowedValues: ["1 year ago or less", "More than 1 year to 2 years", "More than 2 years to 3 years", "More than 3 years to 4 years", "More than 4 years to 5 years", "More than 5 years", "Never been checked"], optional: true
+        }, hxCancerQ8: {
+          type: String, allowedValues: ["1 year ago or less", "More than 1 year to 2 years", "More than 2 years to 3 years", "More than 3 years to 4 years", "More than 4 years to 5 years", "More than 5 years", "Never been checked"], optional: true
+        }, hxCancerQ9: {
+          type: String, allowedValues: ["Yes", "No"], optional: false
+        }, hxCancerQ10: {
+          type: String, optional: true, custom: function () {
+            if (this.field('hxCancerQ9').isSet && this.field('hxCancerQ9').value === "Yes") {
+              if (!this.isSet || this.value.length === 0) {
+                return SimpleSchema.ErrorTypes.REQUIRED
+              }
+            }
+          }
+        }, hxCancerQ11: {
+          type: Number, optional: false
+        }, hxCancerQ12: {
+          type: Number, optional: false
+        }, hxCancerQ13: {
+          type: Number, optional: false
+        }, hxCancerQ14: {
+          type: Number, optional: false
+        }, hxCancerQ15: {
+          type: Number, optional: true
+        }, hxCancerQ16: {
+          type: Number, optional: true
+        }, hxCancerQ17: {
+          type: Number, optional: false
+        }, hxCancerQ18: {
+          type: Number, optional: false
+        }, hxCancerQ19: {
+          type: Number, optional: true
+        }, hxCancerQ20: {
+          type: Number, optional: true
+        }, hxCancerQ21: {
+          type: Number, optional: false
+        }, hxCancerQ22: {
+          type: String, allowedValues: ["Yes", "No"], optional: false
+        }, hxCancerQ23: {
+          type: Boolean, label: "Yes", optional: true
+        }, hxCancerQ24: {
+          type: Number, optional: true
+        }, hxCancerQ25: {
+          type: Array, optional: false
+        }, "hxCancerQ25.$": {
+          type: String, allowedValues: ["FIT (50 and above, FIT not done in past 1 year, Colonoscopy not done in past 10 years, Not diagnosed with colorectal cancer)", "WCE (40 and above, females only)", "Geriatrics (60 and above)", "Doctor\s Consultation (& Dietitian) - As recommended by hx-taker, undiagnosed or non-compliant cases (HTN, DM, Vision Impairment, Hearing Impairment, Urinary Incontinence, Any other pertinent medical issues)", "Social Service - As recommended by hx-taker (CHAS Application, Financial Support required, Social Support required)", "Oral Health Screening - participants aged 40-59 with poor dental hygiene", "Exhibition - recommended as per necessary"]
+        }, hxCancerQ26: {
+          type: String, optional: true, custom: function () {
+            if (this.field('hxCancerQ1').isSet && this.field('hxCancerQ1').value.length !== 0 && !this.field('hxCancerQ1').value.includes("No, I don't have any of the above")) {
+              if (!this.isSet || this.value.length === 0) {
+                return SimpleSchema.ErrorTypes.REQUIRED
+              }
+            }
+          }
+        }, hxCancerQ26: {
+          type: String, allowedValues: ["Yes", "No"], optional: false
+        }
+      }
+      )
+    },
+  },
+
+  "History Taking - Non Phleb": {
+    "Hx HCSR": (info) => { return new SimpleSchema({
+      hxHcsrQ1: {
+      type: String, optional: false
+      }, hxHcsrQ2: {
+      type: String, optional: false
+      }, hxHcsrQ3: {
+      type: String, optional: false
+      }, hxHcsrQ4: {
+      type: String, allowedValues: ["Yes, (Please specify):", "No"], optional: false
+      }, hxHcsrQ5: {
+      type: String, optional: true, custom: function () {
+        if (this.field('hxHcsrQ4').isSet && this.field('hxHcsrQ4').value === 'Yes, (Please specify):') {
+          if(!this.isSet || this.value.length === 0) {
+            return SimpleSchema.ErrorTypes.REQUIRED
+          }
+        }
+      }
+      }, hxHcsrQ6: {
+      type: String, allowedValues: ["Yes, (Please specify):", "No"], optional: false
+      }, hxHcsrQ7: {
+      type: String, optional: true, custom: function () {
+        if (this.field('hxHcsrQ6').isSet && this.field('hxHcsrQ6').value === 'Yes, (Please specify):') {
+          if(!this.isSet || this.value.length === 0) {
+            return SimpleSchema.ErrorTypes.REQUIRED
+          }
+        }
+      }
+      }, hxHcsrQ8: {
+      type: String, allowedValues: ["Yes, (Please specify):", "No"], optional: false
+      }, hxHcsrQ9: {
+      type: String, optional: true, custom: function () {
+        if (this.field('hxHcsrQ8').isSet && this.field('hxHcsrQ8').value === 'Yes, (Please specify):') {
+          if(!this.isSet || this.value.length === 0) {
+            return SimpleSchema.ErrorTypes.REQUIRED
+          }
+        }
+      }
+      }, hxHcsrQ11: {
+        type: String, allowedValues: ["Yes", "No"], optional: false
+      }, hxHcsrQ12: {
+        type: String, allowedValues: ["Yes", "No"], optional: false
+      }
+      }
+     )},
+
+    "Hx NSS": (info) => {
+      return new SimpleSchema({
+        hxNssQ1: {
+          type: Array, optional: false
+        }, "hxNssQ1.$": {
+          type: String, allowedValues: ["Hypertension\n(Please proceed to Q2)", "Diabetes\n(Please proceed to Q2)", "High Cholesterol\n(Please proceed to Q2)", "Stroke (including transient ischaemic attack) \n(Please proceed to Q2)", "Chronic Kidney Disease\n(Please proceed to Q2d)", "No, I don't have any of the above \n(Please proceed to Q2d)"]
+        }, hxNssQ2: {
+          type: String, allowedValues: ["Yes (please answer question below)", "No", "Not Applicable"], optional: false
+        }, hxNssQ3: {
+          type: String, allowedValues: ["Yes, on current follow up with General Practioner (GP) \n(Please proceed to Q2c)", "Yes, on current follow up with Family Medicine Centre\n(Please proceed to Q2c)", "Yes, on current follow up with Polyclinic \n(Please proceed to Q2c)", "Yes, on current follow up with Specialist Outpatient Clinic (SOC)\n(Please proceed to Q2c)", "No, the last appointment was > 1 year ago (Please proceed to Q2b and 2c)"], optional: true, custom: function () {
+            if (this.field('hxNssQ2').isSet && this.field('hxNssQ2').value === 'Yes (please answer question below)') {
+              if (!this.isSet || this.value.length === 0) {
+                return SimpleSchema.ErrorTypes.REQUIRED
+              }
+            }
+          }
+        }, hxNssQ4: {
+          type: Array, optional: true, custom: function () {
+            if (this.field('hxNssQ3').isSet && this.field('hxNssQ3').value === 'No, the last appointment was > 1 year ago (Please proceed to Q2b and 2c)') {
+              if (!this.isSet || this.value.length === 0) {
+                return SimpleSchema.ErrorTypes.REQUIRED
+              }
+            }
+          }
+        }, "hxNssQ4.$": {
+          type: String, allowedValues: ["Do not see the need for tests", "Challenging to make time to go for appointments", "Difficulties gtting to the clinics", "Financial issues", "Scared of doctor", "Others: (please specify reason)"]
+        }, hxNssQ5: {
+          type: String, allowedValues: ["Yes", "No", "Not Applicable"], optional: false
+        }, hxNssQ6: {
+          type: String, allowedValues: ["Yes", "No", "Not Applicable"], optional: false
+        }, hxNssQ7: {
+          type: String, allowedValues: ["Yes", "No", "Not Applicable"], optional: false
+        }, hxNssQ8: {
+          type: String, allowedValues: ["Yes", "No", "Not Applicable"], optional: false
+        }, hxNssQ9: {
+          type: String, allowedValues: ["Yes, (Please specify):", "None"], optional: false
+        }, hxNssQ10: {
+          type: String, optional: true, custom: function () {
+            if (this.field('hxNssQ9').isSet && this.field('hxNssQ9').value === 'Yes, (Please specify):') {
+              if (!this.isSet || this.value.length === 0) {
+                return SimpleSchema.ErrorTypes.REQUIRED
+              }
+            }
+          }
+        }, hxNssQ11: {
+          type: String, allowedValues: ["Yes", "No"], optional: false
+        }, hxNssQ12: {
+          type: String, optional: true, custom: function () {
+            if (this.field('hxNssQ11').isSet && this.field('hxNssQ11').value === 'Yes') {
+              if (!this.isSet || this.value.length === 0) {
+                return SimpleSchema.ErrorTypes.REQUIRED
+              }
+            }
+          }
+        }, hxNssQ14: {
+          type: String, allowedValues: ["Yes, at least 1 cigarette (or equivalent) per day on average.", "Yes, occasionally, less than 1 cigarette (or equivalent) per day on average.", "No, I have never smoked.", "No, I have completely quit smoking."], optional: false
+        }, hxNssQ15: {
+          type: String, allowedValues: ["Less than 2 standard drinks per day on average.", "More than 2 standard drinks per day on average.", "No", "Quit Alcoholic Drinks"], optional: false
+        }, hxNssQ18: {
+          type: String, allowedValues: ["1 year ago or less", "More than 1 year to 2 years", "More than 2 years to 3 years", "More than 3 years to 4 years", "More than 4 years to 5 years", "More than 5 years", "Never been checked"], optional: false
+        }, hxNssQ19: {
+          type: String, allowedValues: ["1 year ago or less", "More than 1 year to 2 years", "More than 2 years to 3 years", "More than 3 years to 4 years", "More than 4 years to 5 years", "More than 5 years", "Never been checked"], optional: false
+        }, hxNssQ20: {
+          type: String, allowedValues: ["1 year ago or less", "More than 1 year to 2 years", "More than 2 years to 3 years", "More than 3 years to 4 years", "More than 4 years to 5 years", "More than 5 years", "Never been checked"], optional: false
+        }, hxNssQ22: {
+          type: String, optional: true, custom: function () {
+            if (this.field('hxNssQ4').isSet && this.field('hxNssQ4').value.includes("Others: (please specify reason)")) {
+              if (!this.isSet || this.value.length === 0) {
+                return SimpleSchema.ErrorTypes.REQUIRED
+              }
+            }
+          }
+        }, hxNssQ24: {
+          type: String, allowedValues: ["Yes", "No"], optional: false
         }
       }
       )
