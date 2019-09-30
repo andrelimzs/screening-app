@@ -1138,6 +1138,8 @@ export const formSchemas = {
 
   "Screening Review": (info) => { return new SimpleSchema({}) },
 
+  "Oral Screening": (info) => { return new SimpleSchema({}) },
+
   "Feedback Form": (info) => {
     return new SimpleSchema({
       feedbackFormQ1: {

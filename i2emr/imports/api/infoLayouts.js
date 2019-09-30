@@ -8,6 +8,7 @@ import { geriCognitiveFollowUp } from './infoLayouts/geriCognitiveFollowUp';
 import { socialService } from './infoLayouts/socialService';
 import { dietitian } from './infoLayouts/dietitian';
 import { historyTaking } from './infoLayouts/historyTaking';
+import { oralScreening } from './infoLayouts/oralScreening';
 
 // Define the layouts
 export const infoLayouts = {
@@ -45,6 +46,10 @@ export const infoLayouts = {
 
   "History Taking - Non Phleb" : (info) => {
     return historyTaking(info);
+  },
+
+  "Oral Screening" : (info) => {
+    return oralScreening(info);
   },
 
 };

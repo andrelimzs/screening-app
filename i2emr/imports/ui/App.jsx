@@ -20,6 +20,8 @@ import { infoLayouts } from '../api/infoLayouts.js';
 
 const stationsWithInfo = new Set(Object.keys(infoLayouts))
 
+const stationsWithInfoOnly = new Set(["Screening Review", "Oral Screening"])
+
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -108,7 +110,7 @@ class App extends Component {
 
         </div>
       );
-    } else if ( station && station === "Screening Review")  {
+    } else if ( station && stationsWithInfoOnly.has(station))  {
       return (
       <div>
           
