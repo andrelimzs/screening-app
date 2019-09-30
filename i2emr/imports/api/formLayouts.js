@@ -93,7 +93,7 @@ export const formLayouts = {
       <RadioField name="preRegistrationQ1" />
       Initials (Surname must be spelt out. E.g. John Tan Soo Keng = Tan S.K.J. ; Alan Simon Lee = A.S. Lee)
       <LongTextField name="preRegistrationQ2" />
-      Last 4 digits of NRIC (e.g. 987A)
+      Last 4 characters of NRIC (e.g. 987A)
       <LongTextField name="preRegistrationQ3" />
       Going for Phlebotomy?<br /><br /><i>Conditions:<br />1) Fasted for minimum 8 hours <br />          Note: Water is allowed, coffee/tea is not. Medications are fine. <br />2) NOT previously diagnosed with Diabetes/ High Cholesterol/ High Blood Pressure.<br />3) Have not done a blood test within 1 year.</i>
       <RadioField name="preRegistrationQ4" />
@@ -159,7 +159,7 @@ export const formLayouts = {
   "History Taking" : {
     "Hx HCSR" : (info) => (
       <Fragment>
-        <font color="red"><h3>Please verify participant's identity using his/her NRIC before proceeding <br />A. S/N B. Surname followed by Initials C. Last 4 digits of Participant's NRIC and Letter</h3></font>
+        <font color="red"><h3>Please verify participant's identity using his/her NRIC before proceeding <br />A. S/N B. Surname followed by Initials C. Last 4 characters of Participant's NRIC and Letter</h3></font>
         <h2>PARTICIPANT IDENTIFICATION</h2>
         <b>Booth number</b> and <b>History-taker's Name</b><br />
         <LongTextField name="hxHcsrQ1" label="Hx HCSR Q1" />
@@ -543,7 +543,7 @@ export const formLayouts = {
   "FIT" : (info) => (
     <Fragment>
       <h2>PARTICIPANT IDENTIFICATION</h2>
-      <h3><font color="red">Please verify participant's identity using his/her NRIC before proceeding <br />A. S/N B. Surname followed by Initials C. Last 4 digits of Participant's NRIC and Letter</font></h3>
+      <h3><font color="red">Please verify participant's identity using his/her NRIC before proceeding <br />A. S/N B. Surname followed by Initials C. Last 4 characters of Participant's NRIC and Letter</font></h3>
       <h2>1. NSS CANCER SCREENING PRACTICES SURVEY.</h2>
       1. <font color="red"><b>For respondent aged 50 and above only,</b></font> unless positive family history for colorectal cancer.<br />When was the last time you had a blood stool test? (A blood stool test is a test to determine whether the stool contains blood.)
       <h2><font color="green">{info["Hx Cancer"] && info["Hx Cancer"].hxCancerQ5}</font></h2>
@@ -566,7 +566,7 @@ export const formLayouts = {
   "WCE" : (info) => (
     <Fragment>
       <h2>PARTICIPANT IDENTIFICATION</h2>
-      <h3><font color="red">Please verify participant's identity using his/her NRIC before proceeding <br />A. S/N B. Surname followed by Initials C. Last 4 digits of Participant's NRIC and Letter</font></h3>
+      <h3><font color="red">Please verify participant's identity using his/her NRIC before proceeding <br />A. S/N B. Surname followed by Initials C. Last 4 characters of Participant's NRIC and Letter</font></h3>
       <h2>1. FINANCIAL STATUS<br /></h2>
       <font color="red"><b>Please refer to page 1 of Form A for following questions.</b></font>
       1. Current CHAS status?
