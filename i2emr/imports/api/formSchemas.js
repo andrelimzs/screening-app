@@ -375,9 +375,9 @@ export const formSchemas = {
         }, hxCancerQ18: {
           type: Number, optional: false
         }, hxCancerQ19: {
-          type: Number, optional: false
+          type: Number, optional: true
         }, hxCancerQ20: {
-          type: Number, optional: false
+          type: Number, optional: true
         }, hxCancerQ21: {
           type: Number, optional: false
         }, hxCancerQ22: {

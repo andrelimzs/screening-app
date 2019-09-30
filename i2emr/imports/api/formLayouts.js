@@ -195,7 +195,7 @@ export const formLayouts = {
           <Fragment>
             Please Specify:
             <LongTextField name="hxHcsrQ5" label="Hx HCSR Q5" />
-            <br /><b>REFER TO <font color="red">DR CONSULT</font> and <font color="red">EXHIBITION SFCS</font> booth under Form A</b><br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation <br />3) Pleae write relevant medical/social history of participant under history taking box <br /> 4) Page 2 of Form A, under Exhibition - Recommendation, tick renal and bladder health, write down SFCS booth<br/><br/>
+            <br /><b>REFER TO <font color="red">DR CONSULT</font> and <font color="red">EXHIBITION SFCS</font> booth under Form A</b><br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation <br />3) Pleae write relevant medical/social history of participant under history taking box <br /> 4) Page 2 of Form A, under Exhibition - Recommendation, tick renal and bladder health, write down SFCS booth<br/><br/><br/><br/>
           </Fragment>
         </DisplayIf>
         2b. Do you have any vision problems? Please specify if yes. Exclude complaints like unspecific itchy eyes etc<br />
@@ -204,7 +204,7 @@ export const formLayouts = {
           <Fragment>
             Please Specify:
             <LongTextField name="hxHcsrQ7" label="Hx HCSR Q7" />
-            <b>REFER TO <font color="red">DR CONSULT</font> if have vision problems for 40-59. For 60 and above, indicate for Geriatrics - Geriatrics Functional Screening includes vision screening.</b><br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation<br/><br/>
+            <b>REFER TO <font color="red">DR CONSULT</font> if have vision problems for 40-59. For 60 and above, indicate for Geriatrics - Geriatrics Functional Screening includes vision screening.</b><br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation<br/><br/><br/><br/>
           </Fragment>
         </DisplayIf>
         2c. Do you have any hearing problems? Please specify if yes. <br />
@@ -257,13 +257,17 @@ export const formLayouts = {
         <RadioField name="hxNssQ7" label="Hx NSS Q7"/>
         Stroke** <font color="blue"><b>(including transient ischaemic attack)</b></font>
         <RadioField name="hxNssQ8" label="Hx NSS Q8"/>
-        <h3>PLEASE TAKE 2ND BP READING NOW AND RECORD ON FORM A.<br /></h3>
-        Hypertension criteria:<br />○ Younger participants: > 140/90<br />○ Participants > 80 years old: > 150/90 <br />○ CKD w proteinuria (mod to severe albuminuria): > 130/80<br />○ DM: > 130/80<br /><br />
-        <b>REFER TO DR CONSULT: (FOR THE FOLLOWING SCENARIOS)<br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A  <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation   <br /><br />
-        <font color="red"><u>HYPERTENSIVE EMERGENCY</u><br />• SYSTOLIC  <mark>≥ 180</mark> AND/OR DIASTOLIC ≥ <mark>110 mmHg</mark> AND <mark><u>SYMPTOMATIC</u></mark> (make sure pt has rested and 2nd reading was taken)<br /><mark>o ASK THE DOCTOR TO COME AND REVIEW!</mark><br /> <br />
-        <u>HYPERTENSIVE URGENCY</u><br />• SYSTOLIC  <mark>≥ 180</mark> AND/OR DIASTOLIC ≥ <mark>110 mmHg</mark> AND <mark>ASYMPTOMATIC</mark> (make sure pt has rested and 2nd reading was taken)<br />o ESCORT TO DC DIRECTLY!<br />o Follow the patient, continue clerking the patient afterward if doctor acknowledges patient is well enough to continue the screening<br /><br />
-        <u>RISK OF HYPERTENSIVE CRISIS</u><br />• IF SYSTOLIC between <mark>160 - 180 mmHg</mark> <br />• IF <mark>ASYMPTOMATIC</mark>, continue clerking. <br />• IF <mark>SYMPTOMATIC</mark>, ESCORT TO DC DIRECTLY!<br /><br />
-        <u>If systolic between 140 - 160 mmHg: </u></font></b><br />o Ask for:<br />- Has hypertension been pre-diagnosed? If not, refer to DC (possible new HTN diagnosis)<br />- If diagnosed before, ask about compliance and whether he/she goes for regular follow up?
+        <DisplayIf condition={(context) => (typeof(context.model.hxNssQ8) !== "undefined" && context.model.hxNssQ8 === "Yes")}>
+          <Fragment>
+          <h3>PLEASE TAKE 2ND BP READING NOW AND RECORD ON FORM A.<br /></h3>
+          Hypertension criteria:<br />○ Younger participants: > 140/90<br />○ Participants > 80 years old: > 150/90 <br />○ CKD w proteinuria (mod to severe albuminuria): > 130/80<br />○ DM: > 130/80<br /><br />
+          <b>REFER TO DR CONSULT: (FOR THE FOLLOWING SCENARIOS)<br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A  <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation   <br /><br />
+          <font color="red"><u>HYPERTENSIVE EMERGENCY</u><br />• SYSTOLIC  <mark>≥ 180</mark> AND/OR DIASTOLIC ≥ <mark>110 mmHg</mark> AND <mark><u>SYMPTOMATIC</u></mark> (make sure pt has rested and 2nd reading was taken)<br /><mark>o ASK THE DOCTOR TO COME AND REVIEW!</mark><br /> <br />
+          <u>HYPERTENSIVE URGENCY</u><br />• SYSTOLIC  <mark>≥ 180</mark> AND/OR DIASTOLIC ≥ <mark>110 mmHg</mark> AND <mark>ASYMPTOMATIC</mark> (make sure pt has rested and 2nd reading was taken)<br />o ESCORT TO DC DIRECTLY!<br />o Follow the patient, continue clerking the patient afterward if doctor acknowledges patient is well enough to continue the screening<br /><br />
+          <u>RISK OF HYPERTENSIVE CRISIS</u><br />• IF SYSTOLIC between <mark>160 - 180 mmHg</mark> <br />• IF <mark>ASYMPTOMATIC</mark>, continue clerking. <br />• IF <mark>SYMPTOMATIC</mark>, ESCORT TO DC DIRECTLY!<br /><br />
+          <u>If systolic between 140 - 160 mmHg: </u></font></b><br />o Ask for:<br />- Has hypertension been pre-diagnosed? If not, refer to DC (possible new HTN diagnosis)<br />- If diagnosed before, ask about compliance and whether he/she goes for regular follow up?
+          </Fragment>
+        </DisplayIf>
         <font color="blue"><h3>THE FOLLOWING QUESTIONS ARE NOT PART OF NSS QUESTIONNAIRE. PLEASE ASK THE PARTICIPANT ACCORDINGLY. </h3></font>
         <font color="blue"><b>2d. Are you on any types of medications not listed above? (includes use of traditional medicine)</b></font>
         <RadioField name="hxNssQ9" label="Hx NSS Q9"/>
@@ -377,13 +381,13 @@ export const formLayouts = {
         </DisplayIf>
         <h2>3. SOCIAL ISSUES</h2>
         1. Are you caring for a loved one?
-        <RadioField name="hxSocialQ9" label="Hx Social Q9"/>
+        <RadioField name="hxSocialQ9" label="Hx Social Q9"/><br/><br/>
         <DisplayIf condition={(context) => (typeof(context.model.hxSocialQ9) !== "undefined" && context.model.hxSocialQ9 === "Yes")}>
           <Fragment>
             2. If you are caring for a loved one, do you need training?
-            <RadioField name="hxSocialQ10" label="Hx Social Q10"/>
+            <RadioField name="hxSocialQ10" label="Hx Social Q10"/><br/><br/>
             3. Do you need assistance? (eg funds to hire a helper / funds to offset caretaking costs, subsidies for home healthcare items, arranging for short term care in nursing homes/senior care centres)
-            <RadioField name="hxSocialQ11" label="Hx Social Q11"/>
+            <RadioField name="hxSocialQ11" label="Hx Social Q11"/><br/><br/>
           </Fragment>
         </DisplayIf>
         4. Do you require social support?
