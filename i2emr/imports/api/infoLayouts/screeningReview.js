@@ -362,6 +362,13 @@ export const screeningReview = (info) => {
             })
         }</font>
         <br /><br /></b>
+        Referred to go for L2 Eye Screening?
+        <b>{typeof(info['Geri - Vision']) !== "undefined" && 
+            typeof(info['Geri - Vision'].geriVisionQ9) !== "undefined" &&
+            info['Geri - Vision'].geriVisionQ9
+            }
+        <br /><br /></b>
+
 
         <h2>Social Service</h2>
         Did the participant visit the social service station? <br/>

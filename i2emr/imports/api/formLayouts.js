@@ -757,8 +757,9 @@ export const formLayouts = {
       <RadioField name="geriVisionQ7" label="Geri - Vision Q7"/>
        Please <b>refer to Occupational Therapist Consult</b> if visual acuity is <b>≥ 6/12</b>
       <SelectField name="geriVisionQ8" checkboxes="true" label="Geri - Vision Q8" />
-       Please <b>refer to Doctor’s Consult if pinhole</b> visual acuity <u><b>is ≥ 6/12</b></u>
-      <SelectField name="geriVisionQ9" checkboxes="true" label="Geri - Vision Q9" />
+       Please <b>refer to L2 Eye Screening (Eye Bus/ NUHS)</b> if pinhole visual acuity <u><b>is > 6/12</b></u><br/>
+       If participant is required to go for L2 Eye Screening, encourage participant to go to Eye Bus/ NUHS after Screening Review.
+      <RadioField name="geriVisionQ9" label="Geri - Vision Q9" />
       <font color="red"><h2>IF THE PATIENT NEEDS TO GO TO DOCTOR'S CONSULT MODALITY THAT YOU RECOMMENDED, PLEASE INDICATE ON FORM A.</h2></font>
     </Fragment>
   ),
@@ -1002,7 +1003,7 @@ export const formLayouts = {
       </DisplayIf>
 
       <h3>3. Eligibility for SWCDC Safe and Bright Homes Programme </h3>
-      1) Participants will be eligible for the SWCDC Safe and Bright Homes Programme if they meet the following criteria:<br />i) SWCDC Resident (Link: http://sis.pa-apps.sg/NASApp/sim/SearchResults.jsp)<br />ii) Requires home modification (determined by SAOT) - Refer to Form A<br />
+      1) Participants will be eligible for the SWCDC Safe and Bright Homes Programme if they meet the following criteria:<br />i) SWCDC Resident (Link: <a href="https://sis.pa-apps.sg/NASApp/sim/AdvancedSearch.aspx">https://sis.pa-apps.sg/NASApp/sim/AdvancedSearch.aspx</a>)<br />ii) Requires home modification (determined by SAOT) - Refer to Form A<br />
       <RadioField name="geriGeriApptQ6" label="Geri - Geri Appt Q6"/>
       <DisplayIf condition={(context) => (typeof(context.model.geriGeriApptQ6) !== "undefined" && context.model.geriGeriApptQ6 === "Yes, requirement met.")}>
         <Fragment>
