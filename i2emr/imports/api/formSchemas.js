@@ -57,7 +57,7 @@ export const formSchemas = {
           }
         }
       }, registrationQ11: {
-        type: String, allowedValues: ["English", "Mandarin", "Malay", "Tamil"], optional: false, custom: function () {
+        type: String, allowedValues: ["English", "Mandarin", "Malay", "Tamil"], optional: true, custom: function () {
           if (typeof (info["Pre-Registration"]) !== "undefined" && info["Pre-Registration"].preRegistrationQ4 === 'Y') {
             if (!this.isSet || this.value.length === 0) {
               return SimpleSchema.ErrorTypes.REQUIRED
@@ -73,7 +73,7 @@ export const formSchemas = {
           }
         }
       }, registrationQ13: {
-        type: Boolean, label: "I agree and consent to the above.", custom: function () {
+        type: Boolean, label: "I agree and consent to the above.", optional: true, custom: function () {
           if (!this.isSet || !this.value) {
             return SimpleSchema.ErrorTypes.REQUIRED
           }
@@ -96,13 +96,13 @@ export const formSchemas = {
   "Phlebotomy": (info) => {
     return new SimpleSchema({
       phlebotomyQ1: {
-        type: Boolean, label: "Yes", custom: function () {
+        type: Boolean, label: "Yes", optional: true, custom: function () {
           if (!this.isSet || !this.value) {
             return SimpleSchema.ErrorTypes.REQUIRED
           }
         }
       }, phlebotomyQ2: {
-        type: Boolean, label: "Yes", custom: function () {
+        type: Boolean, label: "Yes", optional: true, custom: function () {
           if (!this.isSet || !this.value) {
             return SimpleSchema.ErrorTypes.REQUIRED
           }
@@ -235,7 +235,7 @@ export const formSchemas = {
         }, hxNssQ21: {
           type: String, allowedValues: ["Yes", "No"], optional: false
         }, hxNssQ22: {
-          type: String, optional: false, custom: function () {
+          type: String, optional: true, custom: function () {
             if (this.field('hxNssQ4').isSet && this.field('hxNssQ4').value.includes("Others: (please specify reason)")) {
               if (!this.isSet || this.value.length === 0) {
                 return SimpleSchema.ErrorTypes.REQUIRED
@@ -243,7 +243,7 @@ export const formSchemas = {
             }
           }
         }, hxNssQ23: {
-          type: String, optional: false, custom: function () {
+          type: String, optional: true, custom: function () {
             if (this.field('hxNssQ13').isSet && this.field('hxNssQ13').value.includes("Coronary Heart disease (caused by narrowed blood vessels supplying the heart muscle) or Heart attack, (Please specify):")) {
               if (!this.isSet || this.value.length === 0) {
                 return SimpleSchema.ErrorTypes.REQUIRED
@@ -822,7 +822,7 @@ export const formSchemas = {
       }, doctorSConsultQ10: {
         type: Boolean, label: "Yes", optional: true
       }, doctorSConsultQ11: {
-        type: Boolean, label: "Yes", custom: function () {
+        type: Boolean, label: "Yes", optional: true, custom: function () {
           if (!this.isSet || !this.value) {
             return SimpleSchema.ErrorTypes.REQUIRED
           }
