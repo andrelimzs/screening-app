@@ -1072,10 +1072,6 @@ export const formLayouts = {
     </Fragment>
   ),
 
-  "Screening Review" : (info) => (
-    <Fragment />
-  ),
-
   "Feedback Form" : (info) => (
     <Fragment>
       <h2>PHS 2019 Screening Feedback Form <br />公共健康服务 2019 检验反馈表</h2>
@@ -1163,6 +1159,10 @@ export const formLayouts = {
       <h2>Thank you for completing this survey! :) <br />谢谢您为我们提供您宝贵的意见！</h2>
       
     </Fragment>
+  ),
+
+  "Screening Review" : (info) => (
+    <Fragment />
   ),
 
 };
