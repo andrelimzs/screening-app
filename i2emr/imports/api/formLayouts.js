@@ -126,7 +126,7 @@ export const formLayouts = {
       <SelectField name="registrationQ7" />
       CHAS Status 社保援助计划
       <SelectField name="registrationQ8" />
-      Pioneer Generation Status 建国一代配套
+      Pioneer / Merdeka Generation Status 建国一代配套
       <RadioField name="registrationQ9" />
       <DisplayIf condition={() => (typeof(info["Pre-Registration"]) !== "undefined" && info["Pre-Registration"].preRegistrationQ4 === "Y")}>
         <Fragment>
@@ -332,7 +332,7 @@ export const formLayouts = {
         {info["Registration"] && 
         info["Registration"].registrationQ8} <br />
         </b>
-        2. For participants born before 1949. Pioneer Generation Card? 
+        2. Pioneer / Merderka Generation Card? 
         <b>
         {info["Registration"] &&
           info["Registration"].registrationQ9} <br /><br />
@@ -568,7 +568,7 @@ export const formLayouts = {
       1. Current CHAS status?
       <h2><font color="green">{info["Registration"] && 
         info["Registration"].registrationQ8}</ font></h2>
-      2. For participants born before 1949. Pioneer Generation Card? 
+      2. Pioneer / Merdeka Generation Card? 
       <h2><font color="green">{info["Registration"] && 
         info["Registration"].registrationQ9}</ font></h2>
       3. Are you currently on any other Government Financial Assistance, other than CHAS and PG (e.g. Public Assistance Scheme)?
