@@ -35,7 +35,7 @@ export const infoLayouts = {
     return dietitian(info);
   },
 
-  "History Taking" : (info) => {
+  "History Taking - Phlebo" : (info) => {
     return historyTaking(info);
   },
 

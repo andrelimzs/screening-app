@@ -330,7 +330,7 @@ class ScreeningReview extends Component {
                 </Grid>
 
                 <h2>FIT Kits</h2>
-                Was participant issued 2 FIT kits? <br />
+                Was participant issued an FIT kit (2 test sets in a pack)? <br />
                 <b>{typeof (info['FIT']) !== "undefined" &&
                   typeof (info['FIT'].fitQ2) !== "undefined" &&
                   <div>
