@@ -156,14 +156,14 @@ export const formLayouts = {
     </Fragment>
   ),
   
-  "History Taking" : {
+  "History Taking - Phlebo" : {
     "Hx HCSR" : (info) => (
       <Fragment>
-        <font color="red"><h3>Please verify participant's identity using his/her NRIC before proceeding <br />A. S/N B. Surname followed by Initials C. Last 4 characters of Participant's NRIC and Letter</h3></font><br/><br/>
+        <font color="red"><h3>Please verify participant's identity using his/her NRIC before proceeding <br />A. S/N B. Surname followed by Initials C. Last 4 characters of Participant's NRIC</h3></font><br/><br/>
         <h2>PARTICIPANT IDENTIFICATION</h2>
         <b>Booth number</b> and <b>History-taker's Name</b><br />
         <LongTextField name="hxHcsrQ1" label="Hx HCSR Q1" />
-        <br /><br /><font color="red">On Page 2 of Form A, under Doctor's Consultation (Hx-taking column, 1st row), please write down booth number and history taker's name. (Eg. Booth 18 David Choo Ah Beng = 18 David Choo A B)</font>
+        <br /><br /><font color="red">On Page 2 of Form A, on top right hand corner of hx-taking section, please write down booth number and history taker's name. (Eg. Booth 18 David Choo Ah Beng = 18 David Choo A B)</font>
         <h2>HISTORY TAKING PART 1: HEALTH CONCERNS AND SYSTEMS REVIEW</h2>
         <b>TAKE 1ST BP READING NOW & RECORD ON FORM A.</b> Ensure participant is comfortable at rest before measuring their BP. <u>They should not have taken caffeine or smoked in the past 30 minutes either.</u> <br /> <br />
         <b><font color="red">IF SYSTOLIC  ≥ 180 AND/OR DIASTOLIC ≥ 110 mmHg, please take a second reading and ask for symptoms of malignant hypertension (severe headache, giddiness, numbness in extremities,blurred vision etc.)</font></b><br/><br/>
@@ -222,7 +222,7 @@ export const formLayouts = {
 
     "Hx NSS" : (info) => (
       <Fragment>
-        <h2>HISTORY TAKING PART 2: NSS HEALTH AND LIFESTYLE QUESTIONNAIRE</h2>
+        <h2>HISTORY TAKING PART 2: PAST MEDICAL HISTORY</h2>
         <font color="red"><h3>Please go through NSS Questionnaire now.</h3></font><br/><br/>
         <h2>1. Past Medical History</h2>
         1a. Has a doctor ever told you that you have the following condition? Please tick the appropriate box(es) if the answer is "Yes" to any of the conditions listed below, or tick the last box if you have none.
@@ -546,11 +546,11 @@ export const formLayouts = {
   "History Taking - Non Phleb" : {
     "Hx HCSR" : (info) => (
       <Fragment>
-        <font color="red"><h3>Please verify participant's identity using his/her NRIC before proceeding <br />A. S/N B. Surname followed by Initials C. Last 4 characters of Participant's NRIC and Letter</h3></font><br/><br/>
+        <font color="red"><h3>Please verify participant's identity using his/her NRIC before proceeding <br />A. S/N B. Surname followed by Initials C. Last 4 characters of Participant's NRIC</h3></font><br/><br/>
         <h2>PARTICIPANT IDENTIFICATION</h2>
         <b>Booth number</b> and <b>History-taker's Name</b><br />
         <LongTextField name="hxHcsrQ1" label="Hx HCSR Q1" />
-        <br /><br /><font color="red">On Page 2 of Form A, under Doctor's Consultation (Hx-taking column, 1st row), please write down booth number and history taker's name. (Eg. Booth 18 David Choo Ah Beng = 18 David Choo A B)</font>
+        <br /><br /><font color="red">On Page 2 of Form A, on top right hand corner of hx-taking section, please write down booth number and history taker's name. (Eg. Booth 18 David Choo Ah Beng = 18 David Choo A B)</font>
         <h2>HISTORY TAKING PART 1: HEALTH CONCERNS AND SYSTEMS REVIEW</h2>
         <b>TAKE 1ST BP READING NOW & RECORD ON FORM A.</b> Ensure participant is comfortable at rest before measuring their BP. <u>They should not have taken caffeine or smoked in the past 30 minutes either.</u> <br /> <br />
         <b><font color="red">IF SYSTOLIC  ≥ 180 AND/OR DIASTOLIC ≥ 110 mmHg, please take a second reading and ask for symptoms of malignant hypertension (severe headache, giddiness, numbness in extremities,blurred vision etc.)</font></b><br/><br/>
@@ -609,7 +609,7 @@ export const formLayouts = {
 
     "Hx NSS" : (info) => (
       <Fragment>
-        <h2>HISTORY TAKING PART 2: NSS HEALTH AND LIFESTYLE QUESTIONNAIRE</h2>
+        <h2>HISTORY TAKING PART 2: PAST MEDICAL HISTORY</h2>
         1a. Has a doctor ever told you that you have the following condition? Please tick the appropriate box(es) if the answer is "Yes" to any of the conditions listed below, or tick the last box if you have none.
         <SelectField name="hxNssQ1" checkboxes="true" label="Hx NSS Q1" /><br/><br/>
         <br/><br/><font color="red"><b>For respondent with known hypertension, diabetes, high cholesterol and stroke only.</b></font><br /><br /><br/><br/>
@@ -912,7 +912,7 @@ export const formLayouts = {
           <b>REFER TO DR CONSULT</b> by indicating on: <br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A under Doctor's Consultation row<br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation
         </Fragment>
       </DisplayIf>
-      3. Was participant issued 2 FIT kits?
+      3. Was participant issued an FIT kit (2 test sets in a pack)?
       <RadioField name="fitQ2" label="FIT Q2"/>
       
     </Fragment>
