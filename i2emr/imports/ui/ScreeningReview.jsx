@@ -16,21 +16,22 @@ const messageFilter = (text) => {
 
 const populateField = (info, station, field, reasonField) => {
   if (info && typeof (info[station]) !== "undefined" && typeof (info[station][field]) !== "undefined") {
-    // if (typeof (info[station][field]) == "Array") {
-    //   return info[station][field].map((text) => {
-    //     return text + ", ";
-    //   })
-    // }
+    if (typeof (info[station][field]) == "array") {
+      return info[station][field].join()
+    }
+    if (typeof (info[station][field]) == "boolean") {
+      return info[station][field] ? "Yes" : "No"
+    }
     // if (typeof(info[station][field]) == "String" && info[station][field].includes('\n')) {
     //     return info[station][field].split('\n').map((text) => {
     //         return <p>{text}<br/></p>
     //     })
     // }
     if (reasonField && typeof(info[station][reasonField]) !== "undefined") {
-      return info[station][field] + "\n" + info[station][reasonField]
+      return messageFilter(info[station][field]) + "\n" + info[station][reasonField]
     }
     else {
-      return info[station][field];
+      return messageFilter(info[station][field]);
     }
   }
   return "-";
@@ -61,10 +62,11 @@ const getPastMedicalHistory = (info) => {
 }
 
 const getNoOfLines = (text) => {
-  return text.split('\n').length
+  if (typeof(text) === "string") {
+    return text.split('\n').length;
+  }
+  return 1;
 }
-
-
 
 const getBpMessage = (info) => {
   if (info && typeof (info['Hx Cancer']) !== "undefined" && typeof (info['Hx Cancer']['hxCancerQ17']) !== "undefined" && typeof (info['Hx Cancer']['hxCancerQ18']) !== "undefined") {
@@ -98,6 +100,13 @@ const getIncontinenceMessage = (info) => {
 const getHearingMessage = (info) => {
   if (info && typeof (info['Hx HSCR']) !== "undefined" && typeof (info['Hx HSCR']['hxHcsrQ9']) !== "undefined") {
       return "If it is a Geri participant, inform them HPB will follow-up with them. If it is a non-Geri participant, advice them to visit a polyclinic to follow-up with their hearing issue";
+  }
+  return "";
+}
+
+const getVisionProblemMessage = (info) => {
+  if (info && typeof (info['Hx HSCR']) !== "undefined" && typeof (info['Hx HSCR']['hxHcsrQ7']) !== "undefined") {
+      return "If participant is non-Geri and received Doctor's Memo --> Advice them to visit polyclinic with Doctor's Memo.\nIf participant is Geri, Snellens for both eyes is normal (denominator of 6/_ is smaller than 6/12) --> Patient possibly has pathology of the eye not picked up by Snellens--> Advice them to visit polyclinic/GP. \nIf participant is Geri, Snellens for either/both eye fail (denominator is 12 and above) --> Participant may have refractive error (can be corrected through spectacles prescription) or non-refractive error (not correctable through spectacles) --> Inform them that HPB will follow-up with their vision issues (both refractive and non-refractive); also for refractive error, participant should have received spectacle vouchers from Geri Appointment; for nonrefractive error participant should have seen the doctor at Doctor\'s Consult";
   }
   return "";
 }
@@ -138,30 +147,32 @@ const getFollowUpMessage = (info) => {
   return "";
 }
 
-<h2>Social History</h2>
-                Do you smoke? <br />
-                <b>{typeof (info['Hx NSS']) !== "undefined" &&
-                  typeof (info['Hx NSS'].hxNssQ14) !== "undefined" &&
-                  <div>
-                    {info['Hx NSS'].hxNssQ14}
-                    {info['Hx NSS'].hxNssQ14.includes("Yes") &&
-                      <p><br />Check if participant is referred to Health Promotion Board (HPB) iQuit booth at Exhibition. If no, tick on PHS Passport and indicate.</p>}</div>
-                }<br /><br /></b>
-                Do you consume alcoholic drinks? (Note: Standard drink means a shot of hard liquor, a can or bottle of beer, or a glass of wine.) <br />
-                <b>{typeof (info['Hx NSS']) !== "undefined" &&
-                  typeof (info['Hx NSS'].hxNssQ15) !== "undefined" &&
-                  (info['Hx NSS'].hxNssQ15 === "Less than 2 standard drinks per day on average." || info['Hx NSS'].hxNssQ15 === "More than 2 standard drinks per day on average.") &&
-                  <div>
-                    {info['Hx NSS'].hxNssQ15}
-                    <p><br />Check if participant is referred to Health Promotion Board (HPB) Metabolic booth at Exhibition. If no, tick on PHS Passport and indicate<br /></p>
-                  </div>
-                }
-                  {typeof (info['Hx NSS']) !== "undefined" &&
-                    typeof (info['Hx NSS'].hxNssQ15) !== "undefined" &&
-                    info['Hx NSS'].hxNssQ15 !== "Less than 2 standard drinks per day on average." &&
-                    info['Hx NSS'].hxNssQ15 !== "More than 2 standard drinks per day on average." &&
-                    info['Hx NSS'].hxNssQ15
-                  }<br /><br /></b>
+const getSmokingMessage = (info) => {
+  if (info && typeof (info['Hx NSS']) !== "undefined" && typeof (info['Hx NSS']['hxNssQ14']) !== "undefined") {
+    if(info['Hx NSS']['hxNssQ14'].includes("Yes")){
+      return "Check if participant is referred to Health Promotion Board (HPB) iQuit booth at Exhibition. If no, tick on PHS Passport and indicate.";
+    }
+  }
+  return "";
+}
+
+const getAlcoholMessage = (info) => {
+  if (info && typeof (info['Hx NSS']) !== "undefined" && typeof (info['Hx NSS']['hxNssQ15']) !== "undefined") {
+    if(info['Hx NSS']['hxNssQ15'] === "Less than 2 standard drinks per day on average." || info['Hx NSS']['hxNssQ15'] === "More than 2 standard drinks per day on average."){
+      return "Check if participant is referred to Health Promotion Board (HPB) Metabolic booth at Exhibition. If no, tick on PHS Passport and indicate";
+    }
+  }
+  return "";
+}
+
+const getFITMessage = (info) => {
+  if (info && typeof (info['FIT']) !== "undefined" && typeof (info['FIT']['fitQ2']) !== "undefined") {
+    if(info['FIT']['fitQ2'] === "Yes"){
+      return "Kindly remind the participant to adhere to the instructions regarding FIT kit application and sending. Teach the participant how to use the kit if he/she is unsure or has forgotten";
+    }
+  }
+  return "";
+}
 
 const isBmiToBeFlag = (info) => {
   if (info && typeof (info['Hx Cancer']) !== "undefined" && typeof (info['Hx Cancer']['hxCancerQ21']) !== "undefined") {
@@ -182,9 +193,71 @@ const isWaistCircumToBeFlag = (info) => {
   return false;
 }
 
+const isReferredFromPt = (info) => {
+  if (info && typeof (info['Geri - PT Consult']) !== "undefined" && typeof (info['Geri - PT Consult']['geriPtConsultQ4']) !== "undefined") {
+    if (info['Geri - PT Consult'].geriPtConsultQ4 === "Yes")  {
+      return true;
+    }
+  }
+  return false;
+}
+
+const isReferredFromOt = (info) => {
+  if (info && typeof (info['Geri - OT Consult']) !== "undefined" && typeof (info['Geri - OT Consult']['geriOtConsultQ4']) !== "undefined") {
+    if (info['Geri - OT Consult'].geriOtConsultQ4 === "Yes")  {
+      return true;
+    }
+  }
+  return false;
+}
+
+const isReferredToOtProgrammes = (info) => {
+  if (info && typeof (info['Geri - OT Consult']) !== "undefined" && typeof (info['Geri - OT Consult']['geriOtConsultQ6']) !== "undefined") {
+    if (info['Geri - OT Consult'].geriOtConsultQ6.length > 1)  {
+      return true;
+    }
+  }
+  return false;
+}
+
+const isReferredToSocialService = (info) => {
+  if (info && typeof (info['Social Service']) !== "undefined" && typeof (info['Social Service']['socialServiceQ1']) !== "undefined") {
+    if (info['Social Service'].socialServiceQ1 === "Yes")  {
+      return true;
+    }
+  }
+  return false;
+}
+
+const isConsultedDoctor = (info) => {
+  if (info && typeof (info['Doctor\'s Consult']) !== "undefined" && typeof (info['Doctor\'s Consult']['doctorSConsultQ11']) !== "undefined") {
+    return info['Doctor\'s Consult']['doctorSConsultQ11'];
+  }
+}
+
+const isUrgentFollowUp = (info) => {
+  if (info && typeof (info['Doctor\'s Consult']) !== "undefined" && typeof (info['Doctor\'s Consult']['doctorSConsultQ10']) !== "undefined") {
+    return info['Doctor\'s Consult']['doctorSConsultQ10'];
+  }
+}
+
+const isReferredToDietitian = (info) => {
+  if (info && typeof (info['Doctor\'s Consult']) !== "undefined" && typeof (info['Doctor\'s Consult']['doctorSConsultQ4']) !== "undefined") {
+    if (info['Doctor\'s Consult'].doctorSConsultQ4 === "Yes")  {
+      return true;
+    }
+  }
+  return false;
+}
+
+
 class ScreeningReview extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      printFlag: false
+    }
   }
 
   selectStation(newStation, e) {
@@ -202,11 +275,23 @@ class ScreeningReview extends Component {
     this.forceUpdate();
   }
 
+  togglePrint(e) {
+    e.preventDefault();
+  
+    this.setState({
+      printFlag: !this.state.printFlag
+    })
+  }
+
   render() {
     const info = this.props.patientInfo;
     return (
       <Fragment>
-        <Button variant="outlined" onClick={this.selectStation.bind(this,"")}>Back</Button>
+        {
+          !this.state.printFlag && 
+          <Button variant="outlined" onClick={this.selectStation.bind(this,"")}>Back</Button>
+        }
+        <Button variant={(this.state.printFlag) ? "contained": "outlined"} color={(this.state.printFlag) ? "secondary": "default"} onClick={this.togglePrint.bind(this)}>Print</Button>
         <Grid container direction="row" justify="flex-start" alignItems="center" >
           <Grid item xs={5}>
             <h1>Screening Review</h1>
@@ -238,7 +323,7 @@ class ScreeningReview extends Component {
                   alignItems="flex-start"
                 >
                   <Divider /><br />
-                  <Typography variant="h4">Personal Particulars</Typography>
+                  <Typography variant="h5">Personal Particulars</Typography>
                   <Divider /><br />
                   <Grid container direction="row" justify="space-between" alignItems="center" >
                     <Grid item xs={2}>ID: <TextField variant="outlined" fullWidth={true} margin="dense" value={info.id} /></Grid>
@@ -248,7 +333,7 @@ class ScreeningReview extends Component {
                   </Grid>
                   <Divider /><br />
 
-                  <Typography variant="h4">Health Concerns</Typography>
+                  <Typography variant="h5">Health Concerns</Typography>
                   <Divider /><br />
                   <Grid container direction="row" justify="space-between" alignItems="center" >
                     <Grid item xs={12}>Participant's presenting complaints/concerns (if any) <TextField rows={getNoOfLines(populateField(info, 'Hx HCSR', 'hxHcsrQ2'))} variant="outlined" fullWidth={true} multiline={true} margin="dense" value={populateField(info, 'Hx HCSR', 'hxHcsrQ2')} /></Grid>
@@ -256,8 +341,8 @@ class ScreeningReview extends Component {
                   <Divider /><br />
 
                   <Grid container direction="row" justify="space-between" alignItems="center" >
-                    <Grid item xs={4}><Typography variant="h4">Blood Pressure</Typography></Grid>
-                    <Grid item xs={8}><Typography variant="h4">BMI</Typography></Grid>
+                    <Grid item xs={4}><Typography variant="h5">Blood Pressure</Typography></Grid>
+                    <Grid item xs={8}><Typography variant="h5">BMI</Typography></Grid>
                   </Grid>
                   <Divider /><br />
                   <Grid container direction="row" justify="space-between" alignItems="flex-end" >
@@ -275,8 +360,8 @@ class ScreeningReview extends Component {
                   </Grid>
 
                   <Grid container direction="row" justify="space-between" alignItems="center" >
-                    <Grid item xs={6}><Typography variant="h4">Urinary Incontinence</Typography></Grid>
-                    <Grid item xs={6}><Typography variant="h4">Hearing</Typography></Grid>
+                    <Grid item xs={6}><Typography variant="h5">Urinary Incontinence</Typography></Grid>
+                    <Grid item xs={6}><Typography variant="h5">Hearing</Typography></Grid>
                   </Grid>
                   <Divider /><br />
                   <Grid container direction="row" justify="space-between" alignItems="flex-end" >
@@ -289,7 +374,7 @@ class ScreeningReview extends Component {
                     <Grid item xs={6}><Typography variant="subtitle1" color="error">{getHearingMessage(info)}</Typography></Grid>
                   </Grid>
                   
-                  <Typography variant="h4">Vision</Typography>
+                  <Typography variant="h5">Vision</Typography>
                   <Grid container direction="row" justify="space-between" alignItems="flex-end" >
                     <Grid item xs={4}>Vision Problems: <TextField variant="outlined" multiline={true} rows={getNoOfLines(populateField(info, 'Hx HCSR', 'hxHcsrQ6', 'hxHcsrQ7'))} fullWidth={true} margin="dense" value={populateField(info, 'Hx HCSR', 'hxHcsrQ6', 'hxHcsrQ7')} /></Grid>
                     <Grid item xs={2}>Visual acuity (w/o pinhole occluder) - Right Eye <TextField variant="outlined" fullWidth={true} margin="dense" value={populateField(info, 'Hx HCSR', 'hxHcsrQ3')} /></Grid>
@@ -299,12 +384,12 @@ class ScreeningReview extends Component {
                   </Grid>
                   <Divider /><br />
                   <Grid container direction="row" justify="space-between" alignItems="flex-start" >
-                    <Grid item xs={4}></Grid>
+                    <Grid item xs={4}><Typography variant="subtitle1" color="error">{getVisionProblemMessage(info)}</Typography></Grid>
                     <Grid item xs={4}><Typography variant="subtitle1" color="error">{getPinholeMessage(info)}</Typography></Grid>
                     <Grid item xs={4}><Typography variant="subtitle1" color="error">{getRefractiveMessage(info)}</Typography></Grid>
                   </Grid>
 
-                  <Typography variant="h4">Past Medical History</Typography>
+                  <Typography variant="h5">Past Medical History</Typography>
                   <Grid container direction="row" justify="space-between" alignItems="flex-end" >
                     <Grid item xs={6}>Has a doctor ever told you that you have the following condition? Please tick the appropriate box(es) if the answer is "Yes" to any of the conditions listed below, or tick the last box if you have none. <TextField variant="outlined" multiline={true} rows={getNoOfLines(getPastMedicalHistory(info))} fullWidth={true} margin="dense" value={getPastMedicalHistory(info)} /></Grid>
                     <Grid item xs={6}>For respondent with known hypertension, diabetes, high cholesterol and stroke only. Are you currently on follow up with a doctor for the existing conditions you have indicated? <TextField variant="outlined" fullWidth={true} margin="dense" value={populateField(info, 'Hx NSS', 'hxNssQ2')} /></Grid>
@@ -315,9 +400,9 @@ class ScreeningReview extends Component {
                     <Grid item xs={6}><Typography variant="subtitle1" color="error">{getFollowUpMessage(info)}</Typography></Grid>
                   </Grid>
 
-                  <Typography variant="h4">Social History</Typography>
+                  <Typography variant="h5">Social History</Typography>
                   <Grid container direction="row" justify="space-between" alignItems="flex-end" >
-                    <Grid item xs={6}>Do you smoke? <TextField variant="outlined" multiline={true} rows={getNoOfLines(getPastMedicalHistory(info))} fullWidth={true} margin="dense" value={populateField(info, 'Hx NSS', 'hxNssQ14')} /></Grid>
+                    <Grid item xs={6}>Do you smoke? <TextField variant="outlined" fullWidth={true} margin="dense" value={populateField(info, 'Hx NSS', 'hxNssQ14')} /></Grid>
                     <Grid item xs={6}>Do you consume alcoholic drinks? (Note: Standard drink means a shot of hard liquor, a can or bottle of beer, or a glass of wine.) <TextField variant="outlined" fullWidth={true} margin="dense" value={populateField(info, 'Hx NSS', 'hxNssQ15')} /></Grid>
                   </Grid>
                   <Divider /><br />
@@ -326,146 +411,60 @@ class ScreeningReview extends Component {
                     <Grid item xs={6}><Typography variant="subtitle1" color="error">{getAlcoholMessage(info)}</Typography></Grid>
                   </Grid>
 
+                  <Grid container direction="row" justify="space-between" alignItems="center" >
+                    <Grid item xs={3}><Typography variant="h5">FIT Kits</Typography></Grid>
+                    <Grid item xs={9}><Typography variant="h5">WCE Station</Typography></Grid>
+                  </Grid>
+                  <Grid container direction="row" justify="space-between" alignItems="flex-end" >
+                    <Grid item xs={3}>Was participant issued an FIT kit (2 test sets in a pack)? <TextField variant="outlined" fullWidth={true} margin="dense" value={populateField(info, 'FIT', 'fitQ2')} /></Grid>
+                    <Grid item xs={3}>Indicated interest for HPV Test under SCS? <TextField variant="outlined" fullWidth={true} margin="dense" value={populateField(info, 'WCE', 'wceQ4')} /></Grid>
+                    <Grid item xs={3}>Indicated interest for Mammogram under SCS? <TextField variant="outlined" fullWidth={true} margin="dense" value={populateField(info, 'WCE', 'wceQ5')} /></Grid>
+                    <Grid item xs={3}>Registered for Mammogram under NHGD? <TextField variant="outlined" fullWidth={true} margin="dense" value={populateField(info, 'WCE', 'wceQ6')} /></Grid>
+                  </Grid>
+                  <Divider /><br />
+                  <Grid container direction="row" justify="space-between" alignItems="flex-start" >
+                    <Grid item xs={3}><Typography variant="subtitle1" color="error">{getFITMessage(info)}</Typography></Grid>
+                  </Grid>
+
+                  <Typography variant="h5">Geriatrics</Typography>
+                  <Grid container direction="row" justify="space-between" alignItems="flex-end" >
+                    <Grid item xs={6}>Was the participant referred for Social Service? (PT): <TextField variant="outlined" error={isReferredFromOt(info)} fullWidth={true} margin="dense" value={populateField(info, 'Geri - PT Consult', 'geriPtConsultQ4')} /></Grid>
+                    <Grid item xs={6}>Was the participant referred for Social Service? (OT): <TextField variant="outlined" error={isReferredFromPt(info)} fullWidth={true} margin="dense" value={populateField(info, 'Geri - OT Consult', 'geriOtConsultQ4')} /></Grid>
+                  </Grid>
+                  <Divider /><br />
+                  <Grid container direction="row" justify="space-between" alignItems="flex-end" >
+                    <Grid item xs={6}>Reasons for referral to social support (PT): <TextField variant="outlined" error={isReferredFromOt(info)} multiline={true} rows={getNoOfLines(populateField(info, 'Geri - PT Consult', 'geriPtConsultQ5'))} fullWidth={true} margin="dense" value={populateField(info, 'Geri - PT Consult', 'geriPtConsultQ5')} /></Grid>
+                    <Grid item xs={6}>Reasons for referral to social support (OT): <TextField variant="outlined" error={isReferredFromPt(info)} multiline={true} rows={getNoOfLines(populateField(info, 'Geri - OT Consult', 'geriOtConsultQ5'))} fullWidth={true} margin="dense" value={populateField(info, 'Geri - OT Consult', 'geriOtConsultQ5')} /></Grid>
+                  </Grid>
+                  <Divider /><br />
+                  <Grid container direction="row" justify="space-between" alignItems="flex-end" >
+                    <Grid item xs={6}>Which organisation was the participant referred to for post-screening assessment? (from AMT) <TextField variant="outlined" multiline={true} rows={getNoOfLines(populateField(info, 'Geri - Cognitive Follow Up', 'geriCognitiveFollowUpQ1'))} fullWidth={true} margin="dense" value={populateField(info, 'Geri - Cognitive Follow Up', 'geriCognitiveFollowUpQ1')} /></Grid>
+                    <Grid item xs={6}>Which of the programmes did the OT recommend for the participant to go? (if applicable) <TextField variant="outlined" error={isReferredToOtProgrammes(info)} multiline={true} rows={getNoOfLines(populateField(info, 'Geri - OT Consult', 'geriOtConsultQ6'))} fullWidth={true} margin="dense" value={populateField(info, 'Geri - OT Consult', 'geriOtConsultQ6')} /></Grid>
+                  </Grid>
+                  <Divider /><br />
+
+                  <Grid container direction="row" justify="space-between" alignItems="center" >
+                    <Grid item xs={3}><Typography variant="h5">Social Service</Typography></Grid>
+                    <Grid item xs={9}><Typography variant="h5">Doctor's Consult</Typography></Grid>
+                  </Grid>
+                  <Grid container direction="row" justify="space-between" alignItems="flex-end" >
+                    <Grid item xs={3}>Did the participant visit the social service station? <TextField variant="outlined" error={isReferredToSocialService(info)} fullWidth={true} margin="dense" value={populateField(info, 'Social Service', 'socialServiceQ1')} /></Grid>                    
+                    <Grid item xs={3}>Did this patient consult an on-site doctor today? <TextField variant="outlined" error={isConsultedDoctor(info)} fullWidth={true} margin="dense" value={populateField(info, 'Doctor\'s Consult', 'doctorSConsultQ11')} /></Grid>                    
+                    <Grid item xs={3}>Does this patient require urgent follow-up? <TextField variant="outlined" error={isUrgentFollowUp(info)} fullWidth={true} margin="dense" value={populateField(info, 'Doctor\'s Consult', 'doctorSConsultQ10')} /></Grid>                    
+                    <Grid item xs={3}>Was the patient referred to the dietitian? <TextField variant="outlined" error={isReferredToDietitian(info)} fullWidth={true} margin="dense" value={populateField(info, 'Doctor\'s Consult', 'doctorSConsultQ4')} /></Grid>                    
+                  </Grid>
+                  <Divider /><br />
+
+                  <Typography variant="h5">Doctor's Memo</Typography>
+                  <Grid container direction="row" justify="space-between" alignItems="flex-end" >
+                    <Grid item xs={12}>Memo <TextField variant="outlined" multiline={true} rows={getNoOfLines(populateField(info, 'Doctor\'s Consult', 'doctorSConsultQ3'))} fullWidth={true} margin="dense" value={populateField(info, 'Doctor\'s Consult', 'doctorSConsultQ3')} /></Grid>
+                  </Grid>
+                  <Divider /><br /><br />
+
+                  <Typography variant="h5" color="error">All participants will receive a more detailed health report from PHS within 4-6 weeks of the screening.
+        *If you have gone for phlebotomy, you will receive the blood test results from NUHS within 4 - 6 weeks of the screening.</Typography>
 
                 </Grid>
-
-                <h2>FIT Kits</h2>
-                Was participant issued an FIT kit (2 test sets in a pack)? <br />
-                <b>{typeof (info['FIT']) !== "undefined" &&
-                  typeof (info['FIT'].fitQ2) !== "undefined" &&
-                  <div>
-                    {info['FIT'].fitQ2}
-                    {info['FIT'].fitQ2 === "Yes" &&
-                      <p><br />Kindly remind the participant to adhere to the instructions regarding FIT kit application and sending. Teach the participant how to use the kit if he/she is unsure or has forgotten<br /></p>}</div>
-                }<br /><br /></b>
-
-                <h2>WCE Station</h2>
-                Indicated interest for HPV Test under SCS?<br />
-                <b>{typeof (info['WCE']) !== "undefined" &&
-                  typeof (info['WCE'].wceQ4) !== "undefined" &&
-                  info['WCE'].wceQ4
-                }<br /><br /></b>
-                Indicated interest for Mammogram under SCS?<br />
-                <b>{typeof (info['WCE']) !== "undefined" &&
-                  typeof (info['WCE'].wceQ5) !== "undefined" &&
-                  info['WCE'].wceQ5
-                }<br /><br /></b>
-                Registered for Mammogram under NHGD?<br />
-                <b>{typeof (info['WCE']) !== "undefined" &&
-                  typeof (info['WCE'].wceQ6) !== "undefined" &&
-                  info['WCE'].wceQ6 === "Yes, (Please specify date of appointment if given):" &&
-                  "Yes"
-                }<br /><br /></b>
-
-                <h2>Geriatrics</h2>
-                Which organisation was the participant referred to for post-screening assessment? (from AMT) <br />
-                <b>{typeof (info['Geri - Cognitive Follow Up']) !== "undefined" &&
-                  typeof (info['Geri - Cognitive Follow Up'].geriCognitiveFollowUpQ1) !== "undefined" &&
-                  info['Geri - Cognitive Follow Up'].geriCognitiveFollowUpQ1
-                }<br /><br /></b>
-                To be referred for social support (For HDB Ease Sign-up) (PT): <br />
-                <b>{typeof (info['Geri - PT Consult']) !== "undefined" &&
-                  typeof (info['Geri - PT Consult'].geriPtConsultQ4) !== "undefined" &&
-                  info['Geri - PT Consult'].geriPtConsultQ4 === "No" &&
-                  info['Geri - PT Consult'].geriPtConsultQ4
-                }
-                  <font color="red">{typeof (info['Geri - PT Consult']) !== "undefined" &&
-                    typeof (info['Geri - PT Consult'].geriPtConsultQ4) !== "undefined" &&
-                    info['Geri - PT Consult'].geriPtConsultQ4 === "Yes" &&
-                    <div>
-                      {info['Geri - PT Consult'].geriPtConsultQ4}
-                      <p><br />Reasons for referral to social support (PT):<br /></p>
-                      {typeof (info['Geri - PT Consult'].geriPtConsultQ5) !== "undefined" &&
-                        typeof (info['Geri - PT Consult'].geriPtConsultQ5) !== "undefined" &&
-                        info['Geri - PT Consult'].geriPtConsultQ5.split("\n").map(text => {
-                          return <p>{text}<br /></p>
-                        })
-                      }
-                    </div>
-                  }</font>
-                  <br /><br /></b>
-
-                To be referred for social support (For HDB Ease Sign-up) (OT): <br />
-                <b>{typeof (info['Geri - OT Consult']) !== "undefined" &&
-                  typeof (info['Geri - OT Consult'].geriOtConsultQ4) !== "undefined" &&
-                  info['Geri - OT Consult'].geriOtConsultQ4 === "No" &&
-                  info['Geri - OT Consult'].geriOtConsultQ4
-                }
-                  <font color="red">{typeof (info['Geri - OT Consult']) !== "undefined" &&
-                    typeof (info['Geri - OT Consult'].geriOtConsultQ4) !== "undefined" &&
-                    info['Geri - OT Consult'].geriOtConsultQ4 === "Yes" &&
-                    <div>
-                      {info['Geri - OT Consult'].geriOtConsultQ4}
-                      <p><br />Reasons for referral to social support (OT):<br /></p>
-                      {typeof (info['Geri - OT Consult'].geriOtConsultQ5) !== "undefined" &&
-                        typeof (info['Geri - OT Consult'].geriOtConsultQ5) !== "undefined" &&
-                        info['Geri - OT Consult'].geriOtConsultQ5.split("\n").map(text => {
-                          return <p>{text}<br /></p>
-                        })
-                      }
-                    </div>
-                  }</font>
-                  <br /><br /></b>
-                Which of the programmes did the OT recommend for the participant to go? (if applicable) <br />
-                <b>{typeof (info['Geri - OT Consult']) !== "undefined" &&
-                  typeof (info['Geri - OT Consult'].geriOtConsultQ6) === "undefined" &&
-                  <p>None<br /></p>
-                }
-                  <font color="red">{typeof (info['Geri - OT Consult']) !== "undefined" &&
-                    typeof (info['Geri - OT Consult'].geriOtConsultQ6) !== "undefined" &&
-                    info['Geri - OT Consult'].geriOtConsultQ6.map(text => {
-                      return <p>{text}<br /></p>
-                    })
-                  }</font>
-                  <br /><br /></b>
-                Referred to go for L2 Eye Screening?
-        <b>{typeof (info['Geri - Vision']) !== "undefined" &&
-                  typeof (info['Geri - Vision'].geriVisionQ9) !== "undefined" &&
-                  info['Geri - Vision'].geriVisionQ9
-                }
-                  <br /><br /></b>
-
-
-                <h2>Social Service</h2>
-                Did the participant visit the social service station? <br />
-                <b>{typeof (info['Social Service']) !== "undefined" &&
-                  typeof (info['Social Service'].socialServiceQ1) !== "undefined" &&
-                  info['Social Service'].socialServiceQ1 === "No" &&
-                  info['Social Service'].socialServiceQ1
-                }
-                  <mark>{typeof (info['Social Service']) !== "undefined" &&
-                    typeof (info['Social Service'].socialServiceQ1) !== "undefined" &&
-                    info['Social Service'].socialServiceQ1 === "Yes" &&
-                    info['Social Service'].socialServiceQ1
-                  }<br /><br /></mark></b>
-
-                <h2>Doctor's Consult</h2>
-                Did this patient consult an on-site doctor today?<br />
-                <b>{typeof (info['Social Service']) !== "undefined" &&
-                  typeof (info['Doctor\'s Consult'].doctorSConsultQ11) !== "undefined" &&
-                  info['Doctor\'s Consult'].doctorSConsultQ11 ? <p><mark>Yes</mark></p> : "No"
-                }<br /><br /></b>
-                Does this patient require urgent follow-up?<br />
-                <b>{typeof (info['Social Service']) !== "undefined" &&
-                  typeof (info['Doctor\'s Consult'].doctorSConsultQ11) !== "undefined" &&
-                  info['Doctor\'s Consult'].doctorSConsultQ11 ? <p><mark>Yes</mark></p> : "No"
-                }<br /><br /></b>
-                Doctor's memo (if applicable):<br />
-                <b>{typeof (info['Doctor\'s Consult']) !== "undefined" &&
-                  typeof (info['Doctor\'s Consult'].doctorSConsultQ3) !== "undefined" &&
-                  info['Doctor\'s Consult'].doctorSConsultQ3.split("\n").map((text) => {
-                    return <p>{text}<br /></p>
-                  })
-                }
-                  <br /><br /></b>
-                Was the patient referred to the dietitian?<br />
-                <b>{typeof (info['Social Service']) !== "undefined" &&
-                  typeof (info['Doctor\'s Consult'].doctorSConsultQ4) !== "undefined" &&
-                  info['Doctor\'s Consult'].doctorSConsultQ4 ? "Yes" : "No"
-                }<br /><br /></b>
-
-                <h3><font color="red">All participants will receive a more detailed health report from PHS within 4-6 weeks of the screening.
-        *If you have gone for phlebotomy, you will receive the blood test results from NUHS within 4 - 6 weeks of the screening.</font></h3>
 
               </Fragment>
             </Grid>
