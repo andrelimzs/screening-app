@@ -5,7 +5,7 @@ import Station from './Station.jsx';
 import Queue from './Queue.jsx';
 import Form from './Form.jsx';
 import Info from './Info.jsx';
-import PrintSummary from './PrintSummary.jsx';
+import ScreeningReview from './ScreeningReview.jsx';
 
 import Patientinfo from '/imports/api/patientinfo';
 import { formLayouts } from '/imports/api/formLayouts';
@@ -73,26 +73,10 @@ class App extends Component {
   render() {
     const station = Session.get('station');
     
-    if ( station && station === "Done") {
+    if ( station && station === "Screening Review") {
       return (
         <div>
-          
-          {/* <Button variant="outlined" onClick={this.selectStation.bind(this, "")}>Back</Button>
-          <br /> */}
-          
-          <Grid container
-            justify="flex-start"
-            spacing={16}>
-            
-            {typeof(Session.get('currentPatient')) !== "number" && <Grid item xs={12}>
-              <Queue patientList={this.props.patientList} />
-            </Grid>}
-            
-            <Grid item xs={12}>
-              <PrintSummary station={station} id={Session.get('currentPatient')}
-                    stationQueue={this.props.patientInfo.stationQueue} patientInfo={this.props.patientInfo}/>
-            </Grid>
-          </Grid>
+          <ScreeningReview stationQueue={this.selectStation.bind(this, "")} patientList={this.props.patientList} patientInfo={this.props.patientInfo}/>
 
           <Dialog
             open={!this.props.connected}
