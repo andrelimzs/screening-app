@@ -11,26 +11,47 @@ import Search from './Search.jsx';
 import Queue from './Queue.jsx';
 
 const messageFilter = (text) => {
+  if (typeof(text) === "object") {
+    newTextArray = text.map(data => {
+      return messageFilter(data);
+    })
+    return newTextArray;
+  }
+  if (typeof(text) === "string") {
+    if (text.includes("Yes, (Please specify):")) {
+      return "Yes"
+    }
+    if (text.includes("Others (Please Specify):")) {
+      return "Others: "
+    }
+    if (text.includes("Yes (please answer question below)")) {
+      return "Yes"
+    }
+    if (text.includes("Yes, (Please specify date of appointment if given):")) {
+      return "Yes. Date of appointment: "
+    }
+    if (text.includes("\n(Please proceed to Q2)")) {
+      return text.replace("\n(Please proceed to Q2)", "")
+    }
+    if (text.includes("\n(Please proceed to Q2d)")) {
+      return text.replace("\n(Please proceed to Q2d)", "")
+    }
+  }
   return text;
 }
 
 const populateField = (info, station, field, reasonField) => {
   if (info && typeof (info[station]) !== "undefined" && typeof (info[station][field]) !== "undefined") {
     if (typeof (info[station][field]) == "array") {
-      return info[station][field].join()
+      return messageFilter(info[station][field]).join()
     }
     if (typeof (info[station][field]) == "boolean") {
       return info[station][field] ? "Yes" : "No"
     }
-    // if (typeof(info[station][field]) == "String" && info[station][field].includes('\n')) {
-    //     return info[station][field].split('\n').map((text) => {
-    //         return <p>{text}<br/></p>
-    //     })
-    // }
     if (reasonField && typeof(info[station][reasonField]) !== "undefined") {
       return messageFilter(info[station][field]) + "\n" + info[station][reasonField]
     }
-    else {
+    else {      
       return messageFilter(info[station][field]);
     }
   }
@@ -39,23 +60,11 @@ const populateField = (info, station, field, reasonField) => {
 
 const getPastMedicalHistory = (info, printFlag) => {
   if (info && typeof (info['Hx NSS']) !== "undefined" && typeof (info['Hx NSS']['hxNssQ1']) !== "undefined") {
-    // if (typeof (info[station][field]) == "Array") {
-    //   return info[station][field].map((text) => {
-    //     return text + ", ";
-    //   })
-    // }
-    // if (typeof(info[station][field]) == "String" && info[station][field].includes('\n')) {
-    //     return info[station][field].split('\n').map((text) => {
-    //         return <p>{text}<br/></p>
-    //     })
-    // }
     if (info['Hx NSS']['hxNssQ1'].includes("No, I don't have any of the above \n(Please proceed to Q2d)")) {
       return "No"
     }
     else {
-      return info['Hx NSS']['hxNssQ1'].map((text) => {
-        return text + '\n'
-      });
+      return messageFilter(info['Hx NSS']['hxNssQ1']).join();
     }
   }
   return "-";
@@ -222,7 +231,7 @@ const getWCEMessage = (info, printFlag) => {
     }
   }
   return <Typography variant="subtitle1" color="error">{message.map( text => {
-    return <div>text</div>
+    return <div>{text}</div>
   })}</Typography>;
 }
 
@@ -456,6 +465,7 @@ class ScreeningReview extends Component {
                     <Grid item xs={1}></Grid>
                     <Grid item xs={8}><Typography variant="subtitle1" color="error">{getBmiMessage(info, this.state.printFlag)}</Typography></Grid>
                   </Grid>
+                  <Divider /><br />
 
                   {
                       !this.state.printFlag &&
@@ -475,6 +485,7 @@ class ScreeningReview extends Component {
                           <Grid item xs={1}></Grid>
                           <Grid item xs={6}><Typography variant="subtitle1" color="error">{getHearingMessage(info, this.state.printFlag)}</Typography></Grid>
                         </Grid>
+                        <Divider /><br />
                       </Fragment>
                     }
                   
@@ -486,10 +497,10 @@ class ScreeningReview extends Component {
                         <Grid item xs={4}>Vision Problems: <TextField variant="outlined" multiline={true} rows={getNoOfLines(populateField(info, 'Hx HCSR', 'hxHcsrQ6', 'hxHcsrQ7'))} fullWidth={true} margin="dense" value={populateField(info, 'Hx HCSR', 'hxHcsrQ6', 'hxHcsrQ7')} /></Grid>
                       </Fragment>
                     }
-                    <Grid item xs={2}>Visual acuity (w/o pinhole occluder) - Right Eye <TextField variant="outlined" fullWidth={true} margin="dense" value={populateField(info, 'Geri - Vision', 'geriVisionQ3')} /></Grid>
-                    <Grid item xs={2}>Visual acuity (w/o pinhole occluder) - Left Eye <TextField variant="outlined" fullWidth={true} margin="dense" value={populateField(info, 'Geri - Vision', 'geriVisionQ4')} /></Grid>
-                    <Grid item xs={2}>Visual acuity (w pinhole occluder) - Right Eye <TextField variant="outlined" fullWidth={true} margin="dense" value={populateField(info, 'Geri - Vision', 'geriVisionQ5')} /></Grid>
-                    <Grid item xs={2}>Visual acuity (w pinhole occluder) - Left Eye <TextField variant="outlined" fullWidth={true} margin="dense" value={populateField(info, 'Geri - Vision', 'geriVisionQ6')} /></Grid>
+                    <Grid item xs={2}>Visual acuity (w/o pinhole occluder) - Right Eye <TextField variant="outlined" fullWidth={true} margin="dense" value={"6/" + populateField(info, 'Geri - Vision', 'geriVisionQ3')} /></Grid>
+                    <Grid item xs={2}>Visual acuity (w/o pinhole occluder) - Left Eye <TextField variant="outlined" fullWidth={true} margin="dense" value={"6/" + populateField(info, 'Geri - Vision', 'geriVisionQ4')} /></Grid>
+                    <Grid item xs={2}>Visual acuity (w pinhole occluder) - Right Eye <TextField variant="outlined" fullWidth={true} margin="dense" value={"6/" + populateField(info, 'Geri - Vision', 'geriVisionQ5')} /></Grid>
+                    <Grid item xs={2}>Visual acuity (w pinhole occluder) - Left Eye <TextField variant="outlined" fullWidth={true} margin="dense" value={"6/" + populateField(info, 'Geri - Vision', 'geriVisionQ6')} /></Grid>
                   </Grid>
                   <Divider /><br />
                   <Grid container direction="row" justify="space-between" alignItems="flex-start" >
@@ -498,19 +509,20 @@ class ScreeningReview extends Component {
                       <Fragment>
                         <Grid item xs={3}><Typography variant="subtitle1" color="error">{getVisionProblemMessage(info, this.state.printFlag)}</Typography></Grid>
                         <Grid item xs={1}></Grid>
+                        <Grid item xs={3}><Typography variant="subtitle1" color="error">{getPinholeMessage(info, this.state.printFlag)}</Typography></Grid>
+                        <Grid item xs={1}></Grid>
                       </Fragment>
                     }
-                    <Grid item xs={3}><Typography variant="subtitle1" color="error">{getPinholeMessage(info, this.state.printFlag)}</Typography></Grid>
-                    <Grid item xs={1}></Grid>
                     <Grid item xs={4}><Typography variant="subtitle1" color="error">{getRefractiveMessage(info, this.state.printFlag)}</Typography></Grid>
                   </Grid>
+                  <Divider /><br />
 
                   {
                     !this.state.printFlag &&
                     <Fragment>
                       <Typography variant="h5">Past Medical History</Typography>
                       <Grid container direction="row" justify="space-between" alignItems="flex-end" >
-                        <Grid item xs={6}>Has a doctor ever told you that you have the following condition? Please tick the appropriate box(es) if the answer is "Yes" to any of the conditions listed below, or tick the last box if you have none. <TextField variant="outlined" multiline={true} rows={getNoOfLines(getPastMedicalHistory(info, this.state.printFlag))} fullWidth={true} margin="dense" value={getPastMedicalHistory(info, this.state.printFlag)} /></Grid>
+                        <Grid item xs={6}>Has a doctor ever told you that you have the following condition? Please tick the appropriate box(es) if the answer is "Yes" to any of the conditions listed below, or tick the last box if you have none. <TextField variant="outlined" fullWidth={true} margin="dense" value={getPastMedicalHistory(info, this.state.printFlag)} /></Grid>
                         <Grid item xs={6}>For respondent with known hypertension, diabetes, high cholesterol and stroke only. Are you currently on follow up with a doctor for the existing conditions you have indicated? <TextField variant="outlined" fullWidth={true} margin="dense" value={populateField(info, 'Hx NSS', 'hxNssQ2')} /></Grid>
                       </Grid>
                       <Divider /><br />
@@ -519,6 +531,7 @@ class ScreeningReview extends Component {
                         <Grid item xs={1}></Grid>
                         <Grid item xs={6}><Typography variant="subtitle1" color="error">{getFollowUpMessage(info, this.state.printFlag)}</Typography></Grid>
                       </Grid>
+                      <Divider /><br />
                     </Fragment>
                   }
 
@@ -536,6 +549,7 @@ class ScreeningReview extends Component {
                         <Grid item xs={1}></Grid>
                         <Grid item xs={6}><Typography variant="subtitle1" color="error">{getAlcoholMessage(info, this.state.printFlag)}</Typography></Grid>
                       </Grid>
+                      <Divider /><br />
                     </Fragment>
                   }
 
@@ -551,35 +565,37 @@ class ScreeningReview extends Component {
                   </Grid>
                   <Divider /><br />
                   <Grid container direction="row" justify="space-between" alignItems="flex-start" >
-                    <Grid item xs={2}><Typography variant="subtitle1" color="error">{getFITMessage(info, this.state.printFlag)}</Typography></Grid>
+                    <Grid item xs={5}><Typography variant="subtitle1" color="error">{getFITMessage(info, this.state.printFlag)}</Typography></Grid>
                     <Grid item xs={1}></Grid>
-                    <Grid item xs={9}>{getWCEMessage(info, this.state.printFlag)}</Grid>
+                    <Grid item xs={6}>{getWCEMessage(info, this.state.printFlag)}</Grid>
                   </Grid>
+                  <Divider /><br />
 
                   <Typography variant="h5">Geriatrics</Typography>
                   {
                     !this.state.printFlag && 
                     <Fragment>
                       <Grid container direction="row" justify="space-between" alignItems="flex-end" >
-                        <Grid item xs={6}>Was the participant referred for Social Service? (PT): <TextField variant="outlined" error={isReferredFromOt(info)} fullWidth={true} margin="dense" value={populateField(info, 'Geri - PT Consult', 'geriPtConsultQ4')} /></Grid>
-                        <Grid item xs={6}>Was the participant referred for Social Service? (OT): <TextField variant="outlined" error={isReferredFromPt(info)} fullWidth={true} margin="dense" value={populateField(info, 'Geri - OT Consult', 'geriOtConsultQ4')} /></Grid>
+                        <Grid item xs={6}>Was the participant referred for Social Service? (PT): <TextField variant="outlined" error={isReferredFromPt(info)} fullWidth={true} margin="dense" value={populateField(info, 'Geri - PT Consult', 'geriPtConsultQ4')} /></Grid>
+                        <Grid item xs={6}>Was the participant referred for Social Service? (OT): <TextField variant="outlined" error={isReferredFromOt(info)} fullWidth={true} margin="dense" value={populateField(info, 'Geri - OT Consult', 'geriOtConsultQ4')} /></Grid>
                       </Grid>
                       <Divider /><br />
                       <Grid container direction="row" justify="space-between" alignItems="flex-end" >
-                        <Grid item xs={6}>Reasons for referral to social support (PT): <TextField variant="outlined" error={isReferredFromOt(info)} multiline={true} rows={getNoOfLines(populateField(info, 'Geri - PT Consult', 'geriPtConsultQ5'))} fullWidth={true} margin="dense" value={populateField(info, 'Geri - PT Consult', 'geriPtConsultQ5')} /></Grid>
-                        <Grid item xs={6}>Reasons for referral to social support (OT): <TextField variant="outlined" error={isReferredFromPt(info)} multiline={true} rows={getNoOfLines(populateField(info, 'Geri - OT Consult', 'geriOtConsultQ5'))} fullWidth={true} margin="dense" value={populateField(info, 'Geri - OT Consult', 'geriOtConsultQ5')} /></Grid>
+                        <Grid item xs={6}>Reasons for referral to social support (PT): <TextField variant="outlined" error={isReferredFromPt(info)} multiline={true} rows={getNoOfLines(populateField(info, 'Geri - PT Consult', 'geriPtConsultQ5'))} fullWidth={true} margin="dense" value={populateField(info, 'Geri - PT Consult', 'geriPtConsultQ5')} /></Grid>
+                        <Grid item xs={6}>Reasons for referral to social support (OT): <TextField variant="outlined" error={isReferredFromOt(info)} multiline={true} rows={getNoOfLines(populateField(info, 'Geri - OT Consult', 'geriOtConsultQ5'))} fullWidth={true} margin="dense" value={populateField(info, 'Geri - OT Consult', 'geriOtConsultQ5')} /></Grid>
                       </Grid>
                       <Divider /><br />
                     </Fragment>
                   }
                   <Grid container direction="row" justify="space-between" alignItems="flex-end" >
-                    <Grid item xs={6}>Which organisation was the participant referred to for post-screening assessment? (from AMT) <TextField variant="outlined" multiline={true} rows={getNoOfLines(populateField(info, 'Geri - Cognitive Follow Up', 'geriCognitiveFollowUpQ1'))} fullWidth={true} margin="dense" value={populateField(info, 'Geri - Cognitive Follow Up', 'geriCognitiveFollowUpQ1')} /></Grid>
+                    <Grid item xs={6}>Which organisation was the participant referred to for post-screening assessment? (from AMT) <TextField variant="outlined" fullWidth={true} margin="dense" value={populateField(info, 'Geri - Cognitive Follow Up', 'geriCognitiveFollowUpQ1', 'geriCognitiveFollowUpQ2')} /></Grid>
                     <Grid item xs={6}>Which of the programmes did the OT recommend for the participant to go? (if applicable) <TextField variant="outlined" error={isReferredToOtProgrammes(info, this.state.printFlag)} multiline={true} rows={getNoOfLines(populateField(info, 'Geri - OT Consult', 'geriOtConsultQ6'))} fullWidth={true} margin="dense" value={populateField(info, 'Geri - OT Consult', 'geriOtConsultQ6')} /></Grid>
                   </Grid>
                   <Divider /><br />
                   <Grid container direction="row" justify="space-between" alignItems="flex-start" >
                     <Grid item xs={6}><Typography variant="subtitle1" color="error">{getAmtAssessmentMessage(info, this.state.printFlag)}</Typography></Grid>
                   </Grid>
+                  <Divider /><br />
 
                   <Grid container direction="row" justify="space-between" alignItems="center" >
                     <Grid item xs={3}><Typography variant="h5">Social Service</Typography></Grid>
@@ -587,9 +603,9 @@ class ScreeningReview extends Component {
                   </Grid>
                   <Grid container direction="row" justify="space-between" alignItems="flex-end" >
                     <Grid item xs={3}>Did the participant visit the social service station? <TextField variant="outlined" error={isReferredToSocialService(info)} fullWidth={true} margin="dense" value={populateField(info, 'Social Service', 'socialServiceQ1')} /></Grid>                    
-                    <Grid item xs={3}>Did this patient consult an on-site doctor today? <TextField variant="outlined" error={isConsultedDoctor(info)} fullWidth={true} margin="dense" value={populateField(info, 'Doctor\'s Consult', 'doctorSConsultQ11')} /></Grid>                    
-                    <Grid item xs={3}>Does this patient require urgent follow-up? <TextField variant="outlined" error={isUrgentFollowUp(info)} fullWidth={true} margin="dense" value={populateField(info, 'Doctor\'s Consult', 'doctorSConsultQ10')} /></Grid>                    
-                    <Grid item xs={3}>Was the patient referred to the dietitian? <TextField variant="outlined" error={isReferredToDietitian(info)} fullWidth={true} margin="dense" value={populateField(info, 'Doctor\'s Consult', 'doctorSConsultQ4')} /></Grid>                    
+                    <Grid item xs={3}>Did this participant consult an on-site doctor today? <TextField variant="outlined" error={isConsultedDoctor(info)} fullWidth={true} margin="dense" value={populateField(info, 'Doctor\'s Consult', 'doctorSConsultQ11')} /></Grid>                    
+                    <Grid item xs={3}>Does this participant require urgent follow-up? <TextField variant="outlined" error={isUrgentFollowUp(info)} fullWidth={true} margin="dense" value={populateField(info, 'Doctor\'s Consult', 'doctorSConsultQ10')} /></Grid>                    
+                    <Grid item xs={3}>Was the participant referred to the dietitian? <TextField variant="outlined" error={isReferredToDietitian(info)} fullWidth={true} margin="dense" value={populateField(info, 'Doctor\'s Consult', 'doctorSConsultQ4')} /></Grid>                    
                   </Grid>
                   <Divider /><br />
                   <Grid container direction="row" justify="space-between" alignItems="flex-start" >
@@ -597,6 +613,7 @@ class ScreeningReview extends Component {
                     <Grid item xs={1}></Grid>
                     <Grid item xs={6}><Typography variant="subtitle1" color="error">{getUrgentFollowUpMessage(info, this.state.printFlag)}</Typography></Grid>
                   </Grid>
+                  <Divider /><br />
 
                   {
                     !this.state.printFlag && 
@@ -609,8 +626,7 @@ class ScreeningReview extends Component {
                     </Fragment>
                   }
 
-                  <Typography variant="h5" color="error">All participants will receive a more detailed health report from PHS within 4-6 weeks of the screening.
-        *If you have gone for phlebotomy, you will receive the blood test results from NUHS within 4 - 6 weeks of the screening.</Typography>
+                  <Typography variant="h5" color="error">All participants will receive a more detailed health report from PHS within 4-6 weeks of the screening.<br/> *If you have gone for phlebotomy, you will receive the blood test results from NUHS within 4 - 6 weeks of the screening.</Typography>
 
                 </Grid>
 
