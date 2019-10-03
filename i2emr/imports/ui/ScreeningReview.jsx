@@ -589,7 +589,7 @@ class ScreeningReview extends Component {
                   }
                   <Grid container direction="row" justify="space-between" alignItems="flex-end" >
                     <Grid item xs={6}>Which organisation was the participant referred to for post-screening assessment? (from AMT) <TextField variant="outlined" fullWidth={true} margin="dense" value={populateField(info, 'Geri - Cognitive Follow Up', 'geriCognitiveFollowUpQ1', 'geriCognitiveFollowUpQ2')} /></Grid>
-                    <Grid item xs={6}>Which of the programmes did the OT recommend for the participant to go? (if applicable) <TextField variant="outlined" error={isReferredToOtProgrammes(info, this.state.printFlag)} multiline={true} rows={getNoOfLines(populateField(info, 'Geri - OT Consult', 'geriOtConsultQ6'))} fullWidth={true} margin="dense" value={populateField(info, 'Geri - OT Consult', 'geriOtConsultQ6')} /></Grid>
+                    <Grid item xs={6}>Which of the programmes did the OT recommend for the participant to go? (if applicable) <TextField variant="outlined" error={isReferredToOtProgrammes(info, this.state.printFlag)} fullWidth={true} margin="dense" value={populateField(info, 'Geri - OT Consult', 'geriOtConsultQ6')} /></Grid>
                   </Grid>
                   <Divider /><br />
                   <Grid container direction="row" justify="space-between" alignItems="flex-start" >
