@@ -966,7 +966,7 @@ export const formLayouts = {
       <RadioField name="wceQ6" label="WCE Q6" />
       <DisplayIf condition = {(context) => (typeof(context.model.wceQ6) !== undefined && context.model.wceQ6 === 'Yes, (Please specify date of appointment if given):')} >
         <Fragment>
-          Please specify date:
+          Please specify date (dd/mm/yy):
           <LongTextField name="wceQ7" label="WCE Q7"/>
         </Fragment>
       </DisplayIf>

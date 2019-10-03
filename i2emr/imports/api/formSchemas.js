@@ -710,7 +710,7 @@ export const formSchemas = {
       }, wceQ6: {
         type: String, allowedValues: ["Yes, (Please specify date of appointment if given):", "No", "Not Applicable"], optional: false
       }, wceQ7: {
-        type: String, optional: true, custom: function () {
+        type: String, optional: true, regEx: /^([1-9]|[12][0-9]|3[01])[/]([1-9]|1[012])[/]\d\d$/, custom: function () {
           if (this.field('wceQ6').isSet && this.field('wceQ6').value === "Yes, (Please specify date of appointment if given):") {
             if (!this.isSet || this.value.length === 0) {
               return SimpleSchema.ErrorTypes.REQUIRED
