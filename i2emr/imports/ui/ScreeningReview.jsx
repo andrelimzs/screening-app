@@ -81,7 +81,7 @@ const getBpMessage = (info, printFlag) => {
   if (info && typeof (info['Hx Cancer']) !== "undefined" && typeof (info['Hx Cancer']['hxCancerQ17']) !== "undefined" && typeof (info['Hx Cancer']['hxCancerQ18']) !== "undefined") {
     if (info['Hx Cancer'].hxCancerQ17 >= 130 || info['Hx Cancer'].hxCancerQ18 >= 85) {
       if (printFlag) {
-        return "A healthy blood pressure reading is below 130/85 mmHg. Please see a GP if you have not been diagnosed with hypertension";
+        return "A healthy blood pressure reading is below 130/85 mmHg.";
       }
       return "Blood pressure is high, please see a GP if you have not been diagnosed with hypertension";
     }
