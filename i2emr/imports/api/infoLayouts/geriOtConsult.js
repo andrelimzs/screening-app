@@ -107,12 +107,13 @@ export const geriOtConsult = (info) => {
         3.3b Time-Up and Go (TUG) <br/>
         Walking aid (if any):  <br />
         <b>{typeof(info['Geri - TUG']) !== "undefined" &&
+            typeof(info['Geri - TUG'].geriTugQ1) !== "undefined" &&
             info['Geri - TUG'].geriTugQ1.map((data) => {
                 return data + ", "
                 })
             }<br /><br /></b>
         {typeof(info['Geri - TUG']) !== "undefined" &&
-        typeof(info['Geri - TUG'] !== "undefined") &&
+        typeof(info['Geri - TUG'].geriTugQ1) !== "undefined" &&
         info['Geri - TUG'].geriTugQ1.includes("Others (Please specify in textbox )") &&
             <div>
                 Type of Walking Aid: <br />
@@ -126,8 +127,6 @@ export const geriOtConsult = (info) => {
         Falls Risk Level:  <br />
         <b>{typeof(info['Geri - TUG']) !== "undefined" &&
             info['Geri - TUG'].geriTugQ4}<br /><br /></b>
-
-        {/* Reasons for referral to Dr's consult from PT */}
       
     </Fragment>
 }

@@ -4,6 +4,7 @@ export const oralScreening = (info) => {
     return <Fragment>       
         <h2>Reason for referral from Doctor's Consult</h2>
         <b>{typeof(info['Doctor\'s Consult']) !== "undefined" &&
+            typeof(info['Doctor\'s Consult']).doctorSConsultQ9 !== "undefined" &&
             info['Doctor\'s Consult'].doctorSConsultQ9.split('\n').map( text => {
                 return <p>{text}<br/></p>
             })}</b><br /><br />
@@ -11,11 +12,13 @@ export const oralScreening = (info) => {
     <h2>Health Concerns</h2>
         Brief History <br/>
         <b>{typeof(info['Hx HCSR']) !== "undefined" &&
+            typeof(info['Hx HCSR'].hxHcsrQ2) !== "undefined" &&
             info['Hx HCSR'].hxHcsrQ2.split('\n').map( text => {
                 return <p>{text}<br/></p>
             })}</b><br /><br />
         Red Flags <br/>
         <b>{typeof(info['Hx HCSR']) !== "undefined" &&
+            typeof(info['Hx HCSR'].hxHcsrQ3) !== "undefined" &&
             info['Hx HCSR'].hxHcsrQ3.split('\n').map( text => {
                 return <p>{text}<br/></p>
             })}</b><br /><br />
