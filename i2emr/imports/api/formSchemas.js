@@ -112,7 +112,7 @@ export const formSchemas = {
     )
   },
 
-  "History Taking": {
+  "History Taking - Phlebo": {
     "Hx HCSR": (info) => { return new SimpleSchema({
       hxHcsrQ1: {
       type: String, optional: false

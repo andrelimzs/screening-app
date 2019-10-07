@@ -64,7 +64,7 @@ export const geriOtConsult = (info) => {
 
         <h2>SPPB Scores</h2>
 
-        1) REPEATED CHAIR STANgeriSppDS<br />Time taken in seconds (only if 5 chair stands were completed):<br />
+        1) REPEATED CHAIR STANDS<br />Time taken in seconds (only if 5 chair stands were completed):<br />
         <b>{typeof(info['Geri - SPPB']) !== "undefined" &&
             info['Geri - SPPB'].geriSppbQ1}<br /><br /></b>
         Score for REPEATED CHAIR STANDS (out of 4):<br />
