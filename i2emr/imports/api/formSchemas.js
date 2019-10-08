@@ -57,13 +57,7 @@ export const formSchemas = {
           }
         }
       }, registrationQ11: {
-        type: String, allowedValues: ["English", "Mandarin", "Malay", "Tamil"], optional: true, custom: function () {
-          if (typeof (info["Pre-Registration"]) !== "undefined" && info["Pre-Registration"].preRegistrationQ4 === 'Y') {
-            if (!this.isSet || this.value.length === 0) {
-              return SimpleSchema.ErrorTypes.REQUIRED
-            }
-          }
-        }
+        type: String, allowedValues: ["English", "Mandarin", "Malay", "Tamil"], optional: true
       }, registrationQ12: {
         type: Boolean, label: "I have read and acknowledged the eligibility criteria for Phlebotomy. 我知道抽血的合格标准。", optional: true, custom: function () {
           if (typeof (info["Pre-Registration"]) !== "undefined" && info["Pre-Registration"].preRegistrationQ4 === 'Y') {
@@ -400,7 +394,7 @@ export const formSchemas = {
               }
             }
           }
-        }, hxCancerQ26: {
+        }, hxCancerQ27: {
           type: String, allowedValues: ["Yes", "No"], optional: false
         }
       }
@@ -676,7 +670,7 @@ export const formSchemas = {
               }
             }
           }
-        }, hxCancerQ26: {
+        }, hxCancerQ27: {
           type: String, allowedValues: ["Yes", "No"], optional: false
         }
       }
