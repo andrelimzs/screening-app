@@ -394,7 +394,7 @@ export const formSchemas = {
               }
             }
           }
-        }, hxCancerQ26: {
+        }, hxCancerQ27: {
           type: String, allowedValues: ["Yes", "No"], optional: false
         }
       }
@@ -670,7 +670,7 @@ export const formSchemas = {
               }
             }
           }
-        }, hxCancerQ26: {
+        }, hxCancerQ27: {
           type: String, allowedValues: ["Yes", "No"], optional: false
         }
       }

@@ -505,8 +505,8 @@ export const formLayouts = {
         <NumField name="hxCancerQ18" label="Hx Cancer Q18" /> <br />
         Hypertension criteria:<br />○ Younger participants: > 140/90<br />○ Participants > 80 years old: > 150/90 <br />○ CKD w proteinuria (mod to severe albuminuria): > 130/80<br />○ DM: > 130/80<br /> <br />
         Please tick to highlight if you feel <b>BLOOD PRESSURE</b> require closer scrutiny by docors later.<br/><br/>
-        <RadioField name="hxCancerQ26" label="Hx Cancer Q26" />
-        <DisplayIf condition={(context) => (typeof(context.model.hxCancerQ26) !== "undefined" && context.model.hxCancerQ26 === "Yes")}>
+        <RadioField name="hxCancerQ27" label="Hx Cancer Q27" />
+        <DisplayIf condition={(context) => (typeof(context.model.hxCancerQ27) !== "undefined" && context.model.hxCancerQ27 === "Yes")}>
           <Fragment>
             <b>REFER TO DR CONSULT: (FOR THE FOLLOWING SCENARIOS)<br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A  <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation   <br /><br /><font color="red"><u>HYPERTENSIVE EMERGENCY</u><br />• SYSTOLIC  <mark>≥ 180</mark> AND/OR DIASTOLIC ≥ <mark>110 mmHg</mark> AND <mark><u>SYMPTOMATIC</u></mark> (make sure pt has rested and 2nd reading was taken)<br />o <mark>ASK THE DOCTOR TO COME AND REVIEW!</mark><br /> <br /><u>HYPERTENSIVE URGENCY</u><br />• SYSTOLIC  <mark>≥ 180</mark> AND/OR DIASTOLIC <mark>≥ 110 mmHg</mark> AND <mark>ASYMPTOMATIC</mark> (make sure pt has rested and 2nd reading was taken)<br />o ESCORT TO DC DIRECTLY!<br />o Follow the patient, continue clerking the patient afterward if doctor acknowledges patient is well enough to continue the screening<br /><br /><u>RISK OF HYPERTENSIVE CRISIS</u><br />• IF SYSTOLIC between <mark>160 - 180 mmHg</mark> <br />• IF <mark>ASYMPTOMATIC</mark>, continue clerking. <br />• IF <mark>SYMPTOMATIC</mark>, ESCORT TO DC DIRECTLY!<br /><br /><u>If systolic between 140 - 160 mmHg:</u></font><br />o Ask for:<br />- Has hypertension been pre-diagnosed? If not, refer to DC (possible new HTN diagnosis)<br />- If diagnosed before, ask about compliance and whether he/she goes for regular follow up? If non-compliant or not on regular follow-up, refer to DC (chronic HTN, uncontrolled).<br /></b>
           </Fragment>
@@ -857,8 +857,8 @@ export const formLayouts = {
         <NumField name="hxCancerQ18" label="Hx Cancer Q18" /> <br />
         Hypertension criteria:<br />○ Younger participants: > 140/90<br />○ Participants > 80 years old: > 150/90 <br />○ CKD w proteinuria (mod to severe albuminuria): > 130/80<br />○ DM: > 130/80<br /> <br />
         Please tick to highlight if you feel <b>BLOOD PRESSURE</b> require closer scrutiny by docors later.<br/><br/>
-        <RadioField name="hxCancerQ26" label="Hx Cancer Q26" />
-        <DisplayIf condition={(context) => (typeof(context.model.hxCancerQ26) !== "undefined" && context.model.hxCancerQ26 === "Yes")}>
+        <RadioField name="hxCancerQ27" label="Hx Cancer Q26" />
+        <DisplayIf condition={(context) => (typeof(context.model.hxCancerQ27) !== "undefined" && context.model.hxCancerQ27 === "Yes")}>
           <Fragment>
             <b>REFER TO DR CONSULT: (FOR THE FOLLOWING SCENARIOS)<br />1) Tick eligibility, Circle interested 'Y' on Page 1 of Form A  <br />2) Write reasons on Page 2 of Form A Doctor's Consultation - Reasons for Recommendation   <br /><br /><font color="red"><u>HYPERTENSIVE EMERGENCY</u><br />• SYSTOLIC  <mark>≥ 180</mark> AND/OR DIASTOLIC ≥ <mark>110 mmHg</mark> AND <mark><u>SYMPTOMATIC</u></mark> (make sure pt has rested and 2nd reading was taken)<br />o <mark>ASK THE DOCTOR TO COME AND REVIEW!</mark><br /> <br /><u>HYPERTENSIVE URGENCY</u><br />• SYSTOLIC  <mark>≥ 180</mark> AND/OR DIASTOLIC <mark>≥ 110 mmHg</mark> AND <mark>ASYMPTOMATIC</mark> (make sure pt has rested and 2nd reading was taken)<br />o ESCORT TO DC DIRECTLY!<br />o Follow the patient, continue clerking the patient afterward if doctor acknowledges patient is well enough to continue the screening<br /><br /><u>RISK OF HYPERTENSIVE CRISIS</u><br />• IF SYSTOLIC between <mark>160 - 180 mmHg</mark> <br />• IF <mark>ASYMPTOMATIC</mark>, continue clerking. <br />• IF <mark>SYMPTOMATIC</mark>, ESCORT TO DC DIRECTLY!<br /><br /><u>If systolic between 140 - 160 mmHg:</u></font><br />o Ask for:<br />- Has hypertension been pre-diagnosed? If not, refer to DC (possible new HTN diagnosis)<br />- If diagnosed before, ask about compliance and whether he/she goes for regular follow up? If non-compliant or not on regular follow-up, refer to DC (chronic HTN, uncontrolled).<br /></b>
           </Fragment>
@@ -1008,7 +1008,7 @@ export const formLayouts = {
       <h3>9) Count backwards from 20 to 1.<br /> 请您从二十开始，倒数到一。</h3>
       Was Q9 answered correctly?
       <RadioField name="geriAmtQ9" label="Geri - AMT Q9" />
-      <h3>10) Recall memory phase<br /> 请您把刚才我要您记住的地址重复一遍。</h3>
+      <h3>10) Recall memory phrase<br /> 请您把刚才我要您记住的地址重复一遍。</h3>
       Was Q10 answered correctly?
       <RadioField name="geriAmtQ10" label="Geri - AMT Q10" />
       <SomeComp calculation={(model) => (
