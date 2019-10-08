@@ -128,13 +128,13 @@ export const formLayouts = {
       <SelectField name="registrationQ8" />
       Pioneer / Merdeka Generation Status 建国一代配套
       <RadioField name="registrationQ9" />
+      Preferred Language for Health Report
+      <RadioField name="registrationQ11" />
       <DisplayIf condition={() => (typeof(info["Pre-Registration"]) !== "undefined" && info["Pre-Registration"].preRegistrationQ4 === "Y")}>
         <Fragment>
           <h2>Follow up at GP Clinics</h2>
           <i>Your Health Report & Blood Test Results (if applicable) will be mailed out about <b>4-6 weeks</b> after the screening.  Depending on your results, our team <b>may</b> shortlist you for further follow-up.<br />Scenario 1: If <b>no follow-up</b> is required, the report will be mailed directly to you.<br />Scenario 2: If follow-up is required, you will need to <b>visit a GP clinic</b> to collect your report. <br />Please choose a preferred GP Clinic from the following list in case of Scenario 2.</i> <br/> Some residents such as PRs and residents who have been registered in the National Screening System in the past 3 years will not be eligible. 
           <RadioField name="registrationQ10" />
-          Preferred Language for Health Report
-          <RadioField name="registrationQ11" />
           <h2>Phlebotomy Eligibility</h2>
           Before entering our screening, do note the following <b>eligibility criteria for Phlebotomy</b> <br />1) Fasted for minimum 8 hours <br />          Note: Water is allowed, coffee/tea is not. Medications are fine. <br />2) NOT previously diagnosed with Diabetes/ High Cholesterol/ High Blood Pressure.<br />3) Have not done a blood test within 1 year.<br /><br /><i>Rationale: PHS aims to reach out to undiagnosed people. Patients that are already aware of their condition would have regular follow-ups with the GPs/polyclinics/hospitals. This information is available in our publicity material. Please approach our registration volunteers should you have any queries. We are happy to explain further. Thank you!</i><br /><br />抽血合格标准:<br />1) 十个小时内没有吃东西或喝饮料. 可以喝水, 吃药。不能喝咖啡, 喝茶。<br />2) 在过去的一年内沒有验过血。<br />3) 没有糖尿病, 高血压, 高胆固醇。
           <BoolField name="registrationQ12" />
