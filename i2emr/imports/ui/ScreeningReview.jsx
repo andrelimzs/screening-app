@@ -159,7 +159,7 @@ const getRefractiveMessage = (info, printFlag) => {
       }
     }
     if(info['Geri - Vision']['geriVisionQ3'] >= 12  || info['Geri - Vision']['geriVisionQ4'] >= 12){
-      return "Non-refractive error, participant should have consulted on-site doctor";
+      return "Non-refractive error, participant recommended to go for L2 Eye Screening at SNEC Eye Bus";
     } else {
       return "Refractive error, participant should have received spectacles vouchers"
     }
