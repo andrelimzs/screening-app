@@ -1115,7 +1115,7 @@ export const formLayouts = {
        Please <b>refer to L2 Eye Screening (Eye Bus/ NUHS)</b> if pinhole visual acuity <u><b>is > 6/12</b></u><br/>
        If participant is required to go for L2 Eye Screening, encourage participant to go to Eye Bus/ NUHS after Screening Review.
       <RadioField name="geriVisionQ9" label="Geri - Vision Q9" />
-      <font color="red"><h2>IF THE PATIENT NEEDS TO GO TO DOCTOR'S CONSULT MODALITY THAT YOU RECOMMENDED, PLEASE INDICATE ON FORM A.</h2></font>
+      {/* <font color="red"><h2>IF THE PATIENT NEEDS TO GO TO DOCTOR'S CONSULT MODALITY THAT YOU RECOMMENDED, PLEASE INDICATE ON FORM A.</h2></font> */}
     </Fragment>
   ),
 
