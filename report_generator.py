@@ -20,10 +20,11 @@ def run():
         station_filename = filename.replace(".xlsx", "")
         station = df.columns[0]
 
-        df = pd.read_excel(os.path.join(FORMS_LOCATION,filename), skiprows=2)
+        df = pd.read_excel(os.path.join(FORMS_LOCATION,filename), skiprows=1)
 
         out_df = generate_data_frame(station, df, db)
         StyleFrame(out_df).to_excel(os.path.join(OUT_LOCATION,"{}_Report.xlsx".format(station_filename)), index=False).save()
+        print("Finished", station)
     
 def convert_info_to_string(data):
     if type(data) is bool:
