@@ -15,16 +15,12 @@ def run():
     client = MongoClient('localhost',3001)
     db = client.meteor.patientinfo
 
-    for filename in os.listdir(FORMS_LOCATION)[0:4]:
-        df = pd.read_excel(filename)
+    for filename in os.listdir(FORMS_LOCATION):
+        df = pd.read_excel(os.path.join(FORMS_LOCATION,filename))
         station_filename = filename.replace(".xlsx", "")
         station = df.columns[0]
 
-        if station_filename != station:
-            print("Station mismatch")
-            sys.exit()
-
-        df = pd.read_excel(filename, skiprows=2)
+        df = pd.read_excel(os.path.join(FORMS_LOCATION,filename), skiprows=2)
 
         out_df = generate_data_frame(station, df, db)
         StyleFrame(out_df).to_excel(os.path.join(OUT_LOCATION,"{}_Report.xlsx".format(station_filename)), index=False).save()
@@ -37,8 +33,7 @@ def convert_info_to_string(data):
             return "No"
     if isinstance(data, list):
         return "\n".join(list(map(str, data)))
-    else:
-        return data
+    return data
 
 def generate_data_frame(station, df, db):
     for info in db.find({station: {'$exists' :True}}, {'id': 1, station: 1}): 
