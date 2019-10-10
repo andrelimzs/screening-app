@@ -2,29 +2,29 @@ import os
 import math
 import re
 import pymongo
+import sys
+from StyleFrame import StyleFrame
 from pymongo import MongoClient
 import pandas as pd
 from pandas import ExcelFile
 
+FORMS_LOCATION = './Forms/ReportTemplates/'
+OUT_LOCATION = './Reports/'
+
 def run():
-    # for filename in os.listdir(FORMS_LOCATION)[0:4]:
-    #     df = pd.read_excel(os.path.join(FORMS_LOCATION, filename), nrows=1, headers=None)
-    #     form_name = df['Unnamed: 2'][0]
-
-    #     df = pd.read_excel(os.path.join(FORMS_LOCATION, filename), skiprows=4)
-    #     generate_strings(df, form_name)
-
-    filename = './Registration.xlsx'
-
-    df = pd.read_excel(filename)
-    station = df.columns[0]
-    df = pd.read_excel(filename, skiprows=2)
-
     client = MongoClient('localhost',3001)
     db = client.meteor.patientinfo
 
-    out_df = generate_data_frame(station, df, db)
-    out_df.to_excel('./Registration_Report.xlsx', index=False)
+    for filename in os.listdir(FORMS_LOCATION):
+        df = pd.read_excel(os.path.join(FORMS_LOCATION,filename))
+        station_filename = filename.replace(".xlsx", "")
+        station = df.columns[0]
+
+        df = pd.read_excel(os.path.join(FORMS_LOCATION,filename), skiprows=1)
+
+        out_df = generate_data_frame(station, df, db)
+        StyleFrame(out_df).to_excel(os.path.join(OUT_LOCATION,"{}_Report.xlsx".format(station_filename)), index=False).save()
+        print("Finished", station)
     
 def convert_info_to_string(data):
     if type(data) is bool:
@@ -32,12 +32,12 @@ def convert_info_to_string(data):
             return "Yes"
         else:
             return "No"
-    else:
-        return data
+    if isinstance(data, list):
+        return "\n".join(list(map(str, data)))
+    return data
 
 def generate_data_frame(station, df, db):
-    for i in range(1, db.count_documents({}) + 1):
-        info = db.find_one({'id' : i})    
+    for info in db.find({station: {'$exists' :True}}, {'id': 1, station: 1}): 
         if station in info:
             responses = {}
             for question_id in df.columns:
@@ -50,8 +50,6 @@ def generate_data_frame(station, df, db):
                         responses[question_id] = '-'
             df = df.append(responses, ignore_index=True)
     return df
-
-
 
 
 if __name__ == "__main__":
