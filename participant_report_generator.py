@@ -8,8 +8,12 @@ from pymongo import MongoClient
 import pandas as pd
 from pandas import ExcelFile
 
-TEMPLATE_LOCATION = './Forms/ReportTemplates/Participant.xlsx'
-OUT_LOCATION = './ParticipantReports/'
+TEMPLATE_LOCATION = './Forms/ReportTemplates/ParticipantReport.xlsx'
+OUT_LOCATION = 'C:/Users/Jonathan/Desktop/ParticipantReports/'
+MONGO_DB_URL = 'localhost'
+MONGO_DB_PORT = 3001
+DB_NAME = 'meteor'
+DB_COLLECTION = 'patientinfo'
 
 question_map = {
     'preRegistrationQ': 'Pre-Registration',
@@ -41,15 +45,16 @@ question_map = {
 }
 
 def run():
-    client = MongoClient('localhost',3001)
-    db = client.meteor.patientinfo
+    client = MongoClient(MONGO_DB_URL,MONGO_DB_PORT)
+    db = client[DB_NAME][DB_COLLECTION]
 
-    df = pd.read_excel(TEMPLATE_LOCATION, skiprows=1)
+    df = pd.read_excel(TEMPLATE_LOCATION)
 
-    for info in db.find({'id': {'$exists' :True}}): 
-        out_df = generate_data_frame(info, df)
-        StyleFrame(out_df).to_excel(os.path.join(OUT_LOCATION,"{}.xlsx".format(info['id'])), index=False).save()
-        print("Finished", str(info['id']))
+    # for info in db.find({'id': {'$exists' :True}}): 
+    info = db.find_one({'id': 1})
+    out_df = generate_data_frame(info, df)
+    StyleFrame(out_df).to_excel(os.path.join(OUT_LOCATION,"{}.xlsx".format(info['id'])), index=False).save()
+    print("Finished", str(info['id']))
     
 def convert_info_to_string(data):
     if type(data) is bool:
@@ -67,7 +72,7 @@ def generate_data_frame(info, df):
         if question_id == 'ID':
             responses['ID'] = info['id']
         else:
-            station = question_map[question_id].rstrip('0123456789')
+            station = question_map[question_id.rstrip('0123456789')]
             if station in info and question_id in info[station]:
                 responses[question_id] = convert_info_to_string(info[station][question_id])
             else:
