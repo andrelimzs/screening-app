@@ -1207,17 +1207,11 @@ export const formSchemas = {
       }, feedbackFormQ27: {
         type: Array, optional: false
       }, "feedbackFormQ27.$": {
-        type: String, allowedValues: ["Happened to pass by 刚好经过", "Posters, banners 海报/旗帜", "PHS Facebook Page 公共健康服务官方脸书", "Community Centre (CC) 社区中心（CC）", "SMS Reminder (简讯）", "PHS Instagram 公共健康服务 Instagram", "Door-to-Door Publicity 义工上门宣传", "Lamp post banners 路灯上的海报", "PHS Website (www.publichealthservice.org) 公共健康服务官方网站", "Newspaper 报纸", "Others (Please specify) 其他（请注明)"]
+        type: String, allowedValues: ["Happened to pass by 刚好经过", "Door-to-Door Publicity 义工上门宣传", "Posters, neighbourhood & lamp post banners 海报/旗帜/ 路灯上的海报", "Community Centre (CC) 社区中心(CC)", "SMS Reminder (简讯)", "Social Media 社交媒体"]
       }, feedbackFormQ28: {
-        type: String, optional: true, custom: function () {
-          if (this.field('feedbackFormQ27').isSet && this.field('feedbackFormQ27').length !== 0 && this.field('feedbackFormQ27').value.includes("Others (Please specify) 其他（请注明)")) {
-            if (!this.isSet || this.value.length === 0) {
-              return SimpleSchema.ErrorTypes.REQUIRED
-            }
-          }
-        }
+        type: String, allowedValues: ["Yes 是", "No 否", "NA 不适用"], optional: true
       }, feedbackFormQ29: {
-        type: String, allowedValues: ["Yes", "No", "Did not receive brochure"], optional: true
+        type: String, allowedValues: ["Yes 是", "No 否", "NA 不适用"], optional: true
       }, feedbackFormQ30: {
         type: String, optional: true
       }, feedbackFormQ31: {

@@ -1501,19 +1501,15 @@ export const formLayouts = {
       <RadioField name="feedbackFormQ26" label="Feedback Form Q26"/>
       14. How did you come to know of the PHS 2019 screening? Select all that apply. <br />您如何认知此活动的智讯？（请在所有适当的空格中打勾）<br />
       <SelectField name="feedbackFormQ27" checkboxes="true" label="Feedback Form Q27" />
-      <DisplayIf condition={(context) => (typeof(context.model.feedbackFormQ27) !== "undefined" && context.model.feedbackFormQ27.includes("Others (Please specify) 其他（请注明)"))}>
-        <Fragment>
-          Please Specify for "Others" 请注明:
-          <LongTextField name="feedbackFormQ28" label="Feedback Form Q28"/>
-        </Fragment>
-      </DisplayIf>
-      15. If you have been contacted for Door-to-Door Publicity, did you learn about healthy ageing/metabolic syndrome through our volunteers/brochure? <br />若您有遇见义工上门宣传您是否从义工们/健康宣传册中学到更多关于健康老龄化/代谢综合症的相关知识？
+      15. Did you learn about PHS 2019 screening through our volunteer visit/ flyers at your doorstep? <br />您是否通过义工登门拜访／门前的宣传单得知到此健康检查2019？
+      <RadioField name="feedbackFormQ28" label="Feedback Form Q28"/>
+      16. Was the volunteer visit/ flyers at your doorstep effective in encouraging you to participate in PHS 2019 screening?<br />义工登门拜访／门前的宣传单是否有效鼓励您参与此健康检查2019？
       <RadioField name="feedbackFormQ29" label="Feedback Form Q29"/>
-      16. What else do you want to learn more about through PHS?<br />您还有什么想更加了解/更深入学习的东西吗？
+      17. What else do you want to learn more about through PHS?<br />您还有什么想更加了解/更深入学习的东西吗？
       <LongTextField name="feedbackFormQ30" label="Feedback Form Q30"/>
-      17. Any other feedback? <br />您有其他的意见吗？
+      18. Any other feedback? <br />您有其他的意见吗？
       <LongTextField name="feedbackFormQ31" label="Feedback Form Q31" />
-      18. Would you like to attend the PHS2019 Fitness Carnival?
+      19. Would you like to attend the PHS2019 Fitness Carnival?
       <RadioField name="feedbackFormQ32" label="Feedback Form Q32"/>
       <h2>Thank you for completing this survey! :) <br />谢谢您为我们提供您宝贵的意见！</h2>
       
