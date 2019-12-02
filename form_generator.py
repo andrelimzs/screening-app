@@ -3,12 +3,13 @@ import math
 import re
 import pandas as pd
 from pandas import ExcelFile
+import numpy
 
 #TODO
 # Illegal character replacement (e.g. < > ) 
 
-FORMS_LOCATION = './Forms/'
-OUTPUT_LOCATION = './GeneratedForms/'
+FORMS_LOCATION = './NewForms/'
+OUTPUT_LOCATION = './NewGenerated/'
 string_formats = {
     'label': '<h2>{text}</h2>\n',
     'smalllabel': '<h3>{text}</h3>\n',
@@ -32,12 +33,12 @@ def run():
     #     df = pd.read_excel(os.path.join(FORMS_LOCATION, filename), skiprows=4)
     #     generate_strings(df, form_name)
 
-    filename = './Forms/PHS Data Collection Hx Taking 31-08-2019.xlsx'
+    filename = './NewForms/Basic Patient Info.xlsx'
 
-    df = pd.read_excel(filename, nrows=1, headers=None,sheet_name="4")
+    df = pd.read_excel(filename, nrows=1, headers=None,sheet_name="BPI")
     form_name = df['Unnamed: 2'][0]
 
-    df = pd.read_excel(filename, skiprows=4,sheet_name="4")
+    df = pd.read_excel(filename, skiprows=4,sheet_name="BPI")
     generate_strings(df, form_name)
     
 
