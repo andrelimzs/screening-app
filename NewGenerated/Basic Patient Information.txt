@@ -1,0 +1,59 @@
+"Basic Patient Information" : (info) => (
+	<Fragment>
+		<h2>1. BASIC PATIENT INFORMATION</h2>
+		1. Name
+		<TextField name="basicPatientInformationQ1" label="Basic Patient Information Q1"/>
+		2. Gender
+		<RadioField name="basicPatientInformationQ2" label="Basic Patient Information Q2"/>
+		3. Birthdate
+		<TextField name="basicPatientInformationQ3" label="Basic Patient Information Q3"/>
+		4. Age <br />
+		<NumField name="basicPatientInformationQ4" label="Basic Patient Information Q4" /><br />
+		5. District Name
+		<TextField name="basicPatientInformationQ5" label="Basic Patient Information Q5"/>
+		6. Address
+		<TextField name="basicPatientInformationQ6" label="Basic Patient Information Q6"/>
+		7. Zip Code
+		<TextField name="basicPatientInformationQ7" label="Basic Patient Information Q7"/>
+		8. Contact Number <br />
+		<NumField name="basicPatientInformationQ8" label="Basic Patient Information Q8" /><br />
+		9. Spoken Language
+		<TextField name="basicPatientInformationQ9" label="Basic Patient Information Q9"/>
+		10. Any drug allergic?
+		<RadioField name="basicPatientInformationQ10" label="Basic Patient Information Q10"/>
+		11. Do you have any blood borne diseases?
+		<RadioField name="basicPatientInformationQ11" label="Basic Patient Information Q11"/>
+		
+	</Fragment>
+),
+
+
+==========================================================================================================================================
+
+
+"Basic Patient Information" : new SimpleSchema({
+	basicPatientInformationQ1: {
+	type: String, optional: false
+	}, basicPatientInformationQ2: {
+	type: String, allowedValues: ["Male", "Female"], optional: false
+	}, basicPatientInformationQ3: {
+	type: String, optional: false
+	}, basicPatientInformationQ4: {
+	type: Number, optional: false
+	}, basicPatientInformationQ5: {
+	type: String, optional: false
+	}, basicPatientInformationQ6: {
+	type: String, optional: false
+	}, basicPatientInformationQ7: {
+	type: String, optional: false
+	}, basicPatientInformationQ8: {
+	type: Number, optional: false
+	}, basicPatientInformationQ9: {
+	type: String, optional: false
+	}, basicPatientInformationQ10: {
+	type: String, allowedValues: ["Yes, pls specify", "No"], optional: false
+	}, basicPatientInformationQ11: {
+	type: String, allowedValues: ["Yes, pls specify", "No"], optional: false
+	}
+	}
+ ),
