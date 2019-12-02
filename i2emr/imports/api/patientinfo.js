@@ -17,13 +17,13 @@ export default Patientinfo = new Mongo.Collection('patientinfo');
 Meteor.methods({
   'patientinfo.insert'(data) {
     console.log(data)
-    const isChoosePhlebo = data["Pre-Registration"].preRegistrationQ4 === "Y"
+    const isChoosePhlebo = data["Basic Patient Information"].basicPatientInformationQ11 === "No"
 
-    data.stationQueue = ["Registration"];
+    data.stationQueue = ["Basic Patient Information"];
 
-    if (isChoosePhlebo) {
-      data.stationQueue.push("Phlebotomy")
-    }
+    // if (isChoosePhlebo) {
+    //   data.stationQueue.push("Phlebotomy")
+    // }
     
     data.nextStation = data.stationQueue[0];
     
@@ -36,7 +36,7 @@ Meteor.methods({
     Patientinfo.insert(data);
 
     // Print a patient insertion summary
-    console.log(String(data.id) + " | " + String(data['Pre-Registration'].preRegistrationQ2));
+    console.log(String(data.id) + " | " + String(data['Basic Patient Information'].basicPatientInformationQ1));
     console.log(data.stationQueue);
 
     return data.id;

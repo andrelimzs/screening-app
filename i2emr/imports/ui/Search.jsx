@@ -109,10 +109,10 @@ class Search extends Component {
                 At {patientInfo.nextStation}
               </Typography> */}
               <Typography variant="h6">
-                {patientInfo["Pre-Registration"].preRegistrationQ2}
+                {patientInfo["Basic Patient Information"].basicPatientInformationQ1}
               </Typography>
               <Typography variant="body2">
-                {patientInfo["Pre-Registration"].preRegistrationQ1}, NRIC: {patientInfo["Pre-Registration"].preRegistrationQ3}
+                {patientInfo["Basic Patient Information"].basicPatientInformationQ2}
               </Typography>
             </CardContent>
             <CardActions>

@@ -149,7 +149,7 @@ class App extends Component {
           <Grid container
             justify="flex-start"
             spacing={16}>
-            {station != "Pre-Registration" &&
+            {station != "Basic Patient Information" &&
               <Grid item xs={12}>
                 <Queue patientList={this.props.patientList} />
               </Grid>

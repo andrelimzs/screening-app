@@ -60,7 +60,7 @@ class Form extends Component {
 
   handleSubmit(newForm) { 
     // If no user
-    if (this.props.id === null && this.props.station !== "Pre-Registration") {
+    if (this.props.id === null && this.props.station !== "Basic Patient Information") {
         window.scrollTo(0, 0)
         alert("Please take a patient before submitting");
         return
@@ -108,7 +108,7 @@ class Form extends Component {
         });
       }
     } else { // not multipage
-      if (this.props.station == "Pre-Registration") {
+      if (this.props.station == "Basic Patient Information") {
         // Meteor.call('patientinfo.insert', this.multiData);
         var formData = {};
         formData[this.props.station] = newForm;
@@ -184,14 +184,14 @@ class Form extends Component {
         schema={currentFormSchema(this.props.patientInfo)}
         onSubmit={this.handleSubmit}
         onSubmitSuccess={() => {
-          if (this.props.id !== null && this.props.station !== "Pre-Registration" && (!this.isMultipage || (this.state.pageIndex == 0))) {
+          if (this.props.id !== null && this.props.station !== "Basic Patient Information" && (!this.isMultipage || (this.state.pageIndex == 0))) {
             alert("Successful");
           }}}
         onSubmitFailure={() => {
           if (!this.isMultipage || (this.state.pageIndex == 0)) {
             alert('Unsuccessful')
           }}}
-        noUserSelected = {this.props.id === null && this.props.station !== "Pre-Registration"}
+        noUserSelected = {this.props.id === null && this.props.station !== "Basic Patient Information"}
       >
         {currentFormLayout(this.props.patientInfo)}
         <ErrorsField />
