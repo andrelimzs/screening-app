@@ -87,978 +87,52 @@ export const formSchemas = {
     })
   },
 
-  "Phlebotomy": (info) => {
+  "Basic Patient Information" : (info) => {
     return new SimpleSchema({
-      phlebotomyQ1: {
-        type: Boolean, label: "Yes", optional: true, custom: function () {
-          if (!this.isSet || !this.value) {
-            return SimpleSchema.ErrorTypes.REQUIRED
-          }
-        }
-      }, phlebotomyQ2: {
-        type: Boolean, label: "Yes", optional: true, custom: function () {
-          if (!this.isSet || !this.value) {
-            return SimpleSchema.ErrorTypes.REQUIRED
-          }
-        }
-      }
-    }
-    )
-  },
-
-  "History Taking - Phlebo": {
-    "Hx HCSR": (info) => { return new SimpleSchema({
-      hxHcsrQ1: {
-      type: String, optional: false
-      }, hxHcsrQ2: {
-      type: String, optional: false
-      }, hxHcsrQ3: {
-      type: String, optional: false
-      }, hxHcsrQ4: {
-      type: String, allowedValues: ["Yes, (Please specify):", "No"], optional: false
-      }, hxHcsrQ5: {
-      type: String, optional: true, custom: function () {
-        if (this.field('hxHcsrQ4').isSet && this.field('hxHcsrQ4').value === 'Yes, (Please specify):') {
-          if(!this.isSet || this.value.length === 0) {
-            return SimpleSchema.ErrorTypes.REQUIRED
-          }
-        }
-      }
-      }, hxHcsrQ6: {
-      type: String, allowedValues: ["Yes, (Please specify):", "No"], optional: false
-      }, hxHcsrQ7: {
-      type: String, optional: true, custom: function () {
-        if (this.field('hxHcsrQ6').isSet && this.field('hxHcsrQ6').value === 'Yes, (Please specify):') {
-          if(!this.isSet || this.value.length === 0) {
-            return SimpleSchema.ErrorTypes.REQUIRED
-          }
-        }
-      }
-      }, hxHcsrQ8: {
-      type: String, allowedValues: ["Yes, (Please specify):", "No"], optional: false
-      }, hxHcsrQ9: {
-      type: String, optional: true, custom: function () {
-        if (this.field('hxHcsrQ8').isSet && this.field('hxHcsrQ8').value === 'Yes, (Please specify):') {
-          if(!this.isSet || this.value.length === 0) {
-            return SimpleSchema.ErrorTypes.REQUIRED
-          }
-        }
-      }
-      }, hxHcsrQ11: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, hxHcsrQ12: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }
-      }
-     )},
-
-    "Hx NSS": (info) => {
-      return new SimpleSchema({
-        hxNssQ1: {
-          type: Array, optional: false
-        }, "hxNssQ1.$": {
-          type: String, allowedValues: ["Hypertension\n(Please proceed to Q2)", "Diabetes\n(Please proceed to Q2)", "High Cholesterol\n(Please proceed to Q2)", "Stroke (including transient ischaemic attack) \n(Please proceed to Q2)", "Chronic Kidney Disease\n(Please proceed to Q2d)", "No, I don't have any of the above \n(Please proceed to Q2d)"]
-        }, hxNssQ2: {
-          type: String, allowedValues: ["Yes (please answer question below)", "No", "Not Applicable"], optional: false
-        }, hxNssQ3: {
-          type: String, allowedValues: ["Yes, on current follow up with General Practioner (GP) \n(Please proceed to Q2c)", "Yes, on current follow up with Family Medicine Centre\n(Please proceed to Q2c)", "Yes, on current follow up with Polyclinic \n(Please proceed to Q2c)", "Yes, on current follow up with Specialist Outpatient Clinic (SOC)\n(Please proceed to Q2c)", "No, the last appointment was > 1 year ago (Please proceed to Q2b and 2c)"], optional: true, custom: function () {
-            if (this.field('hxNssQ2').isSet && this.field('hxNssQ2').value === 'Yes (please answer question below)') {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxNssQ4: {
-          type: Array, optional: true, custom: function () {
-            if (this.field('hxNssQ3').isSet && this.field('hxNssQ3').value === 'No, the last appointment was > 1 year ago (Please proceed to Q2b and 2c)') {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, "hxNssQ4.$": {
-          type: String, allowedValues: ["Do not see the need for tests", "Challenging to make time to go for appointments", "Difficulties gtting to the clinics", "Financial issues", "Scared of doctor", "Others: (please specify reason)"]
-        }, hxNssQ5: {
-          type: String, allowedValues: ["Yes", "No", "Not Applicable"], optional: false
-        }, hxNssQ6: {
-          type: String, allowedValues: ["Yes", "No", "Not Applicable"], optional: false
-        }, hxNssQ7: {
-          type: String, allowedValues: ["Yes", "No", "Not Applicable"], optional: false
-        }, hxNssQ8: {
-          type: String, allowedValues: ["Yes", "No", "Not Applicable"], optional: false
-        }, hxNssQ9: {
-          type: String, allowedValues: ["Yes, (Please specify):", "None"], optional: false
-        }, hxNssQ10: {
-          type: String, optional: true, custom: function () {
-            if (this.field('hxNssQ9').isSet && this.field('hxNssQ9').value === 'Yes, (Please specify):') {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxNssQ11: {
-          type: String, allowedValues: ["Yes", "No"], optional: false
-        }, hxNssQ12: {
-          type: String, optional: true, custom: function () {
-            if (this.field('hxNssQ11').isSet && this.field('hxNssQ11').value === 'Yes') {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxNssQ13: {
-          type: Array, optional: false
-        }, "hxNssQ13.$": {
-          type: String, allowedValues: ["Cancer", "Coronary Heart disease (caused by narrowed blood vessels supplying the heart muscle) or Heart attack, (Please specify):", "Diabetes", "Hypertension", "High Cholesterol", "Stroke (including transient ischaemic attack)", "No, they do not have any of the above."]
-        }, hxNssQ14: {
-          type: String, allowedValues: ["Yes, at least 1 cigarette (or equivalent) per day on average.", "Yes, occasionally, less than 1 cigarette (or equivalent) per day on average.", "No, I have never smoked.", "No, I have completely quit smoking."], optional: false
-        }, hxNssQ15: {
-          type: String, allowedValues: ["Less than 2 standard drinks per day on average.", "More than 2 standard drinks per day on average.", "No", "Quit Alcoholic Drinks"], optional: false
-        }, hxNssQ16: {
-          type: Array, optional: false
-        }, "hxNssQ16.$": {
-          type: String, allowedValues: ["No (Skip to Q7)", "Yes (Proceed to answer below)", "Vegetables (1 serving/day)", "Vegetables (2 or more servings/day)", "Fruits (1 serving/day)", "Fruits (2 or more servings/day)", "Whole grain and cereals"]
-        }, hxNssQ17: {
-          type: String, allowedValues: ["Yes (At least 20 mins each time, for 3 or more days per week.)", "Yes (At least 20 mins each time, for less than 3 days per week.)", "No participation of at least 20 min each time."], optional: false
-        }, hxNssQ18: {
-          type: String, allowedValues: ["1 year ago or less", "More than 1 year to 2 years", "More than 2 years to 3 years", "More than 3 years to 4 years", "More than 4 years to 5 years", "More than 5 years", "Never been checked"], optional: false
-        }, hxNssQ19: {
-          type: String, allowedValues: ["1 year ago or less", "More than 1 year to 2 years", "More than 2 years to 3 years", "More than 3 years to 4 years", "More than 4 years to 5 years", "More than 5 years", "Never been checked"], optional: false
-        }, hxNssQ20: {
-          type: String, allowedValues: ["1 year ago or less", "More than 1 year to 2 years", "More than 2 years to 3 years", "More than 3 years to 4 years", "More than 4 years to 5 years", "More than 5 years", "Never been checked"], optional: false
-        }, hxNssQ21: {
-          type: String, allowedValues: ["Yes", "No"], optional: false
-        }, hxNssQ22: {
-          type: String, optional: true, custom: function () {
-            if (this.field('hxNssQ4').isSet && this.field('hxNssQ4').value.includes("Others: (please specify reason)")) {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxNssQ23: {
-          type: String, optional: true, custom: function () {
-            if (this.field('hxNssQ13').isSet && this.field('hxNssQ13').value.includes("Coronary Heart disease (caused by narrowed blood vessels supplying the heart muscle) or Heart attack, (Please specify):")) {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxNssQ24: {
-          type: String, allowedValues: ["Yes", "No"], optional: false
-        }
-      }
-      )
-    },
-
-    "Hx Social": (info) => {
-      return new SimpleSchema({
-        hxSocialQ1: {
-          type: String, allowedValues: ["Yes, (Please specify):", "No"], optional: false
-        }, hxSocialQ2: {
-          type: String, optional: true, custom: function () {
-            if (this.field('hxSocialQ1').isSet && this.field('hxSocialQ1').value === 'Yes, (Please specify):') {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxSocialQ3: {
-          type: String, allowedValues: ["1200 and below per month", "1,201 - 2,000 per month", "2,001 - 3,999 per month", "4,000 - 5,999 per month", "6,000 - 9,999 per month", "10,000 & above", "NIL"], optional: false
-        }, hxSocialQ4: {
-          type: String, optional: false
-        }, hxSocialQ5: {
-          type: String, allowedValues: ["Yes, (Please specify):", "No, I do not qualify", "No, I qualify but...(Please specify the reasons for not applying if you qualify):"], optional: false
-        }, hxSocialQ6: {
-          type: String, optional: true, custom: function () {
-            if (this.field('hxSocialQ5').isSet && (this.field('hxSocialQ5').value === 'Yes, (Please specify):' || this.field('hxSocialQ5').value === 'No, I qualify but...(Please specify the reasons for not applying if you qualify):')) {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxSocialQ7: {
-          type: String, allowedValues: ["Yes, (Please specify):", "No"], optional: false
-        }, hxSocialQ8: {
-          type: String, optional: true, custom: function () {
-            if (this.field('hxSocialQ7').isSet && this.field('hxSocialQ7').value === 'Yes, (Please specify):') {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxSocialQ9: {
-          type: String, allowedValues: ["Yes", "No"], optional: false
-        }, hxSocialQ10: {
-          type: String, allowedValues: ["Yes", "No"], optional: true, custom: function () {
-            if (this.field('hxSocialQ9').isSet && this.field('hxSocialQ9').value === 'Yes') {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxSocialQ11: {
-          type: String, allowedValues: ["Yes", "No"], optional: true, custom: function () {
-            if (this.field('hxSocialQ9').isSet && this.field('hxSocialQ9').value === 'Yes') {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxSocialQ12: {
-          type: String, allowedValues: ["Yes", "No"], optional: false
-        }, hxSocialQ13: {
-          type: String, allowedValues: ["Healthy", "Moderate", "Poor"], optional: false
-        }, hxSocialQ14: {
-          type: String, allowedValues: ["Yes", "No"], optional: false
-        }
-      }
-      )
-    },
-
-    "Hx Cancer": (info) => {
-      return new SimpleSchema({
-        hxCancerQ1: {
-          type: Array, optional: false
-        }, "hxCancerQ1.$": {
-          type: String, allowedValues: ["Ischaemic Heart Disease (Including Coronary Artery Diseases) 缺血性心脏病（包括心脏血管阻塞)", "Cervical Cancer 子宫颈癌, (Please specify age of diagnosis): (Free text)", "Breast Cancer 乳癌, (Please specify age of diagnosis): (Free text)", "Colorectal Cancer 大肠癌, (Please specify age of diagnosis): (Free text)", "Others, (Please Specify condition and age of diagnosis): (Free text)", "No, I don't have any of the above"]
-        }, hxCancerQ2: {
-          type: Array, optional: false
-        }, "hxCancerQ2.$": {
-          type: String, allowedValues: ["Cervical Cancer 子宫颈癌, (Please specify age of diagnosis):", "Breast Cancer 乳癌, (Please specify age of diagnosis):", "Colorectal Cancer 大肠癌, (Please specify age of diagnosis):", "Others, (Please Specify condition and age of diagnosis):", "No"]
-        }, hxCancerQ3: {
-          type: String, optional: true, custom: function () {
-            if (this.field('hxCancerQ2').isSet && this.field('hxCancerQ2').value.length !== 0 && !this.field('hxCancerQ2').value.includes("No")) {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxCancerQ4: {
-          type: String, optional: false
-        }, hxCancerQ5: {
-          type: String, allowedValues: ["1 year ago or less", "More than 1 year to 2 years", "More than 2 years to 3 years", "More than 3 years to 4 years", "More than 4 years to 5 years", "More than 5 years", "Never been checked"], optional: true
-        }, hxCancerQ6: {
-          type: String, allowedValues: ["1 year ago or less", "More than 1 year to 2 years", "More than 2 years to 3 years", "More than 3 years to 4 years", "More than 4 years to 5 years", "More than 5 years", "Never been checked"], optional: true
-        }, hxCancerQ7: {
-          type: String, allowedValues: ["1 year ago or less", "More than 1 year to 2 years", "More than 2 years to 3 years", "More than 3 years to 4 years", "More than 4 years to 5 years", "More than 5 years", "Never been checked"], optional: true
-        }, hxCancerQ8: {
-          type: String, allowedValues: ["1 year ago or less", "More than 1 year to 2 years", "More than 2 years to 3 years", "More than 3 years to 4 years", "More than 4 years to 5 years", "More than 5 years", "Never been checked"], optional: true
-        }, hxCancerQ9: {
-          type: String, allowedValues: ["Yes", "No"], optional: false
-        }, hxCancerQ10: {
-          type: String, optional: true, custom: function () {
-            if (this.field('hxCancerQ9').isSet && this.field('hxCancerQ9').value === "Yes") {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxCancerQ11: {
-          type: Number, optional: false
-        }, hxCancerQ12: {
-          type: Number, optional: false
-        }, hxCancerQ13: {
-          type: Number, optional: false
-        }, hxCancerQ14: {
-          type: Number, optional: false
-        }, hxCancerQ15: {
-          type: Number, optional: true
-        }, hxCancerQ16: {
-          type: Number, optional: true
-        }, hxCancerQ17: {
-          type: Number, optional: false
-        }, hxCancerQ18: {
-          type: Number, optional: false
-        }, hxCancerQ19: {
-          type: Number, optional: true
-        }, hxCancerQ20: {
-          type: Number, optional: true
-        }, hxCancerQ21: {
-          type: Number, optional: false
-        }, hxCancerQ22: {
-          type: String, allowedValues: ["Yes", "No"], optional: false
-        }, hxCancerQ23: {
-          type: Boolean, label: "Yes", optional: true
-        }, hxCancerQ24: {
-          type: Number, optional: true
-        }, hxCancerQ25: {
-          type: Array, optional: false
-        }, "hxCancerQ25.$": {
-          type: String, allowedValues: ["FIT (50 and above, FIT not done in past 1 year, Colonoscopy not done in past 10 years, Not diagnosed with colorectal cancer)", "WCE (40 and above, females only)", "Geriatrics (60 and above)", "Doctor\s Consultation (& Dietitian) - As recommended by hx-taker, undiagnosed or non-compliant cases (HTN, DM, Vision Impairment, Hearing Impairment, Urinary Incontinence, Any other pertinent medical issues)", "Social Service - As recommended by hx-taker (CHAS Application, Financial Support required, Social Support required)", "Oral Health Screening - participants aged 40-59 with poor dental hygiene", "Exhibition - recommended as per necessary"]
-        }, hxCancerQ26: {
-          type: String, optional: true, custom: function () {
-            if (this.field('hxCancerQ1').isSet && this.field('hxCancerQ1').value.length !== 0 && !this.field('hxCancerQ1').value.includes("No, I don't have any of the above")) {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxCancerQ27: {
-          type: String, allowedValues: ["Yes", "No"], optional: false
-        }
-      }
-      )
-    },
-  },
-
-  "History Taking - Non Phleb": {
-    "Hx HCSR": (info) => { return new SimpleSchema({
-      hxHcsrQ1: {
-      type: String, optional: false
-      }, hxHcsrQ2: {
-      type: String, optional: false
-      }, hxHcsrQ3: {
-      type: String, optional: false
-      }, hxHcsrQ4: {
-      type: String, allowedValues: ["Yes, (Please specify):", "No"], optional: false
-      }, hxHcsrQ5: {
-      type: String, optional: true, custom: function () {
-        if (this.field('hxHcsrQ4').isSet && this.field('hxHcsrQ4').value === 'Yes, (Please specify):') {
-          if(!this.isSet || this.value.length === 0) {
-            return SimpleSchema.ErrorTypes.REQUIRED
-          }
-        }
-      }
-      }, hxHcsrQ6: {
-      type: String, allowedValues: ["Yes, (Please specify):", "No"], optional: false
-      }, hxHcsrQ7: {
-      type: String, optional: true, custom: function () {
-        if (this.field('hxHcsrQ6').isSet && this.field('hxHcsrQ6').value === 'Yes, (Please specify):') {
-          if(!this.isSet || this.value.length === 0) {
-            return SimpleSchema.ErrorTypes.REQUIRED
-          }
-        }
-      }
-      }, hxHcsrQ8: {
-      type: String, allowedValues: ["Yes, (Please specify):", "No"], optional: false
-      }, hxHcsrQ9: {
-      type: String, optional: true, custom: function () {
-        if (this.field('hxHcsrQ8').isSet && this.field('hxHcsrQ8').value === 'Yes, (Please specify):') {
-          if(!this.isSet || this.value.length === 0) {
-            return SimpleSchema.ErrorTypes.REQUIRED
-          }
-        }
-      }
-      }, hxHcsrQ11: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, hxHcsrQ12: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }
-      }
-     )},
-
-    "Hx NSS": (info) => {
-      return new SimpleSchema({
-        hxNssQ1: {
-          type: Array, optional: false
-        }, "hxNssQ1.$": {
-          type: String, allowedValues: ["Hypertension\n(Please proceed to Q2)", "Diabetes\n(Please proceed to Q2)", "High Cholesterol\n(Please proceed to Q2)", "Stroke (including transient ischaemic attack) \n(Please proceed to Q2)", "Chronic Kidney Disease\n(Please proceed to Q2d)", "No, I don't have any of the above \n(Please proceed to Q2d)"]
-        }, hxNssQ2: {
-          type: String, allowedValues: ["Yes (please answer question below)", "No", "Not Applicable"], optional: false
-        }, hxNssQ3: {
-          type: String, allowedValues: ["Yes, on current follow up with General Practioner (GP) \n(Please proceed to Q2c)", "Yes, on current follow up with Family Medicine Centre\n(Please proceed to Q2c)", "Yes, on current follow up with Polyclinic \n(Please proceed to Q2c)", "Yes, on current follow up with Specialist Outpatient Clinic (SOC)\n(Please proceed to Q2c)", "No, the last appointment was > 1 year ago (Please proceed to Q2b and 2c)"], optional: true, custom: function () {
-            if (this.field('hxNssQ2').isSet && this.field('hxNssQ2').value === 'Yes (please answer question below)') {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxNssQ4: {
-          type: Array, optional: true, custom: function () {
-            if (this.field('hxNssQ3').isSet && this.field('hxNssQ3').value === 'No, the last appointment was > 1 year ago (Please proceed to Q2b and 2c)') {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, "hxNssQ4.$": {
-          type: String, allowedValues: ["Do not see the need for tests", "Challenging to make time to go for appointments", "Difficulties gtting to the clinics", "Financial issues", "Scared of doctor", "Others: (please specify reason)"]
-        }, hxNssQ5: {
-          type: String, allowedValues: ["Yes", "No", "Not Applicable"], optional: false
-        }, hxNssQ6: {
-          type: String, allowedValues: ["Yes", "No", "Not Applicable"], optional: false
-        }, hxNssQ7: {
-          type: String, allowedValues: ["Yes", "No", "Not Applicable"], optional: false
-        }, hxNssQ8: {
-          type: String, allowedValues: ["Yes", "No", "Not Applicable"], optional: false
-        }, hxNssQ9: {
-          type: String, allowedValues: ["Yes, (Please specify):", "None"], optional: false
-        }, hxNssQ10: {
-          type: String, optional: true, custom: function () {
-            if (this.field('hxNssQ9').isSet && this.field('hxNssQ9').value === 'Yes, (Please specify):') {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxNssQ11: {
-          type: String, allowedValues: ["Yes", "No"], optional: false
-        }, hxNssQ12: {
-          type: String, optional: true, custom: function () {
-            if (this.field('hxNssQ11').isSet && this.field('hxNssQ11').value === 'Yes') {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxNssQ14: {
-          type: String, allowedValues: ["Yes, at least 1 cigarette (or equivalent) per day on average.", "Yes, occasionally, less than 1 cigarette (or equivalent) per day on average.", "No, I have never smoked.", "No, I have completely quit smoking."], optional: false
-        }, hxNssQ15: {
-          type: String, allowedValues: ["Less than 2 standard drinks per day on average.", "More than 2 standard drinks per day on average.", "No", "Quit Alcoholic Drinks"], optional: false
-        }, hxNssQ18: {
-          type: String, allowedValues: ["1 year ago or less", "More than 1 year to 2 years", "More than 2 years to 3 years", "More than 3 years to 4 years", "More than 4 years to 5 years", "More than 5 years", "Never been checked"], optional: false
-        }, hxNssQ19: {
-          type: String, allowedValues: ["1 year ago or less", "More than 1 year to 2 years", "More than 2 years to 3 years", "More than 3 years to 4 years", "More than 4 years to 5 years", "More than 5 years", "Never been checked"], optional: false
-        }, hxNssQ20: {
-          type: String, allowedValues: ["1 year ago or less", "More than 1 year to 2 years", "More than 2 years to 3 years", "More than 3 years to 4 years", "More than 4 years to 5 years", "More than 5 years", "Never been checked"], optional: false
-        }, hxNssQ22: {
-          type: String, optional: true, custom: function () {
-            if (this.field('hxNssQ4').isSet && this.field('hxNssQ4').value.includes("Others: (please specify reason)")) {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxNssQ24: {
-          type: String, allowedValues: ["Yes", "No"], optional: false
-        }
-      }
-      )
-    },
-
-    "Hx Social": (info) => {
-      return new SimpleSchema({
-        hxSocialQ1: {
-          type: String, allowedValues: ["Yes, (Please specify):", "No"], optional: false
-        }, hxSocialQ2: {
-          type: String, optional: true, custom: function () {
-            if (this.field('hxSocialQ1').isSet && this.field('hxSocialQ1').value === 'Yes, (Please specify):') {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxSocialQ3: {
-          type: String, allowedValues: ["1200 and below per month", "1,201 - 2,000 per month", "2,001 - 3,999 per month", "4,000 - 5,999 per month", "6,000 - 9,999 per month", "10,000 & above", "NIL"], optional: false
-        }, hxSocialQ4: {
-          type: String, optional: false
-        }, hxSocialQ5: {
-          type: String, allowedValues: ["Yes, (Please specify):", "No, I do not qualify", "No, I qualify but...(Please specify the reasons for not applying if you qualify):"], optional: false
-        }, hxSocialQ6: {
-          type: String, optional: true, custom: function () {
-            if (this.field('hxSocialQ5').isSet && (this.field('hxSocialQ5').value === 'Yes, (Please specify):' || this.field('hxSocialQ5').value === 'No, I qualify but...(Please specify the reasons for not applying if you qualify):')) {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxSocialQ7: {
-          type: String, allowedValues: ["Yes, (Please specify):", "No"], optional: false
-        }, hxSocialQ8: {
-          type: String, optional: true, custom: function () {
-            if (this.field('hxSocialQ7').isSet && this.field('hxSocialQ7').value === 'Yes, (Please specify):') {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxSocialQ9: {
-          type: String, allowedValues: ["Yes", "No"], optional: false
-        }, hxSocialQ10: {
-          type: String, allowedValues: ["Yes", "No"], optional: true, custom: function () {
-            if (this.field('hxSocialQ9').isSet && this.field('hxSocialQ9').value === 'Yes') {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxSocialQ11: {
-          type: String, allowedValues: ["Yes", "No"], optional: true, custom: function () {
-            if (this.field('hxSocialQ9').isSet && this.field('hxSocialQ9').value === 'Yes') {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxSocialQ12: {
-          type: String, allowedValues: ["Yes", "No"], optional: false
-        }, hxSocialQ13: {
-          type: String, allowedValues: ["Healthy", "Moderate", "Poor"], optional: false
-        }, hxSocialQ14: {
-          type: String, allowedValues: ["Yes", "No"], optional: false
-        }
-      }
-      )
-    },
-
-    "Hx Cancer": (info) => {
-      return new SimpleSchema({
-        hxCancerQ1: {
-          type: Array, optional: false
-        }, "hxCancerQ1.$": {
-          type: String, allowedValues: ["Ischaemic Heart Disease (Including Coronary Artery Diseases) 缺血性心脏病（包括心脏血管阻塞)", "Cervical Cancer 子宫颈癌, (Please specify age of diagnosis): (Free text)", "Breast Cancer 乳癌, (Please specify age of diagnosis): (Free text)", "Colorectal Cancer 大肠癌, (Please specify age of diagnosis): (Free text)", "Others, (Please Specify condition and age of diagnosis): (Free text)", "No, I don't have any of the above"]
-        }, hxCancerQ2: {
-          type: Array, optional: false
-        }, "hxCancerQ2.$": {
-          type: String, allowedValues: ["Cervical Cancer 子宫颈癌, (Please specify age of diagnosis):", "Breast Cancer 乳癌, (Please specify age of diagnosis):", "Colorectal Cancer 大肠癌, (Please specify age of diagnosis):", "Others, (Please Specify condition and age of diagnosis):", "No"]
-        }, hxCancerQ3: {
-          type: String, optional: true, custom: function () {
-            if (this.field('hxCancerQ2').isSet && this.field('hxCancerQ2').value.length !== 0 && !this.field('hxCancerQ2').value.includes("No")) {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxCancerQ4: {
-          type: String, optional: false
-        }, hxCancerQ5: {
-          type: String, allowedValues: ["1 year ago or less", "More than 1 year to 2 years", "More than 2 years to 3 years", "More than 3 years to 4 years", "More than 4 years to 5 years", "More than 5 years", "Never been checked"], optional: true
-        }, hxCancerQ6: {
-          type: String, allowedValues: ["1 year ago or less", "More than 1 year to 2 years", "More than 2 years to 3 years", "More than 3 years to 4 years", "More than 4 years to 5 years", "More than 5 years", "Never been checked"], optional: true
-        }, hxCancerQ7: {
-          type: String, allowedValues: ["1 year ago or less", "More than 1 year to 2 years", "More than 2 years to 3 years", "More than 3 years to 4 years", "More than 4 years to 5 years", "More than 5 years", "Never been checked"], optional: true
-        }, hxCancerQ8: {
-          type: String, allowedValues: ["1 year ago or less", "More than 1 year to 2 years", "More than 2 years to 3 years", "More than 3 years to 4 years", "More than 4 years to 5 years", "More than 5 years", "Never been checked"], optional: true
-        }, hxCancerQ9: {
-          type: String, allowedValues: ["Yes", "No"], optional: false
-        }, hxCancerQ10: {
-          type: String, optional: true, custom: function () {
-            if (this.field('hxCancerQ9').isSet && this.field('hxCancerQ9').value === "Yes") {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxCancerQ11: {
-          type: Number, optional: false
-        }, hxCancerQ12: {
-          type: Number, optional: false
-        }, hxCancerQ13: {
-          type: Number, optional: false
-        }, hxCancerQ14: {
-          type: Number, optional: false
-        }, hxCancerQ15: {
-          type: Number, optional: true
-        }, hxCancerQ16: {
-          type: Number, optional: true
-        }, hxCancerQ17: {
-          type: Number, optional: false
-        }, hxCancerQ18: {
-          type: Number, optional: false
-        }, hxCancerQ19: {
-          type: Number, optional: true
-        }, hxCancerQ20: {
-          type: Number, optional: true
-        }, hxCancerQ21: {
-          type: Number, optional: false
-        }, hxCancerQ22: {
-          type: String, allowedValues: ["Yes", "No"], optional: false
-        }, hxCancerQ23: {
-          type: Boolean, label: "Yes", optional: true
-        }, hxCancerQ24: {
-          type: Number, optional: true
-        }, hxCancerQ25: {
-          type: Array, optional: false
-        }, "hxCancerQ25.$": {
-          type: String, allowedValues: ["FIT (50 and above, FIT not done in past 1 year, Colonoscopy not done in past 10 years, Not diagnosed with colorectal cancer)", "WCE (40 and above, females only)", "Geriatrics (60 and above)", "Doctor\s Consultation (& Dietitian) - As recommended by hx-taker, undiagnosed or non-compliant cases (HTN, DM, Vision Impairment, Hearing Impairment, Urinary Incontinence, Any other pertinent medical issues)", "Social Service - As recommended by hx-taker (CHAS Application, Financial Support required, Social Support required)", "Oral Health Screening - participants aged 40-59 with poor dental hygiene", "Exhibition - recommended as per necessary"]
-        }, hxCancerQ26: {
-          type: String, optional: true, custom: function () {
-            if (this.field('hxCancerQ1').isSet && this.field('hxCancerQ1').value.length !== 0 && !this.field('hxCancerQ1').value.includes("No, I don't have any of the above")) {
-              if (!this.isSet || this.value.length === 0) {
-                return SimpleSchema.ErrorTypes.REQUIRED
-              }
-            }
-          }
-        }, hxCancerQ27: {
-          type: String, allowedValues: ["Yes", "No"], optional: false
-        }
-      }
-      )
-    },
-  },
-
-  "FIT": (info) => {
-    return new SimpleSchema({
-      fitQ1: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, fitQ2: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }
-    }
-    )
-  },
-
-  "WCE": (info) => {
-    return new SimpleSchema({
-      wceQ1: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, wceQ2: {
-        type: String, allowedValues: ["Yes", "No", "Not Applicable"], optional: false
-      }, wceQ3: {
-        type: String, allowedValues: ["Yes", "No", "Not Applicable"], optional: false
-      }, wceQ4: {
-        type: String, allowedValues: ["Yes", "No", "Not Applicable"], optional: false
-      }, wceQ5: {
-        type: String, allowedValues: ["Yes", "No", "Not Applicable"], optional: false
-      }, wceQ6: {
-        type: String, allowedValues: ["Yes", "No", "Not Applicable"], optional: false
-      // }, wceQ7: {
-      //   type: String, optional: true, regEx: /^(0[1-9]|[1-9]|[12][0-9]|3[01])[/](0[1-9]|[1-9]|1[012])[/](\d\d|\d\d\d\d)$/, custom: function () {
-      //     if (this.field('wceQ6').isSet && this.field('wceQ6').value === "Yes, (Please specify date of appointment if given):") {
-      //       if (!this.isSet || this.value.length === 0) {
-      //         return SimpleSchema.ErrorTypes.REQUIRED
-      //       }
-      //     }
-      //   }
-      }
-    }
-    )
-  },
-
-  "Geri - AMT": (info) => {
-    return new SimpleSchema({
-      geriAmtQ1: {
-        type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
-      }, geriAmtQ2: {
-        type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
-      }, geriAmtQ3: {
-        type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
-      }, geriAmtQ4: {
-        type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
-      }, geriAmtQ5: {
-        type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
-      }, geriAmtQ6: {
-        type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
-      }, geriAmtQ7: {
-        type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
-      }, geriAmtQ8: {
-        type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
-      }, geriAmtQ9: {
-        type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
-      }, geriAmtQ10: {
-        type: String, allowedValues: ["Yes (Answered correctly)", "No (Answered incorrectly)"], optional: false
-      }, geriAmtQ11: {
-        type: Number, optional: false
-      }, geriAmtQ12: {
-        type: String, allowedValues: ["0 to 6 years of education", "More than 6 years of education"], optional: false
-      }, geriAmtQ13: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, geriAmtQ14: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }
-    }
-    )
-  },
-
-  "Geri - EBAS-DEP": (info) => {
-    return new SimpleSchema({
-      geriEbasDepQ1: {
-        type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
-      }, geriEbasDepQ2: {
-        type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
-      }, geriEbasDepQ3: {
-        type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
-      }, geriEbasDepQ4: {
-        type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
-      }, geriEbasDepQ5: {
-        type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
-      }, geriEbasDepQ6: {
-        type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
-      }, geriEbasDepQ7: {
-        type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
-      }, geriEbasDepQ8: {
-        type: String, allowedValues: ["1 (Abnormal)", "0 (Normal)"], optional: false
-      }, geriEbasDepQ9: {
-        type: Number, optional: false
-      }, geriEbasDepQ10: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, geriEbasDepQ11: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, geriEbasDepQ12: {
-        type: String, optional: true, custom: function () {
-          if (this.field('geriEbasDepQ11').isSet && this.field('geriEbasDepQ11').value === "Yes") {
-            if (!this.isSet || this.value.length === 0) {
-              return SimpleSchema.ErrorTypes.REQUIRED
-            }
-          }
-        }
-      }
-    }
-    )
-  },
-
-  "Geri - Cognitive Follow Up": (info) => {
-    return new SimpleSchema({
-      geriCognitiveFollowUpQ1: {
-        type: String, allowedValues: ["NTUC Health (Jurong West)", "SACS (Jurong East/Bukit Batok)", "Others (Please Specify):"], optional: false
-      }, geriCognitiveFollowUpQ2: {
-        type: String, optional: true, custom: function () {
-          if (this.field('geriCognitiveFollowUpQ1').isSet && this.field('geriCognitiveFollowUpQ1').value === "Others (Please Specify):") {
-            if (!this.isSet || this.value.length === 0) {
-              return SimpleSchema.ErrorTypes.REQUIRED
-            }
-          }
-        }
-      }
-    }
-    )
-  },
-
-  "Geri - Vision": (info) => {
-    return new SimpleSchema({
-      geriVisionQ1: {
-        type: String, allowedValues: ["Yes (Specify in textbox )", "No"], optional: false
-      }, geriVisionQ2: {
-        type: String, optional: true, custom: function () {
-          if (this.field('geriVisionQ1').isSet && this.field('geriVisionQ1').value === "Yes (Specify in textbox )") {
-            if (!this.isSet || this.value.length === 0) {
-              return SimpleSchema.ErrorTypes.REQUIRED
-            }
-          }
-        }
-      }, geriVisionQ3: {
-        type: Number, optional: false
-      }, geriVisionQ4: {
-        type: Number, optional: false
-      }, geriVisionQ5: {
-        type: Number, optional: true
-      }, geriVisionQ6: {
-        type: Number, optional: true
-      }, geriVisionQ7: {
-        type: String, allowedValues: ["CF2M", "CF1M", "HM", "LP", "NLP", "NIL"], optional: true
-      }, geriVisionQ8: {
-        type: Array, optional: true
-      }, "geriVisionQ8.$": {
-        type: String, allowedValues: ["Referred to OT Consult"]
-      }, geriVisionQ9: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }
-    }
-    )
-  },
-
-  "Geri - PAR-Q": (info) => {
-    return new SimpleSchema({
-      geriParQQ1: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, geriParQQ2: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, geriParQQ3: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, geriParQQ4: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, geriParQQ5: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, geriParQQ6: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, geriParQQ7: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, geriParQQ8: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }
-    }
-    )
-  },
-
-  "Geri - Physical Activity Level": (info) => {
-    return new SimpleSchema({
-      geriPhysicalActivityLevelQ1: {
+      basicPatientInformationQ1: {
         type: String, optional: false
-      }, geriPhysicalActivityLevelQ2: {
-        type: String, optional: false
-      }, geriPhysicalActivityLevelQ3: {
-        type: String, optional: false
-      }, geriPhysicalActivityLevelQ4: {
-        type: String, allowedValues: ["0 (Nothing at all)", "1 (Very light)", "2 (Fairly light)", "3 (Moderate)", "4 (Somewhat hard)", "5 (Hard)", "6", "7 (Very Hard)", "8", "9", "10 (Very, Very Hard)"], optional: false
-      }, geriPhysicalActivityLevelQ5: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, geriPhysicalActivityLevelQ6: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }
-    }
-    )
-  },
-
-  "Geri - Frail Scale": (info) => {
-    return new SimpleSchema({
-      geriFrailScaleQ1: {
-        type: String, allowedValues: ["1", "0"], optional: false
-      }, geriFrailScaleQ2: {
-        type: String, allowedValues: ["1", "0"], optional: false
-      }, geriFrailScaleQ3: {
-        type: String, allowedValues: ["1", "0"], optional: false
-      }, geriFrailScaleQ4: {
-        type: Array, optional: false
-      }, "geriFrailScaleQ4.$": {
-        type: String, allowedValues: ["Hypertension", "Diabetes", "Cancer (other than a minor skin cancer)", "Chronic lung disease", "Heart attack", "Congestive heart failure", "Angina", "Asthma", "Arthritis", "Stroke", "Kidney disease", "NIL"]
-      }, geriFrailScaleQ5: {
-        type: Number, optional: false
-      }, geriFrailScaleQ6: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, geriFrailScaleQ7: {
-        type: Number, optional: true
-      },
-    }
-    )
-  },
-
-  "Geri - OT Questionnaire": (info) => {
-    return new SimpleSchema({
-      geriOtQuestionnaireQ1: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, geriOtQuestionnaireQ2: {
-        type: String, allowedValues: ["Yes (Specify in textbox )", "No"], optional: false
-      }, geriOtQuestionnaireQ3: {
-        type: String, optional: true, custom: function () {
-          if (this.field('geriOtQuestionnaireQ2').isSet && this.field('geriOtQuestionnaireQ2').value === "Yes (Specify in textbox )") {
-            if (!this.isSet || this.value.length === 0) {
-              return SimpleSchema.ErrorTypes.REQUIRED
-            }
-          }
-        }
-      }, geriOtQuestionnaireQ4: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, geriOtQuestionnaireQ5: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, geriOtQuestionnaireQ6: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, geriOtQuestionnaireQ7: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, geriOtQuestionnaireQ8: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }
-    }
-    )
-  },
-
-  "Geri - SPPB": (info) => {
-    return new SimpleSchema({
-      geriSppbQ1: {
-        type: String, optional: true
-      }, geriSppbQ2: {
-        type: String, allowedValues: ["0       (If not able to complete 5 chair stands)", "1       (> 16.7s )", "2       (16.6 – 13.7s )", "3       (13.6 – 11.2s )", "4       (< 11.1s )"], optional: false
-      }, geriSppbQ3: {
-        type: String, optional: true
-      }, geriSppbQ4: {
-        type: String, optional: true
-      }, geriSppbQ5: {
-        type: String, optional: true
-      }, geriSppbQ6: {
-        type: String, allowedValues: ["0        (Side by side < 10s or unable)", "1       (Side by side 10s AND < 10s semi tandem)", "2       (Semi tandem 10s AND tandem < 3s)", "3       (Semi tandem 10s AND tandem < 10s but > 3s)", "4       (Tandem >= 10s)", "Refused to do"], optional: false
-      }, geriSppbQ7: {
-        type: String, optional: true
-      }, geriSppbQ8: {
-        type: String, allowedValues: ["0       (Could not do)", "1       (> 5.7s )", "2       (4.1 – 5.7s )", "3       (3.2 – 4.0s )", "4       (< 3.1s )"], optional: false
-      }, geriSppbQ9: {
-        type: Number, optional: false
-      }, geriSppbQ10: {
-        type: String, allowedValues: ["High Falls Risk (score ≤ 6)", "Low Falls Risk (score > 6)"], optional: false
-      }, geriSppbQ11: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }
-    }
-    )
-  },
-
-  "Geri - TUG": (info) => {
-    return new SimpleSchema({
-      geriTugQ1: {
-        type: Array, optional: true
-      }, "geriTugQ1.$": {
-        type: String, allowedValues: ["Walking frame", "Walking frame with wheels", "Crutches/ Elbow crutches", "Quadstick (Narrow/ Broad)", "Walking stick", "Umbrella", "Others (Please specify in textbox )"]
-      }, geriTugQ2: {
-        type: String, optional: true, custom: function () {
-          if (this.field('geriTugQ1').isSet && this.field('geriTugQ1').length !== 0 && this.field('geriTugQ1').value.includes("Others (Please specify in textbox )")) {
-            if (!this.isSet || this.value.length === 0) {
-              return SimpleSchema.ErrorTypes.REQUIRED
-            }
-          }
-        }
-      }, geriTugQ3: {
-        type: Number, optional: false
-      }, geriTugQ4: {
-        type: String, allowedValues: ["High Falls Risk (> 15sec)", "Low Falls Risk (≤ 15 sec)"], optional: false
-      }, geriTugQ5: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }
-    }
-    )
-  },
-
-  "Geri - PT Consult": (info) => {
-    return new SimpleSchema({
-      geriPtConsultQ1: {
-        type: String, optional: false
-      }, geriPtConsultQ2: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, geriPtConsultQ3: {
-        type: String, optional: true
-      }, geriPtConsultQ4: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, geriPtConsultQ5: {
-        type: String, optional: true
-      }
-    }
-    )
-  },
-
-  "Geri - OT Consult": (info) => {
-    return new SimpleSchema({
-      geriOtConsultQ1: {
-        type: String, optional: false
-      }, geriOtConsultQ2: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, geriOtConsultQ3: {
-        type: String, optional: true
-      }, geriOtConsultQ4: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, geriOtConsultQ5: {
-        type: String, optional: true
-      }, geriOtConsultQ6: {
-        type: Array, optional: true
-      }, "geriOtConsultQ6.$": {
-        type: String, allowedValues: ["HDB EASE", "SWCDC Safe and Bright Homes", "Own Vendors"],
-      }
-    }
-    )
-  },
-
-  "Geri - Geri Appt": (info) => {
-    return new SimpleSchema({
-      geriGeriApptQ4: {
+      }, basicPatientInformationQ2: {
+        type: String, allowedValues: ["Male", "Female"], optional: false
+      }, basicPatientInformationQ12: {
         type: String, allowedValues: ["Yes", "No"], optional: true, custom: function () {
-          if ((typeof (info["Geri - Vision"]) !== "undefined" && info["Geri - Vision"].geriVisionQ3 >= 12) ||
-            (typeof (info["Geri - Vision"]) !== "undefined" && info["Geri - Vision"].geriVisionQ4 >= 12)) {
-            if (!this.isSet) {
-              return SimpleSchema.ErrorTypes.REQUIRED
-            }
-          }
-        }
-      }, geriGeriApptQ5: {
-        type: Boolean, label: "Done", optional: true, custom: function () {
-          if ((typeof (info["Geri - EBAS-DEP"]) !== "undefined" && info["Geri - EBAS-DEP"].geriEbasDepQ10 === "Yes") ||
-            (typeof (info["Geri - EBAS-DEP"]) !== "undefined" && info["Geri - EBAS-DEP"].geriEbasDepQ11 === "Yes") ||
-            (typeof (info["Geri - PT Consult"]) !== "undefined" && info["Geri - PT Consult"].geriPtConsultQ4 === "Yes") ||
-            (typeof (info["Geri - OT Consult"]) !== "undefined" && info["Geri - OT Consult"].geriOtConsultQ4 === "Yes")) {
-            if (!this.isSet || !this.value) {
-              return SimpleSchema.ErrorTypes.REQUIRED
-            }
-          }
-        }
-      }, geriGeriApptQ6: {
-        type: String, allowedValues: ["Yes, requirement met.", "No, requirement not met."], optional: false
-      }, geriGeriApptQ7: {
-        type: String, allowedValues: ["Yes", "No"], optional: true, custom: function () {
-          if (this.field('geriGeriApptQ6').isSet && this.field('geriGeriApptQ6').value === "Yes, requirement met.") {
+          if (this.field('basicPatientInformationQ2').isSet 
+            && this.field('basicPatientInformationQ2').value === "Female") {
             if (!this.isSet || this.value.length === 0) {
               return SimpleSchema.ErrorTypes.REQUIRED
             }
           }
         }
-      }, geriGeriApptQ8: {
-        type: String, allowedValues: ["Yes", "No"], optional: true, custom: function () {
-          if (this.field('geriGeriApptQ6').isSet && this.field('geriGeriApptQ6').value === "Yes, requirement met.") {
+      }, basicPatientInformationQ3: {
+        type: String, optional: false
+      }, basicPatientInformationQ4: {
+        type: Number, optional: false
+      }, basicPatientInformationQ5: {
+        type: String, optional: false
+      }, basicPatientInformationQ6: {
+        type: String, optional: false
+      }, basicPatientInformationQ7: {
+        type: String, optional: false
+      }, basicPatientInformationQ8: {
+        type: Number, optional: false
+      }, basicPatientInformationQ9: {
+        type: String, optional: false
+      }, basicPatientInformationQ10: {
+        type: String, allowedValues: ["Yes, pls specify", "No"], optional: false
+      }, basicPatientInformationQ13: {
+        type: String, optional: true, custom: function () {
+          if (this.field('basicPatientInformationQ10').isSet 
+            && this.field('basicPatientInformationQ10').value === "Yes, pls specify") {
+            if (!this.isSet || this.value.length === 0) {
+              return SimpleSchema.ErrorTypes.REQUIRED
+            }
+          }
+        }
+      }, basicPatientInformationQ11: {
+        type: String, allowedValues: ["Yes, pls specify", "No"], optional: false
+      },basicPatientInformationQ14: {
+        type: String, optional: true, custom: function () {
+          if (this.field('basicPatientInformationQ11').isSet 
+            && this.field('basicPatientInformationQ11').value === "Yes, pls specify") {
             if (!this.isSet || this.value.length === 0) {
               return SimpleSchema.ErrorTypes.REQUIRED
             }
@@ -1066,7 +140,7 @@ export const formSchemas = {
         }
       }
     }
-    )
+   )
   },
 
   "Doctor's Consult": (info) => {
@@ -1097,34 +171,6 @@ export const formSchemas = {
             return SimpleSchema.ErrorTypes.REQUIRED
           }
         }
-      }
-    }
-    )
-  },
-
-  "Dietitian": (info) => {
-    return new SimpleSchema({
-      dietitianQ1: {
-        type: String, optional: true
-      }, dietitianQ2: {
-        type: String, optional: true
-      }, dietitianQ3: {
-        type: String, optional: true
-      }, dietitianQ4: {
-        type: Boolean, label: "Yes", optional: true
-      }
-    }
-    )
-  },
-
-  "Social Service": (info) => {
-    return new SimpleSchema({
-      socialServiceQ1: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, socialServiceQ2: {
-        type: String, optional: false
-      }, socialServiceQ3: {
-        type: String, optional: false
       }
     }
     )
@@ -1221,5 +267,84 @@ export const formSchemas = {
       }
     }
     )
+  },
+
+  "Patient Profiling" : (info) => {
+    return new SimpleSchema({
+      patientProfilingQ1: {
+        type: String, allowedValues: ["Yes", "No"], optional: false
+      }, patientProfilingQ21: {
+        type: String, optional: true, custom: function () {
+          if (this.field('patientProfilingQ1').isSet 
+            && this.field('patientProfilingQ1').value === "Yes") {
+            if (!this.isSet || this.value.length === 0) {
+              return SimpleSchema.ErrorTypes.REQUIRED
+            }
+          }
+        }
+      }, patientProfilingQ2: {
+        type: String, allowedValues: ["Yes", "No"], optional: false
+      }, patientProfilingQ22: {
+        type: String, optional: true, custom: function () {
+          if (this.field('patientProfilingQ2').isSet 
+            && this.field('patientProfilingQ2').value === "Yes") {
+            if (!this.isSet || this.value.length === 0) {
+              return SimpleSchema.ErrorTypes.REQUIRED
+            }
+          }
+        }
+      }, patientProfilingQ3: {
+        type: String, allowedValues: ["Yes", "No"]
+      }, patientProfilingQ23: {
+        type: Array, optional: true
+        // , custom: function () {
+        //   if (this.field('patientProfilingQ3').isSet 
+        //     && this.field('patientProfilingQ3').value === "Yes") {
+        //     if (!this.isSet || this.value.length === 0) {
+        //       return SimpleSchema.ErrorTypes.REQUIRED
+        //     }
+        //   }
+        // }
+      }, "patientProfilingQ23.$": {
+        type: String, allowedValues: ["Yes", "No", "Others"]
+      }, patientProfilingQ4: {
+        type: Array, optional: false
+      }, "patientProfilingQ4.$": {
+        type: String, allowedValues: ["Yes", "No", "Others"]
+      }, patientProfilingQ5: {
+        type: String, optional: false
+      }, patientProfilingQ6: {
+        type: String, optional: false
+      }, patientProfilingQ7: {
+        type: String, optional: false
+      }, patientProfilingQ8: {
+        type: String, optional: false
+      }, patientProfilingQ9: {
+        type: String, optional: false
+      }, patientProfilingQ10: {
+        type: String, allowedValues: ["Hospital", "Seldom/Never visits the doctor"], optional: false
+      }, patientProfilingQ11: {
+        type: String, allowedValues: ["Yes", "No"], optional: false
+      }, patientProfilingQ12: {
+        type: String, allowedValues: ["Yes", "No"], optional: false
+      }, patientProfilingQ13: {
+        type: String, optional: false
+      }, patientProfilingQ14: {
+        type: String, allowedValues: ["Yes", "Yes"], optional: true
+      }, patientProfilingQ15: {
+        type: Number, optional: true
+      }, patientProfilingQ16: {
+        type: String, allowedValues: ["Married", "Single", "Widowed", "Divorced"], optional: false
+      }, patientProfilingQ17: {
+        type: Number, optional: false
+      }, patientProfilingQ18: {
+       type: Number, optional: false
+      }, patientProfilingQ19: {
+        type: Number, optional: false
+      }, patientProfilingQ20: {
+        type: String, allowedValues: ["No Formal Qualifications", "Primary (Completed Sixth Standard)", "Secondary (Studied from Sixth Standard to Tenth Standard)", "Higher Secondary and Above", "Refuse to Answer"], optional: false
+      }
+    }
+   )
   },
 }
