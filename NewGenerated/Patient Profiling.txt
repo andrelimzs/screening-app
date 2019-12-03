@@ -1,0 +1,105 @@
+"Patient Profiling" : (info) => (
+	<Fragment>
+		<h2>2. PATIENT PROFILING</h2>
+		<h2>2.1 TB SCREENING</h2>
+		2.1.1. Have you ever been diagnosed with tuberculosis?
+		<RadioField name="patientProfilingQ1" label="Patient Profiling Q1"/>
+		2.1.2. Have you ever lived with someone with tuberculosis?
+		<RadioField name="patientProfilingQ2" label="Patient Profiling Q2"/>
+		2.1.3. Do you have any of the following symptoms? Select all that apply
+		<SelectField name="patientProfilingQ3" checkboxes="true" label="Patient Profiling Q3" />
+		<h2>2.2 MEDICAL HISTORY</h2>
+		2.2.1. Do you have any of the following medical conditions?
+		<SelectField name="patientProfilingQ4" checkboxes="true" label="Patient Profiling Q4" />
+		<h2>2.3 MEDICAL HISTORY: OTHERS</h2>
+		2.3.1. Do you have other medical conditions we should take note of? (if none, indicate NIL)
+		<TextField name="patientProfilingQ5" label="Patient Profiling Q5"/>
+		2.3.2. How are you managing these conditions? (check-ups, medicines, diet/exercise, others)
+		<TextField name="patientProfilingQ6" label="Patient Profiling Q6"/>
+		2.3.3. Where do you go to for routine healthcare?
+		<TextField name="patientProfilingQ7" label="Patient Profiling Q7"/>
+		2.3.4. Where do you go to for emergency medical services (eg. fall, injury, fainting)?
+		<TextField name="patientProfilingQ8" label="Patient Profiling Q8"/>
+		2.3.5. Are you taking any other medications? (If yes, indicate what medication and why. If none, indicate NIL)
+		<TextField name="patientProfilingQ9" label="Patient Profiling Q9"/>
+		<h2>2.4  BARRIERS TO HEALTHCARE</h2>
+		2.4.1 What type of doctor do you see for your existing conditions?
+		<RadioField name="patientProfilingQ10" label="Patient Profiling Q10"/>
+		<h2>2.5 SMOKING</h2>
+		2.5.1. Do you currently smoke?
+		<RadioField name="patientProfilingQ11" label="Patient Profiling Q11"/>
+		2.5.2 Do you chew pann or tobacoo?
+		<RadioField name="patientProfilingQ12" label="Patient Profiling Q12"/>
+		<h2>2.6 SOCIAL HISTORY</h2>
+		2.6.1 What is your occupation?
+		<TextField name="patientProfilingQ13" label="Patient Profiling Q13"/>
+		2.6.2 If occupation is "Farming/Ariculture', do you use pesticides in your farming?
+		<RadioField name="patientProfilingQ14" label="Patient Profiling Q14"/>
+		2.6.3 Monthly Income? (optional) <br />
+		<NumField name="patientProfilingQ15" label="Patient Profiling Q15" /><br />
+		2.6.4 Marital Status
+		<RadioField name="patientProfilingQ16" label="Patient Profiling Q16"/>
+		2.6.5 Number of Children <br />
+		<NumField name="patientProfilingQ17" label="Patient Profiling Q17" /><br />
+		2.6.6 Hwo many people live in your household (including you)? <br />
+		<NumField name="patientProfilingQ18" label="Patient Profiling Q18" /><br />
+		2.6.7 How many people in your household contribute to household income? <br />
+		<NumField name="patientProfilingQ19" label="Patient Profiling Q19" /><br />
+		2.6.8 What is your highest education level?
+		<RadioField name="patientProfilingQ20" label="Patient Profiling Q20"/>
+		
+	</Fragment>
+),
+
+
+==========================================================================================================================================
+
+
+"Patient Profiling" : new SimpleSchema({
+	patientProfilingQ1: {
+	type: String, allowedValues: ["Yes", "No"], optional: false
+	}, patientProfilingQ2: {
+	type: String, allowedValues: ["Yes", "No"], optional: false
+	}, patientProfilingQ3: {
+	type: Array, optional: false
+	}, "patientProfilingQ3.$": {
+	type: String, allowedValues: ["Yes", "No", "Others"]
+	}, patientProfilingQ4: {
+	type: Array, optional: false
+	}, "patientProfilingQ4.$": {
+	type: String, allowedValues: ["Yes", "No", "Others"]
+	}, patientProfilingQ5: {
+	type: String, optional: false
+	}, patientProfilingQ6: {
+	type: String, optional: false
+	}, patientProfilingQ7: {
+	type: String, optional: false
+	}, patientProfilingQ8: {
+	type: String, optional: false
+	}, patientProfilingQ9: {
+	type: String, optional: false
+	}, patientProfilingQ10: {
+	type: String, allowedValues: ["Hospital", "Seldom/Never visits the doctor"], optional: false
+	}, patientProfilingQ11: {
+	type: String, allowedValues: ["Yes", "No"], optional: false
+	}, patientProfilingQ12: {
+	type: String, allowedValues: ["Yes", "No"], optional: false
+	}, patientProfilingQ13: {
+	type: String, optional: false
+	}, patientProfilingQ14: {
+	type: String, allowedValues: ["Yes", "Yes"], optional: true
+	}, patientProfilingQ15: {
+	type: Number, optional: true
+	}, patientProfilingQ16: {
+	type: String, allowedValues: ["Married", "Single", "Widowed", "Divorced"], optional: false
+	}, patientProfilingQ17: {
+	type: Number, optional: false
+	}, patientProfilingQ18: {
+	type: Number, optional: false
+	}, patientProfilingQ19: {
+	type: Number, optional: false
+	}, patientProfilingQ20: {
+	type: String, allowedValues: ["No Formal Qualifications", "Primary (Completed Sixth Standard)", "Secondary (Studied from Sixth Standard to Tenth Standard)", "Higher Secondary and Above", "Refuse to Answer"], optional: false
+	}
+	}
+ ),

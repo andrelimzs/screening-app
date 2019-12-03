@@ -1,0 +1,35 @@
+"Breast Screening" : (info) => (
+	<Fragment>
+		<h2>7. BREAST SCREENING</h2>
+		7.1. Completed breast examination?
+		<RadioField name="breastScreeningQ1" label="Breast Screening Q1"/>
+		7.1.1. Any abnormalities noted (e.g. lumps, skin changes)?
+		<RadioField name="breastScreeningQ2" label="Breast Screening Q2"/>
+		7.1.1.1.  If yes to Q2, please describe the abnormalities
+		<TextField name="breastScreeningQ3" label="Breast Screening Q3"/>
+		7.1.1.2.  If yes to Q2, FNAC done?
+		<RadioField name="breastScreeningQ4" label="Breast Screening Q4"/>
+		Doctor Consult?
+		<RadioField name="breastScreeningQ5" label="Breast Screening Q5"/>
+		
+	</Fragment>
+),
+
+
+==========================================================================================================================================
+
+
+"Breast Screening" : new SimpleSchema({
+	breastScreeningQ1: {
+	type: String, allowedValues: ["Yes", "No"], optional: false
+	}, breastScreeningQ2: {
+	type: String, allowedValues: ["Yes", "No"], optional: true
+	}, breastScreeningQ3: {
+	type: String, optional: true
+	}, breastScreeningQ4: {
+	type: String, allowedValues: ["Yes", "No"], optional: true
+	}, breastScreeningQ5: {
+	type: String, allowedValues: [], optional: false
+	}
+	}
+ ),

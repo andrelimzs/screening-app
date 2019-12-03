@@ -1,0 +1,55 @@
+"BP" : (info) => (
+	<Fragment>
+		<h2>4. Blood Pressure</h2>
+		<h2>4.1. BP 1st Taking</h2>
+		4.1.1. Systolic Blood Pressure <br />
+		<NumField name="bpQ1" label="BP Q1" /><br />
+		4.1.2. Diastolic Blood Pressure  <br />
+		<NumField name="bpQ2" label="BP Q2" /><br />
+		<h2>4.2. BP 2nd Taking</h2>
+		4.2.1. Systolic Blood Pressure <br />
+		<NumField name="bpQ3" label="BP Q3" /><br />
+		4.2.2. Diastolic Blood Pressure  <br />
+		<NumField name="bpQ4" label="BP Q4" /><br />
+		<h2>4.3. BP 3rd Taking</h2>
+		4.3.1. Systolic Blood Pressure <br />
+		<NumField name="bpQ5" label="BP Q5" /><br />
+		4.3.2. Diastolic Blood Pressure  <br />
+		<NumField name="bpQ6" label="BP Q6" /><br />
+		<h2>4.4. BP average</h2>
+		4.4.1. Systolic Blood Pressure <br />
+		<NumField name="bpQ7" label="BP Q7" /><br />
+		4.4.2. Diastolic Blood Pressure  <br />
+		<NumField name="bpQ8" label="BP Q8" /><br />
+		Overall
+		<RadioField name="bpQ9" label="BP Q9"/>
+		
+	</Fragment>
+),
+
+
+==========================================================================================================================================
+
+
+"BP" : new SimpleSchema({
+	bpQ1: {
+	type: Number, optional: false
+	}, bpQ2: {
+	type: Number, optional: false
+	}, bpQ3: {
+	type: Number, optional: false
+	}, bpQ4: {
+	type: Number, optional: false
+	}, bpQ5: {
+	type: Number, optional: true
+	}, bpQ6: {
+	type: Number, optional: true
+	}, bpQ7: {
+	type: Number, optional: false
+	}, bpQ8: {
+	type: Number, optional: false
+	}, bpQ9: {
+	type: String, allowedValues: ["Yes", "No"], optional: false
+	}
+	}
+ ),

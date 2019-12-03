@@ -1,0 +1,47 @@
+"Blood Glucose and Hb" : (info) => (
+	<Fragment>
+		<h2>3. BLOOD GLUCOSE AND HEMOGLOBIN</h2>
+		3.1. Have you previously been diagnosed with diabetes?
+		<RadioField name="bloodGlucoseAndHbQ1" label="Blood Glucose and Hb Q1"/>
+		3.1.1. Age
+		<RadioField name="bloodGlucoseAndHbQ2" label="Blood Glucose and Hb Q2"/>
+		3.1.2. Waist circumference (refer to Waist:Hip Ratio section)
+		<RadioField name="bloodGlucoseAndHbQ3" label="Blood Glucose and Hb Q3"/>
+		3.1.3. Physical activity
+		<RadioField name="bloodGlucoseAndHbQ4" label="Blood Glucose and Hb Q4"/>
+		3.1.4. Family history
+		<RadioField name="bloodGlucoseAndHbQ5" label="Blood Glucose and Hb Q5"/>
+		3.2. Blood Glucose
+		<TextField name="bloodGlucoseAndHbQ6" label="Blood Glucose and Hb Q6"/>
+		3.3. Hemoglobin (g/dL) <br />
+		<NumField name="bloodGlucoseAndHbQ7" label="Blood Glucose and Hb Q7" /><br />
+		Overview
+		<RadioField name="bloodGlucoseAndHbQ8" label="Blood Glucose and Hb Q8"/>
+		
+	</Fragment>
+),
+
+
+==========================================================================================================================================
+
+
+"Blood Glucose and Hb" : new SimpleSchema({
+	bloodGlucoseAndHbQ1: {
+	type: String, allowedValues: ["Yes", "No"], optional: false
+	}, bloodGlucoseAndHbQ2: {
+	type: String, allowedValues: ["< 35 years old", ">= 35 years < 45 years old", ">= 45 years old"], optional: false
+	}, bloodGlucoseAndHbQ3: {
+	type: String, allowedValues: ["Male: < 90cm ; Female < 80cm"], optional: false
+	}, bloodGlucoseAndHbQ4: {
+	type: String, allowedValues: ["Hardly exercise", "Moderately Exercise", "Vigorous Exercise or Strenuous Work"], optional: false
+	}, bloodGlucoseAndHbQ5: {
+	type: String, allowedValues: ["1", "1 to 4", "5 to 10"], optional: false
+	}, bloodGlucoseAndHbQ6: {
+	type: String, optional: false
+	}, bloodGlucoseAndHbQ7: {
+	type: Number, optional: false
+	}, bloodGlucoseAndHbQ8: {
+	type: String, allowedValues: ["Yes", "No"], optional: false
+	}
+	}
+ ),

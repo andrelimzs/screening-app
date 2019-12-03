@@ -1,0 +1,43 @@
+"Height and Weight" : (info) => (
+	<Fragment>
+		<h2>1. HEIGHT & WEIGHT</h2>
+		1.1 Height (m) <br />
+		<NumField name="heightAndWeightQ1" label="Height and Weight Q1" /><br />
+		Percentile
+		<RadioField name="heightAndWeightQ2" label="Height and Weight Q2"/>
+		1.2 Weight (kg) <br />
+		<NumField name="heightAndWeightQ3" label="Height and Weight Q3" /><br />
+		Percentile
+		<RadioField name="heightAndWeightQ4" label="Height and Weight Q4"/>
+		<h2>1.3 BMI</h2>
+		<h2>2. WAIST:HIP </h2>
+		2.1 Waist Circumference (cm) <br />
+		<NumField name="heightAndWeightQ5" label="Height and Weight Q5" /><br />
+		2.2 Hip Circumfernce (cm) <br />
+		<NumField name="heightAndWeightQ6" label="Height and Weight Q6" /><br />
+		<h2>2.3 Waist : Hip Ration</h2>
+		<h2>Overview </h2>
+		
+	</Fragment>
+),
+
+
+==========================================================================================================================================
+
+
+"Height and Weight" : new SimpleSchema({
+	heightAndWeightQ1: {
+	type: Number, optional: false
+	}, heightAndWeightQ2: {
+	type: String, allowedValues: ["Below 3rd Percentile", "Normal", "Above 97th Percentile"], optional: false
+	}, heightAndWeightQ3: {
+	type: Number, optional: false
+	}, heightAndWeightQ4: {
+	type: String, allowedValues: ["Below 3rd Percentile", "Normal", "Above 97th Percentile"], optional: false
+	}, heightAndWeightQ5: {
+	type: Number, optional: false
+	}, heightAndWeightQ6: {
+	type: Number, optional: false
+	}
+	}
+ ),

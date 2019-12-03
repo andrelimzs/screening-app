@@ -230,4 +230,172 @@ export const formSchemas = {
     }
    )
   },
+
+  "Height and Weight" : (info) => {
+    return new SimpleSchema({
+      heightAndWeightQ1: {
+        type: Number, optional: false
+      }, heightAndWeightQ2: {
+        type: String, allowedValues: ["Below 3rd Percentile", "Normal", "Above 97th Percentile"], optional: false
+      }, heightAndWeightQ3: {
+        type: Number, optional: false
+      }, heightAndWeightQ4: {
+        type: String, allowedValues: ["Below 3rd Percentile", "Normal", "Above 97th Percentile"], optional: false
+      }, heightAndWeightQ5: {
+        type: Number, optional: false
+      }, heightAndWeightQ6: {
+        type: Number, optional: false
+      }, calculateBMI: {
+        type: Number, optional: false
+      }, calculateRatio: {
+        type: Number, optional: false
+      }, overview: {
+        type: String, allowedValues: ["Yes", "No"], optional: false
+      }
+    }
+   )
+  },
+  
+  "Blood Glucose and Hb" : (info) => {
+   return new SimpleSchema({
+    bloodGlucoseAndHbQ1: {
+      type: String, allowedValues: ["Yes", "No"], optional: false
+    }, bloodGlucoseAndHbQ2: {
+      type: String, allowedValues: ["< 35 years old", ">= 35 years < 45 years old", ">= 45 years old"], optional: true, custom: function () {
+        if (this.field('bloodGlucoseAndHbQ1').isSet 
+          && this.field('bloodGlucoseAndHbQ1').value === "No") {
+          if (!this.isSet || this.value.length === 0) {
+            return SimpleSchema.ErrorTypes.REQUIRED
+          }
+        }
+      }
+    }, bloodGlucoseAndHbQ3: {
+      type: String, allowedValues: ["Male: < 90cm ; Female < 80cm"], optional: true, custom: function () {
+        if (this.field('bloodGlucoseAndHbQ1').isSet 
+          && this.field('bloodGlucoseAndHbQ1').value === "No") {
+          if (!this.isSet || this.value.length === 0) {
+            return SimpleSchema.ErrorTypes.REQUIRED
+          }
+        }
+      }
+    }, bloodGlucoseAndHbQ4: {
+     type: String, allowedValues: ["Hardly exercise", "Moderately Exercise", "Vigorous Exercise or Strenuous Work"], optional: true, custom: function () {
+      if (this.field('bloodGlucoseAndHbQ1').isSet 
+        && this.field('bloodGlucoseAndHbQ1').value === "No") {
+        if (!this.isSet || this.value.length === 0) {
+          return SimpleSchema.ErrorTypes.REQUIRED
+        }
+      }
+    }
+    }, bloodGlucoseAndHbQ5: {
+     type: String, allowedValues: ["1", "1 to 4", "5 to 10"], optional: true, custom: function () {
+      if (this.field('bloodGlucoseAndHbQ1').isSet 
+        && this.field('bloodGlucoseAndHbQ1').value === "No") {
+        if (!this.isSet || this.value.length === 0) {
+          return SimpleSchema.ErrorTypes.REQUIRED
+        }
+      }
+    }
+    }, bloodGlucoseAndHbQ6: {
+      type: String, optional: false
+    }, bloodGlucoseAndHbQ7: {
+      type: Number, optional: false
+    }, bloodGlucoseAndHbQ8: {
+      type: String, allowedValues: ["Yes", "No"], optional: false
+    }, totalScore: {
+      type: Number, optional: false
+    }, riskLevel: {
+      type: String, optional: true
+    }
+    }
+   )
+  },
+
+  "Blood Pressure" : (info) => {
+    return new SimpleSchema({
+      bpQ1: {
+        type: Number, optional: true
+      }, bpQ2: {
+        type: Number, optional: true
+      }, bpQ3: {
+        type: Number, optional: true
+      }, bpQ4: {
+        type: Number, optional: true
+      }, bpQ5: {
+        type: Number, optional: true
+      }, bpQ6: {
+        type: Number, optional: true
+      }, bpQ7: {
+        type: Number, optional: false
+      }, bpQ8: {
+        type: Number, optional: false
+      }, bpQ9: {
+        type: String, allowedValues: ["Yes", "No"], optional: false
+      }
+    }
+   )
+  },
+
+  "Phlebo" : (info) => {
+    return new SimpleSchema({
+      phleboQ1: {
+        type: String, allowedValues: ["Yes", "No"], optional: false
+      }
+    }
+   )
+  },
+
+  "Pap Smear" : (info) => {
+    return new SimpleSchema({
+      papSmearQ1: {
+        type: String, allowedValues: ["Yes", "No"], optional: false
+      }, papSmearQ2: {
+        type: String, optional: true
+      }, papSmearQ3: {
+        type: String, allowedValues: ["Yes", "No"], optional: false
+      }
+    }
+   )
+  },
+
+  "Breast Screening" : (info) => {
+    return new SimpleSchema({
+      breastScreeningQ1: {
+        type: String, allowedValues: ["Yes", "No"], optional: false
+      }, breastScreeningQ2: {
+        type: String, allowedValues: ["Yes", "No"], optional: true, custom: function () {
+          if (this.field('breastScreeningQ1').isSet 
+            && this.field('breastScreeningQ1').value === "Yes") {
+            if (!this.isSet || this.value.length === 0) {
+              return SimpleSchema.ErrorTypes.REQUIRED
+            }
+          }
+        }
+      }, breastScreeningQ3: {
+        type: String, optional: true, custom: function () {
+          if (this.field('breastScreeningQ2').isSet 
+            && this.field('breastScreeningQ2').value === "Yes") {
+            if (!this.isSet || this.value.length === 0) {
+              return SimpleSchema.ErrorTypes.REQUIRED
+            }
+          }
+        }
+      }, breastScreeningQ4: {
+        type: String, allowedValues: ["Yes", "No"], optional: true, custom: function () {
+          if (this.field('breastScreeningQ2').isSet 
+            && this.field('breastScreeningQ2').value === "Yes") {
+            if (!this.isSet || this.value.length === 0) {
+              return SimpleSchema.ErrorTypes.REQUIRED
+            }
+          }
+        }
+      }, breastScreeningQ5: {
+        type: String, allowedValues: ["Yes", "No"], optional: false
+      }
+    }
+   )
+  },
+
+  
+
 }

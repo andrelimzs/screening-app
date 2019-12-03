@@ -1,0 +1,19 @@
+"Phlebo" : (info) => (
+	<Fragment>
+		<h2>5. PHLEBO</h2>
+		Completed? 
+		<RadioField name="phleboQ1" label="Phlebo Q1"/>
+		
+	</Fragment>
+),
+
+
+==========================================================================================================================================
+
+
+"Phlebo" : new SimpleSchema({
+	phleboQ1: {
+	type: String, allowedValues: ["Yes", "No"], optional: false
+	}
+	}
+ ),

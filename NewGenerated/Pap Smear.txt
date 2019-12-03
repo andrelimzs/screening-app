@@ -1,0 +1,27 @@
+"Pap Smear" : (info) => (
+	<Fragment>
+		<h2>6. PAP SMEAR</h2>
+		Completed?
+		<RadioField name="papSmearQ1" label="Pap Smear Q1"/>
+		Notes (if any)
+		<TextField name="papSmearQ2" label="Pap Smear Q2"/>
+		Doctors' consult required?
+		<RadioField name="papSmearQ3" label="Pap Smear Q3"/>
+		
+	</Fragment>
+),
+
+
+==========================================================================================================================================
+
+
+"Pap Smear" : new SimpleSchema({
+	papSmearQ1: {
+	type: String, allowedValues: ["Yes", "No"], optional: false
+	}, papSmearQ2: {
+	type: String, optional: true
+	}, papSmearQ3: {
+	type: String, allowedValues: ["Yes", "No"], optional: false
+	}
+	}
+ ),
