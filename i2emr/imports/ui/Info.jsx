@@ -21,36 +21,78 @@ class Info extends Component {
 
   render() {
     const station = Session.get('station');
-    const currentInfoLayout = infoLayouts[station];
-    console.log(this.props.patientInfo)
-    console.log(currentInfoLayout(this.props.patientInfo))
+    console.log(station)
+    //const currentInfoLayout = infoLayouts[station];
+    const basicPatientDetails = this.props.patientInfo['Basic Patient Information']
+    // console.log(currentInfoLayout(this.props.patientInfo))
 
     return (
       <Paper elevation={1}>
-        {/* <AppBar position="static" color="default">
-        </AppBar>         */}
-        {/* <Popover
-          id="simple-popper"
-          open={open}
-          anchorEl={anchorEl}
-          onClose={this.handleClose}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
-          }}
-        > */}
-          {/* <Grid container
-            direction="column"
-            justify="center"
-            alignItems="flex-end"
-          > */}
-            {currentInfoLayout(this.props.patientInfo)}
-          {/* </Grid> */}
-        {/* </Popover> */}
+          <h2>BASIC PATIENT INFORMATION</h2>
+          1. Name <br />
+          {basicPatientDetails &&
+            <b>{basicPatientDetails.basicPatientInformationQ1}</b>
+          }
+          <br />
+          2. Gender
+          <br />
+          {basicPatientDetails &&
+            <b>{basicPatientDetails.basicPatientInformationQ2}</b>}
+          <br />
+          3. Birthdate <br />
+          {basicPatientDetails &&
+            <b>{basicPatientDetails.basicPatientInformationQ3}</b>
+          }
+          <br />
+          4. Age <br />
+          {basicPatientDetails &&
+            <b>{basicPatientDetails.basicPatientInformationQ4}</b>
+          }
+          <br />
+          5. District Name
+          <br />
+          {basicPatientDetails &&
+            <b>{basicPatientDetails.basicPatientInformationQ5}</b>
+          }
+          <br />
+          6. Address
+          <br />
+          {basicPatientDetails &&
+            <b>{basicPatientDetails.basicPatientInformationQ6}</b>
+          }
+          <br />
+          7. Zip Code
+          <br />
+          {basicPatientDetails &&
+            <b>{basicPatientDetails.basicPatientInformationQ7}</b>
+          }
+          <br />
+          8. Contact Number
+          <br />
+          {basicPatientDetails &&
+            <b>{basicPatientDetails.basicPatientInformationQ8}</b>
+          }
+          <br />
+          9. Spoken Language<br />
+          {basicPatientDetails &&
+
+            <b>{basicPatientDetails.basicPatientInformationQ9}</b>
+          }
+          <br />
+          10. Any drug allergic?
+
+          <br />
+          {basicPatientDetails &&
+            <b>{basicPatientDetails.basicPatientInformationQ10}</b>
+          }
+          <br />
+
+          11. Do you have any blood borne diseases?
+          <br />
+          {basicPatientDetails &&
+
+            <b>{basicPatientDetails.basicPatientInformationQ11}</b>
+          }
       </Paper>
     );
   }

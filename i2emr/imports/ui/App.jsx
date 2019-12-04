@@ -15,7 +15,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
-import { DialogTitle,DialogContent,DialogContentText } from '@material-ui/core';
+import { DialogTitle, DialogContent, DialogContentText } from '@material-ui/core';
 import { infoLayouts } from '../api/infoLayouts.js';
 
 const stationsWithInfo = new Set(Object.keys(infoLayouts))
@@ -26,7 +26,7 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
   },
-  spacing : 8,
+  spacing: 8,
   paper: {
     // padding: theme.spacing.unit * 2,
     textAlign: 'center',
@@ -49,12 +49,12 @@ class App extends Component {
     e.preventDefault();
     window.scrollTo(0, 0);
 
-    Session.set("station",newStation);
+    Session.set("station", newStation);
 
     const currentPatient = Session.get('currentPatient');
-    if (currentPatient !==  null) {
+    if (currentPatient !== null) {
       Meteor.call('patientinfo.setBusy', currentPatient, false);
-      Session.set('currentPatient',null); 
+      Session.set('currentPatient', null);
     }
 
     this.forceUpdate()
@@ -72,11 +72,11 @@ class App extends Component {
 
   render() {
     const station = Session.get('station');
-    
-    if ( station && station === "Screening Review") {
+
+    if (station && station === "Screening Review") {
       return (
         <div>
-          <ScreeningReview stationQueue={this.selectStation.bind(this, "")} patientList={this.props.patientList} patientInfo={this.props.patientInfo}/>
+          <ScreeningReview stationQueue={this.selectStation.bind(this, "")} patientList={this.props.patientList} patientInfo={this.props.patientInfo} />
 
           <Dialog
             open={!this.props.connected}
@@ -94,14 +94,14 @@ class App extends Component {
 
         </div>
       );
-    } else if ( station && stationsWithInfoOnly.has(station))  {
+    } else if (station && stationsWithInfoOnly.has(station)) {
       return (
-      <div>
-          
+        <div>
+
           <Button variant="outlined" onClick={this.selectStation.bind(this, "")}>Back</Button>
           <br />
           <Station station={station} />
-          
+
           <Grid container
             justify="flex-start"
             spacing={16}>
@@ -113,8 +113,8 @@ class App extends Component {
               justify="flex-start"
               alignItems="flex-start"
               spacing={16}
-            > 
-              <Grid item xs={12}>              
+            >
+              <Grid item xs={12}>
                 <Info station={station} id={Session.get('currentPatient')} patientInfo={this.props.patientInfo} />
               </Grid>
 
@@ -137,15 +137,15 @@ class App extends Component {
 
         </div>)
     }
-    
-    else if ( station ) {
+
+    else if (station) {
       return (
         <div>
-          
+
           <Button variant="outlined" onClick={this.selectStation.bind(this, "")}>Back</Button>
           <br />
           <Station station={station} />
-          
+
           <Grid container
             justify="flex-start"
             spacing={16}>
@@ -160,40 +160,48 @@ class App extends Component {
               alignItems="flex-start"
               spacing={16}
             >
-              <Grid item xs={8}>
-                {station !== "Finished Patients" && 
-                  <Form station={station} id={Session.get('currentPatient')}
-                        stationQueue={this.props.patientInfo.stationQueue} patientInfo={this.props.patientInfo}/>
-                }
-                {station === "Finished Patients" && typeof(this.props.patientList) !== "undefined" &&
-                  console.log(Patientinfo.find({}).fetch())
-                }
-              </Grid>
-              
-              <Grid item xs={4}>              
-                { stationsWithInfo.has(station) && 
-                  <Info station={station} id={Session.get('currentPatient')} patientInfo={this.props.patientInfo} />
+              <Grid item xs={12}>
+                {station !== "Finished Patients" && <Grid container>
+                  <Grid item xs={8}>
+                    <Form station={station} id={Session.get('currentPatient')}
+                      stationQueue={this.props.patientInfo.stationQueue} patientInfo={this.props.patientInfo} />
+                  </Grid>
+                  {station !== "Basic Patient Information" &&
+                    < Grid item xs={4} style={{ paddingLeft: 30 }}>
+                    <Info station={station} id={Session.get('currentPatient')} patientInfo={this.props.patientInfo} />
+                </Grid>
                 }
               </Grid>
-
+              }
+                {station === "Finished Patients" && typeof (this.props.patientList) !== "undefined" &&
+                console.log(Patientinfo.find({}).fetch())
+              }
             </Grid>
+
+          {/*   <Grid item xs={4}>
+              {stationsWithInfo.has(station) &&
+                <Info station={station} id={Session.get('currentPatient')} patientInfo={this.props.patientInfo} />
+              }
+            </Grid> */}
+
+          </Grid>
           </Grid>
 
-          <Dialog
-            open={!this.props.connected}
-            // onClose={this.handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            <DialogTitle id="alert-dialog-title">{"You have been disconnected"}</DialogTitle>
-            <DialogContent>
-              <DialogContentText id="alert-dialog-description">
-                Please reconnect to wifi network.
+        <Dialog
+          open={!this.props.connected}
+          // onClose={this.handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"You have been disconnected"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Please reconnect to wifi network.
               </DialogContentText>
-            </DialogContent>
-          </Dialog>
+          </DialogContent>
+        </Dialog>
 
-        </div>
+        </div >
       );
 
     } else {
@@ -222,7 +230,7 @@ class App extends Component {
         </div>
       );
     }
-    
+
   }
 }
 const AppContainer = withTracker(() => {
@@ -233,24 +241,26 @@ const AppContainer = withTracker(() => {
 
   if (station === "Done") {
     patientList = Patientinfo.find().fetch();
-  // } else if (station == "Registration" || station == "Phlebotomy"){
+    // } else if (station == "Registration" || station == "Phlebotomy"){
   } else {
     patientList = Patientinfo.find(
-      { $and:[{ nextStation: station }, { $or:[{ busy: false },{ id: currentPatientID }] }
-      ]}).fetch();
+      {
+        $and: [{ nextStation: station }, { $or: [{ busy: false }, { id: currentPatientID }] }
+        ]
+      }).fetch();
   }
   // } else {
   //   patientList = Patientinfo.find(
   //     {  $or:[{ busy: false },{ id: currentPatientID }] 
   //     }).fetch();
   // }
-  
+
   //, { sort: { lastSubmit: 1 } }
   // TODO - Find better way to sent patient info in
   // Retrieve current patient info for Info component
   // If no current patient, set to null
-  const patientInfo = (currentPatientID !== undefined && currentPatientID !== null) ? 
-                      Patientinfo.findOne({id:currentPatientID}) : {name: ""};
+  const patientInfo = (currentPatientID !== undefined && currentPatientID !== null) ?
+    Patientinfo.findOne({ id: currentPatientID }) : { name: "" };
   // if (currentPatientID !== undefined && currentPatientID !== null) {
   //   console.log(currentPatientID);
   // }
