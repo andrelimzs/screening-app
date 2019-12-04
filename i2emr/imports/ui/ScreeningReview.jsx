@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
+import { Table, TableBody, TableCell, TableRow, TableHead } from '@material-ui/core';
 
 import Search from './Search.jsx';
 import Queue from './Queue.jsx';
@@ -428,13 +429,13 @@ class ScreeningReview extends Component {
                   <Divider /><br />
                   <Grid container direction="row" justify="space-between" alignItems="center" >
                     <Grid item xs={2}>ID: <TextField variant="outlined" fullWidth={true} margin="dense" value={info.id} /></Grid>
-                    <Grid item xs={6}>Name: <TextField variant="outlined" fullWidth={true} margin="dense" value={populateField(info, 'Pre-Registration', 'preRegistrationQ2')} /></Grid>
-                    <Grid item xs={2}>Gender: <TextField variant="outlined" fullWidth={true} margin="dense" value={populateField(info, 'Pre-Registration', 'preRegistrationQ1')} /></Grid>
-                    <Grid item xs={2}>NRIC: <TextField variant="outlined" fullWidth={true} margin="dense" value={populateField(info, 'Pre-Registration', 'preRegistrationQ3')} /></Grid>
+                    <Grid item xs={6}>Name: <TextField variant="outlined" fullWidth={true} margin="dense" value={populateField(info, 'Basic Patient Information', 'basicPatientInformationQ1')} /></Grid>
+                    <Grid item xs={2}>Gender: <TextField variant="outlined" fullWidth={true} margin="dense" value={populateField(info, 'Basic Patient Information', 'basicPatientInformationQ2')} /></Grid>
+                    <Grid item xs={2}>Age: <TextField variant="outlined" fullWidth={true} margin="dense" value={populateField(info, 'Basic Patient Information', 'basicPatientInformationQ4')} /></Grid>
                   </Grid>
                   <Divider /><br />
 
-                  {
+{/*                   {
                     !this.state.printFlag && 
                     <Fragment>
                       <Typography variant="h5">Health Concerns</Typography>
@@ -444,7 +445,7 @@ class ScreeningReview extends Component {
                       </Grid>
                       <Divider /><br />
                     </Fragment>
-                  }
+                  } */}
 
                   <Grid container direction="row" justify="space-between" alignItems="center" >
                     <Grid item xs={4}><Typography variant="h5">Blood Pressure</Typography></Grid>
@@ -452,12 +453,12 @@ class ScreeningReview extends Component {
                   </Grid>
                   <Divider /><br />
                   <Grid container direction="row" justify="space-between" alignItems="flex-end" >
-                    <Grid item xs={2}>Average Blood Pressure (Systolic): <TextField variant="outlined" error={isBpToBeFlag(info)} fullWidth={true} margin="dense" value={populateField(info, 'Hx Cancer', 'hxCancerQ17')} /></Grid>
-                    <Grid item xs={2}>Average Blood Pressure (Diastolic): <TextField variant="outlined" error={isBpToBeFlag(info)} fullWidth={true} margin="dense" value={populateField(info, 'Hx Cancer', 'hxCancerQ18')} /></Grid>
-                    <Grid item xs={2}>BMI: <TextField variant="outlined" fullWidth={true} margin="dense" error={isBmiToBeFlag(info)} value={populateField(info, 'Hx Cancer', 'hxCancerQ21')} /></Grid>
-                    <Grid item xs={2}>Height (in cm): <TextField variant="outlined" error={isBmiToBeFlag(info)} fullWidth={true} margin="dense" value={populateField(info, 'Hx Cancer', 'hxCancerQ19')} /></Grid>
-                    <Grid item xs={2}>Weight (in kg): <TextField variant="outlined" error={isBmiToBeFlag(info)} fullWidth={true} margin="dense" value={populateField(info, 'Hx Cancer', 'hxCancerQ20')} /></Grid>
-                    <Grid item xs={2}>Waist Circumference (in cm): <TextField variant="outlined" error={isWaistCircumToBeFlag(info)} fullWidth={true} margin="dense" value={populateField(info, 'Hx Cancer', 'hxCancerQ24')} /></Grid>
+                    <Grid item xs={2}>Average Blood Pressure (Systolic): <TextField variant="outlined" error={isBpToBeFlag(info)} fullWidth={true} margin="dense" value={populateField(info, 'Blood Pressure', 'bpQ7')} /></Grid>
+                    <Grid item xs={2}>Average Blood Pressure (Diastolic): <TextField variant="outlined" error={isBpToBeFlag(info)} fullWidth={true} margin="dense" value={populateField(info, 'Blood Pressure', 'bpQ8')} /></Grid>
+                    <Grid item xs={2}>BMI: <TextField variant="outlined" fullWidth={true} margin="dense" error={isBmiToBeFlag(info)} value={populateField(info, 'Height and Weight', 'hxCancerQ21')} /></Grid>
+                    <Grid item xs={2}>Height (in cm): <TextField variant="outlined" error={isBmiToBeFlag(info)} fullWidth={true} margin="dense" value={populateField(info, 'Height and Weight', 'heightAndWeightQ1')} /></Grid>
+                    <Grid item xs={2}>Weight (in kg): <TextField variant="outlined" error={isBmiToBeFlag(info)} fullWidth={true} margin="dense" value={populateField(info, 'Height and Weight', 'heightAndWeightQ3')} /></Grid>
+                    <Grid item xs={2}>Waist Circumference (in cm): <TextField variant="outlined" error={isWaistCircumToBeFlag(info)} fullWidth={true} margin="dense" value={populateField(info, 'Height and Weight', 'heightAndWeightQ5')} /></Grid>
                   </Grid>
                   <Divider /><br />
                   <Grid container direction="row" justify="space-between" alignItems="flex-start" >
@@ -467,7 +468,7 @@ class ScreeningReview extends Component {
                   </Grid>
                   <Divider /><br />
 
-                  {
+                  {/* {
                       !this.state.printFlag &&
                       <Fragment>
                         <Grid container direction="row" justify="space-between" alignItems="center" >                      
@@ -487,20 +488,190 @@ class ScreeningReview extends Component {
                         </Grid>
                         <Divider /><br />
                       </Fragment>
-                    }
+                    } */}
                   
                   <Typography variant="h5">Vision</Typography>
                   <Grid container direction="row" justify="space-between" alignItems="flex-end" >
-                  {
+                  {/* {
                       !this.state.printFlag &&
                       <Fragment>
                         <Grid item xs={4}>Vision Problems: <TextField variant="outlined" multiline={true} rows={getNoOfLines(populateField(info, 'Hx HCSR', 'hxHcsrQ6', 'hxHcsrQ7'))} fullWidth={true} margin="dense" value={populateField(info, 'Hx HCSR', 'hxHcsrQ6', 'hxHcsrQ7')} /></Grid>
                       </Fragment>
-                    }
-                    <Grid item xs={2}>Visual acuity (w/o pinhole occluder) - Right Eye <TextField variant="outlined" fullWidth={true} margin="dense" value={"6/" + populateField(info, 'Geri - Vision', 'geriVisionQ3')} /></Grid>
+                    } */}
+                    <Grid>
+                    <h4>Visual Acuity</h4>
+
+                    <Table aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell></TableCell>
+            <TableCell align="left">Right Eye</TableCell>
+            <TableCell align="left">Left Eye</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow>
+            <TableCell align="left">Without glasses</TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ2')} />
+            </TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ3')} />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell align="left">With glasses</TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ4')} />
+
+            </TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ5')} />
+
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell align="left">Near vision</TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ6')} />
+
+            </TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ7')} />
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+
+      <h4>Findings in the Eye</h4>
+      <Table aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell></TableCell>
+            <TableCell align="left">Right Eye</TableCell>
+            <TableCell align="left">Left Eye</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow>
+            <TableCell align="left">Lids</TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ8')} />
+            </TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ9')} />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell align="left">Conjunctiva</TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ10')} />
+
+            </TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ11')} />
+
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell align="left">Cornea</TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ12')} />
+
+            </TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ13')} />
+
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell align="left">Anterior segment</TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ14')} />
+            </TableCell>
+        
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ15')} />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell align="left">Iris</TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ16')} />
+            </TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ17')} />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell align="left">Pupil</TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ18')} />
+
+            </TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ19')} />
+
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell align="left">Lens</TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ20')} />
+
+            </TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ21')} />
+
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell align="left">Ocular movements</TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ22')} />
+
+            </TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ23')} />
+
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell align="left">IOP</TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ24')} />
+
+            </TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ25')} />
+
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell align="left">Duct</TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ26')} />
+
+            </TableCell>
+            <TableCell align="left">
+            <TextField variant="outlined" value={populateField(info, 'Eye Screening', 'eyeScreeningQ27')} />
+
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+
+
+
+
+                      </Grid>
+
+
+
+                    {/* <Grid item xs={2}>Visual acuity (w/o pinhole occluder) - Right Eye <TextField variant="outlined" fullWidth={true} margin="dense" value={"6/" + populateField(info, 'Geri - Vision', 'geriVisionQ3')} /></Grid>
                     <Grid item xs={2}>Visual acuity (w/o pinhole occluder) - Left Eye <TextField variant="outlined" fullWidth={true} margin="dense" value={"6/" + populateField(info, 'Geri - Vision', 'geriVisionQ4')} /></Grid>
                     <Grid item xs={2}>Visual acuity (w pinhole occluder) - Right Eye <TextField variant="outlined" fullWidth={true} margin="dense" value={"6/" + populateField(info, 'Geri - Vision', 'geriVisionQ5')} /></Grid>
-                    <Grid item xs={2}>Visual acuity (w pinhole occluder) - Left Eye <TextField variant="outlined" fullWidth={true} margin="dense" value={"6/" + populateField(info, 'Geri - Vision', 'geriVisionQ6')} /></Grid>
+                    <Grid item xs={2}>Visual acuity (w pinhole occluder) - Left Eye <TextField variant="outlined" fullWidth={true} margin="dense" value={"6/" + populateField(info, 'Geri - Vision', 'geriVisionQ6')} /></Grid> */}
                   </Grid>
                   <Divider /><br />
                   <Grid container direction="row" justify="space-between" alignItems="flex-start" >
@@ -626,8 +797,8 @@ class ScreeningReview extends Component {
                     </Fragment>
                   }
 
-                  <Typography variant="h5" color="error">All participants will receive a more detailed health report from PHS within 4-6 weeks of the screening.<br/> *If you have gone for phlebotomy, you will receive the blood test results from NUHS within 4 - 6 weeks of the screening.</Typography>
-
+{/*                   <Typography variant="h5" color="error">All participants will receive a more detailed health report from PHS within 4-6 weeks of the screening.<br/> *If you have gone for phlebotomy, you will receive the blood test results from NUHS within 4 - 6 weeks of the screening.</Typography>
+ */}
                 </Grid>
 
               </Fragment>

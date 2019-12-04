@@ -1,0 +1,36 @@
+"Doctors' Consult" : (info) => (
+	<Fragment>
+		1. Chief complaint
+		<SelectField name="doctorsConsultQ1" checkboxes="true" label="Doctors' Consult Q1" />
+		2. Doctors' notes/advice
+		<LongTextField name="doctorsConsultQ2" label="Doctors' Consult Q2" />
+		3. Provided with referral letter?
+		<SelectField name="doctorsConsultQ3" label="Doctors' Consult Q3"/>
+		4. Referral details
+		<LongTextField name="doctorsConsultQ4" label="Doctors' Consult Q4" />
+		5. Name of doctor
+		<TextField name="doctorsConsultQ5" label="Doctors' Consult Q5"/>
+		
+	</Fragment>
+),
+
+
+==========================================================================================================================================
+
+
+"Doctors' Consult" : new SimpleSchema({
+	doctorsConsultQ1: {
+	type: Array, optional: false
+	}, "doctorsConsultQ1.$": {
+	type: String, allowedValues: ["Overweight/obesity", "Heart burn", "Diabetes", "High blood pressure", "Heart disease", "Unexplained weight loss", "Respiratory problems", "Joint pain/back pain", "Stroke", "Visual impairment", "Mental health issues", "Alcohol overuse"]
+	}, doctorsConsultQ2: {
+	type: String, optional: false
+	}, doctorsConsultQ3: {
+	type: String, allowedValues: ["Yes", "No"], optional: false
+	}, doctorsConsultQ4: {
+	type: String, optional: false
+	}, doctorsConsultQ5: {
+	type: String, optional: false
+	}
+	}
+ ),

@@ -1,0 +1,74 @@
+"Post-screening feedback" : (info) => (
+	<Fragment>
+		1. I have had a good experience at the screening
+		<SelectField name="postScreeningFeedbackQ1" label="Post-screening feedback Q1"/>
+		2. I came for the screening because: (Select all that apply)
+		<SelectField name="postScreeningFeedbackQ2" checkboxes="true" label="Post-screening feedback Q2" />
+		3. I know that regular health screening is important
+		<SelectField name="postScreeningFeedbackQ3" label="Post-screening feedback Q3"/>
+		4. I know that it is important to detect chronic diseases and cancers early
+		<SelectField name="postScreeningFeedbackQ4" label="Post-screening feedback Q4"/>
+		5. I am willing to take the trouble to attend health screenings
+		<SelectField name="postScreeningFeedbackQ5" label="Post-screening feedback Q5"/>
+		6. I am willing to attend my follow-up sessions
+		<SelectField name="postScreeningFeedbackQ6" label="Post-screening feedback Q6"/>
+		7. The student volunteers attended to my needs
+		<SelectField name="postScreeningFeedbackQ7" label="Post-screening feedback Q7"/>
+		8. The student volunteers were well-trained
+		<SelectField name="postScreeningFeedbackQ8" label="Post-screening feedback Q8"/>
+		9. The waiting time to enter the screening was reasonable
+		<SelectField name="postScreeningFeedbackQ9" label="Post-screening feedback Q9"/>
+		10. The waiting time for each station was reasonable
+		<SelectField name="postScreeningFeedbackQ10" label="Post-screening feedback Q10"/>
+		11. The flow of the screening was easy to follow
+		<SelectField name="postScreeningFeedbackQ11" label="Post-screening feedback Q11"/>
+		12. I would recommend my family/friends to attend this screening
+		<SelectField name="postScreeningFeedbackQ12" label="Post-screening feedback Q12"/>
+		13. What encouraged you to come for our event? Select all that apply
+		<SelectField name="postScreeningFeedbackQ13" checkboxes="true" label="Post-screening feedback Q13" />
+		14. How often do you attend a health screening?
+		<SelectField name="postScreeningFeedbackQ14" label="Post-screening feedback Q14"/>
+		
+	</Fragment>
+),
+
+
+==========================================================================================================================================
+
+
+"Post-screening feedback" : new SimpleSchema({
+	postScreeningFeedbackQ1: {
+	type: String, allowedValues: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"], optional: false
+	}, postScreeningFeedbackQ2: {
+	type: Array, optional: false
+	}, "postScreeningFeedbackQ2.$": {
+	type: String, allowedValues: ["I am concerned about my health", "I have never been screened before", "Friends/ family told me to come", "There is a free health screening", "There is a free goodie bag", "I was drawn to the crowd", "It was conveniently located", "It is at a convenient time"]
+	}, postScreeningFeedbackQ3: {
+	type: String, allowedValues: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"], optional: false
+	}, postScreeningFeedbackQ4: {
+	type: String, allowedValues: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"], optional: false
+	}, postScreeningFeedbackQ5: {
+	type: String, allowedValues: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"], optional: false
+	}, postScreeningFeedbackQ6: {
+	type: String, allowedValues: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"], optional: false
+	}, postScreeningFeedbackQ7: {
+	type: String, allowedValues: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"], optional: false
+	}, postScreeningFeedbackQ8: {
+	type: String, allowedValues: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"], optional: false
+	}, postScreeningFeedbackQ9: {
+	type: String, allowedValues: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"], optional: false
+	}, postScreeningFeedbackQ10: {
+	type: String, allowedValues: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"], optional: false
+	}, postScreeningFeedbackQ11: {
+	type: String, allowedValues: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"], optional: false
+	}, postScreeningFeedbackQ12: {
+	type: String, allowedValues: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"], optional: false
+	}, postScreeningFeedbackQ13: {
+	type: Array, optional: false
+	}, "postScreeningFeedbackQ13.$": {
+	type: String, allowedValues: ["Happened to pass by", "Posters", "Newspaper", "Door-to-door publicity", "Heard from neighbours/relatives/friends"]
+	}, postScreeningFeedbackQ14: {
+	type: String, allowedValues: ["Never", "More than 3 years ago", "Once in 3 years", "Once in 2 years", "Once a year", "More than once a year"], optional: false
+	}
+	}
+ ),

@@ -1,0 +1,158 @@
+"Eye Screening" : (info) => (
+	<Fragment>
+		1. Does the participant use spectacles?
+		<RadioField name="eyeScreeningQ1" label="Eye Screening Q1"/>
+		2. Right eye without glasses
+		<TextField name="eyeScreeningQ2" label="Eye Screening Q2"/>
+		3. Left eye without glasses
+		<TextField name="eyeScreeningQ3" label="Eye Screening Q3"/>
+		4. Right eye with glasses
+		<TextField name="eyeScreeningQ4" label="Eye Screening Q4"/>
+		5. Left eye with glasses
+		<TextField name="eyeScreeningQ5" label="Eye Screening Q5"/>
+		6. Right eye near vision
+		<TextField name="eyeScreeningQ6" label="Eye Screening Q6"/>
+		7. Left eye near vision
+		<TextField name="eyeScreeningQ7" label="Eye Screening Q7"/>
+		8. Lids left eye
+		<TextField name="eyeScreeningQ8" label="Eye Screening Q8"/>
+		9. Lids right eye
+		<TextField name="eyeScreeningQ9" label="Eye Screening Q9"/>
+		10. Conjunctiva left eye
+		<TextField name="eyeScreeningQ10" label="Eye Screening Q10"/>
+		11. Conjunctiva right eye
+		<TextField name="eyeScreeningQ11" label="Eye Screening Q11"/>
+		12. Cornea left eye
+		<TextField name="eyeScreeningQ12" label="Eye Screening Q12"/>
+		13. Cornea right eye
+		<TextField name="eyeScreeningQ13" label="Eye Screening Q13"/>
+		14. Anterior segment left eye
+		<TextField name="eyeScreeningQ14" label="Eye Screening Q14"/>
+		15. Anterior segment right eye
+		<TextField name="eyeScreeningQ15" label="Eye Screening Q15"/>
+		16. Iris left eye
+		<TextField name="eyeScreeningQ16" label="Eye Screening Q16"/>
+		17. Iris right eye
+		<TextField name="eyeScreeningQ17" label="Eye Screening Q17"/>
+		18. Pupil left eye
+		<TextField name="eyeScreeningQ18" label="Eye Screening Q18"/>
+		19. Pupil right eye
+		<TextField name="eyeScreeningQ19" label="Eye Screening Q19"/>
+		20. Lens left eye
+		<TextField name="eyeScreeningQ20" label="Eye Screening Q20"/>
+		21. Lens right eye
+		<TextField name="eyeScreeningQ21" label="Eye Screening Q21"/>
+		22. Ocular movements left eye
+		<TextField name="eyeScreeningQ22" label="Eye Screening Q22"/>
+		23. Ocular movements right eye
+		<TextField name="eyeScreeningQ23" label="Eye Screening Q23"/>
+		24. IOP left eye
+		<TextField name="eyeScreeningQ24" label="Eye Screening Q24"/>
+		25. IOP right eye
+		<TextField name="eyeScreeningQ25" label="Eye Screening Q25"/>
+		26. Duct left eye
+		<TextField name="eyeScreeningQ26" label="Eye Screening Q26"/>
+		27. Duct right eye
+		<TextField name="eyeScreeningQ27" label="Eye Screening Q27"/>
+		28. CDR left eye
+		<TextField name="eyeScreeningQ28" label="Eye Screening Q28"/>
+		29. CDR right eye
+		<TextField name="eyeScreeningQ29" label="Eye Screening Q29"/>
+		30. Macula left eye
+		<TextField name="eyeScreeningQ30" label="Eye Screening Q30"/>
+		31. Macula right eye
+		<TextField name="eyeScreeningQ31" label="Eye Screening Q31"/>
+		32. Retina left eye
+		<TextField name="eyeScreeningQ32" label="Eye Screening Q32"/>
+		33. Retina right eye
+		<TextField name="eyeScreeningQ33" label="Eye Screening Q33"/>
+		34. Diagnosis
+		<TextField name="eyeScreeningQ34" label="Eye Screening Q34"/>
+		35. Advice
+		<TextField name="eyeScreeningQ35" label="Eye Screening Q35"/>
+		36. Name of doctor
+		<TextField name="eyeScreeningQ36" label="Eye Screening Q36"/>
+		
+	</Fragment>
+),
+
+
+==========================================================================================================================================
+
+
+"Eye Screening" : new SimpleSchema({
+	eyeScreeningQ1: {
+	type: String, allowedValues: ["Yes", "No"], optional: false
+	}, eyeScreeningQ2: {
+	type: String, optional: false
+	}, eyeScreeningQ3: {
+	type: String, optional: false
+	}, eyeScreeningQ4: {
+	type: String, optional: false
+	}, eyeScreeningQ5: {
+	type: String, optional: false
+	}, eyeScreeningQ6: {
+	type: String, optional: false
+	}, eyeScreeningQ7: {
+	type: String, optional: false
+	}, eyeScreeningQ8: {
+	type: String, optional: false
+	}, eyeScreeningQ9: {
+	type: String, optional: false
+	}, eyeScreeningQ10: {
+	type: String, optional: false
+	}, eyeScreeningQ11: {
+	type: String, optional: false
+	}, eyeScreeningQ12: {
+	type: String, optional: false
+	}, eyeScreeningQ13: {
+	type: String, optional: false
+	}, eyeScreeningQ14: {
+	type: String, optional: false
+	}, eyeScreeningQ15: {
+	type: String, optional: false
+	}, eyeScreeningQ16: {
+	type: String, optional: false
+	}, eyeScreeningQ17: {
+	type: String, optional: false
+	}, eyeScreeningQ18: {
+	type: String, optional: false
+	}, eyeScreeningQ19: {
+	type: String, optional: false
+	}, eyeScreeningQ20: {
+	type: String, optional: false
+	}, eyeScreeningQ21: {
+	type: String, optional: false
+	}, eyeScreeningQ22: {
+	type: String, optional: false
+	}, eyeScreeningQ23: {
+	type: String, optional: false
+	}, eyeScreeningQ24: {
+	type: String, optional: false
+	}, eyeScreeningQ25: {
+	type: String, optional: false
+	}, eyeScreeningQ26: {
+	type: String, optional: false
+	}, eyeScreeningQ27: {
+	type: String, optional: false
+	}, eyeScreeningQ28: {
+	type: String, optional: false
+	}, eyeScreeningQ29: {
+	type: String, optional: false
+	}, eyeScreeningQ30: {
+	type: String, optional: false
+	}, eyeScreeningQ31: {
+	type: String, optional: false
+	}, eyeScreeningQ32: {
+	type: String, optional: false
+	}, eyeScreeningQ33: {
+	type: String, optional: false
+	}, eyeScreeningQ34: {
+	type: String, optional: false
+	}, eyeScreeningQ35: {
+	type: String, optional: false
+	}, eyeScreeningQ36: {
+	type: String, optional: false
+	}
+	}
+ ),
