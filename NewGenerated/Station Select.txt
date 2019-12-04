@@ -1,0 +1,79 @@
+"Station Select" : (info) => (
+	<Fragment>
+		<h2>STATION SELECT</h2>
+		1. Height and Weight + Wasit and Hip Measurement
+		<RadioField name="stationSelectQ1" label="Station Select Q1"/>
+		<h2>2. Blood Glucose</h2>
+		2.1. Can we check your blood sugar?<br />This will be done by pricking your finger to get a small drop of blood
+		<RadioField name="stationSelectQ2" label="Station Select Q2"/>
+		2.2. Can we check if you have anemia?<br />This will be done by pricking your finger to get a small drop of blood
+		<RadioField name="stationSelectQ3" label="Station Select Q3"/>
+		3. Can we check your blood pressure?
+		<RadioField name="stationSelectQ4" label="Station Select Q4"/>
+		<h2>4. Phlebotomy (for patient aged 40 years old and above)</h2>
+		4.1 Do you have the following conditions?
+		<RadioField name="stationSelectQ5" label="Station Select Q5"/>
+		4.1.1. Can we do a blood test to see if you have high cholesterol?<br />A blood sample will be taken by a trained staff. This will then be sent to the lab, and a report will be mailed to you after some time
+		<RadioField name="stationSelectQ6" label="Station Select Q6"/>
+		<h2>5. Pap Smear</h2>
+		5.1. Are you married (or have you ever been married)?
+		<RadioField name="stationSelectQ7" label="Station Select Q7"/>
+		5.1.1. If yes to Q7, have you done a Pap smear in the past 3 years?
+		<RadioField name="stationSelectQ8" label="Station Select Q8"/>
+		5.1.1.1.  If no to Q8, would you want to undergo a free Pap smear today to check for cervical cancer?
+		<RadioField name="stationSelectQ9" label="Station Select Q9"/>
+		<h2>6. Clinical Breast Examination</h2>
+		6.1. Would you want to undergo a breast examination for breast cancer today? 
+		<RadioField name="stationSelectQ10" label="Station Select Q10"/>
+		<h2>7. Women's Education</h2>
+		7.1 Can we teach you about women's health?<br />For adults, we will be sharing about menstrual health and breast self examinations. For girls aged 10-18 years old, we will be sharing about menstrual health only.
+		<RadioField name="stationSelectQ11" label="Station Select Q11"/>
+		<h2>8. Doctors' Consult</h2>
+		8.1. Would you like to see a doctor today? (You will be asked to see the doctor if your test results are abnormal, but would you otherwise want to see the doctor?)
+		<RadioField name="stationSelectQ12" label="Station Select Q12"/>
+		<h2>9. Eye Screening</h2>
+		9.1 Can we check your eyes/vision?
+		<RadioField name="stationSelectQ13" label="Station Select Q13"/>
+		<h2>10. Education</h2>
+		10.1. Can we teach you about healthy lifestyles and how to prevent common diseases like diabetes and high blood pressure?
+		<RadioField name="stationSelectQ14" label="Station Select Q14"/>
+		
+	</Fragment>
+),
+
+
+==========================================================================================================================================
+
+
+"Station Select" : new SimpleSchema({
+	stationSelectQ1: {
+	type: String, allowedValues: ["Yes", "No"], optional: false
+	}, stationSelectQ2: {
+	type: String, allowedValues: ["Yes", "No", "Not Applicable (Child)"], optional: false
+	}, stationSelectQ3: {
+	type: String, allowedValues: ["Yes", "No"], optional: false
+	}, stationSelectQ4: {
+	type: String, allowedValues: ["Yes", "No", "Not Applicable (Child)"], optional: false
+	}, stationSelectQ5: {
+	type: String, allowedValues: ["Yes", "None of the above/not applicable (Age < 40)"], optional: false
+	}, stationSelectQ6: {
+	type: String, allowedValues: ["Yes", "No", "Not applicable (child)"], optional: true
+	}, stationSelectQ7: {
+	type: String, allowedValues: ["Yes", "No"], optional: false
+	}, stationSelectQ8: {
+	type: String, allowedValues: ["Yes", "No"], optional: true
+	}, stationSelectQ9: {
+	type: String, allowedValues: ["Yes", "No"], optional: true
+	}, stationSelectQ10: {
+	type: String, allowedValues: ["Yes", "No", "Not applicable (child)"], optional: false
+	}, stationSelectQ11: {
+	type: String, allowedValues: ["Yes", "No", "Not applicable (child)"], optional: false
+	}, stationSelectQ12: {
+	type: String, allowedValues: ["Yes", "No"], optional: false
+	}, stationSelectQ13: {
+	type: String, allowedValues: ["Yes", "No"], optional: false
+	}, stationSelectQ14: {
+	type: String, allowedValues: ["Yes", "No", "Not applicable (child)"], optional: false
+	}
+	}
+ ),

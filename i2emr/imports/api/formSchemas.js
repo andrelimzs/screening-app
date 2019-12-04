@@ -69,39 +69,6 @@ export const formSchemas = {
     )
   },
 
-  // "Doctor's Consult": (info) => {
-  //   return new SimpleSchema({
-  //     doctorSConsultQ1: {
-  //       type: String, optional: false
-  //     }, doctorSConsultQ2: {
-  //       type: String, optional: false
-  //     }, doctorSConsultQ3: {
-  //       type: String, optional: false
-  //     }, doctorSConsultQ4: {
-  //       type: Boolean, label: "Yes", optional: true
-  //     }, doctorSConsultQ5: {
-  //       type: String, optional: true
-  //     }, doctorSConsultQ6: {
-  //       type: Boolean, label: "Yes", optional: true
-  //     }, doctorSConsultQ7: {
-  //       type: String, optional: true
-  //     }, doctorSConsultQ8: {
-  //       type: Boolean, label: "Yes", optional: true
-  //     }, doctorSConsultQ9: {
-  //       type: String, optional: true
-  //     }, doctorSConsultQ10: {
-  //       type: Boolean, label: "Yes", optional: true
-  //     }, doctorSConsultQ11: {
-  //       type: Boolean, label: "Yes", optional: true, custom: function () {
-  //         if (!this.isSet || !this.value) {
-  //           return SimpleSchema.ErrorTypes.REQUIRED
-  //         }
-  //       }
-  //     }
-  //   }
-  //   )
-  // },
-
   "Screening Review": (info) => { return new SimpleSchema({}) },
 
   // "Oral Screening": (info) => { return new SimpleSchema({}) },
@@ -120,18 +87,20 @@ export const formSchemas = {
           }
         }
       }, patientProfilingQ2: {
-        type: String, allowedValues: ["Yes", "No"], optional: false
+        type: String, allowedValues: ["Yes, the person was diagnosed with TB within the past 4 months"
+          , "Yes, the person was diagnosed with TB more than 4 months ago", "No"], optional: false
       }, patientProfilingQ22: {
         type: String, optional: true, custom: function () {
           if (this.field('patientProfilingQ2').isSet
-            && this.field('patientProfilingQ2').value === "Yes") {
+            && (this.field('patientProfilingQ2').value === "Yes, the person was diagnosed with TB within the past 4 months"
+                || this.field('patientProfilingQ2').value === "Yes, the person was diagnosed with TB more than 4 months ago")) {
             if (!this.isSet || this.value.length === 0) {
               return SimpleSchema.ErrorTypes.REQUIRED
             }
           }
         }
       }, patientProfilingQ3: {
-        type: String, allowedValues: ["Yes", "No"]
+        type: String, allowedValues: ["Yes", "None of the above"]
       }, patientProfilingQ23: {
         type: Array, optional: true, custom: function () {
           if (this.field('patientProfilingQ3').isSet
@@ -142,11 +111,12 @@ export const formSchemas = {
           }
         }
       }, "patientProfilingQ23.$": {
-        type: String, allowedValues: ["Yes", "No", "Others"]
+        type: String, allowedValues: ["Cough that has lasted more than 2 weeks", "Coughing up blood", "Breathlessness"
+        , "Weight loss", "Night sweats", "Fever", "Loss of appetite"]
       }, patientProfilingQ4: {
         type: Array, optional: false
       }, "patientProfilingQ4.$": {
-        type: String, allowedValues: ["Yes", "No", "Others"]
+        type: String, allowedValues: ["Diabetes", "High Blood Pressure", "High Cholesterol", "Others"]
       }, patientProfilingQ5: {
         type: String, optional: false
       }, patientProfilingQ6: {
@@ -158,7 +128,7 @@ export const formSchemas = {
       }, patientProfilingQ9: {
         type: String, optional: false
       }, patientProfilingQ10: {
-        type: String, allowedValues: ["Hospital", "Seldom/Never visits the doctor"], optional: false
+        type: String, allowedValues: ["Hospital", "Clinics", "Traditional Medicine", "Seldom/Never visits the doctor"], optional: false
       }, patientProfilingQ24: {
         type: String, optional: true, custom: function () {
           if (this.field('patientProfilingQ10').isSet
@@ -171,7 +141,9 @@ export const formSchemas = {
       }, patientProfilingQ11: {
         type: String, allowedValues: ["Yes", "No"], optional: false
       }, patientProfilingQ25: {
-        type: String, optional: true, custom: function () {
+        type: String, allowedValues: ["Less than 1 cigarette (or equivalent) per day on average"
+          , "Between 1 to 10 cigarettes (or equivalent) per day on average"
+          , "More than 10 cigarettes (or equivalent) per day on average"], optional: true, custom: function () {
           if (this.field('patientProfilingQ11').isSet
             && this.field('patientProfilingQ11').value === "Yes") {
             if (!this.isSet || this.value.length === 0) {
@@ -189,7 +161,7 @@ export const formSchemas = {
           }
         }
       }, "patientProfilingQ26.$": {
-        type: String, allowedValues: ["Cigarette", "Tobacoo", "Others"]
+        type: String, allowedValues: ["Cigarette", "Tobacoo", "Opium", "Beedi", "Others"]
       }, patientProfilingQ27: {
         type: Number, optional: true, custom: function () {
           if (this.field('patientProfilingQ11').isSet
@@ -229,6 +201,48 @@ export const formSchemas = {
       }
     }
     )
+  },
+
+  "Station Select" : (info) => {
+    return new SimpleSchema({
+      stationSelectQ1: {
+        type: String, allowedValues: ["Yes", "No"], optional: false
+      }, stationSelectQ2: {
+        type: String, allowedValues: ["Yes", "No", "Not Applicable (Child)"], optional: false
+      }, stationSelectQ3: {
+        type: String, allowedValues: ["Yes", "No"], optional: false
+      }, stationSelectQ4: {
+        type: String, allowedValues: ["Yes", "No", "Not Applicable (Child)"], optional: false
+      }, stationSelectQ5: {
+        type: String, allowedValues: ["Yes", "None of the above/not applicable (Age < 40)"], optional: false, optional: true, custom: function () {
+          if (this.field('stationSelectQ4').isSet
+            && this.field('stationSelectQ4').value === "Yes") {
+            if (!this.isSet || this.value.length === 0) {
+              return SimpleSchema.ErrorTypes.REQUIRED
+            }
+          }
+        }
+      }, stationSelectQ6: {
+        type: String, allowedValues: ["Yes", "No", "Not applicable (child)"], optional: true
+      }, stationSelectQ7: {
+        type: String, allowedValues: ["Yes", "No"], optional: false
+      }, stationSelectQ8: {
+        type: String, allowedValues: ["Yes", "No"], optional: true
+      }, stationSelectQ9: {
+        type: String, allowedValues: ["Yes", "No"], optional: true
+      }, stationSelectQ10: {
+       type: String, allowedValues: ["Yes", "No", "Not applicable (child)"], optional: false
+      }, stationSelectQ11: {
+       type: String, allowedValues: ["Yes", "No", "Not applicable (child)"], optional: false
+      }, stationSelectQ12: {
+       type: String, allowedValues: ["Yes", "No"], optional: false
+      }, stationSelectQ13: {
+        type: String, allowedValues: ["Yes", "No"], optional: false
+      }, stationSelectQ14: {
+        type: String, allowedValues: ["Yes", "No", "Not applicable (child)"], optional: false
+      }
+    }
+   )
   },
 
   "Height and Weight": (info) => {
@@ -536,5 +550,50 @@ export const formSchemas = {
       }
     }
     )
+  },
+
+  "Pre-women's edu quiz" : (info) => {
+    return new SimpleSchema({
+      preWomenSEduQuizQ1: {
+        type: String, allowedValues: ["1", "2", "3", "4", "5"], optional: false
+      }, preWomenSEduQuizQ2: {
+        type: String, allowedValues: ["Abdominal Cramps", "Acne", "Headache", "All of the above"], optional: false
+      }, preWomenSEduQuizQ3: {
+        type: String, allowedValues: ["Stress", "Pregnancy", "Weight Loss", "Abrasion"], optional: false
+      }, preWomenSEduQuizQ4: {
+        type: String, allowedValues: ["Menstruation is dirty", "Menstruation happens every 28 days, on average", "We should change our sanitary pads once every few days", "We should clean the area from back to front"], optional: false
+      }, preWomenSEduQuizQ5: {
+        type: String, allowedValues: ["1st day of menses", "7-10 days after start of menses", "21 days after start of menses", "2 days before start of menses"], optional: false
+      }, preWomenSEduQuizQ6: {
+        type: String, allowedValues: ["Once a week", "Once a month", "Once a year", "Once in 2 years"], optional: false
+      }, preWomenSEduQuizQ7: {
+        type: String, allowedValues: ["A lump that can be seen/felt in the breast or underarm", "Nipple that is pushed inwards", "Dimpling of skin over the breast", "Ulceration of skin over the breast", "All of the above"], optional: false
+      }, preQuizScore: {
+        type: String, optional : false
+      },
+    }
+   )
+  },
+  "Post-women's edu quiz" : (info) => {
+    return new SimpleSchema({
+      postWomenSEduQuizQ1: {
+        type: String, allowedValues: ["1", "2", "3", "4", "5"], optional: false
+      }, postWomenSEduQuizQ2: {
+        type: String, allowedValues: ["Abdominal Cramps", "Acne", "Headache", "All of the above"], optional: false
+      }, postWomenSEduQuizQ3: {
+        type: String, allowedValues: ["Stress", "Pregnancy", "Weight Loss", "Abrasion"], optional: false
+      }, postWomenSEduQuizQ4: {
+        type: String, allowedValues: ["Menstruation is dirty", "Menstruation happens every 28 days, on average", "We should change our sanitary pads once every few days", "We should clean the area from back to front"], optional: false
+      }, postWomenSEduQuizQ5: {
+        type: String, allowedValues: ["1st day of menses", "7-10 days after start of menses", "21 days after start of menses", "2 days before start of menses"], optional: false
+      }, postWomenSEduQuizQ6: {
+        type: String, allowedValues: ["Once a week", "Once a month", "Once a year", "Once in 2 years"], optional: false
+      }, postWomenSEduQuizQ7: {
+        type: String, allowedValues: ["A lump that can be seen/felt in the breast or underarm", "Nipple that is pushed inwards", "Dimpling of skin over the breast", "Ulceration of skin over the breast", "All of the above"], optional: false
+      }, postQuizScore: {
+        type: String, optional : false
+      },
+    }
+   )
   },
 }

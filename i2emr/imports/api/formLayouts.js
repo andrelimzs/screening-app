@@ -105,6 +105,66 @@ function getGlucoseRisk(model) {
   }
 }
 
+function calculatePreScore(model) {
+  let count = 0
+  if (typeof (model['preWomenSEduQuizQ2']) !== "undefined" 
+    && typeof (model['preWomenSEduQuizQ3']) !== "undefined"
+    && typeof (model['preWomenSEduQuizQ4']) !== "undefined"
+    && typeof (model['preWomenSEduQuizQ5']) !== "undefined"
+    && typeof (model['preWomenSEduQuizQ6']) !== "undefined"
+    && typeof (model['preWomenSEduQuizQ7']) !== "undefined") {
+    if (model['preWomenSEduQuizQ5'] === "7-10 days after start of menses") {
+      count = count + 1
+    } 
+    if (model['preWomenSEduQuizQ2'] === "All of the above") {
+      count = count + 1
+    }
+    if (model['preWomenSEduQuizQ3'] === "Abrasion") {
+      count = count + 1
+    }
+    if (model['preWomenSEduQuizQ4'] === "Menstruation happens every 28 days, on average") {
+      count = count + 1
+    }
+    if (model['preWomenSEduQuizQ6'] === "Once a month") {
+      count = count + 1
+    }
+    if (model['preWomenSEduQuizQ7'] === "All of the above") {
+      count = count + 1
+    }
+  }
+  return count;
+}
+
+function calculatePostScore(model) {
+  let count = 0
+  if (typeof (model['postWomenSEduQuizQ2']) !== "undefined" 
+    && typeof (model['postWomenSEduQuizQ3']) !== "undefined"
+    && typeof (model['postWomenSEduQuizQ4']) !== "undefined"
+    && typeof (model['postWomenSEduQuizQ5']) !== "undefined"
+    && typeof (model['postWomenSEduQuizQ6']) !== "undefined"
+    && typeof (model['postWomenSEduQuizQ7']) !== "undefined") {
+    if (model['postWomenSEduQuizQ5'] === "7-10 days after start of menses") {
+      count = count + 1
+    } 
+    if (model['postWomenSEduQuizQ2'] === "All of the above") {
+      count = count + 1
+    }
+    if (model['postWomenSEduQuizQ3'] === "Abrasion") {
+      count = count + 1
+    }
+    if (model['postWomenSEduQuizQ4'] === "Menstruation happens every 28 days, on average") {
+      count = count + 1
+    }
+    if (model['postWomenSEduQuizQ6'] === "Once a month") {
+      count = count + 1
+    }
+    if (model['postWomenSEduQuizQ7'] === "All of the above") {
+      count = count + 1
+    }
+  }
+  return count;
+}
+
 // Define the layouts
 export const formLayouts = {
   "Basic Patient Information": (info) => (
@@ -169,7 +229,9 @@ export const formLayouts = {
       </DisplayIf>
       2.1.2. Have you ever lived with someone with tuberculosis?
 		<RadioField name="patientProfilingQ2" label="Patient Profiling Q2" />
-      <DisplayIf condition={(context) => (typeof (context.model.patientProfilingQ2) !== "undefined" && context.model.patientProfilingQ2 === "Yes")}>
+      <DisplayIf condition={(context) => (typeof (context.model.patientProfilingQ2) !== "undefined" 
+        && (context.model.patientProfilingQ2 === "Yes, the person was diagnosed with TB within the past 4 months" 
+          || context.model.patientProfilingQ2 === "Yes, the person was diagnosed with TB more than 4 months ago"))}>
         <Fragment>
           <font color="red"> **Immediate Doctor's Consult</font><br></br>
           Pls Specify.
@@ -177,6 +239,14 @@ export const formLayouts = {
         </Fragment>
       </DisplayIf>
       2.1.3. Do you have any of the following symptoms? Select all that apply
+      <br></br>    - Cough that has lasted more than 2 weeks
+      <br></br>    - Coughing up blood
+      <br></br>    - Breathlessness
+      <br></br>    - Weight loss
+      <br></br>    - Night sweats
+      <br></br>    - Fever
+      <br></br>    - Loss of appetite
+
 		<RadioField name="patientProfilingQ3" label="Patient Profiling Q3" />
       <DisplayIf condition={(context) => (typeof (context.model.patientProfilingQ3) !== "undefined" && context.model.patientProfilingQ3 === "Yes")}>
         <Fragment>
@@ -214,7 +284,7 @@ export const formLayouts = {
       <DisplayIf condition={(context) => (typeof (context.model.patientProfilingQ11) !== "undefined" && context.model.patientProfilingQ11 === "Yes")}>
         <Fragment>
           2.5.1.1. How much do you smoke?
-          <TextField name="patientProfilingQ25" label="patientProfilingQ25" /> <br></br>
+          <RadioField name="patientProfilingQ25" label="patientProfilingQ25" /> <br></br>
           2.5.1.2 What do you smoke?
           <SelectField name="patientProfilingQ26" checkboxes="true" label="patientProfilingQ26" /> <br></br>
           2.5.1.3 How many years have you been smoking for? (Rounded up)
@@ -246,6 +316,67 @@ export const formLayouts = {
       <NumField name="patientProfilingQ19" label="Patient Profiling Q19" /><br />
       2.6.8 What is your highest education level?
 		<RadioField name="patientProfilingQ20" label="Patient Profiling Q20" />
+    </Fragment>
+  ),
+
+  "Station Select" : (info) => (
+    <Fragment>
+      <h2>STATION SELECT</h2>
+      1. Height and Weight + Wasit and Hip Measurement
+      <RadioField name="stationSelectQ1" label="Station Select Q1"/>
+      <h2>2. Blood Glucose</h2>
+      2.1. Can we check your blood sugar?<br />This will be done by pricking your finger to get a small drop of blood
+      <RadioField name="stationSelectQ2" label="Station Select Q2"/>
+      2.2. Can we check if you have anemia?<br />This will be done by pricking your finger to get a small drop of blood
+      <RadioField name="stationSelectQ3" label="Station Select Q3"/>
+      3. Can we check your blood pressure?
+      <RadioField name="stationSelectQ4" label="Station Select Q4"/>
+      <h2>4. Phlebotomy (for patient aged 40 years old and above)</h2>
+      4.1 Do you have the following conditions?
+      <br></br>- High blood pressure
+      <br></br>- Diabetes
+      <br></br>- Cigarette smoking
+      <br></br>- Family member with coronary artery disease
+      <br></br>- Family member with high cholesterol
+      <br></br>- Chronic kidney disease
+      <RadioField name="stationSelectQ5" label="Station Select Q5"/>
+      <DisplayIf condition={(context) => (typeof (context.model.stationSelectQ5) !== "undefined" && context.model.stationSelectQ5 === "Yes")}>
+        <Fragment>
+          4.1.1. Can we do a blood test to see if you have high cholesterol?<br />A blood sample will be taken by a trained staff. This will then be sent to the lab, and a report will be mailed to you after some time
+          <RadioField name="stationSelectQ6" label="Station Select Q6"/>
+          </Fragment>
+        </DisplayIf>
+      <h2>5. Pap Smear</h2>
+      5.1. Are you married (or have you ever been married)?
+      <RadioField name="stationSelectQ7" label="Station Select Q7"/>
+      <DisplayIf condition={(context) => (typeof (context.model.stationSelectQ7) !== "undefined" && context.model.stationSelectQ7 === "Yes")}>
+        <Fragment>
+          5.1.1. If yes to Q7, have you done a Pap smear in the past 3 years?
+          <RadioField name="stationSelectQ8" label="Station Select Q8"/>
+          <DisplayIf condition={(context) => (typeof (context.model.stationSelectQ8) !== "undefined" && context.model.stationSelectQ8 === "No")}>
+            <Fragment>
+            5.1.1.1.  If no to Q8, would you want to undergo a free Pap smear today to check for cervical cancer?
+            <RadioField name="stationSelectQ9" label="Station Select Q9"/>
+            </Fragment>
+          </DisplayIf>
+        </Fragment>
+      </DisplayIf>
+      <h2>6. Clinical Breast Examination</h2>
+      6.1. Would you want to undergo a breast examination for breast cancer today? 
+      <RadioField name="stationSelectQ10" label="Station Select Q10"/>
+      <h2>7. Women's Education</h2>
+      7.1 Can we teach you about women's health?<br />For adults, we will be sharing about menstrual health and breast self examinations. For girls aged 10-18 years old, we will be sharing about menstrual health only.
+      <RadioField name="stationSelectQ11" label="Station Select Q11"/>
+      <h2>8. Doctors' Consult</h2>
+      8.1. Would you like to see a doctor today? (You will be asked to see the doctor if your test results are abnormal, but would you otherwise want to see the doctor?)
+      <RadioField name="stationSelectQ12" label="Station Select Q12"/>
+      <h2>9. Eye Screening</h2>
+      9.1 Can we check your eyes/vision?
+      <RadioField name="stationSelectQ13" label="Station Select Q13"/>
+      <h2>10. Education</h2>
+      10.1. Can we teach you about healthy lifestyles and how to prevent common diseases like diabetes and high blood pressure?
+      <RadioField name="stationSelectQ14" label="Station Select Q14"/>
+      
     </Fragment>
   ),
 
@@ -642,6 +773,66 @@ export const formLayouts = {
   <TextField name="eyeScreeningQ35" label="Eye Screening Q35" />
       36. Name of doctor
   <TextField name="eyeScreeningQ36" label="Eye Screening Q36" />
+    </Fragment>
+  ),
+
+  "Pre-women's edu quiz" : (info) => (
+    <Fragment>
+      <h2>PRE-WOMEN'S EDUCATION QUIZ</h2>
+      <h2>1. Survey</h2>
+      From a scale of 1-5, how much do you know about menstrual cycles?<br />1 being not at all, and 5 being a lot
+      <RadioField name="preWomenSEduQuizQ1" label="Pre-women's edu quiz Q1"/>
+      <h2>2. Quiz</h2>
+      2.1. Which of the following is/are normal symptom(s) of menstrual periods?
+      <RadioField name="preWomenSEduQuizQ2" label="Pre-women's edu quiz Q2"/>
+      2.2. All of the following are reasons for missed periods except
+      <RadioField name="preWomenSEduQuizQ3" label="Pre-women's edu quiz Q3"/>
+      2.3. Which of the following is true about menstruation
+      <RadioField name="preWomenSEduQuizQ4" label="Pre-women's edu quiz Q4"/>
+      2.4. When is the best time to do a breast self examination?
+      <RadioField name="preWomenSEduQuizQ5" label="Pre-women's edu quiz Q5"/>
+      2.5. How often should you do a breast self examination?
+      <RadioField name="preWomenSEduQuizQ6" label="Pre-women's edu quiz Q6"/>
+      2.6. You should go to the doctor if you notice:
+      <RadioField name="preWomenSEduQuizQ7" label="Pre-women's edu quiz Q7"/>
+      <h2>Score</h2>
+      <SomeComp calculation={(model) => (
+        <h3>
+          Score:
+              {model['preQuizScore'] = calculatePreScore(model)}
+        </h3>
+      )} />
+      
+    </Fragment>
+  ),
+
+  "Post-women's edu quiz" : (info) => (
+    <Fragment>
+      <h2>PRE-WOMEN'S EDUCATION QUIZ</h2>
+      <h2>1. Survey</h2>
+      From a scale of 1-5, how much do you know about menstrual cycles?<br />1 being not at all, and 5 being a lot
+      <RadioField name="postWomenSEduQuizQ1" label="Pre-women's edu quiz Q1"/>
+      <h2>2. Quiz</h2>
+      2.1. Which of the following is/are normal symptom(s) of menstrual periods?
+      <RadioField name="postWomenSEduQuizQ2" label="Pre-women's edu quiz Q2"/>
+      2.2. All of the following are reasons for missed periods except
+      <RadioField name="postWomenSEduQuizQ3" label="Pre-women's edu quiz Q3"/>
+      2.3. Which of the following is true about menstruation
+      <RadioField name="postWomenSEduQuizQ4" label="Pre-women's edu quiz Q4"/>
+      2.4. When is the best time to do a breast self examination?
+      <RadioField name="postWomenSEduQuizQ5" label="Pre-women's edu quiz Q5"/>
+      2.5. How often should you do a breast self examination?
+      <RadioField name="postWomenSEduQuizQ6" label="Pre-women's edu quiz Q6"/>
+      2.6. You should go to the doctor if you notice:
+      <RadioField name="postWomenSEduQuizQ7" label="Pre-women's edu quiz Q7"/>
+      <h2>Score</h2>
+      <SomeComp calculation={(model) => (
+        <h3>
+          Score:
+              {model['postQuizScore'] = calculatePostScore(model)}
+        </h3>
+      )} />
+      
     </Fragment>
   ),
 
