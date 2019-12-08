@@ -62,7 +62,7 @@ class App extends Component {
 
   makeStation(station) {
     return (
-      <p>
+      <p style = {{paddingLeft: 90}}>
         <Button variant="outlined" onClick={this.selectStation.bind(this, station)}>
           {station}
         </Button>
@@ -148,6 +148,7 @@ class App extends Component {
 
           <Grid container
             justify="flex-start"
+            style = {{paddingLeft: 90}}
             spacing={16}>
             {station != "Basic Patient Information" &&
               <Grid item xs={12}>

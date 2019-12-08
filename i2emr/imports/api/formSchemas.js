@@ -71,8 +71,6 @@ export const formSchemas = {
 
   "Screening Review": (info) => { return new SimpleSchema({}) },
 
-  // "Oral Screening": (info) => { return new SimpleSchema({}) },
-
   "Patient Profiling": (info) => {
     return new SimpleSchema({
       patientProfilingQ1: {
@@ -86,6 +84,8 @@ export const formSchemas = {
             }
           }
         }
+      }, doctorConsult : {
+        type : String, optional: true
       }, patientProfilingQ2: {
         type: String, allowedValues: ["Yes, the person was diagnosed with TB within the past 4 months"
           , "Yes, the person was diagnosed with TB more than 4 months ago", "No"], optional: false
@@ -234,7 +234,7 @@ export const formSchemas = {
        type: String, allowedValues: ["Yes", "No", "Not applicable (child)"], optional: false
       }, stationSelectQ11: {
        type: String, allowedValues: ["Yes", "No", "Not applicable (child)"], optional: false
-      }, stationSelectQ12: {
+      }, doctorConsult: {
        type: String, allowedValues: ["Yes", "No"], optional: false
       }, stationSelectQ13: {
         type: String, allowedValues: ["Yes", "No"], optional: false
@@ -250,11 +250,11 @@ export const formSchemas = {
       heightAndWeightQ1: {
         type: Number, optional: false
       }, heightAndWeightQ2: {
-        type: String, allowedValues: ["Below 3rd Percentile", "Normal", "Above 97th Percentile"], optional: false
+        type: String, allowedValues: ["Below 3rd Percentile", "Normal", "Above 97th Percentile"], optional: true
       }, heightAndWeightQ3: {
         type: Number, optional: false
       }, heightAndWeightQ4: {
-        type: String, allowedValues: ["Below 3rd Percentile", "Normal", "Above 97th Percentile"], optional: false
+        type: String, allowedValues: ["Below 3rd Percentile", "Normal", "Above 97th Percentile"], optional: true
       }, heightAndWeightQ5: {
         type: Number, optional: false
       }, heightAndWeightQ6: {
@@ -263,7 +263,9 @@ export const formSchemas = {
         type: Number, optional: false
       }, calculateRatio: {
         type: Number, optional: false
-      }, overview: {
+      }, isChild: {
+        type: String, allowedValues: ["Yes", "No"], optional: false
+      }, doctorConsult: {
         type: String, allowedValues: ["Yes", "No"], optional: false
       }
     }
@@ -275,7 +277,7 @@ export const formSchemas = {
       bloodGlucoseAndHbQ1: {
         type: String, allowedValues: ["Yes", "No"], optional: false
       }, bloodGlucoseAndHbQ2: {
-        type: String, allowedValues: ["< 35 years old", ">= 35 years < 45 years old", ">= 45 years old"], optional: true, custom: function () {
+        type: String, allowedValues: ["< 35 years old", "35 - 49 years old", "> 49 years old"], optional: true, custom: function () {
           if (this.field('bloodGlucoseAndHbQ1').isSet
             && this.field('bloodGlucoseAndHbQ1').value === "No") {
             if (!this.isSet || this.value.length === 0) {
@@ -284,7 +286,7 @@ export const formSchemas = {
           }
         }
       }, bloodGlucoseAndHbQ3: {
-        type: String, allowedValues: ["Male: < 90cm ; Female < 80cm"], optional: true, custom: function () {
+        type: String, allowedValues: ["Female < 80cm, Male < 90cm", "Female 80-89cm, Male 90-99cm", "Female ≥ 90cm, Male ≥ 100cm"], optional: true, custom: function () {
           if (this.field('bloodGlucoseAndHbQ1').isSet
             && this.field('bloodGlucoseAndHbQ1').value === "No") {
             if (!this.isSet || this.value.length === 0) {
@@ -293,7 +295,9 @@ export const formSchemas = {
           }
         }
       }, bloodGlucoseAndHbQ4: {
-        type: String, allowedValues: ["Hardly exercise", "Moderately Exercise", "Vigorous Exercise or Strenuous Work"], optional: true, custom: function () {
+        type: String, allowedValues: ["Vigorous exercise or strenuous work"
+          , "Moderate exercise at work/home", "Mild exercise at work/home"
+          , "No exercise and sedentary at work/home"], optional: true, custom: function () {
           if (this.field('bloodGlucoseAndHbQ1').isSet
             && this.field('bloodGlucoseAndHbQ1').value === "No") {
             if (!this.isSet || this.value.length === 0) {
@@ -302,7 +306,7 @@ export const formSchemas = {
           }
         }
       }, bloodGlucoseAndHbQ5: {
-        type: String, allowedValues: ["1", "1 to 4", "5 to 10"], optional: true, custom: function () {
+        type: String, allowedValues: ["0", "1", "2 and above"], optional: true, custom: function () {
           if (this.field('bloodGlucoseAndHbQ1').isSet
             && this.field('bloodGlucoseAndHbQ1').value === "No") {
             if (!this.isSet || this.value.length === 0) {
@@ -314,7 +318,7 @@ export const formSchemas = {
         type: String, optional: false
       }, bloodGlucoseAndHbQ7: {
         type: Number, optional: false
-      }, bloodGlucoseAndHbQ8: {
+      }, doctorConsult: {
         type: String, allowedValues: ["Yes", "No"], optional: false
       }, totalScore: {
         type: Number, optional: false
@@ -328,9 +332,9 @@ export const formSchemas = {
   "Blood Pressure": (info) => {
     return new SimpleSchema({
       bpQ1: {
-        type: Number, optional: true
+        type: Number, optional: false
       }, bpQ2: {
-        type: Number, optional: true
+        type: Number, optional: false
       }, bpQ3: {
         type: Number, optional: true
       }, bpQ4: {
@@ -339,11 +343,11 @@ export const formSchemas = {
         type: Number, optional: true
       }, bpQ6: {
         type: Number, optional: true
-      }, bpQ7: {
+      }, averageSys: {
         type: Number, optional: false
-      }, bpQ8: {
+      }, averageDys: {
         type: Number, optional: false
-      }, bpQ9: {
+      }, doctorConsult: {
         type: String, allowedValues: ["Yes", "No"], optional: false
       }
     }

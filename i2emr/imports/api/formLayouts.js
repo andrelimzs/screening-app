@@ -135,6 +135,54 @@ function calculatePreScore(model) {
   return count;
 }
 
+function calculateGlucose(model) {
+  let count = 0
+  if (typeof (model['bloodGlucoseAndHbQ2']) !== "undefined" 
+    && typeof (model['bloodGlucoseAndHbQ3']) !== "undefined"
+    && typeof (model['bloodGlucoseAndHbQ4']) !== "undefined"
+    && typeof (model['bloodGlucoseAndHbQ5']) !== "undefined") {
+    if (model['bloodGlucoseAndHbQ2'] === "< 35 years old") {
+      count
+    } else if (model['bloodGlucoseAndHbQ2'] === "35 - 49 years old"){
+      count = count + 20
+    } else {
+      count = count + 30
+    }
+    if (model['bloodGlucoseAndHbQ3'] === "Female < 80cm, Male < 90cm") {
+      count
+    } else if (model['bloodGlucoseAndHbQ3'] === "Female 80-89cm, Male 90-99cm"){
+      count = count + 10
+    } else {
+      count = count + 20
+    }
+    if (model['bloodGlucoseAndHbQ4'] === "Vigorous exercise or strenuous work") {
+      count
+    } else if (model['bloodGlucoseAndHbQ4'] === "Moderate exercise at work/home"){
+      count = count + 10
+    } else if (model['bloodGlucoseAndHbQ4'] === "Mild exercise at work/home"){
+      count = count + 20
+    } else {
+      count = count + 30
+    }
+    if (model['bloodGlucoseAndHbQ5'] === "0") {
+      count
+    } else if (model['bloodGlucoseAndHbQ5'] === "1"){
+      count = count + 10
+    } else {
+      count = count + 20
+    }
+  }
+  return count;
+}
+
+function consult(model, question, expected) {
+  if (typeof (model[question]) !== "undefined") {
+    if (model[question] === expected || typeof(model['doctorConsult']) !== "undefined") {
+      return String("Yes")
+    }
+  }
+}
+
 function calculatePostScore(model) {
   let count = 0
   if (typeof (model['postWomenSEduQuizQ2']) !== "undefined" 
@@ -163,6 +211,68 @@ function calculatePostScore(model) {
     }
   }
   return count;
+}
+
+function calculateSysBP(model) {
+  let sysBP = 0
+  if (typeof (model['bpQ1']) === "undefined") {
+    sysBP = 0
+  } else if (typeof (model['bpQ3']) !== "undefined") {
+    if (typeof (model['bpQ5']) !== "undefined") {
+      const a = model["bpQ1"]
+      const b = model["bpQ3"]
+      const c = model["bpQ5"]
+      if ((a > b) && (a > c)){
+        sysBP = (b + c) / 2
+      } else if (a > b) {
+        sysBP = (a + b) / 2
+      } else if (a > c) {
+        sysBP = (a + c) /2
+      } else {
+        if (b > c) {
+          sysBP = (a+c) / 2
+        } else {
+          sysBP = (a + b) / 2
+        }
+      }
+    } else {
+      sysBP = (model["bpQ1"] + model["bpQ3"]) / 2 
+    }
+  } else {
+    sysBP = model["bpQ1"]
+  }
+  return sysBP
+}
+
+function calculateDysBP(model) {
+  let sysBP = 0
+  if (typeof (model['bpQ2']) === "undefined") {
+    sysBP = 0
+  } else if (typeof (model['bpQ4']) !== "undefined") {
+    if (typeof (model['bpQ6']) !== "undefined") {
+      const a = model["bpQ2"]
+      const b = model["bpQ4"]
+      const c = model["bpQ6"]
+      if ((a > b) && (a > c)){
+        sysBP = (b + c) / 2
+      } else if (a > b) {
+        sysBP = (a + b) / 2
+      } else if (a > c) {
+        sysBP = (a + c) /2
+      } else {
+        if (b > c) {
+          sysBP = (a+c) / 2
+        } else {
+          sysBP = (a + b) / 2
+        }
+      }
+    } else {
+      sysBP = (model["bpQ2"] + model["bpQ4"]) / 2 
+    }
+  } else {
+    sysBP = model["bpQ2"]
+  }
+  return sysBP
 }
 
 // Define the layouts
@@ -223,6 +333,12 @@ export const formLayouts = {
       <DisplayIf condition={(context) => (typeof (context.model.patientProfilingQ1) !== "undefined" && context.model.patientProfilingQ1 === "Yes")}>
         <Fragment>
           <font color="red"> **Immediate Doctor's Consult</font><br></br>
+          <SomeComp calculation={(model) => (
+            <text>
+              Doctor Consult? :
+              {model['doctorConsult'] = consult(model, "patientProfilingQ1", "Yes")}
+            </text>
+            )} /> <br></br>
           Pls Specify.
           <TextField name="patientProfilingQ21" label="patientProfilingQ21" />
         </Fragment>
@@ -233,7 +349,28 @@ export const formLayouts = {
         && (context.model.patientProfilingQ2 === "Yes, the person was diagnosed with TB within the past 4 months" 
           || context.model.patientProfilingQ2 === "Yes, the person was diagnosed with TB more than 4 months ago"))}>
         <Fragment>
-          <font color="red"> **Immediate Doctor's Consult</font><br></br>
+        <DisplayIf condition={(context) => (typeof (context.model.patientProfilingQ2) !== "undefined" 
+        && (context.model.patientProfilingQ2 === "Yes, the person was diagnosed with TB within the past 4 months" ))}>
+        <Fragment>
+        <SomeComp calculation={(model) => (
+            <text>
+              Doctor Consult? :
+              {model['doctorConsult'] = consult(model, "patientProfilingQ2", "Yes, the person was diagnosed with TB within the past 4 months")}
+            </text>
+            )} /> <br></br>
+            </Fragment>
+            </DisplayIf>
+            <DisplayIf condition={(context) => (typeof (context.model.patientProfilingQ2) !== "undefined" 
+             && (context.model.patientProfilingQ2 === "Yes, the person was diagnosed with TB more than 4 months ago" ))}>
+              <Fragment>
+                <SomeComp calculation={(model) => (
+                <text>
+                Doctor Consult? :
+                {model['doctorConsult'] = consult(model, "patientProfilingQ2", "Yes, the person was diagnosed with TB more than 4 months ago")}
+                </text>
+                )} /> <br></br>
+              </Fragment>
+            </DisplayIf>
           Pls Specify.
           <TextField name="patientProfilingQ22" label="patientProfilingQ22" />
         </Fragment>
@@ -250,7 +387,17 @@ export const formLayouts = {
 		<RadioField name="patientProfilingQ3" label="Patient Profiling Q3" />
       <DisplayIf condition={(context) => (typeof (context.model.patientProfilingQ3) !== "undefined" && context.model.patientProfilingQ3 === "Yes")}>
         <Fragment>
-          <font color="red"> **Immediate Doctor's Consult</font><br></br>
+        <DisplayIf condition={(context) => (typeof (context.model.patientProfilingQ3) !== "undefined" 
+             && (context.model.patientProfilingQ3 === "Yes" ))}>
+              <Fragment>
+                <SomeComp calculation={(model) => (
+                <text>
+                Doctor Consult? :
+                {model['doctorConsult'] = consult(model, "patientProfilingQ3", "Yes")}
+                </text>
+                )} /> <br></br>
+              </Fragment>
+            </DisplayIf>
           Pls Specify.
           <SelectField name="patientProfilingQ23" checkboxes="true" label="patientProfilingQ23" />
         </Fragment>
@@ -364,18 +511,18 @@ export const formLayouts = {
       <h2>6. Clinical Breast Examination</h2>
       6.1. Would you want to undergo a breast examination for breast cancer today? 
       <RadioField name="stationSelectQ10" label="Station Select Q10"/>
-      <h2>7. Women's Education</h2>
+      {/* <h2>7. Women's Education</h2>
       7.1 Can we teach you about women's health?<br />For adults, we will be sharing about menstrual health and breast self examinations. For girls aged 10-18 years old, we will be sharing about menstrual health only.
-      <RadioField name="stationSelectQ11" label="Station Select Q11"/>
+      <RadioField name="stationSelectQ11" label="Station Select Q11"/> */}
       <h2>8. Doctors' Consult</h2>
       8.1. Would you like to see a doctor today? (You will be asked to see the doctor if your test results are abnormal, but would you otherwise want to see the doctor?)
-      <RadioField name="stationSelectQ12" label="Station Select Q12"/>
+      <RadioField name="doctorConsult" label="doctorConsult"/>
       <h2>9. Eye Screening</h2>
       9.1 Can we check your eyes/vision?
       <RadioField name="stationSelectQ13" label="Station Select Q13"/>
-      <h2>10. Education</h2>
+      {/* <h2>10. Education</h2>
       10.1. Can we teach you about healthy lifestyles and how to prevent common diseases like diabetes and high blood pressure?
-      <RadioField name="stationSelectQ14" label="Station Select Q14"/>
+      <RadioField name="stationSelectQ14" label="Station Select Q14"/> */}
       
     </Fragment>
   ),
@@ -383,16 +530,25 @@ export const formLayouts = {
   "Height and Weight": (info) => (
     <Fragment>
       <h2>1. HEIGHT & WEIGHT</h2>
+      Is the participant a child?
+      <RadioField name="isChild" label="isChild" /><br />
       1.1 Height (m) <br />
       <NumField name="heightAndWeightQ1" label="Height and Weight Q1" /><br />
-      Percentile
-		<RadioField name="heightAndWeightQ2" label="Height and Weight Q2" />
+      <DisplayIf condition={(context) => (typeof (context.model.isChild) !== "undefined" && context.model.isChild === "Yes")}>
+        <Fragment>
+          Pls select percentile
+		      <RadioField name="heightAndWeightQ2" label="Height and Weight Q2" />
+        </Fragment>
+      </DisplayIf>
       1.2 Weight (kg) <br />
       <NumField name="heightAndWeightQ3" label="Height and Weight Q3" /><br />
-      Percentile
-		<RadioField name="heightAndWeightQ4" label="Height and Weight Q4" />
+      <DisplayIf condition={(context) => (typeof (context.model.isChild) !== "undefined" && context.model.isChild === "Yes")}>
+        <Fragment>
+          Pls select percentile
+		      <RadioField name="heightAndWeightQ4" label="Height and Weight Q4" />
+        </Fragment>
+      </DisplayIf>
       <h2>1.3 BMI</h2>
-      {/* <TextField name = "calculateBMI" label="BMI"/><br></br> */}
       <SomeComp calculation={(model) => (
         <h3>
           BMI:
@@ -413,7 +569,7 @@ export const formLayouts = {
       )} />
       <h2>Overview </h2>
       Doctor Consult?
-    <RadioField name="overview" label="overview" /><br />
+    <RadioField name="doctorConsult" label="doctorConsult" /><br />
     </Fragment>
   ),
 
@@ -432,8 +588,12 @@ export const formLayouts = {
           <RadioField name="bloodGlucoseAndHbQ4" label="Blood Glucose and Hb Q4" />
           3.1.4. Family history
           <RadioField name="bloodGlucoseAndHbQ5" label="Blood Glucose and Hb Q5" />
-          Total Score
-          <NumField name="totalScore" label="totalScore" /> <br />
+          <SomeComp calculation={(model) => (
+            <h3>
+              Total Score:
+                {model['totalScore'] = calculateGlucose(model)}
+            </h3>
+          )} />
           <SomeComp calculation={(model) => (
             <h3>
               Risk level:
@@ -447,7 +607,7 @@ export const formLayouts = {
       3.3. Hemoglobin (g/dL) <br />
       <NumField name="bloodGlucoseAndHbQ7" label="Blood Glucose and Hb Q7" /><br />
       Overview : Doctor Consult?
-		<RadioField name="bloodGlucoseAndHbQ8" label="Blood Glucose and Hb Q8" />
+		<RadioField name="doctorConsult" label="doctorConsult" />
     </Fragment>
   ),
 
@@ -464,18 +624,30 @@ export const formLayouts = {
       <NumField name="bpQ3" label="BP Q3" /><br />
       4.2.2. Diastolic Blood Pressure  <br />
       <NumField name="bpQ4" label="BP Q4" /><br />
-      <h2>4.3. BP 3rd Taking</h2>
-      4.3.1. Systolic Blood Pressure <br />
-      <NumField name="bpQ5" label="BP Q5" /><br />
-      4.3.2. Diastolic Blood Pressure  <br />
-      <NumField name="bpQ6" label="BP Q6" /><br />
+      <DisplayIf condition={(context) => (((context.model.bpQ1 - context.model.bpQ3) > 5) || ((context.model.bpQ2 - context.model.bpQ4) > 5))}>
+        <Fragment>
+          <h2>4.3. BP 3rd Taking</h2>
+          4.3.1. Systolic Blood Pressure <br />
+          <NumField name="bpQ5" label="BP Q5" /><br />
+          4.3.2. Diastolic Blood Pressure  <br />
+          <NumField name="bpQ6" label="BP Q6" /><br />
+        </Fragment>
+        </DisplayIf>
       <h2>4.4. BP average</h2>
       4.4.1. Systolic Blood Pressure <br />
-      <NumField name="bpQ7" label="BP Q7" /><br />
+      <SomeComp calculation={(model) => (
+            <h3>
+                {model['averageSys'] = calculateSysBP(model)}
+            </h3>
+          )} />
       4.4.2. Diastolic Blood Pressure  <br />
-      <NumField name="bpQ8" label="BP Q8" /><br />
-      Overall
-		<RadioField name="bpQ9" label="BP Q9" />
+      <SomeComp calculation={(model) => (
+            <h3>
+                {model['averageDys'] = calculateDysBP(model)}
+            </h3>
+          )} />
+      Doctor Consult?
+		  <RadioField name="doctorConsult" label="doctorConsult" />
 
     </Fragment>
   ),
