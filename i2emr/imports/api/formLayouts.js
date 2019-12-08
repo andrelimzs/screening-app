@@ -624,7 +624,8 @@ export const formLayouts = {
       <NumField name="bpQ3" label="BP Q3" /><br />
       4.2.2. Diastolic Blood Pressure  <br />
       <NumField name="bpQ4" label="BP Q4" /><br />
-      <DisplayIf condition={(context) => (((context.model.bpQ1 - context.model.bpQ3) > 5) || ((context.model.bpQ2 - context.model.bpQ4) > 5))}>
+      <DisplayIf condition={(context) => ((Math.abs(context.model.bpQ1 - context.model.bpQ3) > 5) 
+                                            || (Math.abs(context.model.bpQ2 - context.model.bpQ4) > 5))}>
         <Fragment>
           <h2>4.3. BP 3rd Taking</h2>
           4.3.1. Systolic Blood Pressure <br />
