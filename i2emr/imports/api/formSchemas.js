@@ -39,7 +39,7 @@ export const formSchemas = {
       }, basicPatientInformationQ7: {
         type: String, optional: false
       }, basicPatientInformationQ8: {
-        type: Number, optional: false
+        type: Number, optional: true
       }, basicPatientInformationQ9: {
         type: String, optional: false
       }, basicPatientInformationQ10: {
@@ -114,7 +114,7 @@ export const formSchemas = {
         type: String, allowedValues: ["Cough that has lasted more than 2 weeks", "Coughing up blood", "Breathlessness"
         , "Weight loss", "Night sweats", "Fever", "Loss of appetite"]
       }, patientProfilingQ4: {
-        type: Array, optional: false
+        type: Array, optional: true
       }, "patientProfilingQ4.$": {
         type: String, allowedValues: ["Diabetes", "High Blood Pressure", "High Cholesterol", "Others"]
       }, patientProfilingQ5: {
@@ -457,7 +457,7 @@ export const formSchemas = {
       doctorsConsultQ1: {
         type: Array, optional: false
       }, "doctorsConsultQ1.$": {
-        type: String, allowedValues: ["Overweight/obesity", "Heart burn", "Diabetes", "High blood pressure", "Heart disease", "Unexplained weight loss", "Respiratory problems", "Joint pain/back pain", "Stroke", "Visual impairment", "Mental health issues", "Alcohol overuse"]
+        type: String, allowedValues: ["Overweight/obesity", "Heart burn", "Diabetes", "High blood pressure", "Heart disease", "Unexplained weight loss", "Respiratory problems", "Joint pain/back pain", "Stroke", "Visual impairment", "Mental health issues"]
       }, doctorsConsultQ2: {
         type: String, optional: false
       }, doctorsConsultQ3: {

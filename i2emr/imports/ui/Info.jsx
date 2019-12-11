@@ -24,6 +24,12 @@ class Info extends Component {
     console.log(station)
     //const currentInfoLayout = infoLayouts[station];
     const basicPatientDetails = this.props.patientInfo['Basic Patient Information']
+    const patientProfiling = this.props.patientInfo['Patient Profiling']
+    const stationSelect = this.props.patientInfo['Station Select']
+    const heightAndWeight = this.props.patientInfo['Height and Weight']
+    const bloodGlucose = this.props.patientInfo['Blood Glucose and Hb']
+    const bloodPressure = this.props.patientInfo['Blood Pressure']
+    // const papSmear = this.props.patientInfo['Pap Smear']
     // console.log(currentInfoLayout(this.props.patientInfo))
 
     return (
@@ -93,6 +99,42 @@ class Info extends Component {
 
             <b>{basicPatientDetails.basicPatientInformationQ11}</b>
           }
+          <br />
+
+          12. Doctor's Consult
+          <br />
+          Patient Profiling:
+          {
+            patientProfiling &&
+            <b>{patientProfiling.doctorConsult}</b>
+          }
+          <br />
+          Station Select:
+          {
+            stationSelect &&
+            <b>{stationSelect.doctorConsult}</b>
+          }
+          <br />
+          Height and Weight:
+          {
+            heightAndWeight &&
+            <b>{heightAndWeight.doctorConsult}</b>
+          }
+          <br />
+          Blood Glucose:
+          {
+            bloodGlucose &&
+            <b>{bloodGlucose.doctorConsult}</b>
+          }
+          <br />
+          Blood Pressure:
+          {
+            bloodPressure &&
+            <b>{bloodPressure.doctorConsult}</b>
+          }
+          <br />
+
+          <bt />
       </Paper>
     );
   }

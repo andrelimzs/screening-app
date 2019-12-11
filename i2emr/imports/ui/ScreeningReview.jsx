@@ -453,9 +453,9 @@ class ScreeningReview extends Component {
                   </Grid>
                   <Divider /><br />
                   <Grid container direction="row" justify="space-between" alignItems="flex-end" >
-                    <Grid item xs={2}>Average Blood Pressure (Systolic): <TextField variant="outlined" error={isBpToBeFlag(info)} fullWidth={true} margin="dense" value={populateField(info, 'Blood Pressure', 'bpQ7')} /></Grid>
-                    <Grid item xs={2}>Average Blood Pressure (Diastolic): <TextField variant="outlined" error={isBpToBeFlag(info)} fullWidth={true} margin="dense" value={populateField(info, 'Blood Pressure', 'bpQ8')} /></Grid>
-                    <Grid item xs={2}>BMI: <TextField variant="outlined" fullWidth={true} margin="dense" error={isBmiToBeFlag(info)} value={populateField(info, 'Height and Weight', 'hxCancerQ21')} /></Grid>
+                    <Grid item xs={2}>Average Blood Pressure (Systolic): <TextField variant="outlined" error={isBpToBeFlag(info)} fullWidth={true} margin="dense" value={populateField(info, 'Blood Pressure', 'averageSys')} /></Grid>
+                    <Grid item xs={2}>Average Blood Pressure (Diastolic): <TextField variant="outlined" error={isBpToBeFlag(info)} fullWidth={true} margin="dense" value={populateField(info, 'Blood Pressure', 'averageDys')} /></Grid>
+                    <Grid item xs={2}>BMI: <TextField variant="outlined" fullWidth={true} margin="dense" error={isBmiToBeFlag(info)} value={populateField(info, 'Height and Weight', 'calculateBMI')} /></Grid>
                     <Grid item xs={2}>Height (in cm): <TextField variant="outlined" error={isBmiToBeFlag(info)} fullWidth={true} margin="dense" value={populateField(info, 'Height and Weight', 'heightAndWeightQ1')} /></Grid>
                     <Grid item xs={2}>Weight (in kg): <TextField variant="outlined" error={isBmiToBeFlag(info)} fullWidth={true} margin="dense" value={populateField(info, 'Height and Weight', 'heightAndWeightQ3')} /></Grid>
                     <Grid item xs={2}>Waist Circumference (in cm): <TextField variant="outlined" error={isWaistCircumToBeFlag(info)} fullWidth={true} margin="dense" value={populateField(info, 'Height and Weight', 'heightAndWeightQ5')} /></Grid>
