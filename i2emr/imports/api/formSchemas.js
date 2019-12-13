@@ -113,7 +113,7 @@ export const formSchemas = {
 
   "Patient Profiling": (info) => {
     return new SimpleSchema({
-      patientProfilingQ1: {
+       /* patientProfilingQ1: {
         type: String, allowedValues: ["Yes", "No"], optional: false
       }, patientProfilingQ21: {
         type: String, optional: true, custom: function () {
@@ -125,8 +125,8 @@ export const formSchemas = {
           }
         }
       }, doctorConsult : {
-        type : String, optional: true
-      }, patientProfilingQ2: {
+        type : String, optional: true 
+      },  patientProfilingQ2: {
         type: String, allowedValues: ["Yes, the person was diagnosed with TB within the past 4 months"
           , "Yes, the person was diagnosed with TB more than 4 months ago", "No"], optional: false
       }, patientProfilingQ22: {
@@ -153,9 +153,9 @@ export const formSchemas = {
       }, "patientProfilingQ23.$": {
         type: String, allowedValues: ["Cough that has lasted more than 2 weeks", "Coughing up blood", "Breathlessness"
         , "Weight loss", "Night sweats", "Fever", "Loss of appetite"]
-      }, patientProfilingQ4: {
+      }, */patientProfilingQ4: {
         type: Array, optional: true
-      }, "patientProfilingQ4.$": {
+      },"patientProfilingQ4.$": {
         type: String, allowedValues: ["Diabetes", "High Blood Pressure", "High Cholesterol", "Others"]
       }, patientProfilingQ5: {
         type: String, optional: false
@@ -266,21 +266,21 @@ export const formSchemas = {
         type: String, allowedValues: ["Yes", "No", "Not applicable (child)"], optional: true
       }, stationSelectQ7: {
         type: String, allowedValues: ["Yes", "No"], optional: false
-      }, stationSelectQ8: {
+      },  stationSelectQ8: {
         type: String, allowedValues: ["Yes", "No"], optional: true
-      }, stationSelectQ9: {
+      }, /*stationSelectQ9: {
         type: String, allowedValues: ["Yes", "No"], optional: true
       }, stationSelectQ10: {
        type: String, allowedValues: ["Yes", "No", "Not applicable (child)"], optional: false
       }, stationSelectQ11: {
        type: String, allowedValues: ["Yes", "No", "Not applicable (child)"], optional: true
-      }, doctorConsult: {
+      }, */ doctorConsult: {
        type: String, allowedValues: ["Yes", "No"], optional: false
-      }, stationSelectQ13: {
+      }, /* stationSelectQ13: {
         type: String, allowedValues: ["Yes", "No"], optional: false
       }, stationSelectQ14: {
         type: String, allowedValues: ["Yes", "No", "Not applicable (child)"], optional: true
-      }
+      } */
     }
    )
   },
@@ -407,7 +407,7 @@ export const formSchemas = {
     )
   },
 
-  "Pap Smear": (info) => {
+  /* "Pap Smear": (info) => {
     return new SimpleSchema({
       papSmearQ1: {
         type: String, allowedValues: ["Yes", "No"], optional: false
@@ -418,9 +418,9 @@ export const formSchemas = {
       }
     }
     )
-  },
+  }, */
 
-  "Breast Screening": (info) => {
+  /* "Breast Screening": (info) => {
     return new SimpleSchema({
       breastScreeningQ1: {
         type: String, allowedValues: ["Yes", "No"], optional: false
@@ -456,9 +456,9 @@ export const formSchemas = {
       }
     }
     )
-  },
+  }, */
 
-  "Post-screening feedback": (info) => {
+  /* "Post-screening feedback": (info) => {
     return new SimpleSchema({
       postScreeningFeedbackQ1: {
         type: String, allowedValues: ["Strongly Agree", "Agree", "Disagree", "Strongly Disagree"], optional: false
@@ -495,7 +495,7 @@ export const formSchemas = {
       }
     }
     )
-  },
+  }, */
   "Doctors' Consult": (info) => {
     return new SimpleSchema({
       doctorsConsultQ1: {
@@ -522,13 +522,16 @@ export const formSchemas = {
     )
   },
 
-  // "Eye Screening": (info) => {
-  //   return new SimpleSchema({
-  //     eyeScreeningQ1: {
-  //       type: String, allowedValues: ["Yes", "No"], optional: false
-  //     }, eyeScreeningQ2: {
-  //       type: String, optional: false
-  //     }, eyeScreeningQ3: {
+  "Eye Screening": (info) => {
+     return new SimpleSchema({
+      eyeScreeningQ1: {
+         type: String, allowedValues: ["Yes", "No"], optional: false
+       }, eyeScreeningQ2: {
+         type: String, optional: false
+       }, 
+      })
+    }
+       //eyeScreeningQ3: {
   //       type: String, optional: false
   //     }, eyeScreeningQ4: {
   //       type: String, optional: false
@@ -600,7 +603,7 @@ export const formSchemas = {
   //   }
   //   )
   // },
-  "Eye Screening": (info) => {
+ /*  "Eye Screening": (info) => {
     return new SimpleSchema({
       eyeScreeningQ1: {
         type: String, allowedValues: ["Yes", "No"], optional: false
@@ -609,9 +612,9 @@ export const formSchemas = {
       }
     }
     )
-  },
+  }, */
 
-  "Pre-women's edu quiz" : (info) => {
+  /* "Pre-women's edu quiz" : (info) => {
     return new SimpleSchema({
       preWomenSEduQuizQ1: {
         type: String, allowedValues: ["1", "2", "3", "4", "5"], optional: false
@@ -654,5 +657,5 @@ export const formSchemas = {
       },
     }
    )
-  },
+  }, */
 }

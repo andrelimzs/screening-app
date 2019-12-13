@@ -164,6 +164,7 @@ class Info extends Component {
     const open = Boolean(anchorEl);
     const textFieldLabel = this.state.textFieldLabel;
     const textFieldValue = this.state.textFieldValue;
+    console.log(this.props.patientInfo)
 
     return (
       <Paper elevation={1}>
