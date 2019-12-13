@@ -159,7 +159,8 @@ export const formSchemas = {
         type: String, allowedValues: ["Diabetes", "High Blood Pressure", "High Cholesterol", "Others"]
       }, patientProfilingQ5: {
         type: String, optional: false
-      }, patientProfilingQ6: {
+      }, 
+      /*patientProfilingQ6: {
         type: String, optional: false
       }, patientProfilingQ7: {
         type: String, optional: false
@@ -167,7 +168,8 @@ export const formSchemas = {
         type: String, optional: false
       }, patientProfilingQ9: {
         type: String, optional: false
-      }, patientProfilingQ10: {
+      }, */
+      patientProfilingQ10: {
         type: String, allowedValues: ["Hospital", "Clinics", "Traditional Medicine", "Seldom/Never visits the doctor"], optional: false
       }, patientProfilingQ24: {
         type: String, optional: true, custom: function () {
@@ -254,7 +256,7 @@ export const formSchemas = {
       }, stationSelectQ4: {
         type: String, allowedValues: ["Yes", "No", "Not Applicable (Child)"], optional: false
       }, stationSelectQ5: {
-        type: String, allowedValues: ["Yes", "None of the above/not applicable (Age < 40)"], optional: false, optional: true, custom: function () {
+        type: String, allowedValues: ["Yes", "None of the above/not applicable (Age < 40)"], optional: false, optional: false, custom: function () {
           if (this.field('stationSelectQ4').isSet
             && this.field('stationSelectQ4').value === "Yes") {
             if (!this.isSet || this.value.length === 0) {
@@ -264,11 +266,11 @@ export const formSchemas = {
         }
       }, stationSelectQ6: {
         type: String, allowedValues: ["Yes", "No", "Not applicable (child)"], optional: true
-      }, stationSelectQ7: {
+      }, /*stationSelectQ7: {
         type: String, allowedValues: ["Yes", "No"], optional: false
-      },  stationSelectQ8: {
+      }, stationSelectQ8: {
         type: String, allowedValues: ["Yes", "No"], optional: true
-      }, /*stationSelectQ9: {
+      }, stationSelectQ9: {
         type: String, allowedValues: ["Yes", "No"], optional: true
       }, stationSelectQ10: {
        type: String, allowedValues: ["Yes", "No", "Not applicable (child)"], optional: false

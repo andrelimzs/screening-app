@@ -496,17 +496,17 @@ export const formLayouts = {
       <h2> MEDICAL HISTORY</h2>
        Do you have any of the following medical conditions?
 		<SelectField name="patientProfilingQ4" checkboxes="true" label="Patient Profiling Q4" />
-      <h2> MEDICAL HISTORY: OTHERS</h2>
+      <h3> MEDICAL HISTORY: OTHERS</h3>
      Do you have other medical conditions we should take note of? (if none, indicate NIL)
 		<TextField name="patientProfilingQ5" label="Patient Profiling Q5" />
      How are you managing these conditions? (check-ups, medicines, diet/exercise, others)
-		<TextField name="patientProfilingQ6" label="Patient Profiling Q6" />
+		{/* <TextField name="patientProfilingQ6" label="Patient Profiling Q6" />
      Where do you go to for routine healthcare?
 		<TextField name="patientProfilingQ7" label="Patient Profiling Q7" />
      Where do you go to for emergency medical services (eg. fall, injury, fainting)?
 		<TextField name="patientProfilingQ8" label="Patient Profiling Q8" />
      Are you taking any other medications? (If yes, indicate what medication and why. If none, indicate NIL)
-		<TextField name="patientProfilingQ9" label="Patient Profiling Q9" />
+		<TextField name="patientProfilingQ9" label="Patient Profiling Q9" /> */}
       <h2> BARRIERS TO HEALTHCARE</h2>
        What type of doctor do you see for your existing conditions?
 		<RadioField name="patientProfilingQ10" label="Patient Profiling Q10" />
@@ -517,21 +517,21 @@ export const formLayouts = {
         </Fragment>
       </DisplayIf>
       <h2> SMOKING</h2>
-       Do you currently smoke?
+       Do you currently smoke/chew?
 		<RadioField name="patientProfilingQ11" label="Patient Profiling Q11" />
       <DisplayIf condition={(context) => (typeof (context.model.patientProfilingQ11) !== "undefined" && context.model.patientProfilingQ11 === "Yes")}>
         <Fragment>
-           How much do you smoke?
+           How much do you smoke/chew?
           <RadioField name="patientProfilingQ25" label="patientProfilingQ25" /> <br></br>
-           What do you smoke?
+           What do you smoke/chew?
           <SelectField name="patientProfilingQ26" checkboxes="true" label="patientProfilingQ26" /> <br></br>
-           How many years have you been smoking for? (Rounded up)
+           How many years have you been smoking/chewing for? (Rounded up)
           <NumField name="patientProfilingQ27" label="Patient Profiling Q27" /><br></br>
         </Fragment>
       </DisplayIf>
       <DisplayIf condition={(context) => (typeof (context.model.patientProfilingQ11) !== "undefined" && context.model.patientProfilingQ11 === "No")}>
         <Fragment>
-           Have you smoke before?
+           Have you smoke/chew before?
           <RadioField name="patientProfilingQ28" label="patientProfilingQ28" /> <br></br>
         </Fragment>
       </DisplayIf>
@@ -560,17 +560,17 @@ export const formLayouts = {
   "Station Select" : (info) => (
     <Fragment>
       <h2>STATION SELECT</h2>
-      1. Height and Weight + Wasit and Hip Measurement
+       Height and Weight + Wasit and Hip Measurement
       <RadioField name="stationSelectQ1" label="Station Select Q1"/>
-      <h2>2. Blood Glucose</h2>
-      2.1. Can we check your blood sugar?<br />This will be done by pricking your finger to get a small drop of blood
+      <h2>Blood Glucose</h2>
+       Can we check your blood sugar?<br />This will be done by pricking your finger to get a small drop of blood
       <RadioField name="stationSelectQ2" label="Station Select Q2"/>
-      2.2. Can we check if you have anemia?<br />This will be done by pricking your finger to get a small drop of blood
+       Can we check if you have anemia?<br />This will be done by pricking your finger to get a small drop of blood
       <RadioField name="stationSelectQ3" label="Station Select Q3"/>
-      3. Can we check your blood pressure?
+       Can we check your blood pressure?
       <RadioField name="stationSelectQ4" label="Station Select Q4"/>
-      <h2>4. Phlebotomy (for patient aged 40 years old and above)</h2>
-      4.1 Do you have the following conditions?
+      <h2> Phlebotomy (for patient aged 40 years old and above)</h2>
+       Do you have the following conditions?
       <br></br>- High blood pressure
       <br></br>- Diabetes
       <br></br>- Cigarette smoking
@@ -580,33 +580,33 @@ export const formLayouts = {
       <RadioField name="stationSelectQ5" label="Station Select Q5"/>
       <DisplayIf condition={(context) => (typeof (context.model.stationSelectQ5) !== "undefined" && context.model.stationSelectQ5 === "Yes")}>
         <Fragment>
-          4.1.1. Can we do a blood test to see if you have high cholesterol?<br />A blood sample will be taken by a trained staff. This will then be sent to the lab, and a report will be mailed to you after some time
+          Can we do a blood test to see if you have high cholesterol?<br />A blood sample will be taken by a trained staff. This will then be sent to the lab, and a report will be mailed to you after some time
           <RadioField name="stationSelectQ6" label="Station Select Q6"/>
           </Fragment>
         </DisplayIf>
-      <h2>5. Pap Smear</h2>
+      {/* <h2>5. Pap Smear</h2>
       5.1. Are you married (or have you ever been married)?
       <RadioField name="stationSelectQ7" label="Station Select Q7"/>
       <DisplayIf condition={(context) => (typeof (context.model.stationSelectQ7) !== "undefined" && context.model.stationSelectQ7 === "Yes")}>
         <Fragment>
           5.1.1. If yes to Q7, have you done a Pap smear in the past 3 years?
           <RadioField name="stationSelectQ8" label="Station Select Q8"/>
-          {/* <DisplayIf condition={(context) => (typeof (context.model.stationSelectQ8) !== "undefined" && context.model.stationSelectQ8 === "No")}>
+          <DisplayIf condition={(context) => (typeof (context.model.stationSelectQ8) !== "undefined" && context.model.stationSelectQ8 === "No")}>
             <Fragment>
             5.1.1.1.  If no to Q8, would you want to undergo a free Pap smear today to check for cervical cancer?
             <RadioField name="stationSelectQ9" label="Station Select Q9"/>
             </Fragment>
-          </DisplayIf> */}
+          </DisplayIf>
         </Fragment>
-      </DisplayIf>
+      </DisplayIf> */}
       {/* <h2>6. Clinical Breast Examination</h2>
       6.1. Would you want to undergo a breast examination for breast cancer today? 
       <RadioField name="stationSelectQ10" label="Station Select Q10"/> */}
       {/* <h2>7. Women's Education</h2>
       7.1 Can we teach you about women's health?<br />For adults, we will be sharing about menstrual health and breast self examinations. For girls aged 10-18 years old, we will be sharing about menstrual health only.
       <RadioField name="stationSelectQ11" label="Station Select Q11"/> */}
-      <h2>8. Doctors' Consult</h2>
-      8.1. Would you like to see a doctor today? (You will be asked to see the doctor if your test results are abnormal, but would you otherwise want to see the doctor?)
+      <h2> Doctors' Consult</h2>
+      Would you like to see a doctor today? (You will be asked to see the doctor if your test results are abnormal, but would you otherwise want to see the doctor?)
       <RadioField name="doctorConsult" label="doctorConsult"/>
       {/* <h2>9. Eye Screening</h2>
       9.1 Can we check your eyes/vision?

@@ -103,10 +103,10 @@ class Info extends Component {
 
           12. Doctor's Consult
           <br />
-          Patient Profiling:
+          Basic Patient Information: 
           {
-            patientProfiling &&
-            <b>{patientProfiling.doctorConsult}</b>
+            basicPatientDetails &&
+            <b>{basicPatientDetails.doctorConsult}</b>
           }
           <br />
           Station Select:

@@ -601,25 +601,25 @@ class ScreeningReview extends Component {
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ5')}>Save</Button>}
                     </Grid>
 
-                    <Grid style={{ paddingBottom: 15 }} item xs={12}>How are you managing these conditions? (check-ups, medicines, diet/exercise, others)
+                    {/* <Grid style={{ paddingBottom: 15 }} item xs={12}>How are you managing these conditions? (check-ups, medicines, diet/exercise, others)
                     <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ6} />
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ6')}>Save</Button>}
-                    </Grid>
+                    </Grid> */}
 
-                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Where do you go to for routine healthcare?
+                    {/* <Grid style={{ paddingBottom: 15 }} item xs={12}>Where do you go to for routine healthcare?
                     <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ7} />
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ7')}>Save</Button>}
-                    </Grid>
+                    </Grid> */}
 
-                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Where do you go to for emergency medical services (eg. fall, injury, fainting)?
+                    {/* <Grid style={{ paddingBottom: 15 }} item xs={12}>Where do you go to for emergency medical services (eg. fall, injury, fainting)?
                     <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ8} />
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ8')}>Save</Button>}
-                    </Grid>
+                    </Grid> */}
 
-                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Are you taking any other medications? (If yes, indicate what medication and why. If none, indicate NIL)
+                    {/* <Grid style={{ paddingBottom: 15 }} item xs={12}>Are you taking any other medications? (If yes, indicate what medication and why. If none, indicate NIL)
                     <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ9} />
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ9')}>Save</Button>}
-                    </Grid>
+                    </Grid> */}
 
                     <Typography variant="h7"><b>Barriers to Healthcare</b></Typography>
                     <Grid style={{ paddingBottom: 15 }} item xs={12}>What type of doctor do you see for your existing conditions?
