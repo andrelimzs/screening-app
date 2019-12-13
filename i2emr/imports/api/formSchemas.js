@@ -43,7 +43,7 @@ export const formSchemas = {
       }, basicPatientInformationQ9: {
         type: String, optional: false
       }, basicPatientInformationQ10: {
-        type: String, allowedValues: ["Yes, pls specify", "No"], optional: false
+        type: String, allowedValues: ["Yes, pls specify", "No", "Don't Know"], optional: false
       }, basicPatientInformationQ13: {
         type: String, optional: true, custom: function () {
           if (this.field('basicPatientInformationQ10').isSet
@@ -54,7 +54,7 @@ export const formSchemas = {
           }
         }
       }, basicPatientInformationQ11: {
-        type: String, allowedValues: ["Yes, pls specify", "No"], optional: false
+        type: String, allowedValues: ["Yes, pls specify", "No", "Don't Know"], optional: false
       }, basicPatientInformationQ14: {
         type: String, optional: true, custom: function () {
           if (this.field('basicPatientInformationQ11').isSet
@@ -64,6 +64,46 @@ export const formSchemas = {
             }
           }
         }
+      }, basicPatientInformationQ15: {
+        type: String, allowedValues: ["Yes", "No"], optional: false
+      }, basicPatientInformationQ16: {
+        type: String, optional: true, custom: function () {
+          if (this.field('patientProfilingQ16').isSet
+            && this.field('patientProfilingQ16').value === "Yes") {
+            if (!this.isSet || this.value.length === 0) {
+              return SimpleSchema.ErrorTypes.REQUIRED
+            }
+          }
+        }
+      }, doctorConsult : {
+        type : String, optional: true
+      }, basicPatientInformationQ17: {
+        type: String, allowedValues: ["Yes, the person was diagnosed with TB within the past 4 months"
+          , "Yes, the person was diagnosed with TB more than 4 months ago", "No"], optional: false
+      }, basicPatientInformationQ18: {
+        type: String, optional: true, custom: function () {
+          if (this.field('basicPatientInformationQ18').isSet
+            && (this.field('basicPatientInformationQ18').value === "Yes, the person was diagnosed with TB within the past 4 months"
+                || this.field('basicPatientInformationQ18').value === "Yes, the person was diagnosed with TB more than 4 months ago")) {
+            if (!this.isSet || this.value.length === 0) {
+              return SimpleSchema.ErrorTypes.REQUIRED
+            }
+          }
+        }
+      }, basicPatientInformationQ19: {
+        type: String, allowedValues: ["Yes", "None of the above"]
+      }, basicPatientInformationQ20: {
+        type: Array, optional: true, custom: function () {
+          if (this.field('patientProfilingQ3').isSet
+            && this.field('patientProfilingQ3').value === "Yes") {
+            if (!this.isSet || this.value.length === 0) {
+              return SimpleSchema.ErrorTypes.REQUIRED
+            }
+          }
+        }
+      }, "basicPatientInformationQ20.$": {
+        type: String, allowedValues: ["Cough that has lasted more than 2 weeks", "Coughing up blood", "Breathlessness"
+        , "Weight loss", "Night sweats", "Fever", "Loss of appetite"]
       }
     }
     )
@@ -161,7 +201,7 @@ export const formSchemas = {
           }
         }
       }, "patientProfilingQ26.$": {
-        type: String, allowedValues: ["Cigarette", "Tobacoo", "Opium", "Beedi", "Others"]
+        type: String, allowedValues: ["Cigarette", "Tobacoo", "Beedi", "Others"]
       }, patientProfilingQ27: {
         type: Number, optional: true, custom: function () {
           if (this.field('patientProfilingQ11').isSet
@@ -191,11 +231,11 @@ export const formSchemas = {
       }, patientProfilingQ16: {
         type: String, allowedValues: ["Married", "Single", "Widowed", "Divorced"], optional: false
       }, patientProfilingQ17: {
-        type: Number, optional: false
+        type: Number, optional: true
       }, patientProfilingQ18: {
-        type: Number, optional: false
+        type: Number, optional: true
       }, patientProfilingQ19: {
-        type: Number, optional: false
+        type: Number, optional: true
       }, patientProfilingQ20: {
         type: String, allowedValues: ["No Formal Qualifications", "Primary (Completed Sixth Standard)", "Secondary (Studied from Sixth Standard to Tenth Standard)", "Higher Secondary and Above", "Refuse to Answer"], optional: false
       }
@@ -233,13 +273,13 @@ export const formSchemas = {
       }, stationSelectQ10: {
        type: String, allowedValues: ["Yes", "No", "Not applicable (child)"], optional: false
       }, stationSelectQ11: {
-       type: String, allowedValues: ["Yes", "No", "Not applicable (child)"], optional: false
+       type: String, allowedValues: ["Yes", "No", "Not applicable (child)"], optional: true
       }, doctorConsult: {
        type: String, allowedValues: ["Yes", "No"], optional: false
       }, stationSelectQ13: {
         type: String, allowedValues: ["Yes", "No"], optional: false
       }, stationSelectQ14: {
-        type: String, allowedValues: ["Yes", "No", "Not applicable (child)"], optional: false
+        type: String, allowedValues: ["Yes", "No", "Not applicable (child)"], optional: true
       }
     }
    )
@@ -265,6 +305,10 @@ export const formSchemas = {
         type: Number, optional: false
       }, isChild: {
         type: String, allowedValues: ["Yes", "No"], optional: false
+      }, childAssess: {
+        type: String, allowedValues:["Below 3rd Percentile", "Between 3rd Percentile and Overweight", "Between Overweight and Obese", "Above Obese"], optional: true
+      }, adultAssess: {
+        type: String, optional: true
       }, doctorConsult: {
         type: String, allowedValues: ["Yes", "No"], optional: false
       }
@@ -317,7 +361,7 @@ export const formSchemas = {
       }, bloodGlucoseAndHbQ6: {
         type: String, optional: false
       }, bloodGlucoseAndHbQ7: {
-        type: Number, optional: false
+        type: Number, optional: true
       }, doctorConsult: {
         type: String, allowedValues: ["Yes", "No"], optional: false
       }, totalScore: {
@@ -455,7 +499,7 @@ export const formSchemas = {
   "Doctors' Consult": (info) => {
     return new SimpleSchema({
       doctorsConsultQ1: {
-        type: Array, optional: false
+        type: Array, optional: true
       }, "doctorsConsultQ1.$": {
         type: String, allowedValues: ["Overweight/obesity", "Heart burn", "Diabetes", "High blood pressure", "Heart disease", "Unexplained weight loss", "Respiratory problems", "Joint pain/back pain", "Stroke", "Visual impairment", "Mental health issues"]
       }, doctorsConsultQ2: {
@@ -477,79 +521,90 @@ export const formSchemas = {
     }
     )
   },
+
+  // "Eye Screening": (info) => {
+  //   return new SimpleSchema({
+  //     eyeScreeningQ1: {
+  //       type: String, allowedValues: ["Yes", "No"], optional: false
+  //     }, eyeScreeningQ2: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ3: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ4: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ5: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ6: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ7: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ8: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ9: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ10: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ11: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ12: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ13: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ14: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ15: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ16: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ17: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ18: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ19: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ20: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ21: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ22: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ23: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ24: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ25: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ26: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ27: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ28: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ29: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ30: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ31: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ32: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ33: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ34: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ35: {
+  //       type: String, optional: false
+  //     }, eyeScreeningQ36: {
+  //       type: String, optional: false
+  //     }
+  //   }
+  //   )
+  // },
   "Eye Screening": (info) => {
     return new SimpleSchema({
       eyeScreeningQ1: {
         type: String, allowedValues: ["Yes", "No"], optional: false
       }, eyeScreeningQ2: {
-        type: String, optional: false
-      }, eyeScreeningQ3: {
-        type: String, optional: false
-      }, eyeScreeningQ4: {
-        type: String, optional: false
-      }, eyeScreeningQ5: {
-        type: String, optional: false
-      }, eyeScreeningQ6: {
-        type: String, optional: false
-      }, eyeScreeningQ7: {
-        type: String, optional: false
-      }, eyeScreeningQ8: {
-        type: String, optional: false
-      }, eyeScreeningQ9: {
-        type: String, optional: false
-      }, eyeScreeningQ10: {
-        type: String, optional: false
-      }, eyeScreeningQ11: {
-        type: String, optional: false
-      }, eyeScreeningQ12: {
-        type: String, optional: false
-      }, eyeScreeningQ13: {
-        type: String, optional: false
-      }, eyeScreeningQ14: {
-        type: String, optional: false
-      }, eyeScreeningQ15: {
-        type: String, optional: false
-      }, eyeScreeningQ16: {
-        type: String, optional: false
-      }, eyeScreeningQ17: {
-        type: String, optional: false
-      }, eyeScreeningQ18: {
-        type: String, optional: false
-      }, eyeScreeningQ19: {
-        type: String, optional: false
-      }, eyeScreeningQ20: {
-        type: String, optional: false
-      }, eyeScreeningQ21: {
-        type: String, optional: false
-      }, eyeScreeningQ22: {
-        type: String, optional: false
-      }, eyeScreeningQ23: {
-        type: String, optional: false
-      }, eyeScreeningQ24: {
-        type: String, optional: false
-      }, eyeScreeningQ25: {
-        type: String, optional: false
-      }, eyeScreeningQ26: {
-        type: String, optional: false
-      }, eyeScreeningQ27: {
-        type: String, optional: false
-      }, eyeScreeningQ28: {
-        type: String, optional: false
-      }, eyeScreeningQ29: {
-        type: String, optional: false
-      }, eyeScreeningQ30: {
-        type: String, optional: false
-      }, eyeScreeningQ31: {
-        type: String, optional: false
-      }, eyeScreeningQ32: {
-        type: String, optional: false
-      }, eyeScreeningQ33: {
-        type: String, optional: false
-      }, eyeScreeningQ34: {
-        type: String, optional: false
-      }, eyeScreeningQ35: {
-        type: String, optional: false
-      }, eyeScreeningQ36: {
         type: String, optional: false
       }
     }

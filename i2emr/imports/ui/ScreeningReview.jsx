@@ -412,7 +412,7 @@ class ScreeningReview extends Component {
     const papSmear = this.state.allInfo['Pap Smear']
     const breastscreening = this.state.allInfo['Breast Screening']
     const postScreeningFeedback = this.state.allInfo['Post-screening feedback']
-    const doctorsConsule = this.state.allInfo[`Doctors' Consult`]
+    const doctorsConsult = this.state.allInfo[`Doctors' Consult`]
     const eyeScreening = this.state.allInfo['Eye Screening']
     const postWomenEduQuiz = this.state.allInfo[`Post-women's edu quiz`]
 
@@ -472,6 +472,10 @@ class ScreeningReview extends Component {
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Basic Patient Information', 'basicPatientInformationQ2')}>Save</Button>}
                     </Grid>
 
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>For females: Are you currently pregnant?<br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={basicPatientDetails && basicPatientDetails.basicPatientInformationQ12} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Basic Patient Information', 'basicPatientInformationQ12')}>Save</Button>}
+                    </Grid>
+
                     <Grid style={{ paddingBottom: 15 }} item xs={12}>Birthdate:<br /> <input size="200" type="text" onChange={() => this.handleChange(event)} defaultValue={basicPatientDetails && basicPatientDetails.basicPatientInformationQ3} />
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Basic Patient Information', 'basicPatientInformationQ3')}>Save</Button>}
                     </Grid>
@@ -500,24 +504,50 @@ class ScreeningReview extends Component {
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Basic Patient Information', 'basicPatientInformationQ9')}>Save</Button>}
                     </Grid>
 
-                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Written languages:<br /> <input size="200" onChange={() => this.handleChange(event)} defaultValue={basicPatientDetails && basicPatientDetails.basicPatientInformationQ10} />
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Any drug allergies?<br /> <input size="200" onChange={() => this.handleChange(event)} defaultValue={basicPatientDetails && basicPatientDetails.basicPatientInformationQ10} />
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Basic Patient Information', 'basicPatientInformationQ10')}>Save</Button>}
                     </Grid>
 
-                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Any drug allergies?<br /> <input size="200" onChange={() => this.handleChange(event)} defaultValue={basicPatientDetails && basicPatientDetails.basicPatientInformationQ11} />
-                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Basic Patient Information', 'basicPatientInformationQ11')}>Save</Button>}
-                    </Grid>
-
-                    <Grid style={{ paddingBottom: 15 }} item xs={12}>If yes to Q12, what drug allergies do you have?<br /> <input size="200" onChange={() => this.handleChange(event)} defaultValue={basicPatientDetails && basicPatientDetails.basicPatientInformationQ12} />
-                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Basic Patient Information', 'basicPatientInformationQ12')}>Save</Button>}
-                    </Grid>
-
-                    <Grid style={{ paddingBottom: 15 }} item xs={12}>For females: Are you currently pregnant?<br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={basicPatientDetails && basicPatientDetails.basicPatientInformationQ13} />
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>If yes, what drug allergies do you have?<br /> <input size="200" onChange={() => this.handleChange(event)} defaultValue={basicPatientDetails && basicPatientDetails.basicPatientInformationQ13} />
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Basic Patient Information', 'basicPatientInformationQ13')}>Save</Button>}
                     </Grid>
 
-                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Do you have any blood borne diseases <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={basicPatientDetails && basicPatientDetails.basicPatientInformationQ14} />
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Do you have any blood borne diseases? <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={basicPatientDetails && basicPatientDetails.basicPatientInformationQ11} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Basic Patient Information', 'basicPatientInformationQ11')}>Save</Button>}
+                    </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>If yes, please specify the blood borne diseases <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={basicPatientDetails && basicPatientDetails.basicPatientInformationQ14} />
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Basic Patient Information', 'basicPatientInformationQ14')}>Save</Button>}
+                    </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Have you ever been diagnosed with tuberculosis?
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={basicPatientDetails && basicPatientDetails.basicPatientInformationQ15} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Basic Patient Information', 'basicPatientInformationQ15')}>Save</Button>}
+                    </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Comments
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={basicPatientDetails && basicPatientDetails.basicPatientInformationQ16} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Basic Patient Information', 'basicPatientInformationQ16')}>Save</Button>}
+                    </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Have you ever lived with someone with tuberculosis?
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={basicPatientDetails && basicPatientDetails.basicPatientInformationQ17} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Basic Patient Information', 'basicPatientInformationQ17')}>Save</Button>}
+                    </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Comments
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={basicPatientDetails && basicPatientDetails.basicPatientInformationQ18} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Basic Patient Information', 'basicPatientInformationQ18')}>Save</Button>}
+                    </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Do you have any of the following symptoms?
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={basicPatientDetails && basicPatientDetails.basicPatientInformationQ19} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Basic Patient Information', 'basicPatientInformationQ19')}>Save</Button>}
+                    </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>If yes, symptoms
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={basicPatientDetails && basicPatientDetails.basicPatientInformationQ20} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Basic Patient Information', 'basicPatientInformationQ20')}>Save</Button>}
                     </Grid>
 
                   </Grid>
@@ -526,12 +556,17 @@ class ScreeningReview extends Component {
                   {/*PATIENT PROFILING */}
 
                   <Typography variant="h5">Patient Profiling</Typography>
-                  <Typography variant="h7"><b>TB screening</b></Typography>
+                  {/* <Typography variant="h7"><b>TB screening</b></Typography> */}
                   <Grid container direction="row" justify="space-between" alignItems="center" >
 
-                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Have you ever been diagnosed with tuberculosis?
+                    {/* <Grid style={{ paddingBottom: 15 }} item xs={12}>Have you ever been diagnosed with tuberculosis?
                     <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ1} />
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ1')}>Save</Button>}
+                    </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Comments
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ21} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ21')}>Save</Button>}
                     </Grid>
 
                     <Grid style={{ paddingBottom: 15 }} item xs={12}>Have you ever lived with someone with tuberculosis?
@@ -539,10 +574,20 @@ class ScreeningReview extends Component {
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ2')}>Save</Button>}
                     </Grid>
 
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Comments
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ22} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ22')}>Save</Button>}
+                    </Grid>
+
                     <Grid style={{ paddingBottom: 15 }} item xs={12}>Do you have any of the following symptoms?
                     <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ3} />
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ3')}>Save</Button>}
                     </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>If yes, symptoms
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ23} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ23')}>Save</Button>}
+                    </Grid> */}
 
                     <Typography variant="h7"><b>Medical history</b></Typography>
                     <Grid style={{ paddingBottom: 15 }} item xs={12}>Do you have any of the following medical conditions?
@@ -582,82 +627,82 @@ class ScreeningReview extends Component {
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ10')}>Save</Button>}
                     </Grid>
 
-                    <Grid style={{ paddingBottom: 15 }} item xs={12}>If answer to Q1 was 'Seldom/Never visits the doctor', why do you not follow-up with your doctor for your existing conditions?
-                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ11} />
-                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ11')}>Save</Button>}
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>If answer was 'Seldom/Never visits the doctor', why do you not follow-up with your doctor for your existing conditions?
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ24} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ24')}>Save</Button>}
                     </Grid>
 
                     <Typography variant="h7"><b>Smoking</b></Typography>
                     <Grid style={{ paddingBottom: 15 }} item xs={12}>Do you currently smoke?
-                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ12} />
-                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ12')}>Save</Button>}
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ11} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ11')}>Save</Button>}
                     </Grid>
 
                     <Grid style={{ paddingBottom: 15 }} item xs={12}>If yes, what do you smoke? (select all that apply)
-                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ13} />
-                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ13')}>Save</Button>}
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ26} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ26')}>Save</Button>}
                     </Grid>
 
                     <Grid style={{ paddingBottom: 15 }} item xs={12}>If yes, how much do you smoke?
-                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ14} />
-                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ14')}>Save</Button>}
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ25} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ25')}>Save</Button>}
                     </Grid>
 
                     <Grid style={{ paddingBottom: 15 }} item xs={12}>If yes, how many years have you been smoking for?
-                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ15} />
-                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ15')}>Save</Button>}
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ27} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ27')}>Save</Button>}
                     </Grid>
 
-                    <Grid style={{ paddingBottom: 15 }} item xs={12}>If no to Q1, have you ever smoked before?
-                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ16} />
-                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ16')}>Save</Button>}
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>If no to smoking, have you ever smoked before?
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ28} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ28')}>Save</Button>}
                     </Grid>
 
                     <Grid style={{ paddingBottom: 15 }} item xs={12}>Do you chew paan or tobacco?
-                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ17} />
-                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ17')}>Save</Button>}
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ12} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ12')}>Save</Button>}
                     </Grid>
 
 
                     <Typography variant="h7"><b>Social History</b> </Typography>
                     <Grid style={{ paddingBottom: 15 }} item xs={12}>What is your occupation?
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ13} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ13')}>Save</Button>}
+                    </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>If answer is 'Farming/agriculture', do you use pesticides in your farming?:
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ14} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ14')}>Save</Button>}
+                    </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Monthly Income in INR (only if participant is willing to disclose):
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ15} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ15')}>Save</Button>}
+                    </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Marital status:
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ16} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ16')}>Save</Button>}
+                    </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Number of children:
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ17} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ17')}>Save</Button>}
+                    </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>How many people live in your household (including you)?:
                     <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ18} />
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ18')}>Save</Button>}
                     </Grid>
 
-                    <Grid style={{ paddingBottom: 15 }} item xs={12}>If answer to Q1 is 'Farming/agriculture', do you use pesticides in your farming?:
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>How many people in your household contribute to household income?
                     <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ19} />
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ19')}>Save</Button>}
                     </Grid>
 
-                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Monthly Income in INR (only if participant is willing to disclose):
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>What is your highest education level?:
                     <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ20} />
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ20')}>Save</Button>}
-                    </Grid>
-
-                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Marital status:
-                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ21} />
-                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ21')}>Save</Button>}
-                    </Grid>
-
-                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Number of children:
-                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ22} />
-                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ22')}>Save</Button>}
-                    </Grid>
-
-                    <Grid style={{ paddingBottom: 15 }} item xs={12}>How many people live in your household (including you)?:
-                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ23} />
-                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ23')}>Save</Button>}
-                    </Grid>
-
-                    <Grid style={{ paddingBottom: 15 }} item xs={12}>How many people in your household contribute to household income?
-                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ24} />
-                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ24')}>Save</Button>}
-                    </Grid>
-
-                    <Grid style={{ paddingBottom: 15 }} item xs={12}>What is your highest education level?:
-                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={patientProfiling && patientProfiling.patientProfilingQ25} />
-                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Patient Profiling', 'patientProfilingQ25')}>Save</Button>}
                     </Grid>
                   </Grid>
 
@@ -687,6 +732,21 @@ class ScreeningReview extends Component {
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Height and Weight', 'heightAndWeightQ4')}>Save</Button>}
                     </Grid>
 
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}> BMI:
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={heightWeight && heightWeight.calculateBMI} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Height and Weight', 'calculateBMI')}>Save</Button>}
+                    </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>For children: BMI assessment
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={heightWeight && heightWeight.childAssess} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Height and Weight', 'childAssess')}>Save</Button>}
+                    </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>For adult: BMI assessment
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={heightWeight && heightWeight.adultAssess} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Height and Weight', 'adultAssess')}>Save</Button>}
+                    </Grid>
+
                     <Typography variant="h7"><b>Waist:Hip</b></Typography>
                     <Grid style={{ paddingBottom: 15 }} item xs={12}>Waist circumference (cm)
                     <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={heightWeight && heightWeight.heightAndWeightQ5} />
@@ -698,8 +758,27 @@ class ScreeningReview extends Component {
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Height and Weight', 'heightAndWeightQ6')}>Save</Button>}
                     </Grid>
 
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Waist:Hip Ratio
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={heightWeight && heightWeight.calculateRatio} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Height and Weight', 'calculateRatio')}>Save</Button>}
+                    </Grid>
+
                   </Grid>
 
+                  {/*Eye Screening */}
+                  <Typography variant="h5">Eye Screening</Typography>
+                  <Grid container direction="row" justify="space-between" alignItems="center" >
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Completed Eye Screening?
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={eyeScreening && eyeScreening.eyeScreeningQ1} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Eye Screening', 'eyeScreeningQ1')}>Save</Button>}
+                    </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>SNC Patient ID
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={eyeScreening && eyeScreening.eyeScreeningQ2} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Eye Screening', 'eyeScreeningQ2')}>Save</Button>}
+                    </Grid>
+                  </Grid>
 
 
                   {/*BLOOD GLUCOSE */}
@@ -712,7 +791,7 @@ class ScreeningReview extends Component {
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Blood Glucose and Hb', 'bloodGlucoseAndHbQ1')}>Save</Button>}
                     </Grid>
 
-                    <Grid style={{ paddingBottom: 15 }} item xs={12}>1. Age
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}> 1. Age
                     <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={bloodGlucose && bloodGlucose.bloodGlucoseAndHbQ2} />
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Blood Glucose and Hb', 'bloodGlucoseAndHbQ2')}>Save</Button>}
                     </Grid>
@@ -802,7 +881,7 @@ class ScreeningReview extends Component {
 
 
                   {/*PAP SMEAR */}
-                  <Typography variant="h5">Pap Smear</Typography>
+                  {/* <Typography variant="h5">Pap Smear</Typography>
                   <Grid container direction="row" justify="space-between" alignItems="center" >
 
                     <Grid style={{ paddingBottom: 15 }} item xs={12}>Completed Pap smear?
@@ -819,12 +898,12 @@ class ScreeningReview extends Component {
                     <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={papSmear && papSmear.papSmearQ3} />
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Pap Smear', 'papSmearQ3')}>Save</Button>}
                     </Grid>
-                  </Grid>
+                  </Grid> */}
 
 
 
                   {/*BREAST SCREENING */}
-                  <Typography variant="h5">Breast Screening</Typography>
+                  {/* <Typography variant="h5">Breast Screening</Typography>
                   <Grid container direction="row" justify="space-between" alignItems="center" >
 
                     <Grid style={{ paddingBottom: 15 }} item xs={12}>Completed breast examination?
@@ -851,9 +930,37 @@ class ScreeningReview extends Component {
                     <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={breastscreening && breastscreening.breastScreeningQ5} />
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Breast Screening', 'breastScreeningQ5')}>Save</Button>}
                     </Grid>
-                  </Grid>
+                  </Grid> */}
 
+                  {/*Doctors' Consult */}
+                   <Typography variant="h5">Doctors' Consult</Typography>
+                  <Grid container direction="row" justify="space-between" alignItems="center" >
 
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Cheif Complaint
+                      <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={doctorsConsult && doctorsConsult.doctorsConsultQ1} />
+                        {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Doctors\' Consult', 'doctorsConsultQ1')}>Save</Button>}
+                      </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Doctors' Notes/Advice
+                      <br /><input size="250" onChange={() => this.handleChange(event)} defaultValue={doctorsConsult && doctorsConsult.doctorsConsultQ2} />
+                        {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Doctors\' Consult', 'doctorsConsultQ2')}>Save</Button>}
+                      </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Provided with referral letter?
+                      <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={doctorsConsult && doctorsConsult.doctorsConsultQ3} />
+                        {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Doctors\' Consult', 'doctorsConsultQ3')}>Save</Button>}
+                        </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>If yes, referral details
+                      <br /><input size="250" onChange={() => this.handleChange(event)} defaultValue={doctorsConsult && doctorsConsult.doctorsConsultQ4} />
+                        {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Doctors\' Consult', 'doctorsConsultQ4')}>Save</Button>}
+                        </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Name of doctor
+                      <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={doctorsConsult && doctorsConsult.doctorsConsultQ5} />
+                        {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Doctors\' Consult', 'doctorsConsultQ5')}>Save</Button>}
+                        </Grid>
+                  </Grid> 
 
 
 
@@ -918,8 +1025,8 @@ class ScreeningReview extends Component {
                       </Fragment>
                     } */}
 
-                  <Typography variant="h5">Vision</Typography>
-                  <Grid container direction="row" justify="space-between" alignItems="flex-end" >
+                  {/* <Typography variant="h5">Vision</Typography>
+                  <Grid container direction="row" justify="space-between" alignItems="flex-end" > */}
 
                     {/*  <Grid>
                     <h4>Visual Acuity</h4>
@@ -1095,7 +1202,7 @@ class ScreeningReview extends Component {
                     <Grid item xs={2}>Visual acuity (w/o pinhole occluder) - Left Eye <TextField variant="outlined" fullWidth={true} margin="dense" value={"6/" + populateField(info, 'Geri - Vision', 'geriVisionQ4')} /></Grid>
                     <Grid item xs={2}>Visual acuity (w pinhole occluder) - Right Eye <TextField variant="outlined" fullWidth={true} margin="dense" value={"6/" + populateField(info, 'Geri - Vision', 'geriVisionQ5')} /></Grid>
                     <Grid item xs={2}>Visual acuity (w pinhole occluder) - Left Eye <TextField variant="outlined" fullWidth={true} margin="dense" value={"6/" + populateField(info, 'Geri - Vision', 'geriVisionQ6')} /></Grid> */}
-                  </Grid>
+                  {/* </Grid> */}
                   {/* <Divider /><br />
                   <Grid container direction="row" justify="space-between" alignItems="flex-start" >
                     {

@@ -83,10 +83,23 @@ function getBmi(model) {
   }
 }
 
+function getAdultAssess(model) {
+  const bmi = getBmi(model)
+  if (bmi < 18.5){
+    return String("Underweight")
+  } else if ((bmi >= 18.5) && (bmi < 23.0)) {
+    return String("Normal")
+  } else if ((bmi>= 23.0) && (bmi < 25.0)) {
+    return String("Overweight")
+  } else {
+    return String("Obese")
+  }
+}
+
 function getRatio(model) {
   if (typeof (model['heightAndWeightQ5']) !== "undefined" && typeof (model['heightAndWeightQ6']) !== "undefined") {
     const ratio = model['heightAndWeightQ5'] / (model['heightAndWeightQ6'])
-    return Number(Math.round(ratio + 'e1') + 'e-1') // rounds to 2dp
+    return Number(Math.round(ratio + 'e2') + 'e-2') // rounds to 2dp
   }
 }
 
@@ -309,7 +322,7 @@ export const formLayouts = {
       <DisplayIf condition={(context) => (typeof (context.model.basicPatientInformationQ10) !== "undefined" && context.model.basicPatientInformationQ10 === "Yes, pls specify")}>
         <Fragment>
           Pls Specify.
-          <TextField name="basicPatientInformationQ13" label="basicPatientInformationQ13" />
+          <TextField name="basicPatientInformationQ13" label="Basic Patient Information Q13" />
         </Fragment>
       </DisplayIf>
       11. Do you have any blood borne diseases?
@@ -317,7 +330,84 @@ export const formLayouts = {
       <DisplayIf condition={(context) => (typeof (context.model.basicPatientInformationQ11) !== "undefined" && context.model.basicPatientInformationQ11 === "Yes, pls specify")}>
         <Fragment>
           Pls Specify. **Patient not allowed to do Phlebotomy.
-          <TextField name="basicPatientInformationQ14" label="basicPatientInformationQ14" />
+          <TextField name="basicPatientInformationQ14" label="Basic Patient Information Q14" />
+        </Fragment>
+      </DisplayIf>
+
+      <h2>2. TB SCREENING</h2>
+      2.1.1. Have you ever been diagnosed with tuberculosis?
+		<RadioField name="basicPatientInformationQ15" label="Basic Patient Information Q15" />
+      <DisplayIf condition={(context) => (typeof (context.model.basicPatientInformationQ15) !== "undefined" && context.model.basicPatientInformationQ15 === "Yes")}>
+        <Fragment>
+          <font color="red"> **Immediate Doctor's Consult</font><br></br>
+          <SomeComp calculation={(model) => (
+            <text>
+              Doctor Consult? :
+              {model['doctorConsult'] = consult(model, "basicPatientInformationQ15", "Yes")}
+            </text>
+            )} /> <br></br>
+          Comments
+          <TextField name="basicPatientInformationQ16" label="Basic Patient Information Q16" />
+        </Fragment>
+      </DisplayIf>
+      2.1.2. Have you ever lived with someone with tuberculosis?
+		<RadioField name="basicPatientInformationQ17" label="Basic Patient Information Q17" />
+      <DisplayIf condition={(context) => (typeof (context.model.basicPatientInformationQ17) !== "undefined" 
+        && (context.model.basicPatientInformationQ17 === "Yes, the person was diagnosed with TB within the past 4 months" 
+          || context.model.basicPatientInformationQ17 === "Yes, the person was diagnosed with TB more than 4 months ago"))}>
+        <Fragment>
+        <DisplayIf condition={(context) => (typeof (context.model.basicPatientInformationQ17) !== "undefined" 
+        && (context.model.basicPatientInformationQ17 === "Yes, the person was diagnosed with TB within the past 4 months" ))}>
+        <Fragment>
+        <font color="red"> **Immediate Doctor's Consult</font><br></br>
+        <SomeComp calculation={(model) => (
+            <text>
+              Doctor Consult? :
+              {model['doctorConsult'] = consult(model, "basicPatientInformationQ17", "Yes, the person was diagnosed with TB within the past 4 months")}
+            </text>
+            )} /> <br></br>
+            </Fragment>
+            </DisplayIf>
+            <DisplayIf condition={(context) => (typeof (context.model.basicPatientInformationQ17) !== "undefined" 
+             && (context.model.basicPatientInformationQ17 === "Yes, the person was diagnosed with TB more than 4 months ago" ))}>
+              <Fragment>
+                <SomeComp calculation={(model) => (
+                <text>
+                Doctor Consult? :
+                {model['doctorConsult'] = consult(model, "basicPatientInformationQ17", "Yes, the person was diagnosed with TB more than 4 months ago")}
+                </text>
+                )} /> <br></br>
+              </Fragment>
+            </DisplayIf>
+          Comments
+          <TextField name="basicPatientInformationQ18" label="Basic Patient Information Q18" />
+        </Fragment>
+      </DisplayIf>
+      2.1.3. Do you have any of the following symptoms? Select all that apply
+      <br></br>    - Cough that has lasted more than 2 weeks
+      <br></br>    - Coughing up blood
+      <br></br>    - Breathlessness
+      <br></br>    - Weight loss
+      <br></br>    - Night sweats
+      <br></br>    - Fever
+      <br></br>    - Loss of appetite
+
+		<RadioField name="basicPatientInformationQ19" label="Basic Patient Information Q19" />
+      <DisplayIf condition={(context) => (typeof (context.model.basicPatientInformationQ19) !== "undefined" && context.model.basicPatientInformationQ19 === "Yes")}>
+        <Fragment>
+        <DisplayIf condition={(context) => (typeof (context.model.basicPatientInformationQ19) !== "undefined" 
+             && (context.model.basicPatientInformationQ19 === "Yes" ))}>
+              <Fragment>
+                <SomeComp calculation={(model) => (
+                <text>
+                Doctor Consult? :
+                {model['doctorConsult'] = consult(model, "basicPatientInformationQ19", "Yes")}
+                </text>
+                )} /> <br></br>
+              </Fragment>
+            </DisplayIf>
+          Select symptoms
+          <SelectField name="basicPatientInformationQ20" checkboxes="true" label="Basic Patient Information Q20" />
         </Fragment>
       </DisplayIf>
 
@@ -326,7 +416,7 @@ export const formLayouts = {
 
   "Patient Profiling": (info) => (
     <Fragment>
-      <h2>2. PATIENT PROFILING</h2>
+      {/* <h2>2. PATIENT PROFILING</h2>
       <h2>2.1 TB SCREENING</h2>
       2.1.1. Have you ever been diagnosed with tuberculosis?
 		<RadioField name="patientProfilingQ1" label="Patient Profiling Q1" />
@@ -339,7 +429,7 @@ export const formLayouts = {
               {model['doctorConsult'] = consult(model, "patientProfilingQ1", "Yes")}
             </text>
             )} /> <br></br>
-          Pls Specify.
+          Comments
           <TextField name="patientProfilingQ21" label="patientProfilingQ21" />
         </Fragment>
       </DisplayIf>
@@ -352,6 +442,7 @@ export const formLayouts = {
         <DisplayIf condition={(context) => (typeof (context.model.patientProfilingQ2) !== "undefined" 
         && (context.model.patientProfilingQ2 === "Yes, the person was diagnosed with TB within the past 4 months" ))}>
         <Fragment>
+        <font color="red"> **Immediate Doctor's Consult</font><br></br>
         <SomeComp calculation={(model) => (
             <text>
               Doctor Consult? :
@@ -371,7 +462,7 @@ export const formLayouts = {
                 )} /> <br></br>
               </Fragment>
             </DisplayIf>
-          Pls Specify.
+          Comments
           <TextField name="patientProfilingQ22" label="patientProfilingQ22" />
         </Fragment>
       </DisplayIf>
@@ -398,26 +489,26 @@ export const formLayouts = {
                 )} /> <br></br>
               </Fragment>
             </DisplayIf>
-          Pls Specify.
+          Select symptoms
           <SelectField name="patientProfilingQ23" checkboxes="true" label="patientProfilingQ23" />
         </Fragment>
-      </DisplayIf>
-      <h2>2.2 MEDICAL HISTORY</h2>
-      2.2.1. Do you have any of the following medical conditions?
+      </DisplayIf> */}
+      <h2> MEDICAL HISTORY</h2>
+       Do you have any of the following medical conditions?
 		<SelectField name="patientProfilingQ4" checkboxes="true" label="Patient Profiling Q4" />
-      <h2>2.3 MEDICAL HISTORY: OTHERS</h2>
-      2.3.1. Do you have other medical conditions we should take note of? (if none, indicate NIL)
+      <h2> MEDICAL HISTORY: OTHERS</h2>
+     Do you have other medical conditions we should take note of? (if none, indicate NIL)
 		<TextField name="patientProfilingQ5" label="Patient Profiling Q5" />
-      2.3.2. How are you managing these conditions? (check-ups, medicines, diet/exercise, others)
+     How are you managing these conditions? (check-ups, medicines, diet/exercise, others)
 		<TextField name="patientProfilingQ6" label="Patient Profiling Q6" />
-      2.3.3. Where do you go to for routine healthcare?
+     Where do you go to for routine healthcare?
 		<TextField name="patientProfilingQ7" label="Patient Profiling Q7" />
-      2.3.4. Where do you go to for emergency medical services (eg. fall, injury, fainting)?
+     Where do you go to for emergency medical services (eg. fall, injury, fainting)?
 		<TextField name="patientProfilingQ8" label="Patient Profiling Q8" />
-      2.3.5. Are you taking any other medications? (If yes, indicate what medication and why. If none, indicate NIL)
+     Are you taking any other medications? (If yes, indicate what medication and why. If none, indicate NIL)
 		<TextField name="patientProfilingQ9" label="Patient Profiling Q9" />
-      <h2>2.4  BARRIERS TO HEALTHCARE</h2>
-      2.4.1 What type of doctor do you see for your existing conditions?
+      <h2> BARRIERS TO HEALTHCARE</h2>
+       What type of doctor do you see for your existing conditions?
 		<RadioField name="patientProfilingQ10" label="Patient Profiling Q10" />
       <DisplayIf condition={(context) => (typeof (context.model.patientProfilingQ10) !== "undefined" && context.model.patientProfilingQ10 === "Seldom/Never visits the doctor")}>
         <Fragment>
@@ -425,43 +516,43 @@ export const formLayouts = {
           <TextField name="patientProfilingQ24" label="patientProfilingQ24" />
         </Fragment>
       </DisplayIf>
-      <h2>2.5 SMOKING</h2>
-      2.5.1. Do you currently smoke?
+      <h2> SMOKING</h2>
+       Do you currently smoke?
 		<RadioField name="patientProfilingQ11" label="Patient Profiling Q11" />
       <DisplayIf condition={(context) => (typeof (context.model.patientProfilingQ11) !== "undefined" && context.model.patientProfilingQ11 === "Yes")}>
         <Fragment>
-          2.5.1.1. How much do you smoke?
+           How much do you smoke?
           <RadioField name="patientProfilingQ25" label="patientProfilingQ25" /> <br></br>
-          2.5.1.2 What do you smoke?
+           What do you smoke?
           <SelectField name="patientProfilingQ26" checkboxes="true" label="patientProfilingQ26" /> <br></br>
-          2.5.1.3 How many years have you been smoking for? (Rounded up)
+           How many years have you been smoking for? (Rounded up)
           <NumField name="patientProfilingQ27" label="Patient Profiling Q27" /><br></br>
         </Fragment>
       </DisplayIf>
       <DisplayIf condition={(context) => (typeof (context.model.patientProfilingQ11) !== "undefined" && context.model.patientProfilingQ11 === "No")}>
         <Fragment>
-          2.5.1.1. Have you smoke before?
+           Have you smoke before?
           <RadioField name="patientProfilingQ28" label="patientProfilingQ28" /> <br></br>
         </Fragment>
       </DisplayIf>
-      2.5.2 Do you chew pann or tobacoo?
+       Do you chew pann or tobacoo?
 		<RadioField name="patientProfilingQ12" label="Patient Profiling Q12" />
-      <h2>2.6 SOCIAL HISTORY</h2>
-      2.6.1 What is your occupation?
+      <h2> SOCIAL HISTORY</h2>
+     What is your occupation?
 		<TextField name="patientProfilingQ13" label="Patient Profiling Q13" />
-      2.6.2 If occupation is "Farming/Ariculture', do you use pesticides in your farming?
+     If occupation is "Farming/Ariculture', do you use pesticides in your farming?
 		<RadioField name="patientProfilingQ14" label="Patient Profiling Q14" />
-      2.6.3 Monthly Income? (optional) <br />
+     Monthly Income? (optional) <br />
       <NumField name="patientProfilingQ15" label="Patient Profiling Q15" /><br />
-      2.6.4 Marital Status
+     Marital Status
 		<RadioField name="patientProfilingQ16" label="Patient Profiling Q16" />
-      2.6.5 Number of Children <br />
+       Number of Children <br />
       <NumField name="patientProfilingQ17" label="Patient Profiling Q17" /><br />
-      2.6.6 How many people live in your household (including you)? <br />
+       How many people live in your household (including you)? <br />
       <NumField name="patientProfilingQ18" label="Patient Profiling Q18" /><br />
-      2.6.7 How many people in your household contribute to household income? <br />
+       How many people in your household contribute to household income? <br />
       <NumField name="patientProfilingQ19" label="Patient Profiling Q19" /><br />
-      2.6.8 What is your highest education level?
+       What is your highest education level?
 		<RadioField name="patientProfilingQ20" label="Patient Profiling Q20" />
     </Fragment>
   ),
@@ -500,26 +591,26 @@ export const formLayouts = {
         <Fragment>
           5.1.1. If yes to Q7, have you done a Pap smear in the past 3 years?
           <RadioField name="stationSelectQ8" label="Station Select Q8"/>
-          <DisplayIf condition={(context) => (typeof (context.model.stationSelectQ8) !== "undefined" && context.model.stationSelectQ8 === "No")}>
+          {/* <DisplayIf condition={(context) => (typeof (context.model.stationSelectQ8) !== "undefined" && context.model.stationSelectQ8 === "No")}>
             <Fragment>
             5.1.1.1.  If no to Q8, would you want to undergo a free Pap smear today to check for cervical cancer?
             <RadioField name="stationSelectQ9" label="Station Select Q9"/>
             </Fragment>
-          </DisplayIf>
+          </DisplayIf> */}
         </Fragment>
       </DisplayIf>
-      <h2>6. Clinical Breast Examination</h2>
+      {/* <h2>6. Clinical Breast Examination</h2>
       6.1. Would you want to undergo a breast examination for breast cancer today? 
-      <RadioField name="stationSelectQ10" label="Station Select Q10"/>
+      <RadioField name="stationSelectQ10" label="Station Select Q10"/> */}
       {/* <h2>7. Women's Education</h2>
       7.1 Can we teach you about women's health?<br />For adults, we will be sharing about menstrual health and breast self examinations. For girls aged 10-18 years old, we will be sharing about menstrual health only.
       <RadioField name="stationSelectQ11" label="Station Select Q11"/> */}
       <h2>8. Doctors' Consult</h2>
       8.1. Would you like to see a doctor today? (You will be asked to see the doctor if your test results are abnormal, but would you otherwise want to see the doctor?)
       <RadioField name="doctorConsult" label="doctorConsult"/>
-      <h2>9. Eye Screening</h2>
+      {/* <h2>9. Eye Screening</h2>
       9.1 Can we check your eyes/vision?
-      <RadioField name="stationSelectQ13" label="Station Select Q13"/>
+      <RadioField name="stationSelectQ13" label="Station Select Q13"/> */}
       {/* <h2>10. Education</h2>
       10.1. Can we teach you about healthy lifestyles and how to prevent common diseases like diabetes and high blood pressure?
       <RadioField name="stationSelectQ14" label="Station Select Q14"/> */}
@@ -529,7 +620,7 @@ export const formLayouts = {
 
   "Height and Weight": (info) => (
     <Fragment>
-      <h2>1. HEIGHT & WEIGHT</h2>
+      <h2>HEIGHT & WEIGHT</h2>
       Is the participant a child?
       <RadioField name="isChild" label="isChild" /><br />
       1.1 Height (m) <br />
@@ -555,6 +646,22 @@ export const formLayouts = {
               {model['calculateBMI'] = getBmi(model)}
         </h3>
       )} />
+      <DisplayIf condition={(context) => (typeof (context.model.isChild) !== "undefined" && context.model.isChild === "Yes")}>
+        <Fragment>
+          BMI Assessment (Child)
+		      <RadioField name="childAssess" label="Child Assessment" />
+        </Fragment>
+      </DisplayIf>
+      <DisplayIf condition={(context) => (typeof (context.model.isChild) !== "undefined" && context.model.isChild === "No")}>
+      <Fragment>
+        <SomeComp calculation={(model) => (
+        <h3>
+          BMI Assessment (Adult): 
+              {model['adultAssess'] = getAdultAssess(model)}
+        </h3>
+      )} />
+      </Fragment>
+      </DisplayIf>
       <h2>2. WAIST : HIP </h2>
       2.1 Waist Circumference (cm) <br />
       <NumField name="heightAndWeightQ5" label="Height and Weight Q5" /><br />
@@ -573,9 +680,20 @@ export const formLayouts = {
     </Fragment>
   ),
 
+  "Eye Screening": (info) => (
+    <Fragment>
+      <h2>Eye Screening</h2>
+      Completed?
+		<RadioField name="eyeScreeningQ1" label="Eye Screening Q1" />
+    SNC Patient ID
+    <TextField name ="eyeScreeningQ2" label= "Eye Screening Q2" />
+
+    </Fragment>
+  ),
+
   "Blood Glucose and Hb": (info) => (
     <Fragment>
-      <h2>3. BLOOD GLUCOSE AND HEMOGLOBIN</h2>
+      <h2>BLOOD GLUCOSE AND HEMOGLOBIN</h2>
       3.1. Have you previously been diagnosed with diabetes?
 		<RadioField name="bloodGlucoseAndHbQ1" label="Blood Glucose and Hb Q1" />
       <DisplayIf condition={(context) => (typeof (context.model.bloodGlucoseAndHbQ1) !== "undefined" && context.model.bloodGlucoseAndHbQ1 === "No")}>
@@ -613,7 +731,7 @@ export const formLayouts = {
 
   "Blood Pressure": (info) => (
     <Fragment>
-      <h2>4. BLOOD PRESSURE</h2>
+      <h2>BLOOD PRESSURE</h2>
       <h2>4.1. BP 1st Taking</h2>
       4.1.1. Systolic Blood Pressure <br />
       <NumField name="bpQ1" label="BP Q1" /><br />
@@ -655,86 +773,88 @@ export const formLayouts = {
 
   "Phlebo": (info) => (
     <Fragment>
-      <h2>5. PHLEBO</h2>
+      <h2>PHLEBO</h2>
       Completed?
 		<RadioField name="phleboQ1" label="Phlebo Q1" />
 
     </Fragment>
   ),
 
-  "Pap Smear": (info) => (
-    <Fragment>
-      <h2>6. PAP SMEAR</h2>
-      Completed?
-		<RadioField name="papSmearQ1" label="Pap Smear Q1" />
-      Notes (if any)
-		<LongTextField name="papSmearQ2" label="Pap Smear Q2" />
-      Doctors' consult required?
-		<RadioField name="papSmearQ3" label="Pap Smear Q3" />
+  // "Pap Smear": (info) => (
+  //   <Fragment>
+  //     <h2>6. PAP SMEAR</h2>
+  //     Completed?
+	// 	<RadioField name="papSmearQ1" label="Pap Smear Q1" />
+  //     Notes (if any)
+	// 	<LongTextField name="papSmearQ2" label="Pap Smear Q2" />
+  //     Doctors' consult required?
+	// 	<RadioField name="papSmearQ3" label="Pap Smear Q3" />
 
-    </Fragment>
-  ),
+  //   </Fragment>
+  // ),
 
-  "Breast Screening": (info) => (
-    <Fragment>
-      <h2>7. BREAST SCREENING</h2>
-      7.1. Completed breast examination?
-		<RadioField name="breastScreeningQ1" label="Breast Screening Q1" />
-      <DisplayIf condition={(context) => (typeof (context.model.breastScreeningQ1) !== "undefined" && context.model.breastScreeningQ1 === "Yes")}>
-        <Fragment>
-          7.1.1. Any abnormalities noted (e.g. lumps, skin changes)?
-		    <RadioField name="breastScreeningQ2" label="Breast Screening Q2" /> <br></br>
-          <DisplayIf condition={(context) => (typeof (context.model.breastScreeningQ2) !== "undefined" && context.model.breastScreeningQ2 === "Yes")}>
-            <Fragment>
-              7.1.1.1.  If yes to Q2, please describe the abnormalities
-		            <TextField name="breastScreeningQ3" label="Breast Screening Q3" />
-              7.1.1.2.  If yes to Q2, FNAC done?
-		            <RadioField name="breastScreeningQ4" label="Breast Screening Q4" />
-            </Fragment>
-          </DisplayIf>
-        </Fragment>
-      </DisplayIf>
-      Doctor Consult?
-		<RadioField name="breastScreeningQ5" label="Breast Screening Q5" />
+  // "Breast Screening": (info) => (
+  //   <Fragment>
+  //     <h2>7. BREAST SCREENING</h2>
+  //     7.1. Completed breast examination?
+	// 	<RadioField name="breastScreeningQ1" label="Breast Screening Q1" />
+  //     <DisplayIf condition={(context) => (typeof (context.model.breastScreeningQ1) !== "undefined" && context.model.breastScreeningQ1 === "Yes")}>
+  //       <Fragment>
+  //         7.1.1. Any abnormalities noted (e.g. lumps, skin changes)?
+	// 	    <RadioField name="breastScreeningQ2" label="Breast Screening Q2" /> <br></br>
+  //         <DisplayIf condition={(context) => (typeof (context.model.breastScreeningQ2) !== "undefined" && context.model.breastScreeningQ2 === "Yes")}>
+  //           <Fragment>
+  //             7.1.1.1.  If yes to Q2, please describe the abnormalities
+	// 	            <TextField name="breastScreeningQ3" label="Breast Screening Q3" />
+  //             7.1.1.2.  If yes to Q2, FNAC done?
+	// 	            <RadioField name="breastScreeningQ4" label="Breast Screening Q4" />
+  //           </Fragment>
+  //         </DisplayIf>
+  //       </Fragment>
+  //     </DisplayIf>
+  //     Doctor Consult?
+	// 	<RadioField name="breastScreeningQ5" label="Breast Screening Q5" />
 
-    </Fragment>
-  ),
-  "Post-screening feedback": (info) => (
-    <Fragment>
-      1. I have had a good experience at the screening
-    <SelectField name="postScreeningFeedbackQ1" label="Post-screening feedback Q1" />
-      2. I came for the screening because: (Select all that apply)
-    <SelectField name="postScreeningFeedbackQ2" checkboxes="true" label="Post-screening feedback Q2" />
-      3. I know that regular health screening is important
-    <SelectField name="postScreeningFeedbackQ3" label="Post-screening feedback Q3" />
-      4. I know that it is important to detect chronic diseases and cancers early
-    <SelectField name="postScreeningFeedbackQ4" label="Post-screening feedback Q4" />
-      5. I am willing to take the trouble to attend health screenings
-    <SelectField name="postScreeningFeedbackQ5" label="Post-screening feedback Q5" />
-      6. I am willing to attend my follow-up sessions
-    <SelectField name="postScreeningFeedbackQ6" label="Post-screening feedback Q6" />
-      7. The student volunteers attended to my needs
-    <SelectField name="postScreeningFeedbackQ7" label="Post-screening feedback Q7" />
-      8. The student volunteers were well-trained
-    <SelectField name="postScreeningFeedbackQ8" label="Post-screening feedback Q8" />
-      9. The waiting time to enter the screening was reasonable
-    <SelectField name="postScreeningFeedbackQ9" label="Post-screening feedback Q9" />
-      10. The waiting time for each station was reasonable
-    <SelectField name="postScreeningFeedbackQ10" label="Post-screening feedback Q10" />
-      11. The flow of the screening was easy to follow
-    <SelectField name="postScreeningFeedbackQ11" label="Post-screening feedback Q11" />
-      12. I would recommend my family/friends to attend this screening
-    <SelectField name="postScreeningFeedbackQ12" label="Post-screening feedback Q12" />
-      13. What encouraged you to come for our event? Select all that apply
-    <SelectField name="postScreeningFeedbackQ13" checkboxes="true" label="Post-screening feedback Q13" />
-      14. How often do you attend a health screening?
-    <SelectField name="postScreeningFeedbackQ14" label="Post-screening feedback Q14" />
+  //   </Fragment>
+  // ),
 
-    </Fragment>
-  ),
+  // "Post-screening feedback": (info) => (
+  //   <Fragment>
+  //     1. I have had a good experience at the screening
+  //   <SelectField name="postScreeningFeedbackQ1" label="Post-screening feedback Q1" />
+  //     2. I came for the screening because: (Select all that apply)
+  //   <SelectField name="postScreeningFeedbackQ2" checkboxes="true" label="Post-screening feedback Q2" />
+  //     3. I know that regular health screening is important
+  //   <SelectField name="postScreeningFeedbackQ3" label="Post-screening feedback Q3" />
+  //     4. I know that it is important to detect chronic diseases and cancers early
+  //   <SelectField name="postScreeningFeedbackQ4" label="Post-screening feedback Q4" />
+  //     5. I am willing to take the trouble to attend health screenings
+  //   <SelectField name="postScreeningFeedbackQ5" label="Post-screening feedback Q5" />
+  //     6. I am willing to attend my follow-up sessions
+  //   <SelectField name="postScreeningFeedbackQ6" label="Post-screening feedback Q6" />
+  //     7. The student volunteers attended to my needs
+  //   <SelectField name="postScreeningFeedbackQ7" label="Post-screening feedback Q7" />
+  //     8. The student volunteers were well-trained
+  //   <SelectField name="postScreeningFeedbackQ8" label="Post-screening feedback Q8" />
+  //     9. The waiting time to enter the screening was reasonable
+  //   <SelectField name="postScreeningFeedbackQ9" label="Post-screening feedback Q9" />
+  //     10. The waiting time for each station was reasonable
+  //   <SelectField name="postScreeningFeedbackQ10" label="Post-screening feedback Q10" />
+  //     11. The flow of the screening was easy to follow
+  //   <SelectField name="postScreeningFeedbackQ11" label="Post-screening feedback Q11" />
+  //     12. I would recommend my family/friends to attend this screening
+  //   <SelectField name="postScreeningFeedbackQ12" label="Post-screening feedback Q12" />
+  //     13. What encouraged you to come for our event? Select all that apply
+  //   <SelectField name="postScreeningFeedbackQ13" checkboxes="true" label="Post-screening feedback Q13" />
+  //     14. How often do you attend a health screening?
+  //   <SelectField name="postScreeningFeedbackQ14" label="Post-screening feedback Q14" />
+
+  //   </Fragment>
+  // ),
 
   "Doctors' Consult": (info) => (
     <Fragment>
+    <h2>Doctors' Consult</h2>
       1. Chief complaint
     <SelectField name="doctorsConsultQ1" checkboxes="true" label="Doctors' Consult Q1" />
       2. Doctors' notes/advice
@@ -753,261 +873,261 @@ export const formLayouts = {
     </Fragment>
   ),
 
-  "Eye Screening": (info) => (
-    <Fragment>
-      1. Does the participant use spectacles?
-    <RadioField name="eyeScreeningQ1" label="Eye Screening Q1" />
+  // "Eye Screening": (info) => (
+  //   <Fragment>
+  //     1. Does the participant use spectacles?
+  //   <RadioField name="eyeScreeningQ1" label="Eye Screening Q1" />
 
-      <h4>Visual Acuity</h4>
-      <Table aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell></TableCell>
-            <TableCell align="left">Right Eye</TableCell>
-            <TableCell align="left">Left Eye</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <TableRow>
-            <TableCell align="left">Without glasses</TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ2" label="Eye Screening Q2" />
-            </TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ3" label="Eye Screening Q3" />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align="left">With glasses</TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ4" label="Eye Screening Q4" />
-            </TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ5" label="Eye Screening Q5" />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align="left">Near vision</TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ6" label="Eye Screening Q6" />
-            </TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ7" label="Eye Screening Q7" />
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
+  //     <h4>Visual Acuity</h4>
+  //     <Table aria-label="simple table">
+  //       <TableHead>
+  //         <TableRow>
+  //           <TableCell></TableCell>
+  //           <TableCell align="left">Right Eye</TableCell>
+  //           <TableCell align="left">Left Eye</TableCell>
+  //         </TableRow>
+  //       </TableHead>
+  //       <TableBody>
+  //         <TableRow>
+  //           <TableCell align="left">Without glasses</TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ2" label="Eye Screening Q2" />
+  //           </TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ3" label="Eye Screening Q3" />
+  //           </TableCell>
+  //         </TableRow>
+  //         <TableRow>
+  //           <TableCell align="left">With glasses</TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ4" label="Eye Screening Q4" />
+  //           </TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ5" label="Eye Screening Q5" />
+  //           </TableCell>
+  //         </TableRow>
+  //         <TableRow>
+  //           <TableCell align="left">Near vision</TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ6" label="Eye Screening Q6" />
+  //           </TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ7" label="Eye Screening Q7" />
+  //           </TableCell>
+  //         </TableRow>
+  //       </TableBody>
+  //     </Table>
 
-      <h4>Findings in the Eye</h4>
-      <Table aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell></TableCell>
-            <TableCell align="left">Right Eye</TableCell>
-            <TableCell align="left">Left Eye</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <TableRow>
-            <TableCell align="left">Lids</TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ8" label="Eye Screening Q8" />
-            </TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ9" label="Eye Screening Q9" />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align="left">Conjunctiva</TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ10" label="Eye Screening Q10" />
-            </TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ11" label="Eye Screening Q11" />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align="left">Cornea</TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ12" label="Eye Screening Q12" />
-            </TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ13" label="Eye Screening Q13" />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align="left">Anterior segment</TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ14" label="Eye Screening Q14" />
-            </TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ15" label="Eye Screening Q15" />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align="left">Iris</TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ16" label="Eye Screening Q16" />
-            </TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ17" label="Eye Screening Q17" />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align="left">Pupil</TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ18" label="Eye Screening Q18" />
-            </TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ19" label="Eye Screening Q19" />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align="left">Lens</TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ20" label="Eye Screening Q20" />
-            </TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ21" label="Eye Screening Q21" />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align="left">Ocular movements</TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ22" label="Eye Screening Q22" />
-            </TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ23" label="Eye Screening Q23" />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align="left">IOP</TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ24" label="Eye Screening Q24" />
-            </TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ25" label="Eye Screening Q25" />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align="left">Duct</TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ26" label="Eye Screening Q26" />
-            </TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ27" label="Eye Screening Q27" />
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
+  //     <h4>Findings in the Eye</h4>
+  //     <Table aria-label="simple table">
+  //       <TableHead>
+  //         <TableRow>
+  //           <TableCell></TableCell>
+  //           <TableCell align="left">Right Eye</TableCell>
+  //           <TableCell align="left">Left Eye</TableCell>
+  //         </TableRow>
+  //       </TableHead>
+  //       <TableBody>
+  //         <TableRow>
+  //           <TableCell align="left">Lids</TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ8" label="Eye Screening Q8" />
+  //           </TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ9" label="Eye Screening Q9" />
+  //           </TableCell>
+  //         </TableRow>
+  //         <TableRow>
+  //           <TableCell align="left">Conjunctiva</TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ10" label="Eye Screening Q10" />
+  //           </TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ11" label="Eye Screening Q11" />
+  //           </TableCell>
+  //         </TableRow>
+  //         <TableRow>
+  //           <TableCell align="left">Cornea</TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ12" label="Eye Screening Q12" />
+  //           </TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ13" label="Eye Screening Q13" />
+  //           </TableCell>
+  //         </TableRow>
+  //         <TableRow>
+  //           <TableCell align="left">Anterior segment</TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ14" label="Eye Screening Q14" />
+  //           </TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ15" label="Eye Screening Q15" />
+  //           </TableCell>
+  //         </TableRow>
+  //         <TableRow>
+  //           <TableCell align="left">Iris</TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ16" label="Eye Screening Q16" />
+  //           </TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ17" label="Eye Screening Q17" />
+  //           </TableCell>
+  //         </TableRow>
+  //         <TableRow>
+  //           <TableCell align="left">Pupil</TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ18" label="Eye Screening Q18" />
+  //           </TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ19" label="Eye Screening Q19" />
+  //           </TableCell>
+  //         </TableRow>
+  //         <TableRow>
+  //           <TableCell align="left">Lens</TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ20" label="Eye Screening Q20" />
+  //           </TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ21" label="Eye Screening Q21" />
+  //           </TableCell>
+  //         </TableRow>
+  //         <TableRow>
+  //           <TableCell align="left">Ocular movements</TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ22" label="Eye Screening Q22" />
+  //           </TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ23" label="Eye Screening Q23" />
+  //           </TableCell>
+  //         </TableRow>
+  //         <TableRow>
+  //           <TableCell align="left">IOP</TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ24" label="Eye Screening Q24" />
+  //           </TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ25" label="Eye Screening Q25" />
+  //           </TableCell>
+  //         </TableRow>
+  //         <TableRow>
+  //           <TableCell align="left">Duct</TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ26" label="Eye Screening Q26" />
+  //           </TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ27" label="Eye Screening Q27" />
+  //           </TableCell>
+  //         </TableRow>
+  //       </TableBody>
+  //     </Table>
 
-      <h4>Posterior segment examination</h4>
-      <Table aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell></TableCell>
-            <TableCell align="left">Right Eye</TableCell>
-            <TableCell align="left">Left Eye</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <TableRow>
-            <TableCell align="left">CDR</TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ28" label="Eye Screening Q28" />
-            </TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ29" label="Eye Screening Q29" />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align="left">Macula</TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ30" label="Eye Screening Q30" />
-            </TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ31" label="Eye Screening Q31" />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align="left">Retina</TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ32" label="Eye Screening Q32" />
-            </TableCell>
-            <TableCell align="left">
-              <TextField name="eyeScreeningQ33" label="Eye Screening Q33" />
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-      34. Diagnosis
-  <TextField name="eyeScreeningQ34" label="Eye Screening Q34" />
-      35. Advice
-  <TextField name="eyeScreeningQ35" label="Eye Screening Q35" />
-      36. Name of doctor
-  <TextField name="eyeScreeningQ36" label="Eye Screening Q36" />
-    </Fragment>
-  ),
+  //     <h4>Posterior segment examination</h4>
+  //     <Table aria-label="simple table">
+  //       <TableHead>
+  //         <TableRow>
+  //           <TableCell></TableCell>
+  //           <TableCell align="left">Right Eye</TableCell>
+  //           <TableCell align="left">Left Eye</TableCell>
+  //         </TableRow>
+  //       </TableHead>
+  //       <TableBody>
+  //         <TableRow>
+  //           <TableCell align="left">CDR</TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ28" label="Eye Screening Q28" />
+  //           </TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ29" label="Eye Screening Q29" />
+  //           </TableCell>
+  //         </TableRow>
+  //         <TableRow>
+  //           <TableCell align="left">Macula</TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ30" label="Eye Screening Q30" />
+  //           </TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ31" label="Eye Screening Q31" />
+  //           </TableCell>
+  //         </TableRow>
+  //         <TableRow>
+  //           <TableCell align="left">Retina</TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ32" label="Eye Screening Q32" />
+  //           </TableCell>
+  //           <TableCell align="left">
+  //             <TextField name="eyeScreeningQ33" label="Eye Screening Q33" />
+  //           </TableCell>
+  //         </TableRow>
+  //       </TableBody>
+  //     </Table>
+  //     34. Diagnosis
+  // <TextField name="eyeScreeningQ34" label="Eye Screening Q34" />
+  //     35. Advice
+  // <TextField name="eyeScreeningQ35" label="Eye Screening Q35" />
+  //     36. Name of doctor
+  // <TextField name="eyeScreeningQ36" label="Eye Screening Q36" />
+  //   </Fragment>
+  // ),
 
-  "Pre-women's edu quiz" : (info) => (
-    <Fragment>
-      <h2>PRE-WOMEN'S EDUCATION QUIZ</h2>
-      <h2>1. Survey</h2>
-      From a scale of 1-5, how much do you know about menstrual cycles?<br />1 being not at all, and 5 being a lot
-      <RadioField name="preWomenSEduQuizQ1" label="Pre-women's edu quiz Q1"/>
-      <h2>2. Quiz</h2>
-      2.1. Which of the following is/are normal symptom(s) of menstrual periods?
-      <RadioField name="preWomenSEduQuizQ2" label="Pre-women's edu quiz Q2"/>
-      2.2. All of the following are reasons for missed periods except
-      <RadioField name="preWomenSEduQuizQ3" label="Pre-women's edu quiz Q3"/>
-      2.3. Which of the following is true about menstruation
-      <RadioField name="preWomenSEduQuizQ4" label="Pre-women's edu quiz Q4"/>
-      2.4. When is the best time to do a breast self examination?
-      <RadioField name="preWomenSEduQuizQ5" label="Pre-women's edu quiz Q5"/>
-      2.5. How often should you do a breast self examination?
-      <RadioField name="preWomenSEduQuizQ6" label="Pre-women's edu quiz Q6"/>
-      2.6. You should go to the doctor if you notice:
-      <RadioField name="preWomenSEduQuizQ7" label="Pre-women's edu quiz Q7"/>
-      <h2>Score</h2>
-      <SomeComp calculation={(model) => (
-        <h3>
-          Score:
-              {model['preQuizScore'] = calculatePreScore(model)}
-        </h3>
-      )} />
+  // "Pre-women's edu quiz" : (info) => (
+  //   <Fragment>
+  //     <h2>PRE-WOMEN'S EDUCATION QUIZ</h2>
+  //     <h2>1. Survey</h2>
+  //     From a scale of 1-5, how much do you know about menstrual cycles?<br />1 being not at all, and 5 being a lot
+  //     <RadioField name="preWomenSEduQuizQ1" label="Pre-women's edu quiz Q1"/>
+  //     <h2>2. Quiz</h2>
+  //     2.1. Which of the following is/are normal symptom(s) of menstrual periods?
+  //     <RadioField name="preWomenSEduQuizQ2" label="Pre-women's edu quiz Q2"/>
+  //     2.2. All of the following are reasons for missed periods except
+  //     <RadioField name="preWomenSEduQuizQ3" label="Pre-women's edu quiz Q3"/>
+  //     2.3. Which of the following is true about menstruation
+  //     <RadioField name="preWomenSEduQuizQ4" label="Pre-women's edu quiz Q4"/>
+  //     2.4. When is the best time to do a breast self examination?
+  //     <RadioField name="preWomenSEduQuizQ5" label="Pre-women's edu quiz Q5"/>
+  //     2.5. How often should you do a breast self examination?
+  //     <RadioField name="preWomenSEduQuizQ6" label="Pre-women's edu quiz Q6"/>
+  //     2.6. You should go to the doctor if you notice:
+  //     <RadioField name="preWomenSEduQuizQ7" label="Pre-women's edu quiz Q7"/>
+  //     <h2>Score</h2>
+  //     <SomeComp calculation={(model) => (
+  //       <h3>
+  //         Score:
+  //             {model['preQuizScore'] = calculatePreScore(model)}
+  //       </h3>
+  //     )} />
       
-    </Fragment>
-  ),
+  //   </Fragment>
+  // ),
 
-  "Post-women's edu quiz" : (info) => (
-    <Fragment>
-      <h2>PRE-WOMEN'S EDUCATION QUIZ</h2>
-      <h2>1. Survey</h2>
-      From a scale of 1-5, how much do you know about menstrual cycles?<br />1 being not at all, and 5 being a lot
-      <RadioField name="postWomenSEduQuizQ1" label="Pre-women's edu quiz Q1"/>
-      <h2>2. Quiz</h2>
-      2.1. Which of the following is/are normal symptom(s) of menstrual periods?
-      <RadioField name="postWomenSEduQuizQ2" label="Pre-women's edu quiz Q2"/>
-      2.2. All of the following are reasons for missed periods except
-      <RadioField name="postWomenSEduQuizQ3" label="Pre-women's edu quiz Q3"/>
-      2.3. Which of the following is true about menstruation
-      <RadioField name="postWomenSEduQuizQ4" label="Pre-women's edu quiz Q4"/>
-      2.4. When is the best time to do a breast self examination?
-      <RadioField name="postWomenSEduQuizQ5" label="Pre-women's edu quiz Q5"/>
-      2.5. How often should you do a breast self examination?
-      <RadioField name="postWomenSEduQuizQ6" label="Pre-women's edu quiz Q6"/>
-      2.6. You should go to the doctor if you notice:
-      <RadioField name="postWomenSEduQuizQ7" label="Pre-women's edu quiz Q7"/>
-      <h2>Score</h2>
-      <SomeComp calculation={(model) => (
-        <h3>
-          Score:
-              {model['postQuizScore'] = calculatePostScore(model)}
-        </h3>
-      )} />
+  // "Post-women's edu quiz" : (info) => (
+  //   <Fragment>
+  //     <h2>PRE-WOMEN'S EDUCATION QUIZ</h2>
+  //     <h2>1. Survey</h2>
+  //     From a scale of 1-5, how much do you know about menstrual cycles?<br />1 being not at all, and 5 being a lot
+  //     <RadioField name="postWomenSEduQuizQ1" label="Pre-women's edu quiz Q1"/>
+  //     <h2>2. Quiz</h2>
+  //     2.1. Which of the following is/are normal symptom(s) of menstrual periods?
+  //     <RadioField name="postWomenSEduQuizQ2" label="Pre-women's edu quiz Q2"/>
+  //     2.2. All of the following are reasons for missed periods except
+  //     <RadioField name="postWomenSEduQuizQ3" label="Pre-women's edu quiz Q3"/>
+  //     2.3. Which of the following is true about menstruation
+  //     <RadioField name="postWomenSEduQuizQ4" label="Pre-women's edu quiz Q4"/>
+  //     2.4. When is the best time to do a breast self examination?
+  //     <RadioField name="postWomenSEduQuizQ5" label="Pre-women's edu quiz Q5"/>
+  //     2.5. How often should you do a breast self examination?
+  //     <RadioField name="postWomenSEduQuizQ6" label="Pre-women's edu quiz Q6"/>
+  //     2.6. You should go to the doctor if you notice:
+  //     <RadioField name="postWomenSEduQuizQ7" label="Pre-women's edu quiz Q7"/>
+  //     <h2>Score</h2>
+  //     <SomeComp calculation={(model) => (
+  //       <h3>
+  //         Score:
+  //             {model['postQuizScore'] = calculatePostScore(model)}
+  //       </h3>
+  //     )} />
       
-    </Fragment>
-  ),
+  //   </Fragment>
+  // ),
 
   "Screening Review": (info) => (
     <Fragment />
