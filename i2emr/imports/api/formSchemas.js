@@ -185,43 +185,47 @@ export const formSchemas = {
       }, patientProfilingQ25: {
         type: String, allowedValues: ["Less than 1 cigarette (or equivalent) per day on average"
           , "Between 1 to 10 cigarettes (or equivalent) per day on average"
-          , "More than 10 cigarettes (or equivalent) per day on average"], optional: true, custom: function () {
-          if (this.field('patientProfilingQ11').isSet
-            && this.field('patientProfilingQ11').value === "Yes") {
-            if (!this.isSet || this.value.length === 0) {
-              return SimpleSchema.ErrorTypes.REQUIRED
-            }
-          }
-        }
+          , "More than 10 cigarettes (or equivalent) per day on average"], optional: true
+          // , custom: function () {
+        //   if (this.field('patientProfilingQ11').isSet
+        //     && this.field('patientProfilingQ11').value === "Yes") {
+        //     if (!this.isSet || this.value.length === 0) {
+        //       return SimpleSchema.ErrorTypes.REQUIRED
+        //     }
+        //   }
+        // }
       }, patientProfilingQ26: {
-        type: Array, optional: true, custom: function () {
-          if (this.field('patientProfilingQ11').isSet
-            && this.field('patientProfilingQ11').value === "Yes") {
-            if (!this.isSet || this.value.length === 0) {
-              return SimpleSchema.ErrorTypes.REQUIRED
-            }
-          }
-        }
+        type: Array, optional: true
+        // , custom: function () {
+        //   if (this.field('patientProfilingQ11').isSet
+        //     && this.field('patientProfilingQ11').value === "Yes") {
+        //     if (!this.isSet || this.value.length === 0) {
+        //       return SimpleSchema.ErrorTypes.REQUIRED
+        //     }
+        //   }
+        // }
       }, "patientProfilingQ26.$": {
         type: String, allowedValues: ["Cigarette", "Tobacoo", "Beedi", "Others"]
       }, patientProfilingQ27: {
-        type: Number, optional: true, custom: function () {
-          if (this.field('patientProfilingQ11').isSet
-            && this.field('patientProfilingQ11').value === "Yes") {
-            if (!this.isSet || this.value.length === 0) {
-              return SimpleSchema.ErrorTypes.REQUIRED
-            }
-          }
-        }
+        type: Number, optional: true
+        // , custom: function () {
+        //   if (this.field('patientProfilingQ11').isSet
+        //     && this.field('patientProfilingQ11').value === "Yes") {
+        //     if (!this.isSet || this.value.length === 0) {
+        //       return SimpleSchema.ErrorTypes.REQUIRED
+        //     }
+        //   }
+        // }
       }, patientProfilingQ28: {
-        type: String, allowedValues: ["I have never smoked before", "I have stopped smoking totally"], optional: true, custom: function () {
-          if (this.field('patientProfilingQ11').isSet
-            && this.field('patientProfilingQ11').value === "No") {
-            if (!this.isSet || this.value.length === 0) {
-              return SimpleSchema.ErrorTypes.REQUIRED
-            }
-          }
-        }
+        type: String, allowedValues: ["I have never smoked before", "I have stopped smoking totally"], optional: true
+        // , custom: function () {
+        //   if (this.field('patientProfilingQ11').isSet
+        //     && this.field('patientProfilingQ11').value === "No") {
+        //     if (!this.isSet || this.value.length === 0) {
+        //       return SimpleSchema.ErrorTypes.REQUIRED
+        //     }
+        //   }
+        // }
       }, patientProfilingQ12: {
         type: String, allowedValues: ["Yes", "No"], optional: false
       }, patientProfilingQ13: {
@@ -367,7 +371,7 @@ export const formSchemas = {
       }, doctorConsult: {
         type: String, allowedValues: ["Yes", "No"], optional: false
       }, totalScore: {
-        type: Number, optional: false
+        type: Number, optional: true
       }, riskLevel: {
         type: String, optional: true
       }

@@ -517,15 +517,15 @@ export const formLayouts = {
         </Fragment>
       </DisplayIf>
       <h2> SMOKING</h2>
-       Do you currently smoke/chew?
+       Do you currently smoke?
 		<RadioField name="patientProfilingQ11" label="Patient Profiling Q11" />
       <DisplayIf condition={(context) => (typeof (context.model.patientProfilingQ11) !== "undefined" && context.model.patientProfilingQ11 === "Yes")}>
         <Fragment>
-           How much do you smoke/chew?
+           How much do you smoke?
           <RadioField name="patientProfilingQ25" label="patientProfilingQ25" /> <br></br>
-           What do you smoke/chew?
+           What do you smoke?
           <SelectField name="patientProfilingQ26" checkboxes="true" label="patientProfilingQ26" /> <br></br>
-           How many years have you been smoking/chewing for? (Rounded up)
+           How many years have you been smoking for? (Rounded up)
           <NumField name="patientProfilingQ27" label="Patient Profiling Q27" /><br></br>
         </Fragment>
       </DisplayIf>

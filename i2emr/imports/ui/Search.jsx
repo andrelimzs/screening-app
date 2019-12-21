@@ -37,25 +37,30 @@ class Search extends Component {
         console.log(result)
 
         if (result) {
-          this.setState({
-            searchResult: result,
-            anchorEl: currentTarget
-          })
-
+          // this.setState({
+          //   searchResult: result,
+          //   anchorEl: currentTarget
+          // })
+          this.setState({ searchResult: result,
+            anchorEl: currentTarget })
         } else {
-          this.setState({
-            searchResult: null,
-            anchorEl: null
-          })
+          // this.setState({
+          //   searchResult: null,
+          //   anchorEl: null
+          // })
+          this.setState({ searchResult: null,
+            anchorEl: null })
         }
       });
 
 
     } else {
-      this.setState({
-        searchResult: null,
-        anchorEl: null
-      })
+      // this.setState({
+      //   searchResult: null,
+      //   anchorEl: null
+      // })
+      this.setState({ searchResult: null,
+        anchorEl: null })
     }
   }
 
@@ -65,10 +70,12 @@ class Search extends Component {
     if (!busy) {
       Meteor.call('patientinfo.movePatient', id, this.props.station);
 
-      this.setState({
-        searchResult: null,
-        anchorEl: null
-      })
+      // this.setState({
+      //   searchResult: null,
+      //   anchorEl: null
+      // })
+      this.setState({ searchResult: null,
+        anchorEl: null })
 
       const previousPatient = Session.get('currentPatient');
       if (previousPatient) {
@@ -89,56 +96,57 @@ class Search extends Component {
       this.computation.stop()
     }
   }
-
-  showPopper = () => {
-    const station = Session.get('station')
-    const patientInfo = this.state.searchResult
+  render() {
+  // showPopper = () => {
+  //   const station = Session.get('station')
+  //   const patientInfo = this.state.searchResult
     const anchorEl = this.state.anchorEl;
     const open = Boolean(anchorEl);
     const id = open ? 'find-patient-popper' : null;
-
-    if (station === "Height and Weight" && patientInfo && patientInfo["Station Select"].stationSelectQ1 === "No" ||
-      station === "Blood Pressure" && patientInfo && patientInfo["Station Select"].stationSelectQ2 === "No"
-    ) {
-      return null
-    }
-    return (
-      <Popper id={id} open={open} anchorEl={anchorEl}>
-        {open && <Card>
-          <CardContent>
-            <Typography variant="h6">
-              ID {patientInfo.id}
-            </Typography>
-            {/* <Typography variant="h6">
-                At {patientInfo.nextStation}
-              </Typography> */}
-            <Typography variant="h6">
-              {patientInfo["Basic Patient Information"].basicPatientInformationQ1}
-            </Typography>
-            <Typography variant="body2">
-              {patientInfo["Basic Patient Information"].basicPatientInformationQ2}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button
-              variant={(patientInfo.busy) ? "contained" : "outlined"}
-              color={(patientInfo.busy) ? "secondary" : "default"}
-              onClick={this.movePatient.bind(this, patientInfo.id, patientInfo.busy)}>
-              {(patientInfo.busy) ? "Busy" : "Take"}
-            </Button>
-          </CardActions>
-        </Card>}
-      </Popper>
-    )
-  }
-
-  render() {
-   // const anchorEl = this.state.anchorEl;
-    //const open = Boolean(anchorEl);
-   // const id = open ? 'find-patient-popper' : null;
     const patientInfo = this.state.searchResult;
-    const station = Session.get('station');
-    console.log(station)
+
+  //   if (station === "Height and Weight" && patientInfo && patientInfo["Station Select"].stationSelectQ1 === "No" ||
+  //     station === "Blood Pressure" && patientInfo && patientInfo["Station Select"].stationSelectQ2 === "No"
+  //   ) {
+  //     return null
+  //   }
+  //   return (
+  //     <Popper id={id} open={open} anchorEl={anchorEl}>
+  //       {open && <Card>
+  //         <CardContent>
+  //           <Typography variant="h6">
+  //             ID {patientInfo.id}
+  //           </Typography>
+  //           {/* <Typography variant="h6">
+  //               At {patientInfo.nextStation}
+  //             </Typography> */}
+  //           <Typography variant="h6">
+  //             {patientInfo["Basic Patient Information"].basicPatientInformationQ1}
+  //           </Typography>
+  //           <Typography variant="body2">
+  //             {patientInfo["Basic Patient Information"].basicPatientInformationQ2}
+  //           </Typography>
+  //         </CardContent>
+  //         <CardActions>
+  //           <Button
+  //             variant={(patientInfo.busy) ? "contained" : "outlined"}
+  //             color={(patientInfo.busy) ? "secondary" : "default"}
+  //             onClick={this.movePatient.bind(this, patientInfo.id, patientInfo.busy)}>
+  //             {(patientInfo.busy) ? "Busy" : "Take"}
+  //           </Button>
+  //         </CardActions>
+  //       </Card>}
+  //     </Popper>
+  //   )
+  // }
+
+  // render() {
+  //  // const anchorEl = this.state.anchorEl;
+  //   //const open = Boolean(anchorEl);
+  //  // const id = open ? 'find-patient-popper' : null;
+  //   const patientInfo = this.state.searchResult;
+  //   const station = Session.get('station');
+  //   console.log(station)
     return (
       <div>
         <TextField
@@ -152,8 +160,33 @@ class Search extends Component {
           onChange={this.handleChangeID}
         />
 
-        {this.showPopper()}
-
+        {/* {this.showPopper()} */}
+        <Popper id={id} open={open} anchorEl={anchorEl}>
+          {open && <Card>
+            <CardContent>
+              <Typography variant="h6">
+                ID {patientInfo.id}
+              </Typography>
+              {/* <Typography variant="h6">
+                At {patientInfo.nextStation}
+              </Typography> */}
+              <Typography variant="h6">
+                {patientInfo["Basic Patient Information"].basicPatientInformationQ1}
+              </Typography>
+              <Typography variant="body2">
+                {patientInfo["Basic Patient Information"].basicPatientInformationQ2}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button
+                variant={(patientInfo.busy) ? "contained": "outlined"}
+                color={(patientInfo.busy) ? "secondary": "default"}
+                onClick={this.movePatient.bind(this, patientInfo.id, patientInfo.busy)}>
+                  {(patientInfo.busy) ? "Busy" : "Take"}
+              </Button>
+            </CardActions>
+          </Card>}
+        </Popper>
       </div>
     );
   }

@@ -810,6 +810,16 @@ class ScreeningReview extends Component {
                     <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={bloodGlucose && bloodGlucose.bloodGlucoseAndHbQ5} />
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Blood Glucose and Hb', 'bloodGlucoseAndHbQ5')}>Save</Button>}
                     </Grid>
+                    
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Total Score
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={bloodGlucose && bloodGlucose.totalScore} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Blood Glucose and Hb', 'totalScore')}>Save</Button>}
+                    </Grid>
+
+                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Risk Level
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={bloodGlucose && bloodGlucose.riskLevel} />
+                      {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Blood Glucose and Hb', 'riskLevel')}>Save</Button>}
+                    </Grid>
 
                     <Typography variant="h7"><b>Blood glucose</b></Typography>
                     <Grid style={{ paddingBottom: 15 }} item xs={12}>Blood glucose
@@ -874,7 +884,7 @@ class ScreeningReview extends Component {
                   <Grid container direction="row" justify="space-between" alignItems="center" >
 
                     <Grid style={{ paddingBottom: 15 }} item xs={12}>Completed phlebotomy?
-                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={phlebo && phlebo.bpQ1} />
+                    <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={phlebo && phlebo.phleboQ1} />
                       {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Phlebo', 'phleboQ1')}>Save</Button>}
                     </Grid>
                   </Grid>
@@ -946,7 +956,7 @@ class ScreeningReview extends Component {
                         {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Doctors\' Consult', 'doctorsConsultQ2')}>Save</Button>}
                       </Grid>
 
-                    <Grid style={{ paddingBottom: 15 }} item xs={12}>Provided with referral letter?
+                    {/* <Grid style={{ paddingBottom: 15 }} item xs={12}>Provided with referral letter?
                       <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={doctorsConsult && doctorsConsult.doctorsConsultQ3} />
                         {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Doctors\' Consult', 'doctorsConsultQ3')}>Save</Button>}
                         </Grid>
@@ -954,7 +964,7 @@ class ScreeningReview extends Component {
                     <Grid style={{ paddingBottom: 15 }} item xs={12}>If yes, referral details
                       <br /><input size="250" onChange={() => this.handleChange(event)} defaultValue={doctorsConsult && doctorsConsult.doctorsConsultQ4} />
                         {!this.state.printFlag && <Button size="small" variant="contained" color="primary" onClick={() => this.save(event, 'Doctors\' Consult', 'doctorsConsultQ4')}>Save</Button>}
-                        </Grid>
+                        </Grid> */}
 
                     <Grid style={{ paddingBottom: 15 }} item xs={12}>Name of doctor
                       <br /><input size="200" onChange={() => this.handleChange(event)} defaultValue={doctorsConsult && doctorsConsult.doctorsConsultQ5} />

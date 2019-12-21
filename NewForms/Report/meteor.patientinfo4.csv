@@ -1,0 +1,149 @@
+Gender,Age,District Name,Blood Borne Disease?,Have you ever been diagonse with TB?,Do you have any other medical conditions? ,What do you smoke?,Do you chew paan or taobacco?,What is your occupation?,"If answer is 'Farming/agriculture', do you use pesticides in your farming?:",Monthly Income in INR (only if participant is willing to disclose):,Marital status:,Number of children:,How many people live in your household (including you)?:,How many people in your household contribute to household income?,What is your highest education level?:,height,weight,waist,hip,waist:hip ratio,Eye Screening completed?,SNC ID,blood,,,,,,,,,,,,,,,,,,,,,
+Basic Patient Information.basicPatientInformationQ2,Basic Patient Information.basicPatientInformationQ4,Basic Patient Information.basicPatientInformationQ5,Basic Patient Information.basicPatientInformationQ11,Basic Patient Information.basicPatientInformationQ15,Patient Profiling.patientProfilingQ4,Patient Profiling.patientProfilingQ26,Patient Profiling.patientProfilingQ12,Patient Profiling.patientProfilingQ13,Patient Profiling.patientProfilingQ14,Patient Profiling.patientProfilingQ15,Patient Profiling.patientProfilingQ16,Patient Profiling.patientProfilingQ17,Patient Profiling.patientProfilingQ18,Patient Profiling.patientProfilingQ19,Patient Profiling.patientProfilingQ20,Height and Weight.heightAndWeightQ1,Height and Weight.heightAndWeightQ3,Height and Weight.heightAndWeightQ5,Height and Weight.heightAndWeightQ6,Height and Weight.calculateRatio,Eye Screening.eyeScreeningQ1,Eye Screening.eyeScreeningQ2,Blood Glucose and Hb.bloodGlucoseAndHbQ1,Blood Glucose and Hb.bloodGlucoseAndHbQ2,Blood Glucose and Hb.bloodGlucoseAndHbQ3,Blood Glucose and Hb.bloodGlucoseAndHbQ4,Blood Glucose and Hb.bloodGlucoseAndHbQ5,Blood Glucose and Hb.totalScore,Blood Glucose and Hb.riskLevel,Blood Glucose and Hb.bloodGlucoseAndHbQ6,Blood Glucose and Hb.bloodGlucoseAndHbQ7,Blood Pressure.bpQ1,Blood Pressure.bpQ2,Blood Pressure.bpQ3,Blood Pressure.bpQ4,Blood Pressure.bpQ5,Blood Pressure.bpQ6,Blood Pressure.averageSys,Blood Pressure.averageDys,Doctors' Consult.doctorsConsultQ1,Doctors' Consult.doctorsConsultQ2,Doctors' Consult.doctorsConsultQ3,Doctors' Consult.doctorsConsultQ4,Doctors' Consult.doctorsConsultQ5
+Male,42,Damoh,Don't Know,No,- ,-,No,Unemployed,"No, Not in Farming/Ariculture",-,unmarried ,,"3, mother brother and him ",1,Primary (Completed Sixth Standard),-,-,101.6,101.6,0.9,,,No,35 - 49 years old,"Female < 80cm, Male < 90cm",No exercise and sedentary at work/home,0,50,medium ,93,11.4,80,80,80,80,-,-,,,,NIL,No,,DR.SHIVAM MISHRA
+Male,63,Damah,Don't Know,No,-,beedi,No,Unemployed,"No, Not in Farming/Ariculture",,Married,4,3,,Refuse to Answer,-,-,31,32,0.97,Yes,1327526,Yes,,,,,0,Low,74,14.5,150,80,150,80,,,150,80,"[ ""High blood pressure"" ]","High BP.
+ADV- T. Tewlma 40mg",No,,DR. SHIVA MISHRA
+Male,71,Damoh,Don't Know,No,-,"[ ""Tobacoo"" ]",Yes,manual laborer,Yes,1000,Married,4,6,2,No Formal Qualifications,,,76.2,76.2,0.93,Yes,1327464,No,> 49 years old,"Female < 80cm, Male < 90cm",Mild exercise at work/home,0,50,Medium,89,12.2,110,80,110,80,,,110,80,,,,,
+Male,70,Damoh,Don't Know,No,"[ ""Others"" ]","[ ""Beedi"" ]",No,Manual labourer,Yes,,Married,1,5,2,No Formal Qualifications,,,,,,Yes,1327368,No,> 49 years old,"Female 80-89cm, Male 90-99cm",Moderate exercise at work/home,0,50,medium,102,12.4,160,110,160,110,,,160,110,"[ ""High blood pressure"" ]","bp- 160/110
+ADV: T. Telma 80mg",No,,DR SHIVAM 
+Male,46,MP,Don't Know,No,"[ ""Others"" ]","[ ""Beedi"" ]",No,Manual labour,Yes,60000,Married,2,1,4,Primary (Completed Sixth Standard),-,-,106,114.3,0.93,Yes,1327430,No,30,30,10,10,70,High,80,13.7,110,80,110,80,,,110,80,,,,,
+Male,55,Madhya Pradesh,Don't Know,No,-,"[ ""Beedi"" ]",No,manual labourer,Yes,4000-5000 R,Married,4,10,3,No Formal Qualifications,-,-,94,94,0.97,,,No,20,10,20,0,60,60,100,13.7,120,80,120,80,,,120,80,,,,,
+Male,78,Damah,Don't Know,No,"[ ""Others"" ]",,No,Farmer,Yes,,Married,4,6,1,Primary (Completed Sixth Standard),1.68,52,32,35,0.91,Yes,1327493,No,> 49 years old,"Female 80-89cm, Male 90-99cm",Mild exercise at work/home,0,60,High,93,9.9,130,100,130,100,,,130,100,,0.91,,,
+Male,61,Damoh,Don't Know,No,- ,- ,No,Manual labourer,"No, Not in Farming/Ariculture",- ,Married,4,10,don't know ,No Formal Qualifications,1.6,63,91.44,94,0.95,Yes,1327404,No,> 49 years old,"Female < 80cm, Male < 90cm",Mild exercise at work/home,0,50,medium ,92,14.4,150,100,150,100,,,150,100,,,,,
+Male,62,Damoh,Don't Know,No,-,,No,manual laborer,,5000,Married,2,4,2,Primary (Completed Sixth Standard),1.63,39,76.2,81.28,0.94,Yes,1327454,No,30,0,20,0,50,Medium,95,9.9,130,90,130,90,,,130,90,,"Hb - 9.9g/dL
+Adv: 
+T. oroflex XT OD 1 month",No,,Dr. Shiva
+Male,56,Damoh,Don't Know,No,"[ ""Others"" ]",,No,Manual labourer,"No, Not in Farming/Ariculture",,Married,2,13,2,No Formal Qualifications,1.83,73,41,43,0.95,Yes,1327532,No,56,"Female 80-89cm, Male 90-99cm",No exercise and sedentary at work/home,0,70,High,86,15.5,130,90,130,90,,,130,90,,,,,
+Male,55,MP,No,No,- ,"[ ""Beedi"" ]",No,Manual labour,"No, Not in Farming/Ariculture",-,Married,4,3,,Primary (Completed Sixth Standard),1.68,55,27,63.5,1.08,Yes,1327460,No,55,69,Mild exercise at work/home,0,50,medium ,78,15.3,110,80,110,80,,,110,80,,,,,
+Male,60,Damoh,-,No,-,,Yes,manual laborer,Yes,1000,Married,3,10,3,Higher Secondary and Above,1.54,50,88.9,94,0.95,Yes,1327553,-,-,-,-,-,-,-,-,-,140,110,140,100,,,140,100,,,,,
+Male,62,Damoh,Don't Know,No,-,"[ ""Beedi"" ]",No,Manual labourer,Yes,1000,Married,3,8,4,No Formal Qualifications,-,-,88.9,37,0.95,Yes,1327562,No,62,88.9,Moderate exercise at work/home,0,40,Medium,83,12.1,130,90,130,90,,,130,90,,,,,
+Male,63,Hatta,Don't Know,No,-,"[ ""Cigarette"" ]",Yes,Unemployed,"No, Not in Farming/Ariculture",,Married,4,4,1,No Formal Qualifications,-,-,42,44,0.95,Yes,1327550,No,63,106.68,Mild exercise at work/home,0,60,High,117,9.8,150,100,150,100,,,150,100,,,,,
+Male,71,Damoh,Don't Know,No,-,,No,Manual labour,-,,Married,3,5,,Primary (Completed Sixth Standard),-,-,83.82,35,0.94,Yes,1327539,No,71,83.82,Mild exercise at work/home,0,50,medium ,84,13.8,150,80,150,80,,,150,80,,,,,
+Male,69,Patera,Don't Know,No,-,"[ ""Beedi"" ]",No,manual laborer,Yes,833,Married,4,2,7,No Formal Qualifications,1.87,50,88.9,88.9,0.97,,,No,30,0,10,0,50,Medium,87,13.6,140,80,140,80,,,140,80,"[ ""Respiratory problems"" ]","Chest X-ray for the suspected TB case
+MX/ ESP/ Sputum AFB",Yes,"Referral for more investigative tests.
+Chest X-ray for the suspected TB case
+MX/ ESP/ Sputum AFB",DR. SHIVA MISHRAM
+Male,43,Damoh,Don't Know,No,-,,No,Manual labourer,Yes,,Married,2,4,-,Primary (Completed Sixth Standard),-,-,88.9,88.9,0.95,Yes,1327502,No,43,88.9,Moderate exercise at work/home,0,30,Medium,86,15,120,80,120,80,,,120,80,,,,,
+Male,30,Damoh,Don't Know,No,"[ ""Others"" ]","[ ""Tobacoo"" ]",Yes,Manual labourer,"No, Not in Farming/Ariculture",4000,Married,2,4,1,No Formal Qualifications,1.68,58,78.74,81.28,0.97,Yes,1327382,No,30,"Female < 80cm, Male < 90cm",Vigorous exercise or strenuous work,0,0,Low,85,16.6,100,60,100,60,,,100,60,,,,,
+Male,61,damoh,Don't Know,No,,,No,manual labourer,"No, Not in Farming/Ariculture",,Married,2,7,0,No Formal Qualifications,1.64,48,20,20,0.94,Yes,1327487,No,20,20,20,0,20,High,87,10,140,100,140,100,,,140,100,,,,,
+Male,56,Damoh,Don't Know,No,-,-,No,unemployed,-,,Married,2,6,2,No Formal Qualifications,1.6,55,81.28,86.36,0.94,Yes,1327528,No,30,10,10,0,50,Medium,218,10.3,130,90,130,90,,,130,90,,"FBS/PPBS
+T. Rejumeet 500BD",No,,Dr. Shivam Mishra
+Male,73,DAMOH,Don't Know,No,-,,No,MANUAL LABOURER,Yes,1000,Married,4,6,3,No Formal Qualifications,-,-,71.1,76.2,0.93,Yes,1327466,No,30,0,20,0,50,MEDIUM,256,9.8,130,90,130,90,,,130,90,,"Adv:
+FBS/PPBS
+T. Rejumet 500BD
+T. orofer x7 ODx 15 days ",No,,Dr. Shivam Mishra
+Male,68,Damah,No,No,-,"[ ""Tobacoo"" ]",Yes,Manual labour,"No, Not in Farming/Ariculture",,Married,3,8,3,Primary (Completed Sixth Standard),1.56,52,88.9,88.9,0.94,Yes,1327559,No,20,20,20,0,50,High,75,13.9,150,100,150,100,,,150,100,,,,,
+Male,66,Damoh,Don't Know,No,,-,No,manual labourer ,"No, Not in Farming/Ariculture",unemployed,Married,4,12,-,No Formal Qualifications,1.6,42,32,32,0.95,Yes,1327544,No,> 49 years old,"Female < 80cm, Male < 90cm",Vigorous exercise or strenuous work,0,30,Medium,103,9.7,130,90,130,90,,,130,90,,"HB: 9.7 g/dl
+T. orofer X7 OD for 1 month",No,,Dr. Shivam Mishram
+Male,74,"DAMOH, MADHYA PRADESH",Don't Know,No,"[ ""Others"" ]",,No,manual labourer (stopped working),no,,Single,3,2,,No Formal Qualifications,160,78,46,42,0.95,Yes,1327522,No,> 49 years old,"Female 80-89cm, Male 90-99cm",Mild exercise at work/home,0,70,High,180,13.1,140,100,140,100,,,140,100,,"Tests: FBG/ PPBS
+",No,,Dr. Shivam Mishra
+Male,54,MP,Don't Know,No,,beedi,,manual labourer,yes,"10,000/year",married,4,2,6,no formal education,-,-,-,-,-,,,No,> 49 years old,"Female < 80cm, Male < 90cm",Vigorous exercise or strenuous work,0,30,Medium,83,14.1,150,100,150,100,,,150,100,,"Chest X-ray 
+CBC / ECR / MX test",No,,DR. SHIVA MISHRAM
+Male,67,Damoh,Don't Know,No,-,,Yes,manual laborer,Yes,2000,Married,5,4,2,Secondary (Studied from Sixth Standard to Tenth Standard),-,-,96.52,96.52,0.95,Yes,1327560,No,30,10,10,0,50,Medium,245,7.4,130,80,130,80,,,130,80,,"Fasting Blood Glucose tests and PPBS
+T. Rejumeet BD- 1 month 
+T. orofer OD -1 month
+",No,,DR. Shivam Mishram
+Male,63,DAMOH,Don't Know,No,-,,No,MANUAL LABOURER,Yes,5000,Married,3,5,4,Primary (Completed Sixth Standard),-,-,36,96.52,0.95,Yes,1327375,No,30,20,10,0,60,High,180,13.3,150,100,150,100,,,150,100,,"BP: 150/100
+T. Telma 40mg OD",No,,Dr. Shivam Mishra
+Male,60,Damoh,Don't Know,No,,"[ ""Beedi"" ]",Yes,manual laborer,Yes,2000,Married,7,9,2,No Formal Qualifications,-,-,36,96.52,0.95,Yes,1327537,No,> 49 years old,0,20,0,50,Medium,224,13.2,140,100,140,100,,,140,100,,"ADV: FBS/PPBS
+T. Rejumeet 500BD
+T. Telma20OD",No,,Dr. Shivam Mishra
+Male,71,DAMOH,Don't Know,No,-,"[ ""Tobacoo"" ]",Yes,MANUAL LABOUR,"No, Not in Farming/Ariculture",-,Married,4,6,2,No Formal Qualifications,-,-,91.44,96.52,0.95,Yes,1327571,No,30,0,10,0,40,Medium,196,13.5,130,90,130,90,,,130,90,,"FBS/PPBS
+T. Rejumeet 500BD",No,,Dr. Shivam Mishra
+Male,71,DAMOH,Don't Know,No,"[ ""Others"" ]",,No,MANUAL LABOURER,"No, Not in Farming/Ariculture",1000,Married,3,7,3,No Formal Qualifications,,,31,86.36,0.91,Yes,1327538,No,> 49 years old,30,30,0,60,High,99,,130,90,130,90,,,130,90,,,,,
+Male,65,DAMOH,No,No,-,,No,Manual labour,"No, Not in Farming/Ariculture",3000,Married,4,8,3,No Formal Qualifications,-,-,91.44,91.44,0.97,Yes,1327567,No,30,10,20,0,60,High,88,11.9,170,100,170,100,,,170,100,,"170/100
+T. Amloch AT OD",No,,Dr. Shivam Mishra
+Male,67,Damoh,Don't Know,No,-,,Yes,unemployed,"No, Not in Farming/Ariculture",-,Married,3,5,3,Primary (Completed Sixth Standard),-,-,88.9,96.52,0.92,Yes,1327540,No,30,10,20,0,60,High,283,8.6,130,100,130,100,,,130,100,,"FBS/PPBS
+T. Glimistar M1- BD 
+T. Orofer x7 OD 1 month
+",No,,Dr. Shivam Mishra
+Male,59,Damoh,-,No,"[ ""Others"" ]","[ ""Beedi"" ]",Yes,Manual Labourer,Yes,833,Married,3,2,6,No Formal Qualifications,-,58,88.9,93.98,0.95,,,No,30,30,10,0,50,Medium,351,9,100,60,100,60,,,100,60,,"FBS/PPBS 
+T. Glimistar M1 BD 
+T. Orofer. X7 OD 1 week",No,,Dr. Shivam Mishra
+Male,64,DAMOH,Don't Know,No,-,-,No,MANUAL LABOURER,Yes,500,Married,1,4,3,No Formal Qualifications,-,-,88.9,96.52,0.92,Yes,1327506,Yes,High,High,High,High,High,High,198,10.5,130,100,130,100,,,130,100,,"FBS/ PPBS
+T. Rejumeet BD",No,,Dr. Shivam Mishra
+Male,52,DAMOH,Don't Know,No,-,"[ ""Beedi"" ]",No,FARMER,Yes,2000,Married,3,6,1,Primary (Completed Sixth Standard),-,-,94,94,0.95,Yes,1327484,No,30,0,10,0,40,Medium,233,13.6,130,80,130,80,,,130,80,,"T Glimistar M1 x OD with meal 
+ADV: 
+FBS/ PPBS",No,,Dr. Shivam Misrha
+Male,60,MP,Don't Know,No,-,-,TOBACCO,homemaker,,,Married,1,7,1,No Formal Qualifications,-,-,73.7,81.3,0.91,Yes,1327408,No,30,0,20,0,50,MEDIUM,201,13.6,140,100,140,100,,,140,100,,"Glimistar M1 x OD with meal
+ADV: FBS/ PPBS",No,,Dr. Shivam Mishra
+Male,39,"Damoh, Madhya Pradesh",No,No,-,NO,"Yes, SOMETIMES",Manual Labourer,"No, Not in Farming/Ariculture",50000,Married,3,5,1,Secondary (Studied from Sixth Standard to Tenth Standard),-,-,91.4,96.5,0.95,Yes,1327415,No,20,10,0,0,30,Medium,173,10,130,90,130,90,,,130,90,,FBS/ PPBD T. orofer x7 OD x 10 days,No,,Dr. Shivam Mishra
+Male,60,BAXWAHA,Don't Know,No,"VISITS CLINICS, FINANCIAL ISSUES",TOBACCO ,Yes,MANUAL LABOURER,"No, Not in Farming/Ariculture",500,MARRIED,3,5,2,No Formal Qualifications,-,-,81.3,91.4,0.89,Yes,1327419,No,0,0,20,0,50,MEDIUM ,211,9.1,130,90,130,90,,,130,90,,"Rezumat x BD 10 days 
+FBS",No,,Dr. Shivam Mishra
+Male,40,DAMOH,DONT KNOW ,No,"[ ""Others"" ]","[ ""Tobacoo"" ]",Yes,MANUAL LABOURER,Yes,5000,Married,3,5,1,PRIMARY (COMPLETE 6TH STANDARD),-,-,81.3,86.4,0.94,Yes,1327413,No,20,0,10,0,30,Medium,213,11,110,80,110,80,,,110,80,"[ ""Overweight/obesity"" ]","FBS/PPBS
+T. Rejumeet 500 BD",No,,Dr. Shivam Mishra
+Male,75,DAMOH,Don't Know,No,-,"[ ""Tobacoo"" ]",Yes,MANUAL LABOURER,Yes,660,Married,2,2,1,No Formal Qualifications,-,,78.7,83.8,0.94,Yes,1327503,No,30,0,10,0,40,Medium,296,12,140,80,140,80,,,140,80,,"Blood Sugar - 296mg/dl (FBS) 
+T. Glimistar M1 x BD with meal
+ADV: 
+FBS/ PPBS",No,,Dr. Shivam Mishra
+Male,54,"Damoh, MP",Don't Know ,No,-,,No,manual laborer,Yes,,Married,3,4,2,Secondary (Studied from Sixth Standard to Tenth Standard),-,-,81.3,86.4,0.94,Yes,1327451,No,30,0,10,0,40,Medium,319,11.1,160,100,160,100,,,160,100,,"GLimistar M1 x BD with meal 
+FBS/PPBS",No,,Dr. Shivam Mishra
+Male,49,PATERA,Don't Know,No,"[ ""Others"" ]","[ ""Tobacoo"" ]",Yes,MANUAL LABOURER,"No, Not in Farming/Ariculture",13000-14000,Married,3,5,2,No Formal Qualifications,-,-,29,33,0.88,Yes,1327519,No,35 - 49 years old,10,10,0,30,Medium,116,15.1,130,80,130,80,,,130,80,,,,,
+Male,21,Test 2,Don't Know,No,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Female,65,PRATAPGARH,Don't Know,No,-,,No,HOUSEWIFE,"No, Not in Farming/Agriculture",,Married,3,8,,No Formal Qualifications,1.57,50,76.2,91.44,0.83,Yes,1328062,No,20,20,20,0,50,High,124,12.2,160,110,160,110,,,160,110,,,,,
+Male,59,Rai Baouelex,Donâ€™t know,No,,"[ ""Beedi"" ]",No,manual laborer,Yes,1000,Married,8,3,1,No Formal Qualifications,1.56,45,83.82,86.36,0.97,Yes,1328070,No,30,0,10,0,40,Medium,118,13.3,130,90,130,90,,,130,90,,,,,
+Female,60,PRATAPGARH,No,No,"[ ""Others"" ]",,No,Housewife,"No, Not in Farming/Ariculture",,Married,4,10,3,No Formal Qualifications,1.53,60,38,43,0.88,Yes,1328069,Yes,> 49 years old,,,,0,Low,152,9.8,140,100,140,100,,,140,100,,"FBS/ PPBS
+",No,,Dr. Shivam Mishra
+Male,85,Rewa,Don't Know,No,,"[ ""Tobacoo"" ]",Yes,Shopkeeper,"No, Not in Farming/Ariculture",2000,Married,2,2,1,No Formal Qualifications,1.66,78,42,45,0.93,Yes,1327886,No,> 49 years old,"Female 80-89cm, Male 90-99cm",Mild exercise at work/home,0,60,High,177,10.9,140,80,140,80,,,140,80,,FBS/ PPBS,No,,Dr. Shivam Mishra
+Female,60,UTTAR PRADESH,No,No,"[ ""Others"" ]",,No,HOUSEWIFE,"No, Not in Farming/Ariculture",,Married,3,9,1,No Formal Qualifications,1.56,50,32,36,0.89,Yes,1328063,No,50,<80,vigorous exercise or strenuous work,0,30,Medium risk,315,10.1,160,100,160,100,,,160,100,,Medium risk,No,,Dr. Shivam Mishra
+Male,72,SATNA,Don't Know,No,"[ ""Others"" ]",,No,Unemployed,"No, Not in Farming/Ariculture",,Married,2,6,1,Primary (Completed Sixth Standard),1.68,65,40,41,0.98,Yes,1327953,Yes,-,-,-,-,-,-,172,13,150,80,150,80,,,150,80,,FBS/PPBS,No,,Dr. Shivam Mishra
+Female,65,Satha,Don't Know,No,,,No,Housewife,"No, Not in Farming/Ariculture",,Married,6,6,1,No Formal Qualifications,55,55,33,39,0.85,Yes,1327964,No,50 years an above,"Female < 80cm, Male < 90cm",Moderate exercise at work/home,0,40,Medium,203,9.9,130,90,130,90,,,130,90,,"T. Rejumet x BD 15 day 
+FBS",No,,Dr. Shivam Mishra
+Female,60,Kotra,No,No,"[ ""Others"" ]",,No,Housewife,"No, Not in Farming/Ariculture",,Married,8,5,2,No Formal Qualifications,1.42,45,33,91.44,0.92,Yes,1328071,No,91.44,91.44,20,0,50,High,119,11,100,60,100,60,,,100,60,,,,,
+Male,70,SAINA,Don't Know,No,"[ ""Others"" ]",Tobacco,Yes, MANUAL LABOURER,Yes,3000,Married,6,3,2,Primary (Completed Sixth Standard),1.7,80,111.76,116.84,0.96,Yes,1327960,No,30,"Female 80-89cm, Male 90-99cm",0,0,40,Medium,78,12.2,160,100,160,100,,,160,100,,,,,
+Female,70,PRATAPGARH,No,No,"[ ""Others"" ]",,No,Manual labour,"No, Not in Farming/Ariculture",100,Widowed,4,1,1,No Formal Qualifications,1.44,40,31,34,0.91,Yes,1328066,No,> 49 years old,"Female < 80cm, Male < 90cm",Moderate exercise at work/home,0,40,Medium,187,10.1,150,100,150,100,,,150,100,,FBS/PPBS,No,,Dr. Shivam Mishra
+Female,62,Rai Barelly,No,No,-,,Yes,housewife,"No, Not in Farming/Ariculture",1000,Married,3,16,3,No Formal Qualifications,1.48,45,81.28,88.9,0.91,Yes,1328072,No,30,10,10,0,50,Medium,166,13.5,120,80,120,80,,,120,80,,FBS / PPBS,No,,Dr. Shivam Mishra
+Male,50,SATNA,Don't Know,No,"[ ""Others"" ]",,No,MANUAL LABOURER,Yes,3000,Married,3,5,1,Higher Secondary and Above,1.82,75,93.98,104.14,0.9,Yes,1327938,No,30,0,0,0,30,Medium,165,13.8,100,60,100,60,,,100,60,,,,,
+Male,70,SATNA,-,No,"[ ""Others"" ]",-,No,Unemployed,"No, Not in Farming/Ariculture",-,Married,3,2,1,Secondary,1.69,63,89,99,0.9,Yes,1327935,No,30,0,20,0,50,Medium,165,12.4,150,100,150,100,,,150,100,,,,,
+Male,48,Nagoo,Don't Know,No,-,,Yes,manual laborer,-,2000,Married,1,4,1,No formal education,170,55,93.98,93.98,93.98,Yes,1327978,No,35 - 49 years old,"Female < 80cm, Male < 90cm",0,0,30,30,113,11.3,100,60,100,60,,,100,60,,,,,
+Male,66,Saina,Don't know,No,,Tobacco,Tobacco,Manual Labourer,Yes,1000,Married,3,11,1,Secondary,1.61,53,88.9,91.44,0.97,Yes,1327951,No,> 49 years old,"Female < 80cm, Male < 90cm",Vigorous exercise or strenuous work,0,30,Medium,103,14.4,100,60,100,60,,,100,60,,,,,
+Female,65,BANDA,No,No,"[ ""Others"" ]",,No,UNEMPLOYED,"No, Not in Farming/Ariculture",,Widowed,1,1,-,No Formal Qualifications,1.41,35,38,30,1.27,Yes,1328324,No,> 49 years old,"Female < 80cm, Male < 90cm",Mild exercise at work/home,0,50,High,101,11,130,90,130,90,,,130,90,,,,,
+Male,65,BANDA,Don't Know,No,"[ ""Others"" ]","[ ""Tobacoo"" ]",Yes,FARMER,Yes,-,Married,5,6,5,Primary (Completed Sixth Standard),1.72,55,88.9,88.9,0.91,Yes,1328303,No,30,0,0,0,30,Medium,96,10.5,150,100,150,100,,,150,100,,"Reduce Salty things intake 
+Tomorrow check BP, Review SOS 
+
+Tos Telmikind and Lozanges 
+Tirla 0.25 ns ",No,,-
+Male,65,Banda,-,No,,,No,manual laborer,"No, Not in Farming/Ariculture",,Married,3,8,,No Formal Qualifications,1.58,40,73.66,86.36,0.85,Yes,1328306,No,> 49 years old,"Female < 80cm, Male < 90cm",Mild exercise at work/home,0,50,High,88,14.3,140,90,140,90,,,140,90,,,,,
+Female,70,BANDA,-,No,-,,No,UMEMPLOYED,"No, Not in Farming/Ariculture",-,Married,1,6,1,No Formal Qualifications,1.28,30,73.66,81.28,0.91,Yes,1328320,No,70,73.66,Mild exercise at work/home,0,50,medium ,88,9.7,130,90,130,90,,,130,90,,T. Orofer x 7 BD x 2 months,No,,Dr. Vikas
+Male,65,BANDA,-,No,"[ ""Others"" ]",,No,MANUAL LABOURER,Yes,3000,Married,6,11,4,No Formal Qualifications,1.57,55,33,91.44,0.92,Yes,1328328,No,30,10,0,0,40,Medium,104,15.4,120,80,120,80,,,120,80,,,,,
+Male,60,BABERU,Don't Know,No,-,,Yes,Farmer ,Yes,1000,Married,7,9,2,No Formal Qualifications,1.6,50,88.9,88.9,0.86,Yes,1328327,No,30,0,0,0,30,Medium,104,13.2,100,50,100,50,,,100,50,,T. orofex x 7 OD x 2 month,No,,Dr. Vikas Khatri
+Male,62,Banda,Don't Know,No,,,Yes,manual laborer,Yes,,Married,3,5,3,No Formal Qualifications,1.75,78,36,40,0.9,Yes,1328298,No,> 49 years old,"Female < 80cm, Male < 90cm",Vigorous exercise or strenuous work,0,30,Medium,104,13.6,120,80,120,80,,,120,80,,,,,
+Female,60,BANDA,No,No,-,,No,HOUSEWIFE,"No, Not in Farming/Ariculture",,Widowed,5,11,2,No Formal Qualifications,1.54,40,27,83.82,0.82,Yes,1328311,No,30,0,10,0,40,Medium,102,12.1,150,90,150,90,,,150,90,"[ ""High blood pressure"" ]",T. Telma 40mg OD for 1 month,No,,Dr Vikas Khatri 
+Male,70,BANDA,Don't Know,No,visits clinic. FINANCIAL ISSUE,,No,MANUAL LABOURER,Yes,,Married,5,10,-,No Formal Qualifications,1.54,40,73.66,81.28,0.91,Yes,1328305,No,30,0,20,0,50,medium,82,11.2,120,80,120,80,,,120,80,,,,,
+Female,60,BANDA,No,No,"[ ""Others"" ]",,No,Unemployed,"No, Not in Farming/Ariculture",,Widowed,9,2,1,No Formal Qualifications,1.52,45,31,33,0.94,Yes,1328313,No,> 49 years old,"Female < 80cm, Male < 90cm",Mild exercise at work/home,0,50,High,109,12.7,140,80,140,80,,,140,80,,,,,
+Male,67,BANDA,Don't Know,No,"[ ""Others"" ]",,Yes,MANUAL LABOURER,Yes,500,Married,2,7,2,No Formal Qualifications,1.67,50,33,36,0.92,Yes,1328297,No,> 49 years old,"Female < 80cm, Male < 90cm",Moderate exercise at work/home,0,40,Medium,82,9.5,130,90,130,90,,,130,90,,T. orofer x 7x OD x 1 month,No,,Dr. Vikas
+Male,66,BANADA,Don't Know,No,,"[ ""Beedi"" ]",No,MANUAL LABOURER,Yes,5000,Married,2,13,4,Secondary (Studied from Sixth Standard to Tenth Standard),1.76,60,88.9,93.98,0.95,No,1328316,No,30,0,0,0,30,Medium,105,9.3,140,90,140,90,,,140,90,,T. orofer x 7 x OD x 1 month,No,,Dr. Vikas 
+Female,66,Banda,No,No,,,No,housewife,"No, Not in Farming/Ariculture",,Widowed,6,11,1,No Formal Qualifications,1.45,35,28,31,0.9,Yes,1328322,No,> 49 years old,"Female < 80cm, Male < 90cm",Vigorous exercise or strenuous work,0,30,Medium,99,10.7,130,90,130,90,,,130,90,,T. Orofer x 7 x OD x 1 month,No,,Dr Vikas
+Female,60,BANDA,-,No,"[ ""High Blood Pressure"" ]",,No,HOUSEWIFE,"No, Not in Farming/Ariculture",,Widowed,0,1,0,No Formal Qualifications,1.48,50,86.36,86.3,0.94,Yes,1328308,No,30,10,0,0,40,Medium,100,12,160,100,160,100,,,160,100,"[ ""High blood pressure"" ]","Systolic hypertension; BP 160/100 
+Allergic dermatitis
+Prescribed medicine: Telmikind 40mg, Trika 0.25mg, Levocetirizine ",No,,-
+Female,60,BANDA,Don't Know,No,"[ ""Others"" ]",,Yes,HOUSEWIFE,"No, Not in Farming/Ariculture",,Married,1,4,2,No Formal Qualifications,1.46,45,32,35,0.91,Yes,1328330,,,,,,,,,,130,70,130,70,,,130,70,,,,,
+Female,60,BABERU,Don't Know,No,-,,No,MANUAL LABOURER,Yes,100,Married,2,6,1,No Formal Qualifications,1.48,40,29,86.36,0.85,Yes,1328336,No,30,0,20,0,50,medium,121,10.3,140,100,140,100,,,140,100,,,,,
+Female,66,Banda,-,-,-,,No,housewife,"No, Not in Farming/Ariculture",,Widowed,4,2,,No Formal Qualifications,1.51,43,73.7,73.7,0.83,Yes,1328276,No,30,0,0,0,30,Medium,105,14.6,100,60,100,60,,,100,60,,NO CLINICAL COMPLAINTS ,,,
+Female,55,BANDA,Don't Know,No,"[ ""Others"" ]",,No,HOUSEWIFE,Yes,,Married,2,4,1,No Formal Qualifications,1.49,38,25,30,0.83,Yes,1328331,No,> 49 years old,"Female < 80cm, Male < 90cm",20,0,50,Medium,91,11.9,130,90,130,90,,,130,90,,,,,
+Female,60,BABERU,Don't Know,No,-,,No,HOUSEWIFE,"No, Not in Farming/Ariculture",,Married,1,3,1,No Formal Qualifications,1.47,49,83.82,93.98,0.89,Yes,1328300,No,30,10,10,0,50,Medium,111,10.7,160,100,160,100,,,160,100,"[ ""High blood pressure"" ]","Telmikind 40mg,  Trika 0.25mg",No,,- 
+Male,65,Banda,Don't Know,No,-,,Yes,manual laborer,Yes,,Married,6,5,,No Formal Qualifications,1.68,45,81.28,81.28,0.97,Yes,1328325,No,30,0,0,0,30,medium,85,12.4,130,80,130,80,,,130,80,,,,,
+Male,65,BABERU,Don't Know,No,-,,Yes,UNEMPLOYED,-,,Married,5,7,1,No Formal Qualifications,1.78,60,81.3,88.9,0.91,Yes,1328317,No,30,0,20,0,50,MEDIUM,78,11.8,140,100,140,100,,,140,100,,,,,
+Male,65,BANDA,No,No,-,-,-,YES,YES,-,MARRIED,3,5,3,NO FORMAL QUALIFICATION,1.57,55,83.8,86.4,0.97,Yes,1328302,No,30,0,20,0,50,MEDIUM,78,10.6,130,100,130,100,,,130,100,,,,,
+Female,50,Banda,Don't know,No,,,No,housewife,"No, Not in Farming/Ariculture",,Married,4,6,2,No Formal Qualifications,1.49,35,26,81.28,0.81,Yes,1328309,No,> 49 years old,0,20,0,20,High,108,10.6,110,80,110,80,,,110,80,,,,,
+Female,69,BABERU,-,No,-,,No,HOUSEWIFE,"No, Not in Farming/Ariculture",,Married,1,3,1,No Formal Qualifications,1.55,48,76.2,36,0.83,Yes,1328335,No,30,0,0,0,30,Medium,91,11.4,110,70,110,70,,,110,70,,"headache, ringing sensation in both ears. palpitation.refer to JKC for opinion. medication prescribed: Gracil 2x/day, Viplur 20mg 1x/day, Fortis B. 1x/day",No,,-
+Male,65,BANDA,Don't Know,No,-,TOBACCO,Yes,MANUAL LABOURER,Yes,-,Married,1,6,2,No Formal Qualifications,1.65,48,81.3,81.3,0.91,Yes,1328337,No,30,0,20,0,50,MEDIUM,89,12.6,100,70,100,70,,,100,70,,,,,
+Male,55,BABERU,Don't Know,No,-,"[ ""Beedi"" ]",Yes,MANUAL LABOURER,Yes,500,Married,2,4,1,No Formal Qualifications,1.75,65,81.3,94,0.86,Yes,1328332,No,30,0,10,0,40,Medium,82,12.6,120,80,120,80,,,120,80,,,,,
+Male,74,Banda,Don't Know,No,-,,No,manual laborer,Yes,,Married,2,7,-,No Formal Qualifications,1.62,40,81.3,81.3,0.94,Yes,1328314,No,MEDIUM,0,MEDIUM,0,50,MEDIUM,76,12,130,80,130,80,,,130,80,,,,,
+Male,73,BABERU,Don't Know,No,-,,No,MANUAL LABOURER,Yes,,Married,6,4,2,No Formal Qualifications,1.6,42,78.7,78.7,0.86,Yes,1328334,No,30,0,10,0,40,Medium,72,13,140,80,140,80,,,140,80,,,,,
+Male,74,BANDA,Don't Know,No,-,,No,MANUAL LABOURER,Yes,,Married,1,2,,No Formal Qualifications,1.62,45,86.4,91.4,0.94,Yes,1328333,No,0,0,10,0,40,Medium,68,14.6,140,100,140,100,,,140,100,,,,,
+Male,65,BANDA,Don't Know,No,"[ ""Others"" ]",,No,MANUAL LABOURER,Yes,,Married,6,4,2,No Formal Qualifications,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Male,63,Banda,No,No,-,,No,manual laborer,Yes,-,Married,5,2,1,No Formal Qualifications,-,-,-,-,-,- ,- ,No,63,-,Mild exercise at work/home,0,50,medium ,72,15.2,130,80,130,90,,,130,85,"[ ""Respiratory problems"" ]","No exertional dyspnea, no tobacco chewing, BP 130/80, COPD - refer to physician for further investigation, Deriphyllin BD, L-Montus NS",Yes,Refer to physician for further Investigation ,- 
+Female,67,CHHATAPUR,-,No,,,No,HOUSEWIFE,"No, Not in Farming/Ariculture",,Married,6,13,2,No Formal Qualifications,1.52,50,96.52,96.52,0.92,Yes,1328466,No,> 49 years old,10,10,0,Medium,Medium,97,13,130,90,130,90,,,130,90,,,,,
+Female,55,Chhatarpur,Don't Know,No,-,,No,manual laborer,Yes,,Married,4,6,-,No Formal Qualifications,1.51,40,88.9,91.44,0.97,Yes,1328448,No,30,10,0,0,40,Medium,114,9.8,98,70,98,70,,,98,70,,"Anemic, clinically no complaint. ",No,,-
+Female,64,CHHATARPUR,Don't Know,No,-,-,No,HOUSEWIFE,"No, Not in Farming/Ariculture",-,Married,2,4,1,No Formal Qualifications,1.45,35,0.94,0.94,0.94,Yes,1328468,No,30,10,10,0,50,50,95,11.5,115,80,115,80,,,115,80,,,,,
+Male,70,CHHATARPUR,Don't Know,No,-,,No,MANUAL LABOURER,Yes,,Married,7,7,3,No Formal Qualifications,1.7,60,93.98,96.52,0.97,Yes,1328442,No,30,10,10,0,50,Medium,58,13,130,80,130,80,,,130,80,,"No present complaints only blood sugar level low. Of lower concern, see physician for consistent hypoglycemia. ",No,,-
+Female,74,UNNAO,No,No,No,,No,MANUAL LABOURER,Yes,,Married,4,11,2,No Formal Qualifications,1.4,48,83.82,93.98,0.89,Yes,1328359,No,30,10,10,0,50,Medium,58,11.6,110,80,110,80,,,110,80,,Medically no problem. Patient came for low blood sugar. That means patient can take oral sweet and chew,No,,-
+Male,67,CHHATARPUR,Don’t Know,No,,"[ ""Tobacoo"" ]",Yes,MANUAL LABOURER,Yes,,Married,5,10,2,No Formal Qualifications,1.68,62,91.44,101.6,0.9,Yes,1328475,No,30,0,10,0,40,Medium,85,12.4,130,100,130,100,,,130,100,,,,,
+Female,66,CHHATARPUR,Don't Know,No,"[ ""Others"" ]",-,No,MANUAL LABOURER,Yes,-,Married,3,5,,No formal education,1.6,60,91.44,93.98,0.97,Yes,1328477,No,> 49 years old,30,Vigorous exercise or strenuous work,0,60,High,85,12.1,120,80,120,80,,,120,80,,,,,
+Female,50,CHHATARPUR,Don't Know,No,-,-,No,HOUSEWIFE ,Yes,,Married,3,2,1,No Formal Qualifications,1.51,38,60.96,76.2,0.8,Yes,1328470,No,> 49 years old,0,0,0,30,Low,93,12.7,100,60,100,60,,,100,60,,,,,
+Male,62,CHATARPUR,-,-,-,,No,Manual labour ,-,500,Married,1,6,2,Primary (Completed Sixth Standard),1.6,48,76.2,86.4,0.88,Yes,1328474,No,30,0,10,0,40,Medium,81,9.8,110,70,110,70,,,110,70,[  ],Budesonide inhaler BD x 1 month,No,,Dr. Vikas
+Male,74,CHHATANPUN,Don't Know,No,,cigarettes,Yes,MANAUAL LABOURER,yes,,Married,4,2,1,No Formal Qualifications,165,60,39,38,0.87,Yes,1328,No,> 49 years old,"Female < 80cm, Male < 90cm",Mild exercise at work/home,0,50,High,81,15.9,170,100,170,100,,,170,100,,"clinically: itching and rashes on elbow and leg, exertion dyspnea, hypertension
+Medications: Telmikind, Trika 0.25mg, avil 25mg, Levocetirizine ",No,,- 
+Male,70,CHHATARPUR,Don't Know,No,,-,No,MANUAL LABOURER,Yes,,Married,2,2,-,No Formal Qualifications,68,68,0.9,0.9,0.9,Yes,1328427,No,> 49 years old,"Female < 80cm, Male < 90cm",Vigorous exercise or strenuous work,0,30,Medium,81,15,100,60,100,60,,,100,60,[  ],"clinically patient no complaints. Some cardiac drug combination taken - blood thinners (clopikind 75mg), high bp (cardace 3.25mg, envas) 15 -16 years ago. 
+Opinion: doctor karan for stop drug before eye cataract surgery",No,,-
