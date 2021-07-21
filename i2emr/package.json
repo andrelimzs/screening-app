@@ -13,7 +13,7 @@
     "meteor-node-stubs": "^0.4.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "simpl-schema": "^1.5.5",
+    "simpl-schema": "^1.10.2",
     "typeface-roboto": "0.0.54",
     "uniforms": "^1.31.1",
     "uniforms-bridge-simple-schema": "^2.3.1",
